@@ -24,4 +24,4 @@ MonoBehaviour:
   targetTexture: {fileID: 2800000, guid: b13ab4d4418b181468a1ad15f3a08038, type: 3}
   targetMaterial: {fileID: 2100000, guid: 9a56e17d2e83d694fb36b14cdaa9b227, type: 2}
   tiles: {x: 14, y: 4}
-  pixelPerUnit: 10
+  pixelPerUnit: 50000

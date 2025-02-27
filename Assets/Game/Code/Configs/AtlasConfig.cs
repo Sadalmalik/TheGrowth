@@ -40,10 +40,10 @@ namespace Sadalmalik.TheGrowth
                 {
                     vertices = new []
                     {
-                        new Vector3(-aspect * tileSize.x, 0, -aspect * tileSize.x),
-                        new Vector3(+aspect * tileSize.x, 0, -aspect * tileSize.x),
-                        new Vector3(+aspect * tileSize.x, 0, +aspect * tileSize.x),
-                        new Vector3(-aspect * tileSize.x, 0, +aspect * tileSize.x),
+                        new Vector3(-aspect * tileSize.x * textureSize.x, 0, -aspect * tileSize.x * textureSize.y),
+                        new Vector3(+aspect * tileSize.x * textureSize.x, 0, -aspect * tileSize.x * textureSize.y),
+                        new Vector3(+aspect * tileSize.x * textureSize.x, 0, +aspect * tileSize.x * textureSize.y),
+                        new Vector3(-aspect * tileSize.x * textureSize.x, 0, +aspect * tileSize.x * textureSize.y),
                     },
                     uv = new []
                     {
@@ -69,8 +69,8 @@ namespace Sadalmalik.TheGrowth
                     },
                     triangles = new []
                     {
-                        0, 1, 2,
-                        0, 2, 3
+                        0, 2, 1,
+                        0, 3, 2
                     }
                 };
 

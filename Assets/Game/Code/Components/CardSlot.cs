@@ -9,7 +9,7 @@ namespace Sadalmalik.TheGrowth
 
         public Vector3 GetNewPosition()
         {
-            return transform.position + transform.up * RootConfig.Instance.CardThickness;
+            return transform.position + transform.up * RootConfig.Instance.CardThickness * (1 + Cards.Count);
         }
 
         public Vector3 GetNewRotation()

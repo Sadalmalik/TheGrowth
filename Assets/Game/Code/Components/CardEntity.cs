@@ -8,16 +8,15 @@ namespace Sadalmalik.TheGrowth
     {
         public CardView view;
         public CardConfig config;
-        public bool isFaceUp = false;
-
+        
         public bool IsAnimated { get; private set; }
+        public CardSlot Slot { get; private set; }
 
 
         public void SetConfig(CardConfig Config)
         {
             config = Config;
             view.SetConfig(config);
-            view.SetFaceVisible(isFaceUp);
         }
 
         private float _dragStart;
@@ -61,14 +60,26 @@ namespace Sadalmalik.TheGrowth
 
         public void MoveTo(CardSlot slot, bool instant=false)
         {
+            if (Slot != null)
+            {
+                Slot.Cards.Remove(this);
+            }
+            
             if (view != null)
             {
                 IsAnimated = true;
-                view.MoveTo(slot, () => IsAnimated = false);
+                Debug.Log($"MoveTo");
+                view.MoveTo(slot, MoveComplete, instant = instant);
             }
             else
             {
                 // aaaa
+            }
+
+            void MoveComplete()
+            {
+                IsAnimated = false;
+                slot.Cards.Add(this);
             }
         }
 
@@ -79,16 +90,10 @@ namespace Sadalmalik.TheGrowth
                 IsAnimated = true;
                 view.Flip(FlipFace);
             }
-            else
-            {
-                FlipFace();
-            }
 
             void FlipFace()
             {
                 IsAnimated = false;
-                isFaceUp = !isFaceUp;
-                view.SetFaceVisible(isFaceUp);
             }
         }
     }

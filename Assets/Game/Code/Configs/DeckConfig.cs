@@ -20,7 +20,7 @@ namespace Sadalmalik.TheGrowth
         [TextArea(3, 5)]
         public string description;
 
-        public bool shuffleOnStart = false;
+        public bool shuffleOnStart = true;
 
         public CardSpawner spawner;
         
@@ -36,14 +36,15 @@ namespace Sadalmalik.TheGrowth
                 var amount = entries[i].amount;
                 for (int k = 0; k < amount; k++)
                 {
-                    cards.Append(spawner.CreateCard(config));
+                    cards.Add(spawner.CreateCard(config));
                 }
             }
 
             if (shuffleOnStart)
             {
-                
+                cards.Shuffle();
             }
+            
             return new Deck { Cards = cards };
         }
     }

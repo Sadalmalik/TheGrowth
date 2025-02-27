@@ -8,6 +8,7 @@ namespace Sadalmalik.TheGrowth
     {
         public DeckConfig deck;
 
+        public float startDelay = 3f; 
         public CardSlot deckSlot;
         public List<CardSlot> table;
 
@@ -15,6 +16,8 @@ namespace Sadalmalik.TheGrowth
 
         public void Start()
         {
+            Debug.Log($"Start");
+            
             _deck = deck.CreateDeck();
             foreach (var card in _deck.Cards)
             {
@@ -26,7 +29,7 @@ namespace Sadalmalik.TheGrowth
 
         private IEnumerator DealCards()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(startDelay);
             
             var slots = new List<CardSlot>(table);
             slots.Shuffle();
@@ -35,8 +38,10 @@ namespace Sadalmalik.TheGrowth
                 var card = _deck.Peek();
                 var slot = slots.Peek();
 
+                Debug.Log($"Move {card} to {slot}");
                 card.MoveTo(slot);
-                yield return new WaitUntil(() => card.IsAnimated);
+                
+                yield return new WaitForSeconds(RootConfig.Instance.dealDelay);
             }
 
             Debug.Log($"Deal complete!");

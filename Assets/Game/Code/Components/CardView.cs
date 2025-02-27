@@ -12,7 +12,10 @@ namespace Sadalmalik.TheGrowth
 
         private CardConfig _config;
         private Sequence _tween;
+        private bool _faceUp;
 
+        public bool FaceUp => _faceUp;
+        
         public event Action OnAnimationComplete;
 
         public void SetConfig(CardConfig config)
@@ -37,6 +40,9 @@ namespace Sadalmalik.TheGrowth
         {
             var endPosition = slot.GetNewPosition();
             var endRotation = slot.GetNewRotation();
+            
+            Debug.Log($"MoveTo: {endPosition}, {endRotation}");
+            
             if (instant)
             {
                 transform.position = endPosition;
@@ -48,7 +54,7 @@ namespace Sadalmalik.TheGrowth
             
             var duration = RootConfig.Instance.jumpDuration;
             _tween = DOTween.Sequence()
-                .Append(transform.DOJump(endPosition, 1, 1, duration))
+                .Append(transform.DOJump(endPosition, 3, 1, duration))
                 .Insert(0, transform.DORotate(endRotation, duration))
                 .AppendCallback(() =>
                 {
@@ -67,6 +73,11 @@ namespace Sadalmalik.TheGrowth
                 onComplete?.Invoke();
                 OnAnimationComplete?.Invoke();
             }
+
+            bool wasFaceUp = _faceUp;
+
+            if (!_faceUp)
+                SetFaceVisible(true);
             
             var duration = RootConfig.Instance.flipDuration;
             angle = (angle + 180) % 360;
@@ -77,6 +88,11 @@ namespace Sadalmalik.TheGrowth
                 .AppendCallback(() =>
                 {
                     _tween = null;
+                    
+                    if (wasFaceUp)
+                        SetFaceVisible(false);
+                    
+                    _faceUp = !_faceUp;
                     onComplete?.Invoke();
                     OnAnimationComplete?.Invoke();
                 });
