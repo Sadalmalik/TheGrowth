@@ -11,8 +11,8 @@ namespace Sadalmalik.TheGrowth
     public class CardConfig : SerializedScriptableObject
     {
         public string Title;
-        public Sprite Cover;
-        public Sprite Face;
+        public CardSprite Cover;
+        public CardSprite Face;
 
         public List<CardComponentConfig> components;
     }
