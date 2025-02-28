@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sadalmalik.TheGrowth
 {
@@ -14,6 +15,7 @@ namespace Sadalmalik.TheGrowth
         public float flipDuration = 0.3f;
         public float jumpDuration = 0.4f;
 
-        public float dealDelay = 0.25f;
+        [FormerlySerializedAs("dealDelay")]
+        public float dealDuration = 1.5f;
     }
 }

@@ -10,7 +10,6 @@ namespace Sadalmalik.TheGrowth
     {
         public DeckConfig deck;
 
-        public float startDelay = 3f; 
         public CardSlot deckSlot;
         public Transform SlotsRoot;
         [PropertyOrder(11)]
@@ -26,35 +25,79 @@ namespace Sadalmalik.TheGrowth
         
         public void Start()
         {
-            Debug.Log($"Start");
-            
             _deck = deck.CreateDeck();
             foreach (var card in _deck.Cards)
             {
                 card.MoveTo(deckSlot, instant: true);
             }
 
-            StartCoroutine(DealCards());
         }
 
-        private IEnumerator DealCards()
+        [Button, PropertyOrder(50)]
+        private void DealCards()
         {
-            yield return new WaitForSeconds(startDelay);
-            
+            StartCoroutine(DealCardsCor());
+        }
+
+        [Button, PropertyOrder(50)]
+        private void CollectCards()
+        {
+            StartCoroutine(CollectCardsCor());
+        }
+
+        [Button, PropertyOrder(50)]
+        private void ShuffleCards()
+        {
+            StartCoroutine(ShuffleCardsCor());
+        }
+
+        private IEnumerator DealCardsCor()
+        {
             var slots = new List<CardSlot>(table);
             slots.Shuffle();
-            while (!_deck.IsEmpty && slots.Count > 0)
-            {
-                var card = _deck.Peek();
-                var slot = slots.Peek();
 
-                Debug.Log($"Move {card} to {slot}");
+            var delay = RootConfig.Instance.dealDuration / slots.Count;
+            while (deckSlot.Cards.Count>0 && slots.Count > 0)
+            {
+                var card = deckSlot.Peek();
+                var slot = slots.Peek();
                 card.MoveTo(slot);
                 
-                yield return new WaitForSeconds(RootConfig.Instance.dealDelay);
+                yield return new WaitForSeconds(delay);
             }
 
             Debug.Log($"Deal complete!");
+        }
+
+        private IEnumerator CollectCardsCor()
+        {
+            var slots = new List<CardSlot>(table);
+            slots.Reverse();
+            
+            var delay = RootConfig.Instance.dealDuration / slots.Count;
+            foreach (var slot in slots)
+            {
+                var card = slot.Peek();
+                card?.MoveTo(deckSlot);
+                
+                yield return new WaitForSeconds(delay);
+            }
+        }
+
+        private IEnumerator ShuffleCardsCor()
+        {
+            var cards = new List<CardEntity>(deckSlot.Cards);
+            deckSlot.Cards.Clear();
+            cards.Shuffle();
+            
+            var delay = RootConfig.Instance.dealDuration / cards.Count;
+            foreach (var card in cards)
+            {
+                card.Slot = null;
+                card.MoveTo(deckSlot);
+                
+                yield return new WaitForSeconds(delay);
+            }
         }
     }
 }

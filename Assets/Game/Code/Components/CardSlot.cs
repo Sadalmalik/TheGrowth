@@ -7,6 +7,11 @@ namespace Sadalmalik.TheGrowth
     {
         public List<CardEntity> Cards;
 
+        public CardEntity Peek()
+        {
+            return Cards.Peek();
+        }
+        
         public Vector3 GetNewPosition()
         {
             return transform.position + transform.up * RootConfig.Instance.CardThickness * (1 + Cards.Count);

@@ -54,6 +54,11 @@ namespace Sadalmalik.TheGrowth
         public List<CardEntity> Cards;
 
         public bool IsEmpty => Cards.Count == 0;
+
+        public void Put(CardEntity card)
+        {
+            Cards.Add(card);
+        }
         
         public CardEntity Peek()
         {

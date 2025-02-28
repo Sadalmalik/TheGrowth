@@ -15,16 +15,16 @@ namespace Sadalmalik.TheGrowth
         private bool _faceUp;
 
         public bool FaceUp => _faceUp;
-        
+
         public event Action OnAnimationComplete;
 
         public void SetConfig(CardConfig config)
         {
             _config = config;
-            
+
             face.GetComponent<MeshFilter>().mesh = config.Face.Model;
             face.material = config.Face.Material;
-            
+
             cover.GetComponent<MeshFilter>().mesh = config.Cover.Model;
             cover.material = config.Cover.Material;
         }
@@ -40,9 +40,7 @@ namespace Sadalmalik.TheGrowth
         {
             var endPosition = slot.GetNewPosition();
             var endRotation = slot.GetNewRotation();
-            
-            Debug.Log($"MoveTo: {endPosition}, {endRotation}");
-            
+
             if (instant)
             {
                 transform.position = endPosition;
@@ -51,7 +49,7 @@ namespace Sadalmalik.TheGrowth
                 OnAnimationComplete?.Invoke();
                 return;
             }
-            
+
             var duration = RootConfig.Instance.jumpDuration;
             _tween = DOTween.Sequence()
                 .Append(transform.DOJump(endPosition, 3, 1, duration))
@@ -78,7 +76,7 @@ namespace Sadalmalik.TheGrowth
 
             if (!_faceUp)
                 SetFaceVisible(true);
-            
+
             var duration = RootConfig.Instance.flipDuration;
             angle = (angle + 180) % 360;
             _tween = DOTween.Sequence()
@@ -88,10 +86,10 @@ namespace Sadalmalik.TheGrowth
                 .AppendCallback(() =>
                 {
                     _tween = null;
-                    
+
                     if (wasFaceUp)
                         SetFaceVisible(false);
-                    
+
                     _faceUp = !_faceUp;
                     onComplete?.Invoke();
                     OnAnimationComplete?.Invoke();

@@ -25,4 +25,4 @@ MonoBehaviour:
   RandomAngle: 8
   flipDuration: 0.3
   jumpDuration: 0.4
-  dealDelay: 0.15
+  dealDuration: 1.5

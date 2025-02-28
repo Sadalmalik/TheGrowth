@@ -10,7 +10,7 @@ namespace Sadalmalik.TheGrowth
         public CardConfig config;
         
         public bool IsAnimated { get; private set; }
-        public CardSlot Slot { get; private set; }
+        public CardSlot Slot { get; set; }
 
 
         public void SetConfig(CardConfig Config)
@@ -61,14 +61,13 @@ namespace Sadalmalik.TheGrowth
         public void MoveTo(CardSlot slot, bool instant=false)
         {
             if (Slot != null)
-            {
                 Slot.Cards.Remove(this);
-            }
+            Slot = slot;
             
             if (view != null)
             {
                 IsAnimated = true;
-                Debug.Log($"MoveTo");
+                slot.Cards.Add(this);
                 view.MoveTo(slot, MoveComplete, instant: instant);
             }
             else
@@ -79,7 +78,6 @@ namespace Sadalmalik.TheGrowth
             void MoveComplete()
             {
                 IsAnimated = false;
-                slot.Cards.Add(this);
             }
         }
 

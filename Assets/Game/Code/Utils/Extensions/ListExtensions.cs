@@ -17,6 +17,7 @@ namespace Sadalmalik.TheGrowth
         public static T Peek<T>(this List<T> list)
         {
             var last = list.Count - 1;
+            if (last < 0) return default;
             var item = list[last];
             list.RemoveAt(last);
             return item;
