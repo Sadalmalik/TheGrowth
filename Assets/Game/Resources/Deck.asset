@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55bd0a0af37d4fb0945f124b156c2169, type: 3}
-  m_Name: DeckConfig
+  m_Name: Deck
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -36,7 +36,7 @@ MonoBehaviour:
       Data: 1|Sadalmalik.TheGrowth.DeckEntry, Code
     - Name: amount
       Entry: 3
-      Data: 4
+      Data: 40
     - Name: card
       Entry: 10
       Data: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
       Data: 2|Sadalmalik.TheGrowth.DeckEntry, Code
     - Name: amount
       Entry: 3
-      Data: 2
+      Data: 25
     - Name: card
       Entry: 10
       Data: 1
@@ -60,7 +60,7 @@ MonoBehaviour:
       Data: 3|Sadalmalik.TheGrowth.DeckEntry, Code
     - Name: amount
       Entry: 3
-      Data: 1
+      Data: 10
     - Name: card
       Entry: 10
       Data: 2

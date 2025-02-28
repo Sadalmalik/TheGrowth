@@ -21,8 +21,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  CardThickness: 0.025
-  RandomAngle: 15
+  CardThickness: 0.01
+  RandomAngle: 8
   flipDuration: 0.3
   jumpDuration: 0.4
-  dealDelay: 0.25
+  dealDelay: 0.15

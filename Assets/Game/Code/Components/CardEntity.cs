@@ -69,7 +69,7 @@ namespace Sadalmalik.TheGrowth
             {
                 IsAnimated = true;
                 Debug.Log($"MoveTo");
-                view.MoveTo(slot, MoveComplete, instant = instant);
+                view.MoveTo(slot, MoveComplete, instant: instant);
             }
             else
             {

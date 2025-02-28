@@ -1,19 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
 {
-    public class TestGameManager : MonoBehaviour
+    public class TestGameManager : SerializedMonoBehaviour
     {
         public DeckConfig deck;
 
         public float startDelay = 3f; 
         public CardSlot deckSlot;
+        public Transform SlotsRoot;
+        [PropertyOrder(11)]
         public List<CardSlot> table;
 
         private Deck _deck;
 
+        [Button, PropertyOrder(10)]
+        private void CollectSlots()
+        {
+            table = SlotsRoot.GetComponentsInChildren<CardSlot>().ToList();
+        }
+        
         public void Start()
         {
             Debug.Log($"Start");
