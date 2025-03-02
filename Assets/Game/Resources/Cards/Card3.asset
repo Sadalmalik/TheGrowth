@@ -32,16 +32,26 @@ MonoBehaviour:
       Data: 
     - Name: AllowedMoves
       Entry: 7
-      Data: 0|Sadalmalik.TheGrowth.TableSlots, Code
+      Data: 0|Sadalmalik.TheGrowth.TableSlotsCombine, Code
     - Name: Variant
       Entry: 3
-      Data: 1
+      Data: 0
+    - Name: Evaluators
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[Sadalmalik.TheGrowth.EntitySlot,
+        Code]], System.Core]], Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 2|Sadalmalik.TheGrowth.TableSlotsAround, Code
     - Name: Position
       Entry: 7
-      Data: 1|Sadalmalik.TheGrowth.TableCardPosition, Code
+      Data: 3|Sadalmalik.TheGrowth.TableCardPosition, Code
     - Name: Card
       Entry: 7
-      Data: 2|Sadalmalik.TheGrowth.ActiveCard, Code
+      Data: 4|Sadalmalik.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -50,19 +60,55 @@ MonoBehaviour:
       Data: 
     - Name: Figure
       Entry: 3
-      Data: 2
-    - Name: Side
+      Data: 3
+    - Name: Distance
       Entry: 3
+      Data: 3
+    - Name: Radius
+      Entry: 4
       Data: 0
-    - Name: Steps
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|Sadalmalik.TheGrowth.TableSlotsAround, Code
+    - Name: Position
+      Entry: 7
+      Data: 6|Sadalmalik.TheGrowth.TableCardPosition, Code
+    - Name: Card
+      Entry: 7
+      Data: 7|Sadalmalik.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Figure
       Entry: 3
-      Data: 5
+      Data: 4
+    - Name: Distance
+      Entry: 3
+      Data: 3
+    - Name: Radius
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: components
       Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.CardComponentConfig,
+      Data: 8|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.CardComponentConfig,
         Code]], mscorlib
     - Name: 
       Entry: 12

@@ -6,12 +6,12 @@ namespace Sadalmalik.TheGrowth
     {
         public enum EVariant
         {
-            Intersection,
             Union,
+            Intersection,
             SymmetricDifference,
         }
 
-        public EVariant Variant;
+        public EVariant Variant = EVariant.Union;
         public List<Evaluator<HashSet<EntitySlot>>> Evaluators = new List<Evaluator<HashSet<EntitySlot>>>();
         
         public override HashSet<EntitySlot> Evaluate(Context context)
