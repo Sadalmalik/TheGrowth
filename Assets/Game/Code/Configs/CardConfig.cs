@@ -30,7 +30,7 @@ namespace Sadalmalik.TheGrowth
         public List<Command> OnStep;
         [BoxGroup("Brain")]
         public Evaluator<HashSet<EntitySlot>> AllowedMoves;
-        
+
         [Space]
         public List<CardComponentConfig> components;
     }

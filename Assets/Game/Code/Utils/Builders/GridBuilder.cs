@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
@@ -21,7 +22,7 @@ namespace Sadalmalik.TheGrowth
             for (int y = 0; y < size.y; y++)
             for (int x = 0; x < size.x; x++)
             {
-                var t = Instantiate(prefab, transform);
+                var t = (Transform) PrefabUtility.InstantiatePrefab(prefab, transform);
                 t.gameObject.name = $"{prefab.name}: {x}, {y}";
                 float px = x;
                 float py = y;
