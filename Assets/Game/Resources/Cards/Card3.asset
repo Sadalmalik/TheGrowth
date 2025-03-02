@@ -31,11 +31,38 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: AllowedMoves
-      Entry: 6
+      Entry: 7
+      Data: 0|Sadalmalik.TheGrowth.TableSlots, Code
+    - Name: Variant
+      Entry: 3
+      Data: 1
+    - Name: Position
+      Entry: 7
+      Data: 1|Sadalmalik.TheGrowth.TableCardPosition, Code
+    - Name: Card
+      Entry: 7
+      Data: 2|Sadalmalik.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Figure
+      Entry: 3
+      Data: 2
+    - Name: Side
+      Entry: 3
+      Data: 0
+    - Name: Steps
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
       Data: 
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.CardComponentConfig,
+      Data: 3|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.CardComponentConfig,
         Code]], mscorlib
     - Name: 
       Entry: 12
@@ -53,4 +80,4 @@ MonoBehaviour:
   Face:
     atlas: {fileID: 11400000, guid: 28272552980f6b3488a44e74ac8cdc0b, type: 2}
     sprite: {x: 0, y: 3}
-  CanBeDragged: 0
+  CanBeDragged: 1

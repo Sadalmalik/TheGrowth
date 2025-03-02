@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -41,6 +42,7 @@ namespace Sadalmalik.TheGrowth
         [ShowIf(nameof(Variant), EVariant.FromSide)]
         public ESide Side;
 
+        [HideIf(nameof(Variant), EVariant.AllSlots)]
         public int Steps;
 
 
@@ -48,23 +50,30 @@ namespace Sadalmalik.TheGrowth
         {
             return Variant switch
             {
-                EVariant.AllSlots => GetAllSlots(),
-                EVariant.Around => GetSlotsAround(),
-                EVariant.FromSide => GetSlotsFromSide(),
+                EVariant.AllSlots => GetAllSlots(context),
+                EVariant.Around => GetSlotsAround(context),
+                EVariant.FromSide => GetSlotsFromSide(context),
                 _ => null
             };
         }
 
-        private HashSet<EntitySlot> GetAllSlots()
+        private HashSet<EntitySlot> GetAllSlots(Context context)
         {
             return new HashSet<EntitySlot>(CardTable.Instance.slots);
         }
-        private HashSet<EntitySlot> GetSlotsAround()
+        private HashSet<EntitySlot> GetSlotsAround(Context context)
         {
-            return null;
+            var all = CardTable.Instance.slots;
+            var center = CardTable.Instance[Position.Evaluate(context)].transform.position;
+            return Figure switch
+            {
+                EFigure.Circle => new HashSet<EntitySlot>(all.Where(
+                    slot => Vector3.Distance(slot.transform.position, center) < Steps)),
+                _ => null
+            };
         }
 
-        private HashSet<EntitySlot> GetSlotsFromSide()
+        private HashSet<EntitySlot> GetSlotsFromSide(Context context)
         {
             // CardTable.Instance.size
 

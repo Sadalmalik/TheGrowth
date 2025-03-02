@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEditor;
@@ -12,40 +11,56 @@ namespace Sadalmalik.TheGrowth
         public EntitySlot slotPrefab;
         
         [Space]
-        [OnValueChanged(nameof(Rebuild))]
+        [OnValueChanged(nameof(InternalRebuild))]
         public Vector2Int size = new Vector2Int(5, 5);
-        [OnValueChanged(nameof(Rebuild))]
+        [OnValueChanged(nameof(InternalRebuild))]
         public Vector3 xStep = Vector3.right;
-        [OnValueChanged(nameof(Rebuild))]
+        [OnValueChanged(nameof(InternalRebuild))]
         public Vector3 yStep = Vector3.forward;
 
         [Space]
         [TableMatrix(SquareCells = true)]
-        public EntitySlot[,] grid;
+        public EntitySlot[,] Grid;
 
         public List<EntitySlot> slots = new List<EntitySlot>();
         
         public EntitySlot this[Vector2Int pos]
-            => grid[pos.x, pos.y];
+            => Grid[pos.x, pos.y];
+
+        [Button]
+        public void Clear()
+        {
+            transform.Clear();
+            Grid = new EntitySlot[0, 0];
+            slots.Clear();
+        }
         
         [Button]
-        private void Rebuild()
+        public void Rebuild()
+        {
+            transform.Clear();
+            Grid = new EntitySlot[0, 0];
+            slots.Clear();
+            InternalRebuild();
+        }
+        
+        private void InternalRebuild()
         {
             if (size.x <= 0 || size.y <= 0)
             {
                 transform.Clear();
-                grid = new EntitySlot[0, 0];
+                Grid = new EntitySlot[0, 0];
                 return;
             }
             
             List<EntitySlot> temp = new List<EntitySlot>();
-            if (grid != null)
+            if (Grid != null)
             {
-                temp.AddRange(grid.Cast<EntitySlot>().Distinct());
+                temp.AddRange(Grid.Cast<EntitySlot>().Distinct());
                 temp.Remove(null);
             }
             
-            grid = new EntitySlot[size.x, size.y];
+            Grid = new EntitySlot[size.x, size.y];
 
             for (int y = 0; y < size.y; y++)
             for (int x = 0; x < size.x; x++)
@@ -57,7 +72,7 @@ namespace Sadalmalik.TheGrowth
                 var px = x - size.x * 0.5f + 0.5f;
                 var py = y - size.y * 0.5f + 0.5f;
                 slot.transform.localPosition = px * xStep + py * yStep;
-                grid[x, y] = slot;
+                Grid[x, y] = slot;
             }
 
             // Clean remains
@@ -67,7 +82,7 @@ namespace Sadalmalik.TheGrowth
             }
             
             slots.Clear();
-            slots.AddRange(grid.Cast<EntitySlot>());
+            slots.AddRange(Grid.Cast<EntitySlot>());
 
             EntitySlot GetSlot()
             {

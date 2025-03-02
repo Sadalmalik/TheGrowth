@@ -9,11 +9,11 @@ namespace Sadalmalik.TheGrowth
     {
         public DeckConfig deck;
 
-        
+
         public LayerMask cardLayer;
         public LayerMask tableLayer;
         public float slotDropRadius = 1;
-        
+
         public EntitySlot deckSlot;
         public CardTable table;
 
@@ -29,12 +29,21 @@ namespace Sadalmalik.TheGrowth
 
 #region Player Control
 
+        private bool _check = true;
         private Vector3 _startDragPosition;
         private EntityCard _draggedCard;
         private HashSet<EntitySlot> _moves;
 
         public void Update()
         {
+            if (_check)
+            {
+                _check = false;
+                Debug.Log($"Table: {CardTable.Instance}\n" +
+                          $"Grid: {CardTable.Instance.Grid.GetLength(0)}, {CardTable.Instance.Grid.GetLength(1)}\n" +
+                          $"Slots: {CardTable.Instance.slots.Count}");
+            }
+            
             var cam = Camera.main;
             if (cam == null) return;
 
@@ -50,6 +59,7 @@ namespace Sadalmalik.TheGrowth
                 {
                     card.FlipCard();
                 }
+
                 return;
             }
 
@@ -59,11 +69,16 @@ namespace Sadalmalik.TheGrowth
                 if (card != null)
                 {
                     // Start Drag
+                    Debug.Log($"Start grad: {card}");
                     _startDragPosition = GetTablePositionUnderCursor() - card.transform.position;
                     _draggedCard = card;
                     _moves = _draggedCard.GetAllowedMoves();
-                    foreach (var slot in _moves)
-                        slot.ShowMarker(true);
+                    if (_moves != null)
+                    {
+                        Debug.Log($"Moves: {_moves.Count}");
+                        foreach (var slot in _moves)
+                            slot.ShowMarker(true);
+                    }
                 }
 
                 return;
@@ -71,12 +86,44 @@ namespace Sadalmalik.TheGrowth
 
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
-                float minDist = float.MaxValue;
-                EntitySlot nearestSlot = null;
+                var (slot, dist) = GetNearestSlot(_draggedCard.transform.position);
+
+                if (slot != null && dist < slotDropRadius)
+                {
+                    _draggedCard.MoveTo(slot);
+                }
+                else
+                {
+                    _draggedCard.MoveTo(_draggedCard.Slot);
+                }
+
+                if (_moves != null)
+                    foreach (var temp in _moves) 
+                        temp.ShowMarker(false);
+
+                _draggedCard = null;
+
+                return;
+            }
+
+            if (_draggedCard != null)
+            {
+                _draggedCard.transform.position = GetTablePositionUnderCursor() - _startDragPosition + Vector3.up;
+                
+                var (slot, dist) = GetNearestSlot(_draggedCard.transform.position);
+                Debug.DrawLine(_draggedCard.transform.position, slot.transform.position, Color.blue, 5f);
+            }
+        }
+
+        private (EntitySlot, float) GetNearestSlot(Vector3 position)
+        {
+            float minDist = float.MaxValue;
+            EntitySlot nearestSlot = null;
+            
+            if (_moves != null)
+            {
                 foreach (var slot in _moves)
                 {
-                    slot.ShowMarker(false);
-
                     var dist = Vector3.Distance(slot.transform.position, _draggedCard.transform.position);
                     if (dist < minDist)
                     {
@@ -84,24 +131,9 @@ namespace Sadalmalik.TheGrowth
                         nearestSlot = slot;
                     }
                 }
-
-                if (nearestSlot != null &&
-                    minDist<slotDropRadius)
-                {
-                    _draggedCard.MoveTo(nearestSlot);
-                }
-                else
-                {
-                    _draggedCard.MoveTo(_draggedCard.Slot);
-                }
-                
-                return;
             }
 
-            if (_draggedCard != null)
-            {
-                _draggedCard.transform.position = GetTablePositionUnderCursor() - _startDragPosition;
-            }
+            return (nearestSlot, minDist);
         }
 
         private Vector3 GetTablePositionUnderCursor()

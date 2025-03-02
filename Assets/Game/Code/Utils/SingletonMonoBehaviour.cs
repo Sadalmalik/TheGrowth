@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
@@ -22,10 +23,22 @@ namespace Sadalmalik.TheGrowth
                 return _instance;
             }
         }
-        
+
         protected virtual void Initialize()
         {
-			
+        }
+
+        private void Awake()
+        {
+            if (_instance != null)
+            {
+                Debug.LogError(
+                    $"Can be only one instance of {typeof(T).Name}!\nObject {gameObject} will be turned off!");
+                gameObject.SetActive(false);
+                return;
+            }
+
+            _instance = (T) this;
         }
     }
 }
