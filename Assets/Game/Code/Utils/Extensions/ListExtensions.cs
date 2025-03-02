@@ -14,6 +14,13 @@ namespace Sadalmalik.TheGrowth
             }
         }
 
+        public static T Top<T>(this List<T> list)
+        {
+            var last = list.Count - 1;
+            if (last < 0) return default;
+            return list[last];
+        }
+
         public static T Peek<T>(this List<T> list)
         {
             var last = list.Count - 1;

@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,6 +13,7 @@ namespace Sadalmalik.TheGrowth
         public bool IsAnimated { get; private set; }
         public CardSlot Slot { get; set; }
 
+        public bool IsFaceUp => view.IsFaceUp;
 
         public void SetConfig(CardConfig Config)
         {
@@ -94,5 +96,31 @@ namespace Sadalmalik.TheGrowth
                 IsAnimated = false;
             }
         }
+
+#region Behaviour
+
+        public void OnPlaced()
+        {
+            ActiveCard.Card = this;
+            config.OnPlaced.ExecuteAll();
+            ActiveCard.
+                Card = null;
+        }
+        
+        public void OnFlipped()
+        {
+            ActiveCard.Card = this;
+            config.OnFlipped.ExecuteAll();
+            ActiveCard.Card = null;
+        }
+        
+        public void OnStep()
+        {
+            ActiveCard.Card = this;
+            config.OnStep.ExecuteAll();
+            ActiveCard.Card = null;
+        }
+
+#endregion
     }
 }

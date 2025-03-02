@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 456210810074249473}
   - component: {fileID: 456210810074249474}
   - component: {fileID: 456210810074249487}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 456210810074249474}
   config: {fileID: 11400000, guid: dab00cc110e207b46b98ec91564df108, type: 2}
-  isFaceUp: 0
 --- !u!1 &456210810233467129
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +87,7 @@ GameObject:
   - component: {fileID: 456210810233467130}
   - component: {fileID: 456210810233467132}
   - component: {fileID: 456210810233467131}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 456210810888356539}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +200,7 @@ GameObject:
   - component: {fileID: 456210810993643636}
   - component: {fileID: 456210810993643639}
   - component: {fileID: 456210810993643638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}

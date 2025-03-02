@@ -27,7 +27,7 @@ namespace Sadalmalik.TheGrowth
         [TableList(ShowIndexLabels = true)]
         public List<DeckEntry> entries;
 
-        public Deck CreateDeck()
+        public List<CardEntity> CreateDeck()
         {
             var cards = new List<CardEntity>();
             for (int i = 0; i < entries.Count; i++)
@@ -44,33 +44,8 @@ namespace Sadalmalik.TheGrowth
             {
                 cards.Shuffle();
             }
-            
-            return new Deck { Cards = cards };
-        }
-    }
 
-    public class Deck
-    {
-        public List<CardEntity> Cards;
-
-        public bool IsEmpty => Cards.Count == 0;
-
-        public void Put(CardEntity card)
-        {
-            Cards.Add(card);
-        }
-        
-        public CardEntity Peek()
-        {
-            var last = Cards.Count - 1;
-            var card = Cards[last];
-            Cards.RemoveAt(last);
-            return card;
-        }
-        
-        public void Shuffle()
-        {
-            Cards.Shuffle();
+            return cards;
         }
     }
 }

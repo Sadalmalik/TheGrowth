@@ -12,9 +12,9 @@ namespace Sadalmalik.TheGrowth
 
         private CardConfig _config;
         private Sequence _tween;
-        private bool _faceUp;
+        private bool _isFaceUp;
 
-        public bool FaceUp => _faceUp;
+        public bool IsFaceUp => _isFaceUp;
 
         public event Action OnAnimationComplete;
 
@@ -72,9 +72,9 @@ namespace Sadalmalik.TheGrowth
                 OnAnimationComplete?.Invoke();
             }
 
-            bool wasFaceUp = _faceUp;
+            bool wasFaceUp = _isFaceUp;
 
-            if (!_faceUp)
+            if (!_isFaceUp)
                 SetFaceVisible(true);
 
             var duration = RootConfig.Instance.flipDuration;
@@ -90,7 +90,7 @@ namespace Sadalmalik.TheGrowth
                     if (wasFaceUp)
                         SetFaceVisible(false);
 
-                    _faceUp = !_faceUp;
+                    _isFaceUp = !_isFaceUp;
                     onComplete?.Invoke();
                     OnAnimationComplete?.Invoke();
                 });

@@ -1,36 +1,45 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
 {
-    public class TestGameManager : SerializedMonoBehaviour
+    public class CardManager : SerializedMonoBehaviour
     {
         public DeckConfig deck;
 
-        public CardSlot deckSlot;
-        public Transform SlotsRoot;
-        [PropertyOrder(11)]
-        public List<CardSlot> table;
-
-        private Deck _deck;
-
-        [Button, PropertyOrder(10)]
-        private void CollectSlots()
-        {
-            table = SlotsRoot.GetComponentsInChildren<CardSlot>().ToList();
-        }
+        public LayerMask cardLayer;
+        public LayerMask tableLayer;
         
+        public CardSlot deckSlot;
+        public CardTable table;
+
         public void Start()
         {
-            _deck = deck.CreateDeck();
-            foreach (var card in _deck.Cards)
+            var cards = deck.CreateDeck();
+            foreach (var card in cards)
             {
                 card.MoveTo(deckSlot, instant: true);
             }
+        }
 
+        public void Update()
+        {
+            // return Camera.main.WorldToScreenPoint(transform.position);
+            // transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - _startMousePosition);
+
+            var cam = Camera.main;
+            if (cam == null) return;
+            var ray = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit, 100f, tableLayer))
+            {
+                var col = new Color(1f, 1f, 0.2f, 0.5f);
+                Debug.DrawLine(cam.transform.position, hit.point, col, 0.2f);
+                Debug.DrawRay(hit.point, hit.normal, col, 0.2f);
+                Debug.DrawRay(hit.point, Vector3.up, col, 0.2f);
+            }
         }
 
         [Button, PropertyOrder(50)]
@@ -53,7 +62,7 @@ namespace Sadalmalik.TheGrowth
 
         private IEnumerator DealCardsCor()
         {
-            var slots = new List<CardSlot>(table);
+            var slots = new List<CardSlot>(table.slots);
             slots.Shuffle();
 
             var delay = RootConfig.Instance.dealDuration / slots.Count;
@@ -71,7 +80,7 @@ namespace Sadalmalik.TheGrowth
 
         private IEnumerator CollectCardsCor()
         {
-            var slots = new List<CardSlot>(table);
+            var slots = new List<CardSlot>(table.slots);
             slots.Reverse();
             
             var delay = RootConfig.Instance.dealDuration / slots.Count;

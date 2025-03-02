@@ -10,10 +10,25 @@ namespace Sadalmalik.TheGrowth
         order = 0)]
     public class CardConfig : SerializedScriptableObject
     {
+        [BoxGroup("View")]
         public string Title;
+        [BoxGroup("View")]
         public CardSprite Cover;
+        [BoxGroup("View")]
         public CardSprite Face;
 
+        [Space]
+        [BoxGroup("Brain")]
+        public List<Command> OnPlaced;
+        [BoxGroup("Brain")]
+        public List<Command> OnFlipped;
+        [BoxGroup("Brain")]
+        public List<Command> OnStep;
+        [BoxGroup("Brain")]
+        public Evaluator<HashSet<CardSlot>> AllowedMoves;
+        
+        [Space]
+        [BoxGroup("Components")]
         public List<CardComponentConfig> components;
     }
 

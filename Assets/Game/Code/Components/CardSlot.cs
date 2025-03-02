@@ -1,12 +1,21 @@
 ﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
 {
-    public class CardSlot : MonoBehaviour
+    public class CardSlot : SerializedMonoBehaviour
     {
+        public bool isTableSlot;
+        [ShowIf(nameof(isTableSlot))]
+        public Vector2Int index;
         public List<CardEntity> Cards;
 
+        public CardEntity Top()
+        {
+            return Cards.Top();
+        }
+        
         public CardEntity Peek()
         {
             return Cards.Peek();
