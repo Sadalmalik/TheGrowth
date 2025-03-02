@@ -2,7 +2,7 @@
 
 namespace Sadalmalik.TheGrowth
 {
-    public class TableCard : Evaluator<EntityCard>
+    public class CardByPosition : Evaluator<EntityCard>
     {
         public Evaluator<Vector2Int> Position = new TablePosition();
         

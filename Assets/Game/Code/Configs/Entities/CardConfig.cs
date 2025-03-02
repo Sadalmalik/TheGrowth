@@ -1,9 +1,25 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
 {
+    public interface ICardComponent
+    {
+        void OnEntityCreated(EntityCard card);
+    }
+    
+    [Serializable]
+    public class CardSprite
+    {
+        public AtlasConfig atlas;
+        public Vector2Int sprite;
+
+        public Mesh Model => atlas.GetMeshForSprite(sprite);
+        public Material Material => atlas.targetMaterial;
+    }
+    
     [CreateAssetMenu(
         fileName = "CardConfig",
         menuName = "[Game]/Card",
@@ -29,35 +45,13 @@ namespace Sadalmalik.TheGrowth
         [BoxGroup("Brain")]
         public List<Command> OnStep;
         [BoxGroup("Brain")]
+        public List<Command> OnCovered;
+        [BoxGroup("Brain")]
+        public List<Command> OnUnCovered;
+        [BoxGroup("Brain")]
         public Evaluator<HashSet<EntitySlot>> AllowedMoves;
 
         [Space]
-        public List<CardComponentConfig> components;
-    }
-
-    public abstract class CardComponentConfig
-    {
-    }
-
-    public class ChargesComponent : CardComponentConfig
-    {
-        public int Charges;
-    }
-
-    public enum DistanceType
-    {
-        Square,
-        Cross
-    }
-
-    public class RevealComponent : CardComponentConfig
-    {
-        public DistanceType Shape;
-        public int RevealRadius;
-    }
-
-    public class AiComponent : CardComponentConfig
-    {
-        public string MonsterBehaviour;
+        public List<ICardComponent> components;
     }
 }

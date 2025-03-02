@@ -2,6 +2,6 @@
 {
     public abstract class Condition
     {
-        public abstract bool Chech(Context context);
+        public abstract bool Check(Context context);
     }
 }

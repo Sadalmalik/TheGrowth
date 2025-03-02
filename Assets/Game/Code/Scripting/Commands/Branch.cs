@@ -10,7 +10,7 @@ namespace Sadalmalik.TheGrowth
 
         public override void Execute(Context context)
         {
-            if (condition.Chech(context))
+            if (condition.Check(context))
             {
                 OnTrue.ExecuteAll(context);
             }

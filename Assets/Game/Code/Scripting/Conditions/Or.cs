@@ -6,12 +6,12 @@ namespace Sadalmalik.TheGrowth
     {
         public List<Condition> conditions = new List<Condition>();
 
-        public override bool Chech(Context context)
+        public override bool Check(Context context)
         {
             if (conditions.Count == 0)
                 return true;
             foreach (var cond in conditions)
-                if (cond.Chech(context))
+                if (cond.Check(context))
                     return true;
             return false;
         }

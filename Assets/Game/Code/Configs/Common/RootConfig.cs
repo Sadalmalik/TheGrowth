@@ -12,10 +12,14 @@ namespace Sadalmalik.TheGrowth
         public float CardThickness = 0.1f;
         public float RandomAngle = 15f;
 
+        [Space]
         public float flipDuration = 0.3f;
         public float jumpDuration = 0.4f;
 
-        [FormerlySerializedAs("dealDelay")]
+        [Space]
         public float dealDuration = 1.5f;
+
+        [Space]
+        public float cameraMoveDuration = 1.5f;
     }
 }

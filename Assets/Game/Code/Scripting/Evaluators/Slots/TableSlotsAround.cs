@@ -15,7 +15,7 @@ namespace Sadalmalik.TheGrowth
             Cross,
             Diagonals
         }
-        public Evaluator<Vector2Int> Position = new TableCardPosition();
+        public Evaluator<Vector2Int> Position = new PositionByCard();
         public EFigure Figure;
         [HideIf(nameof(Figure), EFigure.Circle)]
         public int Distance;

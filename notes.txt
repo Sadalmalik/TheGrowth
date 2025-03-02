@@ -10,8 +10,9 @@
 - Ход игры
 
 Команды:
-- FlipCard
-- MoveCard
+- (done) FlipCard
+- (done) MoveCard
+- (done) Сдвинуть камеру
 - IterateCards
 - Пустить эффект
 - Применить ко всем (картам/слотам)
@@ -21,21 +22,20 @@
 - Изменить заряды
   - потратить
   - добавить
-- Сдвинуть камеру
 
 Проверки:
-- Чем является карта?
+- (done) Чем является карта?
   - Нужно задавать списки карт
-- Проверка числа зарядов
+- (done) Проверка числа зарядов
 
 Эвалуаторы:
-- Эвалуаторы ячеек
-- Эвалуаторы карт на поле
-- CardUnder : Evaluator<CardEntity>
-- PlayerCard
-- ActiveCard
-- CoverCard
-- IteratingCard
+- (done) Эвалуаторы ячеек
+- (done) Эвалуаторы карт на поле
+- (done) CoverCard
+- (done) CardUnder : Evaluator<CardEntity>
+- (done) PlayerCard
+- (done) ActiveCard
+- (done) IteratingCard
 - TrashSlot
 - LootSlot
 - Слоты руки (список)

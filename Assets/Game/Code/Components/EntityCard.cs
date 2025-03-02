@@ -75,7 +75,7 @@ namespace Sadalmalik.TheGrowth
             if (config.OnPlaced == null)
                 return;
             var context = new Context();
-            context.Add(new ActiveCardData { Card = this });
+            context.Add(new ActiveCard.Data { Card = this });
             config.OnPlaced.ExecuteAll(context);
         }
 
@@ -83,7 +83,7 @@ namespace Sadalmalik.TheGrowth
         {
             if (config.OnFlipped == null)
                 return;
-            var context = new Context(new ActiveCardData { Card = this });
+            var context = new Context(new ActiveCard.Data { Card = this });
             config.OnFlipped.ExecuteAll(context);
         }
 
@@ -93,7 +93,7 @@ namespace Sadalmalik.TheGrowth
                 return;
             if (config.OnStep == null)
                 return;
-            var context = new Context(new ActiveCardData { Card = this });
+            var context = new Context(new ActiveCard.Data { Card = this });
             config.OnStep.ExecuteAll(context);
         }
 
@@ -102,7 +102,7 @@ namespace Sadalmalik.TheGrowth
             if (config.AllowedMoves == null)
                 return null;
 
-            var context = new Context(new ActiveCardData { Card = this });
+            var context = new Context(new ActiveCard.Data { Card = this });
             var moves = config.AllowedMoves?.Evaluate(context);
             return moves;
         }
