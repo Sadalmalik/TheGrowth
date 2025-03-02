@@ -21,6 +21,18 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: OnPlaced
+      Entry: 6
+      Data: 
+    - Name: OnFlipped
+      Entry: 6
+      Data: 
+    - Name: OnStep
+      Entry: 6
+      Data: 
+    - Name: AllowedMoves
+      Entry: 6
+      Data: 
     - Name: components
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.CardComponentConfig,
@@ -37,7 +49,8 @@ MonoBehaviour:
   Title: First Card
   Cover:
     atlas: {fileID: 11400000, guid: 28272552980f6b3488a44e74ac8cdc0b, type: 2}
-    sprite: {x: 0, y: 0}
+    sprite: {x: 0, y: 3}
   Face:
     atlas: {fileID: 11400000, guid: 28272552980f6b3488a44e74ac8cdc0b, type: 2}
     sprite: {x: 0, y: 3}
+  CanBeDragged: 0

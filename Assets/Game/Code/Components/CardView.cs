@@ -36,7 +36,7 @@ namespace Sadalmalik.TheGrowth
             face.material = sprite.Material;
         }
 
-        public void MoveTo(CardSlot slot, Action onComplete, bool instant = false)
+        public void MoveTo(EntitySlot slot, Action onComplete, bool instant = false)
         {
             var endPosition = slot.GetNewPosition();
             var endRotation = slot.GetNewRotation();

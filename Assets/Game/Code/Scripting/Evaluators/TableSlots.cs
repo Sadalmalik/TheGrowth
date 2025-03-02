@@ -4,15 +4,16 @@ using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
 {
-    public class TableSlots : Evaluator<HashSet<CardSlot>>
+    public class TableSlots : Evaluator<HashSet<EntitySlot>>
     {
         public enum EVariant
         {
+            AllSlots,
             Around,
             FromSide
         }
 
-        public EVariant Variant;
+        public EVariant Variant = EVariant.AllSlots;
 
         [ShowIf(nameof(Variant), EVariant.Around)]
         public Evaluator<Vector2Int> Position = new TableCardPosition();
@@ -20,7 +21,7 @@ namespace Sadalmalik.TheGrowth
         public enum EFigure
         {
             Square,
-            Rombus,
+            Rhombus,
             Circle,
             Cross,
             Diagonals
@@ -43,22 +44,27 @@ namespace Sadalmalik.TheGrowth
         public int Steps;
 
 
-        public override HashSet<CardSlot> Evaluate()
+        public override HashSet<EntitySlot> Evaluate(Context context)
         {
             return Variant switch
             {
+                EVariant.AllSlots => GetAllSlots(),
                 EVariant.Around => GetSlotsAround(),
                 EVariant.FromSide => GetSlotsFromSide(),
                 _ => null
             };
         }
 
-        private HashSet<CardSlot> GetSlotsAround()
+        private HashSet<EntitySlot> GetAllSlots()
+        {
+            return new HashSet<EntitySlot>(CardTable.Instance.slots);
+        }
+        private HashSet<EntitySlot> GetSlotsAround()
         {
             return null;
         }
 
-        private HashSet<CardSlot> GetSlotsFromSide()
+        private HashSet<EntitySlot> GetSlotsFromSide()
         {
             // CardTable.Instance.size
 

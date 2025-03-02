@@ -4,9 +4,9 @@
     {
         public Condition conditions;
 
-        public override bool Chech()
+        public override bool Chech(Context context)
         {
-            return !conditions.Chech();
+            return !conditions.Chech(context);
         }
     }
 }

@@ -8,13 +8,13 @@ namespace Sadalmalik.TheGrowth
         order = 0)]
     public class CardSpawner : SingletonScriptableObject<CardSpawner>
     {
-        public CardEntity prefab;
+        public EntityCard prefab;
 
         private int _count = 0;
         
-        public CardEntity CreateCard(CardConfig config)
+        public EntityCard CreateCard(CardConfig config)
         {
-            var entity = GameObject.Instantiate<CardEntity>(prefab);
+            var entity = GameObject.Instantiate<EntityCard>(prefab);
             entity.SetConfig(config);
             entity.name = $"Entity#{_count++}: {config.name}";
             return entity;

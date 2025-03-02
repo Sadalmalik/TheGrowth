@@ -8,15 +8,15 @@ namespace Sadalmalik.TheGrowth
         public List<Command> OnTrue = new List<Command>();
         public List<Command> OnFalse = new List<Command>();
 
-        public override void Execute()
+        public override void Execute(Context context)
         {
-            if (condition.Chech())
+            if (condition.Chech(context))
             {
-                OnTrue.ExecuteAll();
+                OnTrue.ExecuteAll(context);
             }
             else
             {
-                OnFalse.ExecuteAll();
+                OnFalse.ExecuteAll(context);
             }
         }
     }

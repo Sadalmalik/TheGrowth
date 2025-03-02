@@ -27,9 +27,9 @@ namespace Sadalmalik.TheGrowth
         [TableList(ShowIndexLabels = true)]
         public List<DeckEntry> entries;
 
-        public List<CardEntity> CreateDeck()
+        public List<EntityCard> CreateDeck()
         {
-            var cards = new List<CardEntity>();
+            var cards = new List<EntityCard>();
             for (int i = 0; i < entries.Count; i++)
             {
                 var config = entries[i].card;

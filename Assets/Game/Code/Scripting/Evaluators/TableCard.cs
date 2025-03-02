@@ -2,13 +2,13 @@
 
 namespace Sadalmalik.TheGrowth
 {
-    public class TableCard : Evaluator<CardEntity>
+    public class TableCard : Evaluator<EntityCard>
     {
         public Evaluator<Vector2Int> Position = new TablePosition();
         
-        public override CardEntity Evaluate()
+        public override EntityCard Evaluate(Context context)
         {
-            var pos = Position.Evaluate();
+            var pos = Position.Evaluate(context);
             return CardTable.Instance[pos].Top();
         }
     }

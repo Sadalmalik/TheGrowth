@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
 {
     public class CardTable : SingletonMonoBehaviour<CardTable>
     {
-        public CardSlot slotPrefab;
+        public EntitySlot slotPrefab;
         
         [Space]
         [OnValueChanged(nameof(Rebuild))]
@@ -20,11 +21,11 @@ namespace Sadalmalik.TheGrowth
 
         [Space]
         [TableMatrix(SquareCells = true)]
-        public CardSlot[,] grid;
+        public EntitySlot[,] grid;
 
-        public List<CardSlot> slots = new List<CardSlot>();
+        public List<EntitySlot> slots = new List<EntitySlot>();
         
-        public CardSlot this[Vector2Int pos]
+        public EntitySlot this[Vector2Int pos]
             => grid[pos.x, pos.y];
         
         [Button]
@@ -33,18 +34,18 @@ namespace Sadalmalik.TheGrowth
             if (size.x <= 0 || size.y <= 0)
             {
                 transform.Clear();
-                grid = new CardSlot[0, 0];
+                grid = new EntitySlot[0, 0];
                 return;
             }
             
-            List<CardSlot> temp = new List<CardSlot>();
+            List<EntitySlot> temp = new List<EntitySlot>();
             if (grid != null)
             {
-                temp.AddRange(grid.Cast<CardSlot>().Distinct());
+                temp.AddRange(grid.Cast<EntitySlot>().Distinct());
                 temp.Remove(null);
             }
             
-            grid = new CardSlot[size.x, size.y];
+            grid = new EntitySlot[size.x, size.y];
 
             for (int y = 0; y < size.y; y++)
             for (int x = 0; x < size.x; x++)
@@ -66,13 +67,13 @@ namespace Sadalmalik.TheGrowth
             }
             
             slots.Clear();
-            slots.AddRange(grid.Cast<CardSlot>());
+            slots.AddRange(grid.Cast<EntitySlot>());
 
-            CardSlot GetSlot()
+            EntitySlot GetSlot()
             {
                 if (temp.Count>0)
                     return temp.Peek();
-                return Instantiate(slotPrefab, transform);
+                return (EntitySlot) PrefabUtility.InstantiatePrefab(slotPrefab, transform);
             }
         }
     }

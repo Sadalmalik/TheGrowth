@@ -2,13 +2,16 @@
 
 namespace Sadalmalik.TheGrowth
 {
-    public class ActiveCard : Evaluator<CardEntity>
+    public class ActiveCardData : IContextData
     {
-        public static CardEntity Card;
-
-        public override CardEntity Evaluate()
+        public EntityCard Card;
+    }
+    
+    public class ActiveCard : Evaluator<EntityCard>
+    {
+        public override EntityCard Evaluate(Context context)
         {
-            return Card;
+            return context.GetOptional<ActiveCardData>()?.Card;
         }
     }
 }

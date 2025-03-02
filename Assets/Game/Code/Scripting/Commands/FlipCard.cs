@@ -10,11 +10,11 @@
         }
 
         public EVariant Variant = EVariant.Reveal;
-        public Evaluator<CardEntity> Card;
+        public Evaluator<EntityCard> Card;
 
-        public override void Execute()
+        public override void Execute(Context context)
         {
-            var card = Card.Evaluate();
+            var card = Card.Evaluate(context);
 
             switch (Variant)
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,10 +9,12 @@ namespace Sadalmalik.TheGrowth
     {
         public DeckConfig deck;
 
+        
         public LayerMask cardLayer;
         public LayerMask tableLayer;
+        public float slotDropRadius = 1;
         
-        public CardSlot deckSlot;
+        public EntitySlot deckSlot;
         public CardTable table;
 
         public void Start()
@@ -25,27 +26,129 @@ namespace Sadalmalik.TheGrowth
             }
         }
 
+
+#region Player Control
+
+        private Vector3 _startDragPosition;
+        private EntityCard _draggedCard;
+        private HashSet<EntitySlot> _moves;
+
         public void Update()
         {
-            // return Camera.main.WorldToScreenPoint(transform.position);
-            // transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - _startMousePosition);
-
             var cam = Camera.main;
             if (cam == null) return;
-            var ray = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit, 100f, tableLayer))
+
+            var pos = GetTablePositionUnderCursor();
+            var col = new Color(1f, 1f, 0.2f, 0.2f);
+            Debug.DrawLine(cam.transform.position, pos, col, 0.2f);
+            Debug.DrawRay(pos, Vector3.up, col, 0.2f);
+
+            if (Input.GetKeyUp(KeyCode.Mouse1))
             {
-                var col = new Color(1f, 1f, 0.2f, 0.5f);
-                Debug.DrawLine(cam.transform.position, hit.point, col, 0.2f);
-                Debug.DrawRay(hit.point, hit.normal, col, 0.2f);
-                Debug.DrawRay(hit.point, Vector3.up, col, 0.2f);
+                var card = GetCardUnderMouse();
+                if (card != null)
+                {
+                    card.FlipCard();
+                }
+                return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                var card = GetCardUnderMouse();
+                if (card != null)
+                {
+                    // Start Drag
+                    _startDragPosition = GetTablePositionUnderCursor() - card.transform.position;
+                    _draggedCard = card;
+                    _moves = _draggedCard.GetAllowedMoves();
+                    foreach (var slot in _moves)
+                        slot.ShowMarker(true);
+                }
+
+                return;
+            }
+
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                float minDist = float.MaxValue;
+                EntitySlot nearestSlot = null;
+                foreach (var slot in _moves)
+                {
+                    slot.ShowMarker(false);
+
+                    var dist = Vector3.Distance(slot.transform.position, _draggedCard.transform.position);
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        nearestSlot = slot;
+                    }
+                }
+
+                if (nearestSlot != null &&
+                    minDist<slotDropRadius)
+                {
+                    _draggedCard.MoveTo(nearestSlot);
+                }
+                else
+                {
+                    _draggedCard.MoveTo(_draggedCard.Slot);
+                }
+                
+                return;
+            }
+
+            if (_draggedCard != null)
+            {
+                _draggedCard.transform.position = GetTablePositionUnderCursor() - _startDragPosition;
             }
         }
+
+        private Vector3 GetTablePositionUnderCursor()
+        {
+            var ray = Camera.main!.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit, 100f, tableLayer))
+                return hit.point;
+
+            return Vector3.zero;
+        }
+
+        private EntityCard GetCardUnderMouse()
+        {
+            var ray = Camera.main!.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit, 100f, cardLayer))
+                return hit.transform?.GetComponent<EntityCard>();
+
+            return null;
+        }
+
+#endregion
+
+
+#region Global Actions
 
         [Button, PropertyOrder(50)]
         private void DealCards()
         {
             StartCoroutine(DealCardsCor());
+        }
+
+        private IEnumerator DealCardsCor()
+        {
+            var slots = new List<EntitySlot>(table.slots);
+            slots.Shuffle();
+
+            var delay = RootConfig.Instance.dealDuration / slots.Count;
+            while (deckSlot.Cards.Count > 0 && slots.Count > 0)
+            {
+                var card = deckSlot.Peek();
+                var slot = slots.Peek();
+                card.MoveTo(slot);
+
+                yield return new WaitForSeconds(delay);
+            }
+
+            Debug.Log("Deal complete!");
         }
 
         [Button, PropertyOrder(50)]
@@ -54,59 +157,47 @@ namespace Sadalmalik.TheGrowth
             StartCoroutine(CollectCardsCor());
         }
 
+        private IEnumerator CollectCardsCor()
+        {
+            var slots = new List<EntitySlot>(table.slots);
+            slots.Reverse();
+
+            var delay = RootConfig.Instance.dealDuration / slots.Count;
+            foreach (var slot in slots)
+            {
+                var card = slot.Peek();
+                card?.MoveTo(deckSlot);
+
+                yield return new WaitForSeconds(delay);
+            }
+
+            Debug.Log("Collect complete!");
+        }
+
         [Button, PropertyOrder(50)]
         private void ShuffleCards()
         {
             StartCoroutine(ShuffleCardsCor());
         }
 
-        private IEnumerator DealCardsCor()
-        {
-            var slots = new List<CardSlot>(table.slots);
-            slots.Shuffle();
-
-            var delay = RootConfig.Instance.dealDuration / slots.Count;
-            while (deckSlot.Cards.Count>0 && slots.Count > 0)
-            {
-                var card = deckSlot.Peek();
-                var slot = slots.Peek();
-                card.MoveTo(slot);
-                
-                yield return new WaitForSeconds(delay);
-            }
-
-            Debug.Log($"Deal complete!");
-        }
-
-        private IEnumerator CollectCardsCor()
-        {
-            var slots = new List<CardSlot>(table.slots);
-            slots.Reverse();
-            
-            var delay = RootConfig.Instance.dealDuration / slots.Count;
-            foreach (var slot in slots)
-            {
-                var card = slot.Peek();
-                card?.MoveTo(deckSlot);
-                
-                yield return new WaitForSeconds(delay);
-            }
-        }
-
         private IEnumerator ShuffleCardsCor()
         {
-            var cards = new List<CardEntity>(deckSlot.Cards);
+            var cards = new List<EntityCard>(deckSlot.Cards);
             deckSlot.Cards.Clear();
             cards.Shuffle();
-            
+
             var delay = RootConfig.Instance.dealDuration / cards.Count;
             foreach (var card in cards)
             {
                 card.Slot = null;
                 card.MoveTo(deckSlot);
-                
+
                 yield return new WaitForSeconds(delay);
             }
+
+            Debug.Log("Shuffle complete!");
         }
+
+#endregion
     }
 }

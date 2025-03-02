@@ -6,9 +6,9 @@ namespace Sadalmalik.TheGrowth
     {
         public List<Command> commands = new List<Command>();
         
-        public override void Execute()
+        public override void Execute(Context context)
         {
-            commands.ExecuteAll();
+            commands.ExecuteAll(context);
         }
     }
 }

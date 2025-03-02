@@ -2,7 +2,7 @@
 
 namespace Sadalmalik.TheGrowth
 {
-    public class TableSlotsCombine : Evaluator<HashSet<CardSlot>>
+    public class TableSlotsCombine : Evaluator<HashSet<EntitySlot>>
     {
         public enum EVariant
         {
@@ -12,15 +12,15 @@ namespace Sadalmalik.TheGrowth
         }
 
         public EVariant Variant;
-        public List<Evaluator<HashSet<CardSlot>>> Evaluators = new List<Evaluator<HashSet<CardSlot>>>();
+        public List<Evaluator<HashSet<EntitySlot>>> Evaluators = new List<Evaluator<HashSet<EntitySlot>>>();
         
-        public override HashSet<CardSlot> Evaluate()
+        public override HashSet<EntitySlot> Evaluate(Context context)
         {
-            HashSet<CardSlot> result = new HashSet<CardSlot>();
-            List<HashSet<CardSlot>> sets = new List<HashSet<CardSlot>>();
+            HashSet<EntitySlot> result = new HashSet<EntitySlot>();
+            List<HashSet<EntitySlot>> sets = new List<HashSet<EntitySlot>>();
             foreach (var evaluator in Evaluators)
             {
-                sets.Add(evaluator.Evaluate());
+                sets.Add(evaluator.Evaluate(context));
             }
 
             switch (Variant)

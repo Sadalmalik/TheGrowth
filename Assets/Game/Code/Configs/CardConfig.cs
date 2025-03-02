@@ -18,6 +18,10 @@ namespace Sadalmalik.TheGrowth
         public CardSprite Face;
 
         [Space]
+        [BoxGroup("Settings")]
+        public bool CanBeDragged;
+        
+        [Space]
         [BoxGroup("Brain")]
         public List<Command> OnPlaced;
         [BoxGroup("Brain")]
@@ -25,7 +29,7 @@ namespace Sadalmalik.TheGrowth
         [BoxGroup("Brain")]
         public List<Command> OnStep;
         [BoxGroup("Brain")]
-        public Evaluator<HashSet<CardSlot>> AllowedMoves;
+        public Evaluator<HashSet<EntitySlot>> AllowedMoves;
         
         [Space]
         [BoxGroup("Components")]

@@ -22,16 +22,16 @@ namespace Sadalmalik.TheGrowth
         [ShowIf(nameof(_isOperation))]
         public TablePosition Right;
         
-        public override Vector2Int Evaluate()
+        public override Vector2Int Evaluate(Context context)
         {
             switch (Mode)
             {
                 case Variant.Constant:
                     return Position;
                 case Variant.Sum:
-                    return Left.Evaluate() + Right.Evaluate();
+                    return Left.Evaluate(context) + Right.Evaluate(context);
                 case Variant.Difference:
-                    return Left.Evaluate() - Right.Evaluate();
+                    return Left.Evaluate(context) - Right.Evaluate(context);
             }
             return Vector2Int.zero;
         }
