@@ -63,7 +63,7 @@ MonoBehaviour:
       Data: 3
     - Name: Distance
       Entry: 3
-      Data: 3
+      Data: 4
     - Name: Radius
       Entry: 4
       Data: 0
@@ -90,7 +90,7 @@ MonoBehaviour:
       Data: 4
     - Name: Distance
       Entry: 3
-      Data: 3
+      Data: 4
     - Name: Radius
       Entry: 4
       Data: 0

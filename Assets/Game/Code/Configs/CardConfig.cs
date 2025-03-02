@@ -32,7 +32,6 @@ namespace Sadalmalik.TheGrowth
         public Evaluator<HashSet<EntitySlot>> AllowedMoves;
         
         [Space]
-        [BoxGroup("Components")]
         public List<CardComponentConfig> components;
     }
 
