@@ -1,9 +1,9 @@
 ﻿namespace Sadalmalik.TheGrowth
 {
     /// <summary>
-    /// Возвращает текущую итерируемую карту
+    /// Возвращает карту, которая лежит НА активной
     /// </summary>
-    public class IteratingCard : Evaluator<EntityCard>
+    public class CoveringCard : Evaluator<EntityCard>
     {
         public class Data : IContextData
         {

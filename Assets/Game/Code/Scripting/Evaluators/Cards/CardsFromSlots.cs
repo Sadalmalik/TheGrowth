@@ -3,7 +3,10 @@ using System.Linq;
 
 namespace Sadalmalik.TheGrowth
 {
-    public class TableCards : Evaluator<HashSet<EntityCard>>
+    /// <summary>
+    /// Возвращает карты из слотов
+    /// </summary>
+    public class CardsFromSlots : Evaluator<HashSet<EntityCard>>
     {
         public Evaluator<HashSet<EntitySlot>> Slots;
         public List<CardListConfig> Filter;

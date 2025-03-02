@@ -22,17 +22,21 @@ namespace Sadalmalik.TheGrowth
 
 #region Commands
 
-        public void MoveTo(EntitySlot slot, bool instant = false)
+        public void MoveTo(EntitySlot newSlot, bool instant = false)
         {
             if (Slot != null)
+            {
                 Slot.Cards.Remove(this);
-            Slot = slot;
+            }
+
+            var oldSlot = Slot;
+            Slot = newSlot;
+            Slot.Cards.Add(this);
 
             if (view != null)
             {
                 IsAnimated = true;
-                slot.Cards.Add(this);
-                view.MoveTo(slot, MoveComplete, instant: instant);
+                view.MoveTo(newSlot, MoveComplete, instant: instant);
             }
 
             void MoveComplete()
@@ -41,6 +45,18 @@ namespace Sadalmalik.TheGrowth
 
                 if (AllowEvents)
                 {
+                    var oldUnder = oldSlot.Cards.Count - 2;
+                    if (oldUnder >= 0)
+                    {
+                        oldSlot.Cards[oldUnder].OnUnCovered(this);
+                    }
+
+                    var newUnder = Slot.Cards.Count - 2;
+                    if (newUnder >= 0)
+                    {
+                        Slot.Cards[newUnder].OnCovered(this);
+                    }
+
                     OnPlaced();
                 }
             }
@@ -84,6 +100,26 @@ namespace Sadalmalik.TheGrowth
             if (config.OnFlipped == null)
                 return;
             var context = new Context(new ActiveCard.Data { Card = this });
+            config.OnFlipped.ExecuteAll(context);
+        }
+
+        public void OnCovered(EntityCard coverCard)
+        {
+            if (config.OnPlaced == null)
+                return;
+            var context = new Context(
+                new ActiveCard.Data { Card = this },
+                new CoveringCard.Data { Card = coverCard });
+            config.OnPlaced.ExecuteAll(context);
+        }
+
+        public void OnUnCovered(EntityCard coverCard)
+        {
+            if (config.OnFlipped == null)
+                return;
+            var context = new Context(
+                new ActiveCard.Data { Card = this },
+                new CoveringCard.Data { Card = coverCard });
             config.OnFlipped.ExecuteAll(context);
         }
 

@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Возвращает слоты с какой-то стороны стола
+    /// </summary>
     public class TableSlotsFromSide : Evaluator<HashSet<EntitySlot>>
     {
         public enum ESide

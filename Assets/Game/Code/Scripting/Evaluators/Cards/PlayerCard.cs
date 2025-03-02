@@ -1,5 +1,8 @@
 ﻿namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Возвращает карту Героя
+    /// </summary>
     public class PlayerCard : Evaluator<EntityCard>
     {
         public class Data : IContextData

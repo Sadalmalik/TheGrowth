@@ -2,6 +2,9 @@
 
 namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Возвращает все слоты на столе
+    /// </summary>
     public class TableSlotsAll : Evaluator<HashSet<EntitySlot>>
     {
         public override HashSet<EntitySlot> Evaluate(Context context)

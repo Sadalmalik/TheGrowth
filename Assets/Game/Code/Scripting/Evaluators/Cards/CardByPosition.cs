@@ -2,9 +2,12 @@
 
 namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Возвращает самую верхнюю карту в ячейке на столе
+    /// </summary>
     public class CardByPosition : Evaluator<EntityCard>
     {
-        public Evaluator<Vector2Int> Position = new TablePosition();
+        public Evaluator<Vector2Int> Position = new PositionEvaluator();
         
         public override EntityCard Evaluate(Context context)
         {

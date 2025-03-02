@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Возвращает слоты в некоторой области вокруг точки
+    /// </summary>
     public class TableSlotsAround : Evaluator<HashSet<EntitySlot>>
     {
         public enum EFigure

@@ -2,6 +2,9 @@
 
 namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Возвращает карту, для которой выполняются команды, настроенные в конфиге карты
+    /// </summary>
     public class ActiveCard : Evaluator<EntityCard>
     {
         public class Data : IContextData

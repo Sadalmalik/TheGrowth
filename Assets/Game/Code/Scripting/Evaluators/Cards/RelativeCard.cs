@@ -1,5 +1,8 @@
 ﻿namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Возвращает карту относительно данной карты в стопке
+    /// </summary>
     public class RelativeCard : Evaluator<EntityCard>
     {
         public enum EVariant

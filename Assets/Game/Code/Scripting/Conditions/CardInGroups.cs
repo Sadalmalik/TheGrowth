@@ -2,6 +2,9 @@
 
 namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Проверяет, есть ли карта в указанной группе
+    /// </summary>
     public class CardInGroups : Condition
     {
         public Evaluator<EntityCard> Card;

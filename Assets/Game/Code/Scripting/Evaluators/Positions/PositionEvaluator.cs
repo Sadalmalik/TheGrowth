@@ -3,7 +3,10 @@ using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
 {
-    public class TablePosition : Evaluator<Vector2Int>
+    /// <summary>
+    /// Возвращает константную позицию или комбинацию двух позиций
+    /// </summary>
+    public class PositionEvaluator : Evaluator<Vector2Int>
     {
         public enum Variant
         {
@@ -18,9 +21,9 @@ namespace Sadalmalik.TheGrowth
 
         private bool _isOperation => this.Mode == Variant.Sum || this.Mode == Variant.Difference;
         [ShowIf(nameof(_isOperation))]
-        public TablePosition Left;
+        public PositionEvaluator Left;
         [ShowIf(nameof(_isOperation))]
-        public TablePosition Right;
+        public PositionEvaluator Right;
         
         public override Vector2Int Evaluate(Context context)
         {

@@ -1,5 +1,8 @@
 ﻿namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Возвращает текущий итерируемый слот
+    /// </summary>
     public class IteratingSlot : Evaluator<EntitySlot>
     {
         public class Data : IContextData

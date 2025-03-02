@@ -1,5 +1,9 @@
 ﻿namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Проверяет колличество зарядов укарты
+    /// Если у карты нет компонента зарядов - вернут false
+    /// </summary>
     public class ChargesCheck : Condition
     {
         public enum ECompare
@@ -18,18 +22,18 @@
         public override bool Check(Context context)
         {
             var card = Card.Evaluate(context);
-            var chargesComponent = card.gameObject.GetComponent<ChargesComponent>();
+            var chargesComponent = card.gameObject.GetComponent<CardCharges>();
 
             if (chargesComponent == null)
                 return false;
 
             return Compare switch
             {
-                ECompare.Equal => chargesComponent.Charges == Value,
-                ECompare.Less => chargesComponent.Charges < Value,
-                ECompare.LessOrEqual => chargesComponent.Charges <= Value,
-                ECompare.Greater => chargesComponent.Charges > Value,
-                ECompare.GreaterOrEqual => chargesComponent.Charges >= Value,
+                ECompare.Equal => chargesComponent.charges == Value,
+                ECompare.Less => chargesComponent.charges < Value,
+                ECompare.LessOrEqual => chargesComponent.charges <= Value,
+                ECompare.Greater => chargesComponent.charges > Value,
+                ECompare.GreaterOrEqual => chargesComponent.charges >= Value,
                 _ => false
             };
         }

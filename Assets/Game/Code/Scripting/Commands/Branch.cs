@@ -2,6 +2,9 @@
 
 namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Команда ЕСЛИ - проверят условие и выполняет один из списков команд в зависимости от него
+    /// </summary>
     public class Branch : Command
     {
         public Condition condition = new And();

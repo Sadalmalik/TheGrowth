@@ -1,5 +1,8 @@
 ﻿namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Команда переворачивает карту
+    /// </summary>
     public class FlipCard : Command
     {
         public enum EVariant

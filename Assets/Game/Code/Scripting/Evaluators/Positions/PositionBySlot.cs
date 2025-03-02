@@ -2,6 +2,9 @@
 
 namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Возвращает координаты слота
+    /// </summary>
     public class PositionBySlot : Evaluator<Vector2Int>
     {
         public Evaluator<EntitySlot> Slot;

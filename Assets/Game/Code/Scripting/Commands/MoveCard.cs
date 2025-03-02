@@ -1,5 +1,8 @@
 ﻿namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Команды перекидывает указанную карту на указанный слот
+    /// </summary>
     public class MoveCard : Command
     {
         public Evaluator<EntityCard> Card;

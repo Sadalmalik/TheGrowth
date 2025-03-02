@@ -2,6 +2,9 @@
 
 namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Возвращает позицию карты на поле (координаты слоты)
+    /// </summary>
     public class PositionByCard : Evaluator<Vector2Int>
     {
         public Evaluator<EntityCard> Card = new ActiveCard();

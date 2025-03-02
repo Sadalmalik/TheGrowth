@@ -1,5 +1,8 @@
 ﻿namespace Sadalmalik.TheGrowth
 {
+    /// <summary>
+    /// Команда выполняет список команд из конфига
+    /// </summary>
     public class ExecuteCommands : Command
     {
         public CommandConfig config;
