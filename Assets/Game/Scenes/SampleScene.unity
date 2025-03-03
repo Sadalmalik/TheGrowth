@@ -1420,6 +1420,8 @@ MonoBehaviour:
   slotDropRadius: 3
   deckSlot: {fileID: 891107045}
   table: {fileID: 679964669}
+  stepAfterDrop: 1
+  stepDelay: 0.1
 --- !u!4 &530211717
 Transform:
   m_ObjectHideFlags: 0

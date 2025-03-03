@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6b354048c82481eb5b3add2dd4003e3, type: 3}
-  m_Name: CommonResources
+  m_Name: Monsters
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -22,6 +22,4 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   Cards:
-  - {fileID: 11400000, guid: dab00cc110e207b46b98ec91564df108, type: 2}
-  - {fileID: 11400000, guid: 376eaa740945a7f41b241de31202ed6d, type: 2}
   - {fileID: 11400000, guid: 77fb4d0db3d301d46b9779ffb58daace, type: 2}

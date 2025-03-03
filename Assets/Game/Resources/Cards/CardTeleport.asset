@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 520928b9d9de328488e7176c634b319e, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -42,19 +43,82 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|Sadalmalik.TheGrowth.MoveCard, Code
+      Data: 1|Sadalmalik.TheGrowth.Branch, Code
+    - Name: condition
+      Entry: 7
+      Data: 2|Sadalmalik.TheGrowth.CardInGroups, Code
     - Name: Card
       Entry: 7
-      Data: 2|Sadalmalik.TheGrowth.CoveringCard, Code
+      Data: 3|Sadalmalik.TheGrowth.CoveringCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Filter
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.CardListConfig,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnTrue
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 6|Sadalmalik.TheGrowth.MoveCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 7|Sadalmalik.TheGrowth.CoveringCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Slot
       Entry: 7
-      Data: 3|Sadalmalik.TheGrowth.Random`1[[Sadalmalik.TheGrowth.EntitySlot, Code]],
+      Data: 8|Sadalmalik.TheGrowth.Random`1[[Sadalmalik.TheGrowth.EntitySlot, Code]],
         Code
     - Name: Collection
-      Entry: 6
+      Entry: 7
+      Data: 9|Sadalmalik.TheGrowth.TableSlotsAll, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnFalse
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
       Data: 
     - Name: 
       Entry: 8
@@ -76,7 +140,7 @@ MonoBehaviour:
       Data: 
     - Name: components
       Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.ICardComponent,
+      Data: 11|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.ICardComponent,
         Code]], mscorlib
     - Name: 
       Entry: 12
@@ -90,7 +154,7 @@ MonoBehaviour:
   Title: First Card
   Cover:
     atlas: {fileID: 11400000, guid: 28272552980f6b3488a44e74ac8cdc0b, type: 2}
-    sprite: {x: 0, y: 0}
+    sprite: {x: 13, y: 0}
   Face:
     atlas: {fileID: 11400000, guid: 28272552980f6b3488a44e74ac8cdc0b, type: 2}
     sprite: {x: 0, y: 2}
