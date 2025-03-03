@@ -22,6 +22,7 @@ namespace Sadalmalik.TheGrowth
             var cards = deck.CreateDeck();
             foreach (var card in cards)
             {
+                card.AllowEvents = false;
                 card.MoveTo(deckSlot, instant: true);
             }
         }
@@ -43,7 +44,7 @@ namespace Sadalmalik.TheGrowth
                           $"Grid: {CardTable.Instance.Grid.GetLength(0)}, {CardTable.Instance.Grid.GetLength(1)}\n" +
                           $"Slots: {CardTable.Instance.slots.Count}");
             }
-            
+
             var cam = Camera.main;
             if (cam == null) return;
 
@@ -98,7 +99,7 @@ namespace Sadalmalik.TheGrowth
                 }
 
                 if (_moves != null)
-                    foreach (var temp in _moves) 
+                    foreach (var temp in _moves)
                         temp.ShowMarker(false);
 
                 _draggedCard = null;
@@ -109,9 +110,12 @@ namespace Sadalmalik.TheGrowth
             if (_draggedCard != null)
             {
                 _draggedCard.transform.position = GetTablePositionUnderCursor() - _startDragPosition + Vector3.up;
-                
+
                 var (slot, dist) = GetNearestSlot(_draggedCard.transform.position);
-                Debug.DrawLine(_draggedCard.transform.position, slot.transform.position, Color.blue, 5f);
+                if (slot != null)
+                {
+                    Debug.DrawLine(_draggedCard.transform.position, slot.transform.position, Color.blue, 5f);
+                }
             }
         }
 
@@ -119,7 +123,7 @@ namespace Sadalmalik.TheGrowth
         {
             float minDist = float.MaxValue;
             EntitySlot nearestSlot = null;
-            
+
             if (_moves != null)
             {
                 foreach (var slot in _moves)
@@ -175,7 +179,7 @@ namespace Sadalmalik.TheGrowth
             {
                 var card = deckSlot.Peek();
                 var slot = slots.Peek();
-                card.MoveTo(slot);
+                card.MoveTo(slot, false, true);
 
                 yield return new WaitForSeconds(delay);
             }
@@ -198,7 +202,11 @@ namespace Sadalmalik.TheGrowth
             foreach (var slot in slots)
             {
                 var card = slot.Peek();
-                card?.MoveTo(deckSlot);
+                if (card != null)
+                {
+                    card.AllowEvents = false;
+                    card.MoveTo(deckSlot);
+                }
 
                 yield return new WaitForSeconds(delay);
             }

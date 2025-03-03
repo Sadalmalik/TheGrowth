@@ -22,7 +22,7 @@ namespace Sadalmalik.TheGrowth
 
 #region Commands
 
-        public void MoveTo(EntitySlot newSlot, bool instant = false)
+        public void MoveTo(EntitySlot newSlot, bool instant = false, bool allowAfter = false)
         {
             if (Slot != null)
             {
@@ -45,10 +45,13 @@ namespace Sadalmalik.TheGrowth
 
                 if (AllowEvents)
                 {
-                    var oldUnder = oldSlot.Cards.Count - 2;
-                    if (oldUnder >= 0)
+                    if (oldSlot != null)
                     {
-                        oldSlot.Cards[oldUnder].OnUnCovered(this);
+                        var oldUnder = oldSlot.Cards.Count - 2;
+                        if (oldUnder >= 0)
+                        {
+                            oldSlot.Cards[oldUnder].OnUnCovered(this);
+                        }
                     }
 
                     var newUnder = Slot.Cards.Count - 2;
@@ -58,6 +61,11 @@ namespace Sadalmalik.TheGrowth
                     }
 
                     OnPlaced();
+                }
+
+                if (allowAfter)
+                {
+                    AllowEvents = true;
                 }
             }
         }
