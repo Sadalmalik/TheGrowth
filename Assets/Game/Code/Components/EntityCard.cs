@@ -102,6 +102,15 @@ namespace Sadalmalik.TheGrowth
             context.Add(new ActiveCard.Data { Card = this });
             config.OnPlaced.ExecuteAll(context);
         }
+        
+        public void OnPlacedFirstTime()
+        {
+            if (config.OnPlaced == null)
+                return;
+            var context = new Context();
+            context.Add(new ActiveCard.Data { Card = this });
+            config.OnPlacedFirstTime.ExecuteAll(context);
+        }
 
         public void OnFlipped()
         {

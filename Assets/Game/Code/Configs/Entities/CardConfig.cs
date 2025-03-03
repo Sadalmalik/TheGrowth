@@ -41,6 +41,8 @@ namespace Sadalmalik.TheGrowth
         [BoxGroup("Brain")]
         public List<Command> OnPlaced;
         [BoxGroup("Brain")]
+        public List<Command> OnPlacedFirstTime;
+        [BoxGroup("Brain")]
         public List<Command> OnFlipped;
         [BoxGroup("Brain")]
         public List<Command> OnStep;

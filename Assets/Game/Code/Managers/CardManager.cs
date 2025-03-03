@@ -184,6 +184,13 @@ namespace Sadalmalik.TheGrowth
                 yield return new WaitForSeconds(delay);
             }
 
+            yield return new WaitForSeconds(RootConfig.Instance.jumpDuration);
+
+            foreach (var slot in table.slots)
+            {
+                slot.Top()?.OnPlacedFirstTime();
+            }
+            
             Debug.Log("Deal complete!");
         }
 
