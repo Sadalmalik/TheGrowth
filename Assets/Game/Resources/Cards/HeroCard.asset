@@ -30,49 +30,13 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|Sadalmalik.TheGrowth.Branch, Code
-    - Name: condition
+      Data: 1|Sadalmalik.TheGrowth.FlipCard, Code
+    - Name: Variant
+      Entry: 3
+      Data: 1
+    - Name: Card
       Entry: 7
-      Data: 2|Sadalmalik.TheGrowth.And, Code
-    - Name: conditions
-      Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Condition,
-        Code]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OnTrue
-      Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OnFalse
-      Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
+      Data: 2|Sadalmalik.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -87,7 +51,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFlipped
       Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+      Data: 3|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -100,7 +64,7 @@ MonoBehaviour:
       Data: 
     - Name: OnStep
       Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+      Data: 4|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -111,20 +75,17 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: OnCovered
+      Entry: 6
+      Data: 
+    - Name: OnUnCovered
+      Entry: 6
+      Data: 
     - Name: AllowedMoves
       Entry: 7
-      Data: 8|Sadalmalik.TheGrowth.TableSlotsAround, Code
+      Data: 5|Sadalmalik.TheGrowth.TableSlotsAround, Code
     - Name: Position
-      Entry: 7
-      Data: 9|Sadalmalik.TheGrowth.TableCardPosition, Code
-    - Name: Card
-      Entry: 7
-      Data: 10|Sadalmalik.TheGrowth.ActiveCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: Figure
       Entry: 3
@@ -140,14 +101,14 @@ MonoBehaviour:
       Data: 
     - Name: components
       Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.CardComponentConfig,
+      Data: 6|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.ICardComponent,
         Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 12|Sadalmalik.TheGrowth.ChargesComponent, Code
+      Data: 7|Sadalmalik.TheGrowth.ChargesComponent, Code
     - Name: Charges
       Entry: 3
       Data: 37
