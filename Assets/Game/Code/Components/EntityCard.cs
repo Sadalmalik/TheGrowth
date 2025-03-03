@@ -105,7 +105,7 @@ namespace Sadalmalik.TheGrowth
         
         public void OnPlacedFirstTime()
         {
-            if (config.OnPlaced == null)
+            if (config.OnPlacedFirstTime == null)
                 return;
             var context = new Context();
             context.Add(new ActiveCard.Data { Card = this });
@@ -122,22 +122,22 @@ namespace Sadalmalik.TheGrowth
 
         public void OnCovered(EntityCard coverCard)
         {
-            if (config.OnPlaced == null)
+            if (config.OnCovered == null)
                 return;
             var context = new Context(
                 new ActiveCard.Data { Card = this },
                 new CoveringCard.Data { Card = coverCard });
-            config.OnPlaced.ExecuteAll(context);
+            config.OnCovered.ExecuteAll(context);
         }
 
         public void OnUnCovered(EntityCard coverCard)
         {
-            if (config.OnFlipped == null)
+            if (config.OnUnCovered == null)
                 return;
             var context = new Context(
                 new ActiveCard.Data { Card = this },
                 new CoveringCard.Data { Card = coverCard });
-            config.OnFlipped.ExecuteAll(context);
+            config.OnUnCovered.ExecuteAll(context);
         }
 
         public void OnStep()
