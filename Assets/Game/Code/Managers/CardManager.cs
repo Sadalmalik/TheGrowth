@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
 {
-    public class CardManager : SerializedMonoBehaviour
+    public class CardManager : SingletonMonoBehaviour<CardManager>
     {
         public DeckConfig deck;
 
@@ -35,6 +35,20 @@ namespace Sadalmalik.TheGrowth
         private EntityCard _draggedCard;
         private HashSet<EntitySlot> _moves;
 
+        public void CallStep(float delay=0)
+        {
+            StartCoroutine(CallStepCor(delay));
+        }
+
+        private IEnumerator CallStepCor(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            foreach (var slot in table.slots)
+            {
+                slot.Top()?.OnStep();
+            }
+        }
+        
         public void Update()
         {
             if (_check)
