@@ -22,6 +22,9 @@ namespace Sadalmalik.TheGrowth
 
         private bool CardInFilter(EntityCard card)
         {
+            if (card == null)
+                return false;
+            
             if (Filter == null || Filter.Count == 0)
                 return true;
 
