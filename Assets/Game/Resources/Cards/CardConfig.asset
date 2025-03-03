@@ -34,7 +34,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: OnFlipped
+    - Name: OnPlacedFirstTime
       Entry: 7
       Data: 1|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
         mscorlib
@@ -47,59 +47,12 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: OnStep
+    - Name: OnFlipped
       Entry: 7
       Data: 2|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 3|Sadalmalik.TheGrowth.FlipCard, Code
-    - Name: Variant
-      Entry: 3
-      Data: 1
-    - Name: Card
-      Entry: 7
-      Data: 4|Sadalmalik.TheGrowth.ActiveCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 5|Sadalmalik.TheGrowth.Branch, Code
-    - Name: condition
-      Entry: 7
-      Data: 6|Sadalmalik.TheGrowth.And, Code
-    - Name: conditions
-      Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Condition,
-        Code]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 8|Sadalmalik.TheGrowth.Not, Code
-    - Name: conditions
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 9|Sadalmalik.TheGrowth.And, Code
-    - Name: conditions
-      Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Condition,
-        Code]], mscorlib
-    - Name: 
-      Entry: 12
       Data: 0
     - Name: 
       Entry: 13
@@ -107,21 +60,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OnTrue
+    - Name: OnStep
       Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+      Data: 3|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -132,9 +73,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: OnFalse
+    - Name: OnCovered
       Entry: 7
-      Data: 12|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+      Data: 4|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -145,9 +86,13 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: OnUnCovered
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+        mscorlib
     - Name: 
-      Entry: 8
-      Data: 
+      Entry: 12
+      Data: 0
     - Name: 
       Entry: 13
       Data: 

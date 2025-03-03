@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 721fd4a630e54d9784e83e35768c9280, type: 3}
-  m_Name: Card3
+  m_Name: CardMonster
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 52f3eee5fad002e4f984ced85e276ea0, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -28,28 +27,20 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 1|Sadalmalik.TheGrowth.ExecuteCommands, Code
-    - Name: config
-      Entry: 10
       Data: 0
     - Name: 
-      Entry: 8
+      Entry: 13
       Data: 
     - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnPlacedFirstTime
       Entry: 7
-      Data: 2|Sadalmalik.TheGrowth.MoveCamera, Code
-    - Name: Card
-      Entry: 7
-      Data: 3|Sadalmalik.TheGrowth.ActiveCard, Code
+      Data: 1|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+        mscorlib
     - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 12
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
@@ -58,7 +49,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFlipped
       Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+      Data: 2|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -71,7 +62,66 @@ MonoBehaviour:
       Data: 
     - Name: OnStep
       Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+      Data: 3|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 4|Sadalmalik.TheGrowth.MoveCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 5|Sadalmalik.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Slot
+      Entry: 7
+      Data: 6|Sadalmalik.TheGrowth.First`1[[Sadalmalik.TheGrowth.EntitySlot, Code]],
+        Code
+    - Name: Collection
+      Entry: 7
+      Data: 7|Sadalmalik.TheGrowth.TableSlotsAround, Code
+    - Name: Position
+      Entry: 7
+      Data: 8|Sadalmalik.TheGrowth.PositionByCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 9|Sadalmalik.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Figure
+      Entry: 3
+      Data: 3
+    - Name: Distance
+      Entry: 3
+      Data: 1
+    - Name: Radius
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnCovered
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -82,64 +132,25 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: OnCovered
-      Entry: 6
-      Data: 
     - Name: OnUnCovered
-      Entry: 6
-      Data: 
-    - Name: AllowedMoves
       Entry: 7
-      Data: 6|Sadalmalik.TheGrowth.TableSlotsCombine, Code
-    - Name: Variant
-      Entry: 3
-      Data: 0
-    - Name: Evaluators
-      Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[Sadalmalik.TheGrowth.EntitySlot,
-        Code]], System.Core]], Code]], mscorlib
+      Data: 11|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+        mscorlib
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 8|Sadalmalik.TheGrowth.TableSlotsAround, Code
-    - Name: Position
-      Entry: 7
-      Data: 9|Sadalmalik.TheGrowth.PositionByCard, Code
-    - Name: Card
-      Entry: 7
-      Data: 10|Sadalmalik.TheGrowth.ActiveCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Figure
-      Entry: 3
-      Data: 1
-    - Name: Distance
-      Entry: 3
-      Data: 4
-    - Name: Radius
-      Entry: 4
-      Data: 4
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 8
+    - Name: AllowedMoves
+      Entry: 6
       Data: 
     - Name: components
       Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.ICardComponent,
+      Data: 12|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.ICardComponent,
         Code]], mscorlib
     - Name: 
       Entry: 12
@@ -157,4 +168,4 @@ MonoBehaviour:
   Face:
     atlas: {fileID: 11400000, guid: 28272552980f6b3488a44e74ac8cdc0b, type: 2}
     sprite: {x: 0, y: 3}
-  CanBeDragged: 1
+  CanBeDragged: 0

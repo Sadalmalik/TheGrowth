@@ -62,27 +62,37 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: Filter
-      Entry: 6
+      Entry: 7
+      Data: 6|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.CardListConfig,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: Commands
       Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+      Data: 7|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 7|Sadalmalik.TheGrowth.FlipCard, Code
+      Data: 8|Sadalmalik.TheGrowth.FlipCard, Code
     - Name: Variant
       Entry: 3
       Data: 1
     - Name: Card
       Entry: 7
-      Data: 8|Sadalmalik.TheGrowth.IteratingCard, Code
+      Data: 9|Sadalmalik.TheGrowth.IteratingCard, Code
     - Name: 
       Entry: 8
       Data: 

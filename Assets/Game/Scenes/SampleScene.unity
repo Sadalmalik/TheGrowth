@@ -1319,7 +1319,7 @@ MonoBehaviour:
   tableLayer:
     serializedVersion: 2
     m_Bits: 1
-  slotDropRadius: 1
+  slotDropRadius: 3
   deckSlot: {fileID: 891107045}
   table: {fileID: 679964669}
 --- !u!4 &530211717
