@@ -16,6 +16,8 @@ namespace Sadalmalik.TheGrowth
 
         public EntitySlot deckSlot;
         public CardTable table;
+        public bool stepAfterDrop;
+        public float stepDelay;
 
         public void Start()
         {
@@ -117,6 +119,11 @@ namespace Sadalmalik.TheGrowth
                         temp.ShowMarker(false);
 
                 _draggedCard = null;
+
+                if (stepAfterDrop)
+                {
+                    CallStep(stepDelay);
+                }
 
                 return;
             }
