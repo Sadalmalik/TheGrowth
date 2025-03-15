@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using GeekyHouse.Architecture.Logger;
 
 namespace GeekyHouse.Architecture.CSV
 {
@@ -22,7 +21,7 @@ namespace GeekyHouse.Architecture.CSV
 		{
 			var csv = ObjectCSVConverter.ToCSV(items1);
 			
-			Log.Temp($"CSV:\n\n{csv}");
+			//Log.Temp($"CSV:\n\n{csv}");
 			
 			items2 = ObjectCSVConverter.FromCSV<MyItem>(csv);
 		}
