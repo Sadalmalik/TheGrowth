@@ -90,10 +90,10 @@ namespace Sadalmalik.TheGrowth
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 var card = GetCardUnderMouse();
-                if (card != null)
+                if (card != null && card.config.CanBeDragged)
                 {
                     // Start Drag
-                    Debug.Log($"Start grad: {card}");
+                    Debug.Log($"Start drad: {card}");
                     _startDragPosition = GetTablePositionUnderCursor() - card.transform.position;
                     _draggedCard = card;
                     _moves = _draggedCard.GetAllowedMoves();
