@@ -140,14 +140,14 @@ namespace Sadalmalik.TheGrowth
             config.OnUnCovered.ExecuteAll(context);
         }
 
-        public void OnStep()
+        public void OnStep(Context context)
         {
             if (!IsFaceUp)
                 return;
             if (config.OnStep == null)
                 return;
-            var context = new Context(new ActiveCard.Data { Card = this });
-            config.OnStep.ExecuteAll(context);
+            var newContext = new Context(context, new ActiveCard.Data { Card = this });
+            config.OnStep.ExecuteAll(newContext);
         }
 
         public HashSet<EntitySlot> GetAllowedMoves()

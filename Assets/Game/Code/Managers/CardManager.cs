@@ -9,7 +9,6 @@ namespace Sadalmalik.TheGrowth
     {
         public DeckConfig deck;
 
-
         public LayerMask cardLayer;
         public LayerMask tableLayer;
         public float slotDropRadius = 1;
@@ -19,6 +18,8 @@ namespace Sadalmalik.TheGrowth
         public bool stepAfterDrop;
         public float stepDelay;
 
+        private EntityCard m_PlayerCard;
+        
         public void Start()
         {
             var cards = deck.CreateDeck();
@@ -26,6 +27,11 @@ namespace Sadalmalik.TheGrowth
             {
                 card.AllowEvents = false;
                 card.MoveTo(deckSlot, instant: true);
+
+                if (card.config.CanBeDragged)
+                {
+                    m_PlayerCard = card;
+                }
             }
         }
 
@@ -44,10 +50,11 @@ namespace Sadalmalik.TheGrowth
 
         private IEnumerator CallStepCor(float delay)
         {
+            var newContext = new Context(new PlayerCard.Data { Card = m_PlayerCard });
             yield return new WaitForSeconds(delay);
             foreach (var slot in table.slots)
             {
-                slot.Top()?.OnStep();
+                slot.Top()?.OnStep(newContext);
             }
         }
         
@@ -198,8 +205,9 @@ namespace Sadalmalik.TheGrowth
             var delay = RootConfig.Instance.dealDuration / slots.Count;
             while (deckSlot.Cards.Count > 0 && slots.Count > 0)
             {
-                var card = deckSlot.Peek();
                 var slot = slots.Peek();
+                if (slot==null) continue;
+                var card = deckSlot.Peek();
                 card.MoveTo(slot, false, true);
 
                 yield return new WaitForSeconds(delay);
@@ -209,6 +217,7 @@ namespace Sadalmalik.TheGrowth
 
             foreach (var slot in table.slots)
             {
+                if (slot==null) continue;
                 slot.Top()?.OnPlacedFirstTime();
             }
             
