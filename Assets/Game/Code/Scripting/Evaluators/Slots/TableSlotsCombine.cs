@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Sadalmalik.TheGrowth
 {
@@ -72,6 +73,11 @@ namespace Sadalmalik.TheGrowth
                     break;
             }
 
+            foreach (var slot in result)
+            {
+                Debug.DrawRay(slot.transform.position + Random.onUnitSphere*0.2f, Vector3.up*5, Color.green, 15);
+            }
+            
             return result;
         }
     }

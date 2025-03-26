@@ -50,8 +50,12 @@ namespace Sadalmalik.TheGrowth
         public List<Command> OnCovered;
         [BoxGroup("Brain")]
         public List<Command> OnUnCovered;
-        [BoxGroup("Brain")]
+        
+        [Space]
+        [BoxGroup("Slot Filters")]
         public Evaluator<HashSet<EntitySlot>> AllowedMoves;
+        [BoxGroup("Slot Filters")]
+        public Evaluator<HashSet<EntitySlot>> SpawnEvaluator;
 
         [Space]
         public List<ICardComponent> components;
