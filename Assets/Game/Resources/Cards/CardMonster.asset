@@ -17,7 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: -625640704665706067, guid: d1e7fc04906c5fb46a86aac8560031bd, type: 3}
-    - {fileID: 9159116282793296634, guid: a2cf2fb6ee9aee94f94b7a8958c666c1, type: 3}
+    - {fileID: 9159116282793296634, guid: 5c82a682c5fddaa499f8aafdbc0fdf73, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -52,6 +52,9 @@ MonoBehaviour:
       Entry: 7
       Data: 2|Sadalmalik.TheGrowth.CardBrain, Code
     - Name: CanBeDragged
+      Entry: 5
+      Data: false
+    - Name: EndsTheTurn
       Entry: 5
       Data: false
     - Name: SpawnSlot

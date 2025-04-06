@@ -16,10 +16,12 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: dab00cc110e207b46b98ec91564df108, type: 2}
-    - {fileID: 11400000, guid: 4113282ec065cf046bfaa947dd70a663, type: 2}
-    - {fileID: 11400000, guid: 77fb4d0db3d301d46b9779ffb58daace, type: 2}
     - {fileID: 11400000, guid: b47a1a6a365ade24fb3a48c112ca0e41, type: 2}
+    - {fileID: 11400000, guid: 77fb4d0db3d301d46b9779ffb58daace, type: 2}
+    - {fileID: 11400000, guid: 4113282ec065cf046bfaa947dd70a663, type: 2}
+    - {fileID: 11400000, guid: 376eaa740945a7f41b241de31202ed6d, type: 2}
+    - {fileID: 11400000, guid: dab00cc110e207b46b98ec91564df108, type: 2}
+    - {fileID: 11400000, guid: 6a0ef49b6ed2cab4989f5cb152412206, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -31,13 +33,13 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 6
     - Name: 
       Entry: 7
       Data: 1|Sadalmalik.TheGrowth.DeckEntry, Code
     - Name: amount
       Entry: 3
-      Data: 20
+      Data: 1
     - Name: card
       Entry: 10
       Data: 0
@@ -49,7 +51,7 @@ MonoBehaviour:
       Data: 2|Sadalmalik.TheGrowth.DeckEntry, Code
     - Name: amount
       Entry: 3
-      Data: 10
+      Data: 3
     - Name: card
       Entry: 10
       Data: 1
@@ -73,10 +75,34 @@ MonoBehaviour:
       Data: 4|Sadalmalik.TheGrowth.DeckEntry, Code
     - Name: amount
       Entry: 3
-      Data: 1
+      Data: 15
     - Name: card
       Entry: 10
       Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|Sadalmalik.TheGrowth.DeckEntry, Code
+    - Name: amount
+      Entry: 3
+      Data: 7
+    - Name: card
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 6|Sadalmalik.TheGrowth.DeckEntry, Code
+    - Name: amount
+      Entry: 3
+      Data: 5
+    - Name: card
+      Entry: 10
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
