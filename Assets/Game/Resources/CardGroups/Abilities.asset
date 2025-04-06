@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 547a4bb9bc9e4329a93b909d74502245, type: 3}
-  m_Name: CardSpawner
+  m_Script: {fileID: 11500000, guid: d6b354048c82481eb5b3add2dd4003e3, type: 3}
+  m_Name: Abilities
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,4 +21,4 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  prefab: {fileID: 9159116282793296634, guid: f163897a31fb56e499887468c05baf71, type: 3}
+  Cards: []

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6b354048c82481eb5b3add2dd4003e3, type: 3}
-  m_Name: CommonResources
+  m_Script: {fileID: 11500000, guid: d34a7632e36a4ad39f9565f2decb676e, type: 3}
+  m_Name: Location
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -20,7 +20,17 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
-  Cards:
-  - {fileID: 11400000, guid: dab00cc110e207b46b98ec91564df108, type: 2}
-  - {fileID: 11400000, guid: 376eaa740945a7f41b241de31202ed6d, type: 2}
+    SerializationNodes:
+    - Name: Scene
+      Entry: 7
+      Data: Sirenix.OdinInspector.Editor.Validation.SceneReference, Sirenix.OdinInspector.Editor
+    - Name: IsValid
+      Entry: 5
+      Data: false
+    - Name: GUID
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  Title: 

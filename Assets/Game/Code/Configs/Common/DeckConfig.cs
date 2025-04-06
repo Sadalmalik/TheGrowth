@@ -8,7 +8,7 @@ namespace Sadalmalik.TheGrowth
     public class DeckEntry
     {
         public int amount;
-        public CardConfig card;
+        public CardModel card;
     }
     
     [CreateAssetMenu(

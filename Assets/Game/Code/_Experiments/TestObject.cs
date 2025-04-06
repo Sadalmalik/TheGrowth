@@ -9,8 +9,8 @@ namespace Sadalmalik.TheGrowth
     [Serializable]
     public class TestObjectData
     {
-        public AssetReference<CardConfig> config1;
-        public AssetReference<CardConfig> config2;
+        public AssetReference<CardModel> config1;
+        public AssetReference<CardModel> config2;
     }
 
     [Serializable]
@@ -65,8 +65,8 @@ namespace Sadalmalik.TheGrowth
     [ExecuteInEditMode]
     public class TestObject : MonoBehaviour
     {
-        public CardConfig config1;
-        public CardConfig config2;
+        public CardModel config1;
+        public CardModel config2;
 
         public bool test1;
         public bool test2;

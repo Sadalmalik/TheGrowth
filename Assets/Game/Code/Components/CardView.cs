@@ -1,16 +1,22 @@
 ﻿using System;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Sadalmalik.TheGrowth
 {
-    public class CardView : MonoBehaviour
+    public partial class CardView : MonoBehaviour
     {
         public Transform model;
-        public MeshRenderer face;
-        public MeshRenderer cover;
+        public GameObject faceObject;
+        public Image face;
+        public Image cover;
+        public TMP_Text title;
+        public TMP_Text leftText;
+        public TMP_Text rightText;
 
-        private CardConfig _config;
+        private CardModel m_Model;
         private Sequence _tween;
         private bool _isFaceUp;
 
@@ -18,22 +24,9 @@ namespace Sadalmalik.TheGrowth
 
         public event Action OnAnimationComplete;
 
-        public void SetConfig(CardConfig config)
-        {
-            _config = config;
-
-            face.GetComponent<MeshFilter>().mesh = config.Face.Model;
-            face.material = config.Face.Material;
-
-            cover.GetComponent<MeshFilter>().mesh = config.Cover.Model;
-            cover.material = config.Cover.Material;
-        }
-
         public void SetFaceVisible(bool visible)
         {
-            var sprite = visible ? _config.Face : _config.Cover;
-            face.GetComponent<MeshFilter>().mesh = sprite.Model;
-            face.material = sprite.Material;
+            faceObject.SetActive(visible);
         }
 
         public void MoveTo(EntitySlot slot, Action onComplete, bool instant = false)

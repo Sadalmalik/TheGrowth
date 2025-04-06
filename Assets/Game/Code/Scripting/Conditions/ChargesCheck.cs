@@ -29,11 +29,11 @@
 
             return Compare switch
             {
-                ECompare.Equal => chargesComponent.charges == Value,
-                ECompare.Less => chargesComponent.charges < Value,
-                ECompare.LessOrEqual => chargesComponent.charges <= Value,
-                ECompare.Greater => chargesComponent.charges > Value,
-                ECompare.GreaterOrEqual => chargesComponent.charges >= Value,
+                ECompare.Equal => chargesComponent.Charges == Value,
+                ECompare.Less => chargesComponent.Charges < Value,
+                ECompare.LessOrEqual => chargesComponent.Charges <= Value,
+                ECompare.Greater => chargesComponent.Charges > Value,
+                ECompare.GreaterOrEqual => chargesComponent.Charges >= Value,
                 _ => false
             };
         }

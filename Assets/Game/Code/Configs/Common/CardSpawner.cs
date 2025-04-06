@@ -12,11 +12,14 @@ namespace Sadalmalik.TheGrowth
 
         private int _count = 0;
         
-        public EntityCard CreateCard(CardConfig config)
+        public EntityCard CreateCard(CardModel model)
         {
-            var entity = GameObject.Instantiate<EntityCard>(prefab);
-            entity.SetConfig(config);
-            entity.name = $"Entity#{_count++}: {config.name}";
+            var visual = model.GetComponent<CardVisual>();
+            var entity = GameObject.Instantiate<EntityCard>(visual?.CustomPrefab ?? prefab);
+            entity.name = $"Entity#{_count++}: {model.name}";
+            entity.SetConfig(model);
+            foreach (var component in model.components)
+                component.OnEntityCreated(entity);
             return entity;
         }
     }

@@ -28,7 +28,7 @@ namespace Sadalmalik.TheGrowth
                 card.AllowEvents = false;
                 card.MoveTo(deckSlot, instant: true);
 
-                if (card.config.CanBeDragged)
+                if (card.CanBeDragged)
                 {
                     m_PlayerCard = card;
                 }
@@ -90,7 +90,7 @@ namespace Sadalmalik.TheGrowth
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 var card = GetCardUnderMouse();
-                if (card != null && card.config.CanBeDragged)
+                if (card != null && card.CanBeDragged)
                 {
                     // Start Drag
                     Debug.Log($"Start drad: {card}");
@@ -112,27 +112,27 @@ namespace Sadalmalik.TheGrowth
             {
                 var (slot, dist) = GetNearestSlot(_draggedCard.transform.position);
 
-                if (slot != null && dist < slotDropRadius)
+                if (slot == null || slotDropRadius < dist)
                 {
-                    _draggedCard.MoveTo(slot);
+                    slot = _draggedCard.Slot;
                 }
-                else
-                {
-                    _draggedCard.MoveTo(_draggedCard.Slot);
-                }
+                
+                _draggedCard.MoveTo(slot, callback: AfterCardMove);
 
                 if (_moves != null)
                     foreach (var temp in _moves)
                         temp.ShowMarker(false);
 
                 _draggedCard = null;
-
-                if (stepAfterDrop)
-                {
-                    CallStep(stepDelay);
-                }
-
                 return;
+
+                void AfterCardMove(EntityCard card)
+                {
+                    if (card.EndsTheTurn)
+                    {
+                        CallStep(stepDelay);
+                    }
+                }
             }
 
             if (_draggedCard != null)
@@ -202,14 +202,22 @@ namespace Sadalmalik.TheGrowth
             var slots = new List<EntitySlot>(table.slots);
             slots.Shuffle();
 
+            var context = new Context(new PlayerCard.Data { Card = m_PlayerCard });
             var delay = RootConfig.Instance.dealDuration / slots.Count;
             while (deckSlot.Cards.Count > 0 && slots.Count > 0)
             {
-                var slot = slots.Peek();
-                if (slot==null) continue;
                 var card = deckSlot.Peek();
+                var slot = card.model.GetComponent<CardBrain>()?.SpawnSlot?.Evaluate(context);
+                if (slot == null)
+                {
+                    slot = slots.Peek();
+                }
+                if (slot == null)
+                {
+                    card.MoveTo(deckSlot, true, true);
+                    continue;
+                }
                 card.MoveTo(slot, false, true);
-
                 yield return new WaitForSeconds(delay);
             }
 

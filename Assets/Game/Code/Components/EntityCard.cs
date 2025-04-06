@@ -1,28 +1,35 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sadalmalik.TheGrowth
 {
     public class EntityCard : MonoBehaviour
     {
         public CardView view;
-        public CardConfig config;
+        [FormerlySerializedAs("config")]
+        public CardModel model;
+        public CardBrain brain;
 
         public bool IsAnimated { get; private set; }
         public EntitySlot Slot { get; set; }
         public bool AllowEvents { get; set; } = true;
 
+        public bool CanBeDragged => brain?.CanBeDragged ?? false;
+        public bool EndsTheTurn => brain?.EndsTheTurn ?? false;
+
         public bool IsFaceUp => view.IsFaceUp;
 
-        public void SetConfig(CardConfig Config)
+        public void SetConfig(CardModel model)
         {
-            config = Config;
-            view.SetConfig(config);
+            this.model = model;
+            brain = this.model.GetComponent<CardBrain>();
         }
 
 #region Commands
 
-        public void MoveTo(EntitySlot newSlot, bool instant = false, bool allowAfter = false)
+        public void MoveTo(EntitySlot newSlot, bool instant = false, bool allowAfter = false, Action<EntityCard> callback=null)
         {
             if (Slot != null)
             {
@@ -67,6 +74,8 @@ namespace Sadalmalik.TheGrowth
                 {
                     AllowEvents = true;
                 }
+                
+                callback?.Invoke(this);
             }
         }
 
@@ -96,67 +105,67 @@ namespace Sadalmalik.TheGrowth
 
         public void OnPlaced()
         {
-            if (config.OnPlaced == null)
+            if (brain?.OnPlaced == null)
                 return;
             var context = new Context();
             context.Add(new ActiveCard.Data { Card = this });
-            config.OnPlaced.ExecuteAll(context);
+            brain.OnPlaced.ExecuteAll(context);
         }
         
         public void OnPlacedFirstTime()
         {
-            if (config.OnPlacedFirstTime == null)
+            if (brain?.OnPlacedFirstTime == null)
                 return;
             var context = new Context();
             context.Add(new ActiveCard.Data { Card = this });
-            config.OnPlacedFirstTime.ExecuteAll(context);
+            brain.OnPlacedFirstTime.ExecuteAll(context);
         }
 
         public void OnFlipped()
         {
-            if (config.OnFlipped == null)
+            if (brain?.OnFlipped == null)
                 return;
             var context = new Context(new ActiveCard.Data { Card = this });
-            config.OnFlipped.ExecuteAll(context);
+            brain.OnFlipped.ExecuteAll(context);
         }
 
         public void OnCovered(EntityCard coverCard)
         {
-            if (config.OnCovered == null)
+            if (brain?.OnCovered == null)
                 return;
             var context = new Context(
                 new ActiveCard.Data { Card = this },
                 new CoveringCard.Data { Card = coverCard });
-            config.OnCovered.ExecuteAll(context);
+            brain.OnCovered.ExecuteAll(context);
         }
 
         public void OnUnCovered(EntityCard coverCard)
         {
-            if (config.OnUnCovered == null)
+            if (brain?.OnUnCovered == null)
                 return;
             var context = new Context(
                 new ActiveCard.Data { Card = this },
                 new CoveringCard.Data { Card = coverCard });
-            config.OnUnCovered.ExecuteAll(context);
+            brain.OnUnCovered.ExecuteAll(context);
         }
 
         public void OnStep(Context context)
         {
             if (!IsFaceUp)
                 return;
-            if (config.OnStep == null)
+            if (brain?.OnStep == null)
                 return;
             var newContext = new Context(context, new ActiveCard.Data { Card = this });
-            config.OnStep.ExecuteAll(newContext);
+            brain.OnStep.ExecuteAll(newContext);
         }
 
         public HashSet<EntitySlot> GetAllowedMoves()
         {
-            if (config.AllowedMoves == null)
+            if (brain?.AllowedMoves == null)
                 return null;
 
             var context = new Context(new ActiveCard.Data { Card = this });
-            var moves = config.AllowedMoves?.Evaluate(context);
+            var moves = brain.AllowedMoves?.Evaluate(context);
             return moves;
         }
 

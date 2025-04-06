@@ -13,6 +13,8 @@ namespace Sadalmalik.TheGrowth
         public Vector2Int index;
         public List<EntityCard> Cards;
 
+        public bool IsEmpty => Cards.Count == 0;
+        
         public EntityCard Top()
         {
             return Cards.Top();

@@ -24,10 +24,10 @@
             switch (Variant)
             {
                 case EVariant.Set:
-                    cardCharges.charges = Amount;
+                    cardCharges.Charges = Amount;
                     break;
                 case EVariant.Add:
-                    cardCharges.charges += Amount;
+                    cardCharges.Charges += Amount;
                     break;
             }
         }

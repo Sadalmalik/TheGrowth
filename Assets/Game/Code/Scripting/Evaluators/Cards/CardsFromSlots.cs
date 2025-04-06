@@ -30,7 +30,7 @@ namespace Sadalmalik.TheGrowth
 
             foreach (var filter in Filter)
             {
-                if (filter.Cards?.Contains(card.config) ?? false)
+                if (filter.Cards?.Contains(card.model) ?? false)
                     return true;
             }
 
