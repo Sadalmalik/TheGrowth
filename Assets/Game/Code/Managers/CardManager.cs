@@ -192,7 +192,7 @@ namespace Sadalmalik.TheGrowth
 #region Global Actions
 
         [Button, PropertyOrder(50)]
-        private void DealCards()
+        public void DealCards()
         {
             StartCoroutine(DealCardsCor());
         }
