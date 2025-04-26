@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Scenes/Start.unity
+    path: Assets/_XandArt/TheGrowth/Scenes/Start.unity
     guid: 25b70689621d415419fae382ca403cbe
   - enabled: 1
-    path: Assets/Game/Scenes/SampleScene.unity
+    path: Assets/_XandArt/TheGrowth/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
