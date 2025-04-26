@@ -1,4 +1,4 @@
-﻿namespace Sadalmalik.TheGrowth
+﻿namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Возвращает карту относительно данной карты в стопке

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Возвращает ближайший к карте слот

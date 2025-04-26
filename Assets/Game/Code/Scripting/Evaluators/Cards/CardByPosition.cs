@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Возвращает самую верхнюю карту в ячейке на столе

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Команда ЕСЛИ - проверят условие и выполняет один из списков команд в зависимости от него

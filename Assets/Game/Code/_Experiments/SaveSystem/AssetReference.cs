@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     [Serializable]
     public struct AssetReference<T> where T : UnityEngine.Object

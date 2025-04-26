@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     public class VectorJsonConverter : JsonConverter
     {

@@ -1,4 +1,4 @@
-﻿namespace Sadalmalik.TheGrowth
+﻿namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Команда двигает камеру к указанной карте

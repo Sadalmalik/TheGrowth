@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     [CreateAssetMenu(
         fileName = "RootConfig",

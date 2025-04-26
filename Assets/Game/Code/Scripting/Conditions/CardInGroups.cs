@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Проверяет, есть ли карта в указанной группе

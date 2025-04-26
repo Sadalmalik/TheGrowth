@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Возвращает все слоты на столе

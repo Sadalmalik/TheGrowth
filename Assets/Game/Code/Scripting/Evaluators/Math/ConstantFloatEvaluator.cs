@@ -1,4 +1,4 @@
-﻿namespace Sadalmalik.TheGrowth
+﻿namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Возвращает константное значение

@@ -1,4 +1,4 @@
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Команда вызывает OnStep у всех карт на поле

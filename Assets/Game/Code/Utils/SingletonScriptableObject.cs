@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEditor;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     public class SingletonScriptableObject<T> : SerializedScriptableObject where T : SingletonScriptableObject<T>
     {

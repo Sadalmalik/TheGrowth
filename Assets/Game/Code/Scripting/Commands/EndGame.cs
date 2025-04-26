@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Команда вызывает завершение игры

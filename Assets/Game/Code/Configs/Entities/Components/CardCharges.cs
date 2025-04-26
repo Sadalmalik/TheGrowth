@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     public class ChargesComponent : ICardComponent
     {

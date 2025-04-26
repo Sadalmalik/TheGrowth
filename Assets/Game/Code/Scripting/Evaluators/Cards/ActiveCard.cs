@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Возвращает карту, для которой выполняются команды, настроенные в конфиге карты

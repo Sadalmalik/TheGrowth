@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     [CreateAssetMenu(
         fileName = "Location",

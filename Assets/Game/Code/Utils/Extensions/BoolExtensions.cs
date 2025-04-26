@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     public static class BoolExtensions
     {

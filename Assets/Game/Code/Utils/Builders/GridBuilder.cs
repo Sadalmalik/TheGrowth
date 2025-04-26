@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Sadalmalik.TheGrowth
+namespace XandArt.TheGrowth
 {
     public class GridBuilder : MonoBehaviour
     {
