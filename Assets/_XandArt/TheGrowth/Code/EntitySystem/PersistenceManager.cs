@@ -10,11 +10,8 @@ namespace XandArt.TheGrowth
         {
             Formatting = Formatting.Indented,
             TypeNameHandling = TypeNameHandling.All,
-            
-            // PreserveReferencesHandling = PreserveReferencesHandling.Objects,
             DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
             // ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-            
             Converters =
             {
                 new RefConverter()
