@@ -6,19 +6,9 @@ using UnityEngine;
 
 namespace XandArt.TheGrowth
 {
-    public interface ICardComponent
+    public interface IEntityComponentModel
     {
         void OnEntityCreated(EntityCard card);
-    }
-    
-    [Serializable]
-    public class CardSprite
-    {
-        public AtlasConfig atlas;
-        public Vector2Int sprite;
-
-        public Mesh Model => atlas.GetMeshForSprite(sprite);
-        public Material Material => atlas.targetMaterial;
     }
 
 
@@ -28,20 +18,20 @@ namespace XandArt.TheGrowth
         order = 0)]
     public class CardModel : SerializedScriptableObject
     {
-        public List<ICardComponent> components;
+        public List<IEntityComponentModel> components;
 
-        public TComponent GetComponent<TComponent>() where TComponent : ICardComponent
+        public TComponent GetComponent<TComponent>() where TComponent : IEntityComponentModel
         {
             return (TComponent) components?.FirstOrDefault(c => c.GetType() == typeof(TComponent));
         }
         
-        public TComponent AddComponent<TComponent>() where TComponent : ICardComponent, new()
+        public TComponent AddComponent<TComponent>() where TComponent : IEntityComponentModel, new()
         {
             var component = GetComponent<TComponent>();
             if (component == null)
             {
                 component = new TComponent();
-                components ??= new List<ICardComponent>();
+                components ??= new List<IEntityComponentModel>();
                 components.Add(component);
             }
             return component;

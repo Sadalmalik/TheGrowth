@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace XandArt.TheGrowth
 {
-    public class ChargesComponent : ICardComponent
+    public class ChargesComponentModel : IEntityComponentModel
     {
         public int Charges;
         

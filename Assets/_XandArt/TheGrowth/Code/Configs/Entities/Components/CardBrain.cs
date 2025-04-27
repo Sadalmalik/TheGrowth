@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace XandArt.TheGrowth
 {
-    public class CardBrain : ICardComponent
+    public class EntityBrain : IEntityComponentModel
     {
         public bool CanBeDragged;
         public bool EndsTheTurn;

@@ -1,6 +1,6 @@
 {
     "name": "Code",
-    "rootNamespace": "",
+    "rootNamespace": "XandArt.TheGrowth",
     "references": [
         "GUID:dc393b131cc31ce4d8e96cec25f4172f",
         "GUID:6055be8ebefd69e48b49212b09b47b2f"

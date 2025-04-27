@@ -2,7 +2,7 @@
 
 namespace XandArt.TheGrowth
 {
-    public class CardVisual : ICardComponent
+    public class EntityVisual : IEntityComponentModel
     {
         public string Title;
         public Sprite Face;

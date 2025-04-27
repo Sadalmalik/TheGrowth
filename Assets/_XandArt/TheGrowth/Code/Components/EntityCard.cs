@@ -10,7 +10,7 @@ namespace XandArt.TheGrowth
         public CardView view;
         [FormerlySerializedAs("config")]
         public CardModel model;
-        public CardBrain brain;
+        public EntityBrain brain;
 
         public bool IsAnimated { get; private set; }
         public EntitySlot Slot { get; set; }
@@ -24,7 +24,7 @@ namespace XandArt.TheGrowth
         public void SetConfig(CardModel model)
         {
             this.model = model;
-            brain = this.model.GetComponent<CardBrain>();
+            brain = this.model.GetComponent<EntityBrain>();
         }
 
 #region Commands

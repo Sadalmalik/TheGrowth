@@ -14,7 +14,7 @@ namespace XandArt.TheGrowth
         
         public EntityCard CreateCard(CardModel model)
         {
-            var visual = model.GetComponent<CardVisual>();
+            var visual = model.GetComponent<EntityVisual>();
             var entity = GameObject.Instantiate<EntityCard>(visual?.CustomPrefab ?? prefab);
             entity.name = $"Entity#{_count++}: {model.name}";
             entity.SetConfig(model);
