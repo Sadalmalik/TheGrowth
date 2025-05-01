@@ -16,7 +16,7 @@ namespace XandArt.TheGrowth
         fileName = "CardConfig",
         menuName = "[Game]/Card",
         order = 0)]
-    public class CardModel : SerializedScriptableObject
+    public class CardModel : ScriptableAsset
     {
         public List<IEntityComponentModel> components;
 

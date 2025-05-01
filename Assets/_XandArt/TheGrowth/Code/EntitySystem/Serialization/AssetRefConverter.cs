@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Reflection;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace XandArt.TheGrowth
 {
@@ -8,14 +9,19 @@ namespace XandArt.TheGrowth
     /// Special converter, allows to use generic Ref<T> struct for optimal entities referencing.
     /// In JSON reference to entity serialize as string "ref:guid"
     /// </summary>
-    public class RefConverter : JsonConverter
+    public class AssetRefConverter : JsonConverter
     {
-        private static readonly string Tag = "ref";
+        private static readonly string Tag = "resource";
         private static readonly char[] Separator = { ':' };
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType.IsGenericType && typeof(Ref<>) == objectType.GetGenericTypeDefinition();
+            var result = objectType.IsGenericType && typeof(AssetRef<>) == objectType.GetGenericTypeDefinition();
+            if (result)
+                Debug.LogError($"[TEST] AssetRef: {objectType} == {typeof(AssetRef<>)} ? ----- {result}");
+            else
+                Debug.Log($"[TEST] AssetRef: {objectType} == {typeof(AssetRef<>)} ? ----- {result}");
+            return result;
         }
 
         public override object ReadJson(
@@ -24,10 +30,12 @@ namespace XandArt.TheGrowth
             object existingValue,
             JsonSerializer serializer)
         {
-            // Make empty Ref<T>
+            // Make empty AssetRef<T>
             var reference = Activator.CreateInstance(objectType);
-            var propertyInfo = objectType.GetProperty(Ref<Entity>.GuidPropertyName, BindingFlags.Instance | BindingFlags.Public)!;
-            propertyInfo.SetValue(reference, Guid.Empty);
+            var propertyInfo = objectType.GetProperty(
+                AssetRef<ScriptableAsset>.PathPropertyName,
+                BindingFlags.Instance | BindingFlags.Public)!;
+            propertyInfo.SetValue(reference, null);
             
             if (reader.TokenType == JsonToken.Null)
                 return reference;
@@ -43,10 +51,9 @@ namespace XandArt.TheGrowth
             var parts = enumText.Split(Separator, 2, StringSplitOptions.None);
             if (parts[0] != Tag)
                 // TODO: Decide, should we raise error here or not?
-                return reference;
-
-            if (Guid.TryParse(parts[1], out var guid))
-                propertyInfo.SetValue(reference, guid);
+                return reference; 
+            
+            propertyInfo.SetValue(reference, parts[1]);
 
             return reference;
         }
@@ -56,14 +63,19 @@ namespace XandArt.TheGrowth
             object value,
             JsonSerializer serializer)
         {
-            var guid = Guid.Empty;
+            string path = null;
             if (value != null)
             {
                 // Get GUID from generic object
-                var propertyInfo = value.GetType().GetProperty(Ref<Entity>.GuidPropertyName, BindingFlags.Instance | BindingFlags.Public)!;
-                guid = (Guid) propertyInfo.GetValue(value!);
+                var propertyInfo = value.GetType().GetProperty(
+                    AssetRef<ScriptableAsset>.PathPropertyName,
+                    BindingFlags.Instance | BindingFlags.Public)!;
+                path = (string) propertyInfo.GetValue(value!);
             }
-            writer.WriteValue($"{Tag}{Separator}{guid}");
+
+            var result = $"{Tag}:{path}";
+            Debug.Log($"Save reference as: {result}");
+            writer.WriteValue(result);
         }
     }
 }

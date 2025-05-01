@@ -15,8 +15,7 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 52f3eee5fad002e4f984ced85e276ea0, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -24,74 +23,16 @@ MonoBehaviour:
     SerializationNodes:
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.ICardComponent,
+      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.IEntityComponentModel,
         Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
-      Entry: 7
-      Data: 1|Sadalmalik.TheGrowth.CardVisual, Code
-    - Name: Title
-      Entry: 1
-      Data: Teleport
-    - Name: Face
-      Entry: 6
-      Data: 
-    - Name: Cover
-      Entry: 6
-      Data: 
-    - Name: CustomPrefab
       Entry: 6
       Data: 
     - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|Sadalmalik.TheGrowth.CardBrain, Code
-    - Name: CanBeDragged
-      Entry: 5
-      Data: false
-    - Name: EndsTheTurn
-      Entry: 5
-      Data: false
-    - Name: SpawnSlot
       Entry: 6
-      Data: 
-    - Name: AllowedMoves
-      Entry: 6
-      Data: 
-    - Name: OnPlaced
-      Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 4|Sadalmalik.TheGrowth.ExecuteCommands, Code
-    - Name: config
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 5|Sadalmalik.TheGrowth.MoveCard, Code
-    - Name: Card
-      Entry: 7
-      Data: 6|Sadalmalik.TheGrowth.ActiveCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Slot
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
       Data: 
     - Name: 
       Entry: 13
@@ -99,27 +40,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: OnPlacedFirstTime
-      Entry: 6
-      Data: 
-    - Name: OnFlipped
-      Entry: 6
-      Data: 
-    - Name: OnStep
-      Entry: 6
-      Data: 
-    - Name: OnCovered
-      Entry: 6
-      Data: 
-    - Name: OnUnCovered
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  Path: Cards/Abilities/CardFlare.asset

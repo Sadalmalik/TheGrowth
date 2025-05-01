@@ -23,28 +23,13 @@ MonoBehaviour:
     SerializationNodes:
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.ICardComponent,
+      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.IEntityComponentModel,
         Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 1|Sadalmalik.TheGrowth.CardVisual, Code
-    - Name: Title
-      Entry: 1
-      Data: Scrap Metal
-    - Name: Face
       Entry: 6
-      Data: 
-    - Name: Cover
-      Entry: 6
-      Data: 
-    - Name: CustomPrefab
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
       Data: 
     - Name: 
       Entry: 13
@@ -52,3 +37,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  Path: ScrapMetal.asset

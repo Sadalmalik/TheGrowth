@@ -23,121 +23,16 @@ MonoBehaviour:
     SerializationNodes:
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.ICardComponent,
+      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.IEntityComponentModel,
         Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
-      Entry: 7
-      Data: 1|Sadalmalik.TheGrowth.CardVisual, Code
-    - Name: Title
-      Entry: 1
-      Data: Teleport
-    - Name: Face
-      Entry: 6
-      Data: 
-    - Name: Cover
-      Entry: 6
-      Data: 
-    - Name: CustomPrefab
       Entry: 6
       Data: 
     - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|Sadalmalik.TheGrowth.CardBrain, Code
-    - Name: CanBeDragged
-      Entry: 5
-      Data: false
-    - Name: EndsTheTurn
-      Entry: 5
-      Data: false
-    - Name: SpawnSlot
       Entry: 6
-      Data: 
-    - Name: AllowedMoves
-      Entry: 6
-      Data: 
-    - Name: OnPlaced
-      Entry: 6
-      Data: 
-    - Name: OnPlacedFirstTime
-      Entry: 6
-      Data: 
-    - Name: OnFlipped
-      Entry: 6
-      Data: 
-    - Name: OnStep
-      Entry: 6
-      Data: 
-    - Name: OnCovered
-      Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 4|Sadalmalik.TheGrowth.MoveCard, Code
-    - Name: Card
-      Entry: 7
-      Data: 5|Sadalmalik.TheGrowth.CoveringCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Slot
-      Entry: 7
-      Data: 6|Sadalmalik.TheGrowth.Random`1[[Sadalmalik.TheGrowth.EntitySlot, Code]],
-        Code
-    - Name: Collection
-      Entry: 7
-      Data: 7|Sadalmalik.TheGrowth.TableSlotsCombine, Code
-    - Name: Variant
-      Entry: 3
-      Data: 3
-    - Name: Evaluators
-      Entry: 7
-      Data: 8|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[Sadalmalik.TheGrowth.EntitySlot,
-        Code]], System.Core]], Code]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 9|Sadalmalik.TheGrowth.TableSlotsAll, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 10|Sadalmalik.TheGrowth.TableSlotsAround, Code
-    - Name: Position
-      Entry: 7
-      Data: 11|Sadalmalik.TheGrowth.PositionByCard, Code
-    - Name: Card
-      Entry: 7
-      Data: 12|Sadalmalik.TheGrowth.ActiveCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Figure
-      Entry: 3
-      Data: 0
-    - Name: Distance
-      Entry: 3
-      Data: 0
-    - Name: Radius
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
       Data: 
     - Name: 
       Entry: 13
@@ -145,30 +40,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OnUnCovered
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  Path: Cards/Special/CardTeleport.asset

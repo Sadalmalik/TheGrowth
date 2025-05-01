@@ -14,7 +14,9 @@ namespace XandArt.TheGrowth
             // ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
             Converters =
             {
-                new RefConverter()
+                new RefConverter(),
+                new AssetRefConverter(),
+                new VectorJsonConverter()
             }
         };
 
@@ -50,7 +52,7 @@ namespace XandArt.TheGrowth
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
 
-            return Path.Combine(folder, saveId);
+            return Path.Combine(folder, $"{saveId}.json");
         }
     }
 }

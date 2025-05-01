@@ -14,6 +14,7 @@ namespace XandArt.TheGrowth
     {
         // Protection from renaming
         public const string GuidPropertyName = nameof(Guid);
+        public const string ValuePropertyName = nameof(Value);
 
         [JsonIgnore]
         private Guid _guid;

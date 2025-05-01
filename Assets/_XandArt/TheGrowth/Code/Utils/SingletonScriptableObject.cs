@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ namespace XandArt.TheGrowth
                     var type = typeof(T);
                     var paths = AssetDatabase.GetAllAssetPaths();
                     var path  = paths.FirstOrDefault(p => p.EndsWith(type.Name + ".asset"));
-                    _instance = (T)AssetDatabase.LoadAssetAtPath(path, type);
+                    _instance = (T) AssetDatabase.LoadAssetAtPath(path, type);
 #else
 					_instance = Resources.LoadAll<T>("").First();
 #endif

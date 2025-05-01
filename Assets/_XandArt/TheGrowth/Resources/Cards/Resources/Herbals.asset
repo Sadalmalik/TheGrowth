@@ -23,28 +23,13 @@ MonoBehaviour:
     SerializationNodes:
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.ICardComponent,
+      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.IEntityComponentModel,
         Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 1|Sadalmalik.TheGrowth.CardVisual, Code
-    - Name: Title
-      Entry: 1
-      Data: Herbals
-    - Name: Face
       Entry: 6
-      Data: 
-    - Name: Cover
-      Entry: 6
-      Data: 
-    - Name: CustomPrefab
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
       Data: 
     - Name: 
       Entry: 13
@@ -52,10 +37,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Title: Herbals
-  Cover:
-    atlas: {fileID: 11400000, guid: 28272552980f6b3488a44e74ac8cdc0b, type: 2}
-    sprite: {x: 0, y: 0}
-  Face:
-    atlas: {fileID: 11400000, guid: 28272552980f6b3488a44e74ac8cdc0b, type: 2}
-    sprite: {x: 0, y: 2}
+  Path: Herbals.asset

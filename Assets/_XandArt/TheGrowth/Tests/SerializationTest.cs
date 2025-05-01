@@ -78,7 +78,6 @@ namespace XandArt.Tests
             //world2.SetActive();
             
             Assert.AreEqual(world1.Entities.Count, world2.Entities.Count);
-            
         }
     }
 }
