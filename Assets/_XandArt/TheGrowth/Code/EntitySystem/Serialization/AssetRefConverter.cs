@@ -11,15 +11,13 @@ namespace XandArt.TheGrowth
     /// </summary>
     public class AssetRefConverter : JsonConverter
     {
-        private static readonly string Tag = "resource";
+        private static readonly string Tag = "res";
         private static readonly char[] Separator = { ':' };
 
         public override bool CanConvert(Type objectType)
         {
             var result = objectType.IsGenericType && typeof(AssetRef<>) == objectType.GetGenericTypeDefinition();
             if (result)
-                Debug.LogError($"[TEST] AssetRef: {objectType} == {typeof(AssetRef<>)} ? ----- {result}");
-            else
                 Debug.Log($"[TEST] AssetRef: {objectType} == {typeof(AssetRef<>)} ? ----- {result}");
             return result;
         }
@@ -54,7 +52,8 @@ namespace XandArt.TheGrowth
                 return reference; 
             
             propertyInfo.SetValue(reference, parts[1]);
-
+            Debug.LogWarning($"[TEST] AssetRef parsed: {parts[1]}");
+            
             return reference;
         }
 

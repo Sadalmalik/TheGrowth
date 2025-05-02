@@ -14,9 +14,11 @@ namespace XandArt.TheGrowth
             // ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
             Converters =
             {
-                new RefConverter(),
+                new DebugConverter{ID=" A"},
                 new AssetRefConverter(),
-                new VectorJsonConverter()
+                new RefConverter(),
+                new VectorJsonConverter(),
+                new DebugConverter{ID=" B"},
             }
         };
 

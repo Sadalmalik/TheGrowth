@@ -18,8 +18,6 @@ namespace XandArt.TheGrowth
         {
             var result = objectType.IsGenericType && typeof(Ref<>) == objectType.GetGenericTypeDefinition();
             if (result)
-                Debug.LogError($"[TEST] Ref: {objectType} == {typeof(Ref<>)} ? ----- {result}");
-            else
                 Debug.Log($"[TEST] Ref: {objectType} == {typeof(Ref<>)} ? ----- {result}");
             return result;
         }
@@ -32,7 +30,9 @@ namespace XandArt.TheGrowth
         {
             // Make empty Ref<T>
             var reference = Activator.CreateInstance(objectType);
-            var propertyInfo = objectType.GetProperty(Ref<Entity>.GuidPropertyName, BindingFlags.Instance | BindingFlags.Public)!;
+            var propertyInfo = objectType.GetProperty(
+                Ref<Entity>.GuidPropertyName,
+                BindingFlags.Instance | BindingFlags.Public)!;
             propertyInfo.SetValue(reference, Guid.Empty);
             
             if (reader.TokenType == JsonToken.Null)
@@ -57,7 +57,6 @@ namespace XandArt.TheGrowth
                 Debug.LogWarning($"[TEST] Ref parsed: {guid}");
             }
 
-            
             return reference;
         }
 

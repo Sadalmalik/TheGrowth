@@ -10,6 +10,5 @@
             Model = model;
             Self = this;
         }
-
     }
 }

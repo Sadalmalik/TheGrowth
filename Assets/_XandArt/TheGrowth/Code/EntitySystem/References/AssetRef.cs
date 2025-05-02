@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace XandArt.TheGrowth
 {
@@ -44,7 +43,7 @@ namespace XandArt.TheGrowth
             {
                 if (_value == null && !string.IsNullOrEmpty(_path))
                 {
-                    _value = Resources.Load<T>(_path);
+                    _value = UnityEngine.Resources.Load<T>(_path);
                 }
 
                 return _value;
@@ -61,9 +60,9 @@ namespace XandArt.TheGrowth
             return @ref.Value;
         }
 
-        public static implicit operator AssetRef<T>(T entity)
+        public static implicit operator AssetRef<T>(T asset)
         {
-            return new AssetRef<T> { Value = entity };
+            return new AssetRef<T> { Value = asset };
         }
     }
 }
