@@ -1,0 +1,175 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Serialization;
+using XandArt.Architecture;
+
+namespace XandArt.TheGrowth
+{
+    public class EntityCard : MonoBehaviour
+    {
+        public CardView view;
+        [FormerlySerializedAs("config")]
+        public EntityModel model;
+        public EntityModelBrain ModelBrain;
+
+        public bool IsAnimated { get; private set; }
+        public EntitySlot Slot { get; set; }
+        public bool AllowEvents { get; set; } = true;
+
+        public bool CanBeDragged => ModelBrain?.CanBeDragged ?? false;
+        public bool EndsTheTurn => ModelBrain?.EndsTheTurn ?? false;
+
+        public bool IsFaceUp => view.IsFaceUp;
+
+        public void SetConfig(EntityModel model)
+        {
+            this.model = model;
+            ModelBrain = this.model.GetComponent<EntityModelBrain>();
+        }
+
+#region Commands
+
+        public void MoveTo(EntitySlot newSlot, bool instant = false, bool allowAfter = false, Action<EntityCard> callback=null)
+        {
+            if (Slot != null)
+            {
+                Slot.Cards.Remove(this);
+            }
+
+            var oldSlot = Slot;
+            Slot = newSlot;
+            Slot.Cards.Add(this);
+
+            if (view != null)
+            {
+                IsAnimated = true;
+                view.MoveTo(newSlot, MoveComplete, instant: instant);
+            }
+
+            void MoveComplete()
+            {
+                IsAnimated = false;
+
+                if (AllowEvents)
+                {
+                    if (oldSlot != null)
+                    {
+                        var oldUnder = oldSlot.Cards.Count - 2;
+                        if (oldUnder >= 0)
+                        {
+                            oldSlot.Cards[oldUnder].OnUnCovered(this);
+                        }
+                    }
+
+                    var newUnder = Slot.Cards.Count - 2;
+                    if (newUnder >= 0)
+                    {
+                        Slot.Cards[newUnder].OnCovered(this);
+                    }
+
+                    OnPlaced();
+                }
+
+                if (allowAfter)
+                {
+                    AllowEvents = true;
+                }
+                
+                callback?.Invoke(this);
+            }
+        }
+
+        public void FlipCard()
+        {
+            if (view != null)
+            {
+                IsAnimated = true;
+                view.Flip(FlipFace);
+            }
+
+            void FlipFace()
+            {
+                IsAnimated = false;
+
+                if (AllowEvents)
+                {
+                    OnFlipped();
+                }
+            }
+        }
+
+#endregion
+
+
+#region Behaviour
+
+        public void OnPlaced()
+        {
+            if (ModelBrain?.OnPlaced == null)
+                return;
+            var context = new Context();
+            context.Add(new ActiveCard.Data { Card = this });
+            ModelBrain.OnPlaced.ExecuteAll(context);
+        }
+        
+        public void OnPlacedFirstTime()
+        {
+            if (ModelBrain?.OnPlacedFirstTime == null)
+                return;
+            var context = new Context();
+            context.Add(new ActiveCard.Data { Card = this });
+            ModelBrain.OnPlacedFirstTime.ExecuteAll(context);
+        }
+
+        public void OnFlipped()
+        {
+            if (ModelBrain?.OnFlipped == null)
+                return;
+            var context = new Context(new ActiveCard.Data { Card = this });
+            ModelBrain.OnFlipped.ExecuteAll(context);
+        }
+
+        public void OnCovered(EntityCard coverCard)
+        {
+            if (ModelBrain?.OnCovered == null)
+                return;
+            var context = new Context(
+                new ActiveCard.Data { Card = this },
+                new CoveringCard.Data { Card = coverCard });
+            ModelBrain.OnCovered.ExecuteAll(context);
+        }
+
+        public void OnUnCovered(EntityCard coverCard)
+        {
+            if (ModelBrain?.OnUnCovered == null)
+                return;
+            var context = new Context(
+                new ActiveCard.Data { Card = this },
+                new CoveringCard.Data { Card = coverCard });
+            ModelBrain.OnUnCovered.ExecuteAll(context);
+        }
+
+        public void OnStep(Context context)
+        {
+            if (!IsFaceUp)
+                return;
+            if (ModelBrain?.OnStep == null)
+                return;
+            var newContext = new Context(context, new ActiveCard.Data { Card = this });
+            ModelBrain.OnStep.ExecuteAll(newContext);
+        }
+
+        public HashSet<EntitySlot> GetAllowedMoves()
+        {
+            if (ModelBrain?.AllowedMoves == null)
+                return null;
+
+            var context = new Context(new ActiveCard.Data { Card = this });
+            var moves = ModelBrain.AllowedMoves?.Evaluate(context);
+            return moves;
+        }
+
+#endregion
+    }
+}

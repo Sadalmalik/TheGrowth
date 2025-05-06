@@ -1,15 +1,9 @@
 using System;
 using NUnit.Framework;
-using UnityEngine;
-using XandArt.TheGrowth;
+using XandArt.Architecture;
 
 namespace XandArt.Tests
 {
-    public class SampleEntity : Entity
-    {
-        public Ref<SampleEntity> Other;
-    }
-
     public class SerializationTest
     {
         // I was testing generic struct casts for implementing Serialization converter.
@@ -27,6 +21,10 @@ namespace XandArt.Tests
         //     Assert.AreEqual(refA.Guid, refB.Guid);
         // }
 
+        public class SampleEntity : Entity
+        {
+            public Ref<SampleEntity> Other;
+        }
 
         [Test]
         public void TestReference()
@@ -61,7 +59,7 @@ namespace XandArt.Tests
             // just fill
             var entity = new Entity();
             world1.Add(entity);
-            
+
             // Loop reference
             var entityA = new SampleEntity();
             world1.Add(entityA);
@@ -76,7 +74,7 @@ namespace XandArt.Tests
 
             var world2 = persistenceManager.Load("TestSave");
             //world2.SetActive();
-            
+
             Assert.AreEqual(world1.Entities.Count, world2.Entities.Count);
         }
     }

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99fbbe255ee1474ea1994efa05044685, type: 3}
+  m_Script: {fileID: 11500000, guid: ea41eb7c33864117bf5a9d4ee88cf401, type: 3}
   m_Name: RootConfig
   m_EditorClassIdentifier: 
   serializationData:
@@ -21,8 +21,4 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  CardThickness: 0.01
-  RandomAngle: 8
-  flipDuration: 0.3
-  jumpDuration: 0.4
-  dealDuration: 1.5
+  startStep: {fileID: 0}

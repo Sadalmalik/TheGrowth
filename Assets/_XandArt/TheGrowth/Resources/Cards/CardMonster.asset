@@ -21,9 +21,12 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: Guid
+      Entry: 2
+      Data: 77fb4d0db3d301d46b9779ffb58daace
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.IEntityComponentModel,
+      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.IEntityModelComponent,
         Code]], mscorlib
     - Name: 
       Entry: 12
@@ -40,4 +43,3 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Path: Cards/CardMonster.asset

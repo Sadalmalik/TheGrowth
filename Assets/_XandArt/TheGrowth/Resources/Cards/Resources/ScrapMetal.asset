@@ -21,9 +21,12 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: Guid
+      Entry: 2
+      Data: 6a0ef49b6ed2cab4989f5cb152412206
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.IEntityComponentModel,
+      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.IEntityModelComponent,
         Code]], mscorlib
     - Name: 
       Entry: 12
@@ -37,4 +40,3 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Path: ScrapMetal.asset
