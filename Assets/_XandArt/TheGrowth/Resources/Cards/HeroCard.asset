@@ -26,19 +26,73 @@ MonoBehaviour:
       Data: b47a1a6a365ade24fb3a48c112ca0e41
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.IEntityModelComponent,
+      Data: 0|System.Collections.Generic.List`1[[XandArt.Architecture.IEntityModelComponent,
         Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
+      Entry: 7
+      Data: 1|XandArt.TheGrowth.EntityModelBrain, Code
+    - Name: CanBeDragged
+      Entry: 5
+      Data: false
+    - Name: EndsTheTurn
+      Entry: 5
+      Data: false
+    - Name: SpawnSlot
+      Entry: 6
+      Data: 
+    - Name: AllowedMoves
+      Entry: 6
+      Data: 
+    - Name: OnPlaced
+      Entry: 6
+      Data: 
+    - Name: OnPlacedFirstTime
+      Entry: 6
+      Data: 
+    - Name: OnFlipped
+      Entry: 6
+      Data: 
+    - Name: OnStep
+      Entry: 6
+      Data: 
+    - Name: OnCovered
+      Entry: 6
+      Data: 
+    - Name: OnUnCovered
       Entry: 6
       Data: 
     - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|XandArt.TheGrowth.EntityModelVisual, Code
+    - Name: Title
+      Entry: 6
+      Data: 
+    - Name: Face
+      Entry: 6
+      Data: 
+    - Name: Cover
+      Entry: 6
+      Data: 
+    - Name: CustomPrefab
       Entry: 6
       Data: 
     - Name: 
-      Entry: 6
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.ChargesModelComponent, Code
+    - Name: Charges
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 13

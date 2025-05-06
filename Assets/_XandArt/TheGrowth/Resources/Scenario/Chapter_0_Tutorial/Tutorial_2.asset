@@ -27,5 +27,7 @@ MonoBehaviour:
   gdDescription: 
   next: {fileID: 11400000, guid: 173f9f649443ac440892f2aea12dc912, type: 2}
   enabledActions: 0
-  enabledDialogues: []
+  enabledDialogues:
+  - 
+  - 
   addToInventory: []
