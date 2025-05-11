@@ -1,10 +1,11 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
+using XandArt.Architecture.IOC;
 
 namespace XandArt.Architecture
 {
-    public class PersistenceManager
+    public class PersistenceManager : IShared
     {
         private static readonly JsonSerializerSettings SerializationSettings = new JsonSerializerSettings
         {
@@ -21,20 +22,34 @@ namespace XandArt.Architecture
         };
 
         private const string SaveFolder = "save";
+        private string SaveFolderPath;
+        
+        public void Init()
+        {
+            SaveFolderPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, SaveFolder));
+            
+            if (!Directory.Exists(SaveFolderPath))
+                Directory.CreateDirectory(SaveFolderPath);
+        }
 
-        public PersistentState Load(string saveId)
+        public void Dispose()
+        {
+            
+        }
+        
+        public T Load<T>(string saveId) where T : PersistentState
         {
             var path = GetPathToSave(saveId);
             
             Debug.Log($"Load game from {path}");
             
             var json = File.ReadAllText(path);
-            var world = JsonConvert.DeserializeObject<PersistentState>(json, SerializationSettings);
+            var world = JsonConvert.DeserializeObject<T>(json, SerializationSettings);
             world.OnPostLoad();
             return world;
         }
         
-        public void Save(string saveId, PersistentState persistentState)
+        public void Save<T>(string saveId, T persistentState) where T : PersistentState
         {
             var path = GetPathToSave(saveId);
             
@@ -47,12 +62,7 @@ namespace XandArt.Architecture
 
         private string GetPathToSave(string saveId)
         {
-            var folder = Path.GetFullPath(Path.Combine(Application.persistentDataPath, SaveFolder));
-
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
-
-            return Path.Combine(folder, $"{saveId}.json");
+            return Path.Combine(SaveFolderPath, $"{saveId}.json");
         }
     }
 }

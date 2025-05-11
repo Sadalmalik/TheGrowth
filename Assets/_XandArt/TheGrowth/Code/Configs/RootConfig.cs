@@ -7,7 +7,7 @@ namespace XandArt.TheGrowth
         fileName = "RootConfig",
         menuName = "[Game]/Configs/RootConfig",
         order = 0)]
-    public class RootConfig : SingletonScriptableObject<CardsViewConfig>
+    public class RootConfig : SingletonScriptableObject<RootConfig>
     {
         public StoryStep startStep;
     }

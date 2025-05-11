@@ -72,7 +72,7 @@ namespace XandArt.Tests
             // Test save and load
             persistenceManager.Save("TestSave", world1);
 
-            var world2 = persistenceManager.Load("TestSave");
+            var world2 = persistenceManager.Load<PersistentState>("TestSave");
             //world2.SetActive();
 
             Assert.AreEqual(world1.Entities.Count, world2.Entities.Count);
