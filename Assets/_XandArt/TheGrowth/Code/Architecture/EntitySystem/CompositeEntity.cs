@@ -22,6 +22,7 @@ namespace XandArt.Architecture
 
         public EntityModel Model => _model;
         
+        [JsonIgnore]
         public IReadOnlyCollection<EntityComponent> Components => _components;
 
         public override void OnPreSave()

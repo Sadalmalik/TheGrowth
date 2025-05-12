@@ -9,6 +9,7 @@ namespace XandArt.TheGrowth
         [JsonProperty]
         private List<Ref<Entity>> _items = new List<Ref<Entity>>();
 
+        [JsonIgnore]
         public List<Ref<Entity>> Items => _items;
         
         public void Add(Entity entity)

@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: 00000000000000000000000000000000
+      Data: 173f9f649443ac440892f2aea12dc912
   gdDescription: 
   next: {fileID: 11400000, guid: 55a6d0057ef83d74481bdf21a0c6bc77, type: 2}
   enabledActions: 0

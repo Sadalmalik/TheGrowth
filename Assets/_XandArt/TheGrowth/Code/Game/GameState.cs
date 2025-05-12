@@ -9,7 +9,8 @@ namespace XandArt.TheGrowth
         [JsonProperty] private Ref<Inventory> _inventory;
 
         [JsonIgnore] public StoryStep CurrentStoryStep => _currentStep;
-
+        [JsonIgnore] public Inventory Inventory => _inventory;
+        
         private GameState() { }
         
         public static GameState Create(StoryStep start)

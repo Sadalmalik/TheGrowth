@@ -1,4 +1,5 @@
-﻿using XandArt.Architecture;
+﻿using UnityEditor;
+using XandArt.Architecture;
 using XandArt.Architecture.IOC;
 
 namespace XandArt.TheGrowth
@@ -36,6 +37,31 @@ namespace XandArt.TheGrowth
         public static void SaveGame(string gameId)
         {
             _persistenceManager.Save(gameId, CurrentGameState);
+        }
+
+        [MenuItem("[TEST]/Do Tesst")]
+        public static void Test()
+        {
+            Initialize();
+            StartNewGame();
+            
+            CurrentGameState.Add(new CardEntity());
+            CurrentGameState.Add(new CardEntity());
+
+            var card = new CardEntity{HueMoe="lololo"};
+            CurrentGameState.Inventory.Add(card);
+            CurrentGameState.Add(card);
+            
+            card = new CardEntity{HueMoe="vilka"};
+            CurrentGameState.Inventory.Add(card);
+            CurrentGameState.Add(card);
+            
+            card = new CardEntity{HueMoe="fdghfgsjhefghdjf"};
+            CurrentGameState.Inventory.Add(card);
+            CurrentGameState.Add(card);
+
+            SaveGame("AAA");
+            _container.Dispose();
         }
     }
 }

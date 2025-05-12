@@ -26,7 +26,7 @@ MonoBehaviour:
       Data: aa0fd3938b9a6954d904268e782753bd
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.IEntityModelComponent,
+      Data: 0|System.Collections.Generic.List`1[[XandArt.Architecture.IEntityModelComponent,
         Code]], mscorlib
     - Name: 
       Entry: 12
