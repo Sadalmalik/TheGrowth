@@ -14,6 +14,8 @@ namespace XandArt.Architecture
         [JsonIgnore]
         public Dictionary<Guid, Entity> EntitiesByGUIDs { get; private set; } = new Dictionary<Guid, Entity>();
 
+        public event Action<Entity> OnEntityAdded;
+        
         public void SetActive()
         {
             Active = this;
@@ -25,6 +27,7 @@ namespace XandArt.Architecture
                 throw new ArgumentException("Can't add an entity with an empty guid");
             Entities.Add(entity);
             EntitiesByGUIDs.Add(entity.Guid, entity);
+            OnEntityAdded?.Invoke(entity);
         }
 
         public void Remove(Entity entity)

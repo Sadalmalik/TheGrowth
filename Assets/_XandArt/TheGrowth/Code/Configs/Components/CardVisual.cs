@@ -3,7 +3,7 @@ using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
-    public class EntityModelVisual : IEntityModelComponent
+    public class CardVisual : IEntityModelComponent
     {
         public string Title;
         public Sprite Face;
@@ -12,6 +12,7 @@ namespace XandArt.TheGrowth
         
         public void OnEntityCreated(CompositeEntity card)
         {
+            card.AddComponent<Component>();
             // if (Face != null)
             //     card.view.face.sprite = Face;
             // if (Cover != null)
@@ -19,5 +20,14 @@ namespace XandArt.TheGrowth
             //
             // card.view.title.SetText(Title);
         }
+        
+        public class Component : EntityComponent
+        {
+            public override void OnPostLoad()
+            {
+                //Owner.View = Object.Instantiate();
+            }
+        }
     }
+
 }

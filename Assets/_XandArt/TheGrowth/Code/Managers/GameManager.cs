@@ -38,6 +38,7 @@ namespace XandArt.TheGrowth
         {
             Debug.Log("Game: StartNewGame");
             CurrentGameState = GameState.Create(RootConfig.Instance.startStep);
+            CurrentGameState.OnPostLoad();
         }
 
         public bool TryLoadLastGame()

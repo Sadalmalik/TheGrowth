@@ -5,25 +5,35 @@ using XandArt.Architecture.IOC;
 
 namespace XandArt.TheGrowth
 {
-    public class GameStarter : SerializedMonoBehaviour
+    public class Game : SerializedMonoBehaviour
     {
-        public static Container MainContainer;
+#region Public stuff
+
+        public static Container Container;
+
+#endregion
+
+
+#region Game Initialization
 
         [SerializeField]
         private TickManager _tickManager;
-        
+
         [SerializeField]
         private MenuManager _menuManager;
-        
+
         private void Start()
         {
-            MainContainer = new Container();
-            MainContainer.Add(_menuManager);
-            MainContainer.Add(_tickManager);
-            MainContainer.Add<GameManager>();
-            MainContainer.Add<PersistenceManager>();
-            MainContainer.Add<AutosaveManager>();
-            MainContainer.Init();
+            Container = new Container();
+
+            Container.Add(_menuManager);
+            Container.Add(_tickManager);
+
+            Container.Add<GameManager>();
+            Container.Add<PersistenceManager>();
+            Container.Add<AutosaveManager>();
+
+            Container.Init();
 
             InitializeAllWidgets();
         }
@@ -33,9 +43,11 @@ namespace XandArt.TheGrowth
             var widgets = FindObjectsOfType<WidgetBase>();
             foreach (var widget in widgets)
             {
-                MainContainer.InjectAt(widget);
+                Container.InjectAt(widget);
                 widget.Init();
             }
         }
+
+#endregion
     }
 }

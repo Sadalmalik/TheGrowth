@@ -31,8 +31,11 @@ namespace XandArt.TheGrowth
             if (_nextTime <= Time.unscaledTime)
             {
                 _nextTime = Time.unscaledTime + AutosaveDelay;
-                var date = DateTime.Now.ToString("yyyyMMddHHmmss");
-                _gameManager.SaveGame($"{date}-autosave");
+                if (_gameManager.CurrentGameState != null)
+                {
+                    var date = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    _gameManager.SaveGame($"{date}-autosave");
+                }
             }
         }
     }

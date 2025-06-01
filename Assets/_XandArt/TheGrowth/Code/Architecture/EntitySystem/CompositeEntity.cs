@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace XandArt.Architecture
 {
@@ -20,10 +21,14 @@ namespace XandArt.Architecture
         [JsonProperty]
         private List<EntityComponent> _components = new List<EntityComponent>();
 
+        [JsonIgnore]
         public EntityModel Model => _model;
         
         [JsonIgnore]
         public IReadOnlyCollection<EntityComponent> Components => _components;
+
+        [JsonIgnore]
+        public GameObject View { get; set; }
 
         public override void OnPreSave()
         {

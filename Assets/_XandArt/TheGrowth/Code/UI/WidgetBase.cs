@@ -17,10 +17,10 @@ namespace XandArt.TheGrowth
             if (Container != null) return;
             
             // Can bee initialized
-            if (GameStarter.MainContainer == null)
+            if (Game.Container == null)
                 return;
             
-            GameStarter.MainContainer.InjectAt(this);
+            Game.Container.InjectAt(this);
             Init();
         }
 
