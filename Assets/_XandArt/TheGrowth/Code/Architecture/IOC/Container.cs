@@ -66,15 +66,7 @@ namespace XandArt.Architecture.IOC
 
         public T Get<T>() where T : ISharedInterface
         {
-            Type type = typeof(T);
-            if (!_shareds.TryGetValue(type, out var shared))
-            {
-                if (Parent == null)
-                    throw new ContainerTypeException($"Container doesn't contains element of Type '{type.Name}'");
-                return Parent.Get<T>();
-            }
-
-            return (T)shared;
+            return (T) Get(typeof(T));
         }
 
         public object Get(Type type)

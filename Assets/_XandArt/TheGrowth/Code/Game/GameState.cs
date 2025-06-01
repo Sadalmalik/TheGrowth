@@ -8,7 +8,13 @@ namespace XandArt.TheGrowth
         [JsonProperty] private AssetRef<StoryStep> _currentStep;
         [JsonProperty] private Ref<Inventory> _inventory;
 
-        [JsonIgnore] public StoryStep CurrentStoryStep => _currentStep;
+        [JsonIgnore]
+        public StoryStep CurrentStoryStep
+        {
+            get => _currentStep;
+            set => _currentStep = value;
+        }
+        
         [JsonIgnore] public Inventory Inventory => _inventory;
         
         private GameState() { }
@@ -24,6 +30,5 @@ namespace XandArt.TheGrowth
             state.Add(state._inventory);
             return state;
         }
-
     }
 }

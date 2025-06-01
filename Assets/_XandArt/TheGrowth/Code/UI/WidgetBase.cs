@@ -13,7 +13,20 @@ namespace XandArt.TheGrowth
         
         private void OnEnable()
         {
-            Game.Container.InjectAt(this);
+            // Not initialized
+            if (Container != null) return;
+            
+            // Can bee initialized
+            if (GameStarter.MainContainer == null)
+                return;
+            
+            GameStarter.MainContainer.InjectAt(this);
+            Init();
+        }
+
+        public virtual void Init()
+        {
+            
         }
     }
 }

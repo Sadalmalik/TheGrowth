@@ -37,8 +37,16 @@ namespace XandArt.Architecture
 
         public CompositeEntity Create()
         {
-            var entity = new CompositeEntity();
-            entity._model = this;
+            var entity = new CompositeEntity { _model = this };
+            foreach (var component in components)
+                component.OnEntityCreated(entity);
+            entity.OnInit();
+            return entity;
+        }
+
+        public T Create<T>() where T : CompositeEntity, new()
+        {
+            var entity = new T { _model = this };
             foreach (var component in components)
                 component.OnEntityCreated(entity);
             entity.OnInit();

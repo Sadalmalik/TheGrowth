@@ -33,7 +33,25 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.EntityModelBrain, Code
+      Data: 1|XandArt.TheGrowth.EntityModelVisual, Code
+    - Name: Title
+      Entry: 6
+      Data: 
+    - Name: Face
+      Entry: 6
+      Data: 
+    - Name: Cover
+      Entry: 6
+      Data: 
+    - Name: CustomPrefab
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|XandArt.TheGrowth.EntityModelBrain, Code
     - Name: CanBeDragged
       Entry: 5
       Data: false
@@ -62,24 +80,6 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: OnUnCovered
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|XandArt.TheGrowth.EntityModelVisual, Code
-    - Name: Title
-      Entry: 6
-      Data: 
-    - Name: Face
-      Entry: 6
-      Data: 
-    - Name: Cover
-      Entry: 6
-      Data: 
-    - Name: CustomPrefab
       Entry: 6
       Data: 
     - Name: 
