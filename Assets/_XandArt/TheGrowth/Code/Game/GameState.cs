@@ -5,11 +5,11 @@ namespace XandArt.TheGrowth
 {
     public class GameState : PersistentState
     {
-        [JsonProperty] private AssetRef<StoryStep> _currentStep;
+        [JsonProperty] private AssetRef<GameStep> _currentStep;
         [JsonProperty] private Ref<Inventory> _inventory;
 
         [JsonIgnore]
-        public StoryStep CurrentStoryStep
+        public GameStep CurrentGameStep
         {
             get => _currentStep;
             set => _currentStep = value;
@@ -19,7 +19,7 @@ namespace XandArt.TheGrowth
         
         private GameState() { }
         
-        public static GameState Create(StoryStep start)
+        public static GameState Create(GameStep start)
         {
             // Game structure preset
             var state = new GameState

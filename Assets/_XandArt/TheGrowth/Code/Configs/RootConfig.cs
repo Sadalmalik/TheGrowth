@@ -9,6 +9,6 @@ namespace XandArt.TheGrowth
         order = 0)]
     public class RootConfig : SingletonScriptableObject<RootConfig>
     {
-        public StoryStep startStep;
+        public GameStep startStep;
     }
 }

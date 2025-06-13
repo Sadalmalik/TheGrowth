@@ -32,22 +32,7 @@ MonoBehaviour:
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 1|XandArt.TheGrowth.EntityModelVisual, Code
-    - Name: Title
       Entry: 6
-      Data: 
-    - Name: Face
-      Entry: 6
-      Data: 
-    - Name: Cover
-      Entry: 6
-      Data: 
-    - Name: CustomPrefab
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
       Data: 
     - Name: 
       Entry: 13

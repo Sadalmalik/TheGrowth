@@ -32,26 +32,11 @@ MonoBehaviour:
       Entry: 12
       Data: 3
     - Name: 
-      Entry: 7
-      Data: 1|XandArt.TheGrowth.EntityModelVisual, Code
-    - Name: Title
-      Entry: 6
-      Data: 
-    - Name: Face
-      Entry: 6
-      Data: 
-    - Name: Cover
-      Entry: 6
-      Data: 
-    - Name: CustomPrefab
       Entry: 6
       Data: 
     - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.EntityModelBrain, Code
+      Data: 1|XandArt.TheGrowth.EntityModelBrain, Code
     - Name: CanBeDragged
       Entry: 5
       Data: false
@@ -87,7 +72,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|XandArt.TheGrowth.ChargesModelComponent, Code
+      Data: 2|XandArt.TheGrowth.ChargesModelComponent, Code
     - Name: Charges
       Entry: 3
       Data: 0

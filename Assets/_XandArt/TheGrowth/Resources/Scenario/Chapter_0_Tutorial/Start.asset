@@ -15,7 +15,9 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 376eaa740945a7f41b241de31202ed6d, type: 2}
+    - {fileID: 11400000, guid: 77fb4d0db3d301d46b9779ffb58daace, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -24,10 +26,52 @@ MonoBehaviour:
     - Name: Guid
       Entry: 2
       Data: 6e3e4e75d7ffc444b8752621a599ad3a
-  gdDescription: "\u044A\u0430\u043F\u0440\n\u0430\u0432\u043F\u0440\n\u0430\u044B\u043F\u0440\n\u044B\u0430\u0432\u043F\n\u0440\u0430\u0432\u043F\n\u0440\n\u0430\u043F\u044B\u0440\n"
+    - Name: components
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.GameStepComponent,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|XandArt.TheGrowth.SetEnabledActions, Code
+    - Name: actions
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|XandArt.TheGrowth.AddItemsToInventory, Code
+    - Name: items
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[XandArt.Architecture.EntityModel,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  description: 
   next: {fileID: 11400000, guid: 357c61c417917024ea9c5015f5fd7920, type: 2}
-  enabledActions: 2
-  enabledDialogues:
-  - aaa
-  addToInventory:
-  - {fileID: 11400000, guid: aa0fd3938b9a6954d904268e782753bd, type: 2}
