@@ -2,7 +2,7 @@
 
 namespace XandArt.TheGrowth
 {
-    public class ChargesModelComponent : IEntityModelComponent
+    public class CardChargesComponent : IEntityModelComponent
     {
         public int Charges;
         

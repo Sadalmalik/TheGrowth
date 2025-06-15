@@ -17,11 +17,23 @@ namespace XandArt.TheGrowth
         public GameStep next;
         [Space]
         public List<GameStepComponent> components = new List<GameStepComponent>();
+
+        public void OnStepStart(GameState state)
+        {
+            foreach (var component in components)
+                component.OnStepStart(state);
+        }
+        
+        public void OnStepComplete(GameState state)
+        {
+            foreach (var component in components)
+                component.OnStepComplete(state);
+        }
     }
 
     public abstract class GameStepComponent
     {
-        public virtual void OnStepStart() { }
-        public virtual void OnStepComplete() { }
+        public virtual void OnStepStart(GameState state) { }
+        public virtual void OnStepComplete(GameState state) { }
     }
 }

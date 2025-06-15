@@ -11,6 +11,8 @@ namespace XandArt.TheGrowth
 
         public static Container Container;
 
+        public static Context BaseContext;
+        
 #endregion
 
 
@@ -32,9 +34,13 @@ namespace XandArt.TheGrowth
             Container.Add<GameManager>();
             Container.Add<PersistenceManager>();
             Container.Add<AutosaveManager>();
+            Container.Add<LocationManager>();
+            Container.Add<ViewManager>();
 
+            BaseContext = new Context(new GlobalData { container = Container });
+            
             Container.Init();
-
+            
             InitializeAllWidgets();
         }
 

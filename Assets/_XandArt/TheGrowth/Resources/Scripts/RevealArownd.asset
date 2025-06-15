@@ -23,26 +23,26 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Commands
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|Sadalmalik.TheGrowth.ForEachCard, Code
+      Data: 1|XandArt.TheGrowth.ForEachCard, Code
     - Name: Cards
       Entry: 7
-      Data: 2|Sadalmalik.TheGrowth.CardsFromSlots, Code
+      Data: 2|XandArt.TheGrowth.CardsFromSlots, Code
     - Name: Slots
       Entry: 7
-      Data: 3|Sadalmalik.TheGrowth.TableSlotsAround, Code
+      Data: 3|XandArt.TheGrowth.TableSlotsAround, Code
     - Name: Position
       Entry: 7
-      Data: 4|Sadalmalik.TheGrowth.PositionByCard, Code
+      Data: 4|XandArt.TheGrowth.PositionByCard, Code
     - Name: Card
       Entry: 7
-      Data: 5|Sadalmalik.TheGrowth.ActiveCard, Code
+      Data: 5|XandArt.TheGrowth.PlayerCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -63,7 +63,7 @@ MonoBehaviour:
       Data: 
     - Name: Filter
       Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.CardListConfig,
+      Data: 6|System.Collections.Generic.List`1[[XandArt.TheGrowth.CardListConfig,
         Code]], mscorlib
     - Name: 
       Entry: 12
@@ -79,20 +79,20 @@ MonoBehaviour:
       Data: 
     - Name: Commands
       Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[Sadalmalik.TheGrowth.Command, Code]],
+      Data: 7|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 8|Sadalmalik.TheGrowth.FlipCard, Code
+      Data: 8|XandArt.TheGrowth.FlipCard, Code
     - Name: Variant
       Entry: 3
       Data: 1
     - Name: Card
       Entry: 7
-      Data: 9|Sadalmalik.TheGrowth.IteratingCard, Code
+      Data: 9|XandArt.TheGrowth.IteratingCard, Code
     - Name: 
       Entry: 8
       Data: 

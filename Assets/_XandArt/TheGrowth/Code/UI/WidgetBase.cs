@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
 using XandArt.Architecture.IOC;
 
 namespace XandArt.TheGrowth
@@ -6,10 +6,10 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Should be loaded after Game.Initialize()
     /// </summary>
-    public class WidgetBase : MonoBehaviour
+    public class WidgetBase : SerializedMonoBehaviour
     {
         [Inject]
-        public Container Container;
+        protected Container Container;
         
         private void OnEnable()
         {
@@ -24,9 +24,6 @@ namespace XandArt.TheGrowth
             Init();
         }
 
-        public virtual void Init()
-        {
-            
-        }
+        public virtual void Init() { }
     }
 }

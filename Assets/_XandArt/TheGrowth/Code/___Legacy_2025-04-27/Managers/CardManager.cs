@@ -208,7 +208,7 @@ namespace XandArt.TheGrowth
             while (deckSlot.Cards.Count > 0 && slots.Count > 0)
             {
                 var card = deckSlot.Peek();
-                var slot = card.model.GetComponent<EntityModelBrain>()?.SpawnSlot?.Evaluate(context);
+                var slot = card.model.GetComponent<CardBrain>()?.SpawnSlot?.Evaluate(context);
                 if (slot == null)
                 {
                     slot = slots.Peek();

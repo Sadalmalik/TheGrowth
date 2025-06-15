@@ -5,6 +5,12 @@ using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
+    public enum LocationType
+    {
+        UI,
+        Space
+    }
+    
     [CreateAssetMenu(
         fileName = "Location",
         menuName = "[Game]/Location",
@@ -12,6 +18,7 @@ namespace XandArt.TheGrowth
     public class Location : ScriptableAsset
     {
         public string Title;
+        public LocationType Type;
         public string Scene;
     }
 }

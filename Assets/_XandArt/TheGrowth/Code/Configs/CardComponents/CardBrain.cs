@@ -4,7 +4,7 @@ using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
-    public class EntityModelBrain : IEntityModelComponent
+    public class CardBrain : IEntityModelComponent
     {
         public bool CanBeDragged;
         public bool EndsTheTurn;

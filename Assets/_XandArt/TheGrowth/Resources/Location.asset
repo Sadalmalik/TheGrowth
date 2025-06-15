@@ -21,16 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Scene
-      Entry: 7
-      Data: Sirenix.OdinInspector.Editor.Validation.SceneReference, Sirenix.OdinInspector.Editor
-    - Name: IsValid
-      Entry: 5
-      Data: false
-    - Name: GUID
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    - Name: Guid
+      Entry: 2
+      Data: 2d69ff76c7cf270408247d226bac66b6
   Title: 
+  Type: 0
+  Scene: 

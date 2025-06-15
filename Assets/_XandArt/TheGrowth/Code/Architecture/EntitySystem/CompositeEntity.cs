@@ -68,5 +68,14 @@ namespace XandArt.Architecture
                     result.Add(component as T);
             return result;
         }
+
+        public List<I> GetInterfaces<I>(List<I> result=null)
+        {
+            result ??= new List<I>();
+            foreach (var component in _components)
+                if (component is I inter)
+                    result.Add(inter);
+            return result;
+        }
     }
 }

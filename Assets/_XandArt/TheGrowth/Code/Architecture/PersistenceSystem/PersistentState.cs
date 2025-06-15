@@ -15,6 +15,7 @@ namespace XandArt.Architecture
         public Dictionary<Guid, Entity> EntitiesByGUIDs { get; private set; } = new Dictionary<Guid, Entity>();
 
         public event Action<Entity> OnEntityAdded;
+        public event Action<Entity> OnEntityRemoved;
         
         public void SetActive()
         {
@@ -34,6 +35,7 @@ namespace XandArt.Architecture
         {
             Entities.Remove(entity);
             EntitiesByGUIDs.Remove(entity.Guid);
+            OnEntityRemoved?.Invoke(entity);
         }
 
         public virtual void OnPreSave()

@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 52f3eee5fad002e4f984ced85e276ea0, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -30,13 +31,10 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 6
-      Data: 
+      Data: 1
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.EntityModelBrain, Code
+      Data: 1|XandArt.TheGrowth.CardBrain, Code
     - Name: CanBeDragged
       Entry: 5
       Data: false
@@ -47,35 +45,168 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: AllowedMoves
-      Entry: 6
+      Entry: 7
+      Data: 2|XandArt.TheGrowth.TableSlotsCombine, Code
+    - Name: Variant
+      Entry: 3
+      Data: 3
+    - Name: Evaluators
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[XandArt.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.EntitySlot,
+        Code]], System.Core]], Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 4|XandArt.TheGrowth.TableSlotsAround, Code
+    - Name: Position
+      Entry: 7
+      Data: 5|XandArt.TheGrowth.PositionByCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 6|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
       Data: 
-    - Name: OnPlaced
-      Entry: 6
+    - Name: 
+      Entry: 8
       Data: 
-    - Name: OnPlacedFirstTime
-      Entry: 6
-      Data: 
-    - Name: OnFlipped
-      Entry: 6
-      Data: 
-    - Name: OnStep
-      Entry: 6
-      Data: 
-    - Name: OnCovered
-      Entry: 6
-      Data: 
-    - Name: OnUnCovered
-      Entry: 6
-      Data: 
+    - Name: Figure
+      Entry: 3
+      Data: 0
+    - Name: Distance
+      Entry: 3
+      Data: 1
+    - Name: Radius
+      Entry: 4
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.ChargesModelComponent, Code
-    - Name: Charges
+      Data: 7|XandArt.TheGrowth.TableSlotsAround, Code
+    - Name: Position
+      Entry: 7
+      Data: 8|XandArt.TheGrowth.PositionByCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 9|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Figure
       Entry: 3
       Data: 0
+    - Name: Distance
+      Entry: 3
+      Data: 0
+    - Name: Radius
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnPlaced
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 11|XandArt.TheGrowth.ExecuteCommands, Code
+    - Name: config
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnPlacedFirstTime
+      Entry: 7
+      Data: 12|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnFlipped
+      Entry: 7
+      Data: 13|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnStep
+      Entry: 7
+      Data: 14|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnCovered
+      Entry: 7
+      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnUnCovered
+      Entry: 7
+      Data: 16|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 

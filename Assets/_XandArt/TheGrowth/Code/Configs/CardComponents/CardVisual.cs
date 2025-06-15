@@ -3,6 +3,7 @@ using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
+    
     public class CardVisual : IEntityModelComponent
     {
         public string Title;
@@ -21,13 +22,20 @@ namespace XandArt.TheGrowth
             // card.view.title.SetText(Title);
         }
         
-        public class Component : EntityComponent
+        public class Component : EntityComponent, IViewComponent
         {
             public override void OnPostLoad()
             {
                 //Owner.View = Object.Instantiate();
             }
+
+            public GameObject GetPrefab() => null;
+
+            GameObject IViewComponent.View
+            {
+                get => throw new System.NotImplementedException();
+                set => throw new System.NotImplementedException();
+            }
         }
     }
-
 }

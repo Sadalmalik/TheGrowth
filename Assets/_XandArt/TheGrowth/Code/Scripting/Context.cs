@@ -10,7 +10,7 @@ namespace XandArt.TheGrowth
     public class Context
     {
         public static Context Global;
-        
+
         private Dictionary<Type, IContextData> _data = new Dictionary<Type, IContextData>();
 
         public Context Parent { get; private set; }
@@ -23,6 +23,7 @@ namespace XandArt.TheGrowth
                 _data[data.GetType()] = data;
             }
         }
+
         public Context(Context parent = null, params IContextData[] initial)
         {
             Parent = parent ?? Global;

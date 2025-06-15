@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using XandArt.Architecture;
 using XandArt.Architecture.IOC;
 
@@ -9,10 +10,16 @@ namespace XandArt.TheGrowth
         public const string LastSavePref = "last-save";
 
         [Inject]
-        protected PersistenceManager PersistenceManager;
+        private PersistenceManager _persistenceManager;
+
+        [Inject]
+        private LocationManager _locationManager;
 
         public GameState CurrentGameState { get; private set; }
 
+        public event Action<GameState> OnGameStateWillBeUnload;
+        public event Action<GameState> OnGameStateLoaded;
+        
         public void Init()
         {
         }
@@ -39,6 +46,7 @@ namespace XandArt.TheGrowth
             Debug.Log("Game: StartNewGame");
             CurrentGameState = GameState.Create(RootConfig.Instance.startStep);
             CurrentGameState.OnPostLoad();
+            _locationManager.LoadLocation(CurrentGameState.ActiveLocation);
         }
 
         public bool TryLoadLastGame()
@@ -47,7 +55,8 @@ namespace XandArt.TheGrowth
             
             string lastSave = PlayerPrefs.GetString(LastSavePref, null);
             if (string.IsNullOrEmpty(lastSave)) return false;
-            CurrentGameState = PersistenceManager.Load<GameState>(lastSave);
+            CurrentGameState = _persistenceManager.Load<GameState>(lastSave);
+            _locationManager.LoadLocation(CurrentGameState.ActiveLocation);
             return true;
         }
 
@@ -56,7 +65,8 @@ namespace XandArt.TheGrowth
             Debug.Log("Game: LoadGame");
             
             PlayerPrefs.SetString(LastSavePref, gameId);
-            CurrentGameState = PersistenceManager.Load<GameState>(gameId);
+            CurrentGameState = _persistenceManager.Load<GameState>(gameId);
+            _locationManager.LoadLocation(CurrentGameState.ActiveLocation);
         }
 
         public void SaveGame(string gameId)
@@ -64,7 +74,7 @@ namespace XandArt.TheGrowth
             Debug.Log("Game: SaveGame");
             
             PlayerPrefs.SetString(LastSavePref, gameId);
-            PersistenceManager.Save(gameId, CurrentGameState);
+            _persistenceManager.Save(gameId, CurrentGameState);
         }
 
 #endregion

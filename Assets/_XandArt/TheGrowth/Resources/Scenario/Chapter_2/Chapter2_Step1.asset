@@ -24,8 +24,18 @@ MonoBehaviour:
     - Name: Guid
       Entry: 2
       Data: 2c624c5a65aea1547b2da26719633de8
-  gdDescription: 
+    - Name: components
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.GameStepComponent,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  description: 
   next: {fileID: 11400000, guid: d128b908187eefe4da8b4180763b6cd5, type: 2}
-  enabledActions: 0
-  enabledDialogues: []
-  addToInventory: []

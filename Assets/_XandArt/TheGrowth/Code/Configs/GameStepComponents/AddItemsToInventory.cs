@@ -7,7 +7,7 @@ namespace XandArt.TheGrowth
     {
         public List<EntityModel> items;
 
-        public override void OnStepStart()
+        public override void OnStepStart(GameState state)
         {
             
         }

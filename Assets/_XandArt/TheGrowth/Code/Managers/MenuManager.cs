@@ -28,8 +28,12 @@ namespace XandArt.TheGrowth
 
         [Inject]
         private PersistenceManager _persistenceManager;
+        
         [Inject]
         private GameManager _gameManager;
+
+        public LoadingScreen LoadingScreen
+            => _loadingScreen;
 
         public void Init()
         {
@@ -45,6 +49,11 @@ namespace XandArt.TheGrowth
         private void HandleSaveSelected(string save)
         {
             _gameManager.LoadGame(save);
+        }
+
+        public void SetMainScreenActive(bool active)
+        {
+            _mainMenuScreen.SetActive(active);
         }
 
 #region API
