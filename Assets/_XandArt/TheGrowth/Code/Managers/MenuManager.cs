@@ -13,6 +13,9 @@ namespace XandArt.TheGrowth
     {
         [SerializeField]
         private GameObject _mainMenuScreen;
+        
+        [SerializeField]
+        private GameObject _pauseMenuScreen;
 
         [SerializeField]
         private GameObject _continueGameButton;
@@ -56,6 +59,11 @@ namespace XandArt.TheGrowth
             _mainMenuScreen.SetActive(active);
         }
 
+        public void SetPauseScreenActive(bool active)
+        {
+            _pauseMenuScreen.SetActive(active);
+        }
+
 #region API
 
         public void ContinueGame()
@@ -74,6 +82,13 @@ namespace XandArt.TheGrowth
             _loadingMenu.SetSaves(_persistenceManager.GetAllSaves());
         }
 
+        public void SaveAndExitToMenu()
+        {
+            _gameManager.SaveAndExit();
+            //StartCoroutine(StartNewGameCoroutine());
+            
+        }
+
         public void ExitGame()
         {
             Application.Quit();
@@ -82,26 +97,26 @@ namespace XandArt.TheGrowth
 #endregion
 
 
-#region Legacy
-
-        private IEnumerator StartNewGameCoroutine()
-        {
-            var task = _loadingScreen.ShowAsync();
-            yield return new WaitUntil(() => task.IsCompleted);
-
-            var operation = SceneManager.LoadSceneAsync("Game/Scenes/SampleScene", LoadSceneMode.Additive);
-            yield return operation;
-
-            Debug.Log("Scene loaded");
-
-            _mainMenuScreen.SetActive(false);
-
-            task = _loadingScreen.HideAsync();
-            yield return new WaitUntil(() => task.IsCompleted);
-
-            CardManager.Instance.DealCards();
-        }
-
-#endregion
+// #region Legacy
+//
+//         private IEnumerator StartNewGameCoroutine()
+//         {
+//             var task = _loadingScreen.ShowAsync();
+//             yield return new WaitUntil(() => task.IsCompleted);
+//
+//             var operation = SceneManager.LoadSceneAsync("Game/Scenes/SampleScene", LoadSceneMode.Additive);
+//             yield return operation;
+//
+//             Debug.Log("Scene loaded");
+//
+//             _mainMenuScreen.SetActive(false);
+//
+//             task = _loadingScreen.HideAsync();
+//             yield return new WaitUntil(() => task.IsCompleted);
+//
+//             CardManager.Instance.DealCards();
+//         }
+//
+// #endregion
     }
 }

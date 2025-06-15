@@ -12,6 +12,7 @@ namespace XandArt.TheGrowth
         
         private List<HUBRoom> _rooms;
 
+        private HUBRoom _prev;
         private HUBRoom _active;
         
         public override void Init()
@@ -25,10 +26,16 @@ namespace XandArt.TheGrowth
         public void GoToRoom(HUBRoom room)
         {
             _active?.Hide();
+            _prev = _active;
             _active = room;
             _active?.Show();
             
             Debug.Log($"Enter room: {room.name}");
+        }
+
+        public void GoToLastRoom()
+        {
+            GoToRoom(_prev);
         }
     }
 }

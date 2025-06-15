@@ -40,6 +40,16 @@ namespace XandArt.TheGrowth
             string lastSave = PlayerPrefs.GetString(LastSavePref, null);
             return !string.IsNullOrEmpty(lastSave);
         }
+
+        public void SaveAndExit()
+        {
+            Debug.Log("Game: SaveAndExit");
+            
+            PlayerPrefs.SetString(LastSavePref, "last_game");
+            _persistenceManager.Save("last_game", CurrentGameState);
+
+            CurrentGameState = null;
+        }
         
         public void StartNewGame()
         {
