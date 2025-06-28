@@ -35,6 +35,9 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.CardBrain, Code
+    - Name: Type
+      Entry: 3
+      Data: 4
     - Name: CanBeDragged
       Entry: 5
       Data: false

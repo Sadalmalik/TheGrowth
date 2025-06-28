@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using XandArt.Architecture;
 
@@ -20,6 +21,13 @@ namespace XandArt.TheGrowth
         public void Remove(Entity entity)
         {
             _items.Remove(entity);
+        }
+
+        public IEnumerable<Entity> GetEntities(CardType filter)
+        {
+            return Items
+                .Select(entity=>entity.Value as CompositeEntity)
+                .Where(card => card != null && 0 != (card.Model.GetComponent<CardBrain>().Type & filter));
         }
     }
 }

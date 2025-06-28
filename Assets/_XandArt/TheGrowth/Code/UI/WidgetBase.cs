@@ -11,7 +11,7 @@ namespace XandArt.TheGrowth
         [Inject]
         protected Container Container;
         
-        private void OnEnable()
+        private void Awake()
         {
             // Not initialized
             if (Container != null) return;

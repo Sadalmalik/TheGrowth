@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
@@ -18,5 +19,7 @@ namespace XandArt.TheGrowth
         public string Title;
         public LocationType Type;
         public string Scene;
+        
+        public List<EntityModel> Cards;
     }
 }

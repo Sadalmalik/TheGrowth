@@ -20,7 +20,7 @@ namespace XandArt.Architecture
 
         public TComponent GetComponent<TComponent>() where TComponent : IEntityModelComponent
         {
-            return (TComponent)components?.FirstOrDefault(c => c.GetType() == typeof(TComponent));
+            return (TComponent) components?.FirstOrDefault(c => c.GetType() == typeof(TComponent));
         }
 
         public TComponent AddComponent<TComponent>() where TComponent : IEntityModelComponent, new()
