@@ -3858,7 +3858,7 @@ PrefabInstance:
     - target: {fileID: 7620167292831559917, guid: 893f5e6c9f0f7d748a7ce983c3f9585a,
         type: 3}
       propertyPath: m_text
-      value: 'Exitt
+      value: 'Exit
 
 '
       objectReference: {fileID: 0}

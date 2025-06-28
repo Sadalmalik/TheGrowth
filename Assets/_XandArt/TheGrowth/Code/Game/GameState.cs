@@ -19,7 +19,7 @@ namespace XandArt.TheGrowth
         [JsonProperty]
         private AssetRef<Location> _activeLocation;
         
-        
+        // Access
         [JsonIgnore]
         public GameStep CurrentGameStep => _currentStep;
         
@@ -40,9 +40,9 @@ namespace XandArt.TheGrowth
 
         public void SetGameStep(GameStep next)
         {
-            _currentStep.Value.OnStepComplete(this);
+            _currentStep.Value?.OnStepComplete(this);
             _currentStep = next;
-            _currentStep.Value.OnStepStart(this);
+            _currentStep.Value?.OnStepStart(this);
         }
         
         private GameState() { }

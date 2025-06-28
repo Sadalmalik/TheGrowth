@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
@@ -18,7 +19,7 @@ namespace XandArt.Architecture
         {
             _assets ??= new Dictionary<Guid, ScriptableAsset>();
             _assets.Clear();
-            var assets = Resources.LoadAll<ScriptableAsset>("");
+            var assets = Resources.LoadAll<ScriptableAsset>("").Distinct();
             foreach (var asset in assets)
             {
                 _assets.Add(asset.Guid, asset);

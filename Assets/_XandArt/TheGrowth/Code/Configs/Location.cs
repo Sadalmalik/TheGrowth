@@ -1,6 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using XandArt.Architecture;
 
 namespace XandArt.TheGrowth

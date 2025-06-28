@@ -26,6 +26,8 @@ namespace XandArt.TheGrowth
 
         private void Start()
         {
+            AssetGuidsManager.Initialize();
+            
             Container = new Container();
 
             Container.Add(_menuManager);

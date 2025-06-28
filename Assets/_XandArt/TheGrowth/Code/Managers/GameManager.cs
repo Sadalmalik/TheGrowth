@@ -19,14 +19,6 @@ namespace XandArt.TheGrowth
 
         public event Action<GameState> OnGameStateWillBeUnload;
         public event Action<GameState> OnGameStateLoaded;
-        
-        public void Init()
-        {
-        }
-
-        public void Dispose()
-        {
-        }
 
         public void Tick()
         {

@@ -3,7 +3,6 @@ using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
-    
     public class CardVisual : IEntityModelComponent
     {
         public string Title;
