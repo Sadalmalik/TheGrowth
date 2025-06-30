@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Sirenix.OdinInspector;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using XandArt.Architecture;
 
