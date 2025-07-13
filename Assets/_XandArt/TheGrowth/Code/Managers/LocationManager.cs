@@ -17,22 +17,43 @@ namespace XandArt.TheGrowth
         {
         }
 
-        public async void LoadLocation(Location location)
+        public async Task LoadLocation(LocationEntity locationEntity)
         {
-            var screen = _menuManager.LoadingScreen;
-            await screen.ShowAsync();
+            // var screen = _menuManager.LoadingScreen;
+            // await screen.ShowAsync();
+            using var screenTask = await LoadingTracker.CreateAsync();
 
             _menuManager.SetMainScreenActive(false);
             
             var result = new TaskCompletionSource<bool>();
-            var operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(location.Scene, LoadSceneMode.Additive);
+            var operation = SceneManager.LoadSceneAsync(locationEntity.Model.Scene, LoadSceneMode.Additive);
             if (operation != null)
             {
                 operation.completed += op => { result.SetResult(true); };
                 await result.Task;
             }
+            
+            //await screen.HideAsync();
+        }
 
-            await screen.HideAsync();
+        public async Task UnloadLocation(LocationEntity locationEntity)
+        {
+            // var screen = _menuManager.LoadingScreen;
+            // await screen.ShowAsync();
+            
+            using var screenTask = await LoadingTracker.CreateAsync();
+
+            _menuManager.SetMainScreenActive(false);
+            
+            var result = new TaskCompletionSource<bool>();
+            var operation = SceneManager.UnloadSceneAsync(locationEntity.Model.Scene);
+            if (operation != null)
+            {
+                operation.completed += op => { result.SetResult(true); };
+                await result.Task;
+            }
+            
+            // await screen.HideAsync();
         }
     }
 }

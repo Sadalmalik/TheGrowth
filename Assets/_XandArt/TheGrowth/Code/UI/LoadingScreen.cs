@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -6,7 +8,15 @@ using XandArt.Architecture.IOC;
 
 namespace XandArt.TheGrowth
 {
-    public class LoadingScreen : SerializedMonoBehaviour, IShared
+    public enum LoadingScreenState
+    {
+        Hidden,
+        Shown,
+        ShowAnimation,
+        HideAnimation
+    }
+
+    public partial class LoadingScreen : SerializedMonoBehaviour, IShared
     {
         [SerializeField]
         private CanvasGroup _group;
@@ -22,10 +32,27 @@ namespace XandArt.TheGrowth
 
         public void Init()
         {
+            Debug.Log($"TEST - INTI");
+            LoadingTracker.Created += OnCreated;
+            LoadingTracker.Disposed += OnDisposed;
         }
 
         public void Dispose()
         {
+            LoadingTracker.Created -= OnCreated;
+            LoadingTracker.Disposed -= OnDisposed;
+        }
+
+        private Task OnCreated(LoadingTracker tracker)
+        {
+            Debug.Log($"TEST - OnCreated");
+            return ShowAsync();
+        }
+
+        private Task OnDisposed(LoadingTracker tracker)
+        {
+            Debug.Log($"TEST - OnDisposed");
+            return HideAsync();
         }
 
         private void Update()
@@ -34,38 +61,25 @@ namespace XandArt.TheGrowth
                 _roller.rotation = Quaternion.Euler(_rotationSpeed * Time.unscaledTime);
         }
 
-        [Button]
-        public void Show()
-        {
-            if (!Application.isPlaying) return;
-            _group.blocksRaycasts = true;
-            _group.DOFade(1, _fadeDuration);
-        }
-
-        public Task ShowAsync()
+        public async Task ShowAsync()
         {
             var tcs = new TaskCompletionSource<bool>();
-            _group.blocksRaycasts = true;
-            _group.DOFade(1, _fadeDuration).OnComplete(() => tcs.SetResult(true));
-            return tcs.Task;
+            _group.DOFade(1, _fadeDuration)
+                .OnStart(() => { _group.blocksRaycasts = true; })
+                .OnComplete(() => { tcs.SetResult(true); });
+            await tcs.Task;
         }
 
-        [Button]
-        public void Hide()
-        {
-            if (!Application.isPlaying) return;
-            _group.DOFade(0, _fadeDuration).OnComplete(() => { _group.blocksRaycasts = false; });
-        }
-
-        public Task HideAsync()
+        public async Task HideAsync()
         {
             var tcs = new TaskCompletionSource<bool>();
-            _group.DOFade(0, _fadeDuration).OnComplete(() =>
-            {
-                _group.blocksRaycasts = false;
-                tcs.SetResult(true);
-            });
-            return tcs.Task;
+            _group.DOFade(0, _fadeDuration)
+                .OnComplete(() =>
+                {
+                    _group.blocksRaycasts = false;
+                    tcs.SetResult(false);
+                });
+            await tcs.Task;
         }
     }
 }

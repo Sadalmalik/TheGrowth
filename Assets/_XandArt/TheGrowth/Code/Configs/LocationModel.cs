@@ -9,17 +9,24 @@ namespace XandArt.TheGrowth
         UI,
         Space
     }
-    
+
     [CreateAssetMenu(
         fileName = "Location",
         menuName = "[Game]/Location",
         order = 0)]
-    public class Location : ScriptableAsset
+    public class LocationModel : AbstractEntityModel
     {
         public string Title;
         public LocationType Type;
         public string Scene;
-        
+
         public List<EntityModel> Cards;
+
+        public override Entity Create()
+        {
+            var entity = new LocationEntity { _model = this };
+            entity.OnInit();
+            return entity;
+        }
     }
 }

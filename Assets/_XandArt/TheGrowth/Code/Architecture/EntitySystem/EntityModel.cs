@@ -14,7 +14,7 @@ namespace XandArt.Architecture
         fileName = "EntityModel",
         menuName = "[Game]/Entity Model",
         order = 0)]
-    public class EntityModel : ScriptableAsset
+    public class EntityModel : AbstractEntityModel
     {
         public List<IEntityModelComponent> components;
 
@@ -35,7 +35,7 @@ namespace XandArt.Architecture
             return component;
         }
 
-        public CompositeEntity Create()
+        public override Entity Create()
         {
             var entity = new CompositeEntity { _model = this };
             foreach (var component in components)
@@ -44,20 +44,11 @@ namespace XandArt.Architecture
             return entity;
         }
 
-        public T Create<T>() where T : CompositeEntity, new()
-        {
-            var entity = new T { _model = this };
-            foreach (var component in components)
-                component.OnEntityCreated(entity);
-            entity.OnInit();
-            return entity;
-        }
-
-        [MenuItem("Assets/Create/[Game]/Entity Model 2", false, 0)]
-        public static void TestCreate()
-        {
-            Debug.Log($"[TEST] Selection: {Selection.activeObject}, {Selection.activeContext}");
-            // Selection.activeObject - папка в которой создавать объект
-        }
+        // [MenuItem("Assets/Create/[Game]/Entity Model 2", false, 0)]
+        // public static void TestCreate()
+        // {
+        //     Debug.Log($"[TEST] Selection: {Selection.activeObject}, {Selection.activeContext}");
+        //     // Selection.activeObject - папка в которой создавать объект
+        // }
     }
 }

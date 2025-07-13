@@ -62,6 +62,11 @@ namespace XandArt.Architecture
                 _guid = _value?.Guid ?? Guid.Empty;
             }
         }
+
+        public static implicit operator bool(Ref<T> @ref)
+        {
+            return @ref.Value != null;
+        }
         
         public static implicit operator T(Ref<T> @ref)
         {

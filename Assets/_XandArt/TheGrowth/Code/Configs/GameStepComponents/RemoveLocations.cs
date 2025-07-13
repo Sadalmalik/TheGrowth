@@ -4,12 +4,15 @@ namespace XandArt.TheGrowth
 {
     public class RemoveLocations : GameStepComponent
     {
-        public List<Location> locations;
+        public List<LocationModel> locations;
 
         public override void OnStepStart(GameState state)
         {
-            foreach(var location in locations)
-                state.Locations.Remove(location);
+            foreach (var model in locations)
+            {
+                var location = state.GetOrCreateLocation(model);
+                state.ExpeditionLocations.Remove(location);
+            }
         }
     }
 }

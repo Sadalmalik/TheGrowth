@@ -40,9 +40,10 @@ namespace XandArt.TheGrowth
 
         public void Init()
         {
+            _loadingScreen.Init();
             _continueGameButton.SetActive(_gameManager.HasLastSave());
             _loadingMenu.OnSaveSelected += HandleSaveSelected;
-            _loadingScreen.Hide();
+            _loadingScreen.HideAsync();
         }
 
         public void Dispose()

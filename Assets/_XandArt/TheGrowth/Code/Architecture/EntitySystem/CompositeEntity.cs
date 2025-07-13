@@ -16,13 +16,10 @@ namespace XandArt.Architecture
     public class CompositeEntity : Entity
     {
         [JsonProperty]
-        internal AssetRef<EntityModel> _model;
-        
-        [JsonProperty]
         private List<EntityComponent> _components = new List<EntityComponent>();
 
         [JsonIgnore]
-        public EntityModel Model => _model;
+        public EntityModel Model => _model.Value as EntityModel;
         
         [JsonIgnore]
         public IReadOnlyCollection<EntityComponent> Components => _components;

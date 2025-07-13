@@ -18,7 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 376eaa740945a7f41b241de31202ed6d, type: 2}
     - {fileID: 11400000, guid: 77fb4d0db3d301d46b9779ffb58daace, type: 2}
-    - {fileID: 11400000, guid: a2f4c55b2d6ed7e47933254cc64bb2c1, type: 2}
+    - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -33,7 +33,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.SetEnabledActions, Code
@@ -70,30 +70,8 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|XandArt.TheGrowth.AddLocations, Code
-    - Name: locations
-      Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[XandArt.TheGrowth.Location, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 6|XandArt.TheGrowth.SetActiveLocation, Code
-    - Name: location
+      Data: 4|XandArt.TheGrowth.SetActiveLocation, Code
+    - Name: Location
       Entry: 10
       Data: 2
     - Name: 

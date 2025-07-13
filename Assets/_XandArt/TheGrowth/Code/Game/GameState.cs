@@ -2,11 +2,14 @@
 using System.Linq;
 using Newtonsoft.Json;
 using XandArt.Architecture;
+using XandArt.Architecture.IOC;
 
 namespace XandArt.TheGrowth
 {
     public class GameState : PersistentState
     {
+#region Layout links
+
         [JsonProperty]
         private AssetRef<GameStep> _currentStep;
         
@@ -14,10 +17,22 @@ namespace XandArt.TheGrowth
         private Ref<Inventory> _inventory;
 
         [JsonProperty]
-        private List<AssetRef<Location>> _locations = new List<AssetRef<Location>>();
+        private List<Ref<LocationEntity>> _allLocations = new List<Ref<LocationEntity>>();
+        
+        [JsonProperty]
+        private List<Ref<LocationEntity>> _expeditionLocations = new List<Ref<LocationEntity>>();
 
         [JsonProperty]
-        private AssetRef<Location> _activeLocation;
+        private Ref<LocationEntity> _activeLocation;
+
+#endregion
+
+
+#region Properties
+
+        [JsonIgnore]
+        [Inject]
+        public Container Container;
         
         // Access
         [JsonIgnore]
@@ -29,14 +44,22 @@ namespace XandArt.TheGrowth
         private List<GameStep> _cachedLocations;
 
         [JsonIgnore]
-        public List<AssetRef<Location>> Locations => _locations;
+        public List<Ref<LocationEntity>> AllLocations => _allLocations;
 
         [JsonIgnore]
-        public AssetRef<Location> ActiveLocation
+        public List<Ref<LocationEntity>> ExpeditionLocations => _expeditionLocations;
+
+        [JsonIgnore]
+        public LocationEntity ActiveLocation
         {
             get => _activeLocation;
             set => _activeLocation = value;
         }
+
+#endregion
+
+
+#region API
 
         public void SetGameStep(GameStep next)
         {
@@ -44,7 +67,27 @@ namespace XandArt.TheGrowth
             _currentStep = next;
             _currentStep.Value?.OnStepStart(this);
         }
-        
+
+        public LocationEntity GetOrCreateLocation(LocationModel model)
+        {
+            var location = _allLocations.FirstOrDefault(loc => loc.Value.Model == model);
+            if (!location)
+            {
+                location = (LocationEntity)model.Create();
+                _allLocations.Add(location);
+                Add(location);
+            }
+            return location;
+        }
+
+        public override void OnPostLoad()
+        {
+            base.OnPostLoad();
+            
+            Container.InjectAt(ActiveLocation);
+            ActiveLocation.Load();
+        }
+
         private GameState() { }
         
         public static GameState Create(GameStep start)
@@ -59,5 +102,7 @@ namespace XandArt.TheGrowth
             start.OnStepStart(state);
             return state;
         }
+
+#endregion
     }
 }

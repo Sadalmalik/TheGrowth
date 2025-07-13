@@ -9,6 +9,9 @@ namespace XandArt.Architecture
         [JsonProperty(Order = -1000, PropertyName = "$guid")]
         public Guid Guid { get; internal set; } = Guid.Empty;
 
+        [JsonProperty]
+        internal AssetRef<AbstractEntityModel> _model;
+        
         public Entity(bool makeGuid = true)
         {
             if (makeGuid)

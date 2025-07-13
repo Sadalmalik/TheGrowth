@@ -39,7 +39,7 @@ namespace XandArt.TheGrowth
             
             PlayerPrefs.SetString(LastSavePref, "last_game");
             _persistenceManager.Save("last_game", CurrentGameState);
-
+            CurrentGameState.ActiveLocation.Unload();
             CurrentGameState = null;
         }
         
@@ -47,8 +47,8 @@ namespace XandArt.TheGrowth
         {
             Debug.Log("Game: StartNewGame");
             CurrentGameState = GameState.Create(RootConfig.Instance.startStep);
+            container.InjectAt(CurrentGameState);
             CurrentGameState.OnPostLoad();
-            _locationManager.LoadLocation(CurrentGameState.ActiveLocation);
         }
 
         public bool TryLoadLastGame()
@@ -58,6 +58,7 @@ namespace XandArt.TheGrowth
             string lastSave = PlayerPrefs.GetString(LastSavePref, null);
             if (string.IsNullOrEmpty(lastSave)) return false;
             CurrentGameState = _persistenceManager.Load<GameState>(lastSave);
+            container.InjectAt(CurrentGameState);
             _locationManager.LoadLocation(CurrentGameState.ActiveLocation);
             return true;
         }
@@ -68,6 +69,7 @@ namespace XandArt.TheGrowth
             
             PlayerPrefs.SetString(LastSavePref, gameId);
             CurrentGameState = _persistenceManager.Load<GameState>(gameId);
+            container.InjectAt(CurrentGameState);
             _locationManager.LoadLocation(CurrentGameState.ActiveLocation);
         }
 

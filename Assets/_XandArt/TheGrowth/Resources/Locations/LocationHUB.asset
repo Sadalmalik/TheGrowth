@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34a7632e36a4ad39f9565f2decb676e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2af8676ad01b4d90ae16dcca7ffbc62a, type: 3}
   m_Name: LocationHUB
   m_EditorClassIdentifier: 
   serializationData:
@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: a2f4c55b2d6ed7e47933254cc64bb2c1
+      Data: 2837e4f228d7de34787d6ee48dc6acb9
   Title: HUB
   Type: 0
   Scene: LocationHUB
