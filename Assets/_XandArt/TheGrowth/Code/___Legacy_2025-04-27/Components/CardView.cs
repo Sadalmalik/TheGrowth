@@ -10,14 +10,11 @@ namespace XandArt.TheGrowth
     public partial class CardView : MonoBehaviour
     {
         public Transform model;
+        
         public GameObject faceObject;
-        public Image face;
-        public Image cover;
-        public TMP_Text title;
-        public TMP_Text leftText;
-        public TMP_Text rightText;
+        public Image decor;
+        public Image portrait;
 
-        private EntityModel m_Model;
         private Sequence _tween;
         private bool _isFaceUp;
 
@@ -25,6 +22,12 @@ namespace XandArt.TheGrowth
 
         public event Action OnAnimationComplete;
 
+        public void SetVisual(CardVisual visual)
+        {
+            decor.sprite = visual.Decor;
+            portrait.sprite = visual.Portrait;
+        }
+        
         public void SetFaceVisible(bool visible)
         {
             faceObject.SetActive(visible);
@@ -45,6 +48,7 @@ namespace XandArt.TheGrowth
             }
 
             var duration = CardsViewConfig.Instance.jumpDuration;
+            _tween?.Kill();
             _tween = DOTween.Sequence()
                 .Append(transform.DOJump(endPosition, 3, 1, duration))
                 .Insert(0, transform.DORotate(endRotation, duration))
@@ -73,6 +77,7 @@ namespace XandArt.TheGrowth
 
             var duration = CardsViewConfig.Instance.flipDuration;
             angle = (angle + 180) % 360;
+            _tween?.Kill();
             _tween = DOTween.Sequence()
                 .Append(model.DOLocalMove(Vector3.up, duration * 0.25f))
                 .Append(model.DOLocalRotate(new Vector3(0, 0, angle), duration * 0.5f))

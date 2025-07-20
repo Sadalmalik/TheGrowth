@@ -24,7 +24,7 @@ namespace XandArt.TheGrowth
             set
             {
                 _charges = value;
-                _view?.rightText?.SetText(_charges.ToString());
+                //_view?.rightText?.SetText(_charges.ToString());
             }
         }
 

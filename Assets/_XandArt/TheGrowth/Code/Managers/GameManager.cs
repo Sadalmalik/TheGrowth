@@ -49,6 +49,7 @@ namespace XandArt.TheGrowth
             CurrentGameState = GameState.Create(RootConfig.Instance.startStep);
             container.InjectAt(CurrentGameState);
             CurrentGameState.OnPostLoad();
+            CurrentGameState.Start();
         }
 
         public bool TryLoadLastGame()

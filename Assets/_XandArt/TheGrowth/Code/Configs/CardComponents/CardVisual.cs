@@ -6,8 +6,9 @@ namespace XandArt.TheGrowth
     public class CardVisual : IEntityModelComponent
     {
         public string Title;
-        public Sprite Face;
-        public Sprite Cover;
+        public Sprite Decor;
+        public Sprite Portrait;
+        
         public EntityCard CustomPrefab;
         
         public void OnEntityCreated(CompositeEntity card)

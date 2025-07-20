@@ -22,6 +22,11 @@ namespace XandArt.Architecture
             var assets = Resources.LoadAll<ScriptableAsset>("").Distinct();
             foreach (var asset in assets)
             {
+                if (_assets.TryGetValue(asset.Guid, out var other))
+                {
+                    Debug.LogError($"Asset guids duplicate in assets:\n\t{other}\n\t{asset}");
+                    continue;
+                }
                 _assets.Add(asset.Guid, asset);
             }
         }
@@ -54,15 +59,19 @@ namespace XandArt.Architecture
                     var guid = GetMetaGuid(meta);
                     if (guid.HasValue)
                     {
-                        if (scriptableAsset.Guid != Guid.Empty && scriptableAsset.Guid != guid.Value)
-                        {
-                            Debug.LogError($"Asset guid was changed: {asset}, ignoring new guid.\nPlease check .meta file");
-                        }
-                        else
-                        {
-                            scriptableAsset.Guid = guid.Value;
-                            EditorUtility.SetDirty(scriptableAsset);
-                        }
+                        // TODO: В будущем тут будут проблемы, когда сейвы игроков будут ссылаться на гуиды, потому что юнити может менять гуиды.
+                        // И если гуид поменялся - сейв не найдет старый ассет по новому гуиду
+                        // if (scriptableAsset.Guid != Guid.Empty && scriptableAsset.Guid != guid.Value)
+                        // {
+                        //     Debug.LogError($"Asset guid was changed: {asset}, ignoring new guid.\nPlease check .meta file");
+                        // }
+                        // else
+                        // {
+                        //     scriptableAsset.Guid = guid.Value;
+                        //     EditorUtility.SetDirty(scriptableAsset);
+                        // }
+                        scriptableAsset.Guid = guid.Value;
+                        EditorUtility.SetDirty(scriptableAsset);
                     }
                     else
                     {

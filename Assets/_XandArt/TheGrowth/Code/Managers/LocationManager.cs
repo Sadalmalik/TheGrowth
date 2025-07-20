@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using XandArt.Architecture.IOC;
 
@@ -19,6 +20,7 @@ namespace XandArt.TheGrowth
 
         public async Task LoadLocation(LocationEntity locationEntity)
         {
+            Debug.LogWarning($"Load location: {locationEntity.Model.Scene}");
             // var screen = _menuManager.LoadingScreen;
             // await screen.ShowAsync();
             using var screenTask = await LoadingTracker.CreateAsync();
@@ -32,12 +34,11 @@ namespace XandArt.TheGrowth
                 operation.completed += op => { result.SetResult(true); };
                 await result.Task;
             }
-            
-            //await screen.HideAsync();
         }
 
         public async Task UnloadLocation(LocationEntity locationEntity)
         {
+            Debug.LogWarning($"Unload location: {locationEntity.Model.Scene}");
             // var screen = _menuManager.LoadingScreen;
             // await screen.ShowAsync();
             

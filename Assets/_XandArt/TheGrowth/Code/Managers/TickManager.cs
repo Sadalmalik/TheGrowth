@@ -29,6 +29,7 @@ namespace XandArt.TheGrowth
 
         private void Update()
         {
+            if (_tickables == null) return;
             foreach (var tickable in _tickables)
             {
                 try
