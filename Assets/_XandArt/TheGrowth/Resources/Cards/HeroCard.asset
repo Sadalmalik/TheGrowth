@@ -34,7 +34,25 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.CardBrain, Code
+      Data: 1|XandArt.TheGrowth.CardVisual, Code
+    - Name: Title
+      Entry: 6
+      Data: 
+    - Name: Decor
+      Entry: 6
+      Data: 
+    - Name: Portrait
+      Entry: 6
+      Data: 
+    - Name: CustomPrefab
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|XandArt.TheGrowth.CardBrain, Code
     - Name: Type
       Entry: 3
       Data: 4
@@ -49,26 +67,38 @@ MonoBehaviour:
       Data: 
     - Name: AllowedMoves
       Entry: 7
-      Data: 2|XandArt.TheGrowth.TableSlotsCombine, Code
+      Data: 3|XandArt.TheGrowth.TableSlotsCombine, Code
     - Name: Variant
       Entry: 3
       Data: 3
     - Name: Evaluators
       Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[XandArt.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.EntitySlot,
+      Data: 4|System.Collections.Generic.List`1[[XandArt.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.EntitySlot,
         Code]], System.Core]], Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 4|XandArt.TheGrowth.TableSlotsAround, Code
+      Data: 5|XandArt.TheGrowth.TableSlotsAround, Code
     - Name: Position
       Entry: 7
-      Data: 5|XandArt.TheGrowth.PositionByCard, Code
+      Data: 6|XandArt.TheGrowth.PositionByCard, Code
     - Name: Card
       Entry: 7
-      Data: 6|XandArt.TheGrowth.ActiveCard, Code
+      Data: 7|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Fallback
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -89,13 +119,25 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|XandArt.TheGrowth.TableSlotsAround, Code
+      Data: 8|XandArt.TheGrowth.TableSlotsAround, Code
     - Name: Position
       Entry: 7
-      Data: 8|XandArt.TheGrowth.PositionByCard, Code
+      Data: 9|XandArt.TheGrowth.PositionByCard, Code
     - Name: Card
       Entry: 7
-      Data: 9|XandArt.TheGrowth.ActiveCard, Code
+      Data: 10|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Fallback
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -125,14 +167,14 @@ MonoBehaviour:
       Data: 
     - Name: OnPlaced
       Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 11|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 11|XandArt.TheGrowth.ExecuteCommands, Code
+      Data: 12|XandArt.TheGrowth.ExecuteCommands, Code
     - Name: config
       Entry: 10
       Data: 0
@@ -147,7 +189,7 @@ MonoBehaviour:
       Data: 
     - Name: OnPlacedFirstTime
       Entry: 7
-      Data: 12|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 13|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -160,7 +202,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFlipped
       Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 14|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -173,7 +215,7 @@ MonoBehaviour:
       Data: 
     - Name: OnStep
       Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -186,7 +228,7 @@ MonoBehaviour:
       Data: 
     - Name: OnCovered
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 16|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -199,7 +241,7 @@ MonoBehaviour:
       Data: 
     - Name: OnUnCovered
       Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 17|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -209,24 +251,6 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 17|XandArt.TheGrowth.CardVisual, Code
-    - Name: Title
-      Entry: 6
-      Data: 
-    - Name: Decor
-      Entry: 6
-      Data: 
-    - Name: Portrait
-      Entry: 6
-      Data: 
-    - Name: CustomPrefab
-      Entry: 6
       Data: 
     - Name: 
       Entry: 8

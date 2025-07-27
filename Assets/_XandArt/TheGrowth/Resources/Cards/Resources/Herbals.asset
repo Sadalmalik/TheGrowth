@@ -30,7 +30,25 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|XandArt.TheGrowth.CardVisual, Code
+    - Name: Title
+      Entry: 6
+      Data: 
+    - Name: Decor
+      Entry: 6
+      Data: 
+    - Name: Portrait
+      Entry: 6
+      Data: 
+    - Name: CustomPrefab
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
