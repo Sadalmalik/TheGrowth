@@ -12,7 +12,7 @@ namespace XandArt.TheGrowth
         public override Vector2Int Evaluate(Context context)
         {
             var slot = Slot.Evaluate(context);
-            return slot.index;
+            return slot.Index;
         }
     }
 }

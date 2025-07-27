@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Возвращает самую верхнюю карту в ячейке на столе
     /// </summary>
-    public class CardByPosition : Evaluator<EntityCard>
+    public class EntityFromGrid : Evaluator<Entity>
     {
         public Evaluator<Vector2Int> Position = new PositionEvaluator();
         
-        public override EntityCard Evaluate(Context context)
+        public override Entity Evaluate(Context context)
         {
+            var state = context.GetRequired<GlobalData>().currentState;
+
             var pos = Position.Evaluate(context);
-            return CardTable.Instance[pos].Top();
+            var slots = state.ActiveBoard.Slots;
+            return slots[pos].Top();
         }
     }
 }

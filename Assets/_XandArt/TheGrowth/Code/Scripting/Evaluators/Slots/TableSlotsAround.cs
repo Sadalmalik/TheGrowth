@@ -18,13 +18,16 @@ namespace XandArt.TheGrowth
             Cross,
             Diagonals
         }
+
         public Evaluator<Vector2Int> Position = new PositionByCard();
         public EFigure Figure;
+
         [HideIf(nameof(Figure), EFigure.Circle)]
         public int Distance;
+
         [ShowIf(nameof(Figure), EFigure.Circle)]
         public float Radius;
-        
+
         public override HashSet<EntitySlot> Evaluate(Context context)
         {
             var all = CardTable.Instance.slots;
@@ -32,15 +35,15 @@ namespace XandArt.TheGrowth
             return Figure switch
             {
                 EFigure.Square => new HashSet<EntitySlot>(all.Where(
-                    slot => SquareDist(slot.index, center) <= Distance)),
+                    slot => SquareDist(slot.Index, center) <= Distance)),
                 EFigure.Rhombus => new HashSet<EntitySlot>(all.Where(
-                    slot => RhombusDist(slot.index, center) <= Distance)),
+                    slot => RhombusDist(slot.Index, center) <= Distance)),
                 EFigure.Circle => new HashSet<EntitySlot>(all.Where(
-                    slot => Vector2.Distance(slot.index, center) <= Radius)),
+                    slot => Vector2.Distance(slot.Index, center) <= Radius)),
                 EFigure.Cross => new HashSet<EntitySlot>(all.Where(
-                    slot => CrossDist(slot.index, center) <= Distance)),
+                    slot => CrossDist(slot.Index, center) <= Distance)),
                 EFigure.Diagonals => new HashSet<EntitySlot>(all.Where(
-                    slot => DiagonalDist(slot.index, center) <= Distance)),
+                    slot => DiagonalDist(slot.Index, center) <= Distance)),
                 _ => null
             };
         }
@@ -48,15 +51,15 @@ namespace XandArt.TheGrowth
         private int SquareDist(Vector2Int a, Vector2Int b)
         {
             return Mathf.Max(
-                Mathf.Abs(a.x-b.x),
-                Mathf.Abs(a.y-b.y));
+                Mathf.Abs(a.x - b.x),
+                Mathf.Abs(a.y - b.y));
         }
-        
+
         private int RhombusDist(Vector2Int a, Vector2Int b)
         {
-            return Mathf.Abs(a.x-b.x) + Mathf.Abs(a.y-b.y);
+            return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
         }
-        
+
         private int CrossDist(Vector2Int a, Vector2Int b)
         {
             if (a.x == b.x)
@@ -65,7 +68,7 @@ namespace XandArt.TheGrowth
                 return Mathf.Abs(a.x - b.x);
             return int.MaxValue;
         }
-        
+
         private int DiagonalDist(Vector2Int a, Vector2Int b)
         {
             var dx = Mathf.Abs(a.x - b.x);

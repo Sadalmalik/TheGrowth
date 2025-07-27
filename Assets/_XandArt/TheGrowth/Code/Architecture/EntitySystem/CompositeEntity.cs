@@ -57,6 +57,14 @@ namespace XandArt.Architecture
             _components.Remove(component);
         }
 
+        public T GetComponent<T>() where T : EntityComponent
+        {
+            foreach (var component in _components)
+                if (component is T result)
+                    return result;
+            return null;
+        }
+
         public List<T> GetComponents<T>(List<T> result=null) where T : EntityComponent
         {
             result ??= new List<T>();

@@ -1,4 +1,6 @@
-﻿namespace XandArt.TheGrowth
+﻿using XandArt.Architecture;
+
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Команда меняет заряды указанной карты
@@ -13,13 +15,13 @@
 
         public EVariant Variant = EVariant.Set;
         
-        public Evaluator<EntityCard> Card;
+        public Evaluator<CompositeEntity> Card;
         public int Amount;
         
         public override void Execute(Context context)
         {
             var card = Card.Evaluate(context);
-            var cardCharges = card.gameObject.GetComponent<CardCharges>();
+            var cardCharges = card.GetComponent<CardCharges.Component>();
 
             switch (Variant)
             {

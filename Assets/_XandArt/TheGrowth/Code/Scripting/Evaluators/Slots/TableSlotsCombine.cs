@@ -22,7 +22,7 @@ namespace XandArt.TheGrowth
 
         public EVariant Variant = EVariant.Union;
         public List<Evaluator<HashSet<EntitySlot>>> Evaluators = new List<Evaluator<HashSet<EntitySlot>>>();
-        
+
         public override HashSet<EntitySlot> Evaluate(Context context)
         {
             HashSet<EntitySlot> result = new HashSet<EntitySlot>();
@@ -44,20 +44,24 @@ namespace XandArt.TheGrowth
                             result.UnionWith(set);
                             continue;
                         }
+
                         result.IntersectWith(set);
                     }
+
                     break;
                 case EVariant.Union:
                     foreach (var set in sets)
                     {
                         result.UnionWith(set);
                     }
+
                     break;
                 case EVariant.SymmetricDifference:
                     foreach (var set in sets)
                     {
                         result.SymmetricExceptWith(set);
                     }
+
                     break;
                 case EVariant.Except:
                     foreach (var set in sets)
@@ -68,16 +72,18 @@ namespace XandArt.TheGrowth
                             result.UnionWith(set);
                             continue;
                         }
+
                         result.ExceptWith(set);
                     }
+
                     break;
             }
 
             foreach (var slot in result)
             {
-                Debug.DrawRay(slot.transform.position + Random.onUnitSphere*0.2f, Vector3.up*5, Color.green, 15);
+                Debug.DrawRay(slot.Position + Random.onUnitSphere * 0.2f, Vector3.up * 5, Color.green, 15);
             }
-            
+
             return result;
         }
     }

@@ -34,12 +34,12 @@ namespace XandArt.TheGrowth
         {
             if (Slot != null)
             {
-                Slot.Cards.Remove(this);
+                //Slot.Remove(this);
             }
 
             var oldSlot = Slot;
             Slot = newSlot;
-            Slot.Cards.Add(this);
+            //Slot.Add(this);
 
             if (view != null)
             {
@@ -53,20 +53,20 @@ namespace XandArt.TheGrowth
 
                 if (AllowEvents)
                 {
-                    if (oldSlot != null)
-                    {
-                        var oldUnder = oldSlot.Cards.Count - 2;
-                        if (oldUnder >= 0)
-                        {
-                            oldSlot.Cards[oldUnder].OnUnCovered(this);
-                        }
-                    }
-
-                    var newUnder = Slot.Cards.Count - 2;
-                    if (newUnder >= 0)
-                    {
-                        Slot.Cards[newUnder].OnCovered(this);
-                    }
+                    // if (oldSlot != null)
+                    // {
+                    //     var oldUnder = oldSlot.Cards.Count - 2;
+                    //     if (oldUnder >= 0)
+                    //     {
+                    //         oldSlot.Cards[oldUnder].OnUnCovered(this);
+                    //     }
+                    // }
+                    //
+                    // var newUnder = Slot.Cards.Count - 2;
+                    // if (newUnder >= 0)
+                    // {
+                    //     Slot.Cards[newUnder].OnCovered(this);
+                    // }
 
                     OnPlaced();
                 }
@@ -104,70 +104,16 @@ namespace XandArt.TheGrowth
 
 #region Behaviour
 
-        public void OnPlaced()
-        {
-            if (ModelBrain?.OnPlaced == null)
-                return;
-            var context = new Context();
-            context.Add(new ActiveCard.Data { Card = this });
-            ModelBrain.OnPlaced.ExecuteAll(context);
-        }
-        
-        public void OnPlacedFirstTime()
-        {
-            if (ModelBrain?.OnPlacedFirstTime == null)
-                return;
-            var context = new Context();
-            context.Add(new ActiveCard.Data { Card = this });
-            ModelBrain.OnPlacedFirstTime.ExecuteAll(context);
-        }
-
-        public void OnFlipped()
-        {
-            if (ModelBrain?.OnFlipped == null)
-                return;
-            var context = new Context(new ActiveCard.Data { Card = this });
-            ModelBrain.OnFlipped.ExecuteAll(context);
-        }
-
-        public void OnCovered(EntityCard coverCard)
-        {
-            if (ModelBrain?.OnCovered == null)
-                return;
-            var context = new Context(
-                new ActiveCard.Data { Card = this },
-                new CoveringCard.Data { Card = coverCard });
-            ModelBrain.OnCovered.ExecuteAll(context);
-        }
-
-        public void OnUnCovered(EntityCard coverCard)
-        {
-            if (ModelBrain?.OnUnCovered == null)
-                return;
-            var context = new Context(
-                new ActiveCard.Data { Card = this },
-                new CoveringCard.Data { Card = coverCard });
-            ModelBrain.OnUnCovered.ExecuteAll(context);
-        }
-
-        public void OnStep(Context context)
-        {
-            if (!IsFaceUp)
-                return;
-            if (ModelBrain?.OnStep == null)
-                return;
-            var newContext = new Context(context, new ActiveCard.Data { Card = this });
-            ModelBrain.OnStep.ExecuteAll(newContext);
-        }
+        public void OnPlaced() { }
+        public void OnPlacedFirstTime() { }
+        public void OnFlipped() { }
+        public void OnCovered(EntityCard coverCard) { }
+        public void OnUnCovered(EntityCard coverCard) { }
+        public void OnStep(Context context) { }
 
         public HashSet<EntitySlot> GetAllowedMoves()
         {
-            if (ModelBrain?.AllowedMoves == null)
-                return null;
-
-            var context = new Context(new ActiveCard.Data { Card = this });
-            var moves = ModelBrain.AllowedMoves?.Evaluate(context);
-            return moves;
+            return null;
         }
 
 #endregion

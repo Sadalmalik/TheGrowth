@@ -1,4 +1,6 @@
-﻿namespace XandArt.TheGrowth
+﻿using XandArt.Architecture;
+
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Команда переворачивает карту
@@ -13,26 +15,26 @@
         }
 
         public EVariant Variant = EVariant.Reveal;
-        public Evaluator<EntityCard> Card;
+        public Evaluator<CompositeEntity> Card;
 
         public override void Execute(Context context)
         {
             var card = Card.Evaluate(context);
 
-            switch (Variant)
-            {
-                case EVariant.Flip:
-                    card.FlipCard();
-                    break;
-                case EVariant.Reveal:
-                    if (!card.IsFaceUp)
-                        card.FlipCard();
-                    return;
-                case EVariant.Hide:
-                    if (card.IsFaceUp)
-                        card.FlipCard();
-                    return;
-            }
+            // switch (Variant)
+            // {
+            //     case EVariant.Flip:
+            //         card.FlipCard();
+            //         break;
+            //     case EVariant.Reveal:
+            //         if (!card.IsFaceUp)
+            //             card.FlipCard();
+            //         return;
+            //     case EVariant.Hide:
+            //         if (card.IsFaceUp)
+            //             card.FlipCard();
+            //         return;
+            // }
         }
     }
 }

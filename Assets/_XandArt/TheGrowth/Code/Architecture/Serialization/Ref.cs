@@ -1,5 +1,6 @@
 using System;
 using Unity.Plastic.Newtonsoft.Json;
+// ReSharper disable InconsistentNaming
 
 namespace XandArt.Architecture
 {

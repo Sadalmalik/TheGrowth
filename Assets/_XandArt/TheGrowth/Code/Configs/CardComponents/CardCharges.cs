@@ -2,36 +2,33 @@
 
 namespace XandArt.TheGrowth
 {
-    public class CardChargesComponent : IEntityModelComponent
+    public class CardCharges : IEntityModelComponent
     {
         public int Charges;
         
         public void OnEntityCreated(CompositeEntity card)
         {
-            var component = card.AddComponent<CardCharges>();
+            var component = card.AddComponent<Component>();
             component.Charges = Charges;
         }
-    }
-
-    public class CardCharges : EntityComponent
-    {
-        private CardView _view;
-        private int _charges;
         
-        public int Charges
+        public class Component : EntityComponent
         {
-            get => _charges;
-            set
+            private CardView _view;
+            private int _charges;
+            
+            public int Charges
             {
-                _charges = value;
-                //_view?.rightText?.SetText(_charges.ToString());
+                get => _charges;
+                set => _charges = value;
             }
-        }
 
-        private void OnEnable()
-        {
-            // _view = GetComponent<CardView>();
-            // _view?.rightText?.SetText(_charges.ToString());
+            // private void OnEnable()
+            // {
+            //     _view = GetComponent<CardView>();
+            //     _view?.rightText?.SetText(_charges.ToString());
+            // }
         }
     }
+
 }

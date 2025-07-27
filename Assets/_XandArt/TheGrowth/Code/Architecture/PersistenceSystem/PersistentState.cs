@@ -53,7 +53,10 @@ namespace XandArt.Architecture
                 EntitiesByGUIDs.Add(entity.Guid, entity);
 
             foreach (var entity in Entities)
+            {
+                entity.OnInitOrPostLoad();
                 entity.OnPostLoad();
+            }
         }
     }
 }

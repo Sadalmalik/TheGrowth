@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
@@ -8,7 +9,7 @@ namespace XandArt.TheGrowth
     /// </summary>
     public class ForEachCard : Command
     {
-        public Evaluator<HashSet<EntityCard>> Cards;
+        public Evaluator<HashSet<CompositeEntity>> Cards;
         public List<Command> Commands;
 
         public override void Execute(Context context)

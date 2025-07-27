@@ -11,6 +11,12 @@ namespace XandArt.Architecture
 
         [JsonProperty]
         internal AssetRef<AbstractEntityModel> _model;
+
+        [JsonIgnore]
+        public AbstractEntityModel Model => _model;
+        
+        [JsonIgnore]
+        public IEntityView View;
         
         public Entity(bool makeGuid = true)
         {
@@ -18,8 +24,15 @@ namespace XandArt.Architecture
                 Guid = Guid.NewGuid();
         }
 
+        public void Init()
+        {
+            OnInit();
+            OnInitOrPostLoad();
+        }
+
         public virtual void OnInit() {}
         public virtual void OnPreSave() {}
         public virtual void OnPostLoad() {}
+        public virtual void OnInitOrPostLoad() {}
     }
 }

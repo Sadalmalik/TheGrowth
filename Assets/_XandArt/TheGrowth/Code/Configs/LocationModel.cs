@@ -20,12 +20,12 @@ namespace XandArt.TheGrowth
         public LocationType Type;
         public string Scene;
 
-        public List<EntityModel> Cards;
-
+        public DeckConfig Deck;
+        
         public override Entity Create()
         {
             var entity = new LocationEntity { _model = this };
-            entity.OnInit();
+            entity.Init();
             return entity;
         }
     }

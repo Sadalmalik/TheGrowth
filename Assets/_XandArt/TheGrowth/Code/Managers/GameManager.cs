@@ -22,7 +22,6 @@ namespace XandArt.TheGrowth
 
         public void Tick()
         {
-            
         }
 
 #region Game API
@@ -36,18 +35,21 @@ namespace XandArt.TheGrowth
         public void SaveAndExit()
         {
             Debug.Log("Game: SaveAndExit");
-            
+
             PlayerPrefs.SetString(LastSavePref, "last_game");
             _persistenceManager.Save("last_game", CurrentGameState);
             CurrentGameState.ActiveLocation.Unload();
             CurrentGameState = null;
+
+            Game.BaseContext.GetRequired<GlobalData>().currentState = null;
         }
-        
+
         public void StartNewGame()
         {
             Debug.Log("Game: StartNewGame");
             CurrentGameState = GameState.Create(RootConfig.Instance.startStep);
             container.InjectAt(CurrentGameState);
+            Game.BaseContext.GetRequired<GlobalData>().currentState = CurrentGameState;
             CurrentGameState.OnPostLoad();
             CurrentGameState.Start();
         }
@@ -55,11 +57,12 @@ namespace XandArt.TheGrowth
         public bool TryLoadLastGame()
         {
             Debug.Log("Game: TryLoadLastGame");
-            
+
             string lastSave = PlayerPrefs.GetString(LastSavePref, null);
             if (string.IsNullOrEmpty(lastSave)) return false;
             CurrentGameState = _persistenceManager.Load<GameState>(lastSave);
             container.InjectAt(CurrentGameState);
+            Game.BaseContext.GetRequired<GlobalData>().currentState = CurrentGameState;
             _locationManager.LoadLocation(CurrentGameState.ActiveLocation);
             return true;
         }
@@ -67,22 +70,22 @@ namespace XandArt.TheGrowth
         public void LoadGame(string gameId)
         {
             Debug.Log("Game: LoadGame");
-            
+
             PlayerPrefs.SetString(LastSavePref, gameId);
             CurrentGameState = _persistenceManager.Load<GameState>(gameId);
             container.InjectAt(CurrentGameState);
+            Game.BaseContext.GetRequired<GlobalData>().currentState = CurrentGameState;
             _locationManager.LoadLocation(CurrentGameState.ActiveLocation);
         }
 
         public void SaveGame(string gameId)
         {
             Debug.Log("Game: SaveGame");
-            
+
             PlayerPrefs.SetString(LastSavePref, gameId);
             _persistenceManager.Save(gameId, CurrentGameState);
         }
 
 #endregion
-
     }
 }

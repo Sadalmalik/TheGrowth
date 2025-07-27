@@ -1,9 +1,11 @@
-﻿namespace XandArt.TheGrowth
+﻿using XandArt.Architecture;
+
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Возвращает карту относительно данной карты в стопке
     /// </summary>
-    public class RelativeCard : Evaluator<EntityCard>
+    public class RelativeCard : Evaluator<Entity>
     {
         public enum EVariant
         {
@@ -12,14 +14,17 @@
         }
 
         public EVariant Variant;
-        public Evaluator<EntityCard> Card;
+        public Evaluator<Entity> Card;
         public int Count = 1;
 
-        public override EntityCard Evaluate(Context context)
+        public override Entity Evaluate(Context context)
         {
-            var card = Card.Evaluate(context);
+            var entityCard = Card.Evaluate(context) as CompositeEntity;
+            if (entityCard == null) return null;
+            
+            var card = entityCard.GetComponent<CardBrain.Component>();
             var list = card.Slot.Cards;
-            var index = list.IndexOf(card);
+            var index = list.IndexOf(entityCard);
 
             switch (Variant)
             {

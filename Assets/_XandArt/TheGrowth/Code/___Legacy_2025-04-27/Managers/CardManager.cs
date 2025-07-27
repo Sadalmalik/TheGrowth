@@ -51,11 +51,11 @@ namespace XandArt.TheGrowth
 
         private IEnumerator CallStepCor(float delay)
         {
-            var newContext = new Context(new PlayerCard.Data { Card = m_PlayerCard });
+            // var newContext = new Context(new PlayerCard.Data { Card = m_PlayerCard });
             yield return new WaitForSeconds(delay);
             foreach (var slot in table.slots)
             {
-                slot.Top()?.OnStep(newContext);
+                // slot.Top()?.OnStep(newContext);
             }
         }
         
@@ -143,7 +143,7 @@ namespace XandArt.TheGrowth
                 var (slot, dist) = GetNearestSlot(_draggedCard.transform.position);
                 if (slot != null)
                 {
-                    Debug.DrawLine(_draggedCard.transform.position, slot.transform.position, Color.blue, 5f);
+                    Debug.DrawLine(_draggedCard.transform.position, slot.Position, Color.blue, 5f);
                 }
             }
         }
@@ -157,7 +157,7 @@ namespace XandArt.TheGrowth
             {
                 foreach (var slot in _moves)
                 {
-                    var dist = Vector3.Distance(slot.transform.position, _draggedCard.transform.position);
+                    var dist = Vector3.Distance(slot.Position, _draggedCard.transform.position);
                     if (dist < minDist)
                     {
                         minDist = dist;
@@ -203,22 +203,23 @@ namespace XandArt.TheGrowth
             var slots = new List<EntitySlot>(table.slots);
             slots.Shuffle();
 
-            var context = new Context(new PlayerCard.Data { Card = m_PlayerCard });
+            var context = new Context();//new PlayerCard.Data { Card = m_PlayerCard });
             var delay = CardsViewConfig.Instance.dealDuration / slots.Count;
             while (deckSlot.Cards.Count > 0 && slots.Count > 0)
             {
-                var card = deckSlot.Peek();
-                var slot = card.model.GetComponent<CardBrain>()?.SpawnSlot?.Evaluate(context);
+                var cardEntity = deckSlot.Peek();
+                var card = cardEntity.GetComponent<CardBrain.Component>();
+                var slot = cardEntity.Model.GetComponent<CardBrain>()?.SpawnSlot?.Evaluate(context);
                 if (slot == null)
                 {
                     slot = slots.Peek();
                 }
                 if (slot == null)
                 {
-                    card.MoveTo(deckSlot, true, true);
+                    //card.MoveTo(deckSlot, true, true);
                     continue;
                 }
-                card.MoveTo(slot, false, true);
+                //card.MoveTo(slot, false, true);
                 yield return new WaitForSeconds(delay);
             }
 
@@ -227,7 +228,7 @@ namespace XandArt.TheGrowth
             foreach (var slot in table.slots)
             {
                 if (slot==null) continue;
-                slot.Top()?.OnPlacedFirstTime();
+                //slot.Top()?.OnPlacedFirstTime();
             }
             
             Debug.Log("Deal complete!");
@@ -250,8 +251,8 @@ namespace XandArt.TheGrowth
                 var card = slot.Peek();
                 if (card != null)
                 {
-                    card.AllowEvents = false;
-                    card.MoveTo(deckSlot);
+                    //card.AllowEvents = false;
+                    //card.MoveTo(deckSlot);
                 }
 
                 yield return new WaitForSeconds(delay);
@@ -268,15 +269,15 @@ namespace XandArt.TheGrowth
 
         private IEnumerator ShuffleCardsCor()
         {
-            var cards = new List<EntityCard>(deckSlot.Cards);
+            var cards = new List<CompositeEntity>(deckSlot.Cards);
             deckSlot.Cards.Clear();
             cards.Shuffle();
 
             var delay = CardsViewConfig.Instance.dealDuration / cards.Count;
             foreach (var card in cards)
             {
-                card.Slot = null;
-                card.MoveTo(deckSlot);
+                // card.Slot = null;
+                // card.MoveTo(deckSlot);
 
                 yield return new WaitForSeconds(delay);
             }

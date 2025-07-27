@@ -58,6 +58,9 @@ namespace XandArt.TheGrowth
             set => _activeLocation = value;
         }
 
+        [JsonIgnore]
+        public EntityBoard ActiveBoard => ActiveLocation.Board;
+
 #endregion
 
 
@@ -89,6 +92,20 @@ namespace XandArt.TheGrowth
             _currentStep.Value?.OnStepComplete(this);
             _currentStep = next;
             _currentStep.Value?.OnStepStart(this);
+        }
+
+        public T Create<T>() where T : Entity, new()
+        {
+            var entity = new T();
+            Add(entity);
+            return entity;
+        }
+
+        public Entity Create(EntityModel model)
+        {
+            var entity = model.Create();
+            Add(entity);
+            return entity;
         }
 
         public LocationEntity GetOrCreateLocation(LocationModel model)

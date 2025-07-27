@@ -11,7 +11,7 @@ namespace XandArt.Architecture
 {
     public class AssetGuidsManager : IPreprocessBuildWithReport
     {
-        private static readonly string[] Separators = new[] { "Resources" };
+        // private static readonly string[] Separators = new[] { "Resources" };
 
         private static Dictionary<Guid, ScriptableAsset> _assets;
         

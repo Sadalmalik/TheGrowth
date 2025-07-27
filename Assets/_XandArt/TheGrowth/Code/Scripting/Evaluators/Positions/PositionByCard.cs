@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
@@ -7,12 +8,15 @@ namespace XandArt.TheGrowth
     /// </summary>
     public class PositionByCard : Evaluator<Vector2Int>
     {
-        public Evaluator<EntityCard> Card = new ActiveCard();
+        public Evaluator<Entity> Card = new ActiveCard();
+        public Vector2Int Fallback;
 
         public override Vector2Int Evaluate(Context context)
         {
-            var card = Card.Evaluate(context);
-            return card.Slot.index;
+            var cardEntity = Card.Evaluate(context) as CompositeEntity;
+            if (cardEntity == null) return Fallback;
+            var card = cardEntity.GetComponent<CardBrain.Component>();
+            return card.Slot.Index;
         }
     }
 }
