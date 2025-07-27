@@ -27,4 +27,4 @@ MonoBehaviour:
   Title: ExpeditionTest
   Type: 1
   Scene: ExpeditionTest
-  Cards: []
+  Deck: {fileID: 11400000, guid: 18e1854a5e9f5e24d9a9a251ffafc05e, type: 2}
