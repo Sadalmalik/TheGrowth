@@ -6,6 +6,8 @@ namespace XandArt.TheGrowth
     public class CardVisual : IEntityModelComponent
     {
         public string Title;
+        [TextArea(3, 15)]
+        public string Description;
         public Sprite Decor;
         public Sprite Portrait;
         

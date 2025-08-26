@@ -16,8 +16,12 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 376eaa740945a7f41b241de31202ed6d, type: 2}
-    - {fileID: 11400000, guid: 77fb4d0db3d301d46b9779ffb58daace, type: 2}
+    - {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b, type: 2}
+    - {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
+    - {fileID: 11400000, guid: eb7c22451d8229341ae73790fbd84f0a, type: 2}
+    - {fileID: 11400000, guid: 685c262e01893c94daf1d9420a1be9d3, type: 2}
+    - {fileID: 11400000, guid: aa0fd3938b9a6954d904268e782753bd, type: 2}
+    - {fileID: 11400000, guid: dab00cc110e207b46b98ec91564df108, type: 2}
     - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -33,32 +37,29 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.SetEnabledActions, Code
-    - Name: actions
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
+      Data: 1|XandArt.TheGrowth.CreateEntity, Code
+    - Name: Models
       Entry: 7
-      Data: 2|XandArt.TheGrowth.AddItemsToInventory, Code
-    - Name: items
-      Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[XandArt.Architecture.EntityModel,
+      Data: 2|System.Collections.Generic.List`1[[XandArt.Architecture.AbstractEntityModel,
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 4
     - Name: 
       Entry: 10
       Data: 0
     - Name: 
       Entry: 10
       Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
     - Name: 
       Entry: 13
       Data: 
@@ -70,20 +71,66 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|XandArt.TheGrowth.RunCommands, Code
+      Data: 3|XandArt.TheGrowth.AddItemsToInventory, Code
+    - Name: InventoryModel
+      Entry: 10
+      Data: 0
+    - Name: entries
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[XandArt.TheGrowth.DeckEntry, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 5|XandArt.TheGrowth.DeckEntry, Code
+    - Name: Amount
+      Entry: 3
+      Data: 2
+    - Name: Entity
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 6|XandArt.TheGrowth.DeckEntry, Code
+    - Name: Amount
+      Entry: 3
+      Data: 12
+    - Name: Entity
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|XandArt.TheGrowth.RunCommands, Code
     - Name: _onStepStartActions
       Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 8|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 6|XandArt.TheGrowth.GoToLocation, Code
+      Data: 9|XandArt.TheGrowth.GoToLocation, Code
     - Name: Location
       Entry: 10
-      Data: 2
+      Data: 6
     - Name: 
       Entry: 8
       Data: 
@@ -94,8 +141,27 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: _onStepEndActions
-      Entry: 6
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|XandArt.TheGrowth.SetEnabledActions, Code
+    - Name: actions
+      Entry: 3
+      Data: 7
     - Name: 
       Entry: 8
       Data: 

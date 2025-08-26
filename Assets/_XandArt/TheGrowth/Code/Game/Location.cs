@@ -18,6 +18,7 @@ namespace XandArt.TheGrowth
 
 #endregion
 
+
 #region Model
 
         [JsonIgnore]
@@ -26,7 +27,7 @@ namespace XandArt.TheGrowth
         [JsonIgnore]
         [Inject]
         private GameManager _gameManager;
-        
+
         [JsonIgnore]
         [Inject]
         private LocationManager _locationManager;
@@ -51,15 +52,19 @@ namespace XandArt.TheGrowth
             await _locationManager.LoadLocation(this);
             var scene = SceneManager.GetSceneByName(Model.Scene);
             SceneManager.SetActiveScene(scene);
+            
             Hierarchy = scene.Find<ExpeditionHierarchy>();
+            if (Hierarchy == null) return;
 
             var gameState = _gameManager.CurrentGameState;
+
             if (Hierarchy.tableGrid)
             {
                 if (Board == null)
                 {
                     _board = gameState.Create<EntityBoard>();
                 }
+
                 Board!.Initialize(gameState, Hierarchy.tableGrid);
             }
         }

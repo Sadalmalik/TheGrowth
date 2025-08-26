@@ -51,7 +51,7 @@ namespace XandArt.TheGrowth
             var widgets = FindObjectsOfType<WidgetBase>();
             foreach (var widget in widgets)
             {
-                Container.InjectAt(widget);
+                Container.InjectAt((object) widget);
                 widget.Init();
             }
         }

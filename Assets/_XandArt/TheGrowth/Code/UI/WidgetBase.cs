@@ -10,7 +10,9 @@ namespace XandArt.TheGrowth
     {
         [Inject]
         protected Container Container;
-        
+
+        public bool Inited { get; private set; }
+
         private void Awake()
         {
             // Not initialized
@@ -20,8 +22,11 @@ namespace XandArt.TheGrowth
             if (Game.Container == null)
                 return;
             
-            Game.Container.InjectAt(this);
+            Game.Container.InjectAt((object) this);
+            
             Init();
+            
+            Inited = true;
         }
 
         public virtual void Init() { }

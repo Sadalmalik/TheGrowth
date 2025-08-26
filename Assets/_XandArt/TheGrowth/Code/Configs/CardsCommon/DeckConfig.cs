@@ -8,7 +8,7 @@ namespace XandArt.TheGrowth
 {
     public class DeckEntry
     {
-        public int amount;
+        public int Amount;
         public EntityModel Entity;
     }
     
@@ -34,7 +34,7 @@ namespace XandArt.TheGrowth
             for (int i = 0; i < entries.Count; i++)
             {
                 var config = entries[i].Entity;
-                var amount = entries[i].amount;
+                var amount = entries[i].Amount;
                 for (int k = 0; k < amount; k++)
                 {
                     var card = config.Create();

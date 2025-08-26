@@ -37,6 +37,9 @@ MonoBehaviour:
     - Name: Title
       Entry: 6
       Data: 
+    - Name: Description
+      Entry: 6
+      Data: 
     - Name: Decor
       Entry: 6
       Data: 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XandArt.Architecture;
@@ -14,7 +15,8 @@ namespace XandArt.TheGrowth
         private CardType m_Filter;
 
         [SerializeField]
-        private DeckConfig m_InDeck;
+        [NotNull]
+        private List<DeckConfig> m_InAnyDeck = new List<DeckConfig>();
 
         [SerializeField]
         private InventoryModel m_Inventory;
@@ -28,15 +30,29 @@ namespace XandArt.TheGrowth
         [Tooltip("0 - означает неограниченно")]
         public int limit = 1;
 
+        public override void Init()
+        {
+            base.Init();
+        }
+
         public void OnEnable()
         {
             Debug.Log("UIInventorySlot.OnEnable");
 
-            // Рефрешить набор предмет
-            var inventory = (Inventory)m_GameManager.CurrentGameState
-                .GetAll<Inventory>()
-                .FirstOrDefault(inv => inv.Model == m_Inventory);
+            RefreshView();
+        }
 
+        public void OnDisable()
+        {
+            Debug.Log("UIInventorySlot.OnDisable");
+        }
+
+        public void RefreshView()
+        {
+            if (!Inited) return;
+            
+            var inventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
+            
             if (inventory == null) return;
 
             var items = inventory.Items
@@ -46,7 +62,8 @@ namespace XandArt.TheGrowth
                     if (item == null) return false;
                     var itemBrain = item.Model.GetComponent<CardBrain>();
                     var validType = m_Filter == CardType.None || (itemBrain.Type & m_Filter) != 0;
-                    var validDeck = m_InDeck == null || m_InDeck.Entities.Contains(item.Model);
+                    var validDeck = m_InAnyDeck.Count == 0 ||
+                                    m_InAnyDeck.Any(deck => deck.Entities.Contains(item.Model));
                     return validType && validDeck;
                 });
 
@@ -57,18 +74,19 @@ namespace XandArt.TheGrowth
                 var visual = item.Model.GetComponent<CardVisual>();
 
                 var view = views.Count > 0 ? views.Dequeue() : Instantiate(m_Prefab, transform);
-                
+
                 if (visual != null)
                 {
-                    view.image.sprite = visual.Portrait;
-                    view.label.SetText(visual.Title);
+                    view.imagePortrait.sprite = visual.Portrait;
+                    view.imageDecor.sprite = visual.Decor;
                 }
-            }
-        }
 
-        public void OnDisable()
-        {
-            Debug.Log("UIInventorySlot.OnDisable");
+                var stack = item.GetComponent<CardStackable.Component>();
+                view.label.SetText(
+                    stack != null && stack.Limit > 1
+                        ? stack.Count.ToString()
+                        : string.Empty);
+            }
         }
 
         public void OnDrop(PointerEventData eventData)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -13,9 +14,6 @@ namespace XandArt.TheGrowth
 
         [JsonProperty]
         private AssetRef<GameStep> _currentStep;
-
-        [JsonProperty]
-        private Ref<Inventory> _inventory;
 
         [JsonProperty]
         private List<Ref<Location>> _allLocations = new List<Ref<Location>>();
@@ -38,9 +36,6 @@ namespace XandArt.TheGrowth
         // Access
         [JsonIgnore]
         public GameStep CurrentGameStep => _currentStep;
-
-        [JsonIgnore]
-        public Inventory Inventory => _inventory;
 
         [JsonIgnore]
         private List<GameStep> _cachedLocations;
@@ -75,16 +70,21 @@ namespace XandArt.TheGrowth
             // Game structure preset
             var state = new GameState
             {
-                _currentStep = start,
-                _inventory = new Inventory()
+                _currentStep = start
             };
-            state.Add(state._inventory);
             return state;
         }
 
         public void Start()
         {
             CurrentGameStep.OnStepStart(this);
+        }
+
+        public Inventory GetInventory(InventoryModel model)
+        {
+            var inventory = (Inventory) GetAll<Inventory>().FirstOrDefault(inv => inv.Model == model);
+            if (inventory == null) throw new Exception($"Inventory '{model}' not exist in game state!");
+            return inventory;
         }
 
         public void SetGameStep(GameStep next)
@@ -101,11 +101,18 @@ namespace XandArt.TheGrowth
             return entity;
         }
 
-        public Entity Create(EntityModel model)
+        public Entity Create(AbstractEntityModel model)
         {
             var entity = model.Create();
             Add(entity);
             return entity;
+        }
+
+        public T Create<T>(AbstractEntityModel model) where T : Entity
+        {
+            var entity = model.Create();
+            Add(entity);
+            return (T) entity;
         }
 
         public Location GetOrCreateLocation(LocationModel model)
