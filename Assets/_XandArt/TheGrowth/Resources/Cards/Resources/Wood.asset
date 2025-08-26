@@ -32,7 +32,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.CardVisual, Code
@@ -63,6 +63,45 @@ MonoBehaviour:
     - Name: Limit
       Entry: 3
       Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.CardBrain, Code
+    - Name: Type
+      Entry: 3
+      Data: 1
+    - Name: CanBeDragged
+      Entry: 5
+      Data: false
+    - Name: EndsTheTurn
+      Entry: 5
+      Data: false
+    - Name: SpawnSlot
+      Entry: 6
+      Data: 
+    - Name: AllowedMoves
+      Entry: 6
+      Data: 
+    - Name: OnPlaced
+      Entry: 6
+      Data: 
+    - Name: OnPlacedFirstTime
+      Entry: 6
+      Data: 
+    - Name: OnFlipped
+      Entry: 6
+      Data: 
+    - Name: OnStep
+      Entry: 6
+      Data: 
+    - Name: OnCovered
+      Entry: 6
+      Data: 
+    - Name: OnUnCovered
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 

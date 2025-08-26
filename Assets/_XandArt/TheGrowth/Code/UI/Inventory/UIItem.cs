@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
@@ -11,6 +12,9 @@ namespace XandArt.TheGrowth
         public Image imagePortrait;
         public Image imageDecor;
         public TMP_Text label;
+
+        public UIInventory Inventory;
+        public Entity Data;
         
         private Transform m_LastParent;
 

@@ -9,8 +9,14 @@ using XandArt.Architecture.IOC;
 
 namespace XandArt.TheGrowth
 {
-    public class UIInventoryBox : WidgetBase, IDropHandler
+    public class UIInventory : WidgetBase, IDropHandler
     {
+        [SerializeField]
+        private UIItem m_Prefab;
+
+        [SerializeField]
+        private InventoryModel m_Inventory;
+
         [SerializeField]
         private CardType m_Filter;
 
@@ -19,21 +25,17 @@ namespace XandArt.TheGrowth
         private List<DeckConfig> m_InAnyDeck = new List<DeckConfig>();
 
         [SerializeField]
-        private InventoryModel m_Inventory;
+        [NotNull]
+        private List<EntityModel> m_InList = new List<EntityModel>();
 
         [SerializeField]
-        private UIItem m_Prefab;
-
-        [Inject]
-        private GameManager m_GameManager;
+        private bool m_AllowStack;
 
         [Tooltip("0 - означает неограниченно")]
         public int limit = 1;
 
-        public override void Init()
-        {
-            base.Init();
-        }
+        [Inject]
+        private GameManager m_GameManager;
 
         public void OnEnable()
         {
@@ -47,34 +49,42 @@ namespace XandArt.TheGrowth
             Debug.Log("UIInventorySlot.OnDisable");
         }
 
+        private bool IsValidEntity(CompositeEntity entity)
+        {
+            if (entity == null) return false;
+            var model = entity.Model;
+            var itemBrain = model.GetComponent<CardBrain>();
+            var validType = m_Filter == CardType.None || (itemBrain.Type & m_Filter) != 0;
+            var validDeck = m_InAnyDeck.Count == 0 || m_InAnyDeck.Any(deck => deck.Entities.Contains(model));
+            var validEntity = m_InList.Count == 0 || m_InList.Contains(model);
+            return validType && (validDeck || validEntity);
+        }
+
         public void RefreshView()
         {
             if (!Inited) return;
-            
+
             var inventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
-            
+
             if (inventory == null) return;
 
             var items = inventory.Items
                 .Select(iRef => iRef.Value as CompositeEntity)
-                .Where(item =>
-                {
-                    if (item == null) return false;
-                    var itemBrain = item.Model.GetComponent<CardBrain>();
-                    var validType = m_Filter == CardType.None || (itemBrain.Type & m_Filter) != 0;
-                    var validDeck = m_InAnyDeck.Count == 0 ||
-                                    m_InAnyDeck.Any(deck => deck.Entities.Contains(item.Model));
-                    return validType && validDeck;
-                });
+                .Where(IsValidEntity);
 
             var views = new Queue<UIItem>(GetComponentsInChildren<UIItem>());
 
+            var count = 0;
             foreach (var item in items)
             {
+                var view = views.Count > 0
+                    ? views.Dequeue()
+                    : Instantiate(m_Prefab, transform);
+
+                view.Data = item;
+                view.Inventory = this;
+
                 var visual = item.Model.GetComponent<CardVisual>();
-
-                var view = views.Count > 0 ? views.Dequeue() : Instantiate(m_Prefab, transform);
-
                 if (visual != null)
                 {
                     view.imagePortrait.sprite = visual.Portrait;
@@ -86,6 +96,16 @@ namespace XandArt.TheGrowth
                     stack != null && stack.Limit > 1
                         ? stack.Count.ToString()
                         : string.Empty);
+
+                count++;
+                if (limit <= count)
+                    break;
+            }
+
+            while (0 < views.Count)
+            {
+                var view = views.Dequeue();
+                Destroy(view);
             }
         }
 
@@ -93,8 +113,14 @@ namespace XandArt.TheGrowth
         {
             Debug.Log($"OnDrag over Inventory: {eventData.pointerDrag}");
             var item = eventData.pointerDrag.GetComponent<UIItem>();
+
             Debug.Log($"OnDrag over Inventory: {item}");
             item.TargetTransform = transform;
+
+            if (m_AllowStack)
+            {
+                
+            }
         }
     }
 }

@@ -11,13 +11,12 @@ namespace XandArt.TheGrowth
     {
         None = 0b00000000_00000000_00000000_00000000,
         
-        Resource  = 0b00000001,
-        Monster   = 0b00000010,
-        Player    = 0b00000100,
-        Ability   = 0b00001000,
-        Character = 0b00010000,
+        Character = 0b00000001,
+        Ability   = 0b00000010,
+        Resource  = 0b00000100,
+        Monster   = 0b00001000,
         
-        All = Resource | Monster | Player | Ability | Character
+        All = Character | Ability | Resource | Monster
     }
 
     public class CardBrain : IEntityModelComponent
