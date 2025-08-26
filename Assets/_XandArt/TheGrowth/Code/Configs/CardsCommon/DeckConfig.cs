@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using XandArt.Architecture;
@@ -24,6 +25,8 @@ namespace XandArt.TheGrowth
 
         [TableList(ShowIndexLabels = true)]
         public List<DeckEntry> entries;
+
+        public IEnumerable<EntityModel> Entities => entries.Select(entry => entry.Entity).Distinct();
 
         public List<Entity> CreateDeck()
         {

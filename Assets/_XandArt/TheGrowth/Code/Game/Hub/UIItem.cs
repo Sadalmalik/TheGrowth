@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ namespace XandArt.TheGrowth
     public class UIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         public Image image;
+        public TMP_Text label;
         
         private Transform m_LastParent;
 
@@ -18,6 +20,7 @@ namespace XandArt.TheGrowth
             transform.SetParent(transform.root);
             transform.SetAsLastSibling();
             image.raycastTarget = false;
+            label.raycastTarget = false;
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -28,6 +31,7 @@ namespace XandArt.TheGrowth
         public void OnEndDrag(PointerEventData eventData)
         {
             image.raycastTarget = true;
+            label.raycastTarget = true;
             transform.SetParent(
                 TargetTransform != null
                     ? TargetTransform

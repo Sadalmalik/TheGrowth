@@ -18,9 +18,9 @@ namespace XandArt.TheGrowth
         {
         }
 
-        public async Task LoadLocation(LocationEntity locationEntity)
+        public async Task LoadLocation(Location location)
         {
-            Debug.LogWarning($"Load location: {locationEntity.Model.Scene}");
+            Debug.LogWarning($"Load location: {location.Model.Scene}");
             // var screen = _menuManager.LoadingScreen;
             // await screen.ShowAsync();
             using var screenTask = await LoadingTracker.CreateAsync();
@@ -28,7 +28,7 @@ namespace XandArt.TheGrowth
             _menuManager.SetMainScreenActive(false);
             
             var result = new TaskCompletionSource<bool>();
-            var operation = SceneManager.LoadSceneAsync(locationEntity.Model.Scene, LoadSceneMode.Additive);
+            var operation = SceneManager.LoadSceneAsync(location.Model.Scene, LoadSceneMode.Additive);
             if (operation != null)
             {
                 operation.completed += op => { result.SetResult(true); };
@@ -36,9 +36,9 @@ namespace XandArt.TheGrowth
             }
         }
 
-        public async Task UnloadLocation(LocationEntity locationEntity)
+        public async Task UnloadLocation(Location location)
         {
-            Debug.LogWarning($"Unload location: {locationEntity.Model.Scene}");
+            Debug.LogWarning($"Unload location: {location.Model.Scene}");
             // var screen = _menuManager.LoadingScreen;
             // await screen.ShowAsync();
             
@@ -47,7 +47,7 @@ namespace XandArt.TheGrowth
             _menuManager.SetMainScreenActive(false);
             
             var result = new TaskCompletionSource<bool>();
-            var operation = SceneManager.UnloadSceneAsync(locationEntity.Model.Scene);
+            var operation = SceneManager.UnloadSceneAsync(location.Model.Scene);
             if (operation != null)
             {
                 operation.completed += op => { result.SetResult(true); };

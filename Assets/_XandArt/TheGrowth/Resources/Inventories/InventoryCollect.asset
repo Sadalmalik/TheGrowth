@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2af8676ad01b4d90ae16dcca7ffbc62a, type: 3}
-  m_Name: LocationHUB
+  m_Script: {fileID: 11500000, guid: b694e915bb824bb685cd28443bc654c5, type: 3}
+  m_Name: InventoryCollect
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -23,8 +23,4 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: 2837e4f228d7de34787d6ee48dc6acb9
-  Title: HUB
-  Type: 0
-  Scene: LocationHUB
-  Deck: {fileID: 0}
+      Data: eb7c22451d8229341ae73790fbd84f0a

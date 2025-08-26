@@ -9,7 +9,7 @@ using XandArt.Architecture.Utils;
 
 namespace XandArt.TheGrowth
 {
-    public class LocationEntity : Entity
+    public class Location : Entity
     {
 #region Savable
 

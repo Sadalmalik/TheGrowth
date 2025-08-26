@@ -10,11 +10,14 @@ namespace XandArt.TheGrowth
     public enum CardType
     {
         None = 0b00000000_00000000_00000000_00000000,
-        Resource = 0b00000001,
-        Monster = 0b00000010,
-        Player = 0b00000100,
-        Ability = 0b00001000,
+        
+        Resource  = 0b00000001,
+        Monster   = 0b00000010,
+        Player    = 0b00000100,
+        Ability   = 0b00001000,
         Character = 0b00010000,
+        
+        All = Resource | Monster | Player | Ability | Character
     }
 
     public class CardBrain : IEntityModelComponent

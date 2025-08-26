@@ -18,13 +18,13 @@ namespace XandArt.TheGrowth
         private Ref<Inventory> _inventory;
 
         [JsonProperty]
-        private List<Ref<LocationEntity>> _allLocations = new List<Ref<LocationEntity>>();
+        private List<Ref<Location>> _allLocations = new List<Ref<Location>>();
 
         [JsonProperty]
-        private List<Ref<LocationEntity>> _expeditionLocations = new List<Ref<LocationEntity>>();
+        private List<Ref<Location>> _expeditionLocations = new List<Ref<Location>>();
 
         [JsonProperty]
-        private Ref<LocationEntity> _activeLocation;
+        private Ref<Location> _activeLocation;
 
 #endregion
 
@@ -46,13 +46,13 @@ namespace XandArt.TheGrowth
         private List<GameStep> _cachedLocations;
 
         [JsonIgnore]
-        public List<Ref<LocationEntity>> AllLocations => _allLocations;
+        public List<Ref<Location>> AllLocations => _allLocations;
 
         [JsonIgnore]
-        public List<Ref<LocationEntity>> ExpeditionLocations => _expeditionLocations;
+        public List<Ref<Location>> ExpeditionLocations => _expeditionLocations;
 
         [JsonIgnore]
-        public LocationEntity ActiveLocation
+        public Location ActiveLocation
         {
             get => _activeLocation;
             set => _activeLocation = value;
@@ -108,12 +108,12 @@ namespace XandArt.TheGrowth
             return entity;
         }
 
-        public LocationEntity GetOrCreateLocation(LocationModel model)
+        public Location GetOrCreateLocation(LocationModel model)
         {
             var location = _allLocations.FirstOrDefault(loc => loc.Value.Model == model);
             if (!location)
             {
-                location = (LocationEntity)model.Create();
+                location = (Location)model.Create();
                 _allLocations.Add(location);
                 Add(location);
             }
