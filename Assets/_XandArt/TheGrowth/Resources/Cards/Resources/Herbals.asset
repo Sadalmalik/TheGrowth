@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 21300000, guid: d2c69a30c1e49cf44b0a1648aa37e9d1, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -30,7 +31,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.CardVisual, Code
@@ -44,11 +45,59 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: Portrait
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: CustomPrefab
       Entry: 6
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|XandArt.TheGrowth.CardBrain, Code
+    - Name: Type
+      Entry: 3
+      Data: 4
+    - Name: CanBeDragged
+      Entry: 5
+      Data: false
+    - Name: EndsTheTurn
+      Entry: 5
+      Data: false
+    - Name: SpawnSlot
+      Entry: 6
+      Data: 
+    - Name: AllowedMoves
+      Entry: 6
+      Data: 
+    - Name: OnPlaced
+      Entry: 6
+      Data: 
+    - Name: OnPlacedFirstTime
+      Entry: 6
+      Data: 
+    - Name: OnFlipped
+      Entry: 6
+      Data: 
+    - Name: OnStep
+      Entry: 6
+      Data: 
+    - Name: OnCovered
+      Entry: 6
+      Data: 
+    - Name: OnUnCovered
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.Stackable, Code
+    - Name: Limit
+      Entry: 3
+      Data: 40
     - Name: 
       Entry: 8
       Data: 

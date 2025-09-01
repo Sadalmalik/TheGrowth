@@ -17,7 +17,6 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: d2c69a30c1e49cf44b0a1648aa37e9d1, type: 3}
-    - {fileID: 21300000, guid: ecd42ebbf44f84948aa8978636dff16c, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -47,7 +46,7 @@ MonoBehaviour:
       Data: 0
     - Name: Portrait
       Entry: 10
-      Data: 1
+      Data: 0
     - Name: CustomPrefab
       Entry: 6
       Data: 
@@ -56,22 +55,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.CardStackable, Code
-    - Name: Initial
-      Entry: 3
-      Data: 1
-    - Name: Limit
-      Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 3|XandArt.TheGrowth.CardBrain, Code
+      Data: 2|XandArt.TheGrowth.CardBrain, Code
     - Name: Type
       Entry: 3
-      Data: 1
+      Data: 4
     - Name: CanBeDragged
       Entry: 5
       Data: false
@@ -102,6 +89,15 @@ MonoBehaviour:
     - Name: OnUnCovered
       Entry: 6
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.Stackable, Code
+    - Name: Limit
+      Entry: 3
+      Data: 10
     - Name: 
       Entry: 8
       Data: 

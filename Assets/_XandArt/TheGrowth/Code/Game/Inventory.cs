@@ -12,9 +12,30 @@ namespace XandArt.TheGrowth
 
         [JsonIgnore]
         public List<Ref<Entity>> Items => _items;
-        
-        public void Add(Entity entity)
+
+        public void Add(Entity entity, bool mergeStacks = true)
         {
+            if (mergeStacks && (entity as CompositeEntity)?.GetComponent<Stackable.Component>() is { } stack)
+            {
+                var model = entity.Model;
+                
+                foreach (var itemRef in Items)
+                {
+                    var item = itemRef.Value as CompositeEntity;
+                    if (item == null) continue;
+                    if (item.Model != model) continue;
+                    var otherStack = item.GetComponent<Stackable.Component>();
+                    if (otherStack == null) continue;
+                    if (otherStack.Space == 0) continue;
+
+                    if (stack.TransferTo(otherStack))
+                        break;
+                }
+
+                if (stack.Count == 0)
+                    return;
+            }
+            
             _items.Add(entity);
         }
 
@@ -26,8 +47,30 @@ namespace XandArt.TheGrowth
         public IEnumerable<Entity> GetEntities(CardType filter)
         {
             return Items
-                .Select(entity=>entity.Value as CompositeEntity)
+                .Select(entity => entity.Value as CompositeEntity)
                 .Where(card => card != null && 0 != (card.Model.GetComponent<CardBrain>().Type & filter));
+        }
+    }
+
+    public static class InventoryUtils
+    {
+        public static void MoveItem(Entity item, Inventory from, Inventory into, bool allowStack = true)
+        {
+            from.Remove(item);
+            var stack = (item as CompositeEntity)?.GetComponent<Stackable.Component>();
+
+            if (stack == null)
+            {
+                into.Add(item);
+            }
+            else
+            {
+                if (allowStack)
+                {
+                    into.Add(item, allowStack);
+                    if (stack.Count==0) return;
+                }
+            }
         }
     }
 }

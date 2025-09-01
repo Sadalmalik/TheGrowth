@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace XandArt.Architecture
@@ -16,8 +16,14 @@ namespace XandArt.Architecture
         order = 0)]
     public class EntityModel : AbstractEntityModel
     {
+        [ValidateInput(nameof(ElementsNotNull), "Components can't be null!")]
         public List<IEntityModelComponent> components;
 
+        private bool ElementsNotNull(List<IEntityModelComponent> list)
+        {
+            return !list.Contains(null);
+        }
+        
         public TComponent GetComponent<TComponent>() where TComponent : IEntityModelComponent
         {
             return (TComponent) components?.FirstOrDefault(c => c.GetType() == typeof(TComponent));

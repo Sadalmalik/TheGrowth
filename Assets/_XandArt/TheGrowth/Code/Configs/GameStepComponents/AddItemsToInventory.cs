@@ -19,13 +19,13 @@ namespace XandArt.TheGrowth
             foreach (var entry in entries)
             {
                 var amount = entry.Amount;
-                var stackSettings = entry.Entity.GetComponent<CardStackable>();
+                var stackSettings = entry.Entity.GetComponent<Stackable>();
                 if (stackSettings != null)
                 {
                     while (amount > 0)
                     {
                         var item = state.Create<CompositeEntity>(entry.Entity);
-                        var stack = item.GetComponent<CardStackable.Component>();
+                        var stack = item.GetComponent<Stackable.Component>();
                         stack.Count = Mathf.Min(amount, stack.Limit);
                         amount -= stack.Limit;
                         inventory.Add(item);

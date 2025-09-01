@@ -17,6 +17,8 @@ namespace XandArt.TheGrowth
         private List<Command> OnClickedActions;
 
         private HUB _hub;
+
+        public Button Button => _button;
         
         public event Action<HUBButton> OnClicked;
         

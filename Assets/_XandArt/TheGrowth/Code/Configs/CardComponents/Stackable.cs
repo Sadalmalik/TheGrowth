@@ -2,15 +2,14 @@
 
 namespace XandArt.TheGrowth
 {
-    public class CardStackable : IEntityModelComponent
+    public class Stackable : IEntityModelComponent
     {
-        public int Initial;
         public int Limit;
         
         public void OnEntityCreated(CompositeEntity card)
         {
             var component = card.AddComponent<Component>();
-            component._count = Initial;
+            component._count = 1;
             component._limit = Limit;
         }
 
@@ -35,8 +34,8 @@ namespace XandArt.TheGrowth
     {
         public static bool TransferTo(this CompositeEntity from, CompositeEntity to)
         {
-            var stackFrom = from.GetComponent<CardStackable.Component>();
-            var stackInto = to.GetComponent<CardStackable.Component>();
+            var stackFrom = from.GetComponent<Stackable.Component>();
+            var stackInto = to.GetComponent<Stackable.Component>();
 
             var space = stackInto.Space;
             if (stackFrom.Count < space)
@@ -48,6 +47,21 @@ namespace XandArt.TheGrowth
 
             stackInto.Count += space;
             stackFrom.Count -= space;
+            return false;
+        }
+        
+        public static bool TransferTo(this Stackable.Component from, Stackable.Component to)
+        {
+            var space = to.Space;
+            if (from.Count < space)
+            {
+                to.Count += from.Count;
+                from.Count = 0;
+                return true;
+            }
+
+            to.Count += space;
+            from.Count -= space;
             return false;
         }
     }

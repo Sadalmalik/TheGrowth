@@ -11,7 +11,7 @@ namespace XandArt.Architecture.Utils
 
 	public static class TransformExtensions
 	{
-		public static void DestroyChilds(this Transform t)
+		public static void DestroyChildren(this Transform t)
 		{
 			var childs = new List<Transform>();
 			foreach (Transform child in t)

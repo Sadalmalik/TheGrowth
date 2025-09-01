@@ -22,7 +22,7 @@
         public override bool Check(Context context)
         {
             var card = Card.Evaluate(context);
-            var chargesComponent = card.gameObject.GetComponent<CardCharges>();
+            var chargesComponent = card.GetComponent<Charges.Component>();
 
             if (chargesComponent == null)
                 return false;

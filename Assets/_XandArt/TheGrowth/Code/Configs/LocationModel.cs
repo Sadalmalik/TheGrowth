@@ -17,6 +17,8 @@ namespace XandArt.TheGrowth
     public class LocationModel : AbstractEntityModel
     {
         public string Title;
+        [TextArea(3, 8)]
+        public string Description;
         public LocationType Type;
         public string Scene;
 

@@ -15,7 +15,7 @@ namespace XandArt.TheGrowth
         
         public void OnEntityCreated(CompositeEntity card)
         {
-            card.AddComponent<Component>();
+            // card.AddComponent<Component>();
             // if (Face != null)
             //     card.view.face.sprite = Face;
             // if (Cover != null)
@@ -24,20 +24,20 @@ namespace XandArt.TheGrowth
             // card.view.title.SetText(Title);
         }
         
-        public class Component : EntityComponent, IViewComponent
-        {
-            public override void OnPostLoad()
-            {
-                //Owner.View = Object.Instantiate();
-            }
-
-            public GameObject GetPrefab() => null;
-
-            GameObject IViewComponent.View
-            {
-                get => throw new System.NotImplementedException();
-                set => throw new System.NotImplementedException();
-            }
-        }
+        // public class Component : EntityComponent, IViewComponent
+        // {
+        //     public override void OnPostLoad()
+        //     {
+        //         //Owner.View = Object.Instantiate();
+        //     }
+        //
+        //     public GameObject GetPrefab() => null;
+        //
+        //     GameObject IViewComponent.View
+        //     {
+        //         get => throw new System.NotImplementedException();
+        //         set => throw new System.NotImplementedException();
+        //     }
+        // }
     }
 }

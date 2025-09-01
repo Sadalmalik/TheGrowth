@@ -2,14 +2,14 @@
 
 namespace XandArt.TheGrowth
 {
-    public class CardCharges : IEntityModelComponent
+    public class Charges : IEntityModelComponent
     {
-        public int Charges;
+        public int Amound;
         
         public void OnEntityCreated(CompositeEntity card)
         {
             var component = card.AddComponent<Component>();
-            component.Charges = Charges;
+            component.Charges = Amound;
         }
         
         public class Component : EntityComponent

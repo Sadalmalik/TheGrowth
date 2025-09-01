@@ -21,6 +21,12 @@ namespace XandArt.TheGrowth
         [HideInInspector]
         public Transform TargetTransform;
 
+        public void Set(CardVisual visual)
+        {
+            imageDecor.sprite = visual.Decor;
+            imagePortrait.sprite = visual.Portrait;
+        }
+        
         public void OnBeginDrag(PointerEventData eventData)
         {
             m_LastParent = transform.parent;

@@ -12,6 +12,9 @@ namespace XandArt.TheGrowth
     public class UIInventory : WidgetBase, IDropHandler
     {
         [SerializeField]
+        private Transform m_Container;
+        
+        [SerializeField]
         private UIItem m_Prefab;
 
         [SerializeField]
@@ -40,13 +43,27 @@ namespace XandArt.TheGrowth
         public void OnEnable()
         {
             Debug.Log("UIInventorySlot.OnEnable");
-
+            m_Container ??= transform;
+            
             RefreshView();
         }
 
         public void OnDisable()
         {
             Debug.Log("UIInventorySlot.OnDisable");
+        }
+
+        public void OnDrop(PointerEventData eventData)
+        {
+            var item = eventData.pointerDrag.GetComponent<UIItem>();
+
+            Debug.Log($"OnDrag over Inventory: {item}");
+            item.TargetTransform = m_Container;
+            
+            var fromInventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
+            var intoInventory = m_GameManager.CurrentGameState.GetInventory(item.Inventory.m_Inventory);
+            Debug.Log($"Move item {fromInventory} -> {intoInventory}");
+            InventoryUtils.MoveItem(item.Data, fromInventory, intoInventory, m_AllowStack);
         }
 
         private bool IsValidEntity(CompositeEntity entity)
@@ -79,19 +96,16 @@ namespace XandArt.TheGrowth
             {
                 var view = views.Count > 0
                     ? views.Dequeue()
-                    : Instantiate(m_Prefab, transform);
+                    : Instantiate(m_Prefab, m_Container);
 
                 view.Data = item;
                 view.Inventory = this;
 
                 var visual = item.Model.GetComponent<CardVisual>();
                 if (visual != null)
-                {
-                    view.imagePortrait.sprite = visual.Portrait;
-                    view.imageDecor.sprite = visual.Decor;
-                }
+                    view.Set(visual);
 
-                var stack = item.GetComponent<CardStackable.Component>();
+                var stack = item.GetComponent<Stackable.Component>();
                 view.label.SetText(
                     stack != null && stack.Limit > 1
                         ? stack.Count.ToString()
@@ -106,20 +120,6 @@ namespace XandArt.TheGrowth
             {
                 var view = views.Dequeue();
                 Destroy(view);
-            }
-        }
-
-        public void OnDrop(PointerEventData eventData)
-        {
-            Debug.Log($"OnDrag over Inventory: {eventData.pointerDrag}");
-            var item = eventData.pointerDrag.GetComponent<UIItem>();
-
-            Debug.Log($"OnDrag over Inventory: {item}");
-            item.TargetTransform = transform;
-
-            if (m_AllowStack)
-            {
-                
             }
         }
     }

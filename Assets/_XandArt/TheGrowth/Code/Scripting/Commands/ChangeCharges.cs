@@ -21,7 +21,7 @@ namespace XandArt.TheGrowth
         public override void Execute(Context context)
         {
             var card = Card.Evaluate(context);
-            var cardCharges = card.GetComponent<CardCharges.Component>();
+            var cardCharges = card.GetComponent<Charges.Component>();
 
             switch (Variant)
             {

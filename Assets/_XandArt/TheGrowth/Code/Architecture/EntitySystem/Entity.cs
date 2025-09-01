@@ -34,5 +34,11 @@ namespace XandArt.Architecture
         public virtual void OnPreSave() {}
         public virtual void OnPostLoad() {}
         public virtual void OnInitOrPostLoad() {}
+        
+
+        public override string ToString()
+        {
+            return $"{Model.name}#{Guid}";
+        }
     }
 }
