@@ -15,7 +15,9 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 21300000, guid: dc533fa9a543d3b4e8f1bada754bf687, type: 3}
+    - {fileID: 21300000, guid: 251595fcfe2040b4e8abc9bf483836cf, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -41,11 +43,11 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: Decor
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: Portrait
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: CustomPrefab
       Entry: 6
       Data: 
@@ -57,7 +59,7 @@ MonoBehaviour:
       Data: 2|XandArt.TheGrowth.CardBrain, Code
     - Name: Type
       Entry: 3
-      Data: 0
+      Data: 8
     - Name: CanBeDragged
       Entry: 5
       Data: false

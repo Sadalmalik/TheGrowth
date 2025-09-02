@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55bd0a0af37d4fb0945f124b156c2169, type: 3}
-  m_Name: Deck
+  m_Script: {fileID: 11500000, guid: 2af8676ad01b4d90ae16dcca7ffbc62a, type: 3}
+  m_Name: Expedition1
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,18 +21,11 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: entries
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.DeckEntry, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-  description: 
-  shuffleOnStart: 1
+    - Name: Guid
+      Entry: 2
+      Data: a18b202d9c2a60c4fb4e60457d49a516
+  Title: First Encounter
+  Description: This is first exedition location
+  Type: 1
+  Scene: ExpeditionTest
+  Deck: {fileID: 11400000, guid: 18e1854a5e9f5e24d9a9a251ffafc05e, type: 2}

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using XandArt.Architecture.IOC;
 using XandArt.Architecture.Utils;
 
 namespace XandArt.TheGrowth
 {
+    [SelectionBase]
     public class HUBMissionSelection : WidgetBase
     {
 #region Settings
@@ -43,6 +44,9 @@ namespace XandArt.TheGrowth
 
 #region API
 
+        [Inject]
+        private GameManager m_GameManager;
+        
         private LocationModel m_Selected;
 
         public override void Init()
@@ -90,6 +94,7 @@ namespace XandArt.TheGrowth
 
         public void StartSelected()
         {
+            m_GameManager.CurrentGameState.GotoLocation(m_Selected);
         }
 
 #endregion

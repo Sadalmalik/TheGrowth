@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2af8676ad01b4d90ae16dcca7ffbc62a, type: 3}
-  m_Name: ExpeditionTest
+  m_Name: Expedition2
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -24,7 +24,8 @@ MonoBehaviour:
     - Name: Guid
       Entry: 2
       Data: a18b202d9c2a60c4fb4e60457d49a516
-  Title: ExpeditionTest
+  Title: Second Encounter
+  Description: Hello there!
   Type: 1
   Scene: ExpeditionTest
-  Deck: {fileID: 11400000, guid: 18e1854a5e9f5e24d9a9a251ffafc05e, type: 2}
+  Deck: {fileID: 11400000, guid: e2e880f1feecdec42a8dd60427ef186e, type: 2}
