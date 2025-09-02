@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -58,7 +59,21 @@ namespace XandArt.TheGrowth
             var item = eventData.pointerDrag.GetComponent<UIItem>();
 
             Debug.Log($"OnDrag over Inventory: {item}");
+
+            if (!item)
+                return;
+            
+            DropItem(item);
+        }
+
+        private void DropItem(UIItem item)
+        {
             item.TargetTransform = m_Container;
+
+            var views = m_Container.GetComponentsInChildren<UIItem>();
+            if (limit > 0 && views.Length == limit)
+                item.Inventory.DropItem(views[0]);
+            item.Inventory = this;
             
             var fromInventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
             var intoInventory = m_GameManager.CurrentGameState.GetInventory(item.Inventory.m_Inventory);
@@ -82,14 +97,20 @@ namespace XandArt.TheGrowth
             if (!Inited) return;
 
             var inventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
-
             if (inventory == null) return;
 
             var items = inventory.Items
                 .Select(iRef => iRef.Value as CompositeEntity)
-                .Where(IsValidEntity);
+                .Where(IsValidEntity)
+                .ToList();
 
-            var views = new Queue<UIItem>(GetComponentsInChildren<UIItem>());
+            var sb = new StringBuilder();
+            sb.AppendFormat("TEST - Items {0}\n", items.Count);
+            foreach (var item in items)
+                sb.AppendFormat("  {0}\n", item);
+            Debug.Log(sb.ToString());
+            
+            var views = new Queue<UIItem>(m_Container.GetComponentsInChildren<UIItem>());
 
             var count = 0;
             foreach (var item in items)
@@ -97,9 +118,8 @@ namespace XandArt.TheGrowth
                 var view = views.Count > 0
                     ? views.Dequeue()
                     : Instantiate(m_Prefab, m_Container);
-
-                view.Data = item;
                 view.Inventory = this;
+                view.Data = item;
 
                 var visual = item.Model.GetComponent<CardVisual>();
                 if (visual != null)
@@ -110,6 +130,9 @@ namespace XandArt.TheGrowth
                     stack != null && stack.Limit > 1
                         ? stack.Count.ToString()
                         : string.Empty);
+
+                if (limit==0)
+                    continue;
 
                 count++;
                 if (limit <= count)

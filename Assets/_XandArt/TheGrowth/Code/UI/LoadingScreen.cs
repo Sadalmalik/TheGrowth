@@ -65,8 +65,12 @@ namespace XandArt.TheGrowth
         {
             var tcs = new TaskCompletionSource<bool>();
             _group.DOFade(1, _fadeDuration)
-                .OnStart(() => { _group.blocksRaycasts = true; })
-                .OnComplete(() => { tcs.SetResult(true); });
+                .OnStart(() =>
+                {
+                    _group.blocksRaycasts = true;
+                    _group.gameObject.SetActive(true);
+                })
+                .OnComplete(() => tcs.SetResult(true));
             await tcs.Task;
         }
 
@@ -77,6 +81,7 @@ namespace XandArt.TheGrowth
                 .OnComplete(() =>
                 {
                     _group.blocksRaycasts = false;
+                    _group.gameObject.SetActive(false);
                     tcs.SetResult(false);
                 });
             await tcs.Task;

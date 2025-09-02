@@ -16,6 +16,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 21300000, guid: b91e0aff18a9d2d4d9f52d53b21f9522, type: 3}
+    - {fileID: 21300000, guid: 251595fcfe2040b4e8abc9bf483836cf, type: 3}
     - {fileID: 11400000, guid: 52f3eee5fad002e4f984ced85e276ea0, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -42,11 +44,11 @@ MonoBehaviour:
       Entry: 1
       Data: 
     - Name: Decor
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: Portrait
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: CustomPrefab
       Entry: 6
       Data: 
@@ -180,7 +182,7 @@ MonoBehaviour:
       Data: 12|XandArt.TheGrowth.ExecuteCommands, Code
     - Name: config
       Entry: 10
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 8
       Data: 

@@ -6,6 +6,7 @@ using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
+    [SelectionBase]
     public class UIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         public Image imageBackground;
@@ -24,7 +25,10 @@ namespace XandArt.TheGrowth
         public void Set(CardVisual visual)
         {
             imageDecor.sprite = visual.Decor;
+            imageDecor.gameObject.SetActive(visual.Decor!=null);
+            
             imagePortrait.sprite = visual.Portrait;
+            imagePortrait.gameObject.SetActive(visual.Portrait!=null);
         }
         
         public void OnBeginDrag(PointerEventData eventData)
