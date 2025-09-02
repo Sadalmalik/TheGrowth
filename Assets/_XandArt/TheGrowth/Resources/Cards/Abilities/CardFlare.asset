@@ -96,9 +96,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 3|XandArt.TheGrowth.Stackable, Code
-    - Name: Initial
-      Entry: 3
-      Data: 1
     - Name: Limit
       Entry: 3
       Data: 8
