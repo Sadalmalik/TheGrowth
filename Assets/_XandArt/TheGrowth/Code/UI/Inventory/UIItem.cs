@@ -16,7 +16,7 @@ namespace XandArt.TheGrowth
 
         public UIInventory Inventory;
         public Entity Data;
-        
+
         private Transform m_LastParent;
 
         [HideInInspector]
@@ -25,12 +25,12 @@ namespace XandArt.TheGrowth
         public void Set(CardVisual visual)
         {
             imageDecor.sprite = visual.Decor;
-            imageDecor.gameObject.SetActive(visual.Decor!=null);
-            
+            imageDecor.gameObject.SetActive(visual.Decor != null);
+
             imagePortrait.sprite = visual.Portrait;
-            imagePortrait.gameObject.SetActive(visual.Portrait!=null);
+            imagePortrait.gameObject.SetActive(visual.Portrait != null);
         }
-        
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             m_LastParent = transform.parent;
@@ -51,6 +51,7 @@ namespace XandArt.TheGrowth
                 TargetTransform != null
                     ? TargetTransform
                     : m_LastParent);
+            TargetTransform = null;
         }
     }
 }

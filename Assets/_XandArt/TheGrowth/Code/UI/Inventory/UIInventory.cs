@@ -60,7 +60,7 @@ namespace XandArt.TheGrowth
 
             Debug.Log($"OnDrag over Inventory: {item}");
 
-            if (!item)
+            if (!IsValidEntity(item?.Data as CompositeEntity))
                 return;
             
             DropItem(item);
@@ -68,11 +68,14 @@ namespace XandArt.TheGrowth
 
         private void DropItem(UIItem item)
         {
-            item.TargetTransform = m_Container;
-
             var views = m_Container.GetComponentsInChildren<UIItem>();
             if (limit > 0 && views.Length == limit)
+            {
                 item.Inventory.DropItem(views[0]);
+                views[0].transform.SetParent(item.Inventory.m_Container);
+            }
+
+            item.TargetTransform = m_Container;
             item.Inventory = this;
             
             var fromInventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
