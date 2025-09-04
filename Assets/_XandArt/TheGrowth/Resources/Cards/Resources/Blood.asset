@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 721fd4a630e54d9784e83e35768c9280, type: 3}
-  m_Name: Herbals
+  m_Name: Blood
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 21300000, guid: d2c69a30c1e49cf44b0a1648aa37e9d1, type: 3}
+    - {fileID: 21300000, guid: 0d56ac2c74a2fc74187988178d5c0518, type: 3}
+    - {fileID: 21300000, guid: a8fdd193ac66dae47b56a2fd1bc8583d, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -42,11 +43,11 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: Decor
-      Entry: 6
-      Data: 
-    - Name: Portrait
       Entry: 10
       Data: 0
+    - Name: Portrait
+      Entry: 10
+      Data: 1
     - Name: CustomPrefab
       Entry: 6
       Data: 
@@ -66,7 +67,20 @@ MonoBehaviour:
       Entry: 5
       Data: false
     - Name: SpawnSlot
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.Random`1[[XandArt.TheGrowth.EntitySlot, Code]], Code
+    - Name: Collection
+      Entry: 7
+      Data: 4|XandArt.TheGrowth.Random`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.EntitySlot,
+        Code]], System.Core]], Code
+    - Name: Collection
       Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: AllowedMoves
       Entry: 6
@@ -94,7 +108,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|XandArt.TheGrowth.Stackable, Code
+      Data: 5|XandArt.TheGrowth.Stackable, Code
     - Name: Limit
       Entry: 3
       Data: 40
