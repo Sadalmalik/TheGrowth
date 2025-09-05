@@ -1,4 +1,5 @@
-﻿using XandArt.Architecture;
+﻿using Newtonsoft.Json;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
@@ -15,17 +16,23 @@ namespace XandArt.TheGrowth
 
         public class Component : EntityComponent
         {
+            [JsonProperty]
             internal int _count;
+            
+            [JsonProperty]
             internal int _limit;
             
+            [JsonIgnore]
             public int Count
             {
                 get => _count;
                 set => _count = value;
             }
 
+            [JsonIgnore]
             public int Limit => _limit;
 
+            [JsonIgnore]
             public int Space => _limit - _count;
         }
     }

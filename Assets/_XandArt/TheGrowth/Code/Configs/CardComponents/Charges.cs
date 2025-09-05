@@ -1,4 +1,5 @@
-﻿using XandArt.Architecture;
+﻿using Newtonsoft.Json;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
@@ -14,9 +15,11 @@ namespace XandArt.TheGrowth
         
         public class Component : EntityComponent
         {
-            private EntityCardView _view;
+            //private EntityCardView _view;
+            [JsonProperty]
             private int _charges;
             
+            [JsonIgnore]
             public int Charges
             {
                 get => _charges;
