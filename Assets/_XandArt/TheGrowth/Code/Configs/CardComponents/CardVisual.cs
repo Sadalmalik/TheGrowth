@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
@@ -6,9 +7,14 @@ namespace XandArt.TheGrowth
     public class CardVisual : IEntityModelComponent
     {
         public string Title;
+        
         [TextArea(3, 15)]
         public string Description;
+        
+        [PreviewField(200)]
         public Sprite Decor;
+        
+        [PreviewField(200)]
         public Sprite Portrait;
         
         public EntityCard CustomPrefab;

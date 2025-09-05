@@ -63,6 +63,36 @@ namespace XandArt.Architecture
             OnEntityRemoved?.Invoke(entity);
         }
 
+        public T Create<T>() where T : Entity, new()
+        {
+            var entity = new T();
+            Add(entity);
+            entity.Init();
+            return entity;
+        }
+
+        public Entity Create(AbstractEntityModel model)
+        {
+            var entity = model.Create();
+            Add(entity);
+            entity.Init();
+            return entity;
+        }
+
+        public T Create<T>(AbstractEntityModel model) where T : Entity
+        {
+            var entity = model.Create();
+            Add(entity);
+            entity.Init();
+            return (T) entity;
+        }
+
+        public void Destroy(Entity entity)
+        {
+            entity.OnDestroy();
+            Remove(entity);
+        }
+
         public virtual void OnPreSave()
         {
             foreach (var entity in Entities)

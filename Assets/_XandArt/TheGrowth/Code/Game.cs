@@ -37,6 +37,7 @@ namespace XandArt.TheGrowth
             Container.Add<PersistenceManager>();
             Container.Add<AutosaveManager>();
             Container.Add<LocationManager>();
+            Container.Add<ExpeditionManager>();
             Container.Add<ViewManager>();
 
             BaseContext = new Context(new GlobalData { container = Container });

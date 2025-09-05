@@ -74,14 +74,14 @@ namespace XandArt.TheGrowth
                 item.Inventory.DropItem(views[0]);
                 views[0].transform.SetParent(item.Inventory.m_Container);
             }
+            
+            var fromInventory = m_GameManager.CurrentGameState.GetInventory(item.Inventory.m_Inventory);
+            var intoInventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
+            Debug.Log($"Move item {fromInventory} -> {intoInventory}");
+            InventoryUtils.MoveItem(item.Data, fromInventory, intoInventory, m_AllowStack);
 
             item.TargetTransform = m_Container;
             item.Inventory = this;
-            
-            var fromInventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
-            var intoInventory = m_GameManager.CurrentGameState.GetInventory(item.Inventory.m_Inventory);
-            Debug.Log($"Move item {fromInventory} -> {intoInventory}");
-            InventoryUtils.MoveItem(item.Data, fromInventory, intoInventory, m_AllowStack);
         }
 
         private bool IsValidEntity(CompositeEntity entity)
@@ -107,12 +107,6 @@ namespace XandArt.TheGrowth
                 .Where(IsValidEntity)
                 .ToList();
 
-            var sb = new StringBuilder();
-            sb.AppendFormat("TEST - Items {0}\n", items.Count);
-            foreach (var item in items)
-                sb.AppendFormat("  {0}\n", item);
-            Debug.Log(sb.ToString());
-            
             var views = new Queue<UIItem>(m_Container.GetComponentsInChildren<UIItem>());
 
             var count = 0;

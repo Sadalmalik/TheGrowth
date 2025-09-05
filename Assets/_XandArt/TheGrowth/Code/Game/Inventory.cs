@@ -15,6 +15,10 @@ namespace XandArt.TheGrowth
 
         public void Add(Entity entity, bool mergeStacks = true)
         {
+            // No duplicates
+            if (_items.Any(itemRef => itemRef.Value == entity))
+                return;
+            
             if (mergeStacks && (entity as CompositeEntity)?.GetComponent<Stackable.Component>() is { } stack)
             {
                 var model = entity.Model;
@@ -41,7 +45,7 @@ namespace XandArt.TheGrowth
 
         public void Remove(Entity entity)
         {
-            _items.Remove(entity);
+            _items.RemoveAll(itemRef => itemRef.Value == entity);
         }
 
         public IEnumerable<Entity> GetEntities(CardType filter)

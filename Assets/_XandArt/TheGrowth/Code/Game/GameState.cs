@@ -33,6 +33,10 @@ namespace XandArt.TheGrowth
         [Inject]
         public Container Container;
 
+        [JsonIgnore]
+        [Inject]
+        private LocationManager _locationManager;
+
         // Access
         [JsonIgnore]
         public GameStep CurrentGameStep => _currentStep;
@@ -94,27 +98,6 @@ namespace XandArt.TheGrowth
             _currentStep.Value?.OnStepStart(this);
         }
 
-        public T Create<T>() where T : Entity, new()
-        {
-            var entity = new T();
-            Add(entity);
-            return entity;
-        }
-
-        public Entity Create(AbstractEntityModel model)
-        {
-            var entity = model.Create();
-            Add(entity);
-            return entity;
-        }
-
-        public T Create<T>(AbstractEntityModel model) where T : Entity
-        {
-            var entity = model.Create();
-            Add(entity);
-            return (T) entity;
-        }
-
         public Location GetOrCreateLocation(LocationModel model)
         {
             var location = _allLocations.FirstOrDefault(loc => loc.Value.Model == model);
@@ -132,18 +115,10 @@ namespace XandArt.TheGrowth
         public async void GotoLocation(LocationModel model)
         {
             var nextLocation = GetOrCreateLocation(model);
-
-            if (ActiveLocation != null)
-                await ActiveLocation.Unload();
-
-            if (nextLocation != null)
-                await nextLocation.Load();
-
+            await Task.WhenAll(
+                _locationManager.UnloadLocation(ActiveLocation),
+                _locationManager.LoadLocation(nextLocation));
             ActiveLocation = nextLocation;
-            // var task1 = ActiveLocation.Unload();
-            // var task2 = nextLocation.Load();
-
-            //await Task.WhenAll(task1, task2);
         }
 
         public override void OnPostLoad()
@@ -153,7 +128,7 @@ namespace XandArt.TheGrowth
             foreach (var location in AllLocations)
                 Container.InjectAt(location.Value);
 
-            ActiveLocation?.Load();
+            _ = _locationManager.LoadLocation(ActiveLocation);
         }
 
 #endregion

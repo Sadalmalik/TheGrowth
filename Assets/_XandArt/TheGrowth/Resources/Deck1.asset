@@ -19,6 +19,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: dab00cc110e207b46b98ec91564df108, type: 2}
     - {fileID: 11400000, guid: 376eaa740945a7f41b241de31202ed6d, type: 2}
     - {fileID: 11400000, guid: 77fb4d0db3d301d46b9779ffb58daace, type: 2}
+    - {fileID: 11400000, guid: 90716d6d1d371f84e9afe1565027bd39, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -30,7 +31,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.DeckEntry, Code
@@ -64,6 +65,18 @@ MonoBehaviour:
     - Name: Entity
       Entry: 10
       Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|XandArt.TheGrowth.DeckEntry, Code
+    - Name: Amount
+      Entry: 3
+      Data: 40
+    - Name: Entity
+      Entry: 10
+      Data: 3
     - Name: 
       Entry: 8
       Data: 

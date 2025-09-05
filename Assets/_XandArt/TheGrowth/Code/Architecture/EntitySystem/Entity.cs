@@ -31,6 +31,7 @@ namespace XandArt.Architecture
         }
 
         public virtual void OnInit() {}
+        public virtual void OnDestroy() {}
         public virtual void OnPreSave() {}
         public virtual void OnPostLoad() {}
         public virtual void OnInitOrPostLoad() {}

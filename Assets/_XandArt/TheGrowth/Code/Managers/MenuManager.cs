@@ -87,7 +87,6 @@ namespace XandArt.TheGrowth
         {
             _gameManager.SaveAndExit();
             //StartCoroutine(StartNewGameCoroutine());
-            
         }
 
         public void ExitGame()

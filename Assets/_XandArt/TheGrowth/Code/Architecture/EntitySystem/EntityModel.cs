@@ -46,7 +46,6 @@ namespace XandArt.Architecture
             var entity = new CompositeEntity { _model = this };
             foreach (var component in components)
                 component.OnEntityCreated(entity);
-            entity.Init();
             return entity;
         }
 

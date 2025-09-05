@@ -87,6 +87,7 @@ namespace XandArt.TheGrowth
                     case CardType.Monster:
                         var card = Instantiate(m_EnemyPrefab, m_EnemiesContainer);
                         card.Set(visual);
+                        card.enabled = false;
                         break;
                 }
             }

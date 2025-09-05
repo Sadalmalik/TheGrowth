@@ -7,7 +7,7 @@ namespace XandArt.TheGrowth
 {
     public class AutosaveManager : IShared, ITickable
     {
-        public const float AutosaveDelay = 5 * 60;
+        public const float AutosaveDelay = 10;
 
         [Inject]
         private PersistenceManager _persistenceManager;
@@ -33,7 +33,7 @@ namespace XandArt.TheGrowth
                 _nextTime = Time.unscaledTime + AutosaveDelay;
                 if (_gameManager.CurrentGameState != null)
                 {
-                    var date = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    var date = DateTime.Now.ToString("yyyy.MM.dd-HH.mm.ss");
                     _gameManager.SaveGame($"{date}-autosave");
                 }
             }

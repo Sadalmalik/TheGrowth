@@ -26,9 +26,7 @@ namespace XandArt.TheGrowth
         
         public override Entity Create()
         {
-            var entity = new Location { _model = this };
-            entity.Init();
-            return entity;
+            return new Location { _model = this };
         }
     }
 }

@@ -27,11 +27,11 @@ namespace XandArt.TheGrowth
         [JsonIgnore]
         [Inject]
         private GameManager _gameManager;
-
+        
         [JsonIgnore]
         [Inject]
-        private LocationManager _locationManager;
-
+        private ExpeditionManager _expeditionManager;
+        
         [JsonIgnore]
         [Inject]
         private MenuManager _menuManager;
@@ -47,9 +47,10 @@ namespace XandArt.TheGrowth
 
 #region Lifecycle
 
-        public async Task Load()
+        public async Task OnLoad()
         {
-            await _locationManager.LoadLocation(this);
+            Debug.Log($"TEST - Location.Load: {Model} ( {Model.Scene} )");
+            
             var scene = SceneManager.GetSceneByName(Model.Scene);
             SceneManager.SetActiveScene(scene);
             
@@ -66,13 +67,20 @@ namespace XandArt.TheGrowth
                 }
 
                 Board!.Initialize(gameState, Hierarchy.tableGrid);
+                
+                _expeditionManager.SetBoard(Board);
             }
         }
 
-        public async Task Unload()
+        public async Task OnUnload()
         {
             Hierarchy = null;
-            await _locationManager.UnloadLocation(this);
+            if (Board == null) return;
+            _expeditionManager.SetBoard(null);
+            
+            var gameState = _gameManager.CurrentGameState;
+            gameState.Destroy(Board);
+            _board = null;
         }
 
 #endregion

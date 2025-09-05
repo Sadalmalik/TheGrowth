@@ -20,6 +20,9 @@ namespace XandArt.TheGrowth
 
         public async Task LoadLocation(Location location)
         {
+            if (location == null)
+                return;
+            
             Debug.LogWarning($"Load location: {location.Model.Scene}");
             // var screen = _menuManager.LoadingScreen;
             // await screen.ShowAsync();
@@ -33,11 +36,15 @@ namespace XandArt.TheGrowth
             {
                 operation.completed += op => { result.SetResult(true); };
                 await result.Task;
+                await location.OnLoad();
             }
         }
 
         public async Task UnloadLocation(Location location)
         {
+            if (location == null)
+                return;
+            
             Debug.LogWarning($"Unload location: {location.Model.Scene}");
             // var screen = _menuManager.LoadingScreen;
             // await screen.ShowAsync();
@@ -46,6 +53,7 @@ namespace XandArt.TheGrowth
 
             _menuManager.SetMainScreenActive(false);
             
+            await location.OnUnload();
             var result = new TaskCompletionSource<bool>();
             var operation = SceneManager.UnloadSceneAsync(location.Model.Scene);
             if (operation != null)

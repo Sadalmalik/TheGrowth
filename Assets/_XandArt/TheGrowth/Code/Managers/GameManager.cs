@@ -38,7 +38,7 @@ namespace XandArt.TheGrowth
 
             PlayerPrefs.SetString(LastSavePref, "last_game");
             _persistenceManager.Save("last_game", CurrentGameState);
-            CurrentGameState.ActiveLocation.Unload();
+            _ = _locationManager.UnloadLocation(CurrentGameState.ActiveLocation);
             CurrentGameState = null;
 
             Game.BaseContext.GetRequired<GlobalData>().currentState = null;

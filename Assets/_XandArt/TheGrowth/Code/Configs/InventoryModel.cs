@@ -11,9 +11,7 @@ namespace XandArt.TheGrowth
     {        
         public override Entity Create()
         {
-            var entity = new Inventory() { _model = this };
-            entity.Init();
-            return entity;
+            return new Inventory { _model = this };
         }
     }
 }
