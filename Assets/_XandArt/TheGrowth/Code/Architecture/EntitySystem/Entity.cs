@@ -16,7 +16,7 @@ namespace XandArt.Architecture
         public AbstractEntityModel Model => _model;
         
         [JsonIgnore]
-        public IEntityView View;
+        public IEntityView View { get; private set; }
         
         public Entity(bool makeGuid = true)
         {
@@ -30,6 +30,12 @@ namespace XandArt.Architecture
             OnInitOrPostLoad();
         }
 
+        public void SetView(IEntityView view)
+        {
+            View = view;
+            View.Data = this;
+        }
+
         public virtual void OnInit() {}
         public virtual void OnDestroy() {}
         public virtual void OnPreSave() {}
@@ -39,7 +45,7 @@ namespace XandArt.Architecture
 
         public override string ToString()
         {
-            return $"{Model.name}#{Guid}";
+            return $"{Model?.name ?? GetType().Name}#{Guid}";
         }
     }
 }

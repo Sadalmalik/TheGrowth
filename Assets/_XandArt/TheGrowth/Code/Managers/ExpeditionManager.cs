@@ -33,39 +33,56 @@ namespace XandArt.TheGrowth
             if (location == null) return;
             if (location.Board == null) return;
 
+            var prefab = CardsViewConfig.Instance.entityCardPrefab;
             var gameState = _gameManager.CurrentGameState;
-            var slots = location.Board.Slots.Values;
+            var slots = location.Board.Slots.Values.ToList();
+            var cards = new List<CompositeEntity>();
             if (!location.IsSaved)
             {
-                var cards = new Queue<CompositeEntity>(
-                    location.Model.Deck
-                        .CreateCards(gameState, slots.Count)
-                        .Select(e => e as CompositeEntity)
-                );
+                var deckView = location.Hierarchy.deckSlot;
+                
+                var deckSlot = gameState.Create<EntitySlot>();
+                deckSlot.IsTableSlot = false;
+                deckSlot.Position = deckView.transform.position;
+                deckSlot.SetView(location.Hierarchy.deckSlot);
+                
+                cards.AddRange(location.Model.Deck.CreateCards(gameState, slots.Count));
+                foreach (var card in cards)
+                {
+                    var view = CreateView(card, deckView.transform);
+                    _ = card.MoveTo(deckSlot, instant: true);
+                    view.Flip(null, true);
+                }
+                slots.Shuffle();
+                _ = deckSlot.DealCards(slots, Game.BaseContext);
+            }
+            else
+            {
                 foreach (var slot in slots)
                 {
-                    if (cards.Count==0) break;
-                    slot.Add(cards.Dequeue());
+                    var parent = slot.SlotView.Object.transform;
+                    var count = slot.Count;
+                    for (var i = 0; i < count; i++)
+                    {
+                        var card = slot[i];
+                        var view = CreateView(card, parent);
+                        view.MoveTo(slot, null, true, i);
+                    
+                        if (!card.GetComponent<CardBrain.Component>().IsFaceUp)
+                            view.Flip(null, true);
+                    }
                 }
             }
 
-            var prefab = CardsViewConfig.Instance.entityCardPrefab;
-            foreach (var slot in slots)
+            return;
+
+            EntityCardView CreateView(CompositeEntity card, Transform parent)
             {
-                var parent = slot.SlotView.Object.transform;
-                var count = slot.Count;
-                for (var i = 0; i < count; i++)
-                {
-                    var card = slot[i];
-                    var view = Object.Instantiate(prefab, parent);
-                    var visual = card.Model.GetComponent<CardVisual>();
-                    if (visual != null) view.SetVisual(visual);
-                    card.View = view;
-                    view.MoveTo(slot, null, true, i);
-                    
-                    if (!card.GetComponent<CardBrain.Component>().IsFaceUp)
-                        view.Flip(null, true);
-                }
+                var view = Object.Instantiate(prefab, parent);
+                var visual = card.Model.GetComponent<CardVisual>();
+                if (visual != null) view.SetVisual(visual);
+                card.SetView(view);
+                return view;
             }
         }
 

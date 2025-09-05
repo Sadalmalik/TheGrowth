@@ -10,6 +10,8 @@ namespace XandArt.TheGrowth
 
         public GameObject Object => gameObject;
 
+        Entity IEntityView.Data { get; set; }
+
         public void ShowMarker(bool active)
         {
             Marker?.SetActive(active);

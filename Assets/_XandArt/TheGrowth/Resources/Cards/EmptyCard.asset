@@ -66,13 +66,7 @@ MonoBehaviour:
       Entry: 5
       Data: false
     - Name: SpawnSlot
-      Entry: 7
-      Data: 3|XandArt.TheGrowth.Random`1[[XandArt.TheGrowth.EntitySlot, Code]], Code
-    - Name: Collection
       Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
       Data: 
     - Name: AllowedMoves
       Entry: 6

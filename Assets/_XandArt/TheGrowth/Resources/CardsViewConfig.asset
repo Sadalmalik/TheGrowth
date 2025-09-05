@@ -27,5 +27,6 @@ MonoBehaviour:
   randomAngle: 3
   flipDuration: 0.3
   jumpDuration: 0.4
+  dealDelay: 1
   dealDuration: 1.5
   cameraMoveDuration: 1.5

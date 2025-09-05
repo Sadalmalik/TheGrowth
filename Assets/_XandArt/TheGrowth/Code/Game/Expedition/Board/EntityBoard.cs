@@ -42,12 +42,12 @@ namespace XandArt.TheGrowth
                     slot.IsTableSlot = true;
                     slot.Index = index;
                     slot.Position = view.transform.position;
-                    slot.View = view;
+                    slot.SetView(view);
                     Slots[index] = slot;
                 }
                 else
                 {
-                    Slots[index].View = view;
+                    Slots[index].SetView(view);
                 }
             }
         }

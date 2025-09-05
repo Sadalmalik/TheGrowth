@@ -28,7 +28,7 @@ namespace XandArt.TheGrowth
 
         public IEnumerable<EntityModel> Entities => entries.Select(entry => entry.Entity).Distinct();
 
-        public List<Entity> CreateCards(GameState gameState, int limit)
+        public List<CompositeEntity> CreateCards(GameState gameState, int limit)
         {
             var models = new List<EntityModel>();
             foreach (var entry in entries)
@@ -40,7 +40,7 @@ namespace XandArt.TheGrowth
             }
             models.Shuffle();
 
-            return models.Select(gameState.Create).ToList();
+            return models.Select(gameState.Create<CompositeEntity>).ToList();
         }
     }
 }

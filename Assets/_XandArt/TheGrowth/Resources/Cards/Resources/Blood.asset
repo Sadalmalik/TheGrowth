@@ -67,20 +67,7 @@ MonoBehaviour:
       Entry: 5
       Data: false
     - Name: SpawnSlot
-      Entry: 7
-      Data: 3|XandArt.TheGrowth.Random`1[[XandArt.TheGrowth.EntitySlot, Code]], Code
-    - Name: Collection
-      Entry: 7
-      Data: 4|XandArt.TheGrowth.Random`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.EntitySlot,
-        Code]], System.Core]], Code
-    - Name: Collection
       Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
       Data: 
     - Name: AllowedMoves
       Entry: 6
@@ -108,7 +95,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|XandArt.TheGrowth.Stackable, Code
+      Data: 3|XandArt.TheGrowth.Stackable, Code
     - Name: Limit
       Entry: 3
       Data: 40

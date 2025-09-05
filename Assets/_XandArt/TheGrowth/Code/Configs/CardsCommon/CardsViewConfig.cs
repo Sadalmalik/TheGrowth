@@ -25,6 +25,9 @@ namespace XandArt.TheGrowth
         public float jumpDuration = 0.4f;
 
         [Space]
+        public float dealDelay = 1.0f;
+        
+        [Space]
         public float dealDuration = 1.5f;
 
         [Space]

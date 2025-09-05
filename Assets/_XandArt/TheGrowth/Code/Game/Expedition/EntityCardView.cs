@@ -11,7 +11,9 @@ namespace XandArt.TheGrowth
     public partial class EntityCardView : SerializedMonoBehaviour, IEntityView
     {
         public GameObject Object => gameObject;
-        
+
+        Entity IEntityView.Data { get; set; }
+
         [FormerlySerializedAs("model")]
         public Transform innerTransform;
         
@@ -59,6 +61,7 @@ namespace XandArt.TheGrowth
                 .AppendCallback(() =>
                 {
                     _tween = null;
+                    transform.SetParent(slot.SlotView.Object.transform);
                     onComplete?.Invoke();
                     OnAnimationComplete?.Invoke();
                 });

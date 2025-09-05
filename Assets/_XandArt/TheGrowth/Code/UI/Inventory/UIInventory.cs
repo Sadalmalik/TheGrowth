@@ -43,7 +43,7 @@ namespace XandArt.TheGrowth
 
         public void OnEnable()
         {
-            Debug.Log("UIInventorySlot.OnEnable");
+            // Debug.Log("UIInventorySlot.OnEnable");
             m_Container ??= transform;
             
             RefreshView();
@@ -51,14 +51,14 @@ namespace XandArt.TheGrowth
 
         public void OnDisable()
         {
-            Debug.Log("UIInventorySlot.OnDisable");
+            // Debug.Log("UIInventorySlot.OnDisable");
         }
 
         public void OnDrop(PointerEventData eventData)
         {
             var item = eventData.pointerDrag.GetComponent<UIItem>();
 
-            Debug.Log($"OnDrag over Inventory: {item}");
+            // Debug.Log($"OnDrag over Inventory: {item}");
 
             if (!IsValidEntity(item?.Data as CompositeEntity))
                 return;
@@ -77,7 +77,6 @@ namespace XandArt.TheGrowth
             
             var fromInventory = m_GameManager.CurrentGameState.GetInventory(item.Inventory.m_Inventory);
             var intoInventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
-            Debug.Log($"Move item {fromInventory} -> {intoInventory}");
             InventoryUtils.MoveItem(item.Data, fromInventory, intoInventory, m_AllowStack);
 
             item.TargetTransform = m_Container;

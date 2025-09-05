@@ -32,7 +32,6 @@ namespace XandArt.TheGrowth
 
         [Space]
         public List<Command> OnPlaced;
-
         public List<Command> OnPlacedFirstTime;
         public List<Command> OnFlipped;
         public List<Command> OnStep;
