@@ -21,8 +21,11 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  CardThickness: 0.01
-  RandomAngle: 8
+  entityCardPrefab: {fileID: 8621798118748405003, guid: f163897a31fb56e499887468c05baf71,
+    type: 3}
+  cardThickness: 0.01
+  randomAngle: 3
   flipDuration: 0.3
   jumpDuration: 0.4
   dealDuration: 1.5
+  cameraMoveDuration: 1.5

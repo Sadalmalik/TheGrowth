@@ -16,6 +16,9 @@ namespace XandArt.TheGrowth
         [JsonProperty]
         private Ref<EntityBoard> _board;
 
+        [JsonProperty]
+        private bool _isSaved;
+        
 #endregion
 
 
@@ -27,11 +30,7 @@ namespace XandArt.TheGrowth
         [JsonIgnore]
         [Inject]
         private GameManager _gameManager;
-        
-        [JsonIgnore]
-        [Inject]
-        private ExpeditionManager _expeditionManager;
-        
+
         [JsonIgnore]
         [Inject]
         private MenuManager _menuManager;
@@ -41,11 +40,19 @@ namespace XandArt.TheGrowth
 
         [JsonIgnore]
         public EntityBoard Board => _board;
+        
+        [JsonIgnore]
+        public bool IsSaved => _isSaved;
 
 #endregion
 
 
 #region Lifecycle
+
+        public override void OnPreSave()
+        {
+            _isSaved = true;
+        }
 
         public async Task OnLoad()
         {
@@ -67,8 +74,6 @@ namespace XandArt.TheGrowth
                 }
 
                 Board!.Initialize(gameState, Hierarchy.tableGrid);
-                
-                _expeditionManager.SetBoard(Board);
             }
         }
 
@@ -76,9 +81,9 @@ namespace XandArt.TheGrowth
         {
             Hierarchy = null;
             if (Board == null) return;
-            _expeditionManager.SetBoard(null);
             
             var gameState = _gameManager.CurrentGameState;
+            Board.Dispose(gameState);
             gameState.Destroy(Board);
             _board = null;
         }

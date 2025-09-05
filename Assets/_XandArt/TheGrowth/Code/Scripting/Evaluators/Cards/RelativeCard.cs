@@ -22,8 +22,8 @@ namespace XandArt.TheGrowth
             var entityCard = Card.Evaluate(context) as CompositeEntity;
             if (entityCard == null) return null;
             
-            var card = entityCard.GetComponent<CardBrain.Component>();
-            var list = card.Slot.Cards;
+            var slot = entityCard.GetComponent<CardBrain.Component>().Slot;
+            var list = slot.Cards;
             var index = list.IndexOf(entityCard);
 
             switch (Variant)

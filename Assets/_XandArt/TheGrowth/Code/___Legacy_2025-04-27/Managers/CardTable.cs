@@ -12,8 +12,10 @@ namespace XandArt.TheGrowth
         [Space]
         [OnValueChanged(nameof(InternalRebuild))]
         public Vector2Int size = new Vector2Int(5, 5);
+        
         [OnValueChanged(nameof(InternalRebuild))]
         public Vector3 xStep = Vector3.right;
+        
         [OnValueChanged(nameof(InternalRebuild))]
         public Vector3 yStep = Vector3.forward;
 

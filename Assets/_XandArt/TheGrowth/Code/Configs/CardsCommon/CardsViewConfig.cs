@@ -10,11 +10,13 @@ namespace XandArt.TheGrowth
         order = 1)]
     public class CardsViewConfig : SingletonScriptableObject<CardsViewConfig>
     {
-        public EntityCard cardPrefab;
+        [FormerlySerializedAs("cardPrefab")]
+        public EntityCardView entityCardPrefab;
         
         [Space]
         [FormerlySerializedAs("CardThickness")]
         public float cardThickness = 0.1f;
+
         [FormerlySerializedAs("RandomAngle")]
         public float randomAngle = 15f;
 

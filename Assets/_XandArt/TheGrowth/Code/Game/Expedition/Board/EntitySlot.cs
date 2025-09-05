@@ -36,41 +36,47 @@ namespace XandArt.TheGrowth
         public List<CompositeEntity> Cards => _cardsList;
 
         [JsonIgnore]
-        public bool IsEmpty => _cards.Count == 0;
+        public bool IsEmpty => _cardsList.Count == 0;
 
         [JsonIgnore]
-        public int Count => _cards.Count;
+        public int Count => _cardsList.Count;
 
         [JsonIgnore]
         public CompositeEntity this[int key]
         {
-            get => _cards[key];
-            set => _cards[key] = value;
+            get => _cardsList[key];
+            set => _cardsList[key] = value;
         }
 
 #endregion
 
 
-#region Slot API
+#region Lifecycle
+
+        public override void OnInit()
+        {
+            _cards = new List<Ref<CompositeEntity>>();
+            _cardsList = new List<CompositeEntity>();
+        }
 
         public void Add(CompositeEntity card)
         {
-            _cards.Add(card);
+            _cardsList.Add(card);
         }
 
         public void Remove(CompositeEntity card)
         {
-            _cards.Remove(card);
+            _cardsList.Remove(card);
         }
 
         public CompositeEntity Top()
         {
-            return _cards.Top();
+            return _cardsList.Top();
         }
 
         public CompositeEntity Peek()
         {
-            return _cards.Peek();
+            return _cardsList.Peek();
         }
 
         public void ShowMarker(bool show)
@@ -78,11 +84,12 @@ namespace XandArt.TheGrowth
             SlotView?.ShowMarker(show);
         }
 
-        public Vector3 GetNewPosition()
+        public Vector3 GetNewPosition(int index)
         {
             if (SlotView == null) return Position;
+            if (index == -1) index = 1 + _cardsList.Count;
             return SlotView.transform.position +
-                   SlotView.transform.up * CardsViewConfig.Instance.cardThickness * (1 + _cards.Count);
+                   SlotView.transform.up * CardsViewConfig.Instance.cardThickness * index;
         }
 
         public Vector3 GetNewRotation()
@@ -112,6 +119,10 @@ namespace XandArt.TheGrowth
             {
                 _cardsList.Add(cardRef);
             }
+        }
+
+        public override void OnDestroy()
+        {
         }
 
 #endregion

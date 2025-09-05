@@ -2,7 +2,7 @@
 
 namespace XandArt.TheGrowth
 {
-    public class Draggable : MonoBehaviour
+    public class Obsolete_Draggable : MonoBehaviour
     {
         private Vector3 _startMousePosition;
 

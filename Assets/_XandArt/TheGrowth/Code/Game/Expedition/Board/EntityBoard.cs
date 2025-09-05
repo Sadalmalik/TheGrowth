@@ -12,6 +12,9 @@ namespace XandArt.TheGrowth
         [JsonProperty]
         private List<Ref<EntitySlot>> _slots;
 
+        [JsonProperty]
+        private List<Ref<EntitySlot>> _deck;
+
 #endregion
 
 
@@ -47,6 +50,12 @@ namespace XandArt.TheGrowth
                     Slots[index].View = view;
                 }
             }
+        }
+
+        public void Dispose(GameState gameState)
+        {
+            foreach (var slot in Slots.Values)
+                gameState.Destroy(slot);
         }
 
         public override void OnPreSave()

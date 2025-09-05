@@ -24,9 +24,6 @@ namespace XandArt.Architecture
         [JsonIgnore]
         public IReadOnlyCollection<EntityComponent> Components => _components;
 
-        [JsonIgnore]
-        public GameObject View { get; set; }
-
         public override void OnPreSave()
         {
             foreach (var component in Components)

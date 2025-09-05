@@ -14,7 +14,7 @@ namespace XandArt.TheGrowth
         
         public class Component : EntityComponent
         {
-            private CardView _view;
+            private EntityCardView _view;
             private int _charges;
             
             public int Charges

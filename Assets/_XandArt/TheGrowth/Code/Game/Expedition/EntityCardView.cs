@@ -1,15 +1,19 @@
 ﻿using System;
 using DG.Tweening;
-using TMPro;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
-    public partial class CardView : MonoBehaviour
+    public partial class EntityCardView : SerializedMonoBehaviour, IEntityView
     {
-        public Transform model;
+        public GameObject Object => gameObject;
+        
+        [FormerlySerializedAs("model")]
+        public Transform innerTransform;
         
         public GameObject faceObject;
         public Image decor;
@@ -33,9 +37,9 @@ namespace XandArt.TheGrowth
             faceObject.SetActive(visible);
         }
 
-        public void MoveTo(EntitySlot slot, Action onComplete, bool instant = false)
+        public void MoveTo(EntitySlot slot, Action onComplete, bool instant = false, int index=-1)
         {
-            var endPosition = slot.GetNewPosition();
+            var endPosition = slot.GetNewPosition(index);
             var endRotation = slot.GetNewRotation();
 
             if (instant)
@@ -62,12 +66,15 @@ namespace XandArt.TheGrowth
 
         public void Flip(Action onComplete, bool instant = false)
         {
-            var angle = model.localRotation.eulerAngles.z;
+            var angle = innerTransform.localRotation.eulerAngles.z;
+            angle = (angle + 180) % 360;
+            
             if (instant)
             {
-                model.rotation = Quaternion.Euler(0, 0, angle);
+                innerTransform.rotation = Quaternion.Euler(0, 0, angle);
                 onComplete?.Invoke();
                 OnAnimationComplete?.Invoke();
+                return;
             }
 
             bool wasFaceUp = _isFaceUp;
@@ -76,12 +83,11 @@ namespace XandArt.TheGrowth
                 SetFaceVisible(true);
 
             var duration = CardsViewConfig.Instance.flipDuration;
-            angle = (angle + 180) % 360;
             _tween?.Kill();
             _tween = DOTween.Sequence()
-                .Append(model.DOLocalMove(Vector3.up, duration * 0.25f))
-                .Append(model.DOLocalRotate(new Vector3(0, 0, angle), duration * 0.5f))
-                .Append(model.DOLocalMove(Vector3.zero, duration * 0.25f))
+                .Append(innerTransform.DOLocalMove(Vector3.up, duration * 0.25f))
+                .Append(innerTransform.DOLocalRotate(new Vector3(0, 0, angle), duration * 0.5f))
+                .Append(innerTransform.DOLocalMove(Vector3.zero, duration * 0.25f))
                 .AppendCallback(() =>
                 {
                     _tween = null;

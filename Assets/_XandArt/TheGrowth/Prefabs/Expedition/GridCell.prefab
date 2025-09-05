@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 495841026094504779}
   - component: {fileID: 2305106442329789174}
+  - component: {fileID: 1156439632087451439}
   m_Layer: 0
   m_Name: GridCell
   m_TagString: Untagged
@@ -136,6 +137,28 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   index: {x: 0, y: 0}
+--- !u!114 &1156439632087451439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495841026094504780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e5b8e3afe5448db6be100cf560b84e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  Marker: {fileID: 8458862750832602618}
 --- !u!1 &8458862750832602618
 GameObject:
   m_ObjectHideFlags: 0

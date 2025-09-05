@@ -28,26 +28,19 @@ namespace XandArt.TheGrowth
 
         public IEnumerable<EntityModel> Entities => entries.Select(entry => entry.Entity).Distinct();
 
-        public List<Entity> CreateDeck()
+        public List<Entity> CreateCards(GameState gameState, int limit)
         {
-            var cards = new List<Entity>();
-            for (int i = 0; i < entries.Count; i++)
+            var models = new List<EntityModel>();
+            foreach (var entry in entries)
             {
-                var config = entries[i].Entity;
-                var amount = entries[i].Amount;
+                var config = entry.Entity;
+                var amount = entry.Amount;
                 for (int k = 0; k < amount; k++)
-                {
-                    var card = config.Create();
-                    cards.Add(card);
-                }
+                    models.Add(config);
             }
+            models.Shuffle();
 
-            if (shuffleOnStart)
-            {
-                cards.Shuffle();
-            }
-
-            return cards;
+            return models.Select(gameState.Create).ToList();
         }
     }
 }

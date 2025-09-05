@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using XandArt.Architecture.IOC;
@@ -10,6 +11,9 @@ namespace XandArt.TheGrowth
         [Inject]
         private MenuManager _menuManager;
 
+        public event Action<Location> OnLocationLoaded;
+        public event Action<Location> OnLocationUnloaded;
+        
         public void Init()
         {
         }
@@ -22,10 +26,7 @@ namespace XandArt.TheGrowth
         {
             if (location == null)
                 return;
-            
-            Debug.LogWarning($"Load location: {location.Model.Scene}");
-            // var screen = _menuManager.LoadingScreen;
-            // await screen.ShowAsync();
+
             using var screenTask = await LoadingTracker.CreateAsync();
 
             _menuManager.SetMainScreenActive(false);
@@ -37,6 +38,8 @@ namespace XandArt.TheGrowth
                 operation.completed += op => { result.SetResult(true); };
                 await result.Task;
                 await location.OnLoad();
+                OnLocationLoaded?.Invoke(location);
+                    
             }
         }
 
@@ -44,16 +47,14 @@ namespace XandArt.TheGrowth
         {
             if (location == null)
                 return;
-            
-            Debug.LogWarning($"Unload location: {location.Model.Scene}");
-            // var screen = _menuManager.LoadingScreen;
-            // await screen.ShowAsync();
-            
+
             using var screenTask = await LoadingTracker.CreateAsync();
 
             _menuManager.SetMainScreenActive(false);
             
             await location.OnUnload();
+            OnLocationUnloaded?.Invoke(location);
+            
             var result = new TaskCompletionSource<bool>();
             var operation = SceneManager.UnloadSceneAsync(location.Model.Scene);
             if (operation != null)

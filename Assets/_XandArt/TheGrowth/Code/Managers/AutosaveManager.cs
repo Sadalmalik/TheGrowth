@@ -7,7 +7,7 @@ namespace XandArt.TheGrowth
 {
     public class AutosaveManager : IShared, ITickable
     {
-        public const float AutosaveDelay = 10;
+        public const float AutosaveDelay = 5 * 60;
 
         [Inject]
         private PersistenceManager _persistenceManager;

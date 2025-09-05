@@ -6,9 +6,10 @@ using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
+    [Obsolete]
     public class EntityCard : MonoBehaviour
     {
-        public CardView view;
+        public EntityCardView view;
         [FormerlySerializedAs("config")]
         public EntityModel model;
         public CardBrain ModelBrain;

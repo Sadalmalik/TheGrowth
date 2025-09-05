@@ -23,17 +23,17 @@ namespace XandArt.TheGrowth
         
         public void Start()
         {
-            var cards = deck.CreateDeck();
-            foreach (var card in cards)
-            {
-                // card.AllowEvents = false;
-                // card.MoveTo(deckSlot, instant: true);
-                //
-                // if (card.CanBeDragged)
-                // {
-                //     m_PlayerCard = card;
-                // }
-            }
+            // var cards = deck.CreateDeck(null);
+            // foreach (var card in cards)
+            // {
+            //     // card.AllowEvents = false;
+            //     // card.MoveTo(deckSlot, instant: true);
+            //     //
+            //     // if (card.CanBeDragged)
+            //     // {
+            //     //     m_PlayerCard = card;
+            //     // }
+            // }
         }
 
 
