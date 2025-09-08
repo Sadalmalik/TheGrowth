@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 
 namespace XandArt.Architecture
@@ -33,7 +34,8 @@ namespace XandArt.Architecture
         public void SetView(IEntityView view)
         {
             View = view;
-            View.Data = this;
+            if (View != null)
+                View.Data = this;
         }
 
         public virtual void OnInit() {}

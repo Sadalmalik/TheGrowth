@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 495841026094504779}
   - component: {fileID: 2305106442329789174}
   - component: {fileID: 1156439632087451439}
+  - component: {fileID: 6845042682231290415}
   m_Layer: 0
   m_Name: GridCell
   m_TagString: Untagged
@@ -159,6 +160,19 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   Marker: {fileID: 8458862750832602618}
+--- !u!65 &6845042682231290415
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495841026094504780}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 0.1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8458862750832602618
 GameObject:
   m_ObjectHideFlags: 0

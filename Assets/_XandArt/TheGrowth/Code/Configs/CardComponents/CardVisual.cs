@@ -17,7 +17,7 @@ namespace XandArt.TheGrowth
         [PreviewField(200)]
         public Sprite Portrait;
         
-        public EntityCard CustomPrefab;
+        public EntityCardView CustomPrefab;
         
         public void OnEntityCreated(CompositeEntity card)
         {

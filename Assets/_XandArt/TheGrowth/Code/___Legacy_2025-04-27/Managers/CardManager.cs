@@ -94,7 +94,7 @@ namespace XandArt.TheGrowth
                 if (card != null && card.CanBeDragged)
                 {
                     // Start Drag
-                    Debug.Log($"Start drad: {card}");
+                    Debug.Log($"Start drag: {card}");
                     _startDragPosition = GetTablePositionUnderCursor() - card.transform.position;
                     _draggedCard = card;
                     _moves = _draggedCard.GetAllowedMoves();

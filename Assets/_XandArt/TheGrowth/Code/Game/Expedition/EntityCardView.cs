@@ -12,7 +12,7 @@ namespace XandArt.TheGrowth
     {
         public GameObject Object => gameObject;
 
-        Entity IEntityView.Data { get; set; }
+        public Entity Data { get; set; }
 
         [FormerlySerializedAs("model")]
         public Transform innerTransform;
@@ -20,7 +20,8 @@ namespace XandArt.TheGrowth
         public GameObject faceObject;
         public Image decor;
         public Image portrait;
-
+        public Collider cardCollider;
+        
         private Sequence _tween;
         private bool _isFaceUp;
 

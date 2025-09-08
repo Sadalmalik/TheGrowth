@@ -6,6 +6,6 @@ namespace XandArt.Architecture
     {
         public GameObject Object { get; }
 
-        public Entity Data { get; internal set; }
+        public Entity Data { get; set; }
     }
 }

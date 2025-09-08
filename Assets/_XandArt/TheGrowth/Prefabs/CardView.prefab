@@ -710,7 +710,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 3
@@ -787,7 +787,6 @@ GameObject:
   - component: {fileID: 8621798118748405001}
   - component: {fileID: 8621798118748405000}
   - component: {fileID: 8621798118748405003}
-  - component: {fileID: 8621798118748404998}
   m_Layer: 8
   m_Name: CardView
   m_TagString: Untagged
@@ -849,17 +848,4 @@ MonoBehaviour:
   faceObject: {fileID: 2245679918746579259}
   decor: {fileID: 2245679917308147367}
   portrait: {fileID: 629782729985132061}
---- !u!114 &8621798118748404998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8621798118748404999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 772815fd8e4245cb8e50f527f073a56d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  view: {fileID: 8621798118748405003}
-  model: {fileID: 0}
+  cardCollider: {fileID: 8621798118748405000}
