@@ -31,7 +31,7 @@ namespace XandArt.Architecture
             OnInitOrPostLoad();
         }
 
-        public void SetView(IEntityView view)
+        public virtual void SetView(IEntityView view)
         {
             View = view;
             if (View != null)

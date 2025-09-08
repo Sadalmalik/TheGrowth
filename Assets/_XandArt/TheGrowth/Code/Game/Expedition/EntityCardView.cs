@@ -22,7 +22,8 @@ namespace XandArt.TheGrowth
         public Image portrait;
         public Collider cardCollider;
         
-        private Sequence _tween;
+        private Sequence _moveTween;
+        private Sequence _flipTween;
         private bool _isFaceUp;
 
         public bool IsFaceUp => _isFaceUp;
@@ -55,13 +56,13 @@ namespace XandArt.TheGrowth
             }
 
             var duration = CardsViewConfig.Instance.jumpDuration;
-            _tween?.Kill();
-            _tween = DOTween.Sequence()
+            _moveTween?.Kill();
+            _moveTween = DOTween.Sequence()
                 .Append(transform.DOJump(endPosition, 3, 1, duration))
                 .Insert(0, transform.DORotate(endRotation, duration))
                 .AppendCallback(() =>
                 {
-                    _tween = null;
+                    _moveTween = null;
                     transform.SetParent(slot.SlotView.Object.transform);
                     onComplete?.Invoke();
                     OnAnimationComplete?.Invoke();
@@ -87,14 +88,14 @@ namespace XandArt.TheGrowth
                 SetFaceVisible(true);
 
             var duration = CardsViewConfig.Instance.flipDuration;
-            _tween?.Kill();
-            _tween = DOTween.Sequence()
+            _flipTween?.Kill();
+            _flipTween = DOTween.Sequence()
                 .Append(innerTransform.DOLocalMove(Vector3.up, duration * 0.25f))
                 .Append(innerTransform.DOLocalRotate(new Vector3(0, 0, angle), duration * 0.5f))
                 .Append(innerTransform.DOLocalMove(Vector3.zero, duration * 0.25f))
                 .AppendCallback(() =>
                 {
-                    _tween = null;
+                    _flipTween = null;
 
                     if (wasFaceUp)
                         SetFaceVisible(false);

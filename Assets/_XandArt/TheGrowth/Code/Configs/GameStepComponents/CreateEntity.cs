@@ -11,6 +11,7 @@ namespace XandArt.TheGrowth
         {
             foreach (var model in Models)
             {
+                if (model == null) continue;
                 state.Create(model);
             }
         }

@@ -21,7 +21,23 @@ namespace XandArt.TheGrowth
         {
             var card = Card.Evaluate(context);
             var brain = card.GetComponent<CardBrain.Component>();
-            brain?.FlipCard(null, false);
+            if (brain == null) return;
+
+            switch (Variant)
+            {
+                case EVariant.Flip:
+                    brain.FlipCard(null, false);
+                    break;
+                case EVariant.Reveal:
+                    if (!brain.IsFaceUp)
+                        brain.FlipCard(null, false);
+                    break;
+                case EVariant.Hide:
+                    if (brain.IsFaceUp)
+                        brain.FlipCard(null, false);
+                    break;
+                    
+            }
         }
     }
 }

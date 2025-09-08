@@ -38,5 +38,15 @@ namespace XandArt.TheGrowth
             if (m_HideOnAwake)
                 gameObject.SetActive(false);
         }
+
+        private void OnDestroy()
+        {
+            if (m_Groups.TryGetValue(m_GroupId, out var groups))
+            {
+                groups.Remove(this);
+                if (groups.Count == 0)
+                    m_Groups.Remove(m_GroupId);
+            }
+        }
     }
 }

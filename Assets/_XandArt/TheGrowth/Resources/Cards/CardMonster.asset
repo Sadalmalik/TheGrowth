@@ -72,7 +72,7 @@ MonoBehaviour:
     - Name: AllowedMoves
       Entry: 6
       Data: 
-    - Name: OnPlaced
+    - Name: OnPlacedFirstTime
       Entry: 7
       Data: 3|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
@@ -85,7 +85,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: OnPlacedFirstTime
+    - Name: OnPlaced
       Entry: 7
       Data: 4|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib

@@ -71,10 +71,10 @@ MonoBehaviour:
     - Name: AllowedMoves
       Entry: 6
       Data: 
-    - Name: OnPlaced
+    - Name: OnPlacedFirstTime
       Entry: 6
       Data: 
-    - Name: OnPlacedFirstTime
+    - Name: OnPlaced
       Entry: 6
       Data: 
     - Name: OnFlipped

@@ -40,6 +40,11 @@ namespace XandArt.TheGrowth
 
             _data[typeof(TData)] = data;
         }
+        
+        public void Remove<TData>() where TData : IContextData
+        {
+            _data.Remove(typeof(TData));
+        }
 
         public TData GetOptional<TData>() where TData : class, IContextData
         {

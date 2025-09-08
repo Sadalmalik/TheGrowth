@@ -40,12 +40,14 @@ namespace XandArt.Architecture
         {
             var component = new T();
             _components.Add(component);
+            component.Owner = this;
             return component;
         }
 
         public T AddComponent<T>(T component) where T : EntityComponent
         {
             _components.Add(component);
+            component.Owner = this;
             return component;
         }
 

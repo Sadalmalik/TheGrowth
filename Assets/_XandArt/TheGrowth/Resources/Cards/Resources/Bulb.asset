@@ -25,7 +25,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: dab00cc110e207b46b98ec91564df108
+      Data: 89e7a7510db3dfd4e983bd8e0e95088c
     - Name: components
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[XandArt.Architecture.IEntityModelComponent,
@@ -72,10 +72,10 @@ MonoBehaviour:
     - Name: AllowedMoves
       Entry: 6
       Data: 
-    - Name: OnPlaced
+    - Name: OnPlacedFirstTime
       Entry: 6
       Data: 
-    - Name: OnPlacedFirstTime
+    - Name: OnPlaced
       Entry: 6
       Data: 
     - Name: OnFlipped

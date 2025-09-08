@@ -12,7 +12,8 @@ namespace XandArt.TheGrowth
             this CompositeEntity card,
             SlotEntity target,
             Action OnMoveComplete = null,
-            bool instant = false)
+            bool instant = false,
+            bool cardEvents = true)
         {
             var brain = card.GetComponent<CardBrain.Component>();
 
@@ -49,9 +50,12 @@ namespace XandArt.TheGrowth
 
             void HandleMoved()
             {
-                cardUncover.GetComponent<CardBrain.Component>()?.OnUnCovered(card);
-                cardCover.GetComponent<CardBrain.Component>()?.OnCovered(card);
-                brain.OnPlaced();
+                if (cardEvents)
+                {
+                    cardUncover?.GetComponent<CardBrain.Component>()?.OnUnCovered(card);
+                    cardCover?.GetComponent<CardBrain.Component>()?.OnCovered(card);
+                    brain.OnPlaced();
+                }
                 OnMoveComplete?.Invoke();
                 tcs.SetResult(true);
             }

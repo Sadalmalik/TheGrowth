@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using UnityEngine;
 using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
@@ -60,6 +61,7 @@ namespace XandArt.TheGrowth
     {
         public static void MoveItem(Entity item, Inventory from, Inventory into, bool allowStack = true)
         {
+            Debug.Log($"[TEST] MoveItem {item}]\n\tFrom: {from}\n\tInto: {into}");
             from.Remove(item);
             var stack = (item as CompositeEntity)?.GetComponent<Stackable.Component>();
 
@@ -75,6 +77,7 @@ namespace XandArt.TheGrowth
                     if (stack.Count==0) return;
                 }
             }
+            Debug.Log($"[TEST] MoveItem result:\n\tInventory: {into}\n\tCount: {into.Items.Count}");
         }
     }
 }

@@ -21,10 +21,14 @@ namespace XandArt.TheGrowth
 #region Lifecycle
 
         [JsonIgnore]
+        public Vector2Int Size;
+        
+        [JsonIgnore]
         public Dictionary<Vector2Int, SlotEntity> Slots;
 
         public void Initialize(GameState gameState, Grid grid)
         {
+            Size = grid.size;
             var sx = grid.size.x;
             var sy = grid.size.y;
 

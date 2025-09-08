@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea41eb7c33864117bf5a9d4ee88cf401, type: 3}
-  m_Name: RootConfig
+  m_Script: {fileID: 11500000, guid: b694e915bb824bb685cd28443bc654c5, type: 3}
+  m_Name: InventoryCollect
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -20,8 +20,7 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
-  startStep: {fileID: 11400000, guid: 6e3e4e75d7ffc444b8752621a599ad3a, type: 2}
-  MainInventory: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b, type: 2}
-  ExpeditionHand: {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
-  ExpeditionCollect: {fileID: 11400000, guid: 0fb19187856e38c4392e0a592174a8c5, type: 2}
+    SerializationNodes:
+    - Name: Guid
+      Entry: 2
+      Data: 685c262e01893c94daf1d9420a1be9d3

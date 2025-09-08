@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
@@ -13,6 +14,7 @@ namespace XandArt.TheGrowth
 
         [Space]
         public InventoryModel MainInventory;
-        public InventoryModel Expedition;
+        public InventoryModel ExpeditionHand;
+        public InventoryModel ExpeditionCollect;
     }
 }

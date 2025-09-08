@@ -63,10 +63,10 @@ MonoBehaviour:
       Data: 1
     - Name: CanBeDragged
       Entry: 5
-      Data: false
+      Data: true
     - Name: EndsTheTurn
       Entry: 5
-      Data: false
+      Data: true
     - Name: SpawnSlot
       Entry: 6
       Data: 
@@ -78,7 +78,7 @@ MonoBehaviour:
       Data: 3
     - Name: Evaluators
       Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[XandArt.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.EntitySlot,
+      Data: 4|System.Collections.Generic.List`1[[XandArt.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.SlotEntity,
         Code]], System.Core]], Code]], mscorlib
     - Name: 
       Entry: 12
@@ -112,7 +112,7 @@ MonoBehaviour:
       Data: 
     - Name: Figure
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: Distance
       Entry: 3
       Data: 1
@@ -151,7 +151,7 @@ MonoBehaviour:
       Data: 
     - Name: Figure
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: Distance
       Entry: 3
       Data: 0
@@ -170,13 +170,13 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: OnPlaced
+    - Name: OnPlacedFirstTime
       Entry: 7
       Data: 11|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 12|XandArt.TheGrowth.ExecuteCommands, Code
@@ -187,18 +187,51 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 13|XandArt.TheGrowth.MoveCamera, Code
+    - Name: Card
+      Entry: 7
+      Data: 14|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-    - Name: OnPlacedFirstTime
+    - Name: OnPlaced
       Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 16|XandArt.TheGrowth.ExecuteCommands, Code
+    - Name: config
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|XandArt.TheGrowth.MoveCamera, Code
+    - Name: Card
+      Entry: 7
+      Data: 18|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -207,7 +240,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFlipped
       Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 19|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -220,7 +253,7 @@ MonoBehaviour:
       Data: 
     - Name: OnStep
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 20|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -233,7 +266,7 @@ MonoBehaviour:
       Data: 
     - Name: OnCovered
       Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 21|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -246,7 +279,7 @@ MonoBehaviour:
       Data: 
     - Name: OnUnCovered
       Entry: 7
-      Data: 17|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 22|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12

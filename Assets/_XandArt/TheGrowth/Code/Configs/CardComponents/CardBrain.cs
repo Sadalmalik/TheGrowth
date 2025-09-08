@@ -41,7 +41,7 @@ namespace XandArt.TheGrowth
         public void OnEntityCreated(CompositeEntity card)
         {
             var component = card.AddComponent<Component>();
-            component.Brain = this;
+            component.Settings = this;
         }
 
         public class Component : EntityComponent
@@ -56,7 +56,7 @@ namespace XandArt.TheGrowth
             public bool IsFaceUp;
 
             [JsonIgnore]
-            public CardBrain Brain;
+            public CardBrain Settings;
 
             [JsonIgnore]
             public SlotEntity Slot
@@ -64,6 +64,12 @@ namespace XandArt.TheGrowth
                 get => _slot;
                 set => _slot = value;
             }
+            
+            [JsonIgnore]
+            public CardType Type => Settings.Type;
+            
+            [JsonIgnore]
+            public bool CanBeDragged => Settings.CanBeDragged;
 
             public void FlipCard(Action onComplete, bool instant = false)
             {
@@ -83,7 +89,7 @@ namespace XandArt.TheGrowth
             public override void OnPostLoad()
             {
                 base.OnPostLoad();
-                Brain = Owner.Model.GetComponent<CardBrain>();
+                Settings = Owner.Model.GetComponent<CardBrain>();
             }
 
             public void OnPlacedFirstTime()
@@ -91,7 +97,7 @@ namespace XandArt.TheGrowth
                 var context = new Context(
                     Game.BaseContext,
                     new ActiveCard.Data { Card = Owner });
-                Brain.OnPlacedFirstTime.ExecuteAll(context);
+                Settings.OnPlacedFirstTime.ExecuteAll(context);
             }
 
             public void OnPlaced()
@@ -99,7 +105,7 @@ namespace XandArt.TheGrowth
                 var context = new Context(
                     Game.BaseContext,
                     new ActiveCard.Data { Card = Owner });
-                Brain.OnPlaced.ExecuteAll(context);
+                Settings.OnPlaced.ExecuteAll(context);
             }
 
             public void OnFlipped()
@@ -107,7 +113,7 @@ namespace XandArt.TheGrowth
                 var context = new Context(
                     Game.BaseContext,
                     new ActiveCard.Data { Card = Owner });
-                Brain.OnFlipped.ExecuteAll(context);
+                Settings.OnFlipped.ExecuteAll(context);
             }
 
             public void OnCovered(CompositeEntity coverCard)
@@ -116,7 +122,7 @@ namespace XandArt.TheGrowth
                     Game.BaseContext,
                     new ActiveCard.Data { Card = Owner },
                     new CoveringCard.Data { Card = coverCard });
-                Brain.OnCovered.ExecuteAll(context);
+                Settings.OnCovered.ExecuteAll(context);
             }
 
             public void OnUnCovered(CompositeEntity coverCard)
@@ -125,7 +131,7 @@ namespace XandArt.TheGrowth
                     Game.BaseContext,
                     new ActiveCard.Data { Card = Owner },
                     new CoveringCard.Data { Card = coverCard });
-                Brain.OnUnCovered.ExecuteAll(context);
+                Settings.OnUnCovered.ExecuteAll(context);
             }
 
             public bool OnStep()
@@ -135,18 +141,18 @@ namespace XandArt.TheGrowth
                 var newContext = new Context(
                     Game.BaseContext,
                     new ActiveCard.Data { Card = Owner });
-                return Brain.OnStep.ExecuteAll(newContext);
+                return Settings.OnStep.ExecuteAll(newContext);
             }
 
             public HashSet<SlotEntity> GetAllowedMoves()
             {
-                if (Brain?.AllowedMoves == null)
+                if (Settings?.AllowedMoves == null)
                     return null;
 
                 var context = new Context(
                     Game.BaseContext,
                     new ActiveCard.Data { Card = Owner });
-                var moves = Brain.AllowedMoves?.Evaluate(context);
+                var moves = Settings.AllowedMoves?.Evaluate(context);
                 return moves;
             }
         }
