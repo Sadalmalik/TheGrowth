@@ -10,7 +10,7 @@ namespace XandArt.TheGrowth
     ///
     /// Except вычитает все сеты из первого
     /// </summary>
-    public class TableSlotsCombine : Evaluator<HashSet<EntitySlot>>
+    public class TableSlotsCombine : Evaluator<HashSet<SlotEntity>>
     {
         public enum EVariant
         {
@@ -21,12 +21,12 @@ namespace XandArt.TheGrowth
         }
 
         public EVariant Variant = EVariant.Union;
-        public List<Evaluator<HashSet<EntitySlot>>> Evaluators = new List<Evaluator<HashSet<EntitySlot>>>();
+        public List<Evaluator<HashSet<SlotEntity>>> Evaluators = new List<Evaluator<HashSet<SlotEntity>>>();
 
-        public override HashSet<EntitySlot> Evaluate(Context context)
+        public override HashSet<SlotEntity> Evaluate(Context context)
         {
-            HashSet<EntitySlot> result = new HashSet<EntitySlot>();
-            List<HashSet<EntitySlot>> sets = new List<HashSet<EntitySlot>>();
+            HashSet<SlotEntity> result = new HashSet<SlotEntity>();
+            List<HashSet<SlotEntity>> sets = new List<HashSet<SlotEntity>>();
             foreach (var evaluator in Evaluators)
             {
                 sets.Add(evaluator.Evaluate(context));

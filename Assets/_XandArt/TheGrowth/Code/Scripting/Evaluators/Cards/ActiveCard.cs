@@ -6,14 +6,14 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает карту, для которой выполняются команды, настроенные в конфиге карты
     /// </summary>
-    public class ActiveCard : Evaluator<Entity>
+    public class ActiveCard : Evaluator<CompositeEntity>
     {
         public class Data : IContextData
         {
-            public Entity Card;
+            public CompositeEntity Card;
         }
 
-        public override Entity Evaluate(Context context)
+        public override CompositeEntity Evaluate(Context context)
         {
             return context.GetOptional<Data>()?.Card;
         }

@@ -5,12 +5,14 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает все ПУСТЫЕ слоты на столе
     /// </summary>
-    public class TableSlotsFree : Evaluator<HashSet<EntitySlot>>
+    public class TableSlotsFree : Evaluator<HashSet<SlotEntity>>
     {
-        public override HashSet<EntitySlot> Evaluate(Context context)
+        public override HashSet<SlotEntity> Evaluate(Context context)
         {
-            var set = new HashSet<EntitySlot>();
-            foreach (var slot in CardTable.Instance.slots)
+            var expeditionManager = context.GetRequired<GlobalData>().container.Get<ExpeditionManager>();
+            if (expeditionManager?.Board == null) return null;
+            var set = new HashSet<SlotEntity>();
+            foreach (var slot in expeditionManager.Board.Slots.Values)
                 if (slot.IsEmpty)
                     set.Add(slot);
             return set;

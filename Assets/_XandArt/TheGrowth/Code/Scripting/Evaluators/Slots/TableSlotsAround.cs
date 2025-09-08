@@ -8,7 +8,7 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает слоты в некоторой области вокруг точки
     /// </summary>
-    public class TableSlotsAround : Evaluator<HashSet<EntitySlot>>
+    public class TableSlotsAround : Evaluator<HashSet<SlotEntity>>
     {
         public enum EFigure
         {
@@ -28,21 +28,23 @@ namespace XandArt.TheGrowth
         [ShowIf(nameof(Figure), EFigure.Circle)]
         public float Radius;
 
-        public override HashSet<EntitySlot> Evaluate(Context context)
+        public override HashSet<SlotEntity> Evaluate(Context context)
         {
-            var all = CardTable.Instance.slots;
+            var expeditionManager = context.GetRequired<GlobalData>().container.Get<ExpeditionManager>();
+            if (expeditionManager?.Board == null) return null;
+            var all = expeditionManager.Board.Slots.Values;
             var center = Position.Evaluate(context);
             return Figure switch
             {
-                EFigure.Square => new HashSet<EntitySlot>(all.Where(
+                EFigure.Square => new HashSet<SlotEntity>(all.Where(
                     slot => SquareDist(slot.Index, center) <= Distance)),
-                EFigure.Rhombus => new HashSet<EntitySlot>(all.Where(
+                EFigure.Rhombus => new HashSet<SlotEntity>(all.Where(
                     slot => RhombusDist(slot.Index, center) <= Distance)),
-                EFigure.Circle => new HashSet<EntitySlot>(all.Where(
+                EFigure.Circle => new HashSet<SlotEntity>(all.Where(
                     slot => Vector2.Distance(slot.Index, center) <= Radius)),
-                EFigure.Cross => new HashSet<EntitySlot>(all.Where(
+                EFigure.Cross => new HashSet<SlotEntity>(all.Where(
                     slot => CrossDist(slot.Index, center) <= Distance)),
-                EFigure.Diagonals => new HashSet<EntitySlot>(all.Where(
+                EFigure.Diagonals => new HashSet<SlotEntity>(all.Where(
                     slot => DiagonalDist(slot.Index, center) <= Distance)),
                 _ => null
             };

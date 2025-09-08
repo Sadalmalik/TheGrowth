@@ -109,7 +109,7 @@ namespace XandArt.TheGrowth
                 Brain.OnFlipped.ExecuteAll(context);
             }
 
-            public void OnCovered(Entity coverCard)
+            public void OnCovered(CompositeEntity coverCard)
             {
                 var context = new Context(
                     Game.BaseContext,
@@ -118,7 +118,7 @@ namespace XandArt.TheGrowth
                 Brain.OnCovered.ExecuteAll(context);
             }
 
-            public void OnUnCovered(Entity coverCard)
+            public void OnUnCovered(CompositeEntity coverCard)
             {
                 var context = new Context(
                     Game.BaseContext,

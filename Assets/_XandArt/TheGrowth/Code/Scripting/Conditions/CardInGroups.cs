@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
@@ -7,14 +8,14 @@ namespace XandArt.TheGrowth
     /// </summary>
     public class CardInGroups : Condition
     {
-        public Evaluator<EntityCard> Card;
+        public Evaluator<CompositeEntity> Card;
         public List<CardListConfig> Filter;
 
         public override bool Check(Context context)
         {
             var card = Card.Evaluate(context);
             
-            return Filter.Filter(card);
+            return Filter.Contains(card);
         }
     }
 }

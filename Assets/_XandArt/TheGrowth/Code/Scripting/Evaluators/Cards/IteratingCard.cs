@@ -5,14 +5,14 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает текущую итерируемую карту
     /// </summary>
-    public class IteratingCard : Evaluator<Entity>
+    public class IteratingCard : Evaluator<CompositeEntity>
     {
         public class Data : IContextData
         {
-            public Entity Card;
+            public CompositeEntity Card;
         }
         
-        public override Entity Evaluate(Context context)
+        public override CompositeEntity Evaluate(Context context)
         {
             return context.GetOptional<Data>()?.Card;
         }

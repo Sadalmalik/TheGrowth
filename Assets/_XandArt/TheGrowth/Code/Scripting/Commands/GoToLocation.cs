@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace XandArt.TheGrowth
+﻿namespace XandArt.TheGrowth
 {
     public class GoToLocation : Command
     {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
@@ -8,34 +7,22 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает карты из слотов
     /// </summary>
-    public class CardsFromSlots : Evaluator<HashSet<Entity>>
+    public class CardsFromSlots : Evaluator<HashSet<CompositeEntity>>
     {
-        public Evaluator<HashSet<EntitySlot>> Slots;
+        public Evaluator<HashSet<SlotEntity>> Slots;
         public List<CardListConfig> Filter;
 
-        public override HashSet<Entity> Evaluate(Context context)
+        public override HashSet<CompositeEntity> Evaluate(Context context)
         {
             var slots = Slots.Evaluate(context);
-            return new HashSet<Entity>(slots
+            return new HashSet<CompositeEntity>(slots
                 .Select(slot => slot.Top())
                 .Where(CardInFilter));
         }
 
-        private bool CardInFilter(Entity card)
+        private bool CardInFilter(CompositeEntity card)
         {
-            if (card == null)
-                return false;
-            
-            if (Filter == null || Filter.Count == 0)
-                return true;
-
-            foreach (var filter in Filter)
-            {
-                if (filter.Cards?.Contains(card.Model) ?? false)
-                    return true;
-            }
-
-            return false;
+            return Filter.Contains(card);
         }
     }
 }

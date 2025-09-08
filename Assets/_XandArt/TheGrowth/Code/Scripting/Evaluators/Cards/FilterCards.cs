@@ -8,20 +8,20 @@ namespace XandArt.TheGrowth
     /// Возвращает коллекцию карт, отфильтрованную по некоторому условию
     ///     При фильтрации кондишены могут проверять карту по IteratingCard
     /// </summary>
-    public class FilterCards : Evaluator<HashSet<Entity>>
+    public class FilterCards : Evaluator<HashSet<CompositeEntity>>
     {
         public Condition Condition;
-        public Evaluator<HashSet<Entity>> Collection;
+        public Evaluator<HashSet<CompositeEntity>> Collection;
         
-        public override HashSet<Entity> Evaluate(Context context)
+        public override HashSet<CompositeEntity> Evaluate(Context context)
         {
             var set = Collection.Evaluate(context);
             if (set.Count == 0) return set;
             var data = new IteratingCard.Data { Card = null };
             var subContext = new Context(context, data);
-            return new HashSet<Entity>(set.Where(Check));
+            return new HashSet<CompositeEntity>(set.Where(Check));
 
-            bool Check(Entity card)
+            bool Check(CompositeEntity card)
             {
                 data.Card = card;
                 return Condition.Check(subContext);

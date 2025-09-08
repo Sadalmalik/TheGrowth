@@ -1,4 +1,6 @@
-﻿namespace XandArt.TheGrowth
+﻿using XandArt.Architecture;
+
+namespace XandArt.TheGrowth
 {
     /// <summary>
     /// Проверяет колличество зарядов укарты
@@ -16,7 +18,7 @@
         }
 
         public ECompare Compare;
-        public Evaluator<EntityCard> Card;
+        public Evaluator<CompositeEntity> Card;
         public int Value;
         
         public override bool Check(Context context)

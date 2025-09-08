@@ -5,7 +5,7 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает карту относительно данной карты в стопке
     /// </summary>
-    public class RelativeCard : Evaluator<Entity>
+    public class RelativeCard : Evaluator<CompositeEntity>
     {
         public enum EVariant
         {
@@ -14,12 +14,12 @@ namespace XandArt.TheGrowth
         }
 
         public EVariant Variant;
-        public Evaluator<Entity> Card;
+        public Evaluator<CompositeEntity> Card;
         public int Count = 1;
 
-        public override Entity Evaluate(Context context)
+        public override CompositeEntity Evaluate(Context context)
         {
-            var entityCard = Card.Evaluate(context) as CompositeEntity;
+            var entityCard = Card.Evaluate(context);
             if (entityCard == null) return null;
             
             var slot = entityCard.GetComponent<CardBrain.Component>().Slot;

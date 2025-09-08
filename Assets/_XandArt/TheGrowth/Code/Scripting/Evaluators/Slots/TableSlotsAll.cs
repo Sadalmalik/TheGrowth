@@ -5,11 +5,13 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает все слоты на столе
     /// </summary>
-    public class TableSlotsAll : Evaluator<HashSet<EntitySlot>>
+    public class TableSlotsAll : Evaluator<HashSet<SlotEntity>>
     {
-        public override HashSet<EntitySlot> Evaluate(Context context)
+        public override HashSet<SlotEntity> Evaluate(Context context)
         {
-            return new HashSet<EntitySlot>(CardTable.Instance.slots);
+            var expeditionManager = context.GetRequired<GlobalData>().container.Get<ExpeditionManager>();
+            if (expeditionManager?.Board == null) return null;
+            return new HashSet<SlotEntity>(expeditionManager.Board.Slots.Values);
         }
     }
 }

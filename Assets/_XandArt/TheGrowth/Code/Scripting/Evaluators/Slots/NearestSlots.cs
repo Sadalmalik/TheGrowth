@@ -8,17 +8,17 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает ближайший к карте слот
     /// </summary>
-    public class NearestSlots : Evaluator<EntitySlot>
+    public class NearestSlots : Evaluator<SlotEntity>
     {
-        public Evaluator<Entity> Card = new PlayerCard();
-        public Evaluator<HashSet<EntitySlot>> Collection;
+        public Evaluator<CompositeEntity> Card = new PlayerCard();
+        public Evaluator<HashSet<SlotEntity>> Collection;
 
-        public override EntitySlot Evaluate(Context context)
+        public override SlotEntity Evaluate(Context context)
         {
             var set = Collection.Evaluate(context);
             if (set.Count == 0) return null;
 
-            var cardEntity = Card.Evaluate(context) as CompositeEntity;
+            var cardEntity = Card.Evaluate(context);
             if (cardEntity == null) return null;
             var card = cardEntity.GetComponent<CardBrain.Component>();
             var bestSlot = set.First();

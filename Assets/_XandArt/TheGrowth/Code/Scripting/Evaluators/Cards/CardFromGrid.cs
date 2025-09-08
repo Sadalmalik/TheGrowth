@@ -6,16 +6,16 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает самую верхнюю карту в ячейке на столе
     /// </summary>
-    public class EntityFromGrid : Evaluator<Entity>
+    public class CardFromGrid : Evaluator<CompositeEntity>
     {
         public Evaluator<Vector2Int> Position = new PositionEvaluator();
-        
-        public override Entity Evaluate(Context context)
+
+        public override CompositeEntity Evaluate(Context context)
         {
-            var state = context.GetRequired<GlobalData>().currentState;
+            var expeditionManager = context.GetRequired<GlobalData>().container.Get<ExpeditionManager>();
 
             var pos = Position.Evaluate(context);
-            var slots = state.ActiveBoard.Slots;
+            var slots = expeditionManager.Board.Slots;
             return slots[pos].Top();
         }
     }

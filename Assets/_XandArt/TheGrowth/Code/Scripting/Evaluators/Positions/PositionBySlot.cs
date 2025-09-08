@@ -7,7 +7,7 @@ namespace XandArt.TheGrowth
     /// </summary>
     public class PositionBySlot : Evaluator<Vector2Int>
     {
-        public Evaluator<EntitySlot> Slot;
+        public Evaluator<SlotEntity> Slot;
 
         public override Vector2Int Evaluate(Context context)
         {

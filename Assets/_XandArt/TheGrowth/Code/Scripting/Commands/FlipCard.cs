@@ -20,21 +20,8 @@ namespace XandArt.TheGrowth
         public override void Execute(Context context)
         {
             var card = Card.Evaluate(context);
-
-            // switch (Variant)
-            // {
-            //     case EVariant.Flip:
-            //         card.FlipCard();
-            //         break;
-            //     case EVariant.Reveal:
-            //         if (!card.IsFaceUp)
-            //             card.FlipCard();
-            //         return;
-            //     case EVariant.Hide:
-            //         if (card.IsFaceUp)
-            //             card.FlipCard();
-            //         return;
-            // }
+            var brain = card.GetComponent<CardBrain.Component>();
+            brain?.FlipCard(null, false);
         }
     }
 }
