@@ -7,7 +7,7 @@ namespace XandArt.TheGrowth
 {
     public class CardTable : SingletonMonoBehaviour<CardTable>
     {
-        public EntitySlot slotPrefab;
+        public SlotEntity slotPrefab;
         
         [Space]
         [OnValueChanged(nameof(InternalRebuild))]
@@ -21,11 +21,11 @@ namespace XandArt.TheGrowth
 
         [Space]
         [TableMatrix(SquareCells = true)]
-        public EntitySlot[,] Grid;
+        public SlotEntity[,] Grid;
 
-        public List<EntitySlot> slots = new List<EntitySlot>();
+        public List<SlotEntity> slots = new List<SlotEntity>();
         
-        public EntitySlot this[Vector2Int pos]
+        public SlotEntity this[Vector2Int pos]
             => Grid[pos.x, pos.y];
 
         [Button]

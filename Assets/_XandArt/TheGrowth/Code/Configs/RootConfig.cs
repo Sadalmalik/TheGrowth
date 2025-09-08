@@ -10,5 +10,9 @@ namespace XandArt.TheGrowth
     public class RootConfig : SingletonScriptableObject<RootConfig>
     {
         public GameStep startStep;
+
+        [Space]
+        public InventoryModel MainInventory;
+        public InventoryModel Expedition;
     }
 }

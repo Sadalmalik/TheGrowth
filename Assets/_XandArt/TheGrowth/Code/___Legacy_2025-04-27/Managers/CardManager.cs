@@ -14,7 +14,7 @@ namespace XandArt.TheGrowth
         public LayerMask tableLayer;
         public float slotDropRadius = 1;
 
-        public EntitySlot deckSlot;
+        public SlotEntity deckSlot;
         public CardTable table;
         public bool stepAfterDrop;
         public float stepDelay;
@@ -42,7 +42,7 @@ namespace XandArt.TheGrowth
         private bool _check = true;
         private Vector3 _startDragPosition;
         private EntityCard _draggedCard;
-        private HashSet<EntitySlot> _moves;
+        private HashSet<SlotEntity> _moves;
 
         public void CallStep(float delay=0)
         {
@@ -148,10 +148,10 @@ namespace XandArt.TheGrowth
             }
         }
 
-        private (EntitySlot, float) GetNearestSlot(Vector3 position)
+        private (SlotEntity, float) GetNearestSlot(Vector3 position)
         {
             float minDist = float.MaxValue;
-            EntitySlot nearestSlot = null;
+            SlotEntity nearestSlot = null;
 
             if (_moves != null)
             {
@@ -200,7 +200,7 @@ namespace XandArt.TheGrowth
 
         private IEnumerator DealCardsCor()
         {
-            var slots = new List<EntitySlot>(table.slots);
+            var slots = new List<SlotEntity>(table.slots);
             slots.Shuffle();
 
             var context = new Context();//new PlayerCard.Data { Card = m_PlayerCard });
@@ -242,7 +242,7 @@ namespace XandArt.TheGrowth
 
         private IEnumerator CollectCardsCor()
         {
-            var slots = new List<EntitySlot>(table.slots);
+            var slots = new List<SlotEntity>(table.slots);
             slots.Reverse();
 
             var delay = CardsViewConfig.Instance.dealDuration / slots.Count;

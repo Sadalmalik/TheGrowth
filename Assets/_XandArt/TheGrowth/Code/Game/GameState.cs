@@ -58,7 +58,7 @@ namespace XandArt.TheGrowth
         }
 
         [JsonIgnore]
-        public EntityBoard ActiveBoard => ActiveLocation.Board;
+        public BoardEntity ActiveBoard => ActiveLocation.Board;
 
 #endregion
 

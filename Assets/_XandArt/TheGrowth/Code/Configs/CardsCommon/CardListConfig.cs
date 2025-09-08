@@ -16,22 +16,25 @@ namespace XandArt.TheGrowth
 
     public static class CardListExtensions
     {
-        public static bool Filter(this CardListConfig filter, EntityCard card)
+        public static bool Contains(this CardListConfig filter, CompositeEntity card)
         {
             if (filter == null || filter.Cards.Count == 0)
                 return true;
 
-            return filter.Cards?.Contains(card.model) ?? false;
+            return filter.Cards?.Contains(card.Model) ?? false;
         }
         
-        public static bool Filter(this List<CardListConfig> filters, EntityCard card)
+        public static bool Contains(this List<CardListConfig> filters, CompositeEntity card)
         {
+            if (card == null)
+                return false;
+            
             if (filters == null || filters.Count == 0)
                 return true;
 
             foreach (var filter in filters)
             {
-                if (filter.Cards?.Contains(card.model) ?? false)
+                if (filter.Cards?.Contains(card.Model) ?? false)
                     return true;
             }
 

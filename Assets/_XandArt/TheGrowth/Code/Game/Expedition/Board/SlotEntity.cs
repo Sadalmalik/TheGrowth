@@ -5,7 +5,7 @@ using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
-    public class EntitySlot : Entity
+    public class SlotEntity : Entity
     {
 #region Savable
 

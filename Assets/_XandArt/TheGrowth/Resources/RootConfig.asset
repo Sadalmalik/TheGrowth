@@ -22,3 +22,5 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   startStep: {fileID: 11400000, guid: 6e3e4e75d7ffc444b8752621a599ad3a, type: 2}
+  MainInventory: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b, type: 2}
+  Expedition: {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}

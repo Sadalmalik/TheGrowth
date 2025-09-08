@@ -10,7 +10,7 @@ namespace XandArt.TheGrowth
     {
         public static async Task MoveTo(
             this CompositeEntity card,
-            EntitySlot target,
+            SlotEntity target,
             Action OnMoveComplete = null,
             bool instant = false)
         {
@@ -26,6 +26,7 @@ namespace XandArt.TheGrowth
             {
                 view.MoveTo(target, () =>
                 {
+                    brain.Position = view.transform.position;
                     OnMoveComplete?.Invoke();
                     tcs.SetResult(true);
                 }, instant);
@@ -34,8 +35,8 @@ namespace XandArt.TheGrowth
         }
 
         public static async Task DealCards(
-            this EntitySlot source,
-            List<EntitySlot> slots,
+            this SlotEntity source,
+            List<SlotEntity> slots,
             Context context,
             bool waitEachCard = false)
         {

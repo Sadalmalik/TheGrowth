@@ -14,11 +14,15 @@ namespace XandArt.TheGrowth
         [Inject]
         private GameManager _gameManager;
 
-        private EntityBoard _board;
+        private BoardEntity _board;
         private List<EntityCardView> _views;
         private CompositeEntity _draggedCard;
-        private HashSet<EntitySlot> _moves;
+        private HashSet<SlotEntity> _moves;
 
+        public EntitySlotView LastSlot;
+
+        public BoardEntity Board => _board;
+        
         public void Init()
         {
             _views = new List<EntityCardView>();
@@ -47,21 +51,26 @@ namespace XandArt.TheGrowth
                     var cardView = hit.transform.GetComponent<EntityCardView>();
                     if (cardView?.Data is CompositeEntity card)
                     {
+                        Debug.Log($"[TEST] Start Drag: {card}");
                         var brain = card.GetComponent<CardBrain.Component>();
                         _moves = brain.GetAllowedMoves();
                         ShowMarkers(_moves, true);
                         _draggedCard = card;
                         cardView.cardCollider.enabled = false;
+
+                        LastSlot = brain.Slot.SlotView;
                     }
                 }
+                return;
             }
 
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
                 if (Raycast((int)(Layer.Default | Layer.UI), out var hit))
                 {
+                    Debug.Log($"[TEST] Stop Drag: {_draggedCard}");
                     var slotView = hit.transform.GetComponent<EntitySlotView>();
-                    var slot = slotView?.Data as EntitySlot;
+                    var slot = slotView?.Data as SlotEntity;
                     if (slot != null)
                     {
                         _ = _draggedCard.MoveTo(slot);
@@ -77,8 +86,10 @@ namespace XandArt.TheGrowth
                     }
                 }
 
+                _draggedCard = null;
                 ShowMarkers(_moves, false);
                 _moves = null;
+                return;
             }
 
             if (_draggedCard != null)
@@ -86,6 +97,7 @@ namespace XandArt.TheGrowth
                 if (Raycast((int)(Layer.Default | Layer.UI), out var hit)
                     && _draggedCard.View is EntityCardView view)
                 {
+                    Debug.Log($"[TEST] Drag update: {_draggedCard}");
                     view.transform.position = hit.point + hit.normal * 0.5f;
                 }
             }
@@ -99,7 +111,7 @@ namespace XandArt.TheGrowth
             return Physics.Raycast(ray, out hit, 100f, layers);
         }
 
-        private void ShowMarkers(IEnumerable<EntitySlot> slots, bool show)
+        private void ShowMarkers(IEnumerable<SlotEntity> slots, bool show)
         {
             if (slots == null) return;
             foreach (var slot in slots)
@@ -120,7 +132,7 @@ namespace XandArt.TheGrowth
             {
                 var deckView = location.Hierarchy.deckSlot;
 
-                var deckSlot = gameState.Create<EntitySlot>();
+                var deckSlot = gameState.Create<SlotEntity>();
                 deckSlot.IsTableSlot = false;
                 deckSlot.Position = deckView.transform.position;
                 deckSlot.SetView(location.Hierarchy.deckSlot);

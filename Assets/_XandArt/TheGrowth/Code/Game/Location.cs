@@ -14,7 +14,7 @@ namespace XandArt.TheGrowth
 #region Savable
 
         [JsonProperty]
-        private Ref<EntityBoard> _board;
+        private Ref<BoardEntity> _board;
 
         [JsonProperty]
         private bool _isSaved;
@@ -39,7 +39,7 @@ namespace XandArt.TheGrowth
         public ExpeditionHierarchy Hierarchy { get; private set; }
 
         [JsonIgnore]
-        public EntityBoard Board => _board;
+        public BoardEntity Board => _board;
         
         [JsonIgnore]
         public bool IsSaved => _isSaved;
@@ -70,7 +70,7 @@ namespace XandArt.TheGrowth
             {
                 if (Board == null)
                 {
-                    _board = gameState.Create<EntityBoard>();
+                    _board = gameState.Create<BoardEntity>();
                 }
 
                 Board!.Initialize(gameState, Hierarchy.tableGrid);

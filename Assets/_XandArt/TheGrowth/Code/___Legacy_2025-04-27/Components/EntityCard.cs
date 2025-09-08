@@ -15,7 +15,7 @@ namespace XandArt.TheGrowth
         public CardBrain ModelBrain;
 
         public bool IsAnimated { get; private set; }
-        public EntitySlot Slot { get; set; }
+        public SlotEntity Slot { get; set; }
         public bool AllowEvents { get; set; } = true;
 
         public bool CanBeDragged => ModelBrain?.CanBeDragged ?? false;
@@ -31,7 +31,7 @@ namespace XandArt.TheGrowth
 
 #region Commands
 
-        public void MoveTo(EntitySlot newSlot, bool instant = false, bool allowAfter = false, Action<EntityCard> callback=null)
+        public void MoveTo(SlotEntity newSlot, bool instant = false, bool allowAfter = false, Action<EntityCard> callback=null)
         {
             if (Slot != null)
             {
@@ -112,7 +112,7 @@ namespace XandArt.TheGrowth
         public void OnUnCovered(EntityCard coverCard) { }
         public void OnStep(Context context) { }
 
-        public HashSet<EntitySlot> GetAllowedMoves()
+        public HashSet<SlotEntity> GetAllowedMoves()
         {
             return null;
         }

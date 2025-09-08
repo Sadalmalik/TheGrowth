@@ -26,9 +26,9 @@ namespace XandArt.TheGrowth
         public bool EndsTheTurn;
 
         [Space]
-        public Evaluator<EntitySlot> SpawnSlot;
+        public Evaluator<SlotEntity> SpawnSlot;
 
-        public Evaluator<HashSet<EntitySlot>> AllowedMoves;
+        public Evaluator<HashSet<SlotEntity>> AllowedMoves;
 
         [Space]
         public List<Command> OnPlaced;
@@ -47,7 +47,7 @@ namespace XandArt.TheGrowth
         public class Component : EntityComponent
         {
             [JsonProperty]
-            private Ref<EntitySlot> _slot;
+            private Ref<SlotEntity> _slot;
 
             [JsonProperty]
             public Vector3 Position;
@@ -59,10 +59,24 @@ namespace XandArt.TheGrowth
             public CardBrain Brain;
 
             [JsonIgnore]
-            public EntitySlot Slot
+            public SlotEntity Slot
             {
                 get => _slot;
                 set => _slot = value;
+            }
+
+            public void FlipCard(Action onComplete, bool instant = false)
+            {
+                IsFaceUp = !IsFaceUp;
+                var view = Owner.View as EntityCardView;
+                if (view == null)
+                {
+                    onComplete?.Invoke();
+                    return;
+                }
+                if (view.IsFaceUp != IsFaceUp)
+                    view.Flip(onComplete, instant);
+                onComplete?.Invoke();
             }
 
             public override void OnPostLoad()
@@ -123,7 +137,7 @@ namespace XandArt.TheGrowth
                 Brain.OnStep.ExecuteAll(newContext);
             }
 
-            public HashSet<EntitySlot> GetAllowedMoves()
+            public HashSet<SlotEntity> GetAllowedMoves()
             {
                 if (Brain?.AllowedMoves == null)
                     return null;

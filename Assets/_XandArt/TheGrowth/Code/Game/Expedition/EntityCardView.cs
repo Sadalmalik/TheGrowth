@@ -40,7 +40,7 @@ namespace XandArt.TheGrowth
             faceObject.SetActive(visible);
         }
 
-        public void MoveTo(EntitySlot slot, Action onComplete, bool instant = false, int index=-1)
+        public void MoveTo(SlotEntity slot, Action onComplete, bool instant = false, int index=-1)
         {
             var endPosition = slot.GetNewPosition(index);
             var endRotation = slot.GetNewRotation();

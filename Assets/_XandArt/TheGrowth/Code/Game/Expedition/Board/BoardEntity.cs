@@ -5,15 +5,15 @@ using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
-    public class EntityBoard : Entity
+    public class BoardEntity : Entity
     {
 #region Savable
 
         [JsonProperty]
-        private List<Ref<EntitySlot>> _slots;
+        private List<Ref<SlotEntity>> _slots;
 
         [JsonProperty]
-        private List<Ref<EntitySlot>> _deck;
+        private List<Ref<SlotEntity>> _deck;
 
 #endregion
 
@@ -21,7 +21,7 @@ namespace XandArt.TheGrowth
 #region Lifecycle
 
         [JsonIgnore]
-        public Dictionary<Vector2Int, EntitySlot> Slots;
+        public Dictionary<Vector2Int, SlotEntity> Slots;
 
         public void Initialize(GameState gameState, Grid grid)
         {
@@ -29,7 +29,7 @@ namespace XandArt.TheGrowth
             var sy = grid.size.y;
 
             var firstStart = Slots == null;
-            Slots ??= new Dictionary<Vector2Int, EntitySlot>();
+            Slots ??= new Dictionary<Vector2Int, SlotEntity>();
 
             for (int y = 0; y < sy; y++)
             for (int x = 0; x < sx; x++)
@@ -38,7 +38,7 @@ namespace XandArt.TheGrowth
                 var view = grid.Cells[x, y].GetComponent<EntitySlotView>();
                 if (firstStart)
                 {
-                    var slot = gameState.Create<EntitySlot>();
+                    var slot = gameState.Create<SlotEntity>();
                     slot.IsTableSlot = true;
                     slot.Index = index;
                     slot.Position = view.transform.position;
@@ -60,7 +60,7 @@ namespace XandArt.TheGrowth
 
         public override void OnPreSave()
         {
-            _slots ??= new List<Ref<EntitySlot>>();
+            _slots ??= new List<Ref<SlotEntity>>();
             _slots.Clear();
             foreach (var slot in Slots.Values)
             {
@@ -72,7 +72,7 @@ namespace XandArt.TheGrowth
         {
             foreach (var slotRef in _slots)
             {
-                var slot = (EntitySlot) slotRef;
+                var slot = (SlotEntity) slotRef;
                 Slots[slot.Index] = slot;
             }
         }
