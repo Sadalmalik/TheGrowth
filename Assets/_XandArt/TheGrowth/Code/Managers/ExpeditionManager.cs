@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using XandArt.Architecture;
 using XandArt.Architecture.IOC;
@@ -73,7 +74,7 @@ namespace XandArt.TheGrowth
                     var slot = slotView?.Data as SlotEntity;
                     if (slot != null)
                     {
-                        _ = _draggedCard.MoveTo(slot);
+                        _ = _draggedCard.MoveTo(slot, () => _ = CallStep());
                     }
                     else
                     {
@@ -99,6 +100,22 @@ namespace XandArt.TheGrowth
                 {
                     Debug.Log($"[TEST] Drag update: {_draggedCard}");
                     view.transform.position = hit.point + hit.normal * 0.5f;
+                }
+            }
+        }
+
+        public async Task CallStep()
+        {
+            // var newContext = new Context(new PlayerCard.Data { Card = m_PlayerCard });
+            var delay = CardsViewConfig.Instance.jumpDuration;
+            await Task.Delay((int)(delay * 1000));
+            
+            foreach (var slot in Board.Slots.Values)
+            {
+                var executed = slot.Top()?.GetComponent<CardBrain.Component>()?.OnStep() ?? false;
+                if (executed)
+                {
+                    await Task.Delay((int)(delay * 1000));
                 }
             }
         }

@@ -31,8 +31,8 @@ namespace XandArt.TheGrowth
         public Evaluator<HashSet<SlotEntity>> AllowedMoves;
 
         [Space]
-        public List<Command> OnPlaced;
         public List<Command> OnPlacedFirstTime;
+        public List<Command> OnPlaced;
         public List<Command> OnFlipped;
         public List<Command> OnStep;
         public List<Command> OnCovered;
@@ -71,6 +71,7 @@ namespace XandArt.TheGrowth
                 var view = Owner.View as EntityCardView;
                 if (view == null)
                 {
+                    OnFlipped();
                     onComplete?.Invoke();
                     return;
                 }
@@ -85,20 +86,20 @@ namespace XandArt.TheGrowth
                 Brain = Owner.Model.GetComponent<CardBrain>();
             }
 
-            public void OnPlaced()
-            {
-                var context = new Context(
-                    Game.BaseContext,
-                    new ActiveCard.Data { Card = Owner });
-                Brain.OnPlaced.ExecuteAll(context);
-            }
-
             public void OnPlacedFirstTime()
             {
                 var context = new Context(
                     Game.BaseContext,
                     new ActiveCard.Data { Card = Owner });
                 Brain.OnPlacedFirstTime.ExecuteAll(context);
+            }
+
+            public void OnPlaced()
+            {
+                var context = new Context(
+                    Game.BaseContext,
+                    new ActiveCard.Data { Card = Owner });
+                Brain.OnPlaced.ExecuteAll(context);
             }
 
             public void OnFlipped()
@@ -127,14 +128,14 @@ namespace XandArt.TheGrowth
                 Brain.OnUnCovered.ExecuteAll(context);
             }
 
-            public void OnStep()
+            public bool OnStep()
             {
                 if (!IsFaceUp)
-                    return;
+                    return false;
                 var newContext = new Context(
                     Game.BaseContext,
                     new ActiveCard.Data { Card = Owner });
-                Brain.OnStep.ExecuteAll(newContext);
+                return Brain.OnStep.ExecuteAll(newContext);
             }
 
             public HashSet<SlotEntity> GetAllowedMoves()

@@ -16,8 +16,16 @@ namespace XandArt.TheGrowth
         {
             var brain = card.GetComponent<CardBrain.Component>();
 
-            brain.Slot?.Remove(card);
+            var cardUncover = (CompositeEntity) null;
+            var cardCover = (CompositeEntity) null;
+
+            if (brain.Slot != null)
+            {
+                brain.Slot.Remove(card);
+                cardUncover = brain.Slot.Top();
+            }
             brain.Slot = target;
+            cardCover = target.Top();
             target.Add(card);
             
             var tcs = new TaskCompletionSource<bool>();
@@ -27,10 +35,25 @@ namespace XandArt.TheGrowth
                 view.MoveTo(target, () =>
                 {
                     brain.Position = view.transform.position;
-                    OnMoveComplete?.Invoke();
-                    tcs.SetResult(true);
+                    HandleMoved();
                 }, instant);
-                await tcs.Task;
+            }
+            else
+            {
+                brain.Position = target.Position;
+                HandleMoved();
+            }
+
+            await tcs.Task;
+            return;
+
+            void HandleMoved()
+            {
+                cardUncover.GetComponent<CardBrain.Component>()?.OnUnCovered(card);
+                cardCover.GetComponent<CardBrain.Component>()?.OnCovered(card);
+                brain.OnPlaced();
+                OnMoveComplete?.Invoke();
+                tcs.SetResult(true);
             }
         }
 

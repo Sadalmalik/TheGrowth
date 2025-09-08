@@ -15,7 +15,7 @@ namespace XandArt.TheGrowth
             var card = Card.Evaluate(context);
             var slot = Slot.Evaluate(context);
             
-            card.MoveTo(slot);
+            _ = card.MoveTo(slot);
         }
     }
 }
