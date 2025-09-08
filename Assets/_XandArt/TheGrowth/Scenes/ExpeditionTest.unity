@@ -9098,7 +9098,7 @@ MonoBehaviour:
       Data: 
     - Name: Grid
       Entry: 7
-      Data: 0|XandArt.TheGrowth.EntitySlot[,], Code
+      Data: 0|XandArt.TheGrowth.SlotEntity[,], Code
     - Name: 
       Entry: 12
       Data: 60
@@ -9293,7 +9293,7 @@ MonoBehaviour:
       Data: 
     - Name: slots
       Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[XandArt.TheGrowth.EntitySlot, Code]],
+      Data: 1|System.Collections.Generic.List`1[[XandArt.TheGrowth.SlotEntity, Code]],
         mscorlib
     - Name: 
       Entry: 12

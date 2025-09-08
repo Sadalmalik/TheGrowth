@@ -42,7 +42,19 @@ MonoBehaviour:
       Data: 4|XandArt.TheGrowth.PositionByCard, Code
     - Name: Card
       Entry: 7
-      Data: 5|XandArt.TheGrowth.PlayerCard, Code
+      Data: 5|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Fallback
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -51,7 +63,7 @@ MonoBehaviour:
       Data: 
     - Name: Figure
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: Distance
       Entry: 3
       Data: 1
@@ -62,37 +74,27 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: Filter
-      Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[XandArt.TheGrowth.CardListConfig,
-        Code]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: Commands
       Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 6|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 8|XandArt.TheGrowth.FlipCard, Code
+      Data: 7|XandArt.TheGrowth.FlipCard, Code
     - Name: Variant
       Entry: 3
       Data: 1
     - Name: Card
       Entry: 7
-      Data: 9|XandArt.TheGrowth.IteratingCard, Code
+      Data: 8|XandArt.TheGrowth.IteratingCard, Code
     - Name: 
       Entry: 8
       Data: 
