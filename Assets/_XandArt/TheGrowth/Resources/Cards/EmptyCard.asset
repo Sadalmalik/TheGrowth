@@ -16,7 +16,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 21300000, guid: 255e1b124b7db3d4b9c5b0bb2cc601da, type: 3}
+    - {fileID: 21300000, guid: f3712286af941a740bd607b573cac1b3, type: 3}
+    - {fileID: 21300000, guid: 63d6681565c75ac49b0353d22fbf3f81, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -42,11 +43,11 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: Decor
-      Entry: 6
-      Data: 
-    - Name: Portrait
       Entry: 10
       Data: 0
+    - Name: Portrait
+      Entry: 10
+      Data: 1
     - Name: CustomPrefab
       Entry: 6
       Data: 
