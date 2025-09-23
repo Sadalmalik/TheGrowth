@@ -182,6 +182,19 @@ namespace XandArt.TheGrowth
             return hand;
         }
 
+        private SlotEntity InitSlot(EntitySlotView view, SlotEntity slot = null)
+        {
+            var gameState = _gameManager.CurrentGameState;
+            if (slot == null)
+            {
+                slot = gameState.Create<SlotEntity>();
+                slot.IsTableSlot = false;
+                slot.Position = view.transform.position;
+            }
+            slot.SetView(view);
+            return slot;
+        }
+
         private void LocationLoadHandler(Location location)
         {
             if (location == null) return;
@@ -194,26 +207,32 @@ namespace XandArt.TheGrowth
             var slots = _board.Slots.Values.Distinct().ToList();
             var cards = new List<CompositeEntity>();
             var hand = InitializeHandCards();
-            var character =
-                hand.FirstOrDefault(card => card.GetComponent<CardBrain.Component>()?.Type == CardType.Character);
-
+            var character = hand.FirstOrDefault(card => card.GetComponent<CardBrain.Component>()?.Type == CardType.Character);
+            hand.Remove(character);
+            
             Game.BaseContext.Add(new PlayerCard.Data{Card = character});
             
             if (!location.IsSaved)
             {
-                var deckView = location.Hierarchy.deckSlot;
+                Board.DeckSlot = InitSlot(location.Hierarchy.deckSlot);
+                Board.HandSlot = InitSlot(location.Hierarchy.handSlot);
+                Board.BackSlot = InitSlot(location.Hierarchy.backSlot);
 
-                var deckSlot = gameState.Create<SlotEntity>();
-                deckSlot.IsTableSlot = false;
-                deckSlot.Position = deckView.transform.position;
-                deckSlot.SetView(location.Hierarchy.deckSlot);
+                foreach (var card in hand)
+                {
+                    _ = card.MoveTo(Board.HandSlot, () =>
+                    {
+                        var brain = card.GetComponent<CardBrain.Component>();
+                        if (!brain.IsFaceUp) brain.FlipCard(null, true);
+                    }, true, false);
+                }
 
                 cards.AddRange(location.Model.Deck.CreateCards(gameState, slots.Count));
                 foreach (var card in cards)
                 {
-                    var view = CreateView(card, deckView.transform);
+                    var view = CreateView(card, Board.DeckSlot.SlotView.transform);
                     _views.Add(view);
-                    _ = card.MoveTo(deckSlot, instant: true);
+                    _ = card.MoveTo(Board.DeckSlot, instant: true);
                 }
 
                 var index = new Vector2Int(0, Board.Size.y / 2);
@@ -228,13 +247,17 @@ namespace XandArt.TheGrowth
 
                 async void InitialCardsActivity()
                 {
-                    await deckSlot.DealCards(slots, Game.BaseContext);
+                    await Board.DeckSlot.DealCards(slots, Game.BaseContext);
                     await Task.Delay(Mathf.FloorToInt(1000 * CardsViewConfig.Instance.jumpDuration));
                     character?.GetComponent<CardBrain.Component>()?.OnPlacedFirstTime();
                 }
             }
             else
             {
+                InitSlot(location.Hierarchy.deckSlot, Board.DeckSlot);
+                InitSlot(location.Hierarchy.handSlot, Board.HandSlot);
+                InitSlot(location.Hierarchy.backSlot, Board.BackSlot);
+                
                 foreach (var slot in slots)
                 {
                     var parent = slot.SlotView.Object.transform;

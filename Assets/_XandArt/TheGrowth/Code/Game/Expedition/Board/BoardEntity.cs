@@ -13,13 +13,28 @@ namespace XandArt.TheGrowth
         private List<Ref<SlotEntity>> _slots;
 
         [JsonProperty]
-        private List<Ref<SlotEntity>> _deck;
+        private Ref<SlotEntity> _deck;
+        
+        [JsonProperty]
+        private Ref<SlotEntity> _hand;
+        
+        [JsonProperty]
+        private Ref<SlotEntity> _back;
 
 #endregion
 
 
 #region Lifecycle
 
+        [JsonIgnore]
+        public SlotEntity DeckSlot { get => _deck; set => _deck = value; }
+        
+        [JsonIgnore]
+        public SlotEntity HandSlot { get => _hand; set => _hand = value; }
+        
+        [JsonIgnore]
+        public SlotEntity BackSlot { get => _back; set => _back = value; }
+        
         [JsonIgnore]
         public Vector2Int Size;
         

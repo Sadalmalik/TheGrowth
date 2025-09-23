@@ -48,10 +48,7 @@ namespace XandArt.TheGrowth
 
             if (instant)
             {
-                transform.position = endPosition;
-                transform.rotation = Quaternion.Euler(endRotation);
-                onComplete?.Invoke();
-                OnAnimationComplete?.Invoke();
+                OnMoveEnd();
                 return;
             }
 
@@ -60,13 +57,17 @@ namespace XandArt.TheGrowth
             _moveTween = DOTween.Sequence()
                 .Append(transform.DOJump(endPosition, 3, 1, duration))
                 .Insert(0, transform.DORotate(endRotation, duration))
-                .AppendCallback(() =>
-                {
-                    _moveTween = null;
-                    transform.SetParent(slot.SlotView.Object.transform);
-                    onComplete?.Invoke();
-                    OnAnimationComplete?.Invoke();
-                });
+                .AppendCallback(OnMoveEnd);
+
+            void OnMoveEnd()
+            {
+                _moveTween = null;
+                transform.position = endPosition;
+                transform.rotation = Quaternion.Euler(endRotation);
+                transform.SetParent(slot.SlotView.Object.transform);
+                onComplete?.Invoke();
+                OnAnimationComplete?.Invoke();
+            }
         }
 
         public void Flip(Action onComplete, bool instant = false)

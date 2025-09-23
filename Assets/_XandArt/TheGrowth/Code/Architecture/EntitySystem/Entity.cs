@@ -36,6 +36,7 @@ namespace XandArt.Architecture
             View = view;
             if (View != null)
                 View.Data = this;
+            OnViewAssigned();
         }
 
         public virtual void OnInit() {}
@@ -43,6 +44,7 @@ namespace XandArt.Architecture
         public virtual void OnPreSave() {}
         public virtual void OnPostLoad() {}
         public virtual void OnInitOrPostLoad() {}
+        public virtual void OnViewAssigned() {}
         
 
         public override string ToString()

@@ -9,9 +9,7 @@ namespace XandArt.TheGrowth
         
         [Header("Technical Slots")]
         public EntitySlotView deckSlot;
-        public EntitySlotView dropSlot;
-        [Space]
-        public EntitySlotView abilitySlot1;
-        public EntitySlotView abilitySlot2;
+        public EntitySlotView backSlot;
+        public EntitySlotView handSlot;
     }
 }

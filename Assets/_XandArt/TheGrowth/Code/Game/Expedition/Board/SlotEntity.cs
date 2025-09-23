@@ -53,6 +53,8 @@ namespace XandArt.TheGrowth
 
 #region Lifecycle
 
+        private Vector3 _cardOffset;
+
         public override void OnInit()
         {
             _cards = new List<Ref<CompositeEntity>>();
@@ -88,8 +90,19 @@ namespace XandArt.TheGrowth
         {
             if (SlotView == null) return Position;
             if (index == -1) index = 1 + _cardsList.Count;
-            return SlotView.transform.position +
-                   SlotView.transform.up * CardsViewConfig.Instance.cardThickness * index;
+            return SlotView.transform.position + _cardOffset * index;
+        }
+
+        public override void OnViewAssigned()
+        {
+            if (SlotView == null)
+            {
+                _cardOffset = SlotView.transform.up * CardsViewConfig.Instance.cardThickness;
+            }
+            else
+            {
+                _cardOffset = SlotView.GetCustomOffset() ?? SlotView.transform.up * CardsViewConfig.Instance.cardThickness;
+            }
         }
 
         public Vector3 GetNewRotation()

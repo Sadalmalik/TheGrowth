@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 2
     - Name: CanBeDragged
       Entry: 5
-      Data: false
+      Data: true
     - Name: EndsTheTurn
       Entry: 5
       Data: false
@@ -70,7 +70,104 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: AllowedMoves
-      Entry: 6
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.TableSlotsCombine, Code
+    - Name: Variant
+      Entry: 3
+      Data: 3
+    - Name: Evaluators
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[XandArt.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.SlotEntity,
+        Code]], System.Core]], Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 5|XandArt.TheGrowth.TableSlotsAround, Code
+    - Name: Position
+      Entry: 7
+      Data: 6|XandArt.TheGrowth.PositionByCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 7|XandArt.TheGrowth.PlayerCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Fallback
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Figure
+      Entry: 3
+      Data: 1
+    - Name: Distance
+      Entry: 3
+      Data: 2
+    - Name: Radius
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|XandArt.TheGrowth.TableSlotsAround, Code
+    - Name: Position
+      Entry: 7
+      Data: 9|XandArt.TheGrowth.PositionByCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 10|XandArt.TheGrowth.PlayerCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Fallback
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Figure
+      Entry: 3
+      Data: 0
+    - Name: Distance
+      Entry: 3
+      Data: 0
+    - Name: Radius
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: OnPlacedFirstTime
       Entry: 6
@@ -95,7 +192,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|XandArt.TheGrowth.Charges, Code
+      Data: 11|XandArt.TheGrowth.Charges, Code
     - Name: Amound
       Entry: 3
       Data: 6

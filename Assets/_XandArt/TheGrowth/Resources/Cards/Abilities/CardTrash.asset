@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 2
     - Name: CanBeDragged
       Entry: 5
-      Data: false
+      Data: true
     - Name: EndsTheTurn
       Entry: 5
       Data: false
