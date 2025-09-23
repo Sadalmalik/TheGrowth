@@ -26,6 +26,7 @@ MonoBehaviour:
       Data: 2837e4f228d7de34787d6ee48dc6acb9
   Title: HUB
   Description: 
-  Type: 0
+  Type: 1
   Scene: LocationHUB
+  Steps: 25
   Deck: {fileID: 0}

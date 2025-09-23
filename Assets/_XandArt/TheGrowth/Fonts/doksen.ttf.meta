@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c8560afaa4c431b4fbc0a8b439a66f78
+guid: f3ae0b819ba01d144920baae296a060b
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - DK Traiectum
+  - Doksen
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

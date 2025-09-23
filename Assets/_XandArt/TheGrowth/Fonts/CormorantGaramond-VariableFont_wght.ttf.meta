@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9639ba3a57a10e544ad0c8cb0a734c56
+guid: 707f9151be766e84b951f8688a45272f
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Josefin Slab
+  - Cormorant Garamond
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

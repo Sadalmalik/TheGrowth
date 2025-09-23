@@ -17,6 +17,9 @@ namespace XandArt.TheGrowth
         private Ref<BoardEntity> _board;
 
         [JsonProperty]
+        private int _steps;
+
+        [JsonProperty]
         private bool _isSaved;
         
 #endregion
@@ -44,6 +47,13 @@ namespace XandArt.TheGrowth
         [JsonIgnore]
         public bool IsSaved => _isSaved;
 
+        [JsonIgnore]
+        public int Steps
+        {
+            get => _steps;
+            set => _steps = value;
+        }
+        
 #endregion
 
 

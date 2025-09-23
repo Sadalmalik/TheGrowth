@@ -26,6 +26,7 @@ MonoBehaviour:
       Data: 34db7ec9599c12b42b080c98abe584d9
   Title: Second Encounter
   Description: Hello there!
-  Type: 1
+  Type: 2
   Scene: ExpeditionTest
+  Steps: 25
   Deck: {fileID: 11400000, guid: e2e880f1feecdec42a8dd60427ef186e, type: 2}

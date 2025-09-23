@@ -76,6 +76,7 @@ namespace XandArt.TheGrowth
                 var brainModel = card.Model.GetComponent<CardBrain>();
                 var slot = brainModel?.SpawnSlot?.Evaluate(context) ?? slots.Peek();
                 if (slot == null) continue;
+                slots.Remove(slot);
 
                 var task = card.MoveTo(slot, () => card.GetComponent<CardBrain.Component>()?.OnPlacedFirstTime());
                 if (waitEachCard)

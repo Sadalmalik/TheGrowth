@@ -9,10 +9,12 @@ namespace XandArt.TheGrowth
     {
         public enum EVariant
         {
-            Less,
-            More,
             Equal,
             NotEqual,
+            Less,
+            LessOrEqual,
+            Greater,
+            GreaterOrEqual
         }
         
         public EVariant Variant;
@@ -28,7 +30,9 @@ namespace XandArt.TheGrowth
             return Variant switch
             {
                 EVariant.Less => a < b,
-                EVariant.More => a > b,
+                EVariant.LessOrEqual => a <= b,
+                EVariant.Greater => a > b,
+                EVariant.GreaterOrEqual => a >= b,
                 EVariant.Equal => Mathf.Approximately(a, b),
                 EVariant.NotEqual => !Mathf.Approximately(a, b),
                 _ => false

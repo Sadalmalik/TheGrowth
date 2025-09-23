@@ -26,6 +26,7 @@ MonoBehaviour:
       Data: a18b202d9c2a60c4fb4e60457d49a516
   Title: First Encounter
   Description: This is first exedition location
-  Type: 1
+  Type: 2
   Scene: ExpeditionTest
+  Steps: 25
   Deck: {fileID: 11400000, guid: 18e1854a5e9f5e24d9a9a251ffafc05e, type: 2}

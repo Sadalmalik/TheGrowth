@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
     public enum LocationType
     {
-        UI,
-        Space
+        UI = 1,
+        Expedition = 2
     }
 
     [CreateAssetMenu(
@@ -22,11 +21,13 @@ namespace XandArt.TheGrowth
         public LocationType Type;
         public string Scene;
 
-        public DeckConfig Deck;
-        
+        [Space]
+        public int Steps = 25;
+        public DeckConfig Deck = null;
+
         public override Entity Create()
         {
-            return new Location { _model = this };
+            return new Location { _model = this, Steps = Steps };
         }
     }
 }

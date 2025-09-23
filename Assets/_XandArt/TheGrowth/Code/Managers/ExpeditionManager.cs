@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using XandArt.Architecture;
 using XandArt.Architecture.IOC;
+using Object = UnityEngine.Object;
 
 namespace XandArt.TheGrowth
 {
@@ -15,6 +17,7 @@ namespace XandArt.TheGrowth
         [Inject]
         private GameManager _gameManager;
 
+        private Location _activeLocation;
         private BoardEntity _board;
         private List<EntityCardView> _views;
         private CompositeEntity _draggedCard;
@@ -24,6 +27,21 @@ namespace XandArt.TheGrowth
         public EntitySlotView LastSlot;
 
         public BoardEntity Board => _board;
+
+        public int Steps
+        {
+            get => _activeLocation?.Steps ?? 0;
+            set
+            {
+                if (_activeLocation != null)
+                {
+                    _activeLocation.Steps = value;
+                    OnStepUpdate?.Invoke();
+                }
+            }
+        }
+
+        public event Action OnStepUpdate;
 
         public void Init()
         {
@@ -63,7 +81,6 @@ namespace XandArt.TheGrowth
                     _draggedCard = card;
                     _draggedCardView = cardView;
                     _draggedCardView.cardCollider.enabled = false;
-                    Debug.Log($"[TEST] Start Drag: {card}");
 
                     LastSlot = brain.Slot.SlotView;
                 }
@@ -75,7 +92,6 @@ namespace XandArt.TheGrowth
             {
                 if (Raycast((int)(Layer.Default | Layer.UI), out var hit))
                 {
-                    Debug.Log($"[TEST] Stop Drag: {_draggedCard}");
                     var slotView = hit.transform.GetComponent<EntitySlotView>();
                     var slot = slotView?.Data as SlotEntity;
                     if (slot != null)
@@ -102,7 +118,6 @@ namespace XandArt.TheGrowth
                 if (Raycast((int)(Layer.Default | Layer.UI), out var hit)
                     && _draggedCard.View is EntityCardView view)
                 {
-                    Debug.Log($"[TEST] Drag update: {_draggedCard}");
                     view.transform.position = hit.point + hit.normal * 0.5f;
                 }
             }
@@ -172,10 +187,11 @@ namespace XandArt.TheGrowth
             if (location == null) return;
             if (location.Board == null) return;
 
+            _activeLocation = location;
             _board = location.Board;
 
             var gameState = _gameManager.CurrentGameState;
-            var slots = _board.Slots.Values.ToList();
+            var slots = _board.Slots.Values.Distinct().ToList();
             var cards = new List<CompositeEntity>();
             var hand = InitializeHandCards();
             var character =
@@ -243,6 +259,7 @@ namespace XandArt.TheGrowth
             foreach (var view in _views)
                 DestroyView(view);
 
+            _activeLocation = null;
             _board = null;
         }
 
