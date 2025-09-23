@@ -96,7 +96,7 @@ namespace XandArt.TheGrowth
                     var slot = slotView?.Data as SlotEntity;
                     if (slot != null)
                     {
-                        _ = _draggedCard.MoveTo(slot, () => _ = CallStep());
+                        _ = _draggedCard.MoveTo(slot);
                     }
                     else
                     {

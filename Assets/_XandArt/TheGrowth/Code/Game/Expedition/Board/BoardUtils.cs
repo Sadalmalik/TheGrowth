@@ -50,7 +50,7 @@ namespace XandArt.TheGrowth
 
             void HandleMoved()
             {
-                if (cardEvents)
+                if (cardEvents && target.IsTableSlot)
                 {
                     cardUncover?.GetComponent<CardBrain.Component>()?.OnUnCovered(card);
                     cardCover?.GetComponent<CardBrain.Component>()?.OnCovered(card);

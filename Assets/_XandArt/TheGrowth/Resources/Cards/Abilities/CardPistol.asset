@@ -18,6 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: a8fdd193ac66dae47b56a2fd1bc8583d, type: 3}
     - {fileID: -1315356633612001327, guid: d1e7fc04906c5fb46a86aac8560031bd, type: 3}
+    - {fileID: 11400000, guid: 52f3eee5fad002e4f984ced85e276ea0, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -111,13 +112,13 @@ MonoBehaviour:
       Data: 
     - Name: Figure
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: Distance
       Entry: 3
       Data: 2
     - Name: Radius
       Entry: 4
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 8
       Data: 
@@ -173,7 +174,47 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: OnPlaced
-      Entry: 6
+      Entry: 7
+      Data: 11|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 12|XandArt.TheGrowth.ExecuteCommands, Code
+    - Name: config
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 13|XandArt.TheGrowth.MoveCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 14|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Slot
+      Entry: 7
+      Data: 15|XandArt.TheGrowth.BoardSlot, Code
+    - Name: _slot
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: OnFlipped
       Entry: 6
@@ -192,7 +233,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|XandArt.TheGrowth.Charges, Code
+      Data: 16|XandArt.TheGrowth.Charges, Code
     - Name: Amound
       Entry: 3
       Data: 6
