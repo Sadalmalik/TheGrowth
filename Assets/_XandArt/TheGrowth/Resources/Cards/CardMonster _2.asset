@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 721fd4a630e54d9784e83e35768c9280, type: 3}
-  m_Name: CardMonster
+  m_Name: CardMonster _2
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -269,10 +269,7 @@ MonoBehaviour:
         Code]], System.Core]], Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 6
-      Data: 
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
@@ -311,7 +308,19 @@ MonoBehaviour:
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 6
+      Entry: 7
+      Data: 28|XandArt.TheGrowth.FlipCard, Code
+    - Name: Variant
+      Entry: 3
+      Data: 2
+    - Name: Card
+      Entry: 7
+      Data: 29|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 13
@@ -321,7 +330,7 @@ MonoBehaviour:
       Data: 
     - Name: OnUnCovered
       Entry: 7
-      Data: 28|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 30|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -337,7 +346,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 29|XandArt.TheGrowth.Charges, Code
+      Data: 31|XandArt.TheGrowth.Charges, Code
     - Name: Amound
       Entry: 3
       Data: 0

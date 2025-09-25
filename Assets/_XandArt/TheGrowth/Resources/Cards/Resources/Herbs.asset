@@ -16,8 +16,9 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 21300000, guid: 7a24f0dc8c68dd644bbe909a1101fd37, type: 3}
     - {fileID: 21300000, guid: a8fdd193ac66dae47b56a2fd1bc8583d, type: 3}
+    - {fileID: 21300000, guid: 7a24f0dc8c68dd644bbe909a1101fd37, type: 3}
+    - {fileID: 11400000, guid: e4636dc6714fc27439e4d524b53e4050, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -93,22 +94,10 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 4|XandArt.TheGrowth.MoveCard, Code
-    - Name: Card
-      Entry: 7
-      Data: 5|XandArt.TheGrowth.ActiveCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Slot
-      Entry: 7
-      Data: 6|XandArt.TheGrowth.BoardSlot, Code
-    - Name: _slot
-      Entry: 3
+      Data: 4|XandArt.TheGrowth.ExecuteCommands, Code
+    - Name: config
+      Entry: 10
       Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -126,7 +115,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|XandArt.TheGrowth.Stackable, Code
+      Data: 5|XandArt.TheGrowth.Stackable, Code
     - Name: Limit
       Entry: 3
       Data: 40

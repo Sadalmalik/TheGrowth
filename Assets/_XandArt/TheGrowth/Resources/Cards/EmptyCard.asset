@@ -16,7 +16,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 21300000, guid: f3712286af941a740bd607b573cac1b3, type: 3}
+    - {fileID: 21300000, guid: a3347b3b7a433ba4c81e4590a5107788, type: 3}
     - {fileID: 21300000, guid: 63d6681565c75ac49b0353d22fbf3f81, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -85,10 +85,30 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: OnCovered
-      Entry: 6
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: OnUnCovered
-      Entry: 6
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
