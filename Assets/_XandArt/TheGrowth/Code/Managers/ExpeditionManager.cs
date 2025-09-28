@@ -101,7 +101,7 @@ namespace XandArt.TheGrowth
                     else
                     {
                         var brain = _draggedCard.GetComponent<CardBrain.Component>();
-                        _ = _draggedCard.MoveTo(brain.Slot);
+                        _ = _draggedCard.MoveTo(brain.Slot, cardEvents: false);
                     }
                 }
 

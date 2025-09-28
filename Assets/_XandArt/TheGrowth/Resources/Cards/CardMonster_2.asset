@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 721fd4a630e54d9784e83e35768c9280, type: 3}
-  m_Name: CardMonster _2
+  m_Name: CardMonster_2
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -25,7 +25,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: 77fb4d0db3d301d46b9779ffb58daace
+      Data: 23a1086ab0b61bf44b5983decc9d3a0c
     - Name: components
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[XandArt.Architecture.IEntityModelComponent,
@@ -282,6 +282,12 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: Instant
+      Entry: 5
+      Data: false
+    - Name: RaiseEvents
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 
