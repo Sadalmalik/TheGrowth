@@ -17,7 +17,7 @@ namespace XandArt.TheGrowth
             var slot = Slot.Evaluate(context);
 
             return OnTop
-                ? CardFilter.Contains(slot.Peek())
+                ? CardFilter.Contains(slot.Top())
                 : Enumerable.Any(slot.Cards, card => CardFilter.Contains(card));
         }
     }

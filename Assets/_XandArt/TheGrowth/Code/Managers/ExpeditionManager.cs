@@ -94,7 +94,7 @@ namespace XandArt.TheGrowth
                 {
                     var slotView = hit.transform.GetComponent<EntitySlotView>();
                     var slot = slotView?.Data as SlotEntity;
-                    if (slot != null)
+                    if (slot != null && _moves.Contains(slot))
                     {
                         _ = _draggedCard.MoveTo(slot);
                     }

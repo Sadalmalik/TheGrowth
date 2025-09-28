@@ -21,7 +21,7 @@ namespace XandArt.TheGrowth
             {
                 if (OnTop)
                 {
-                    TryAddCard(slot.Peek());
+                    TryAddCard(slot.Top());
                 }
                 else
                 {
