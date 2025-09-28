@@ -120,6 +120,19 @@ namespace XandArt.TheGrowth
                 {
                     view.transform.position = hit.point + hit.normal * 0.5f;
                 }
+
+                if (Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    var brain = _draggedCard.GetComponent<CardBrain.Component>();
+                    _ = _draggedCard.MoveTo(brain.Slot, cardEvents: false);
+                    
+                    _draggedCard = null;
+                    _draggedCardView.cardCollider.enabled = true;
+                    _draggedCardView = null;
+                    ShowMarkers(_moves, false);
+                    _moves = null;
+                    return;
+                }
             }
         }
 
