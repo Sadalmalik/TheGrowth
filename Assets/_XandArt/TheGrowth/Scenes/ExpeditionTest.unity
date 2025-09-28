@@ -12939,6 +12939,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   Root: {fileID: 1354707303}
+  ZoomAxis: {fileID: 963194228}
+  ZoomMin: -35
+  ZoomMax: -80
+  ZoomFactor: 0.025
 --- !u!1001 &1362770700
 PrefabInstance:
   m_ObjectHideFlags: 0

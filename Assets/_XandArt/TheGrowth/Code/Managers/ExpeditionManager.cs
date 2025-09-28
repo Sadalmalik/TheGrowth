@@ -62,6 +62,8 @@ namespace XandArt.TheGrowth
 
 #region Cards handling
 
+        private Vector3 _dragCameraOrigin;
+
         public void Tick()
         {
             if (_board == null) return;
@@ -125,7 +127,7 @@ namespace XandArt.TheGrowth
                 {
                     var brain = _draggedCard.GetComponent<CardBrain.Component>();
                     _ = _draggedCard.MoveTo(brain.Slot, cardEvents: false);
-                    
+
                     _draggedCard = null;
                     _draggedCardView.cardCollider.enabled = true;
                     _draggedCardView = null;
@@ -134,6 +136,8 @@ namespace XandArt.TheGrowth
                     return;
                 }
             }
+
+            CameraController.Instance.Zoom(Input.GetKey(KeyCode.Mouse1));
         }
 
         public async Task CallStep()
@@ -150,7 +154,7 @@ namespace XandArt.TheGrowth
             {
                 if (card == null) continue;
                 var brain = card.GetComponent<CardBrain.Component>();
-                if (brain==null) continue;
+                if (brain == null) continue;
                 if (brain.OnStep())
                 {
                     await Task.Delay((int)(delay * 1000));
@@ -204,6 +208,7 @@ namespace XandArt.TheGrowth
                 slot.IsTableSlot = false;
                 slot.Position = view.transform.position;
             }
+
             slot.SetView(view);
             return slot;
         }
@@ -220,11 +225,12 @@ namespace XandArt.TheGrowth
             var slots = _board.Slots.Values.Distinct().ToList();
             var cards = new List<CompositeEntity>();
             var hand = InitializeHandCards();
-            var character = hand.FirstOrDefault(card => card.GetComponent<CardBrain.Component>()?.Type == CardType.Character);
+            var character =
+                hand.FirstOrDefault(card => card.GetComponent<CardBrain.Component>()?.Type == CardType.Character);
             hand.Remove(character);
-            
-            Game.BaseContext.Add(new PlayerCard.Data{Card = character});
-            
+
+            Game.BaseContext.Add(new PlayerCard.Data { Card = character });
+
             if (!location.IsSaved)
             {
                 Board.DeckSlot = InitSlot(location.Hierarchy.deckSlot);
@@ -255,7 +261,7 @@ namespace XandArt.TheGrowth
                 slots.Shuffle();
 
                 InitialCardsActivity();
-                
+
                 return;
 
                 async void InitialCardsActivity()
@@ -270,7 +276,7 @@ namespace XandArt.TheGrowth
                 InitSlot(location.Hierarchy.deckSlot, Board.DeckSlot);
                 InitSlot(location.Hierarchy.handSlot, Board.HandSlot);
                 InitSlot(location.Hierarchy.backSlot, Board.BackSlot);
-                
+
                 foreach (var slot in slots)
                 {
                     var parent = slot.SlotView.Object.transform;
@@ -291,7 +297,7 @@ namespace XandArt.TheGrowth
         private void LocationUnloadHandler(Location location)
         {
             Game.BaseContext.Remove<PlayerCard.Data>();
-                
+
             foreach (var view in _views)
                 DestroyView(view);
 
