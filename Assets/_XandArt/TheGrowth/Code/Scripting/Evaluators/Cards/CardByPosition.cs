@@ -6,7 +6,7 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает самую верхнюю карту в ячейке на столе
     /// </summary>
-    public class CardFromGrid : Evaluator<CompositeEntity>
+    public class CardByPosition : Evaluator<CompositeEntity>
     {
         public Evaluator<Vector2Int> Position = new PositionEvaluator();
 

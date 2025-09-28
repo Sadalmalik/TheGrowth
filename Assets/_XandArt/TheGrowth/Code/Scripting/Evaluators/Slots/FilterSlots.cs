@@ -9,8 +9,8 @@ namespace XandArt.TheGrowth
     /// </summary>
     public class FilterSlots : Evaluator<HashSet<SlotEntity>>
     {
-        public Condition Condition;
         public Evaluator<HashSet<SlotEntity>> Collection;
+        public Condition Condition;
         
         public override HashSet<SlotEntity> Evaluate(Context context)
         {

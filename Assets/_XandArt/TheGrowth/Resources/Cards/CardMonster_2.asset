@@ -18,6 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: dc533fa9a543d3b4e8f1bada754bf687, type: 3}
     - {fileID: 21300000, guid: 251595fcfe2040b4e8abc9bf483836cf, type: 3}
+    - {fileID: 11400000, guid: 5c320f4890fcc1c49a4f36a3c2471381, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -269,7 +270,117 @@ MonoBehaviour:
         Code]], System.Core]], Code]], mscorlib
     - Name: 
       Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 27|XandArt.TheGrowth.TableSlotsAround, Code
+    - Name: Position
+      Entry: 7
+      Data: 28|XandArt.TheGrowth.PositionByCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 29|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Fallback
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
       Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Figure
+      Entry: 3
+      Data: 1
+    - Name: Distance
+      Entry: 3
+      Data: 1
+    - Name: Radius
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 30|XandArt.TheGrowth.FilterSlots, Code
+    - Name: Collection
+      Entry: 7
+      Data: 31|XandArt.TheGrowth.TableSlotsAll, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Condition
+      Entry: 7
+      Data: 32|XandArt.TheGrowth.SlotContainsCard, Code
+    - Name: Slot
+      Entry: 7
+      Data: 33|XandArt.TheGrowth.IteratingSlot, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: CardFilter
+      Entry: 7
+      Data: 34|System.Collections.Generic.List`1[[XandArt.TheGrowth.CardListConfig,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnTop
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 35|XandArt.TheGrowth.SlotsFromCards, Code
+    - Name: Cards
+      Entry: 7
+      Data: 36|XandArt.TheGrowth.CardsFromBoard, Code
+    - Name: Filter
+      Entry: 7
+      Data: 37|System.Collections.Generic.List`1[[XandArt.TheGrowth.CardListConfig,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnTop
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -287,7 +398,7 @@ MonoBehaviour:
       Data: false
     - Name: RaiseEvents
       Entry: 5
-      Data: false
+      Data: true
     - Name: 
       Entry: 8
       Data: 
@@ -308,20 +419,20 @@ MonoBehaviour:
       Data: 
     - Name: OnCovered
       Entry: 7
-      Data: 27|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 38|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 28|XandArt.TheGrowth.FlipCard, Code
+      Data: 39|XandArt.TheGrowth.FlipCard, Code
     - Name: Variant
       Entry: 3
       Data: 2
     - Name: Card
       Entry: 7
-      Data: 29|XandArt.TheGrowth.ActiveCard, Code
+      Data: 40|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -336,7 +447,7 @@ MonoBehaviour:
       Data: 
     - Name: OnUnCovered
       Entry: 7
-      Data: 30|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 41|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -352,7 +463,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 31|XandArt.TheGrowth.Charges, Code
+      Data: 42|XandArt.TheGrowth.Charges, Code
     - Name: Amound
       Entry: 3
       Data: 0
