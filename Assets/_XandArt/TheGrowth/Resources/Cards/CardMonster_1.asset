@@ -259,23 +259,40 @@ MonoBehaviour:
       Data: 
     - Name: Collection
       Entry: 7
-      Data: 25|XandArt.TheGrowth.TableSlotsCombine, Code
-    - Name: Variant
-      Entry: 3
-      Data: 3
-    - Name: Evaluators
+      Data: 25|XandArt.TheGrowth.TableSlotsAround, Code
+    - Name: Position
       Entry: 7
-      Data: 26|System.Collections.Generic.List`1[[XandArt.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.SlotEntity,
-        Code]], System.Core]], Code]], mscorlib
+      Data: 26|XandArt.TheGrowth.PositionByCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 27|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
-      Entry: 12
+      Entry: 8
+      Data: 
+    - Name: Fallback
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
       Data: 0
     - Name: 
-      Entry: 13
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
       Data: 
+    - Name: Figure
+      Entry: 3
+      Data: 1
+    - Name: Distance
+      Entry: 3
+      Data: 1
+    - Name: Radius
+      Entry: 4
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -308,7 +325,7 @@ MonoBehaviour:
       Data: 
     - Name: OnCovered
       Entry: 7
-      Data: 27|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 28|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -324,7 +341,7 @@ MonoBehaviour:
       Data: 
     - Name: OnUnCovered
       Entry: 7
-      Data: 28|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 29|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -340,7 +357,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 29|XandArt.TheGrowth.Charges, Code
+      Data: 30|XandArt.TheGrowth.Charges, Code
     - Name: Amound
       Entry: 3
       Data: 0
