@@ -21,4 +21,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Cards: []
+  Cards:
+  - {fileID: 11400000, guid: 4fec5ba75c66062478e8ac0c730e5e0c, type: 2}
+  - {fileID: 11400000, guid: 8e8367ee6ab9a9749a2e1fa41c7f51b3, type: 2}

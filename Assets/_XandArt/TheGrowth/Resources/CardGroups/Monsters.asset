@@ -23,3 +23,4 @@ MonoBehaviour:
     SerializationNodes: []
   Cards:
   - {fileID: 11400000, guid: 77fb4d0db3d301d46b9779ffb58daace, type: 2}
+  - {fileID: 11400000, guid: 23a1086ab0b61bf44b5983decc9d3a0c, type: 2}
