@@ -1,0 +1,223 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721fd4a630e54d9784e83e35768c9280, type: 3}
+  m_Name: Talisman
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 21300000, guid: ecd42ebbf44f84948aa8978636dff16c, type: 3}
+    - {fileID: 21300000, guid: a9ce9db58561aea4295da7ef96e04817, type: 3}
+    - {fileID: 11400000, guid: 520928b9d9de328488e7176c634b319e, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Guid
+      Entry: 2
+      Data: 376eaa740945a7f41b241de31202ed6d
+    - Name: components
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[XandArt.Architecture.IEntityModelComponent,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 1|XandArt.TheGrowth.CardVisual, Code
+    - Name: Title
+      Entry: 6
+      Data: 
+    - Name: Description
+      Entry: 6
+      Data: 
+    - Name: Decor
+      Entry: 10
+      Data: 0
+    - Name: Portrait
+      Entry: 10
+      Data: 1
+    - Name: CustomPrefab
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|XandArt.TheGrowth.CardBrain, Code
+    - Name: Type
+      Entry: 3
+      Data: 4
+    - Name: CanBeDragged
+      Entry: 5
+      Data: false
+    - Name: EndsTheTurn
+      Entry: 5
+      Data: false
+    - Name: SpawnSlot
+      Entry: 6
+      Data: 
+    - Name: AllowedMoves
+      Entry: 6
+      Data: 
+    - Name: OnPlacedFirstTime
+      Entry: 6
+      Data: 
+    - Name: OnPlaced
+      Entry: 6
+      Data: 
+    - Name: OnFlipped
+      Entry: 6
+      Data: 
+    - Name: OnStep
+      Entry: 6
+      Data: 
+    - Name: OnCovered
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 4|XandArt.TheGrowth.Branch, Code
+    - Name: condition
+      Entry: 7
+      Data: 5|XandArt.TheGrowth.CardInGroups, Code
+    - Name: Card
+      Entry: 7
+      Data: 6|XandArt.TheGrowth.CoveringCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Filter
+      Entry: 7
+      Data: 7|System.Collections.Generic.List`1[[XandArt.TheGrowth.CardListConfig,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnTrue
+      Entry: 7
+      Data: 8|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 9|XandArt.TheGrowth.MoveCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 10|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Slot
+      Entry: 7
+      Data: 11|XandArt.TheGrowth.BoardSlot, Code
+    - Name: _slot
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Instant
+      Entry: 5
+      Data: false
+    - Name: RaiseEvents
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 12|XandArt.TheGrowth.FlipCard, Code
+    - Name: Variant
+      Entry: 3
+      Data: 0
+    - Name: Card
+      Entry: 7
+      Data: 13|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnFalse
+      Entry: 7
+      Data: 14|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: OnUnCovered
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 15|XandArt.TheGrowth.Stackable, Code
+    - Name: Limit
+      Entry: 3
+      Data: 40
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
