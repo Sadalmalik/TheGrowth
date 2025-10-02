@@ -24,8 +24,9 @@ MonoBehaviour:
     - Name: Guid
       Entry: 2
       Data: a18b202d9c2a60c4fb4e60457d49a516
-  Title: First Encounter
-  Description: This is first exedition location
+  Title: olD OrChaRd
+  Description: The orchard at the foot of the castle hill is now wild and overgrown.
+    Anyone who ventures deeper into the thicket will hear only wheezing sighs.
   Type: 2
   Scene: ExpeditionTest
   Steps: 25
