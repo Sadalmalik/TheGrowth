@@ -269,7 +269,28 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 23|XandArt.TheGrowth.SetStep, Code
+    - Name: Mode
+      Entry: 3
+      Data: 1
+    - Name: Amount
+      Entry: 3
+      Data: -1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 24|XandArt.TheGrowth.DebugLog, Code
+    - Name: Message
+      Entry: 1
+      Data: On Step
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -278,7 +299,7 @@ MonoBehaviour:
       Data: 
     - Name: OnCovered
       Entry: 7
-      Data: 23|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 25|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -291,7 +312,7 @@ MonoBehaviour:
       Data: 
     - Name: OnUnCovered
       Entry: 7
-      Data: 24|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 26|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
