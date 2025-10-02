@@ -25,7 +25,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: 4fec5ba75c66062478e8ac0c730e5e0c
+      Data: fca1699702490494f8eac65809f9a982
     - Name: components
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[XandArt.Architecture.IEntityModelComponent,
