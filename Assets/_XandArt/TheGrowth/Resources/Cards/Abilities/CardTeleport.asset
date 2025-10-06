@@ -210,7 +210,16 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: Slot
-      Entry: 6
+      Entry: 7
+      Data: 16|XandArt.TheGrowth.SlotFromCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 17|XandArt.TheGrowth.PlayerCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: Instant
       Entry: 5
@@ -223,12 +232,24 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 16|XandArt.TheGrowth.MoveCard, Code
+      Data: 18|XandArt.TheGrowth.MoveCard, Code
     - Name: Card
-      Entry: 6
+      Entry: 7
+      Data: 19|XandArt.TheGrowth.PlayerCard, Code
+    - Name: 
+      Entry: 8
       Data: 
     - Name: Slot
-      Entry: 6
+      Entry: 7
+      Data: 20|XandArt.TheGrowth.SlotFromCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 21|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: Instant
       Entry: 5
