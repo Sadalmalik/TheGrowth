@@ -28,6 +28,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: dab00cc110e207b46b98ec91564df108, type: 2}
     - {fileID: 11400000, guid: 6a0ef49b6ed2cab4989f5cb152412206, type: 2}
     - {fileID: 11400000, guid: fca1699702490494f8eac65809f9a982, type: 2}
+    - {fileID: 11400000, guid: d7209ae1ab1fcb54cbf1132b89be41fa, type: 2}
     - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -87,7 +88,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 8
+      Data: 9
     - Name: 
       Entry: 7
       Data: 5|XandArt.TheGrowth.DeckEntry, Code
@@ -185,28 +186,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
       Entry: 7
-      Data: 13|XandArt.TheGrowth.RunCommands, Code
-    - Name: _onStepStartActions
-      Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
+      Data: 13|XandArt.TheGrowth.DeckEntry, Code
+    - Name: Amount
+      Entry: 3
       Data: 1
-    - Name: 
-      Entry: 7
-      Data: 15|XandArt.TheGrowth.GoToLocation, Code
-    - Name: Location
+    - Name: Entity
       Entry: 10
       Data: 12
     - Name: 
@@ -218,9 +203,37 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 14|XandArt.TheGrowth.RunCommands, Code
+    - Name: _onStepStartActions
+      Entry: 7
+      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 16|XandArt.TheGrowth.GoToLocation, Code
+    - Name: Location
+      Entry: 10
+      Data: 13
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: _onStepEndActions
       Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 17|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -236,7 +249,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|XandArt.TheGrowth.SetEnabledActions, Code
+      Data: 18|XandArt.TheGrowth.SetEnabledActions, Code
     - Name: actions
       Entry: 3
       Data: 7

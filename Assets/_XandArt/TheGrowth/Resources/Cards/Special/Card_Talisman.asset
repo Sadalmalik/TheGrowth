@@ -16,7 +16,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 21300000, guid: ecd42ebbf44f84948aa8978636dff16c, type: 3}
+    - {fileID: 21300000, guid: 1742125e0d4de4d48bea06445acd9447, type: 3}
     - {fileID: 21300000, guid: a9ce9db58561aea4295da7ef96e04817, type: 3}
     - {fileID: 11400000, guid: 520928b9d9de328488e7176c634b319e, type: 2}
     SerializedBytesString: 
@@ -129,19 +129,31 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
-      Data: 9|XandArt.TheGrowth.MoveCard, Code
+      Data: 9|XandArt.TheGrowth.SetStep, Code
+    - Name: Mode
+      Entry: 3
+      Data: 1
+    - Name: Amount
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|XandArt.TheGrowth.MoveCard, Code
     - Name: Card
       Entry: 7
-      Data: 10|XandArt.TheGrowth.ActiveCard, Code
+      Data: 11|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Slot
       Entry: 7
-      Data: 11|XandArt.TheGrowth.BoardSlot, Code
+      Data: 12|XandArt.TheGrowth.BoardSlot, Code
     - Name: _slot
       Entry: 3
       Data: 0
@@ -159,13 +171,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 12|XandArt.TheGrowth.FlipCard, Code
+      Data: 13|XandArt.TheGrowth.FlipCard, Code
     - Name: Variant
       Entry: 3
       Data: 0
     - Name: Card
       Entry: 7
-      Data: 13|XandArt.TheGrowth.ActiveCard, Code
+      Data: 14|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -180,7 +192,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFalse
       Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -208,7 +220,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 15|XandArt.TheGrowth.Stackable, Code
+      Data: 16|XandArt.TheGrowth.Stackable, Code
     - Name: Limit
       Entry: 3
       Data: 40
