@@ -1,4 +1,5 @@
-﻿using XandArt.Architecture;
+﻿using System;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
@@ -21,21 +22,21 @@ namespace XandArt.TheGrowth
         {
             var entityCard = Card.Evaluate(context);
             if (entityCard == null) return null;
-            
+
             var slot = entityCard.GetComponent<CardBrain.Component>().Slot;
             var list = slot.Cards;
-            var index = list.IndexOf(entityCard);
 
-            switch (Variant)
+            var index = Variant switch
             {
-                case EVariant.Under:
-                    return list[index - Count];
-                case EVariant.Above:
-                    if (index < list.Count - Count)
-                        return list[index + Count];
-                    return null;
-                default: return null;
-            }
+                EVariant.Under => list.IndexOf(entityCard) - Count,
+                EVariant.Above => list.IndexOf(entityCard) + Count,
+                _ => -1
+            };
+
+            if (index < 0) return null;
+            if (list.Count <= index) return null;
+
+            return list[index];
         }
     }
 }

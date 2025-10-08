@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace XandArt.TheGrowth
 {
     /// <summary>
@@ -5,11 +7,20 @@ namespace XandArt.TheGrowth
     /// </summary>
     public partial class CallStep : Command
     {
+        public List<Command> AfterCommands;
+        
         public override void Execute(Context context)
         {
             var expeditionManager = context.GetRequired<GlobalData>().container.Get<ExpeditionManager>();
             
-            _ = expeditionManager.CallStep();
+            _ = expeditionManager.CallStep(OnComplete);
+            
+            return;
+
+            void OnComplete()
+            {
+                AfterCommands.ExecuteAll(context);
+            }
         }
     }
 }

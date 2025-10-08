@@ -1,4 +1,5 @@
-﻿using XandArt.Architecture;
+﻿using System.Collections.Generic;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
@@ -11,13 +12,17 @@ namespace XandArt.TheGrowth
         public Evaluator<SlotEntity> Slot;
         public bool Instant = false;
         public bool RaiseEvents = false;
+        public List<Command> AfterCommands;
 
         public override void Execute(Context context)
         {
             var card = Card.Evaluate(context);
             var slot = Slot.Evaluate(context);
             
-            _ = card.MoveTo(slot, instant: Instant, cardEvents: RaiseEvents);
+            _ = card.MoveTo(slot, instant: Instant, cardEvents: RaiseEvents, OnMoveComplete: () =>
+            {
+                AfterCommands.ExecuteAll(context);
+            });
         }
     }
 }

@@ -7,18 +7,15 @@ namespace XandArt.TheGrowth
     /// </summary>
     public class EndGame : Command
     {
-        public enum EVariant
-        {
-            Win,
-            LooseBySteps,
-            LooseByMonster
-        }
-
-        public EVariant Variant;
+        public bool Success = true;
+        public string Message = "Eaten by monster!";
 
         public override void Execute(Context context)
         {
-            Debug.Log($"EndGame: {Variant}");
+            var container = context.GetRequired<GlobalData>().container;
+            var screen = container.Get<MenuManager>().ExplorationEndScreen;
+            
+            screen.Show(Success, Message);
         }
     }
 }

@@ -62,12 +62,15 @@ namespace XandArt.TheGrowth
 
 #region Cards handling
 
+        private bool _blockInput;
         private Vector3 _dragCameraOrigin;
 
         public void Tick()
         {
             if (_board == null) return;
 
+            if (_blockInput) return;
+            
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 if (Raycast((int)(Layer.Cards), out var hit))
@@ -140,8 +143,9 @@ namespace XandArt.TheGrowth
             CameraController.Instance.Zoom(Input.GetKey(KeyCode.Mouse1));
         }
 
-        public async Task CallStep()
+        public async Task CallStep(Action onComplete=null)
         {
+            _blockInput = true;
             // var newContext = new Context(new PlayerCard.Data { Card = m_PlayerCard });
             var delay = CardsViewConfig.Instance.jumpDuration;
             await Task.Delay((int)(delay * 1000));
@@ -160,6 +164,8 @@ namespace XandArt.TheGrowth
                     await Task.Delay((int)(delay * 1000));
                 }
             }
+            onComplete?.Invoke();
+            _blockInput = false;
         }
 
         private bool Raycast(int layers, out RaycastHit hit)

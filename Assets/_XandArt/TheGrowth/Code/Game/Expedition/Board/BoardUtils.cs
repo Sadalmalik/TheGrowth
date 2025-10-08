@@ -68,13 +68,14 @@ namespace XandArt.TheGrowth
             bool waitEachCard = false)
         {
             await Task.Delay(Mathf.FloorToInt(1000 * CardsViewConfig.Instance.dealDelay));
-            
+
+            var dealContext = new Context(context, new DealingSlots.Data { Slots = slots });
             var cardDelay = Mathf.FloorToInt(1000 * CardsViewConfig.Instance.dealDuration / slots.Count);
             while (0 < source.Count && 0 < slots.Count)
             {
                 var card = source.Peek();
                 var brainModel = card.Model.GetComponent<CardBrain>();
-                var slot = brainModel?.SpawnSlot?.Evaluate(context) ?? slots.Peek();
+                var slot = brainModel?.SpawnSlot?.Evaluate(dealContext) ?? slots.Peek();
                 if (slot == null) continue;
                 slots.Remove(slot);
 

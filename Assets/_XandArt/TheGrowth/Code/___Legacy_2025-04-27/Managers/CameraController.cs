@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using XandArt.Architecture;
 
@@ -12,10 +13,12 @@ namespace XandArt.TheGrowth
         public float ZoomMax = -90;
         public float ZoomFactor = 0.05f;
 
-        public void MoveTo(Vector3 position)
+        public void MoveTo(Vector3 position, Action onComplete=null)
         {
-            Root.DOMove(position, CardsViewConfig.Instance.cameraMoveDuration)
+            var tween = Root.DOMove(position, CardsViewConfig.Instance.cameraMoveDuration)
                 .SetEase(Ease.InOutCubic);
+            if (onComplete != null)
+                tween.OnComplete(() => onComplete());
         }
 
         public void Zoom(bool zoomOut)

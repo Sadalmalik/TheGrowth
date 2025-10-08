@@ -1,4 +1,5 @@
-﻿using XandArt.Architecture;
+﻿using System.Collections.Generic;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
@@ -16,6 +17,7 @@ namespace XandArt.TheGrowth
 
         public EVariant Variant = EVariant.Reveal;
         public Evaluator<CompositeEntity> Card;
+        public List<Command> AfterCommands;
 
         public override void Execute(Context context)
         {
@@ -26,17 +28,23 @@ namespace XandArt.TheGrowth
             switch (Variant)
             {
                 case EVariant.Flip:
-                    brain.FlipCard(null, false);
+                    brain.FlipCard(OnComplete, false);
                     break;
                 case EVariant.Reveal:
                     if (!brain.IsFaceUp)
-                        brain.FlipCard(null, false);
+                        brain.FlipCard(OnComplete, false);
                     break;
                 case EVariant.Hide:
                     if (brain.IsFaceUp)
-                        brain.FlipCard(null, false);
+                        brain.FlipCard(OnComplete, false);
                     break;
-                    
+            }
+
+            return;
+            
+            void OnComplete()
+            {
+                AfterCommands.ExecuteAll(context);
             }
         }
     }

@@ -18,7 +18,6 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: 3a05ed99aeb5f564baa4817790aefbe1, type: 3}
     - {fileID: 21300000, guid: eec9f005a9580a442876028f93d5df19, type: 3}
-    - {fileID: 11400000, guid: 520928b9d9de328488e7176c634b319e, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -157,17 +156,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: OnPlaced
-      Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: OnFlipped
       Entry: 6
@@ -176,95 +165,7 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: OnCovered
-      Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 15|XandArt.TheGrowth.Branch, Code
-    - Name: condition
-      Entry: 7
-      Data: 16|XandArt.TheGrowth.CardInGroups, Code
-    - Name: Card
-      Entry: 7
-      Data: 17|XandArt.TheGrowth.CoveringCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Filter
-      Entry: 7
-      Data: 18|System.Collections.Generic.List`1[[XandArt.TheGrowth.CardListConfig,
-        Code]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OnTrue
-      Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 20|XandArt.TheGrowth.EndGame, Code
-    - Name: Variant
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 21|XandArt.TheGrowth.DebugLog, Code
-    - Name: Message
-      Entry: 1
-      Data: EXIT
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OnFalse
-      Entry: 7
-      Data: 22|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: OnUnCovered
       Entry: 6

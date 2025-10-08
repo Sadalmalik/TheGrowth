@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using XandArt.Architecture;
 using XandArt.Architecture.IOC;
@@ -29,6 +26,9 @@ namespace XandArt.TheGrowth
         [SerializeField]
         private LoadingScreen _loadingScreen;
 
+        [SerializeField]
+        private ExplorationEndScreen _explorationEndScreen;
+        
         [Inject]
         private PersistenceManager _persistenceManager;
         
@@ -38,12 +38,17 @@ namespace XandArt.TheGrowth
         public LoadingScreen LoadingScreen
             => _loadingScreen;
 
+        public ExplorationEndScreen ExplorationEndScreen
+            => _explorationEndScreen;
+
         public void Init()
         {
             _loadingScreen.Init();
             _continueGameButton.SetActive(_gameManager.HasLastSave());
             _loadingMenu.OnSaveSelected += HandleSaveSelected;
             _loadingScreen.HideAsync();
+            
+            _pauseMenuScreen.SetActive(false);
         }
 
         public void Dispose()

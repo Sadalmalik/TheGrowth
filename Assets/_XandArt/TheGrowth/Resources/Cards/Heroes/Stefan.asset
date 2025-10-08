@@ -19,6 +19,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b91e0aff18a9d2d4d9f52d53b21f9522, type: 3}
     - {fileID: 21300000, guid: 9bec144c5b6f98e449ff626be9788bde, type: 3}
     - {fileID: 11400000, guid: 52f3eee5fad002e4f984ced85e276ea0, type: 2}
+    - {fileID: 11400000, guid: 74a4769fd3faaf440af4a21e2ea029f3, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -219,7 +220,19 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 7
-      Data: 17|XandArt.TheGrowth.ExecuteCommands, Code
+      Data: 17|XandArt.TheGrowth.MoveCamera, Code
+    - Name: Card
+      Entry: 7
+      Data: 18|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 19|XandArt.TheGrowth.ExecuteCommands, Code
     - Name: config
       Entry: 10
       Data: 2
@@ -228,19 +241,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 18|XandArt.TheGrowth.MoveCamera, Code
-    - Name: Card
-      Entry: 7
-      Data: 19|XandArt.TheGrowth.ActiveCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 20|XandArt.TheGrowth.CallStep, Code
+      Data: 20|XandArt.TheGrowth.ExecuteCommands, Code
+    - Name: config
+      Entry: 10
+      Data: 3
     - Name: 
       Entry: 8
       Data: 

@@ -23,11 +23,21 @@ namespace XandArt.TheGrowth
 
         public bool shuffleOnStart = true;
 
+        [InfoBox("$DynamicMessage")]
         [TableList(ShowIndexLabels = true)]
         public List<DeckEntry> entries;
 
         public IEnumerable<EntityModel> Entities => entries.Select(entry => entry.Entity).Distinct();
-
+        
+        private string DynamicMessage
+        {
+            get
+            {
+                var sum = entries.Sum(entry => entry.Amount);
+                return $"Total: {sum}";
+            }
+        }
+        
         public List<CompositeEntity> CreateCards(GameState gameState, int limit)
         {
             var models = new List<EntityModel>();
