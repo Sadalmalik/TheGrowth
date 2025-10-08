@@ -28,6 +28,6 @@ MonoBehaviour:
   Description: You can't see it, but you can feel this boundary between the Orchards
     and the Forest. It presses on your ears, as if you're diving to the bottom.
   Type: 2
-  Scene: ExpeditionTest
-  Steps: 30
+  Scene: ExpeditionTest_2
+  Steps: 35
   Deck: {fileID: 11400000, guid: e2e880f1feecdec42a8dd60427ef186e, type: 2}
