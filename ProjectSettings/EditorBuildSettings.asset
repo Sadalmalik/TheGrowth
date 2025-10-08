@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_XandArt/TheGrowth/Scenes/LocationHUB.unity
     guid: cdd87bf9e33c7594aa8b5ad3465b3f7d
+  - enabled: 1
+    path: Assets/_XandArt/TheGrowth/Scenes/ExpeditionTest_2.unity
+    guid: ed033fbe11235804da35c720f928a836
   m_configObjects: {}
