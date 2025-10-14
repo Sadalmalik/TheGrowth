@@ -20,6 +20,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 251595fcfe2040b4e8abc9bf483836cf, type: 3}
     - {fileID: 11400000, guid: 5c320f4890fcc1c49a4f36a3c2471381, type: 2}
     - {fileID: 11400000, guid: a603f8618e8e07747ad3416386606692, type: 2}
+    - {fileID: 11400000, guid: 63c8b5d355d36fe42825cd08c02868ca, type: 2}
     - {fileID: 11400000, guid: 520928b9d9de328488e7176c634b319e, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -302,7 +303,7 @@ MonoBehaviour:
       Data: 
     - Name: Figure
       Entry: 3
-      Data: 1
+      Data: 3
     - Name: Distance
       Entry: 3
       Data: 1
@@ -324,13 +325,16 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 10
       Data: 2
     - Name: 
       Entry: 10
       Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 13
       Data: 
@@ -364,6 +368,9 @@ MonoBehaviour:
     - Name: RaiseEvents
       Entry: 5
       Data: true
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -400,7 +407,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 10
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 13
       Data: 

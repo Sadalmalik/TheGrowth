@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6b354048c82481eb5b3add2dd4003e3, type: 3}
-  m_Name: Special
+  m_Name: Obstacles
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -22,5 +22,4 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   Cards:
-  - {fileID: 11400000, guid: 47fc333d35167a046bd66e98aa830544, type: 2}
-  - {fileID: 11400000, guid: c33b0f8c3db74d340970d30fddca159f, type: 2}
+  - {fileID: 11400000, guid: 5eae9409d46fa4f469e2df4ab6a3c50b, type: 2}

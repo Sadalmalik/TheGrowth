@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 721fd4a630e54d9784e83e35768c9280, type: 3}
-  m_Name: Bulb
+  m_Name: Card_Blood
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: a8fdd193ac66dae47b56a2fd1bc8583d, type: 3}
-    - {fileID: 21300000, guid: 534b29b742f0935468404f067f0e424d, type: 3}
+    - {fileID: 21300000, guid: 0d56ac2c74a2fc74187988178d5c0518, type: 3}
     - {fileID: 11400000, guid: e4636dc6714fc27439e4d524b53e4050, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -26,7 +26,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: 89e7a7510db3dfd4e983bd8e0e95088c
+      Data: 7c65908894a30884ea5af52f67c9d7ad
     - Name: components
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[XandArt.Architecture.IEntityModelComponent,
