@@ -159,9 +159,9 @@ namespace XandArt.TheGrowth
                 if (card == null) continue;
                 var brain = card.GetComponent<CardBrain.Component>();
                 if (brain == null) continue;
-                if (brain.OnStep())
+                if (brain.OnStep() && brain.StepDuration > 0)
                 {
-                    await Task.Delay((int)(delay * 1000));
+                    await Task.Delay((int)(brain.StepDuration * 1000));
                 }
             }
             onComplete?.Invoke();
@@ -198,6 +198,7 @@ namespace XandArt.TheGrowth
                 var card = item.Value as CompositeEntity;
                 if (card == null) continue;
                 var view = CreateView(card);
+                view.Flip(null, true);
                 _views.Add(view);
                 hand.Add(card);
             }

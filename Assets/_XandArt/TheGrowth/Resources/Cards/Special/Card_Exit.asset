@@ -131,6 +131,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -145,6 +148,9 @@ MonoBehaviour:
       Data: 12|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
+      Data: 
+    - Name: AfterCommands
+      Entry: 6
       Data: 
     - Name: 
       Entry: 8

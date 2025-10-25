@@ -338,6 +338,9 @@ MonoBehaviour:
     - Name: RaiseEvents
       Entry: 5
       Data: false
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -378,6 +381,9 @@ MonoBehaviour:
     - Name: RaiseEvents
       Entry: 5
       Data: false
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -392,6 +398,9 @@ MonoBehaviour:
       Data: 37|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
+      Data: 
+    - Name: AfterCommands
+      Entry: 6
       Data: 
     - Name: 
       Entry: 8
@@ -442,6 +451,9 @@ MonoBehaviour:
     - Name: RaiseEvents
       Entry: 5
       Data: false
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -460,6 +472,9 @@ MonoBehaviour:
     - Name: RaiseEvents
       Entry: 5
       Data: false
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 

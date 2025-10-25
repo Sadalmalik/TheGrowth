@@ -300,6 +300,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -339,6 +342,9 @@ MonoBehaviour:
     - Name: RaiseEvents
       Entry: 5
       Data: false
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -394,6 +400,9 @@ MonoBehaviour:
     - Name: RaiseEvents
       Entry: 5
       Data: false
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -422,6 +431,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -449,6 +461,9 @@ MonoBehaviour:
     - Name: RaiseEvents
       Entry: 5
       Data: false
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -464,6 +479,9 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 43|XandArt.TheGrowth.CallStep, Code
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -504,6 +522,9 @@ MonoBehaviour:
     - Name: RaiseEvents
       Entry: 5
       Data: false
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 

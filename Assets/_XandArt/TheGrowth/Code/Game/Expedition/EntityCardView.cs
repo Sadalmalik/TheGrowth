@@ -34,6 +34,8 @@ namespace XandArt.TheGrowth
         {
             decor.sprite = visual.Decor;
             portrait.sprite = visual.Portrait;
+            SetFaceVisible(false);
+            _isFaceUp = false;
         }
         
         public void SetFaceVisible(bool visible)

@@ -19,7 +19,6 @@ namespace XandArt.TheGrowth
         public bool AllowEvents { get; set; } = true;
 
         public bool CanBeDragged => ModelBrain?.CanBeDragged ?? false;
-        public bool EndsTheTurn => ModelBrain?.EndsTheTurn ?? false;
 
         public bool IsFaceUp => view.IsFaceUp;
 

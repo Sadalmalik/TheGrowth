@@ -23,8 +23,8 @@ namespace XandArt.TheGrowth
     {
         public CardType Type;
         public bool CanBeDragged;
-        public bool EndsTheTurn;
-
+        public float StepDuration;
+        
         [Space]
         public Evaluator<SlotEntity> SpawnSlot;
 
@@ -70,6 +70,9 @@ namespace XandArt.TheGrowth
             
             [JsonIgnore]
             public bool CanBeDragged => Settings.CanBeDragged;
+            
+            [JsonIgnore]
+            public float StepDuration => Settings.StepDuration;
 
             public void FlipCard(Action onComplete, bool instant = false)
             {
