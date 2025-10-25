@@ -67,9 +67,9 @@ MonoBehaviour:
     - Name: CanBeDragged
       Entry: 5
       Data: true
-    - Name: EndsTheTurn
-      Entry: 5
-      Data: true
+    - Name: StepDuration
+      Entry: 4
+      Data: 0
     - Name: SpawnSlot
       Entry: 6
       Data: 
