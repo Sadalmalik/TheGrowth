@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes: []
   entityCardPrefab: {fileID: 8621798118748405003, guid: f163897a31fb56e499887468c05baf71,
     type: 3}
-  cardThickness: 0.01
+  cardThickness: 0.04
   randomAngle: 0
   flipDuration: 0.3
   jumpDuration: 0.4
