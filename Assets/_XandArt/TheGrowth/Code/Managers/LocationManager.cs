@@ -13,7 +13,7 @@ namespace XandArt.TheGrowth
 
         public event Action<Location> OnLocationLoaded;
         public event Action<Location> OnLocationUnloaded;
-        
+
         public void Init()
         {
         }
@@ -27,10 +27,12 @@ namespace XandArt.TheGrowth
             if (location == null)
                 return;
 
+            Debug.Log($"TEST - Load Location: {location.Model}");
+
             using var screenTask = await LoadingTracker.CreateAsync();
 
             _menuManager.SetMainScreenActive(false);
-            
+
             var result = new TaskCompletionSource<bool>();
             var operation = SceneManager.LoadSceneAsync(location.Model.Scene, LoadSceneMode.Additive);
             if (operation != null)
@@ -39,7 +41,6 @@ namespace XandArt.TheGrowth
                 await result.Task;
                 await location.OnLoad();
                 OnLocationLoaded?.Invoke(location);
-                    
             }
         }
 
@@ -51,10 +52,10 @@ namespace XandArt.TheGrowth
             using var screenTask = await LoadingTracker.CreateAsync();
 
             _menuManager.SetMainScreenActive(false);
-            
+
             await location.OnUnload();
             OnLocationUnloaded?.Invoke(location);
-            
+
             var result = new TaskCompletionSource<bool>();
             var operation = SceneManager.UnloadSceneAsync(location.Model.Scene);
             if (operation != null)
@@ -62,7 +63,7 @@ namespace XandArt.TheGrowth
                 operation.completed += op => { result.SetResult(true); };
                 await result.Task;
             }
-            
+
             // await screen.HideAsync();
         }
     }

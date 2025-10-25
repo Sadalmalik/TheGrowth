@@ -18,7 +18,7 @@ namespace XandArt.TheGrowth
 
         public override void OnStepComplete(GameState state)
         {
-            _onStepStartActions.ExecuteAll(Game.BaseContext);
+            _onStepEndActions.ExecuteAll(Game.BaseContext);
         }
     }
 }

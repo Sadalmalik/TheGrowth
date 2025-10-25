@@ -25,3 +25,4 @@ MonoBehaviour:
   MainInventory: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b, type: 2}
   ExpeditionHand: {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
   ExpeditionCollect: {fileID: 11400000, guid: 0fb19187856e38c4392e0a592174a8c5, type: 2}
+  AutosaveDelay: 300

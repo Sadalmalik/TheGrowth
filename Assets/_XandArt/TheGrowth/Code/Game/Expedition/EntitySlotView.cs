@@ -15,7 +15,12 @@ namespace XandArt.TheGrowth
         [SerializeField]
         private Vector3 CustomOffset;
 
+        [SerializeField]
+        private InventoryModel m_Inventory;
+        
         public GameObject Object => gameObject;
+        
+        public InventoryModel Inventory => m_Inventory;
 
         public Entity Data { get; set; }
 

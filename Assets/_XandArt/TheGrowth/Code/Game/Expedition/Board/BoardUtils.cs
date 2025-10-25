@@ -50,6 +50,13 @@ namespace XandArt.TheGrowth
 
             void HandleMoved()
             {
+                if (target.Inventory != null)
+                {
+                    var component = card.GetOrAddComponent<CardInventoryComponent>();
+                    if (component.Inventory)
+                        component.Inventory.Value.Remove(card);
+                    target.Inventory.Add(card);
+                }
                 if (cardEvents && target.IsTableSlot)
                 {
                     cardUncover?.GetComponent<CardBrain.Component>()?.OnUnCovered(card);

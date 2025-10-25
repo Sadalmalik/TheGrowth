@@ -16,5 +16,8 @@ namespace XandArt.TheGrowth
         public InventoryModel MainInventory;
         public InventoryModel ExpeditionHand;
         public InventoryModel ExpeditionCollect;
+
+        [Space]
+        public float AutosaveDelay = 5 * 60;
     }
 }

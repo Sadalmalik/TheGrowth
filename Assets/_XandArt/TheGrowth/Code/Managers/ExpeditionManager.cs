@@ -214,6 +214,8 @@ namespace XandArt.TheGrowth
                 slot = gameState.Create<SlotEntity>();
                 slot.IsTableSlot = false;
                 slot.Position = view.transform.position;
+                if (view.Inventory != null)
+                    slot.Inventory = gameState.GetInventory(view.Inventory);
             }
 
             slot.SetView(view);

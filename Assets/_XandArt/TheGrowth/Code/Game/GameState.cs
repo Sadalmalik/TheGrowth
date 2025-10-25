@@ -81,7 +81,7 @@ namespace XandArt.TheGrowth
 
         public void Start()
         {
-            CurrentGameStep.OnStepStart(this);
+            SetGameStep(CurrentGameStep);
         }
 
         public Inventory GetInventory(InventoryModel model)

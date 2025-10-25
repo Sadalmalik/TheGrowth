@@ -21,6 +21,9 @@ namespace XandArt.TheGrowth
         [JsonProperty]
         private List<Ref<CompositeEntity>> _cards;
 
+        [JsonProperty]
+        private Ref<Inventory> _invntory;
+        
 #endregion
 
 
@@ -31,6 +34,13 @@ namespace XandArt.TheGrowth
 
         [JsonIgnore]
         private List<CompositeEntity> _cardsList;
+
+        [JsonIgnore]
+        public Inventory Inventory
+        {
+            get => _invntory;
+            set => _invntory = value;
+        }
 
         [JsonIgnore]
         public List<CompositeEntity> Cards => _cardsList;

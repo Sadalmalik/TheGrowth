@@ -3659,6 +3659,10 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 0fb19187856e38c4392e0a592174a8c5, type: 2}
+    - {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b, type: 2}
+    - {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
+    - {fileID: 11400000, guid: 685c262e01893c94daf1d9420a1be9d3, type: 2}
     - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -3671,13 +3675,46 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 4
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.GoToLocation, Code
-    - Name: Location
+      Data: 1|XandArt.TheGrowth.MoveAllItems, Code
+    - Name: FromInventory
       Entry: 10
       Data: 0
+    - Name: IntoInventory
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|XandArt.TheGrowth.MoveAllItems, Code
+    - Name: FromInventory
+      Entry: 10
+      Data: 2
+    - Name: IntoInventory
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.DestroyAllItems, Code
+    - Name: FromInventory
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|XandArt.TheGrowth.GoToLocation, Code
+    - Name: Location
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 8
       Data: 

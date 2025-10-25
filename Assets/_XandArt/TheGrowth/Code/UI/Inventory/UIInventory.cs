@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using JetBrains.Annotations;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XandArt.Architecture;
@@ -12,46 +11,53 @@ namespace XandArt.TheGrowth
 {
     public class UIInventory : WidgetBase, IDropHandler
     {
+        [BoxGroup("Settings")]
         [SerializeField]
         private Transform m_Container;
         
+        [BoxGroup("Settings")]
         [SerializeField]
         private UIItem m_Prefab;
 
+        [BoxGroup("Settings")]
         [SerializeField]
         private InventoryModel m_Inventory;
 
+        [BoxGroup("Filters")]
         [SerializeField]
         private CardType m_Filter;
 
-        [SerializeField]
-        [NotNull]
-        private List<DeckConfig> m_InAnyDeck = new List<DeckConfig>();
+        [BoxGroup("Filters")]
+        [NotNull, SerializeField]
+        private List<CardListConfig> m_InAnyDeck = new List<CardListConfig>();
 
-        [SerializeField]
-        [NotNull]
+        [BoxGroup("Filters")]
+        [NotNull, SerializeField]
         private List<EntityModel> m_InList = new List<EntityModel>();
 
+        [BoxGroup("Filters")]
         [SerializeField]
-        private bool m_AllowStack;
-
-        [Tooltip("0 - означает неограниченно")]
-        public int limit = 1;
-
+        private bool m_IncludeItemFromSlots = true;
+            
         [Inject]
         private GameManager m_GameManager;
 
+        private Inventory m_InventoryEntity;
+        
         public void OnEnable()
         {
             // Debug.Log("UIInventorySlot.OnEnable");
             m_Container ??= transform;
             
+            m_InventoryEntity = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
+            m_InventoryEntity.OnChanged += RefreshView;
             RefreshView();
         }
 
         public void OnDisable()
         {
             // Debug.Log("UIInventorySlot.OnDisable");
+            m_InventoryEntity.OnChanged -= RefreshView;
         }
 
         public void OnDrop(PointerEventData eventData)
@@ -68,30 +74,37 @@ namespace XandArt.TheGrowth
 
         private void DropItem(UIItem item)
         {
-            var views = m_Container.GetComponentsInChildren<UIItem>();
-            if (limit > 0 && views.Length == limit)
-            {
-                item.Inventory.DropItem(views[0]);
-                views[0].transform.SetParent(item.Inventory.m_Container);
-            }
-            
-            var fromInventory = m_GameManager.CurrentGameState.GetInventory(item.Inventory.m_Inventory);
+            var fromInventory = m_GameManager.CurrentGameState.GetInventory(item.Inventory);
             var intoInventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
-            InventoryUtils.MoveItem(item.Data, fromInventory, intoInventory, m_AllowStack);
+
+            if (fromInventory != intoInventory)
+            {
+                fromInventory.Remove(item.Data);
+                intoInventory.Add(item.Data);
+            }
 
             item.TargetTransform = m_Container;
-            item.Inventory = this;
+            item.Inventory = m_Inventory;
         }
 
         private bool IsValidEntity(CompositeEntity entity)
         {
-            if (entity == null) return false;
+            if (entity == null)
+                return false;
             var model = entity.Model;
             var itemBrain = model.GetComponent<CardBrain>();
+            if (!m_IncludeItemFromSlots)
+            {
+                var component = entity.GetComponent<CardInventoryComponent>();
+                if (!string.IsNullOrEmpty(component.SlotName))
+                    return false;
+            }
             var validType = m_Filter == CardType.None || (itemBrain.Type & m_Filter) != 0;
-            var validDeck = m_InAnyDeck.Count == 0 || m_InAnyDeck.Any(deck => deck.Entities.Contains(model));
+            if (!validType)
+                return false;
+            var validDeck = m_InAnyDeck.Count == 0 || m_InAnyDeck.Any(deck => deck.Cards.Contains(model));
             var validEntity = m_InList.Count == 0 || m_InList.Contains(model);
-            return validType && (validDeck || validEntity);
+            return validDeck || validEntity;
         }
 
         public void RefreshView()
@@ -108,31 +121,13 @@ namespace XandArt.TheGrowth
 
             var views = new Queue<UIItem>(m_Container.GetComponentsInChildren<UIItem>());
 
-            var count = 0;
             foreach (var item in items)
             {
                 var view = views.Count > 0
                     ? views.Dequeue()
                     : Instantiate(m_Prefab, m_Container);
-                view.Inventory = this;
-                view.Data = item;
-
-                var visual = item.Model.GetComponent<CardVisual>();
-                if (visual != null)
-                    view.Set(visual);
-
-                var stack = item.GetComponent<Stackable.Component>();
-                view.label.SetText(
-                    stack != null && stack.Limit > 1
-                        ? stack.Count.ToString()
-                        : string.Empty);
-
-                if (limit==0)
-                    continue;
-
-                count++;
-                if (limit <= count)
-                    break;
+                view.Inventory = m_Inventory;
+                view.Setup(item);
             }
 
             while (0 < views.Count)

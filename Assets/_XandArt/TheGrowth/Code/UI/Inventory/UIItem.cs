@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using XandArt.Architecture;
 
@@ -14,21 +15,41 @@ namespace XandArt.TheGrowth
         public Image imageDecor;
         public TMP_Text label;
 
-        public UIInventory Inventory;
-        public Entity Data;
+        public InventoryModel Inventory;
+        public CompositeEntity Data;
 
         private Transform m_LastParent;
 
         [HideInInspector]
         public Transform TargetTransform;
 
-        public void Set(CardVisual visual)
+        public void Setup(CardVisual visual)
         {
+            if (visual == null) return;
+            
             imageDecor.sprite = visual.Decor;
             imageDecor.gameObject.SetActive(visual.Decor != null);
 
             imagePortrait.sprite = visual.Portrait;
             imagePortrait.gameObject.SetActive(visual.Portrait != null);
+        }
+        
+        public void Setup(CompositeEntity entity)
+        {
+            Data = entity;
+            
+            var visual = entity.Model.GetComponent<CardVisual>();
+            Setup(visual);
+
+            var stack = entity.GetComponent<Stackable.Component>();
+            if (stack != null && stack.Limit > 1)
+            {
+                label.SetText(stack.Count.ToString());
+            }
+            else
+            {
+                label.SetText(string.Empty);
+            }
         }
 
         public void OnBeginDrag(PointerEventData eventData)

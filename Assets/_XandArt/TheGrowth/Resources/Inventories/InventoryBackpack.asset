@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b694e915bb824bb685cd28443bc654c5, type: 3}
-  m_Name: InventoryLocation
+  m_Name: InventoryBackpack
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -23,4 +23,4 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: 685c262e01893c94daf1d9420a1be9d3
+      Data: 0fb19187856e38c4392e0a592174a8c5
