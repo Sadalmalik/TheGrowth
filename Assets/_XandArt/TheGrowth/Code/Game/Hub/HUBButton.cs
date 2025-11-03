@@ -11,6 +11,15 @@ namespace XandArt.TheGrowth
         private Button _button;
 
         [SerializeField]
+        private HoldButton _holdButton;
+
+        [SerializeField]
+        private float _duration = 0.25f;
+
+        [SerializeField]
+        private Image _progressFill; 
+
+        [SerializeField]
         private HUBRoom _gotoRoom;
         
         [SerializeField]
@@ -24,8 +33,12 @@ namespace XandArt.TheGrowth
         
         public override void Init()
         {
-            _button.onClick.AddListener(HandleClick);
+            if (_button)
+                _button.onClick.AddListener(HandleClick);
+            if (_holdButton)
+                _holdButton.onClick.AddListener(HandleClick);
             _hub = GetComponentInParent<HUB>();
+            
         }
 
         private void HandleClick()
