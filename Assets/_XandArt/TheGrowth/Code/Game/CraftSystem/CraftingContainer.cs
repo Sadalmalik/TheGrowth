@@ -7,6 +7,6 @@ namespace XandArt.TheGrowth
     public class CraftingContainer : Entity
     {
         public AssetRef<CraftModel> Project;
-        public List<AssetRef<CraftModel>> Crafts;
+        public List<AssetRef<CraftModel>> Crafts = new List<AssetRef<CraftModel>>();
     }
 }

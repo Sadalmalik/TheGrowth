@@ -29,6 +29,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6a0ef49b6ed2cab4989f5cb152412206, type: 2}
     - {fileID: 11400000, guid: fca1699702490494f8eac65809f9a982, type: 2}
     - {fileID: 11400000, guid: d7209ae1ab1fcb54cbf1132b89be41fa, type: 2}
+    - {fileID: 11400000, guid: c177f998dc087ce4a8b65db722b6c394, type: 2}
+    - {fileID: 11400000, guid: 7a928ef056fe9af49a49ba3fd1f8d788, type: 2}
+    - {fileID: 11400000, guid: 5116b4aeabaf94248a1c2ab62903c67d, type: 2}
     - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -215,13 +218,41 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 16|XandArt.TheGrowth.GoToLocation, Code
-    - Name: Location
+      Data: 16|XandArt.TheGrowth.AddCrafts, Code
+    - Name: crafts
+      Entry: 7
+      Data: 17|System.Collections.Generic.List`1[[XandArt.TheGrowth.CraftModel, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
       Entry: 10
       Data: 13
+    - Name: 
+      Entry: 10
+      Data: 14
+    - Name: 
+      Entry: 10
+      Data: 15
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 18|XandArt.TheGrowth.GoToLocation, Code
+    - Name: Location
+      Entry: 10
+      Data: 16
     - Name: 
       Entry: 8
       Data: 
@@ -233,7 +264,7 @@ MonoBehaviour:
       Data: 
     - Name: _onStepEndActions
       Entry: 7
-      Data: 17|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 19|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -249,7 +280,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 18|XandArt.TheGrowth.SetEnabledActions, Code
+      Data: 20|XandArt.TheGrowth.SetEnabledActions, Code
     - Name: actions
       Entry: 3
       Data: 7

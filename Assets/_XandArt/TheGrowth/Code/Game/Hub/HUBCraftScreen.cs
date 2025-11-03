@@ -19,6 +19,9 @@ namespace XandArt.TheGrowth
         
         [SerializeField]
         private RectTransform _craftContainer;
+        
+        [SerializeField]
+        private RectTransform _craftPlaceholder;
 
         [SerializeField]
         private UICraft _CraftSlectPrefab;
