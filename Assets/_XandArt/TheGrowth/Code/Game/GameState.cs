@@ -76,6 +76,7 @@ namespace XandArt.TheGrowth
             {
                 _currentStep = start
             };
+            state.Create<CraftingContainer>();
             return state;
         }
 

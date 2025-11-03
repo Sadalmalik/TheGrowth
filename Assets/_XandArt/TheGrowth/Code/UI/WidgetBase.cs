@@ -23,7 +23,6 @@ namespace XandArt.TheGrowth
                 return;
             
             Game.Container.InjectAt((object) this);
-            
             Init();
             
             Inited = true;

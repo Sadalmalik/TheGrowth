@@ -28,8 +28,6 @@ namespace XandArt.TheGrowth
 
         public override void Init()
         {
-            base.Init();
-
             m_Continue.onClick.AddListener(HandleContinue);
         }
 
