@@ -68,8 +68,13 @@ namespace XandArt.TheGrowth
                 .Select(craftRef => craftRef.Value)
                 .FirstOrDefault(craft => craft.name.Equals(craftAssetName));
             _craftContainer.Clear();
-            if (craft != null && craft.uiCraftPrefab != null)
-                Instantiate(craft.uiCraftPrefab, _projectContainer);
+            var hasCraft = craft != null && craft.uiCraftPrefab;
+            if (hasCraft)
+            {
+                _craftContainer.Clear();
+                Instantiate(craft.uiCraftPrefab, _craftContainer);
+            }
+            _craftPlaceholder.gameObject.SetActive(!hasCraft);
         }
     }
 }

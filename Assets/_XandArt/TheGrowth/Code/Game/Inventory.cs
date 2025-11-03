@@ -23,11 +23,11 @@ namespace XandArt.TheGrowth
             // No duplicates
             if (_items.Any(itemRef => itemRef.Value == entity))
                 return;
-            
+
             if (mergeStacks && (entity as CompositeEntity)?.GetComponent<Stackable.Component>() is { } stack)
             {
                 var model = entity.Model;
-                
+
                 foreach (var itemRef in Items)
                 {
                     var item = itemRef.Value as CompositeEntity;
@@ -64,15 +64,34 @@ namespace XandArt.TheGrowth
                 if (component != null && string.IsNullOrEmpty(component.SlotName))
                     compositeEntity.RemoveComponent(component);
             }
+
             _items.RemoveAll(itemRef => itemRef.Value == entity);
             OnChanged?.Invoke();
         }
 
         public IEnumerable<Entity> GetEntities(CardType filter)
         {
-            return Items
-                .Select(entity => entity.Value as CompositeEntity)
-                .Where(card => card != null && 0 != (card.Model.GetComponent<CardBrain>().Type & filter));
+            var entities = Items.Select(entity => entity.Value as CompositeEntity);
+            return filter == CardType.All
+                ? entities
+                : entities
+                    .Where(card => card != null && 0 != (card.Model.GetComponent<CardBrain>().Type & filter));
+        }
+
+        public int Count(EntityModel model)
+        {
+            int total = 0;
+            foreach (var itemRef in Items)
+            {
+                var item = itemRef.Value as CompositeEntity;
+                if (item == null) continue;
+                if (item.Model != model) continue;
+                var stack = item.GetComponent<Stackable.Component>();
+                if (stack == null) total++;
+                else total += stack.Count;
+            }
+
+            return total;
         }
     }
 
@@ -81,7 +100,7 @@ namespace XandArt.TheGrowth
         public static void MoveItem(Entity item, Inventory from, Inventory into, bool allowStack = true)
         {
             from.Remove(item);
-            
+
             var stack = (item as CompositeEntity)?.GetComponent<Stackable.Component>();
 
             if (stack == null)
@@ -93,9 +112,55 @@ namespace XandArt.TheGrowth
                 if (allowStack)
                 {
                     into.Add(item, allowStack);
-                    if (stack.Count==0) return;
+                    if (stack.Count == 0) return;
                 }
             }
+        }
+
+        public static bool TakeItems(this Inventory inventory, EntityModel model, int amount)
+        {
+            var gameState = Game.Container.Get<GameManager>().CurrentGameState;
+            var toRemove = new List<Ref<Entity>>();
+
+            var remains = amount;
+            foreach (var itemRef in inventory.Items)
+            {
+                if (remains == 0) break;
+                var item = itemRef.Value as CompositeEntity;
+                if (item == null) continue;
+                if (item.Model != model) continue;
+                var stack = item.GetComponent<Stackable.Component>();
+                if (stack == null)
+                {
+                    remains--;
+                    toRemove.Add(itemRef);
+                }
+                else
+                {
+                    if (remains < stack.Count)
+                    {
+                        stack.Count -= remains;
+                        remains = 0;
+                    }
+                    else
+                    {
+                        remains -= stack.Count;
+                        toRemove.Add(itemRef);
+                    }
+                }
+            }
+
+            // Недостаточно предметов!
+            if (remains != 0)
+                return false;
+
+            foreach (var itemRef in toRemove)
+            {
+                inventory.Items.Remove(itemRef);
+                gameState.Remove(itemRef.Value);
+            }
+
+            return true;
         }
     }
 }

@@ -24,6 +24,7 @@ MonoBehaviour:
     - Name: Guid
       Entry: 2
       Data: c177f998dc087ce4a8b65db722b6c394
-  title: 
+  title: Explosive
   icon: {fileID: 8763545384210230769, guid: d1e7fc04906c5fb46a86aac8560031bd, type: 3}
-  uiCraftPrefab: {fileID: 0}
+  uiCraftPrefab: {fileID: 5664196904020489130, guid: cde5918dd3f37764782be9bb53f05bce,
+    type: 3}

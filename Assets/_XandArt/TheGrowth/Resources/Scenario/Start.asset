@@ -29,6 +29,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6a0ef49b6ed2cab4989f5cb152412206, type: 2}
     - {fileID: 11400000, guid: fca1699702490494f8eac65809f9a982, type: 2}
     - {fileID: 11400000, guid: d7209ae1ab1fcb54cbf1132b89be41fa, type: 2}
+    - {fileID: 11400000, guid: 7c65908894a30884ea5af52f67c9d7ad, type: 2}
+    - {fileID: 11400000, guid: 376eaa740945a7f41b241de31202ed6d, type: 2}
     - {fileID: 11400000, guid: c177f998dc087ce4a8b65db722b6c394, type: 2}
     - {fileID: 11400000, guid: 7a928ef056fe9af49a49ba3fd1f8d788, type: 2}
     - {fileID: 11400000, guid: 5116b4aeabaf94248a1c2ab62903c67d, type: 2}
@@ -91,7 +93,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 9
+      Data: 11
     - Name: 
       Entry: 7
       Data: 5|XandArt.TheGrowth.DeckEntry, Code
@@ -201,6 +203,30 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 14|XandArt.TheGrowth.DeckEntry, Code
+    - Name: Amount
+      Entry: 3
+      Data: 3
+    - Name: Entity
+      Entry: 10
+      Data: 13
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 15|XandArt.TheGrowth.DeckEntry, Code
+    - Name: Amount
+      Entry: 3
+      Data: 4
+    - Name: Entity
+      Entry: 10
+      Data: 14
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -211,33 +237,33 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 14|XandArt.TheGrowth.RunCommands, Code
+      Data: 16|XandArt.TheGrowth.RunCommands, Code
     - Name: _onStepStartActions
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 17|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 16|XandArt.TheGrowth.AddCrafts, Code
+      Data: 18|XandArt.TheGrowth.AddCrafts, Code
     - Name: crafts
       Entry: 7
-      Data: 17|System.Collections.Generic.List`1[[XandArt.TheGrowth.CraftModel, Code]],
+      Data: 19|System.Collections.Generic.List`1[[XandArt.TheGrowth.CraftModel, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
       Entry: 10
-      Data: 13
-    - Name: 
-      Entry: 10
-      Data: 14
-    - Name: 
-      Entry: 10
       Data: 15
+    - Name: 
+      Entry: 10
+      Data: 16
+    - Name: 
+      Entry: 10
+      Data: 17
     - Name: 
       Entry: 13
       Data: 
@@ -249,10 +275,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 18|XandArt.TheGrowth.GoToLocation, Code
+      Data: 20|XandArt.TheGrowth.GoToLocation, Code
     - Name: Location
       Entry: 10
-      Data: 16
+      Data: 18
     - Name: 
       Entry: 8
       Data: 
@@ -264,7 +290,7 @@ MonoBehaviour:
       Data: 
     - Name: _onStepEndActions
       Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 21|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -280,7 +306,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 20|XandArt.TheGrowth.SetEnabledActions, Code
+      Data: 22|XandArt.TheGrowth.SetEnabledActions, Code
     - Name: actions
       Entry: 3
       Data: 7
