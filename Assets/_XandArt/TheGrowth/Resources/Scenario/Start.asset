@@ -207,7 +207,7 @@ MonoBehaviour:
       Data: 14|XandArt.TheGrowth.DeckEntry, Code
     - Name: Amount
       Entry: 3
-      Data: 3
+      Data: 5
     - Name: Entity
       Entry: 10
       Data: 13
@@ -219,7 +219,7 @@ MonoBehaviour:
       Data: 15|XandArt.TheGrowth.DeckEntry, Code
     - Name: Amount
       Entry: 3
-      Data: 4
+      Data: 6
     - Name: Entity
       Entry: 10
       Data: 14

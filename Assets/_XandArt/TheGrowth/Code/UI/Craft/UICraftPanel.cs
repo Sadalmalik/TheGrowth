@@ -5,16 +5,17 @@ using UnityEngine;
 using XandArt.Architecture;
 using XandArt.Architecture.IOC;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Crafting
 {
     public class CraftItem
     {
         public int amount;
         public EntityModel model;
+        public UICraftPanelSlot slot;
     }
 
     [SelectionBase]
-    public class UICraftButton : WidgetBase
+    public class UICraftPanel : WidgetBase
     {
         [SerializeField]
         private HoldButton m_Button;
@@ -36,16 +37,24 @@ namespace XandArt.TheGrowth
             m_Button.onClick.AddListener(HandleClick);
         }
 
+        private void OnEnable()
+        {
+            var state = m_GameManager.CurrentGameState;
+            var inventory = state.GetInventory(m_Inventory);
+
+            m_Button.interactable = CanCraft(inventory);
+        }
+
         private void HandleClick()
         {
             // CRAFT
             DoCraft();
-            var slots = GameObject.FindObjectsByType<UICraftItemSlot>(sortMode: FindObjectsSortMode.None);
+            var slots = GameObject.FindObjectsByType<UICraftPanelSlot>(sortMode: FindObjectsSortMode.None);
             foreach (var slot in slots)
                 slot.Refresh();
         }
 
-        public bool CanCraft(Inventory inventory)
+        private bool CanCraft(Inventory inventory)
         {
             bool canCraft = true;
             foreach (var require in m_Requires)
@@ -57,6 +66,7 @@ namespace XandArt.TheGrowth
                     break;
                 }
             }
+
             return canCraft;
         }
 
@@ -64,7 +74,7 @@ namespace XandArt.TheGrowth
         {
             var state = m_GameManager.CurrentGameState;
             var inventory = state.GetInventory(m_Inventory);
-            
+
             if (CanCraft(inventory))
             {
                 foreach (var require in m_Requires)
@@ -80,9 +90,38 @@ namespace XandArt.TheGrowth
                         var stack = item.AddComponent<Stackable.Component>();
                         stack.Count = product.amount;
                     }
+
                     inventory.Add(item);
                 }
+
+                m_Button.interactable = CanCraft(inventory);
             }
         }
+
+#if UNITY_EDITOR
+
+        [Button("Setup")]
+        private void BindSlots()
+        {
+            foreach (var require in m_Requires)
+            {
+                if (require.slot==null) continue;
+
+                require.slot.m_Inventory = m_Inventory;
+                require.slot.m_Entity = require.model;
+                require.slot.m_Required = require.amount;
+            }
+
+            foreach (var product in m_Products)
+            {
+                if (product.slot==null) continue;
+
+                product.slot.m_Inventory = m_Inventory;
+                product.slot.m_Entity = product.model;
+                product.slot.m_Required = product.amount;
+            }
+        }
+        
+#endif
     }
 }

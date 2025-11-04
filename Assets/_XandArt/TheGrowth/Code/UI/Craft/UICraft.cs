@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Crafting
 {
     [SelectionBase]
     public class UICraft : MonoBehaviour

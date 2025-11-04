@@ -1,16 +1,14 @@
-﻿using System.Linq;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using XandArt.Architecture;
 using XandArt.Architecture.IOC;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Crafting
 {
     [SelectionBase]
-    public class UICraftItemSlot : WidgetBase
+    public class UICraftPanelSlot : WidgetBase
     {
         [BoxGroup("UI")]
         [SerializeField]
@@ -22,15 +20,15 @@ namespace XandArt.TheGrowth
         
         [BoxGroup("Craft")]
         [SerializeField]
-        private InventoryModel m_Inventory;
+        internal InventoryModel m_Inventory;
 
         [BoxGroup("Craft")]
         [SerializeField]
-        private EntityModel m_Entity;
+        internal EntityModel m_Entity;
 
         [BoxGroup("Craft")]
         [SerializeField]
-        private int m_Required;
+        internal int m_Required;
 
         [Inject]
         private GameManager m_GameManager;

@@ -2,6 +2,7 @@
 using UnityEngine;
 using XandArt.Architecture;
 using XandArt.Architecture.IOC;
+using XandArt.TheGrowth.Crafting;
 
 namespace XandArt.TheGrowth
 {

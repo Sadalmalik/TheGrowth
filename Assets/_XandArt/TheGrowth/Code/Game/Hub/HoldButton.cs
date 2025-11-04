@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 namespace XandArt.TheGrowth
 {
-    public class HoldButton : MonoBehaviour,
-        IPointerDownHandler,
-        IPointerUpHandler
+    public class HoldButton : Selectable
     {
         [SerializeField]
         private float _duration = 0.25f;
@@ -40,18 +38,26 @@ namespace XandArt.TheGrowth
             _progressFill.fillAmount = 0;
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public override void OnPointerDown(PointerEventData eventData)
         {
-            Debug.Log("Button Pressed Down");
+            if (!interactable)
+            {
+                return;
+            }
+            
             _isHolding = true;
             _isBlocked = false;
             _progress = 0f;
             _progressFill.fillAmount = 0;
         }
 
-        public void OnPointerUp(PointerEventData eventData)
+        public override void OnPointerUp(PointerEventData eventData)
         {
-            Debug.Log("Button Released");
+            if (!interactable)
+            {
+                return;
+            }
+            
             _isHolding = false;
             _isBlocked = false;
             _progress = 0f;
@@ -67,18 +73,18 @@ namespace XandArt.TheGrowth
 
                 if (t > 1)
                 {
-                    t = 1;
+                    _progressFill.fillAmount = 1;
                     Evaluate();
                 }
-
-                _progressFill.fillAmount = t;
+                else
+                {
+                    _progressFill.fillAmount = t;
+                }
             }
         }
 
         private void Evaluate()
         {
-            Debug.Log("Button Evaluate");
-            
             if (_block)
                 _isBlocked = true;
             else
@@ -86,6 +92,14 @@ namespace XandArt.TheGrowth
             
             UISystemProfilerApi.AddMarker("HoldButton.onClick", this);
             m_OnClick.Invoke();
+
+            if (!interactable)
+            {
+                _isHolding = false;
+                _isBlocked = false;
+                _progress = 0f;
+                _progressFill.fillAmount = 0;
+            }
         }
     }
 }
