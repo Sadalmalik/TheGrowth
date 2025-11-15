@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2a70244493a46138e022f7580e72596, type: 3}
-  m_Name: Craft 2
+  m_Name: Project_1
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -23,8 +23,8 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: 7a928ef056fe9af49a49ba3fd1f8d788
+      Data: 54d09b84afeb61c4ca069c248f63e74b
   title: 
-  icon: {fileID: -6598977352912706991, guid: d1e7fc04906c5fb46a86aac8560031bd, type: 3}
-  uiCraftPrefab: {fileID: 5664196904020489130, guid: 89768d86257bdc747b8de01ca8ef9869,
+  icon: {fileID: -115089916598870894, guid: deeb992ddb471814a95b1563e182b323, type: 3}
+  uiCraftPrefab: {fileID: 5664196904020489130, guid: 1665b5d0931c3d1408d3cebe0054a732,
     type: 3}
