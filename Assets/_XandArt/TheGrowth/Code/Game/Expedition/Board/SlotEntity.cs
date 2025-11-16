@@ -23,7 +23,7 @@ namespace XandArt.TheGrowth
 
         [JsonProperty]
         private Ref<Inventory> _invntory;
-        
+
 #endregion
 
 
@@ -79,6 +79,12 @@ namespace XandArt.TheGrowth
         public void Remove(CompositeEntity card)
         {
             _cardsList.Remove(card);
+
+            for (int i = 0; i < _cardsList.Count; i++)
+            {
+                var view = _cardsList[i].View as EntityCardView;
+                view?.SlideInSlot(this, null, false, i);
+            }
         }
 
         public CompositeEntity Top()
@@ -99,7 +105,7 @@ namespace XandArt.TheGrowth
         public Vector3 GetNewPosition(int index)
         {
             if (SlotView == null) return Position;
-            if (index == -1) index = 1 + _cardsList.Count;
+            if (index == -1) index = _cardsList.Count;
             return SlotView.transform.position + _cardOffset * index;
         }
 
@@ -111,7 +117,8 @@ namespace XandArt.TheGrowth
             }
             else
             {
-                _cardOffset = SlotView.GetCustomOffset() ?? SlotView.transform.up * CardsViewConfig.Instance.cardThickness;
+                _cardOffset = SlotView.GetCustomOffset() ??
+                              SlotView.transform.up * CardsViewConfig.Instance.cardThickness;
             }
         }
 

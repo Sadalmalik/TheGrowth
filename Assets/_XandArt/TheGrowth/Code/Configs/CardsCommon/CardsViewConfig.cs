@@ -21,6 +21,7 @@ namespace XandArt.TheGrowth
         public float randomAngle = 15f;
 
         [Space]
+        public float shiftDuration = 0.1f;
         public float flipDuration = 0.3f;
         public float jumpDuration = 0.4f;
 

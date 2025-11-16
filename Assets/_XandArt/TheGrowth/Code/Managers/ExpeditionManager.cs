@@ -70,7 +70,7 @@ namespace XandArt.TheGrowth
             if (_board == null) return;
 
             if (_blockInput) return;
-            
+
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 if (Raycast((int)(Layer.Cards), out var hit))
@@ -99,7 +99,7 @@ namespace XandArt.TheGrowth
                 {
                     var slotView = hit.transform.GetComponent<EntitySlotView>();
                     var slot = slotView?.Data as SlotEntity;
-                    if (slot != null && _moves.Contains(slot))
+                    if (slot != null && _moves != null && _moves.Contains(slot))
                     {
                         _ = _draggedCard.MoveTo(slot);
                     }
@@ -143,7 +143,7 @@ namespace XandArt.TheGrowth
             CameraController.Instance.Zoom(Input.GetKey(KeyCode.Mouse1));
         }
 
-        public async Task CallStep(Action onComplete=null)
+        public async Task CallStep(Action onComplete = null)
         {
             _blockInput = true;
             // var newContext = new Context(new PlayerCard.Data { Card = m_PlayerCard });
@@ -164,6 +164,7 @@ namespace XandArt.TheGrowth
                     await Task.Delay((int)(brain.StepDuration * 1000));
                 }
             }
+
             onComplete?.Invoke();
             _blockInput = false;
         }
@@ -198,7 +199,6 @@ namespace XandArt.TheGrowth
                 var card = item.Value as CompositeEntity;
                 if (card == null) continue;
                 var view = CreateView(card);
-                view.Flip(null, true);
                 _views.Add(view);
                 hand.Add(card);
             }
@@ -313,6 +313,11 @@ namespace XandArt.TheGrowth
             _activeLocation = null;
             _board = null;
         }
+
+#endregion
+
+
+#region View Handling
 
         private EntityCardView CreateView(CompositeEntity card, Transform parent = null)
         {

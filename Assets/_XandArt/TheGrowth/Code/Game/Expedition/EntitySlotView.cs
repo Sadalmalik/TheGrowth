@@ -12,7 +12,7 @@ namespace XandArt.TheGrowth
         [SerializeField]
         private bool UseCustomOffset;
 
-        [SerializeField]
+        [SerializeField, ShowIf(nameof(UseCustomOffset))]
         private Vector3 CustomOffset;
 
         [SerializeField]

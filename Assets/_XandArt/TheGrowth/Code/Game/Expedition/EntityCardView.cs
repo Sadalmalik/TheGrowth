@@ -2,6 +2,7 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using XandArt.Architecture;
@@ -43,6 +44,32 @@ namespace XandArt.TheGrowth
             faceObject.SetActive(visible);
         }
 
+        public void SlideInSlot(SlotEntity slot, Action onComplete, bool instant = false, int index = -1)
+        {
+            var brain = (Data as CompositeEntity)?.GetComponent<CardBrain.Component>();
+            Assert.AreEqual(brain.Slot, slot);
+            
+            var endPosition = slot.GetNewPosition(index);
+            var endRotation = slot.GetNewRotation();
+            
+            var duration = CardsViewConfig.Instance.shiftDuration;
+            _moveTween?.Kill();
+            _moveTween = DOTween.Sequence()
+                .Append(transform.DOMove(endPosition, duration))
+                .Insert(0, transform.DORotate(endRotation, duration))
+                .AppendCallback(OnMoveEnd);
+            
+            void OnMoveEnd()
+            {
+                _moveTween = null;
+                transform.position = endPosition;
+                transform.rotation = Quaternion.Euler(endRotation);
+                transform.SetParent(slot.SlotView.Object.transform);
+                onComplete?.Invoke();
+                OnAnimationComplete?.Invoke();
+            }
+        }
+        
         public void MoveTo(SlotEntity slot, Action onComplete, bool instant = false, int index=-1)
         {
             var endPosition = slot.GetNewPosition(index);
@@ -76,16 +103,20 @@ namespace XandArt.TheGrowth
         {
             var angle = innerTransform.localRotation.eulerAngles.z;
             angle = (angle + 180) % 360;
+
+            bool wasFaceUp = _isFaceUp;
             
             if (instant)
             {
                 innerTransform.rotation = Quaternion.Euler(0, 0, angle);
+                
+                _isFaceUp = !_isFaceUp;
+                SetFaceVisible(_isFaceUp);
+                
                 onComplete?.Invoke();
                 OnAnimationComplete?.Invoke();
                 return;
             }
-
-            bool wasFaceUp = _isFaceUp;
 
             if (!_isFaceUp)
                 SetFaceVisible(true);

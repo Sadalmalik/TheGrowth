@@ -24,7 +24,7 @@ namespace XandArt.TheGrowth
             var expeditionManager = context.GetRequired<GlobalData>().container.Get<ExpeditionManager>();
             if (expeditionManager?.Board == null) return null;
             var list = expeditionManager.Board.Slots.Values;
-            var size = CardTable.Instance.size;
+            var size = expeditionManager.Board.Size;
             return Side switch
             {
                 ESide.Left => new HashSet<SlotEntity>(list.Where(slot => slot.Index.x<Steps)),

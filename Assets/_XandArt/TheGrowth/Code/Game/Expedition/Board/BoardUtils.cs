@@ -17,18 +17,19 @@ namespace XandArt.TheGrowth
         {
             var brain = card.GetComponent<CardBrain.Component>();
 
-            var cardUncover = (CompositeEntity) null;
-            var cardCover = (CompositeEntity) null;
+            var cardUncover = (CompositeEntity)null;
+            var cardCover = (CompositeEntity)null;
 
             if (brain.Slot != null)
             {
                 brain.Slot.Remove(card);
                 cardUncover = brain.Slot.Top();
             }
+
             brain.Slot = target;
             cardCover = target.Top();
             target.Add(card);
-            
+
             var tcs = new TaskCompletionSource<bool>();
             var view = card.View as EntityCardView;
             if (view != null)
@@ -37,7 +38,7 @@ namespace XandArt.TheGrowth
                 {
                     brain.Position = view.transform.position;
                     HandleMoved();
-                }, instant);
+                }, instant, target.Count - 1);
             }
             else
             {
@@ -57,12 +58,14 @@ namespace XandArt.TheGrowth
                         component.Inventory.Value.Remove(card);
                     target.Inventory.Add(card);
                 }
+
                 if (cardEvents && target.IsTableSlot)
                 {
                     cardUncover?.GetComponent<CardBrain.Component>()?.OnUnCovered(card);
                     cardCover?.GetComponent<CardBrain.Component>()?.OnCovered(card);
                     brain.OnPlaced();
                 }
+
                 OnMoveComplete?.Invoke();
                 tcs.SetResult(true);
             }
