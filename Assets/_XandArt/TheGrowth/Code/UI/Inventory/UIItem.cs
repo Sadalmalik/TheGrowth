@@ -67,7 +67,7 @@ namespace XandArt.TheGrowth
 
         public void OnDrag(PointerEventData eventData)
         {
-            transform.position = Input.mousePosition;
+            transform.localPosition = eventData.position;
             //transform.position = _gameManager.MainCamera.cameraToWorldMatrix * _gameManager.MainCamera.ViewportToScreenPoint(Input.mousePosition);
         }
 
