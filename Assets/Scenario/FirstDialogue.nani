@@ -1,0 +1,7 @@
+@char Maia
+Maia: "Hello there!"
+Maia: "How are you?)"
+Maia: "I have greate day today!"
+
+@hidePrinter printer:Dialogue
+@stop

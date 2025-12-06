@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Naninovel;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
@@ -55,7 +56,7 @@ namespace XandArt.TheGrowth
         public void OnBeginDrag(PointerEventData eventData)
         {
             m_LastParent = transform.parent;
-            transform.SetParent(transform.root);
+            transform.SetParent(transform.FindTopmostComponent<Canvas>().transform);
             transform.SetAsLastSibling();
             imageBackground.raycastTarget = false;
         }

@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Naninovel;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using XandArt.Architecture;
 using XandArt.Architecture.IOC;
@@ -24,9 +25,11 @@ namespace XandArt.TheGrowth
         [SerializeField]
         private MenuManager _menuManager;
 
-        private void Start()
+        private async void Start()
         {
             AssetGuidsManager.Initialize();
+            
+            await RuntimeInitializer.Initialize();
             
             Container = new Container();
 
