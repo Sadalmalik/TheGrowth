@@ -5,11 +5,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using XandArt.Architecture;
+using XandArt.Architecture.IOC;
 
 namespace XandArt.TheGrowth
 {
     [SelectionBase]
-    public class UIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class UIItem : WidgetBase, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         public Image imageBackground;
         public Image imagePortrait;
@@ -24,6 +25,9 @@ namespace XandArt.TheGrowth
         [HideInInspector]
         public Transform TargetTransform;
 
+        [Inject]
+        private GameManager _gameManager;
+        
         public void Setup(CardVisual visual)
         {
             if (visual == null) return;
@@ -64,6 +68,7 @@ namespace XandArt.TheGrowth
         public void OnDrag(PointerEventData eventData)
         {
             transform.position = Input.mousePosition;
+            //transform.position = _gameManager.MainCamera.cameraToWorldMatrix * _gameManager.MainCamera.ViewportToScreenPoint(Input.mousePosition);
         }
 
         public void OnEndDrag(PointerEventData eventData)

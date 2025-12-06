@@ -1,21 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using XandArt.Architecture.IOC;
 
 namespace XandArt.TheGrowth
 {
     public class HUB : WidgetBase
     {
         [SerializeField]
-        private Canvas _canvas;
-            
-        [SerializeField]
         private HUBRoom _start;
 
-        [Inject]
-        private GameManager _gameManager;
-        
         private List<HUBRoom> _rooms;
 
         private HUBRoom _prev;
@@ -27,8 +20,6 @@ namespace XandArt.TheGrowth
             foreach (var room in _rooms)
                 room.Hide();
             GoToRoom(_start);
-
-            _canvas.worldCamera = _gameManager.MainCamera;
         }
 
         public void GoToRoom(HUBRoom room)

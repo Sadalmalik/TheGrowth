@@ -302,7 +302,7 @@ namespace Naninovel
             camera.orthographic = true;
             camera.allowHDR = false; // Otherwise text artifacts appear when printing.
             camera.cullingMask = 1 << uiLayer;
-            camera.clearFlags = CameraClearFlags.Nothing;
+            camera.clearFlags = CameraClearFlags.Depth;
             camera.useOcclusionCulling = false;
             camera.transform.position = config.InitialPosition;
             ConfigureUICameraForURP(camera);
