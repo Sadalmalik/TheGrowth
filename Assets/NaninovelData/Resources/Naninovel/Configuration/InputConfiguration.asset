@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnEventSystem: 0
   CustomEventSystem: {fileID: 0}
-  SpawnInputModule: 1
+  SpawnInputModule: 0
   CustomInputModule: {fileID: 0}
   ProcessLegacyBindings: 1
   TouchFrequencyLimit: 0.1

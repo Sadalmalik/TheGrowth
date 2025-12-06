@@ -17,9 +17,16 @@ namespace XandArt.TheGrowth
 
         public GameState CurrentGameState { get; private set; }
 
+        public Camera MainCamera { get; private set; }
+
         public event Action<GameState> OnGameStateWillBeUnload;
         public event Action<GameState> OnGameStateLoaded;
 
+        public GameManager(Camera mainCamera)
+        {
+            MainCamera = mainCamera;
+        }
+        
         public void Tick()
         {
         }

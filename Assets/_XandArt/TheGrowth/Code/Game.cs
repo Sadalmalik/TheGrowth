@@ -20,11 +20,14 @@ namespace XandArt.TheGrowth
 #region Game Initialization
 
         [SerializeField]
-        private TickManager _tickManager;
+        private TickManager m_tickManager;
 
         [SerializeField]
-        private MenuManager _menuManager;
+        private MenuManager m_menuManager;
 
+        [SerializeField]
+        private Camera m_BaseCamera;
+        
         private async void Start()
         {
             AssetGuidsManager.Initialize();
@@ -33,10 +36,10 @@ namespace XandArt.TheGrowth
             
             Container = new Container();
 
-            Container.Add(_menuManager);
-            Container.Add(_tickManager);
+            Container.Add(m_tickManager);
+            Container.Add(m_menuManager);
 
-            Container.Add<GameManager>();
+            Container.Add<GameManager>(new GameManager(m_BaseCamera));
             Container.Add<PersistenceManager>();
             Container.Add<AutosaveManager>();
             Container.Add<LocationManager>();
