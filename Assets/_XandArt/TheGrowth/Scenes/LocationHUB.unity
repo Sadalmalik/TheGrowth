@@ -6326,14 +6326,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1069733357}
   - component: {fileID: 1069733359}
-  - component: {fileID: 1069733358}
   m_Layer: 0
   m_Name: HUBCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1069733357
 Transform:
   m_ObjectHideFlags: 0
@@ -6349,14 +6348,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 397517751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &1069733358
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069733356}
-  m_Enabled: 1
 --- !u!20 &1069733359
 Camera:
   m_ObjectHideFlags: 0
@@ -8117,8 +8108,8 @@ Canvas:
   m_GameObject: {fileID: 1411001286}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 1069733359}
+  m_RenderMode: 1
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -8176,6 +8167,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  _canvas: {fileID: 1411001289}
   _start: {fileID: 1506914568}
 --- !u!1 &1415892817
 GameObject:

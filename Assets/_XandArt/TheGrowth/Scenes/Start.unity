@@ -5034,9 +5034,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  m_tickManager: {fileID: 0}
-  m_menuManager: {fileID: 0}
-  m_BaseCamera: {fileID: 0}
+  _tickManager: {fileID: 1199164067}
+  _menuManager: {fileID: 1199164065}
+  _BaseCamera: {fileID: 1634293761}
 --- !u!1 &1253644337
 GameObject:
   m_ObjectHideFlags: 0
@@ -6187,7 +6187,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1634293762}
   - component: {fileID: 1634293761}
-  - component: {fileID: 1634293760}
   m_Layer: 0
   m_Name: BaseCamera
   m_TagString: Untagged
@@ -6195,14 +6194,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1634293760
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1634293759}
-  m_Enabled: 1
 --- !u!20 &1634293761
 Camera:
   m_ObjectHideFlags: 0

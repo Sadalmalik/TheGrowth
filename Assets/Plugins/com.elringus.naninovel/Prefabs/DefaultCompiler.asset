@@ -30,7 +30,7 @@ MonoBehaviour:
   True: true
   False: false
   GlobalVariablePrefix: g_
-  TextVariablePrefix: t_
+  ScriptConstantPrefix: t_
   Commands: []
   Functions: []
   Constants: []

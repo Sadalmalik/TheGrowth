@@ -278,6 +278,7 @@ namespace Naninovel
             camera.orthographicSize = config.SceneRect.height / 2;
             camera.fieldOfView = 60f;
             camera.useOcclusionCulling = false;
+            camera.clearFlags = CameraClearFlags.Nothing;
             if (!config.UseUICamera)
                 camera.allowHDR = false; // Otherwise text artifacts appear when printing.
             if (Engine.Configuration.OverrideObjectsLayer) // When culling is enabled, render only the engine object and UI (when not using UI camera) layers.
@@ -301,7 +302,7 @@ namespace Naninovel
             camera.orthographic = true;
             camera.allowHDR = false; // Otherwise text artifacts appear when printing.
             camera.cullingMask = 1 << uiLayer;
-            camera.clearFlags = CameraClearFlags.Depth;
+            camera.clearFlags = CameraClearFlags.Nothing;
             camera.useOcclusionCulling = false;
             camera.transform.position = config.InitialPosition;
             ConfigureUICameraForURP(camera);

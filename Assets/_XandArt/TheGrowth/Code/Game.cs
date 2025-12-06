@@ -1,6 +1,7 @@
 ﻿using Naninovel;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 using XandArt.Architecture;
 using XandArt.Architecture.IOC;
 
@@ -20,13 +21,13 @@ namespace XandArt.TheGrowth
 #region Game Initialization
 
         [SerializeField]
-        private TickManager m_tickManager;
+        private TickManager _tickManager;
 
         [SerializeField]
-        private MenuManager m_menuManager;
+        private MenuManager _menuManager;
 
         [SerializeField]
-        private Camera m_BaseCamera;
+        private Camera _BaseCamera;
         
         private async void Start()
         {
@@ -36,10 +37,10 @@ namespace XandArt.TheGrowth
             
             Container = new Container();
 
-            Container.Add(m_tickManager);
-            Container.Add(m_menuManager);
+            Container.Add(_tickManager);
+            Container.Add(_menuManager);
 
-            Container.Add<GameManager>(new GameManager(m_BaseCamera));
+            Container.Add<GameManager>(new GameManager(_BaseCamera));
             Container.Add<PersistenceManager>();
             Container.Add<AutosaveManager>();
             Container.Add<LocationManager>();
