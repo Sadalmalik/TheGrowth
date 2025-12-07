@@ -5,7 +5,7 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Команда модифицирует колличество оставшихся кодов
     /// </summary>
-    public class SetStep : Command
+    public class SetExpeditionStep : Command
     {
         public enum EMode
         {
