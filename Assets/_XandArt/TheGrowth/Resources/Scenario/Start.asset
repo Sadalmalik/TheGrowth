@@ -35,7 +35,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9d76bcc363931334281320d739b8e90a, type: 2}
     - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
     - {fileID: 11400000, guid: 54d09b84afeb61c4ca069c248f63e74b, type: 2}
-    - {fileID: -5555909049971809409, guid: 72046bbc4ed9f52449e9dc0c26328878, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -269,7 +268,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 6
       Data: 
@@ -292,28 +291,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 7
-      Data: 22|XandArt.TheGrowth.StartDialogue, Code
-    - Name: Script
-      Entry: 10
-      Data: 19
-    - Name: AfterCommands
-      Entry: 7
-      Data: 23|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -321,7 +298,7 @@ MonoBehaviour:
       Data: 
     - Name: _onStepEndActions
       Entry: 7
-      Data: 24|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 22|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -337,7 +314,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 25|XandArt.TheGrowth.StoryLine.SetEnabledActions, Code
+      Data: 23|XandArt.TheGrowth.StoryLine.SetEnabledActions, Code
     - Name: actions
       Entry: 3
       Data: 7
@@ -346,17 +323,17 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 26|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
+      Data: 24|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
     - Name: Triggers
       Entry: 7
-      Data: 27|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
+      Data: 25|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
         Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 28|XandArt.TheGrowth.StoryLine.CraftTrigger, Code
+      Data: 26|XandArt.TheGrowth.StoryLine.CraftTrigger, Code
     - Name: Model
       Entry: 10
       Data: 10
@@ -377,10 +354,10 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 29|XandArt.TheGrowth.And, Code
+      Data: 27|XandArt.TheGrowth.And, Code
     - Name: conditions
       Entry: 7
-      Data: 30|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+      Data: 28|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -396,14 +373,14 @@ MonoBehaviour:
       Data: 
     - Name: Commands
       Entry: 7
-      Data: 31|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 29|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 32|XandArt.TheGrowth.DebugLog, Code
+      Data: 30|XandArt.TheGrowth.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u0441\u043A\u0440\u0430\u0444\u0442\u0438\u043B\u0438
@@ -423,17 +400,17 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 33|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
+      Data: 31|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
     - Name: Triggers
       Entry: 7
-      Data: 34|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
+      Data: 32|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
         Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 35|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
+      Data: 33|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
     - Name: Room
       Entry: 1
       Data: Room_Main
@@ -448,10 +425,10 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 36|XandArt.TheGrowth.And, Code
+      Data: 34|XandArt.TheGrowth.And, Code
     - Name: conditions
       Entry: 7
-      Data: 37|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+      Data: 35|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -467,14 +444,14 @@ MonoBehaviour:
       Data: 
     - Name: Commands
       Entry: 7
-      Data: 38|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 36|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 39|XandArt.TheGrowth.DebugLog, Code
+      Data: 37|XandArt.TheGrowth.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u0432\u043E\u0448\u043B\u0438 \u0432 \u0433\u043B\u0430\u0432\u043D\u0443\u044E
@@ -493,17 +470,17 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 40|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
+      Data: 38|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
     - Name: Triggers
       Entry: 7
-      Data: 41|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
+      Data: 39|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
         Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 42|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
+      Data: 40|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
     - Name: Room
       Entry: 1
       Data: Room_Craft
@@ -518,10 +495,10 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 43|XandArt.TheGrowth.And, Code
+      Data: 41|XandArt.TheGrowth.And, Code
     - Name: conditions
       Entry: 7
-      Data: 44|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+      Data: 42|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -537,14 +514,14 @@ MonoBehaviour:
       Data: 
     - Name: Commands
       Entry: 7
-      Data: 45|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 43|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 46|XandArt.TheGrowth.DebugLog, Code
+      Data: 44|XandArt.TheGrowth.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u0432\u043E\u0448\u043B\u0438 \u0432 \u043A\u043E\u043C\u043D\u0430\u0442\u0443
@@ -563,17 +540,17 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 47|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
+      Data: 45|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
     - Name: Triggers
       Entry: 7
-      Data: 48|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
+      Data: 46|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
         Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 49|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
+      Data: 47|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
     - Name: Room
       Entry: 1
       Data: Room_Missions
@@ -588,10 +565,10 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 50|XandArt.TheGrowth.And, Code
+      Data: 48|XandArt.TheGrowth.And, Code
     - Name: conditions
       Entry: 7
-      Data: 51|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+      Data: 49|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -607,14 +584,14 @@ MonoBehaviour:
       Data: 
     - Name: Commands
       Entry: 7
-      Data: 52|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 50|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 53|XandArt.TheGrowth.DebugLog, Code
+      Data: 51|XandArt.TheGrowth.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u0432\u043E\u0448\u043B\u0438 \u0432 \u043A\u043E\u043C\u043D\u0430\u0442\u0443
