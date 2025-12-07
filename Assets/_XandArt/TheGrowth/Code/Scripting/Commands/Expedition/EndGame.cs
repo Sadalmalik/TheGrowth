@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using XandArt.Architecture.Events;
+using XandArt.TheGrowth.StoryLine;
 
 namespace XandArt.TheGrowth
 {
@@ -16,6 +18,11 @@ namespace XandArt.TheGrowth
             var screen = container.Get<MenuManager>().ExplorationEndScreen;
             
             screen.Show(Success, Message);
+
+            EventBus.Global.Invoke(new ExpeditionEvent
+            {
+                State = Success ? ExpeditionState.Success : ExpeditionState.Failure
+            });
         }
     }
 }

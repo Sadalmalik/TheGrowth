@@ -14,6 +14,8 @@ namespace XandArt.TheGrowth
             //EventBus.Global.Subscribe<GameLoadedEvent>(OnGameLoaded);
             EventBus.Global.Subscribe<CraftEvent>(OnEvent);
             EventBus.Global.Subscribe<EnterRoomEvent>(OnEvent);
+            EventBus.Global.Subscribe<ExpeditionState>(OnEvent);
+            EventBus.Global.Subscribe<ExpeditionStartEvent>(OnEvent);
         }
 
         public void Dispose()

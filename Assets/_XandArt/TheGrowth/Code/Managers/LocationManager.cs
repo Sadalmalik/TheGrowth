@@ -2,7 +2,9 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XandArt.Architecture.Events;
 using XandArt.Architecture.IOC;
+using XandArt.TheGrowth.StoryLine;
 
 namespace XandArt.TheGrowth
 {
@@ -41,6 +43,14 @@ namespace XandArt.TheGrowth
                 await result.Task;
                 await location.OnLoad();
                 OnLocationLoaded?.Invoke(location);
+
+                if (location.Model.Type == LocationType.Expedition)
+                {
+                    EventBus.Global.Invoke(new ExpeditionStartEvent
+                    {
+                        Name = location.Model.name
+                    });
+                }
             }
         }
 
