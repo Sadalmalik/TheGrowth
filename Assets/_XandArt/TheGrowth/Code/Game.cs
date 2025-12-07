@@ -3,10 +3,16 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 using XandArt.Architecture;
+using XandArt.Architecture.Events;
 using XandArt.Architecture.IOC;
 
 namespace XandArt.TheGrowth
 {
+    public struct GameInitializedEvent
+    {
+        
+    }
+    
     public class Game : SerializedMonoBehaviour
     {
 #region Public stuff
@@ -52,6 +58,9 @@ namespace XandArt.TheGrowth
             Container.Init();
             
             InitializeAllWidgets();
+            
+            EventBus.ThrowNoHandlersException = false;
+            EventBus.Global.Invoke(new GameInitializedEvent());
         }
 
         private void InitializeAllWidgets()
