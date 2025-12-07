@@ -23,11 +23,6 @@ namespace XandArt.TheGrowth
             
         }
 
-        private void OnGameLoaded(GameLoadedEvent ev)
-        {
-             //ev.GameState.CurrentStoryStep
-        }
-
         private void OnEvent<TEvent>(TEvent ev)
         {
             foreach (var component in _gameManager.CurrentGameState.CurrentStoryStep.components)
