@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.StoryLine
 {
     [Flags]
     public enum EnabledActions
@@ -11,7 +11,7 @@ namespace XandArt.TheGrowth
         BaseCraft = 1 << 3,
         QuestCraft = 1 << 4,
     }
-    
+
     // Пока просто пример
     public class SetEnabledActions : GameStepComponent
     {

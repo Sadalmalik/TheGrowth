@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.StoryLine
 {
-    public class AddExpeditionLocations : GameStepComponent
+    public class AddLocations : GameStepComponent
     {
         public List<LocationModel> locations;
 

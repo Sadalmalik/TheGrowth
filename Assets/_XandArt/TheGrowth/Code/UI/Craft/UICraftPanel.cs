@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using XandArt.Architecture;
+using XandArt.Architecture.Events;
 using XandArt.Architecture.IOC;
+using XandArt.TheGrowth.StoryLine;
 
 namespace XandArt.TheGrowth.Crafting
 {
@@ -92,6 +94,12 @@ namespace XandArt.TheGrowth.Crafting
                     }
 
                     inventory.Add(item);
+                    
+                    EventBus.Global.Invoke(new CraftEvent
+                    {
+                        Model = product.model,
+                        Amount = inventory.Count(product.model)
+                    });
                 }
 
                 m_Button.interactable = CanCraft(inventory);

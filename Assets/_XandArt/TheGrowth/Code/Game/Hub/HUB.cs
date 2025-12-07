@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using XandArt.Architecture.Events;
+using XandArt.TheGrowth.StoryLine;
 
 namespace XandArt.TheGrowth
 {
@@ -28,6 +30,11 @@ namespace XandArt.TheGrowth
             _prev = _active;
             _active = room;
             _active?.Show();
+            
+            EventBus.Global.Invoke(new EnterRoomEvent
+            {
+                Room = room.name
+            });
             
             Debug.Log($"Enter room: {room.name}");
         }

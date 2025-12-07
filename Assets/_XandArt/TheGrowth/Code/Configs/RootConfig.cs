@@ -10,7 +10,7 @@ namespace XandArt.TheGrowth
         order = 0)]
     public class RootConfig : SingletonScriptableObject<RootConfig>
     {
-        public GameStep startStep;
+        public StoryStep startStep;
 
         [Space]
         public InventoryModel MainInventory;

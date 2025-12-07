@@ -1,4 +1,4 @@
-﻿namespace XandArt.TheGrowth
+﻿namespace XandArt.TheGrowth.StoryLine
 {
     public class SetActiveLocation : GameStepComponent
     {

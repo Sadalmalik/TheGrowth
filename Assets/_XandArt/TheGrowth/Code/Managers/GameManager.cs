@@ -1,10 +1,16 @@
 ﻿using System;
 using UnityEngine;
 using XandArt.Architecture;
+using XandArt.Architecture.Events;
 using XandArt.Architecture.IOC;
 
 namespace XandArt.TheGrowth
 {
+    public struct GameLoadedEvent
+    {
+        public GameState GameState;
+    }
+    
     public class GameManager : SharedObject, ITickable
     {
         public const string LastSavePref = "last-save";
@@ -59,6 +65,11 @@ namespace XandArt.TheGrowth
             Game.BaseContext.GetRequired<GlobalData>().currentState = CurrentGameState;
             CurrentGameState.OnPostLoad();
             CurrentGameState.Start();
+            
+            EventBus.Global.Invoke(new GameLoadedEvent
+            {
+                GameState = CurrentGameState
+            });
         }
 
         public bool TryLoadLastGame()

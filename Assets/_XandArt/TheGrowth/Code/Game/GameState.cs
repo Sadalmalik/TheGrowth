@@ -13,7 +13,7 @@ namespace XandArt.TheGrowth
 #region Layout links
 
         [JsonProperty]
-        private AssetRef<GameStep> _currentStep;
+        private AssetRef<StoryStep> _currentStep;
 
         [JsonProperty]
         private List<Ref<Location>> _allLocations = new List<Ref<Location>>();
@@ -39,10 +39,10 @@ namespace XandArt.TheGrowth
 
         // Access
         [JsonIgnore]
-        public GameStep CurrentGameStep => _currentStep;
+        public StoryStep CurrentStoryStep => _currentStep;
 
         [JsonIgnore]
-        private List<GameStep> _cachedLocations;
+        private List<StoryStep> _cachedLocations;
 
         [JsonIgnore]
         public List<Ref<Location>> AllLocations => _allLocations;
@@ -69,7 +69,7 @@ namespace XandArt.TheGrowth
         {
         }
 
-        public static GameState Create(GameStep start)
+        public static GameState Create(StoryStep start)
         {
             // Game structure preset
             var state = new GameState
@@ -82,7 +82,7 @@ namespace XandArt.TheGrowth
 
         public void Start()
         {
-            SetGameStep(CurrentGameStep);
+            SetGameStep(CurrentStoryStep);
         }
 
         public Inventory GetInventory(InventoryModel model)
@@ -92,7 +92,7 @@ namespace XandArt.TheGrowth
             return inventory;
         }
 
-        public void SetGameStep(GameStep next)
+        public void SetGameStep(StoryStep next)
         {
             _currentStep.Value?.OnStepComplete(this);
             _currentStep = next;

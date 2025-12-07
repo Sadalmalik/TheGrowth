@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using XandArt.Architecture;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.StoryLine
 {
     public class AddItemsToInventory : GameStepComponent
     {

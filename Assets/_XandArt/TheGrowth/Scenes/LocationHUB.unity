@@ -2609,7 +2609,7 @@ GameObject:
   - component: {fileID: 373620498}
   - component: {fileID: 373620500}
   m_Layer: 5
-  m_Name: Screen_Missions
+  m_Name: Room_Missions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4486,7 +4486,7 @@ GameObject:
   - component: {fileID: 701518679}
   - component: {fileID: 701518680}
   m_Layer: 5
-  m_Name: Screen_Craft
+  m_Name: Room_Craft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5524,7 +5524,7 @@ GameObject:
   - component: {fileID: 955835224}
   - component: {fileID: 955835225}
   m_Layer: 5
-  m_Name: Screen_Example
+  m_Name: Room_Example_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8466,7 +8466,7 @@ GameObject:
   - component: {fileID: 1506914567}
   - component: {fileID: 1506914568}
   m_Layer: 5
-  m_Name: Screen_Main
+  m_Name: Room_Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8525,7 +8525,7 @@ GameObject:
   - component: {fileID: 1516083401}
   - component: {fileID: 1516083402}
   m_Layer: 5
-  m_Name: Screen_Room
+  m_Name: Room_Example_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

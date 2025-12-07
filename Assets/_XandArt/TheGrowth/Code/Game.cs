@@ -52,6 +52,7 @@ namespace XandArt.TheGrowth
             Container.Add<LocationManager>();
             Container.Add<ExpeditionManager>();
             Container.Add<ViewManager>();
+            Container.Add<StoryLineManager>();
 
             BaseContext = new Context(new GlobalData { container = Container });
             

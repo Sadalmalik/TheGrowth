@@ -32,7 +32,6 @@ namespace XandArt.TheGrowth
 
         public void Init()
         {
-            Debug.Log($"TEST - INTI");
             LoadingTracker.Created += OnCreated;
             LoadingTracker.Disposed += OnDisposed;
         }
@@ -45,13 +44,11 @@ namespace XandArt.TheGrowth
 
         private Task OnCreated(LoadingTracker tracker)
         {
-            Debug.Log($"TEST - OnCreated");
             return ShowAsync();
         }
 
         private Task OnDisposed(LoadingTracker tracker)
         {
-            Debug.Log($"TEST - OnDisposed");
             return HideAsync();
         }
 
