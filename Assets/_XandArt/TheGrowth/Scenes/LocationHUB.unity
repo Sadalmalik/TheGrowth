@@ -12216,20 +12216,43 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: -5555909049971809409, guid: 72046bbc4ed9f52449e9dc0c26328878, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
     - Name: OnClickedActions
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|XandArt.TheGrowth.StartDialogue, Code
+    - Name: Script
+      Entry: 10
+      Data: 0
+    - Name: AfterCommands
       Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
   _button: {fileID: 6030543526901110597}
   _holdButton: {fileID: 0}
   _duration: 0.25
   _progressFill: {fileID: 0}
-  _gotoRoom: {fileID: 1516083402}
+  _gotoRoom: {fileID: 0}
 --- !u!1001 &8973022474500231844
 PrefabInstance:
   m_ObjectHideFlags: 0

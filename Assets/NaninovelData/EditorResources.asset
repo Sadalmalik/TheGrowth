@@ -147,3 +147,8 @@ MonoBehaviour:
     Resources: []
   - Id: Audio
     Resources: []
+  - Id: Backgrounds/b8a767ac-69ab-44b6-834e-5dc2547076e0
+    Resources:
+    - name: HUB_Room
+      pathPrefix: Backgrounds/MainBackground
+      guid: ea85a59bbab90524baad6f14de4a252b

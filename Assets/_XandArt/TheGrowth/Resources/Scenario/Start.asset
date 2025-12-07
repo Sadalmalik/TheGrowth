@@ -36,7 +36,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5116b4aeabaf94248a1c2ab62903c67d, type: 2}
     - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
     - {fileID: 11400000, guid: 54d09b84afeb61c4ca069c248f63e74b, type: 2}
-    - {fileID: -5555909049971809409, guid: 72046bbc4ed9f52449e9dc0c26328878, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -246,7 +245,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 7
       Data: 18|XandArt.TheGrowth.AddCrafts, Code
@@ -294,28 +293,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 7
-      Data: 22|XandArt.TheGrowth.StartDialogue, Code
-    - Name: Script
-      Entry: 10
-      Data: 20
-    - Name: AfterCommands
-      Entry: 7
-      Data: 23|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -323,7 +300,7 @@ MonoBehaviour:
       Data: 
     - Name: _onStepEndActions
       Entry: 7
-      Data: 24|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 22|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -339,7 +316,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 25|XandArt.TheGrowth.SetEnabledActions, Code
+      Data: 23|XandArt.TheGrowth.SetEnabledActions, Code
     - Name: actions
       Entry: 3
       Data: 7
