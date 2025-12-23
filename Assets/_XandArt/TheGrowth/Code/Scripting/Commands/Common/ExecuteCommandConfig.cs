@@ -3,7 +3,7 @@
     /// <summary>
     /// Команда выполняет список команд из конфига
     /// </summary>
-    public class ExecuteCommands : Command
+    public class ExecuteCommandConfig : Command
     {
         public CommandConfig config;
         

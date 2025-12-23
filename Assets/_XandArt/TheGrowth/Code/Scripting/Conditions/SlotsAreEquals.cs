@@ -3,7 +3,7 @@
     /// <summary>
     /// Проверяет, если два слота совподают
     /// </summary>
-    public class SlotsAreEqualsCard : Condition
+    public class SlotsAreEquals : Condition
     {
         public Evaluator<SlotEntity> SlotA = new SlotFromCard { Card=new ActiveCard() };
         public Evaluator<SlotEntity> SlotB = new BoardSlot();

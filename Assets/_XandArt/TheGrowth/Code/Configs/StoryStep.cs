@@ -12,7 +12,7 @@ namespace XandArt.TheGrowth
     {
         [TextArea(2, 5)]
         public string description;
-        public StoryStep next;
+        
         [Space]
         public List<GameStepComponent> components = new List<GameStepComponent>();
 

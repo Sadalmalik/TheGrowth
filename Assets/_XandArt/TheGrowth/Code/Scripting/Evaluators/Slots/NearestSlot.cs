@@ -8,7 +8,7 @@ namespace XandArt.TheGrowth
     /// <summary>
     /// Возвращает ближайший к карте слот
     /// </summary>
-    public class NearestSlots : Evaluator<SlotEntity>
+    public class NearestSlot : Evaluator<SlotEntity>
     {
         public Evaluator<CompositeEntity> Card = new PlayerCard();
         public Evaluator<HashSet<SlotEntity>> Collection;
