@@ -828,10 +828,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 75|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
-    - Name: Room
-      Entry: 6
-      Data: 
+      Data: 75|XandArt.TheGrowth.StoryLine.ExpeditionFailureTrigger, Code
     - Name: 
       Entry: 8
       Data: 
