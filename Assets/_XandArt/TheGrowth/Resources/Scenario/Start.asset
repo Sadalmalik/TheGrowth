@@ -36,7 +36,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.StoryLine.CreateEntity, Code
@@ -86,7 +86,7 @@ MonoBehaviour:
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 6|XandArt.TheGrowth.StartDialogue, Code
@@ -100,40 +100,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _onStepEndActions
       Entry: 7
-      Data: 7|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
-        Code]], Unity.Plastic.Antlr3.Runtime
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 8|XandArt.TheGrowth.StoryLine.RunCommands, Code
-    - Name: _onStepStartActions
-      Entry: 7
-      Data: 9|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
-        Code]], Unity.Plastic.Antlr3.Runtime
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 10|XandArt.TheGrowth.SetStoryStep, Code
+      Data: 7|XandArt.TheGrowth.SetStoryStep, Code
     - Name: Step
       Entry: 10
       Data: 5
@@ -148,7 +116,7 @@ MonoBehaviour:
       Data: 
     - Name: _onStepEndActions
       Entry: 7
-      Data: 11|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
+      Data: 8|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
