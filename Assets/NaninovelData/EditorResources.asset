@@ -143,6 +143,9 @@ MonoBehaviour:
     - name: FirstDialogue
       pathPrefix: Scripts
       guid: 72046bbc4ed9f52449e9dc0c26328878
+    - name: Game_Intro
+      pathPrefix: Scripts
+      guid: 27d5bea086e5f2e4d956d5051adb35ba
   - Id: Unlockables
     Resources: []
   - Id: Audio
@@ -152,3 +155,10 @@ MonoBehaviour:
     - name: HUB_Room
       pathPrefix: Backgrounds/MainBackground
       guid: ea85a59bbab90524baad6f14de4a252b
+  - Id: Characters/437b7352-cc07-4b28-aae1-6c613754236e
+    Resources:
+    - name: Side_NPC_Team_lead
+      pathPrefix: Characters/Maia
+      guid: 444eb560a5d571844b3b385b8a4de18e
+  - Id: CharacterAvatars
+    Resources: []

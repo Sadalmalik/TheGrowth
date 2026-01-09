@@ -95,7 +95,7 @@ MonoBehaviour:
         height: 1
       BakedLookDirection: 1
       HasName: 1
-      DisplayName: 
+      DisplayName: Maia
       UseCharacterColor: 0
       NameColor: {r: 1, g: 1, b: 1, a: 1}
       MessageColor: {r: 1, g: 1, b: 1, a: 1}
@@ -110,7 +110,19 @@ MonoBehaviour:
       MessageSoundPlayback: 0
       VoiceSource: {fileID: 0}
       LinkedPrinter: 
-      Poses: []
+      Poses:
+      - name: Test
+        actorState:
+          appearance: Side_NPC_Team_lead
+          visible: 0
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0, w: 0}
+          scale: {x: 0.5, y: 0.5, z: 0.5}
+          tintColor: {r: 0, g: 0, b: 0, a: 0}
+          lookDirection: 0
+        overriddenProperties:
+        - appearance
+        - scale
   AvatarLoader:
     PathPrefix: CharacterAvatars
     ProviderTypes:

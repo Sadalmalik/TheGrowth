@@ -1,0 +1,6 @@
+@char Maia
+@back HUB_Room
+Maia: "Here will be a game Intro"
+@hideAll
+@stop
+@hidePrinter

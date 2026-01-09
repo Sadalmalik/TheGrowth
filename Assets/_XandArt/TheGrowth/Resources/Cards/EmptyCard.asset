@@ -18,7 +18,6 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: a3347b3b7a433ba4c81e4590a5107788, type: 3}
     - {fileID: 21300000, guid: 63d6681565c75ac49b0353d22fbf3f81, type: 3}
-    - {fileID: 11400000, guid: e1e59e4dd49cd1646a0b654a7090f4c7, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -93,13 +92,7 @@ MonoBehaviour:
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 4|XandArt.TheGrowth.ExecuteCommands, Code
-    - Name: config
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 13
