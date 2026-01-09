@@ -1,9 +1,0 @@
-@char Maia
-@back HUB_Room
-Maia: "Hello there!"
-Maia: "How are you?"
-Maia: "I have greate day today!"
-
-@hideAll
-@stop
-@hidePrinter

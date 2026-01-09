@@ -66,7 +66,7 @@ MonoBehaviour:
     Poses: []
   Metadata:
     ids:
-    - Maia
+    - Alfredo
     metas:
     - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
@@ -95,7 +95,7 @@ MonoBehaviour:
         height: 1
       BakedLookDirection: 1
       HasName: 1
-      DisplayName: Maia
+      DisplayName: Alfredo
       UseCharacterColor: 0
       NameColor: {r: 1, g: 1, b: 1, a: 1}
       MessageColor: {r: 1, g: 1, b: 1, a: 1}
@@ -111,18 +111,17 @@ MonoBehaviour:
       VoiceSource: {fileID: 0}
       LinkedPrinter: 
       Poses:
-      - name: Test
+      - name: Alfredo
         actorState:
-          appearance: Side_NPC_Team_lead
+          appearance: NPC_Alfredo
           visible: 0
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 0, z: 0, w: 0}
-          scale: {x: 0.5, y: 0.5, z: 0.5}
+          scale: {x: 0, y: 0, z: 0}
           tintColor: {r: 0, g: 0, b: 0, a: 0}
           lookDirection: 0
         overriddenProperties:
         - appearance
-        - scale
   AvatarLoader:
     PathPrefix: CharacterAvatars
     ProviderTypes:

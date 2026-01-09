@@ -1,0 +1,9 @@
+@char Alfredo avatar:Alfredo_Ava
+@back HUB_Room
+Alfredo: "Hello there!"
+Alfredo: "How are you?"
+Alfredo: "I have greate day today!"
+
+@hideAll
+@stop
+@hidePrinter

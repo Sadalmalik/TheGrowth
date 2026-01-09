@@ -140,10 +140,10 @@ MonoBehaviour:
       guid: 735d6aa767879aa469134858c5b2f0a7
   - Id: Scripts
     Resources:
-    - name: FirstDialogue
+    - name: SC_FirstDialogue
       pathPrefix: Scripts
       guid: 72046bbc4ed9f52449e9dc0c26328878
-    - name: Game_Intro
+    - name: SC_Game_Intro
       pathPrefix: Scripts
       guid: 27d5bea086e5f2e4d956d5051adb35ba
   - Id: Unlockables
@@ -157,8 +157,11 @@ MonoBehaviour:
       guid: ea85a59bbab90524baad6f14de4a252b
   - Id: Characters/437b7352-cc07-4b28-aae1-6c613754236e
     Resources:
-    - name: Side_NPC_Team_lead
-      pathPrefix: Characters/Maia
-      guid: 444eb560a5d571844b3b385b8a4de18e
+    - name: NPC_Alfredo
+      pathPrefix: Characters/Alfredo
+      guid: 844cf613611080743b59dd30f9c353a3
   - Id: CharacterAvatars
-    Resources: []
+    Resources:
+    - name: Alfredo_Ava
+      pathPrefix: CharacterAvatars
+      guid: 4c17a9670b2a11a439a7234a0a3f35cc
