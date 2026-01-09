@@ -25,6 +25,8 @@ namespace XandArt.TheGrowth
         [HideInInspector]
         public Transform TargetTransform;
 
+        public Transform LastParent => m_LastParent;
+        
         [Inject]
         private GameManager _gameManager;
         

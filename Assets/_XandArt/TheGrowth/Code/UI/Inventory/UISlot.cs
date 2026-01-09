@@ -54,18 +54,27 @@ namespace XandArt.TheGrowth
 
         private void DropItem(UIItem uiItemNew)
         {
-            var uiItemOld = m_Container.GetComponentInChildren<UIItem>();
-            if (uiItemOld != null)
-            {
-                var component = uiItemOld.Data.GetComponent<CardInventoryComponent>();
-                component.SlotName = null;
-            }
-            var slot = uiItemNew.Data.GetOrAddComponent<CardInventoryComponent>();
-            slot.SlotName = m_SlotName;
-            
             var fromInventory = m_GameManager.CurrentGameState.GetInventory(uiItemNew.Inventory);
             var intoInventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
 
+            var uiItemOld = m_Container.GetComponentInChildren<UIItem>();
+            if (uiItemOld != null)
+            {
+                var oldItemSlot = uiItemOld.Data.GetComponent<CardInventoryComponent>();
+                oldItemSlot.SlotName = null;
+                
+                if (fromInventory != intoInventory)
+                {
+                    intoInventory.Remove(uiItemOld.Data);
+                    fromInventory.Add(uiItemOld.Data);
+                }
+
+                uiItemOld.TargetTransform = uiItemNew.LastParent;
+                uiItemOld.OnEndDrag(null);
+            }
+            var newItemSlot = uiItemNew.Data.GetOrAddComponent<CardInventoryComponent>();
+            newItemSlot.SlotName = m_SlotName;
+            
             if (fromInventory != intoInventory)
             {
                 fromInventory.Remove(uiItemNew.Data);
