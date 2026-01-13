@@ -1,5 +1,8 @@
-@char Alfredo avatar:Alfredo_Ava
 @back HUB_Room
+@char Luchia avatar:Female_Ava
+Luchia: "Hello world!"
+Luchia: "I'm happy to be here!"
+@char Alfredo avatar:Alfredo_Ava
 Alfredo: "Hello there!"
 Alfredo: "How are you, {PlayerName}?"
 @char Player avatar:Empty_Ava
