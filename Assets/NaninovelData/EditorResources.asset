@@ -140,12 +140,12 @@ MonoBehaviour:
       guid: 735d6aa767879aa469134858c5b2f0a7
   - Id: Scripts
     Resources:
-    - name: SC_FirstDialogue
-      pathPrefix: Scripts
-      guid: 72046bbc4ed9f52449e9dc0c26328878
-    - name: SC_Game_Intro
+    - name: SC_01_Game_Intro
       pathPrefix: Scripts
       guid: 27d5bea086e5f2e4d956d5051adb35ba
+    - name: SC_02_FirstDialogue
+      pathPrefix: Scripts
+      guid: 72046bbc4ed9f52449e9dc0c26328878
   - Id: Unlockables
     Resources: []
   - Id: Audio
@@ -157,7 +157,7 @@ MonoBehaviour:
       guid: ea85a59bbab90524baad6f14de4a252b
   - Id: Characters/437b7352-cc07-4b28-aae1-6c613754236e
     Resources:
-    - name: NPC_Alfredo
+    - name: Alfredo
       pathPrefix: Characters/Alfredo
       guid: 844cf613611080743b59dd30f9c353a3
   - Id: CharacterAvatars
@@ -165,3 +165,39 @@ MonoBehaviour:
     - name: Alfredo_Ava
       pathPrefix: CharacterAvatars
       guid: 4c17a9670b2a11a439a7234a0a3f35cc
+    - name: Empty_Ava
+      pathPrefix: CharacterAvatars
+      guid: 10b466eefcc190a48af19edf45fd4147
+    - name: Female_Ava
+      pathPrefix: CharacterAvatars
+      guid: 44b777ca6acc4334bb6f969608ffc6dd
+    - name: Male_Ava
+      pathPrefix: CharacterAvatars
+      guid: e524e6c55401bf84789e40cd12569dd8
+  - Id: Characters/2450970b-bf4a-463c-b6cc-3c2da6e646c1
+    Resources: []
+  - Id: Characters/a3b9d49c-7cc0-41d9-b3cd-fca0c1c22d25
+    Resources:
+    - name: Lucia
+      pathPrefix: Characters/Luchia
+      guid: d24d329a431ea6043998ed29d8c73b57
+  - Id: Characters/c52f9989-3c28-48b9-baa6-d2adb225206b
+    Resources:
+    - name: Sebastien
+      pathPrefix: "Characters/S\xE9bastien"
+      guid: 754b3f7a681b5d042a20a834fb79cb5e
+  - Id: Characters/89c52742-0507-406c-9fa5-640e7237d8ff
+    Resources:
+    - name: Alexandru
+      pathPrefix: Characters/Alexandru
+      guid: 2fc4ec465b34fd341a8796c0b48492b7
+  - Id: Characters/00497c1c-17ed-49a9-a7fd-3e1d8161caef
+    Resources:
+    - name: Jun
+      pathPrefix: Characters/Mr.Tang
+      guid: 48db179e9b61f7043a22f11eac347f3a
+  - Id: Characters/e0fedd9a-34ce-4d1e-a60c-e04c577d4671
+    Resources:
+    - name: Stella
+      pathPrefix: Characters/Stella
+      guid: 7c046f5c00f70994aa5a345cb09d4e85

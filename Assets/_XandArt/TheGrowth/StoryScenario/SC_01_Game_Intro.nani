@@ -1,0 +1,10 @@
+@char Alfredo avatar:Alfredo_Ava
+@back HUB_Room
+Alfredo: "Here will be a game Intro"
+@input PlayerName summary:"Choose your name."
+@stop
+@char Player avatar:Empty_Ava
+Player: You can call me {PlayerName}.
+@hideAll
+@stop
+@hidePrinter

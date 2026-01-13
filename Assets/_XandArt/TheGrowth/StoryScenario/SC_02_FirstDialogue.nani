@@ -1,0 +1,10 @@
+@char Alfredo avatar:Alfredo_Ava
+@back HUB_Room
+Alfredo: "Hello there!"
+Alfredo: "How are you, {PlayerName}?"
+@char Player avatar:Empty_Ava
+Player: "I have greate day today."
+Alfredo: "Nice to hear it. Se you in a bit."
+@hideAll
+@stop
+@hidePrinter

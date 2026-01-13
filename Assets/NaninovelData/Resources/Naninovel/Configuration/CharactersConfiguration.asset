@@ -66,8 +66,60 @@ MonoBehaviour:
     Poses: []
   Metadata:
     ids:
+    - Player
     - Alfredo
+    - Luchia
+    - "S\xE9bastien"
+    - Alexandru
+    - Mr.Tang
+    - Stella
+    - Solon
+    - Worker
+    - Guard
     metas:
+    - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      Loader:
+        PathPrefix: Characters
+        ProviderTypes:
+        - Naninovel.AddressableResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - Naninovel.ProjectResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      guid: 2450970b-bf4a-463c-b6cc-3c2da6e646c1
+      customData:
+        rid: -2
+      Pivot: {x: 0.5, y: 0}
+      PixelsPerUnit: 100
+      EnableDepthPass: 1
+      DepthAlphaCutoff: 0.5
+      CustomTextureMaterial: {fileID: 0}
+      CustomSpriteMaterial: {fileID: 0}
+      RenderTexture: {fileID: 0}
+      RenderRectangle:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1
+        height: 1
+      BakedLookDirection: 1
+      HasName: 1
+      DisplayName: '{PlayerName}'
+      UseCharacterColor: 0
+      NameColor: {r: 1, g: 1, b: 1, a: 1}
+      MessageColor: {r: 1, g: 1, b: 1, a: 1}
+      HighlightWhenSpeaking: 0
+      HighlightCharacterCount: 0
+      SpeakingPose: 
+      NotSpeakingPose: 
+      PlaceOnTop: 1
+      HighlightDuration: 0.35
+      HighlightEasing: 1
+      MessageSound: 
+      MessageSoundPlayback: 0
+      VoiceSource: {fileID: 0}
+      LinkedPrinter: 
+      Poses: []
     - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       Loader:
@@ -109,11 +161,11 @@ MonoBehaviour:
       MessageSound: 
       MessageSoundPlayback: 0
       VoiceSource: {fileID: 0}
-      LinkedPrinter: 
+      LinkedPrinter: Dialogue
       Poses:
       - name: Alfredo
         actorState:
-          appearance: NPC_Alfredo
+          appearance: Alfredo
           visible: 0
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -122,6 +174,400 @@ MonoBehaviour:
           lookDirection: 0
         overriddenProperties:
         - appearance
+    - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      Loader:
+        PathPrefix: Characters
+        ProviderTypes:
+        - Naninovel.AddressableResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - Naninovel.ProjectResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      guid: a3b9d49c-7cc0-41d9-b3cd-fca0c1c22d25
+      customData:
+        rid: -2
+      Pivot: {x: 0.5, y: 0}
+      PixelsPerUnit: 100
+      EnableDepthPass: 1
+      DepthAlphaCutoff: 0.5
+      CustomTextureMaterial: {fileID: 0}
+      CustomSpriteMaterial: {fileID: 0}
+      RenderTexture: {fileID: 0}
+      RenderRectangle:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1
+        height: 1
+      BakedLookDirection: 1
+      HasName: 1
+      DisplayName: Lucia
+      UseCharacterColor: 0
+      NameColor: {r: 1, g: 1, b: 1, a: 1}
+      MessageColor: {r: 1, g: 1, b: 1, a: 1}
+      HighlightWhenSpeaking: 0
+      HighlightCharacterCount: 0
+      SpeakingPose: 
+      NotSpeakingPose: 
+      PlaceOnTop: 1
+      HighlightDuration: 0.35
+      HighlightEasing: 1
+      MessageSound: 
+      MessageSoundPlayback: 0
+      VoiceSource: {fileID: 0}
+      LinkedPrinter: 
+      Poses:
+      - name: Lucia
+        actorState:
+          appearance: 
+          visible: 0
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0, w: 0}
+          scale: {x: 0, y: 0, z: 0}
+          tintColor: {r: 0, g: 0, b: 0, a: 0}
+          lookDirection: 0
+        overriddenProperties: []
+    - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      Loader:
+        PathPrefix: Characters
+        ProviderTypes:
+        - Naninovel.AddressableResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - Naninovel.ProjectResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      guid: c52f9989-3c28-48b9-baa6-d2adb225206b
+      customData:
+        rid: -2
+      Pivot: {x: 0.5, y: 0}
+      PixelsPerUnit: 100
+      EnableDepthPass: 1
+      DepthAlphaCutoff: 0.5
+      CustomTextureMaterial: {fileID: 0}
+      CustomSpriteMaterial: {fileID: 0}
+      RenderTexture: {fileID: 0}
+      RenderRectangle:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1
+        height: 1
+      BakedLookDirection: 1
+      HasName: 1
+      DisplayName: "S\xE9bastien"
+      UseCharacterColor: 0
+      NameColor: {r: 1, g: 1, b: 1, a: 1}
+      MessageColor: {r: 1, g: 1, b: 1, a: 1}
+      HighlightWhenSpeaking: 0
+      HighlightCharacterCount: 0
+      SpeakingPose: 
+      NotSpeakingPose: 
+      PlaceOnTop: 1
+      HighlightDuration: 0.35
+      HighlightEasing: 1
+      MessageSound: 
+      MessageSoundPlayback: 0
+      VoiceSource: {fileID: 0}
+      LinkedPrinter: 
+      Poses:
+      - name: Sebastien
+        actorState:
+          appearance: 
+          visible: 0
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0, w: 0}
+          scale: {x: 0, y: 0, z: 0}
+          tintColor: {r: 0, g: 0, b: 0, a: 0}
+          lookDirection: 0
+        overriddenProperties: []
+    - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      Loader:
+        PathPrefix: Characters
+        ProviderTypes:
+        - Naninovel.AddressableResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - Naninovel.ProjectResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      guid: 89c52742-0507-406c-9fa5-640e7237d8ff
+      customData:
+        rid: -2
+      Pivot: {x: 0.5, y: 0}
+      PixelsPerUnit: 100
+      EnableDepthPass: 1
+      DepthAlphaCutoff: 0.5
+      CustomTextureMaterial: {fileID: 0}
+      CustomSpriteMaterial: {fileID: 0}
+      RenderTexture: {fileID: 0}
+      RenderRectangle:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1
+        height: 1
+      BakedLookDirection: 1
+      HasName: 1
+      DisplayName: Alexandru
+      UseCharacterColor: 0
+      NameColor: {r: 1, g: 1, b: 1, a: 1}
+      MessageColor: {r: 1, g: 1, b: 1, a: 1}
+      HighlightWhenSpeaking: 0
+      HighlightCharacterCount: 0
+      SpeakingPose: 
+      NotSpeakingPose: 
+      PlaceOnTop: 1
+      HighlightDuration: 0.35
+      HighlightEasing: 1
+      MessageSound: 
+      MessageSoundPlayback: 0
+      VoiceSource: {fileID: 0}
+      LinkedPrinter: 
+      Poses:
+      - name: Alexandru
+        actorState:
+          appearance: 
+          visible: 0
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0, w: 0}
+          scale: {x: 0, y: 0, z: 0}
+          tintColor: {r: 0, g: 0, b: 0, a: 0}
+          lookDirection: 0
+        overriddenProperties: []
+    - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      Loader:
+        PathPrefix: Characters
+        ProviderTypes:
+        - Naninovel.AddressableResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - Naninovel.ProjectResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      guid: 00497c1c-17ed-49a9-a7fd-3e1d8161caef
+      customData:
+        rid: -2
+      Pivot: {x: 0.5, y: 0}
+      PixelsPerUnit: 100
+      EnableDepthPass: 1
+      DepthAlphaCutoff: 0.5
+      CustomTextureMaterial: {fileID: 0}
+      CustomSpriteMaterial: {fileID: 0}
+      RenderTexture: {fileID: 0}
+      RenderRectangle:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1
+        height: 1
+      BakedLookDirection: 1
+      HasName: 1
+      DisplayName: Mr.Tang
+      UseCharacterColor: 0
+      NameColor: {r: 1, g: 1, b: 1, a: 1}
+      MessageColor: {r: 1, g: 1, b: 1, a: 1}
+      HighlightWhenSpeaking: 0
+      HighlightCharacterCount: 0
+      SpeakingPose: 
+      NotSpeakingPose: 
+      PlaceOnTop: 1
+      HighlightDuration: 0.35
+      HighlightEasing: 1
+      MessageSound: 
+      MessageSoundPlayback: 0
+      VoiceSource: {fileID: 0}
+      LinkedPrinter: 
+      Poses:
+      - name: Jun
+        actorState:
+          appearance: 
+          visible: 0
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0, w: 0}
+          scale: {x: 0, y: 0, z: 0}
+          tintColor: {r: 0, g: 0, b: 0, a: 0}
+          lookDirection: 0
+        overriddenProperties: []
+    - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      Loader:
+        PathPrefix: Characters
+        ProviderTypes:
+        - Naninovel.AddressableResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - Naninovel.ProjectResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      guid: e0fedd9a-34ce-4d1e-a60c-e04c577d4671
+      customData:
+        rid: -2
+      Pivot: {x: 0.5, y: 0}
+      PixelsPerUnit: 100
+      EnableDepthPass: 1
+      DepthAlphaCutoff: 0.5
+      CustomTextureMaterial: {fileID: 0}
+      CustomSpriteMaterial: {fileID: 0}
+      RenderTexture: {fileID: 0}
+      RenderRectangle:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1
+        height: 1
+      BakedLookDirection: 1
+      HasName: 1
+      DisplayName: Stella
+      UseCharacterColor: 0
+      NameColor: {r: 1, g: 1, b: 1, a: 1}
+      MessageColor: {r: 1, g: 1, b: 1, a: 1}
+      HighlightWhenSpeaking: 0
+      HighlightCharacterCount: 0
+      SpeakingPose: 
+      NotSpeakingPose: 
+      PlaceOnTop: 1
+      HighlightDuration: 0.35
+      HighlightEasing: 1
+      MessageSound: 
+      MessageSoundPlayback: 0
+      VoiceSource: {fileID: 0}
+      LinkedPrinter: 
+      Poses:
+      - name: Stella
+        actorState:
+          appearance: 
+          visible: 0
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0, w: 0}
+          scale: {x: 0, y: 0, z: 0}
+          tintColor: {r: 0, g: 0, b: 0, a: 0}
+          lookDirection: 0
+        overriddenProperties: []
+    - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      Loader:
+        PathPrefix: Characters
+        ProviderTypes:
+        - Naninovel.AddressableResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - Naninovel.ProjectResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      guid: fb47046b-39cb-452b-a522-cf56250a36e7
+      customData:
+        rid: -2
+      Pivot: {x: 0.5, y: 0}
+      PixelsPerUnit: 100
+      EnableDepthPass: 1
+      DepthAlphaCutoff: 0.5
+      CustomTextureMaterial: {fileID: 0}
+      CustomSpriteMaterial: {fileID: 0}
+      RenderTexture: {fileID: 0}
+      RenderRectangle:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1
+        height: 1
+      BakedLookDirection: 1
+      HasName: 1
+      DisplayName: 
+      UseCharacterColor: 0
+      NameColor: {r: 1, g: 1, b: 1, a: 1}
+      MessageColor: {r: 1, g: 1, b: 1, a: 1}
+      HighlightWhenSpeaking: 0
+      HighlightCharacterCount: 0
+      SpeakingPose: 
+      NotSpeakingPose: 
+      PlaceOnTop: 1
+      HighlightDuration: 0.35
+      HighlightEasing: 1
+      MessageSound: 
+      MessageSoundPlayback: 0
+      VoiceSource: {fileID: 0}
+      LinkedPrinter: 
+      Poses: []
+    - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      Loader:
+        PathPrefix: Characters
+        ProviderTypes:
+        - Naninovel.AddressableResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - Naninovel.ProjectResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      guid: 59282576-0a20-4542-8173-1aadd1a716d7
+      customData:
+        rid: -2
+      Pivot: {x: 0.5, y: 0}
+      PixelsPerUnit: 100
+      EnableDepthPass: 1
+      DepthAlphaCutoff: 0.5
+      CustomTextureMaterial: {fileID: 0}
+      CustomSpriteMaterial: {fileID: 0}
+      RenderTexture: {fileID: 0}
+      RenderRectangle:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1
+        height: 1
+      BakedLookDirection: 1
+      HasName: 1
+      DisplayName: 
+      UseCharacterColor: 0
+      NameColor: {r: 1, g: 1, b: 1, a: 1}
+      MessageColor: {r: 1, g: 1, b: 1, a: 1}
+      HighlightWhenSpeaking: 0
+      HighlightCharacterCount: 0
+      SpeakingPose: 
+      NotSpeakingPose: 
+      PlaceOnTop: 1
+      HighlightDuration: 0.35
+      HighlightEasing: 1
+      MessageSound: 
+      MessageSoundPlayback: 0
+      VoiceSource: {fileID: 0}
+      LinkedPrinter: 
+      Poses: []
+    - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      Loader:
+        PathPrefix: Characters
+        ProviderTypes:
+        - Naninovel.AddressableResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - Naninovel.ProjectResourceProvider, Elringus.Naninovel.Runtime, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      guid: ab8f0e57-e27c-4666-9da1-21e26cf12ba3
+      customData:
+        rid: -2
+      Pivot: {x: 0.5, y: 0}
+      PixelsPerUnit: 100
+      EnableDepthPass: 1
+      DepthAlphaCutoff: 0.5
+      CustomTextureMaterial: {fileID: 0}
+      CustomSpriteMaterial: {fileID: 0}
+      RenderTexture: {fileID: 0}
+      RenderRectangle:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1
+        height: 1
+      BakedLookDirection: 1
+      HasName: 1
+      DisplayName: 
+      UseCharacterColor: 0
+      NameColor: {r: 1, g: 1, b: 1, a: 1}
+      MessageColor: {r: 1, g: 1, b: 1, a: 1}
+      HighlightWhenSpeaking: 0
+      HighlightCharacterCount: 0
+      SpeakingPose: 
+      NotSpeakingPose: 
+      PlaceOnTop: 1
+      HighlightDuration: 0.35
+      HighlightEasing: 1
+      MessageSound: 
+      MessageSoundPlayback: 0
+      VoiceSource: {fileID: 0}
+      LinkedPrinter: 
+      Poses: []
   AvatarLoader:
     PathPrefix: CharacterAvatars
     ProviderTypes:
