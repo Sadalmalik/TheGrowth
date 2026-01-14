@@ -14,7 +14,7 @@ namespace XandArt.Architecture
         // private static readonly string[] Separators = new[] { "Resources" };
 
         private static Dictionary<Guid, ScriptableAsset> _assets;
-        
+
         public static void Initialize()
         {
             _assets ??= new Dictionary<Guid, ScriptableAsset>();
@@ -27,6 +27,7 @@ namespace XandArt.Architecture
                     Debug.LogError($"Asset guids duplicate in assets:\n\t{other}\n\t{asset}");
                     continue;
                 }
+
                 _assets.Add(asset.Guid, asset);
             }
         }
@@ -41,10 +42,18 @@ namespace XandArt.Architecture
         public static T GetAsset<T>(Guid guid) where T : ScriptableAsset
         {
             if (_assets.TryGetValue(guid, out var asset))
-                return (T) asset;
+                return (T)asset;
             return null;
         }
-        
+
+        public static List<T> GetAllAssets<T>() where T : ScriptableAsset
+        {
+            return _assets.Values
+                .Select(asset => asset as T)
+                .Where(asset => asset != null)
+                .ToList();
+        }
+
         [MenuItem("[TheGrowth]/Update Assets Guids")]
         public static void UpdateGuids()
         {
@@ -85,7 +94,7 @@ namespace XandArt.Architecture
 
         private static Guid? GetMetaGuid(string metaPath)
         {
-            var raw = (string) null;
+            var raw = (string)null;
             var lines = File.ReadLines(metaPath);
             foreach (var line in lines)
             {
