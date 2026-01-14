@@ -1,0 +1,14 @@
+@back HUB_Room
+@char Alfredo avatar:Alfredo_Ava
+Alfredo: "Salutations! Do you want to play the story from the start or you want to skip to the free-mode?"
+@choice "Start from the beginning" goto:CH_02_FirstDialogue
+@choice "Skip intro"
+@stop
+Alfredo: "Please, introduce your self."
+@input PlayerName summary:"My name is:"
+@stop
+Alfredo: "Nice to meet you, {PlayerName}. Lets move to the free-mode."
+
+@hideAll
+@stop
+@hidePrinter
