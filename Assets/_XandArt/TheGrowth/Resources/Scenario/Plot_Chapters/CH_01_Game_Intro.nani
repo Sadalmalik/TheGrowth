@@ -1,0 +1,8 @@
+@back HUB_Room
+@char Alfredo avatar:Alfredo_Ava
+"Salutations! Do you want to play the story from the start or you want to skip to the free-mode?"
+@choice "Start from the beginning" goto:CH_02_Set_Nmae
+@choice "Skip intro"
+@stop
+@hideAll
+@hidePrinter

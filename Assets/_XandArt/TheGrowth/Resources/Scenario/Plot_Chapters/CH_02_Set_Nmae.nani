@@ -1,6 +1,6 @@
-@char Alfredo avatar:Alfredo_Ava
 @back HUB_Room
-Alfredo: "Here will be a game Intro"
+@char Alfredo avatar:Alfredo_Ava
+"Salutations! Do you want to play the story from the start or you want to skip to the free-mode?"
 @input PlayerName summary:"Choose your name."
 @stop
 @char Player avatar:Empty_Ava

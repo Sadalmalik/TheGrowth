@@ -9,12 +9,13 @@ EditorBuildSettings:
     path: Assets/_XandArt/TheGrowth/Scenes/Start.unity
     guid: 25b70689621d415419fae382ca403cbe
   - enabled: 1
-    path: Assets/_XandArt/TheGrowth/Scenes/ExpeditionTest.unity
+    path: Assets/_XandArt/TheGrowth/Scenes/EXP_Test_01.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/_XandArt/TheGrowth/Scenes/LocationHUB.unity
+    path: Assets/_XandArt/TheGrowth/Scenes/HUB_01.unity
     guid: cdd87bf9e33c7594aa8b5ad3465b3f7d
   - enabled: 1
-    path: Assets/_XandArt/TheGrowth/Scenes/ExpeditionTest_2.unity
+    path: Assets/_XandArt/TheGrowth/Scenes/EXP_Test_02.unity
     guid: ed033fbe11235804da35c720f928a836
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
