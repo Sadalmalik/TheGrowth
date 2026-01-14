@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a20198ed85b7431d9a7399db2bad5755, type: 3}
-  m_Name: Scene_Start
+  m_Name: Step_Start
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -20,8 +20,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
     - {fileID: 11400000, guid: 685c262e01893c94daf1d9420a1be9d3, type: 2}
     - {fileID: 11400000, guid: 0fb19187856e38c4392e0a592174a8c5, type: 2}
+    - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
     - {fileID: -5555909049971809409, guid: 27d5bea086e5f2e4d956d5051adb35ba, type: 3}
-    - {fileID: 11400000, guid: 83c6abfe3baf119418761584d5f9b4d1, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -36,7 +36,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.StoryLine.CreateEntity, Code
@@ -86,25 +86,13 @@ MonoBehaviour:
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
-      Data: 6|XandArt.TheGrowth.StartDialogue, Code
-    - Name: Script
+      Data: 6|XandArt.TheGrowth.GoToLocation, Code
+    - Name: Location
       Entry: 10
       Data: 4
-    - Name: AfterCommands
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 7|XandArt.TheGrowth.SetStoryStep, Code
-    - Name: Step
-      Entry: 10
-      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -116,11 +104,83 @@ MonoBehaviour:
       Data: 
     - Name: _onStepEndActions
       Entry: 7
-      Data: 8|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
+      Data: 7|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
       Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
+    - Name: Triggers
+      Entry: 7
+      Data: 9|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 10|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
+    - Name: Room
+      Entry: 1
+      Data: Room_Main
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Condition
+      Entry: 7
+      Data: 11|XandArt.TheGrowth.And, Code
+    - Name: conditions
+      Entry: 7
+      Data: 12|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Commands
+      Entry: 7
+      Data: 13|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 14|XandArt.TheGrowth.StartDialogue, Code
+    - Name: Script
+      Entry: 10
+      Data: 5
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
