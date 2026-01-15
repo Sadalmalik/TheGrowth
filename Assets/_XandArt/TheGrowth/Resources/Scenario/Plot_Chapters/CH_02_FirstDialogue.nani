@@ -1,7 +1,36 @@
 @back HUB_Room
+
+The door to the office flew open, and a tall man entered the room, letting in a rush of cold air from the street along with the damp scent of rain. The stranger began speaking from the doorway, striding briskly toward the counter.
+
 @char Alfredo avatar:Alfredo_Ava
-"Salutations! Do you want to play the story from the start or you want to skip to the free-mode?"
+Alfredo: “ Madam / Sir? I am Alfredo. A pleasure to make your acquaintance. Fortune favored me with the weather; my arrival was a day earlier than planned, and I decided to attend to our affairs without delay.”
+From beneath the hem of his long coat, the man produced a worn leather document folder bearing the crest of House V.
+Alfredo: “I must apologize, but we are severely constrained by time. Let us therefore dispense with courtesies. I will decline coffee and proceed directly to business. Here are the papers—please, review them.”
+Alfredo: “A contract with House V for the retrieval of lost items within their ancestral territory. Duration: two weeks. Compensation, bonuses, reimbursements, and guarantees of safety—all precisely as previously agreed.”
+He placed the papers on the counter.
+
+# QuestionsStart
+@choice "Read the contract" goto:.Contract
+@choice "Ask why I was chosen" goto:.WhyChosen
+@choice "Agree to the terms and ask about the trial assignment" goto:.QuestionsEnd
+@stop
+
+# Contract
+A brief excerpt of the agreement: an item-retrieval task with clear technical requirements. A crucial detail specifies that the work will be conducted in the presence of representatives of House V—vampires.
+The employer guarantees full protection against any hostile actions on their part, including magical interference, in accordance with the Blood Pact. 
+@goto .QuestionsStart
+
+# WhyChosen
+Alfredo: “There is no mystery, Madam / Sir. I must conclude this matter under strict time constraints, and you are the nearest cartomancer of proven reputation who is willing to accept the commission.”
+@goto .QuestionsStart
+
+# QuestionsEnd
+Alfredo inclined his head slightly.
+Alfredo: “A mere formality. I have no questions regarding your qualifications. However, my client insists.”
+He extended his hand; a large coin gleamed in his palm—twenty Drops.
+Alfredo: “If you consent, I shall conceal six such coins in the park at the end of the street. Your sole task will be to locate them within ten minutes. Shall we?”
 
 @hideAll
 @stop
 @hidePrinter
+
