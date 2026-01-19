@@ -53,7 +53,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 5|XandArt.TheGrowth.SlotsAreEqualsCard, Code
+      Data: 5|XandArt.TheGrowth.SlotsAreEquals, Code
     - Name: SlotA
       Entry: 7
       Data: 6|XandArt.TheGrowth.SlotFromCard, Code

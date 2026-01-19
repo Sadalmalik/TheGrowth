@@ -187,7 +187,7 @@ MonoBehaviour:
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
-      Data: 8
+      Data: 7
     - Name: 
       Entry: 7
       Data: 13|XandArt.TheGrowth.FlipCard, Code
@@ -217,9 +217,6 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
-      Data: 
-    - Name: 
-      Entry: 6
       Data: 
     - Name: 
       Entry: 7
