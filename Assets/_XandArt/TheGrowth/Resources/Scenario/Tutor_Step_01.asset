@@ -27,7 +27,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: 83c6abfe3baf119418761584d5f9b4d1
+      Data: e48f1d60093975343a0c2eff70ee12c4
     - Name: components
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.GameStepComponent,
