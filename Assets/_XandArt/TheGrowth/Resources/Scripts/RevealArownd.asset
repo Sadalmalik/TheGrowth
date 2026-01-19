@@ -21,6 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: Guid
+      Entry: 2
+      Data: 52f3eee5fad002e4f984ced85e276ea0
     - Name: Commands
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
@@ -97,6 +100,9 @@ MonoBehaviour:
       Data: 8|XandArt.TheGrowth.IteratingCard, Code
     - Name: 
       Entry: 8
+      Data: 
+    - Name: AfterCommands
+      Entry: 6
       Data: 
     - Name: 
       Entry: 8

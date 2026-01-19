@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
 {
@@ -8,7 +8,7 @@ namespace XandArt.TheGrowth
         fileName = "CommandConfig",
         menuName = "[Game]/Commands",
         order = 0)]
-    public class CommandConfig : SerializedScriptableObject
+    public class CommandConfig : ScriptableAsset
     {
         public List<Command> Commands = new List<Command>();
     }

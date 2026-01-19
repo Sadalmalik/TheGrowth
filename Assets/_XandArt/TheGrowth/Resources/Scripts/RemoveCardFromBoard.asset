@@ -22,6 +22,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: Guid
+      Entry: 2
+      Data: e1e59e4dd49cd1646a0b654a7090f4c7
     - Name: Commands
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
@@ -91,6 +94,9 @@ MonoBehaviour:
     - Name: RaiseEvents
       Entry: 5
       Data: false
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
