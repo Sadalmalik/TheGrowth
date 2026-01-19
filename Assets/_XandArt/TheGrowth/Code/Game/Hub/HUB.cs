@@ -24,6 +24,18 @@ namespace XandArt.TheGrowth
             GoToRoom(_start);
         }
 
+        public void GoToRoom(string roomName)
+        {
+            foreach (var room in _rooms)
+            {
+                if (room.name.Equals(roomName))
+                {
+                    GoToRoom(room);
+                    return;
+                }
+            }
+        }
+        
         public void GoToRoom(HUBRoom room)
         {
             _active?.Hide();
