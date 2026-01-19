@@ -149,6 +149,9 @@ MonoBehaviour:
     - name: CH_01_Intro
       pathPrefix: Scripts
       guid: 27d5bea086e5f2e4d956d5051adb35ba
+    - name: CH_03
+      pathPrefix: Scripts
+      guid: 0e21ac3e446ab664da9bda2c99e423ff
   - Id: Unlockables
     Resources: []
   - Id: Audio

@@ -1,0 +1,13 @@
+@back HUB_Room
+@char Luchia avatar:Female_Ava
+Luchia: "Hello world!"
+Luchia: "I'm happy to be here!"
+@char Alfredo avatar:Alfredo_Ava
+Alfredo: "Hello there!"
+Alfredo: "How are you, {PlayerName}?"
+@char Player avatar:Empty_Ava
+Player: "I have greate day today."
+Alfredo: "Nice to hear it. Se you in a bit."
+@hideAll
+@stop
+@hidePrinter
