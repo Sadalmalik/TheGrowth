@@ -18,7 +18,7 @@ namespace XandArt.TheGrowth
         
         public override void Init()
         {
-            _rooms = GetComponentsInChildren<HUBRoom>().ToList();
+            _rooms = GetComponentsInChildren<HUBRoom>(includeInactive: true).ToList();
             foreach (var room in _rooms)
                 room.Hide();
             GoToRoom(_start);
