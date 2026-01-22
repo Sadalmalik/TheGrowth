@@ -1,4 +1,5 @@
 @back HUB_Room
+@setStoryStep name:Step_001
 
 The door to the office flew open, and a tall man entered the room, letting in a rush of cold air from the street along with the damp scent of rain. The stranger began speaking from the doorway, striding briskly toward the counter.
 
@@ -30,7 +31,12 @@ Alfredo: “A mere formality. I have no questions regarding your qualifications.
 He extended his hand; a large coin gleamed in his palm—twenty Drops.
 Alfredo: “If you consent, I shall conceal six such coins in the park at the end of the street. Your sole task will be to locate them within ten minutes. Shall we?”
 
+@choice "Ask Alfredo to accompany"
+@stop
+
+@setStoryStep name:Step_Tutor_01
+@executeCommandScript name:GoToMissionsRoom
+
 @hideAll
 @stop
 @hidePrinter
-

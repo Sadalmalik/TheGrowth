@@ -5,8 +5,7 @@ Alfredo: Salutations! Do you want to play from begining or you want to skip to t
 @choice "Skip the intro" goto:.SkipIntro
 @stop
 # SkipIntro
-;@setStoryStep name:Step_001
-@executeCommandScript name:GoToMissionsRoom
+@setStoryStep name:Step_001
 @hideAll
 @stop
 @hidePrinter

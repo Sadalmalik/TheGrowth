@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a20198ed85b7431d9a7399db2bad5755, type: 3}
-  m_Name: Tutor_Step_01
+  m_Name: Step_Tutor_01
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -20,6 +20,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bac3c5ba149dca64aa33fd9910a225fb, type: 2}
     - {fileID: 11400000, guid: aa0fd3938b9a6954d904268e782753bd, type: 2}
     - {fileID: 11400000, guid: d7209ae1ab1fcb54cbf1132b89be41fa, type: 2}
+    - {fileID: 11400000, guid: 8fa2ea45db0b4a14b81e404aa5f97f10, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -34,7 +35,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.StoryLine.AddItemsToInventory, Code
@@ -99,6 +100,47 @@ MonoBehaviour:
     - Name: actions
       Entry: 3
       Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|XandArt.TheGrowth.StoryLine.RunCommands, Code
+    - Name: _onStepStartActions
+      Entry: 7
+      Data: 8|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
+        Code]], Unity.Plastic.Antlr3.Runtime
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 9|XandArt.TheGrowth.GoToLocation, Code
+    - Name: Location
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _onStepEndActions
+      Entry: 7
+      Data: 10|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
+        Code]], Unity.Plastic.Antlr3.Runtime
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
