@@ -6,22 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_XandArt/TheGrowth/Resources/Scenario/Maps/Start.unity
+    path: Assets/_XandArt/TheGrowth/Maps/Start.unity
     guid: 25b70689621d415419fae382ca403cbe
   - enabled: 1
-    path: Assets/_XandArt/TheGrowth/Resources/Scenario/Maps/ExpeditionTest.unity
+    path: Assets/_XandArt/TheGrowth/Maps/ExpeditionTest.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/_XandArt/TheGrowth/Resources/Scenario/Maps/LocationHUB.unity
+    path: Assets/_XandArt/TheGrowth/Maps/LocationHUB.unity
     guid: cdd87bf9e33c7594aa8b5ad3465b3f7d
   - enabled: 1
-    path: Assets/_XandArt/TheGrowth/Resources/Scenario/Maps/ExpeditionTest_2.unity
+    path: Assets/_XandArt/TheGrowth/Maps/ExpeditionTest_2.unity
     guid: ed033fbe11235804da35c720f928a836
   - enabled: 1
-    path: Assets/_XandArt/TheGrowth/Resources/Scenario/Maps/Location_Tutor_HUB.unity
+    path: Assets/_XandArt/TheGrowth/Maps/Location_Tutor_HUB.unity
     guid: cfd75862927de7147a766be5749008d0
   - enabled: 1
-    path: Assets/_XandArt/TheGrowth/Resources/Scenario/Maps/MAP_Tutor_01.unity
+    path: Assets/_XandArt/TheGrowth/Maps/MAP_Tutor_01.unity
     guid: fc929e29ac567884599831e65ca2ffb0
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
