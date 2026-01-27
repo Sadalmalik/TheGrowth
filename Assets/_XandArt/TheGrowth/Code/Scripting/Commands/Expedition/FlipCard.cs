@@ -22,7 +22,7 @@ namespace XandArt.TheGrowth
         public override void Execute(Context context)
         {
             var card = Card.Evaluate(context);
-            var brain = card.GetComponent<CardBrain.Component>();
+            var brain = card?.GetComponent<CardBrain.Component>();
             if (brain == null) return;
 
             switch (Variant)
