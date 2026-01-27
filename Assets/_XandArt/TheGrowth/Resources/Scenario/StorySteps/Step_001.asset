@@ -31,6 +31,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 89e7a7510db3dfd4e983bd8e0e95088c, type: 2}
     - {fileID: 11400000, guid: 9d76bcc363931334281320d739b8e90a, type: 2}
     - {fileID: 11400000, guid: 54d09b84afeb61c4ca069c248f63e74b, type: 2}
+    - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -45,7 +46,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.StoryLine.AddItemsToInventory, Code
@@ -280,6 +281,47 @@ MonoBehaviour:
     - Name: actions
       Entry: 3
       Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 22|XandArt.TheGrowth.StoryLine.RunCommands, Code
+    - Name: _onStepStartActions
+      Entry: 7
+      Data: 23|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
+        Code]], Unity.Plastic.Antlr3.Runtime
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 24|XandArt.TheGrowth.GoToLocation, Code
+    - Name: Location
+      Entry: 10
+      Data: 15
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _onStepEndActions
+      Entry: 7
+      Data: 25|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
+        Code]], Unity.Plastic.Antlr3.Runtime
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 

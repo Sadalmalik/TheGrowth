@@ -132,20 +132,45 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: AfterCommands
+      Entry: 7
+      Data: 11|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 12|XandArt.TheGrowth.MoveCamera, Code
+    - Name: Card
+      Entry: 7
+      Data: 13|XandArt.TheGrowth.PlayerCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: AfterCommands
       Entry: 6
       Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 7
-      Data: 11|XandArt.TheGrowth.FlipCard, Code
+      Data: 14|XandArt.TheGrowth.FlipCard, Code
     - Name: Variant
       Entry: 3
       Data: 1
     - Name: Card
       Entry: 7
-      Data: 12|XandArt.TheGrowth.ActiveCard, Code
+      Data: 15|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 

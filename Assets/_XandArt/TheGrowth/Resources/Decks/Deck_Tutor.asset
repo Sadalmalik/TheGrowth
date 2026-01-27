@@ -18,7 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 47fc333d35167a046bd66e98aa830544, type: 2}
     - {fileID: 11400000, guid: 90716d6d1d371f84e9afe1565027bd39, type: 2}
-    - {fileID: 11400000, guid: 7c65908894a30884ea5af52f67c9d7ad, type: 2}
+    - {fileID: 11400000, guid: ef1d686878031864c9b977c651ffc55c, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -60,7 +60,7 @@ MonoBehaviour:
       Data: 3|XandArt.TheGrowth.DeckEntry, Code
     - Name: Amount
       Entry: 3
-      Data: 6
+      Data: 4
     - Name: Entity
       Entry: 10
       Data: 2

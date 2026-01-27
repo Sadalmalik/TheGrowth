@@ -2671,7 +2671,7 @@ MonoBehaviour:
   m_LocationButtons:
   - {fileID: 8973022474500231846}
   m_Locations:
-  - {fileID: 11400000, guid: 8fa2ea45db0b4a14b81e404aa5f97f10, type: 2}
+  - {fileID: 11400000, guid: 4b8683634d96c234ca9bbbd6fe36bbf5, type: 2}
   m_ResourceContainer: {fileID: 973227167}
   m_EnemiesContainer: {fileID: 2061676458}
   m_ResourcePrefab: {fileID: 500157428}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2af8676ad01b4d90ae16dcca7ffbc62a, type: 3}
-  m_Name: LOC_Tutorial_HUB
+  m_Name: Expedition_Tutor_01
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -23,11 +23,11 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: 8fa2ea45db0b4a14b81e404aa5f97f10
-  Title: thE toWn parK
-  Description: You can't see it, but you can feel this boundary between the Orchards
-    and the Forest. It presses on your ears, as if you're diving to the bottom.
-  Type: 1
-  Scene: Location_Tutor_HUB
-  Steps: 16
-  Deck: {fileID: 0}
+      Data: 4b8683634d96c234ca9bbbd6fe36bbf5
+  Title: olD OrChaRd
+  Description: The orchard at the foot of the castle hill is now wild and overgrown.
+    Anyone who ventures deeper into the thicket will hear only wheezing sighs.
+  Type: 2
+  Scene: MAP_Tutor_01
+  Steps: 25
+  Deck: {fileID: 11400000, guid: 1fa01fc4e4ac5364b81d7c363dfbd658, type: 2}

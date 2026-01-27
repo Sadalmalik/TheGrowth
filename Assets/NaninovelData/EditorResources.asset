@@ -149,7 +149,16 @@ MonoBehaviour:
     - name: CH_03
       pathPrefix: Scripts
       guid: 0e21ac3e446ab664da9bda2c99e423ff
-    - name: CH_004
+    - name: Tutorial_END
+      pathPrefix: Scripts
+      guid: 1c80ea59b4a5d85409d10dfe7df6344d
+    - name: Tutorial_NeedMoreCoins
+      pathPrefix: Scripts
+      guid: 846ae4ff0e5a0e8489591df2018f9915
+    - name: CH_05
+      pathPrefix: Scripts
+      guid: 07166cfbc183e8048bff8ba07dd4dbbd
+    - name: CH_04
       pathPrefix: Scripts
       guid: 72046bbc4ed9f52449e9dc0c26328878
   - Id: Unlockables
@@ -185,7 +194,7 @@ MonoBehaviour:
   - Id: Characters/a3b9d49c-7cc0-41d9-b3cd-fca0c1c22d25
     Resources:
     - name: Lucia
-      pathPrefix: Characters/Luchia
+      pathPrefix: Characters/Lucia
       guid: d24d329a431ea6043998ed29d8c73b57
   - Id: Characters/c52f9989-3c28-48b9-baa6-d2adb225206b
     Resources:

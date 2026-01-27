@@ -18,6 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: a8fdd193ac66dae47b56a2fd1bc8583d, type: 3}
     - {fileID: 21300000, guid: 30077ba7b5deb3345998aa4591e769f8, type: 3}
+    - {fileID: 11400000, guid: 52f3eee5fad002e4f984ced85e276ea0, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -32,7 +33,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.CardVisual, Code
@@ -56,7 +57,16 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.CardBrain, Code
+      Data: 2|XandArt.TheGrowth.Charges, Code
+    - Name: Amound
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.CardBrain, Code
     - Name: Type
       Entry: 3
       Data: 2
@@ -70,43 +80,97 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: AllowedMoves
-      Entry: 6
+      Entry: 7
+      Data: 4|XandArt.TheGrowth.TableSlotsAround, Code
+    - Name: Position
+      Entry: 7
+      Data: 5|XandArt.TheGrowth.PositionByCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 6|XandArt.TheGrowth.PlayerCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Fallback
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Figure
+      Entry: 3
+      Data: 0
+    - Name: Distance
+      Entry: 3
+      Data: 2
+    - Name: Radius
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
       Data: 
     - Name: OnPlacedFirstTime
       Entry: 6
       Data: 
     - Name: OnPlaced
       Entry: 7
-      Data: 3|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
+      Data: 7|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 6
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|XandArt.TheGrowth.Branch, Code
+      Data: 8|XandArt.TheGrowth.ChangeCharges, Code
+    - Name: Variant
+      Entry: 3
+      Data: 1
+    - Name: Card
+      Entry: 7
+      Data: 9|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Amount
+      Entry: 3
+      Data: -1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|XandArt.TheGrowth.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 5|XandArt.TheGrowth.And, Code
+      Data: 11|XandArt.TheGrowth.And, Code
     - Name: conditions
       Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+      Data: 12|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 7|XandArt.TheGrowth.ChargesCheck, Code
+      Data: 13|XandArt.TheGrowth.ChargesCheck, Code
     - Name: Compare
       Entry: 3
       Data: 3
     - Name: Card
       Entry: 7
-      Data: 8|XandArt.TheGrowth.ActiveCard, Code
+      Data: 14|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -127,23 +191,32 @@ MonoBehaviour:
       Data: 
     - Name: OnTrue
       Entry: 7
-      Data: 9|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 10|XandArt.TheGrowth.MoveCard, Code
+      Data: 16|XandArt.TheGrowth.ExecuteCommandConfig, Code
+    - Name: config
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|XandArt.TheGrowth.MoveCard, Code
     - Name: Card
       Entry: 7
-      Data: 11|XandArt.TheGrowth.ActiveCard, Code
+      Data: 18|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Slot
       Entry: 7
-      Data: 12|XandArt.TheGrowth.BoardSlot, Code
+      Data: 19|XandArt.TheGrowth.BoardSlot, Code
     - Name: _slot
       Entry: 3
       Data: 1
@@ -170,23 +243,23 @@ MonoBehaviour:
       Data: 
     - Name: OnFalse
       Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 20|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 14|XandArt.TheGrowth.MoveCard, Code
+      Data: 21|XandArt.TheGrowth.MoveCard, Code
     - Name: Card
       Entry: 7
-      Data: 15|XandArt.TheGrowth.ActiveCard, Code
+      Data: 22|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Slot
       Entry: 7
-      Data: 16|XandArt.TheGrowth.BoardSlot, Code
+      Data: 23|XandArt.TheGrowth.BoardSlot, Code
     - Name: _slot
       Entry: 3
       Data: 0
@@ -237,7 +310,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|XandArt.TheGrowth.Stackable, Code
+      Data: 24|XandArt.TheGrowth.Stackable, Code
     - Name: Limit
       Entry: 3
       Data: 4

@@ -36,7 +36,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.StoryLine.CreateEntity, Code
@@ -82,11 +82,11 @@ MonoBehaviour:
       Data: 4|XandArt.TheGrowth.StoryLine.RunCommands, Code
     - Name: _onStepStartActions
       Entry: 7
-      Data: 5|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
-        Code]], Unity.Plastic.Antlr3.Runtime
+      Data: 5|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 6|XandArt.TheGrowth.GoToLocation, Code
@@ -97,81 +97,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _onStepEndActions
       Entry: 7
-      Data: 7|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
-        Code]], Unity.Plastic.Antlr3.Runtime
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 8|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
-    - Name: Triggers
-      Entry: 7
-      Data: 9|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
-        Code]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 10|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
-    - Name: Room
-      Entry: 1
-      Data: Room_Main
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Condition
-      Entry: 7
-      Data: 11|XandArt.TheGrowth.And, Code
-    - Name: conditions
-      Entry: 7
-      Data: 12|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Commands
-      Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 14|XandArt.TheGrowth.StartDialogue, Code
+      Data: 7|XandArt.TheGrowth.StartDialogue, Code
     - Name: Script
       Entry: 10
       Data: 5
@@ -186,6 +113,9 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
+      Data: 
+    - Name: _onStepEndActions
+      Entry: 6
       Data: 
     - Name: 
       Entry: 8

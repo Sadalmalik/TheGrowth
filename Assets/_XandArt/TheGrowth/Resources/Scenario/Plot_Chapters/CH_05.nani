@@ -1,0 +1,44 @@
+@back HUB_Room
+@char Alfredo avatar:Alfredo_Ava
+
+Alfredo: “An excellent result. Now that all formalities have been duly observed, only the signing of the contract remains.”
+He glanced at his watch and continued at once, not giving me the chance to speak.
+Alfredo: “This is truly a matter of great urgency, and if we conclude the remaining formalities immediately, we shall still make the airship and arrive at Watchers Island by early evening.”
+Alfredo: “This contract is not merely a matter of remuneration. It is an opportunity to establish one’s reputation with House V. Such a chance may arise only once in a lifetime. Should we all apply ourselves diligently, your services will likely be required again next year.”
+Alfredo: “Excellent. I must insist, most firmly, that you assemble only the bare essentials. I shall collect you in two hours.”
+He cast the final words over his shoulder while already stepping out of the office, leaving me no opportunity to object.
+
+;change BG here to black screen
+
+A few hours later, our airship disengaged smoothly from the harbor tower. For a long while, through the porthole of my narrow single-berth cabin, there was nothing to see but a gray, rain-soaked sky and the equally gray sea below.
+Île des Veilleurs lay several days away by ship, yet the vampires’ airship—driven by blood magic—reached its destination by evening.
+Darkness had not yet fallen, and I was able to make out the castle. Blackened by age, compact yet rising sharply upward, it crowned a low hill that jutted unnaturally from the dense forest at the island’s center. 
+A rocky outcrop projecting from the eastern slope merged seamlessly with the castle itself, making it impossible to tell where human masonry ended and bare stone began. The airship moored against the balcony of the tallest and most massive tower rising directly from the rock.
+A member of the crew—resembling a house mouse in his gray, shapeless clothes, with a pale, forgettable face—muttered something under his breath and hauled out my luggage.
+Outside, unloading was already in full swing. Among the cargo, wrought wooden crates bearing the emblems of the House stood out; they rang with the clink of bottles whenever the porters carried them past me.
+Crossing the folding gangway, suspended over the abyss from the stern of the airship to the tower’s cornice, proved a trial of nerve. The moment my foot touched the stonework, the workers halted one by one, set down their loads, removed their caps, and bowed their heads.
+
+Alfredo: “That will suffice. Back to work. And make haste, unless you wish to remain here overnight.”
+Alfredo inclined himself courteously toward a young woman clad in costly garments.
+Alfredo: “Madam Lucia, this is the cartomancer of whom I spoke. With her assistance, the search for the remaining pieces will proceed at several times the usual pace…”
+
+@char Lucia avatar:Female_Ava
+Lucia: “Anyone will do— even a priest. I require results, and I required them two days ago. The search will proceed at several times the pace? All we have uncovered so far is a heap of crumbling rubbish turning to dust. I cannot afford to lose this season.”
+She granted me no more than a brief glance, then continued speaking to Alfredo as though I were not present.
+Lucia: “The reconstruction of the Machine is merely the first step, and we still do not know how much more will be required.”
+Alfredo: “I stopped by the workshop to inspect the impressions and assess the prospects. Let us say… they are not particularly encouraging. That said, the dismantling of the eastern wall is progressing more swiftly than anticipated."
+Alfredo: "I continue to recommend the option of micro-charges; we have experienced miners at our disposal."
+Lucia: “Out of the question. Are there any means to accelerate the demolition? And what are we to do if we encounter solid bedrock in the east as well?"
+Alfredo: "I could proceed more quickly, but the matter ultimately comes down to manpower. Rumors about the castle have begun to circulate through the city. And rumors among the common folk spread like a plague—finding workers grows more difficult by the day, and—”
+Alfredo did not finish the sentence. He turned sharply toward me, clearly intending to say something, then merely waved a hand to one of the servants.
+Lucia: “Is that so? We have allowed the population to breed unchecked for generations, and still there are not enough people?”
+Alfredo: “My apologies, Madam. Let us not pursue that line of thought. I believe—no, I am confident—that tomorrow we could travel to the neighboring city. It is unlikely the rumors have reached it yet. We shall recruit labor there.”
+Alfredo gestured toward me at a servant who hurried over and asked that I be escorted to my chambers. The servant led me into the tower, but fragments of the conversation still reached my ears.
+Lucia: “Again? Both you and I, I might remind you, are required here to supervise the work, and you propose to send my airship after a handful of ragamuffins?”
+Alfredo: “Madam, the work will be overseen by Monsieur Sébastien.”
+Lucia: “That puffed-up louse has found himself a new pet restorer. He sees nothing of the situation as a whole—he has buried himself in that book, with its miserable fraction of what we—”
+At that moment, one of the porters dropped his load, and the workers’ curses drowned out the rest of the conversation.
+
+@hideAll
+@stop
+@hidePrinter

@@ -30,7 +30,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.ForEachCard, Code
@@ -112,6 +112,36 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|XandArt.TheGrowth.FlipCard, Code
+    - Name: Variant
+      Entry: 3
+      Data: 1
+    - Name: Card
+      Entry: 7
+      Data: 10|XandArt.TheGrowth.RelativeCard, Code
+    - Name: Variant
+      Entry: 3
+      Data: 0
+    - Name: Card
+      Entry: 7
+      Data: 11|XandArt.TheGrowth.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Count
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: AfterCommands
+      Entry: 6
       Data: 
     - Name: 
       Entry: 8
