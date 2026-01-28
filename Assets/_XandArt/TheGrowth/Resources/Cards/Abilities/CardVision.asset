@@ -127,10 +127,7 @@ MonoBehaviour:
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 6
-      Data: 
+      Data: 2
     - Name: 
       Entry: 7
       Data: 8|XandArt.TheGrowth.ChangeCharges, Code

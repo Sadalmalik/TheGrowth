@@ -1,6 +1,6 @@
 @char Player
 Player: "I need to find all the coins."
 
-
-
+@hideAll
 @stop
+@hidePrinter

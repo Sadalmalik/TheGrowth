@@ -29,5 +29,5 @@ MonoBehaviour:
     Anyone who ventures deeper into the thicket will hear only wheezing sighs.
   Type: 2
   Scene: MAP_Tutor_01
-  Steps: 25
+  Steps: 20
   Deck: {fileID: 11400000, guid: 1fa01fc4e4ac5364b81d7c363dfbd658, type: 2}
