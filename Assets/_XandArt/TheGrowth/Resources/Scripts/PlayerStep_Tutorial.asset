@@ -17,7 +17,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 882e6b7caa59f3046a0ac2d8ca993944, type: 2}
-    - {fileID: -5555909049971809409, guid: 1c80ea59b4a5d85409d10dfe7df6344d, type: 3}
+    - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
+    - {fileID: -5555909049971809409, guid: 07166cfbc183e8048bff8ba07dd4dbbd, type: 3}
     - {fileID: -5555909049971809409, guid: 846ae4ff0e5a0e8489591df2018f9915, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -114,25 +115,22 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 11|XandArt.TheGrowth.StartDialogue, Code
-    - Name: Script
+      Data: 11|XandArt.TheGrowth.GoToLocation, Code
+    - Name: Location
       Entry: 10
       Data: 1
-    - Name: AfterCommands
-      Entry: 6
-      Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 12|XandArt.TheGrowth.EndGame, Code
-    - Name: Success
-      Entry: 5
-      Data: true
-    - Name: Message
-      Entry: 1
-      Data: We finally escaped!
+      Data: 12|XandArt.TheGrowth.StartDialogue, Code
+    - Name: Script
+      Entry: 10
+      Data: 2
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -154,7 +152,7 @@ MonoBehaviour:
       Data: 14|XandArt.TheGrowth.StartDialogue, Code
     - Name: Script
       Entry: 10
-      Data: 2
+      Data: 3
     - Name: AfterCommands
       Entry: 6
       Data: 

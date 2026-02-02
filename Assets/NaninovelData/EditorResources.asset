@@ -149,9 +149,6 @@ MonoBehaviour:
     - name: CH_03
       pathPrefix: Scripts
       guid: 0e21ac3e446ab664da9bda2c99e423ff
-    - name: Tutorial_END
-      pathPrefix: Scripts
-      guid: 1c80ea59b4a5d85409d10dfe7df6344d
     - name: Tutorial_NeedMoreCoins
       pathPrefix: Scripts
       guid: 846ae4ff0e5a0e8489591df2018f9915
@@ -161,6 +158,9 @@ MonoBehaviour:
     - name: CH_04
       pathPrefix: Scripts
       guid: 72046bbc4ed9f52449e9dc0c26328878
+    - name: Tutorial_PrepScr
+      pathPrefix: Scripts
+      guid: 1c80ea59b4a5d85409d10dfe7df6344d
   - Id: Unlockables
     Resources: []
   - Id: Audio
@@ -216,3 +216,14 @@ MonoBehaviour:
     - name: Stella
       pathPrefix: Characters/Stella
       guid: 7c046f5c00f70994aa5a345cb09d4e85
+  - Id: Backgrounds/a966534f-3bba-4b46-966c-15539a6adf76
+    Resources:
+    - name: TP_01
+      pathPrefix: Backgrounds/Tutor_E
+      guid: 0ba5c50ddad3f0b43a52d32593fe0f25
+    - name: TP_02
+      pathPrefix: Backgrounds/Tutor_E
+      guid: 69f8387ade7f67f4aa569c00f5e76c39
+    - name: TP_03
+      pathPrefix: Backgrounds/Tutor_E
+      guid: 91f964786cca7334896af09613531ab3

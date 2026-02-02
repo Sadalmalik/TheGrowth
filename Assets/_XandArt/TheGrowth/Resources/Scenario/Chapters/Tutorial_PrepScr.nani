@@ -1,0 +1,9 @@
+@back TP_01 id:Tutor_E
+Here is the preparation screen. You can get an information about selected level and choose character and abilities. Start by pressing "Character" button. 
+@back TP_02 id:Tutor_E
+Drag and drop character card into the character slot. Next, drag abilities cards into the abilities slots.
+@back TP_03 id:Tutor_E
+Press 'Start".
+@hideAll
+@stop
+@hidePrinter
