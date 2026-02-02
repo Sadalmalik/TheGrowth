@@ -161,6 +161,9 @@ MonoBehaviour:
     - name: Tutorial_PrepScr
       pathPrefix: Scripts
       guid: 1c80ea59b4a5d85409d10dfe7df6344d
+    - name: Tutorial_Game
+      pathPrefix: Scripts
+      guid: 5f9c9c678b7aed741b46b1ad332560ba
   - Id: Unlockables
     Resources: []
   - Id: Audio
@@ -227,3 +230,14 @@ MonoBehaviour:
     - name: TP_03
       pathPrefix: Backgrounds/Tutor_E
       guid: 91f964786cca7334896af09613531ab3
+  - Id: Backgrounds/2ab6830d-5c15-4eb7-8719-584a3854ebf6
+    Resources:
+    - name: TG_01
+      pathPrefix: Backgrounds/Tutor_G
+      guid: 09f2163f59ae7d040a6a74c0316168f4
+    - name: TG_02
+      pathPrefix: Backgrounds/Tutor_G
+      guid: 50e31270ec9c1d848beb7ac0de242151
+    - name: TG_03
+      pathPrefix: Backgrounds/Tutor_G
+      guid: dcf6c0c77f382b64ba3bf9018075148a

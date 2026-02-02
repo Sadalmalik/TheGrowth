@@ -1,0 +1,9 @@
+@back TG_01 id:Tutor_G
+Here is the expedition screen. Your goal is to move your character card collecting resources and get back to the exit in time. You can use character and your abilities to make this jorney easier.
+@back TG_02 id:Tutor_G
+Character card is moving by drag-and-dropping. Each step will consume a turn, so be carefull planning your rout.
+@back TG_03 id:Tutor_G
+Collected resources will go to character backpack. Character will lose all resources if forsed to escape if run of turns or get seriusly wounded.
+@hideAll
+@stop
+@hidePrinter

@@ -21,6 +21,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5c320f4890fcc1c49a4f36a3c2471381, type: 2}
     - {fileID: 11400000, guid: 63c8b5d355d36fe42825cd08c02868ca, type: 2}
     - {fileID: 11400000, guid: 52f3eee5fad002e4f984ced85e276ea0, type: 2}
+    - {fileID: -5555909049971809409, guid: 5f9c9c678b7aed741b46b1ad332560ba, type: 3}
     - {fileID: 11400000, guid: 4d9cdf4b00aa9fe46a5b1f5bd544a171, type: 2}
     - {fileID: 11400000, guid: 8fa2ea45db0b4a14b81e404aa5f97f10, type: 2}
     SerializedBytesString: 
@@ -220,7 +221,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 16|XandArt.TheGrowth.ExecuteCommandConfig, Code
@@ -246,6 +247,18 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 19|XandArt.TheGrowth.StartDialogue, Code
+    - Name: Script
+      Entry: 10
+      Data: 5
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -253,17 +266,17 @@ MonoBehaviour:
       Data: 
     - Name: OnPlaced
       Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 20|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 4
     - Name: 
       Entry: 7
-      Data: 20|XandArt.TheGrowth.MoveCamera, Code
+      Data: 21|XandArt.TheGrowth.MoveCamera, Code
     - Name: Card
       Entry: 7
-      Data: 21|XandArt.TheGrowth.ActiveCard, Code
+      Data: 22|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -275,7 +288,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 22|XandArt.TheGrowth.ExecuteCommandConfig, Code
+      Data: 23|XandArt.TheGrowth.ExecuteCommandConfig, Code
     - Name: config
       Entry: 10
       Data: 4
@@ -284,41 +297,41 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 23|XandArt.TheGrowth.ExecuteCommandConfig, Code
+      Data: 24|XandArt.TheGrowth.ExecuteCommandConfig, Code
     - Name: config
       Entry: 10
-      Data: 5
+      Data: 6
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 24|XandArt.TheGrowth.Branch, Code
+      Data: 25|XandArt.TheGrowth.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 25|XandArt.TheGrowth.Or, Code
+      Data: 26|XandArt.TheGrowth.Or, Code
     - Name: conditions
       Entry: 7
-      Data: 26|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+      Data: 27|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 27|XandArt.TheGrowth.CompareFloats, Code
+      Data: 28|XandArt.TheGrowth.CompareFloats, Code
     - Name: Variant
       Entry: 3
       Data: 3
     - Name: First
       Entry: 7
-      Data: 28|XandArt.TheGrowth.StepsEvaluator, Code
+      Data: 29|XandArt.TheGrowth.StepsEvaluator, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Second
       Entry: 7
-      Data: 29|XandArt.TheGrowth.ConstantFloatEvaluator, Code
+      Data: 30|XandArt.TheGrowth.ConstantFloatEvaluator, Code
     - Name: Value
       Entry: 4
       Data: 0
@@ -339,23 +352,23 @@ MonoBehaviour:
       Data: 
     - Name: OnTrue
       Entry: 7
-      Data: 30|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 31|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
       Entry: 7
-      Data: 31|XandArt.TheGrowth.GoToLocation, Code
+      Data: 32|XandArt.TheGrowth.GoToLocation, Code
     - Name: Location
       Entry: 10
-      Data: 6
+      Data: 7
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 32|XandArt.TheGrowth.GoToHubRoom, Code
+      Data: 33|XandArt.TheGrowth.GoToHubRoom, Code
     - Name: RoomName
       Entry: 1
       Data: Room_Missions
@@ -364,7 +377,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 33|XandArt.TheGrowth.DebugLog, Code
+      Data: 34|XandArt.TheGrowth.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: Tutorial fail - reset the mission
@@ -379,7 +392,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFalse
       Entry: 7
-      Data: 34|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 35|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -401,7 +414,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFlipped
       Entry: 7
-      Data: 35|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 36|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -414,7 +427,7 @@ MonoBehaviour:
       Data: 
     - Name: OnStep
       Entry: 7
-      Data: 36|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 37|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -427,7 +440,7 @@ MonoBehaviour:
       Data: 
     - Name: OnCovered
       Entry: 7
-      Data: 37|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 38|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -440,7 +453,7 @@ MonoBehaviour:
       Data: 
     - Name: OnUnCovered
       Entry: 7
-      Data: 38|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 39|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -456,7 +469,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 39|XandArt.TheGrowth.Charges, Code
+      Data: 40|XandArt.TheGrowth.Charges, Code
     - Name: Amound
       Entry: 3
       Data: 0
