@@ -265,3 +265,8 @@ MonoBehaviour:
     - name: TG_03
       pathPrefix: Backgrounds/Tutor_G
       guid: dcf6c0c77f382b64ba3bf9018075148a
+  - Id: Backgrounds/ac3a81a9-57b9-44f1-a1a1-5f3c8931c3d9
+    Resources:
+    - name: VID_TutorialTest
+      pathPrefix: Backgrounds/Tutor_EV
+      guid: ef4837a716b3edf4c80fb0a72ce143b9
