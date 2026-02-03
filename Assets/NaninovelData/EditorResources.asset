@@ -167,7 +167,31 @@ MonoBehaviour:
   - Id: Unlockables
     Resources: []
   - Id: Audio
-    Resources: []
+    Resources:
+    - name: S_doorbell
+      pathPrefix: Audio
+      guid: 2efa500ce65f50a479a53dc6bee68490
+    - name: S_ClockTick
+      pathPrefix: Audio
+      guid: bdd0a45290f50a743aae8419b6770164
+    - name: S_RainToWindow
+      pathPrefix: Audio
+      guid: 77760e15136d4114eac6ff3f6e6acbdb
+    - name: S_Thunder
+      pathPrefix: Audio
+      guid: 9331c5c0afd0a8c43a6a9747c5cf8263
+    - name: S_Footsteps
+      pathPrefix: Audio
+      guid: 23f8a0ec5af7c594bab17dd1a8d6da6b
+    - name: S_papers_movement
+      pathPrefix: Audio
+      guid: f6d840d444410da40abdcb41645decea
+    - name: SM_CalmPiano
+      pathPrefix: Audio
+      guid: 5cc28f4cef2e51b4795f7eea59e13377
+    - name: S_PaperOnTable
+      pathPrefix: Audio
+      guid: a19e5a93172eaa44b963f5fc7fdede24
   - Id: Backgrounds/b8a767ac-69ab-44b6-834e-5dc2547076e0
     Resources:
     - name: HUB_Room
