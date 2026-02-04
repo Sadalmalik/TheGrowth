@@ -1,6 +1,7 @@
-@back HUB_Room
-@char Alfredo avatar:Alfredo_Ava
-Alfredo: Salutations! Do you want to play from begining or you want to skip to the free-mode? [< skip!]
+@back Black_Screen
+
+Do you want to play from begining or you want to skip to the free-mode? skip
+
 @choice "Start from begining" goto:CH_02_FirstDialogue
 @choice "Skip the intro" goto:.SkipIntro
 @stop

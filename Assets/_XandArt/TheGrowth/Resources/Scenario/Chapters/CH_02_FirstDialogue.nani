@@ -1,7 +1,7 @@
 @sfx S_RainToWindow volume:0.4 loop!
 @sfx S_ClockTick loop!
 
-@back HUB_Room.Crossfade time:2
+@back BG_MCOffice id:Office
 @setStoryStep name:Step_Tutor_01
 @sfx S_doorbell
 

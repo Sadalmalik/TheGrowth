@@ -194,9 +194,9 @@ MonoBehaviour:
       guid: a19e5a93172eaa44b963f5fc7fdede24
   - Id: Backgrounds/b8a767ac-69ab-44b6-834e-5dc2547076e0
     Resources:
-    - name: HUB_Room
+    - name: Black_Screen
       pathPrefix: Backgrounds/MainBackground
-      guid: ea85a59bbab90524baad6f14de4a252b
+      guid: 2c24539fe2b36de4896fe8e4c688e31f
   - Id: Characters/437b7352-cc07-4b28-aae1-6c613754236e
     Resources:
     - name: Alfredo
@@ -270,3 +270,8 @@ MonoBehaviour:
     - name: VID_TutorialTest
       pathPrefix: Backgrounds/Tutor_EV
       guid: ef4837a716b3edf4c80fb0a72ce143b9
+  - Id: Backgrounds/fa38554e-b586-4afb-8418-01d9e62f3ced
+    Resources:
+    - name: BG_MCOffice
+      pathPrefix: Backgrounds/Office
+      guid: a78388a98c16d2b4f8d76f2cf383037c

@@ -1,4 +1,4 @@
-@back HUB_Room
+@back BG_MCOffice id:Office
 @char Alfredo avatar:Alfredo_Ava
 
 Alfredo: “An excellent result. Now that all formalities have been duly observed, only the signing of the contract remains.”
@@ -8,7 +8,7 @@ Alfredo: “This contract is not merely a matter of remuneration. It is an oppor
 Alfredo: “Excellent. I must insist, most firmly, that you assemble only the bare essentials. I shall collect you in two hours.”
 He cast the final words over his shoulder while already stepping out of the office, leaving me no opportunity to object.
 
-;change BG here to black screen
+@back Black_Screen
 
 A few hours later, our airship disengaged smoothly from the harbor tower. For a long while, through the porthole of my narrow single-berth cabin, there was nothing to see but a gray, rain-soaked sky and the equally gray sea below.
 Île des Veilleurs lay several days away by ship, yet the vampires’ airship—driven by blood magic—reached its destination by evening.
