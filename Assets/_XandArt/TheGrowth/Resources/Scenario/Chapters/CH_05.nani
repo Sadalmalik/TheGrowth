@@ -1,3 +1,6 @@
+@sfx S_RainToWindow volume:0.5 loop!
+@sfx S_ClockTick loop!
+
 @back BG_MCOffice id:Office
 @char Alfredo avatar:Alfredo_Ava
 
@@ -8,6 +11,7 @@ Alfredo: “This contract is not merely a matter of remuneration. It is an oppor
 Alfredo: “Excellent. I must insist, most firmly, that you assemble only the bare essentials. I shall collect you in two hours.”
 He cast the final words over his shoulder while already stepping out of the office, leaving me no opportunity to object.
 
+@stopSfx
 @back Black_Screen
 
 A few hours later, our airship disengaged smoothly from the harbor tower. For a long while, through the porthole of my narrow single-berth cabin, there was nothing to see but a gray, rain-soaked sky and the equally gray sea below.
