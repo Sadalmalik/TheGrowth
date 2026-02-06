@@ -42,7 +42,7 @@ Alfredo: “There is no mystery, Madam / Sir. I must conclude this matter under 
 Alfredo inclined his head slightly.
 Alfredo: “A mere formality. I have no questions regarding your qualifications. However, my client insists.”
 He extended his hand; a large coin gleamed in his palm—twenty Drops.
-Alfredo: “If you consent, I shall conceal six such coins in the park at the end of the street. Your sole task will be to locate them within ten minutes. Shall we?”
+Alfredo: “If you consent, I shall conceal four such coins in the park at the end of the street. Your sole task will be to locate them within ten minutes. Shall we?”
 
 @choice "Ask Alfredo to accompany" goto:.LetsGo
 @stop

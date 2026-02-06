@@ -1,6 +1,6 @@
 @back Black_Screen
 
-Do you want to play from begining or you want to skip to the free-mode? skip
+Do you want to play from begining or you want to skip to the free-mode?
 
 @choice "Start from begining" goto:CH_02_FirstDialogue
 @choice "Skip the intro" goto:.SkipIntro
