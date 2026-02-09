@@ -12,6 +12,7 @@ Alfredo: “Excellent. I must insist, most firmly, that you assemble only the ba
 He cast the final words over his shoulder while already stepping out of the office, leaving me no opportunity to object.
 
 @stopSfx
+@hide Alfredo
 @back Black_Screen
 
 A few hours later, our airship disengaged smoothly from the harbor tower. For a long while, through the porthole of my narrow single-berth cabin, there was nothing to see but a gray, rain-soaked sky and the equally gray sea below.
@@ -22,6 +23,7 @@ A member of the crew—resembling a house mouse in his gray, shapeless clothes, 
 Outside, unloading was already in full swing. Among the cargo, wrought wooden crates bearing the emblems of the House stood out; they rang with the clink of bottles whenever the porters carried them past me.
 Crossing the folding gangway, suspended over the abyss from the stern of the airship to the tower’s cornice, proved a trial of nerve. The moment my foot touched the stonework, the workers halted one by one, set down their loads, removed their caps, and bowed their heads.
 
+@show Alfredo
 Alfredo: “That will suffice. Back to work. And make haste, unless you wish to remain here overnight.”
 Alfredo inclined himself courteously toward a young woman clad in costly garments.
 Alfredo: “Madam Lucia, this is the cartomancer of whom I spoke. With her assistance, the search for the remaining pieces will proceed at several times the usual pace…”
