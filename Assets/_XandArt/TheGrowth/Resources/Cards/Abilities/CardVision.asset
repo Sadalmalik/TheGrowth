@@ -127,7 +127,7 @@ MonoBehaviour:
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 8|XandArt.TheGrowth.ChangeCharges, Code
@@ -148,26 +148,35 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 10|XandArt.TheGrowth.Branch, Code
+      Data: 10|XandArt.TheGrowth.ExecuteCommandConfig, Code
+    - Name: config
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|XandArt.TheGrowth.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 11|XandArt.TheGrowth.And, Code
+      Data: 12|XandArt.TheGrowth.Or, Code
     - Name: conditions
       Entry: 7
-      Data: 12|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+      Data: 13|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 13|XandArt.TheGrowth.ChargesCheck, Code
+      Data: 14|XandArt.TheGrowth.ChargesCheck, Code
     - Name: Compare
       Entry: 3
-      Data: 3
+      Data: 2
     - Name: Card
       Entry: 7
-      Data: 14|XandArt.TheGrowth.ActiveCard, Code
+      Data: 15|XandArt.TheGrowth.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -188,20 +197,11 @@ MonoBehaviour:
       Data: 
     - Name: OnTrue
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 16|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 16|XandArt.TheGrowth.ExecuteCommandConfig, Code
-    - Name: config
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 1
     - Name: 
       Entry: 7
       Data: 17|XandArt.TheGrowth.MoveCard, Code
@@ -216,7 +216,7 @@ MonoBehaviour:
       Data: 19|XandArt.TheGrowth.BoardSlot, Code
     - Name: _slot
       Entry: 3
-      Data: 1
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -259,7 +259,7 @@ MonoBehaviour:
       Data: 23|XandArt.TheGrowth.BoardSlot, Code
     - Name: _slot
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 8
       Data: 

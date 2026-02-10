@@ -146,24 +146,21 @@ MonoBehaviour:
     - name: CH_01_Intro
       pathPrefix: Scripts
       guid: 27d5bea086e5f2e4d956d5051adb35ba
-    - name: CH_03
-      pathPrefix: Scripts
-      guid: 0e21ac3e446ab664da9bda2c99e423ff
     - name: Tutorial_NeedMoreCoins
       pathPrefix: Scripts
       guid: 846ae4ff0e5a0e8489591df2018f9915
-    - name: CH_05
-      pathPrefix: Scripts
-      guid: 07166cfbc183e8048bff8ba07dd4dbbd
-    - name: CH_04
-      pathPrefix: Scripts
-      guid: 72046bbc4ed9f52449e9dc0c26328878
     - name: Tutorial_PrepScr
       pathPrefix: Scripts
       guid: 1c80ea59b4a5d85409d10dfe7df6344d
     - name: Tutorial_Game
       pathPrefix: Scripts
       guid: 5f9c9c678b7aed741b46b1ad332560ba
+    - name: CH_03
+      pathPrefix: Scripts
+      guid: 07166cfbc183e8048bff8ba07dd4dbbd
+    - name: CH_04
+      pathPrefix: Scripts
+      guid: f2fcba4ec5fbc434e91d0a240d04226f
   - Id: Unlockables
     Resources: []
   - Id: Audio

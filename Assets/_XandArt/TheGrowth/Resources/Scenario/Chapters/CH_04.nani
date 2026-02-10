@@ -1,13 +1,8 @@
-@back HUB_Room
-@char Luchia avatar:Female_Ava
-Luchia: "Hello world!"
-Luchia: "I'm happy to be here!"
-@char Alfredo avatar:Alfredo_Ava
-Alfredo: "Hello there!"
-Alfredo: "How are you, {PlayerName}?"
-@char Player avatar:Empty_Ava
-Player: "I have greate day today."
-Alfredo: "Nice to hear it. Se you in a bit."
+@back Black_Screen
+
+Story summary. You, as a newly hired cartomancer, are brought by airship to Watchers Island, where a blackened castle rises from living rock at the island’s heart.
+There, House V races against time to dismantle ancient walls and reconstruct a mysterious Machine, struggling with vanishing labor, spreading rumors, and mounting tension between its leaders. Beneath the urgency lies the sense that the season—and perhaps something far older—is slipping beyond their control.
+Now your task is to help find mysterious Machine pieces, scattered in ancient woods around the castle. 
 @hideAll
 @stop
 @hidePrinter
