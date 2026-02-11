@@ -52,7 +52,7 @@ MonoBehaviour:
     ids:
     - MainBackground
     - Office
-    - Tutor_E
+    - Tutor_P
     - Tutor_G
     - Tutor_EV
     metas:

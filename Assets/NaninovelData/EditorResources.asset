@@ -161,6 +161,9 @@ MonoBehaviour:
     - name: CH_04
       pathPrefix: Scripts
       guid: f2fcba4ec5fbc434e91d0a240d04226f
+    - name: CH_04 1
+      pathPrefix: Scripts
+      guid: bb4709b0de22d194d9f16506b22a52be
   - Id: Unlockables
     Resources: []
   - Id: Audio
@@ -243,14 +246,11 @@ MonoBehaviour:
   - Id: Backgrounds/a966534f-3bba-4b46-966c-15539a6adf76
     Resources:
     - name: TP_01
-      pathPrefix: Backgrounds/Tutor_E
-      guid: 0ba5c50ddad3f0b43a52d32593fe0f25
+      pathPrefix: Backgrounds/Tutor_P
+      guid: 23bcd997be36d9347b1dcd41450ad4ee
     - name: TP_02
-      pathPrefix: Backgrounds/Tutor_E
-      guid: 69f8387ade7f67f4aa569c00f5e76c39
-    - name: TP_03
-      pathPrefix: Backgrounds/Tutor_E
-      guid: 91f964786cca7334896af09613531ab3
+      pathPrefix: Backgrounds/Tutor_P
+      guid: c62ca637f694aed4fbc0c5adc5f36416
   - Id: Backgrounds/2ab6830d-5c15-4eb7-8719-584a3854ebf6
     Resources:
     - name: TG_01
