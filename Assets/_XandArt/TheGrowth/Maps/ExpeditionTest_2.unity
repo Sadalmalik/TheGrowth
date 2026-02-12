@@ -696,6 +696,7 @@ GameObject:
   - component: {fileID: 26175993}
   - component: {fileID: 26175992}
   - component: {fileID: 26175994}
+  - component: {fileID: 26175995}
   m_Layer: 0
   m_Name: Location
   m_TagString: Untagged
@@ -761,6 +762,19 @@ MonoBehaviour:
   deckSlot: {fileID: 83824405}
   backSlot: {fileID: 975067123}
   handSlot: {fileID: 5332221894704320527}
+--- !u!114 &26175995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26175991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d499a05bf4b489db6d11851679df9dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dimensions: {x: 40, y: 25}
 --- !u!1001 &37051762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1128,7 +1142,7 @@ Transform:
   m_GameObject: {fileID: 83824401}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2381394, y: 10.000002, z: -7.07058}
+  m_LocalPosition: {x: 0, y: 1.999999, z: 8.251451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7293,7 +7307,7 @@ Transform:
   m_GameObject: {fileID: 975067119}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4163437, y: 10.000002, z: -5.195279}
+  m_LocalPosition: {x: 10.050639, y: 2.0000048, z: -4.839197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16796,7 +16810,7 @@ Transform:
   m_GameObject: {fileID: 6850591796888947820}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 7.7752857, y: 10.000001, z: -0.9510231}
+  m_LocalPosition: {x: 10.08141, y: 2.0000079, z: -1.3897191}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

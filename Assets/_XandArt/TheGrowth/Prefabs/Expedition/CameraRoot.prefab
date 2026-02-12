@@ -862,6 +862,10 @@ MonoBehaviour:
   ZoomMin: -40
   ZoomMax: -80
   ZoomFactor: 0.025
+  MouseControllPadding: {x: 50, y: 50}
+  MaxVelocity: 10
+  MaxAcceleration: 5
+  Damping: 0.03
 --- !u!1 &5056968831129547324
 GameObject:
   m_ObjectHideFlags: 0

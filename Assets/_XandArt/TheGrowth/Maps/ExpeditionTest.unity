@@ -356,6 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 26175993}
   - component: {fileID: 26175994}
+  - component: {fileID: 26175995}
   m_Layer: 0
   m_Name: Location
   m_TagString: Untagged
@@ -408,6 +409,19 @@ MonoBehaviour:
   deckSlot: {fileID: 83824405}
   backSlot: {fileID: 975067123}
   handSlot: {fileID: 5332221894704320527}
+--- !u!114 &26175995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26175991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d499a05bf4b489db6d11851679df9dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dimensions: {x: 35, y: 25}
 --- !u!1001 &26483640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1552,82 +1566,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5056968830379377790, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -299.99988
-      objectReference: {fileID: 0}
     - target: {fileID: 5056968830629639008, guid: 6393a4928c54e3a48ab053c548c226a0,
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 5056968830629639008, guid: 6393a4928c54e3a48ab053c548c226a0,
         type: 3}
-    - target: {fileID: 5056968830629639013, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -78.30005
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830713723236, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830713723236, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830713723236, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830713723236, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830935581325, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830935581325, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830935581325, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830935581325, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830936071496, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830936071496, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830936071496, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056968830936071496, guid: 6393a4928c54e3a48ab053c548c226a0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5056968830977568756, guid: 6393a4928c54e3a48ab053c548c226a0,
         type: 3}
       propertyPath: serializationData.Prefab
