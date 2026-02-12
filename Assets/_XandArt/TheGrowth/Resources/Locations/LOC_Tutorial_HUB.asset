@@ -24,10 +24,9 @@ MonoBehaviour:
     - Name: Guid
       Entry: 2
       Data: 8fa2ea45db0b4a14b81e404aa5f97f10
-  Title: thE toWn parK
-  Description: You can't see it, but you can feel this boundary between the Orchards
-    and the Forest. It presses on your ears, as if you're diving to the bottom.
+  Title: Tutorial HUB
+  Description: 
   Type: 1
   Scene: Location_Tutor_HUB
-  Steps: 16
+  Steps: 1
   Deck: {fileID: 0}

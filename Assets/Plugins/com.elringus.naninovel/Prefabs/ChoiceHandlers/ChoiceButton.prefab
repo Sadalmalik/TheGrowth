@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.6150943, g: 0.15667489, b: 0.22216357, a: 1}
+    m_HighlightedColor: {r: 0.6092913, g: 0.498835, b: 0.734, a: 1}
     m_PressedColor: {r: 0.90943396, g: 0.3999238, b: 0, a: 1}
     m_SelectedColor: {r: 0.22745098, g: 0.4745098, b: 0.73333335, a: 1}
     m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.25490198}
@@ -131,7 +131,7 @@ MonoBehaviour:
   labelText: {fileID: 411760552658208019}
   labelColors:
     m_NormalColor: {r: 0.9098039, g: 0.7921569, b: 0.6431373, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.7735849, g: 0.57603747, b: 0.32548946, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}

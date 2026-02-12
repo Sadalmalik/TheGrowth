@@ -28,5 +28,5 @@ MonoBehaviour:
   Description: 
   Type: 1
   Scene: LocationHUB
-  Steps: 25
+  Steps: 1
   Deck: {fileID: 0}

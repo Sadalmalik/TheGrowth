@@ -272,3 +272,8 @@ MonoBehaviour:
     - name: BG_MCOffice
       pathPrefix: Backgrounds/Office
       guid: a78388a98c16d2b4f8d76f2cf383037c
+  - Id: Backgrounds/259e67b3-d217-4348-b131-539087933bdd
+    Resources:
+    - name: MainMenu
+      pathPrefix: Backgrounds/LoadingSCR
+      guid: c8fed2ad66f09f94ca835079f231c13c

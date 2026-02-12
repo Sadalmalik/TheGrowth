@@ -24,9 +24,8 @@ MonoBehaviour:
     - Name: Guid
       Entry: 2
       Data: 4b8683634d96c234ca9bbbd6fe36bbf5
-  Title: olD OrChaRd
-  Description: The orchard at the foot of the castle hill is now wild and overgrown.
-    Anyone who ventures deeper into the thicket will hear only wheezing sighs.
+  Title: The town park
+  Description: Old town park near office.
   Type: 2
   Scene: MAP_Tutor_01
   Steps: 20
