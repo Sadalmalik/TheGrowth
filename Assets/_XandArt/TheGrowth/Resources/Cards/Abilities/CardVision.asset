@@ -61,6 +61,9 @@ MonoBehaviour:
     - Name: Amound
       Entry: 3
       Data: 3
+    - Name: ShowOnCard
+      Entry: 5
+      Data: true
     - Name: 
       Entry: 8
       Data: 

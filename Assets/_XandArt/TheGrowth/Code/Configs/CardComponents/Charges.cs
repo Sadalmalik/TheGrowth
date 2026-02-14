@@ -6,19 +6,24 @@ namespace XandArt.TheGrowth
     public class Charges : IEntityModelComponent
     {
         public int Amound;
-        
+        public bool ShowOnCard;
+
         public void OnEntityCreated(CompositeEntity card)
         {
             var component = card.AddComponent<Component>();
             component.Charges = Amound;
+            component.ShowOnCard = ShowOnCard;
         }
-        
+
         public class Component : EntityComponent
         {
             //private EntityCardView _view;
             [JsonProperty]
             private int _charges;
-            
+
+            [JsonProperty]
+            private bool _showOnCard;
+
             [JsonIgnore]
             public int Charges
             {
@@ -26,11 +31,12 @@ namespace XandArt.TheGrowth
                 set => _charges = value;
             }
 
-            // private void OnEnable()
-            // {
-            //     _view = GetComponent<CardView>();
-            //     _view?.rightText?.SetText(_charges.ToString());
-            // }
+            [JsonIgnore]
+            public bool ShowOnCard
+            {
+                get => _showOnCard;
+                set => _showOnCard = value;
+            }
         }
     }
 }

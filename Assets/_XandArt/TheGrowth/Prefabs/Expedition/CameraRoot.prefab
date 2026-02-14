@@ -569,7 +569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
+    SerializedFormat: 0
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -849,7 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
+    SerializedFormat: 0
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -864,7 +864,7 @@ MonoBehaviour:
   ZoomFactor: 0.025
   MouseControllPadding: {x: 50, y: 50}
   MaxVelocity: 10
-  MaxAcceleration: 5
+  MaxAcceleration: 100
   Damping: 0.03
 --- !u!1 &5056968831129547324
 GameObject:

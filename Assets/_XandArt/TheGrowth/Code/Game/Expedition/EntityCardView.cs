@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
@@ -17,12 +18,13 @@ namespace XandArt.TheGrowth
 
         [FormerlySerializedAs("model")]
         public Transform innerTransform;
-        
+
         public GameObject faceObject;
         public Image decor;
         public Image portrait;
+        public TMP_Text charges;
         public Collider cardCollider;
-        
+
         private Sequence _moveTween;
         private Sequence _flipTween;
         private bool _isFaceUp;
@@ -31,14 +33,31 @@ namespace XandArt.TheGrowth
 
         public event Action OnAnimationComplete;
 
-        public void SetVisual(CardVisual visual)
+        private Charges.Component m_Charges;
+
+        public void Bind(CompositeEntity card)
         {
-            decor.sprite = visual.Decor;
-            portrait.sprite = visual.Portrait;
-            SetFaceVisible(false);
-            _isFaceUp = false;
+            var visual = card.Model.GetComponent<CardVisual>();
+            if (visual != null)
+            {
+                decor.sprite = visual.Decor;
+                portrait.sprite = visual.Portrait;
+                SetFaceVisible(false);
+                _isFaceUp = false;
+            }
+
+            m_Charges = card.GetComponent<Charges.Component>();
         }
-        
+
+        private void Update()
+        {
+            var newText = m_Charges is { ShowOnCard: true }
+                ? m_Charges.Charges.ToString()
+                : "";
+            if (!charges.text.Equals(newText))
+                charges.SetText(newText);
+        }
+
         public void SetFaceVisible(bool visible)
         {
             faceObject.SetActive(visible);
@@ -48,17 +67,17 @@ namespace XandArt.TheGrowth
         {
             var brain = (Data as CompositeEntity)?.GetComponent<CardBrain.Component>();
             Assert.AreEqual(brain.Slot, slot);
-            
+
             var endPosition = slot.GetNewPosition(index);
             var endRotation = slot.GetNewRotation();
-            
+
             var duration = CardsViewConfig.Instance.shiftDuration;
             _moveTween?.Kill();
             _moveTween = DOTween.Sequence()
                 .Append(transform.DOMove(endPosition, duration))
                 .Insert(0, transform.DORotate(endRotation, duration))
                 .AppendCallback(OnMoveEnd);
-            
+
             void OnMoveEnd()
             {
                 _moveTween = null;
@@ -69,8 +88,8 @@ namespace XandArt.TheGrowth
                 OnAnimationComplete?.Invoke();
             }
         }
-        
-        public void MoveTo(SlotEntity slot, Action onComplete, bool instant = false, int index=-1)
+
+        public void MoveTo(SlotEntity slot, Action onComplete, bool instant = false, int index = -1)
         {
             var endPosition = slot.GetNewPosition(index);
             var endRotation = slot.GetNewRotation();
@@ -105,14 +124,14 @@ namespace XandArt.TheGrowth
             angle = (angle + 180) % 360;
 
             bool wasFaceUp = _isFaceUp;
-            
+
             if (instant)
             {
                 innerTransform.rotation = Quaternion.Euler(0, 0, angle);
-                
+
                 _isFaceUp = !_isFaceUp;
                 SetFaceVisible(_isFaceUp);
-                
+
                 onComplete?.Invoke();
                 OnAnimationComplete?.Invoke();
                 return;

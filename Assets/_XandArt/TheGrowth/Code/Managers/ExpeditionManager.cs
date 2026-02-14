@@ -326,7 +326,7 @@ namespace XandArt.TheGrowth
             var view = Object.Instantiate(prefab, parent);
             view.name = $"{prefab.name}.{card.Model.name}";
             view.Flip(null, true);
-            view.SetVisual(visual);
+            view.Bind(card);
             card.SetView(view);
             return view;
         }
