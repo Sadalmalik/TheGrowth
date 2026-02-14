@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEditor;
@@ -15,19 +17,28 @@ namespace XandArt.TheGrowth
             var assembly = Assembly.GetExecutingAssembly();
             var allTypes = assembly.GetTypes();
 
-            foreach (Type type in allTypes)
-            {
-                if (type.Namespace == null) continue;
-                if (!type.Namespace.Contains("XandArt.TheGrowth")) continue;
+            var commands = allTypes.Where(type => typeof(XandArt.TheGrowth.Command).IsAssignableFrom(type));
+            var conditions = allTypes.Where(type => typeof(XandArt.TheGrowth.Condition).IsAssignableFrom(type));
+            var evaluators = allTypes.Where(type => typeof(XandArt.TheGrowth.IEvaluator).IsAssignableFrom(type));
 
-                var isCommand = typeof(XandArt.TheGrowth.Command).IsAssignableFrom(type);
-                var isCondition = typeof(XandArt.TheGrowth.Condition).IsAssignableFrom(type);
-                var isEvaluator = typeof(XandArt.TheGrowth.Evaluator<>).IsAssignableFrom(type);
-                if (!isCommand && !isCondition && !isEvaluator) continue;
-                sb.AppendLine($"[assembly: BindTypeNameToType(\"XandArt.TheGrowth.{type.Name}\", typeof({type.Name}))]");
-            }
+            sb.AppendLine("\n// Commands:");
+            IterateTypes(commands);
+            
+            sb.AppendLine("\n// Conditions:");
+            IterateTypes(conditions);
+            
+            sb.AppendLine("\n// Evaluators:");
+            IterateTypes(evaluators);
             
             Debug.Log(sb.ToString());
+
+            void IterateTypes(IEnumerable<Type> types)
+            {
+                foreach (Type type in types)
+                {
+                    sb.AppendLine($"[assembly: BindTypeNameToType(\"XandArt.TheGrowth.{type.Name}\", typeof({type.Name}))]");
+                }
+            }
         }
     }
 }

@@ -10,9 +10,9 @@ namespace XandArt.TheGrowth
 {
     public struct GameInitializedEvent
     {
-        
+
     }
-    
+
     public class Game : SerializedMonoBehaviour
     {
 #region Public stuff
@@ -20,7 +20,7 @@ namespace XandArt.TheGrowth
         public static Container Container;
 
         public static Context BaseContext;
-        
+
 #endregion
 
 
@@ -34,13 +34,13 @@ namespace XandArt.TheGrowth
 
         [SerializeField]
         private Camera _BaseCamera;
-        
+
         private async void Start()
         {
             AssetGuidsManager.Initialize();
-            
+
             await RuntimeInitializer.Initialize();
-            
+
             Container = new Container();
 
             Container.Add(_tickManager);
@@ -55,11 +55,11 @@ namespace XandArt.TheGrowth
             Container.Add<StoryLineManager>();
 
             BaseContext = new Context(new GlobalData { container = Container });
-            
+
             Container.Init();
-            
+
             InitializeAllWidgets();
-            
+
             EventBus.ThrowNoHandlersException = false;
             EventBus.Global.Invoke(new GameInitializedEvent());
         }
@@ -69,10 +69,11 @@ namespace XandArt.TheGrowth
             var widgets = FindObjectsOfType<WidgetBase>();
             foreach (var widget in widgets)
             {
-                Container.InjectAt((object) widget);
+                Container.InjectAt((object)widget);
                 widget.Init();
             }
         }
 
 #endregion
     }
+}
