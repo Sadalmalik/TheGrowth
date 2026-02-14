@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Crafting
 {
     /// <summary>
     /// Убирает доступные крафты

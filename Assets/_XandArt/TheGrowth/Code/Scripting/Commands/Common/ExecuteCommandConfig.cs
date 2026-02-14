@@ -1,4 +1,4 @@
-﻿namespace XandArt.TheGrowth
+﻿namespace XandArt.TheGrowth.Common
 {
     /// <summary>
     /// Команда выполняет список команд из конфига

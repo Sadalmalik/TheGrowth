@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Expedition
 {
     /// <summary>
     /// Команда вызывает OnStep у всех карт на поле

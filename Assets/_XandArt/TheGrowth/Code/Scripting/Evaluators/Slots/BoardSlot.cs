@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Expedition.Slots
 {
     /// <summary>
     /// Возвращает текущий итерируемый слот

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Expedition
 {
     /// <summary>
     /// Команда модифицирует колличество оставшихся кодов

@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Expedition
 {
     /// <summary>
     /// Возвращает константную позицию или комбинацию двух позиций

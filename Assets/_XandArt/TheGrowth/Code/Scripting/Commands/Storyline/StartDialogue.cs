@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Naninovel;
 using UnityEngine;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Story
 {
     /// <summary>
     /// Команда запускает диалог

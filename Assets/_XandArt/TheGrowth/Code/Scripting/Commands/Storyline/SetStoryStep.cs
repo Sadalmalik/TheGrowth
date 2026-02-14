@@ -1,4 +1,4 @@
-﻿namespace XandArt.TheGrowth
+﻿namespace XandArt.TheGrowth.Story
 {
     /// <summary>
     /// Команда перехода на заданный шаг истории

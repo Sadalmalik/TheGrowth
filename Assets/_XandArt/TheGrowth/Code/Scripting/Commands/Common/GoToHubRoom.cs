@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Common
 {
     public class GoToHubRoom : Command
     {

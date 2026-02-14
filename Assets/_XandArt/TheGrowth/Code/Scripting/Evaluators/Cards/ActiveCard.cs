@@ -1,7 +1,7 @@
 ﻿using System;
 using XandArt.Architecture;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Cards
 {
     /// <summary>
     /// Возвращает карту, для которой выполняются команды, настроенные в конфиге карты

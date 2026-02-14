@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Slots
 {
     /// <summary>
     /// Возвращает список слотов, в которые сейчас раскладываются карты

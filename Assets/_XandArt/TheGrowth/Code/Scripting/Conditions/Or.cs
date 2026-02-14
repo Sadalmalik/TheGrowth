@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Logic
 {
     public class Or : Condition
     {

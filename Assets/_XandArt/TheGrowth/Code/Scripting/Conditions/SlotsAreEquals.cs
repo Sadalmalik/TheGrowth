@@ -1,4 +1,8 @@
-﻿namespace XandArt.TheGrowth
+﻿using XandArt.TheGrowth.Cards;
+using XandArt.TheGrowth.Expedition.Slots;
+using XandArt.TheGrowth.Slots;
+
+namespace XandArt.TheGrowth.Expedition
 {
     /// <summary>
     /// Проверяет, если два слота совподают

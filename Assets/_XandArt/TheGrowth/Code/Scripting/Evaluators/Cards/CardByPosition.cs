@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using XandArt.Architecture;
+using XandArt.TheGrowth.Expedition;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Cards
 {
     /// <summary>
     /// Возвращает самую верхнюю карту в ячейке на столе

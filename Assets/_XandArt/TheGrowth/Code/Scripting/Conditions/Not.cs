@@ -1,4 +1,4 @@
-﻿namespace XandArt.TheGrowth
+﻿namespace XandArt.TheGrowth.Logic
 {
     public class Not : Condition
     {

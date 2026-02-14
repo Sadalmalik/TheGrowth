@@ -2,8 +2,9 @@
 using System.Linq;
 using UnityEngine;
 using XandArt.Architecture;
+using XandArt.TheGrowth.Cards;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Slots
 {
     /// <summary>
     /// Возвращает ближайший к карте слот

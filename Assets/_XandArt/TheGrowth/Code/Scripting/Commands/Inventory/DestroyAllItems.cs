@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Inventories
 {
     /// <summary>
     /// Удалить все предметы в инвентаре

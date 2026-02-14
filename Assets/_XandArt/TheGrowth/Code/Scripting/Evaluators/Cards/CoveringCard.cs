@@ -1,6 +1,6 @@
 ﻿using XandArt.Architecture;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Cards
 {
     /// <summary>
     /// Возвращает карту, которая лежит НА активной

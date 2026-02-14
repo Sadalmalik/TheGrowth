@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using XandArt.TheGrowth.Slots;
 using Enumerable = System.Linq.Enumerable;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Expedition
 {
     /// <summary>
     /// Проверяет, есть ли карта в указанном слоте

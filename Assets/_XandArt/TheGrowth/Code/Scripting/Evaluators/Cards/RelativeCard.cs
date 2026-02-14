@@ -1,7 +1,7 @@
 ﻿using System;
 using XandArt.Architecture;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Cards
 {
     /// <summary>
     /// Возвращает карту относительно данной карты в стопке

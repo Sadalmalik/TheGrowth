@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Common
 {
     /// <summary>
     /// Возвращает Коллекцию, собранную из отдельных эвалуаторов

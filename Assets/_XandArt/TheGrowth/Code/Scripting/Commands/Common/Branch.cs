@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using XandArt.TheGrowth.Logic;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Common
 {
     /// <summary>
     /// Команда ЕСЛИ - проверят условие и выполняет один из списков команд в зависимости от него

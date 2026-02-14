@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Slots
 {
     /// <summary>
     /// Возвращает слоты с какой-то стороны стола

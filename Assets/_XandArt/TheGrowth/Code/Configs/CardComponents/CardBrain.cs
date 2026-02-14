@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
 using XandArt.Architecture;
+using XandArt.TheGrowth.Cards;
 
 namespace XandArt.TheGrowth
 {

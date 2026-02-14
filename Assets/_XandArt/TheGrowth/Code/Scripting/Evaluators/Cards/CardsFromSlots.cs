@@ -2,7 +2,7 @@
 using System.Linq;
 using XandArt.Architecture;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Cards
 {
     /// <summary>
     /// Возвращает карты из слотов

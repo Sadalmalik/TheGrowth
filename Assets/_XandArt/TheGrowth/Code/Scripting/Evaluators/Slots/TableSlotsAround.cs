@@ -2,8 +2,9 @@
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using XandArt.TheGrowth.Expedition;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Slots
 {
     /// <summary>
     /// Возвращает слоты в некоторой области вокруг точки

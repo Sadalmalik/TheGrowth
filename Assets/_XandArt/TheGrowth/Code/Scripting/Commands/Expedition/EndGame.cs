@@ -2,7 +2,7 @@
 using XandArt.Architecture.Events;
 using XandArt.TheGrowth.StoryLine;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Expedition
 {
     /// <summary>
     /// Команда вызывает завершение игры

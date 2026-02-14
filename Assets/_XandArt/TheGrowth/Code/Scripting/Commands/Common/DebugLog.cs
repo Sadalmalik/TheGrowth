@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Common
 {
     /// <summary>
     /// Команда выводит в консоль сообщение

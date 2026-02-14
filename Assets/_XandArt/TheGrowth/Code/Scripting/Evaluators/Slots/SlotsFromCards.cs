@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using XandArt.Architecture;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Slots
 {
     /// <summary>
     /// Возвращает карты из слотов

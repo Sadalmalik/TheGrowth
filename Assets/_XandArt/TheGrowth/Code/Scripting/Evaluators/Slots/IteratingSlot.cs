@@ -1,4 +1,4 @@
-﻿namespace XandArt.TheGrowth
+﻿namespace XandArt.TheGrowth.Slots
 {
     /// <summary>
     /// Возвращает текущий итерируемый слот

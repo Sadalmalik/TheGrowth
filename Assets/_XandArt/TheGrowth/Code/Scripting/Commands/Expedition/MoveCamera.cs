@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using XandArt.Architecture;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Expedition
 {
     /// <summary>
     /// Команда двигает камеру к указанной карте

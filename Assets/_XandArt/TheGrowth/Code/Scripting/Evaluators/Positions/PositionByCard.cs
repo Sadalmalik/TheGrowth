@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using XandArt.Architecture;
+using XandArt.TheGrowth.Cards;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Expedition
 {
     /// <summary>
     /// Возвращает позицию карты на поле (координаты слоты)

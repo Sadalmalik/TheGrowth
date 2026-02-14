@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using XandArt.Architecture;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Cards
 {
     /// <summary>
     /// Проверяет, есть ли карта в указанной группе

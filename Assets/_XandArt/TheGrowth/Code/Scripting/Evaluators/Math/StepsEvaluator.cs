@@ -1,4 +1,4 @@
-﻿namespace XandArt.TheGrowth
+﻿namespace XandArt.TheGrowth.Expedition
 {
     /// <summary>
     /// Возвращает колличество шагов

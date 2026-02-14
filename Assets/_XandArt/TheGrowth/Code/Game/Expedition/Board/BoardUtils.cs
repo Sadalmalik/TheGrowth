@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using XandArt.Architecture;
+using XandArt.TheGrowth.Slots;
 
 namespace XandArt.TheGrowth
 {

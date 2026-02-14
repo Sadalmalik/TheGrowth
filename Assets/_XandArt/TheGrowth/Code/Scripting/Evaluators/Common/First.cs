@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Common
 {
     /// <summary>
     /// Возвращает первый элемент коллекции (коллекции не упорядоченные)

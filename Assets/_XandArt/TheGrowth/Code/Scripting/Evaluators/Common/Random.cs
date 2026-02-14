@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace XandArt.TheGrowth
+namespace XandArt.TheGrowth.Common
 {
     /// <summary>
     /// Возвращает Случайный элемент коллекции (коллекции не упорядоченные)

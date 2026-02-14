@@ -1,4 +1,4 @@
-﻿namespace XandArt.TheGrowth
+﻿namespace XandArt.TheGrowth.Common
 {
     public class ShowUIElementsGroup : Command
     {
