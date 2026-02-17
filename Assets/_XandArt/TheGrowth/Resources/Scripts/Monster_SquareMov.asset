@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaef992295f949b39ef46da8071477f0, type: 3}
-  m_Name: RevealArownd
+  m_Name: Monster_SquareMov
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 5c320f4890fcc1c49a4f36a3c2471381, type: 2}
+    - {fileID: 11400000, guid: 63c8b5d355d36fe42825cd08c02868ca, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -23,29 +25,54 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: 52f3eee5fad002e4f984ced85e276ea0
+      Data: b0377e602b0719f498e7773afedd91df
     - Name: Commands
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|XandArt.TheGrowth.Expedition.MoveCard, Code
+    - Name: Card
+      Entry: 7
+      Data: 2|XandArt.TheGrowth.Cards.ActiveCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Slot
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.Slots.NearestSlot, Code
+    - Name: Card
+      Entry: 7
+      Data: 4|XandArt.TheGrowth.Cards.PlayerCard, Code
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Collection
+      Entry: 7
+      Data: 5|XandArt.TheGrowth.Slots.TableSlotsCombine, Code
+    - Name: Variant
+      Entry: 3
+      Data: 3
+    - Name: Evaluators
+      Entry: 7
+      Data: 6|System.Collections.Generic.List`1[[XandArt.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.SlotEntity,
+        Code]], System.Core]], Code]], mscorlib
+    - Name: 
+      Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.Cards.ForEachCard, Code
-    - Name: Cards
-      Entry: 7
-      Data: 2|XandArt.TheGrowth.Cards.CardsFromSlots, Code
-    - Name: Slots
-      Entry: 7
-      Data: 3|XandArt.TheGrowth.Slots.TableSlotsAround, Code
+      Data: 7|XandArt.TheGrowth.Slots.TableSlotsAround, Code
     - Name: Position
       Entry: 7
-      Data: 4|XandArt.TheGrowth.Expedition.PositionByCard, Code
+      Data: 8|XandArt.TheGrowth.Expedition.PositionByCard, Code
     - Name: Card
       Entry: 7
-      Data: 5|XandArt.TheGrowth.Cards.ActiveCard, Code
+      Data: 9|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -76,33 +103,36 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: Filter
-      Entry: 6
-      Data: 
     - Name: 
-      Entry: 8
-      Data: 
-    - Name: Commands
       Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
+      Data: 10|XandArt.TheGrowth.Slots.SlotsFromCards, Code
+    - Name: Cards
+      Entry: 7
+      Data: 11|XandArt.TheGrowth.Cards.CardsFromBoard, Code
+    - Name: Filter
+      Entry: 7
+      Data: 12|System.Collections.Generic.List`1[[XandArt.TheGrowth.CardListConfig,
+        Code]], mscorlib
     - Name: 
       Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 7|XandArt.TheGrowth.Expedition.FlipCard, Code
-    - Name: Variant
-      Entry: 3
-      Data: 1
-    - Name: Card
-      Entry: 7
-      Data: 8|XandArt.TheGrowth.Cards.IteratingCard, Code
+      Entry: 13
+      Data: 
     - Name: 
       Entry: 8
       Data: 
-    - Name: AfterCommands
-      Entry: 6
+    - Name: OnTop
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
@@ -117,29 +147,14 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 7
-      Data: 9|XandArt.TheGrowth.Expedition.FlipCard, Code
-    - Name: Variant
-      Entry: 3
-      Data: 1
-    - Name: Card
-      Entry: 7
-      Data: 10|XandArt.TheGrowth.Cards.RelativeCard, Code
-    - Name: Variant
-      Entry: 3
-      Data: 0
-    - Name: Card
-      Entry: 7
-      Data: 11|XandArt.TheGrowth.Cards.ActiveCard, Code
-    - Name: 
       Entry: 8
       Data: 
-    - Name: Count
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
+    - Name: Instant
+      Entry: 5
+      Data: false
+    - Name: RaiseEvents
+      Entry: 5
+      Data: true
     - Name: AfterCommands
       Entry: 6
       Data: 

@@ -34,7 +34,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.GoToHubRoom, Code
+      Data: 1|XandArt.TheGrowth.Common.GoToHubRoom, Code
     - Name: RoomName
       Entry: 1
       Data: Room_Missions
@@ -43,7 +43,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.StartDialogue, Code
+      Data: 2|XandArt.TheGrowth.Story.StartDialogue, Code
     - Name: Script
       Entry: 10
       Data: 0

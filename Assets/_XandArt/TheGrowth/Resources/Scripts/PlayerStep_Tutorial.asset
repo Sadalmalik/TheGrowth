@@ -37,19 +37,19 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.Branch, Code
+      Data: 1|XandArt.TheGrowth.Common.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 2|XandArt.TheGrowth.CardInGroups, Code
+      Data: 2|XandArt.TheGrowth.Cards.CardInGroups, Code
     - Name: Card
       Entry: 7
-      Data: 3|XandArt.TheGrowth.RelativeCard, Code
+      Data: 3|XandArt.TheGrowth.Cards.RelativeCard, Code
     - Name: Variant
       Entry: 3
       Data: 0
     - Name: Card
       Entry: 7
-      Data: 4|XandArt.TheGrowth.ActiveCard, Code
+      Data: 4|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -87,16 +87,16 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 7|XandArt.TheGrowth.Branch, Code
+      Data: 7|XandArt.TheGrowth.Common.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 8|XandArt.TheGrowth.ChargesCheck, Code
+      Data: 8|XandArt.TheGrowth.Cards.ChargesCheck, Code
     - Name: Compare
       Entry: 3
       Data: 0
     - Name: Card
       Entry: 7
-      Data: 9|XandArt.TheGrowth.ActiveCard, Code
+      Data: 9|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -115,7 +115,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 11|XandArt.TheGrowth.GoToLocation, Code
+      Data: 11|XandArt.TheGrowth.Common.GoToLocation, Code
     - Name: Location
       Entry: 10
       Data: 1
@@ -124,7 +124,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 12|XandArt.TheGrowth.StartDialogue, Code
+      Data: 12|XandArt.TheGrowth.Story.StartDialogue, Code
     - Name: Script
       Entry: 10
       Data: 2
@@ -149,7 +149,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 14|XandArt.TheGrowth.StartDialogue, Code
+      Data: 14|XandArt.TheGrowth.Story.StartDialogue, Code
     - Name: Script
       Entry: 10
       Data: 3
@@ -161,7 +161,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 15|XandArt.TheGrowth.DebugLog, Code
+      Data: 15|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: Need more Coins!
@@ -192,7 +192,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 17|XandArt.TheGrowth.SetExpeditionStep, Code
+      Data: 17|XandArt.TheGrowth.Expedition.SetExpeditionStep, Code
     - Name: Mode
       Entry: 3
       Data: 1
@@ -204,7 +204,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 18|XandArt.TheGrowth.CallStep, Code
+      Data: 18|XandArt.TheGrowth.Expedition.CallStep, Code
     - Name: AfterCommands
       Entry: 6
       Data: 

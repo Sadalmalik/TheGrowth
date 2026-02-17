@@ -71,7 +71,7 @@ MonoBehaviour:
       Data: 
     - Name: AllowedMoves
       Entry: 7
-      Data: 3|XandArt.TheGrowth.TableSlotsCombine, Code
+      Data: 3|XandArt.TheGrowth.Slots.TableSlotsCombine, Code
     - Name: Variant
       Entry: 3
       Data: 3
@@ -84,13 +84,13 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 7
-      Data: 5|XandArt.TheGrowth.TableSlotsAround, Code
+      Data: 5|XandArt.TheGrowth.Slots.TableSlotsAround, Code
     - Name: Position
       Entry: 7
-      Data: 6|XandArt.TheGrowth.PositionByCard, Code
+      Data: 6|XandArt.TheGrowth.Expedition.PositionByCard, Code
     - Name: Card
       Entry: 7
-      Data: 7|XandArt.TheGrowth.ActiveCard, Code
+      Data: 7|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -123,13 +123,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 8|XandArt.TheGrowth.TableSlotsAround, Code
+      Data: 8|XandArt.TheGrowth.Slots.TableSlotsAround, Code
     - Name: Position
       Entry: 7
-      Data: 9|XandArt.TheGrowth.PositionByCard, Code
+      Data: 9|XandArt.TheGrowth.Expedition.PositionByCard, Code
     - Name: Card
       Entry: 7
-      Data: 10|XandArt.TheGrowth.ActiveCard, Code
+      Data: 10|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -162,7 +162,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|XandArt.TheGrowth.TableSlotsFree, Code
+      Data: 11|XandArt.TheGrowth.Slots.TableSlotsFree, Code
     - Name: 
       Entry: 8
       Data: 
@@ -187,10 +187,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 13|XandArt.TheGrowth.MoveCamera, Code
+      Data: 13|XandArt.TheGrowth.Expedition.MoveCamera, Code
     - Name: Card
       Entry: 7
-      Data: 14|XandArt.TheGrowth.ActiveCard, Code
+      Data: 14|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -215,10 +215,10 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 7
-      Data: 16|XandArt.TheGrowth.MoveCamera, Code
+      Data: 16|XandArt.TheGrowth.Expedition.MoveCamera, Code
     - Name: Card
       Entry: 7
-      Data: 17|XandArt.TheGrowth.ActiveCard, Code
+      Data: 17|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -265,7 +265,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 20|XandArt.TheGrowth.DebugLog, Code
+      Data: 20|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: On Step

@@ -81,13 +81,13 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 4|XandArt.TheGrowth.FlipCard, Code
+      Data: 4|XandArt.TheGrowth.Expedition.FlipCard, Code
     - Name: Variant
       Entry: 3
       Data: 1
     - Name: Card
       Entry: 7
-      Data: 5|XandArt.TheGrowth.ActiveCard, Code
+      Data: 5|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -121,16 +121,16 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 7|XandArt.TheGrowth.MoveCard, Code
+      Data: 7|XandArt.TheGrowth.Expedition.MoveCard, Code
     - Name: Card
       Entry: 7
-      Data: 8|XandArt.TheGrowth.ActiveCard, Code
+      Data: 8|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Slot
       Entry: 7
-      Data: 9|XandArt.TheGrowth.BoardSlot, Code
+      Data: 9|XandArt.TheGrowth.Expedition.Slots.BoardSlot, Code
     - Name: _slot
       Entry: 3
       Data: 0

@@ -68,10 +68,11 @@ MonoBehaviour:
       Data: 0
     - Name: SpawnSlot
       Entry: 7
-      Data: 3|XandArt.TheGrowth.Random`1[[XandArt.TheGrowth.SlotEntity, Code]], Code
+      Data: 3|XandArt.TheGrowth.Common.Random`1[[XandArt.TheGrowth.SlotEntity, Code]],
+        Code
     - Name: Collection
       Entry: 7
-      Data: 4|XandArt.TheGrowth.TableSlotsCombine, Code
+      Data: 4|XandArt.TheGrowth.Slots.TableSlotsCombine, Code
     - Name: Variant
       Entry: 3
       Data: 3
@@ -84,13 +85,13 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 6|XandArt.TheGrowth.TableSlotsAll, Code
+      Data: 6|XandArt.TheGrowth.Slots.TableSlotsAll, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|XandArt.TheGrowth.TableSlotsFromSide, Code
+      Data: 7|XandArt.TheGrowth.Slots.TableSlotsFromSide, Code
     - Name: Side
       Entry: 3
       Data: 0
@@ -124,10 +125,10 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 9|XandArt.TheGrowth.MoveCamera, Code
+      Data: 9|XandArt.TheGrowth.Expedition.MoveCamera, Code
     - Name: Card
       Entry: 7
-      Data: 10|XandArt.TheGrowth.ActiveCard, Code
+      Data: 10|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -140,10 +141,10 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 12|XandArt.TheGrowth.MoveCamera, Code
+      Data: 12|XandArt.TheGrowth.Expedition.MoveCamera, Code
     - Name: Card
       Entry: 7
-      Data: 13|XandArt.TheGrowth.PlayerCard, Code
+      Data: 13|XandArt.TheGrowth.Cards.PlayerCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -164,13 +165,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 14|XandArt.TheGrowth.FlipCard, Code
+      Data: 14|XandArt.TheGrowth.Expedition.FlipCard, Code
     - Name: Variant
       Entry: 3
       Data: 1
     - Name: Card
       Entry: 7
-      Data: 15|XandArt.TheGrowth.ActiveCard, Code
+      Data: 15|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 

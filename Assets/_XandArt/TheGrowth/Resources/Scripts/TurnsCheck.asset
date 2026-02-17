@@ -33,10 +33,10 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.Branch, Code
+      Data: 1|XandArt.TheGrowth.Common.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 2|XandArt.TheGrowth.Or, Code
+      Data: 2|XandArt.TheGrowth.Logic.Or, Code
     - Name: conditions
       Entry: 7
       Data: 3|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
@@ -45,28 +45,7 @@ MonoBehaviour:
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 4|XandArt.TheGrowth.CompareFloats, Code
-    - Name: Variant
-      Entry: 3
-      Data: 3
-    - Name: First
-      Entry: 7
-      Data: 5|XandArt.TheGrowth.StepsEvaluator, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Second
-      Entry: 7
-      Data: 6|XandArt.TheGrowth.ConstantFloatEvaluator, Code
-    - Name: Value
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 13
@@ -79,14 +58,14 @@ MonoBehaviour:
       Data: 
     - Name: OnTrue
       Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 4|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 8|XandArt.TheGrowth.EndGame, Code
+      Data: 5|XandArt.TheGrowth.Expedition.EndGame, Code
     - Name: Success
       Entry: 5
       Data: false
@@ -104,7 +83,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFalse
       Entry: 7
-      Data: 9|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 6|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12

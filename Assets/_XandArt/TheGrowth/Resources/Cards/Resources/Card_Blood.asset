@@ -94,7 +94,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 4|XandArt.TheGrowth.ExecuteCommandConfig, Code
+      Data: 4|XandArt.TheGrowth.Common.ExecuteCommandConfig, Code
     - Name: config
       Entry: 10
       Data: 2

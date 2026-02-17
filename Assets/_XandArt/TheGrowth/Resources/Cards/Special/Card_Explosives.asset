@@ -60,6 +60,9 @@ MonoBehaviour:
     - Name: Amound
       Entry: 3
       Data: 0
+    - Name: ShowOnCard
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -90,13 +93,13 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 5|XandArt.TheGrowth.FlipCard, Code
+      Data: 5|XandArt.TheGrowth.Expedition.FlipCard, Code
     - Name: Variant
       Entry: 3
       Data: 1
     - Name: Card
       Entry: 7
-      Data: 6|XandArt.TheGrowth.ActiveCard, Code
+      Data: 6|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -147,16 +150,16 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 10|XandArt.TheGrowth.Branch, Code
+      Data: 10|XandArt.TheGrowth.Common.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 11|XandArt.TheGrowth.ChargesCheck, Code
+      Data: 11|XandArt.TheGrowth.Cards.ChargesCheck, Code
     - Name: Compare
       Entry: 3
       Data: 3
     - Name: Card
       Entry: 7
-      Data: 12|XandArt.TheGrowth.ActiveCard, Code
+      Data: 12|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -175,19 +178,19 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 14|XandArt.TheGrowth.ForEachCard, Code
+      Data: 14|XandArt.TheGrowth.Cards.ForEachCard, Code
     - Name: Cards
       Entry: 7
-      Data: 15|XandArt.TheGrowth.CardsFromSlots, Code
+      Data: 15|XandArt.TheGrowth.Cards.CardsFromSlots, Code
     - Name: Slots
       Entry: 7
-      Data: 16|XandArt.TheGrowth.TableSlotsAround, Code
+      Data: 16|XandArt.TheGrowth.Slots.TableSlotsAround, Code
     - Name: Position
       Entry: 7
-      Data: 17|XandArt.TheGrowth.PositionByCard, Code
+      Data: 17|XandArt.TheGrowth.Expedition.PositionByCard, Code
     - Name: Card
       Entry: 7
-      Data: 18|XandArt.TheGrowth.ActiveCard, Code
+      Data: 18|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -233,16 +236,16 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 20|XandArt.TheGrowth.MoveCard, Code
+      Data: 20|XandArt.TheGrowth.Expedition.MoveCard, Code
     - Name: Card
       Entry: 7
-      Data: 21|XandArt.TheGrowth.IteratingCard, Code
+      Data: 21|XandArt.TheGrowth.Cards.IteratingCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Slot
       Entry: 7
-      Data: 22|XandArt.TheGrowth.BoardSlot, Code
+      Data: 22|XandArt.TheGrowth.Expedition.Slots.BoardSlot, Code
     - Name: _slot
       Entry: 3
       Data: 0
@@ -307,13 +310,13 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 25|XandArt.TheGrowth.ChangeCharges, Code
+      Data: 25|XandArt.TheGrowth.Cards.ChangeCharges, Code
     - Name: Variant
       Entry: 3
       Data: 1
     - Name: Card
       Entry: 7
-      Data: 26|XandArt.TheGrowth.ActiveCard, Code
+      Data: 26|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 

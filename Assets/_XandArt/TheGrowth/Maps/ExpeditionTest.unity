@@ -1572,6 +1572,66 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5056968830629639008, guid: 6393a4928c54e3a48ab053c548c226a0,
         type: 3}
+    - target: {fileID: 5056968830713723236, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830713723236, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830713723236, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830713723236, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830935581325, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830935581325, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830935581325, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830935581325, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830936071496, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830936071496, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830936071496, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056968830936071496, guid: 6393a4928c54e3a48ab053c548c226a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5056968830977568756, guid: 6393a4928c54e3a48ab053c548c226a0,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -12406,7 +12466,7 @@ MonoBehaviour:
     SerializationNodes: []
   Marker: {fileID: 0}
   UseCustomOffset: 1
-  CustomOffset: {x: 0, y: 0, z: -2.5}
+  CustomOffset: {x: 0, y: 0, z: -2.6}
   m_Inventory: {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
 --- !u!4 &6850591796888947819
 Transform:

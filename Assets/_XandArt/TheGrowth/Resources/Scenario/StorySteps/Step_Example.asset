@@ -237,7 +237,7 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 7
-      Data: 18|XandArt.TheGrowth.GoToLocation, Code
+      Data: 18|XandArt.TheGrowth.Common.GoToLocation, Code
     - Name: Location
       Entry: 10
       Data: 14
@@ -246,7 +246,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 19|XandArt.TheGrowth.SetProjectCraft, Code
+      Data: 19|XandArt.TheGrowth.Crafting.SetProjectCraft, Code
     - Name: model
       Entry: 10
       Data: 15
@@ -255,7 +255,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 20|XandArt.TheGrowth.DebugLog, Code
+      Data: 20|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "\u042D\u0442\u043E \u0441\u0446\u0435\u043D\u0430 01"
@@ -326,7 +326,7 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 26|XandArt.TheGrowth.And, Code
+      Data: 26|XandArt.TheGrowth.Logic.And, Code
     - Name: conditions
       Entry: 7
       Data: 27|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
@@ -352,7 +352,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 29|XandArt.TheGrowth.DebugLog, Code
+      Data: 29|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u0441\u043A\u0440\u0430\u0444\u0442\u0438\u043B\u0438
@@ -397,7 +397,7 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 33|XandArt.TheGrowth.And, Code
+      Data: 33|XandArt.TheGrowth.Logic.And, Code
     - Name: conditions
       Entry: 7
       Data: 34|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
@@ -423,7 +423,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 36|XandArt.TheGrowth.DebugLog, Code
+      Data: 36|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u0432\u043E\u0448\u043B\u0438 \u0432 \u0433\u043B\u0430\u0432\u043D\u0443\u044E
@@ -467,7 +467,7 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 40|XandArt.TheGrowth.And, Code
+      Data: 40|XandArt.TheGrowth.Logic.And, Code
     - Name: conditions
       Entry: 7
       Data: 41|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
@@ -493,7 +493,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 43|XandArt.TheGrowth.DebugLog, Code
+      Data: 43|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u0432\u043E\u0448\u043B\u0438 \u0432 \u043A\u043E\u043C\u043D\u0430\u0442\u0443
@@ -537,7 +537,7 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 47|XandArt.TheGrowth.And, Code
+      Data: 47|XandArt.TheGrowth.Logic.And, Code
     - Name: conditions
       Entry: 7
       Data: 48|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
@@ -563,7 +563,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 50|XandArt.TheGrowth.DebugLog, Code
+      Data: 50|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u0432\u043E\u0448\u043B\u0438 \u0432 \u043A\u043E\u043C\u043D\u0430\u0442\u0443
@@ -607,7 +607,7 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 54|XandArt.TheGrowth.And, Code
+      Data: 54|XandArt.TheGrowth.Logic.And, Code
     - Name: conditions
       Entry: 7
       Data: 55|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
@@ -633,7 +633,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 57|XandArt.TheGrowth.DebugLog, Code
+      Data: 57|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u043D\u0430\u0447\u0430\u043B\u0438 \u041F\u0435\u0440\u0432\u0443\u044E
@@ -677,7 +677,7 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 61|XandArt.TheGrowth.And, Code
+      Data: 61|XandArt.TheGrowth.Logic.And, Code
     - Name: conditions
       Entry: 7
       Data: 62|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
@@ -703,7 +703,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 64|XandArt.TheGrowth.DebugLog, Code
+      Data: 64|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u043D\u0430\u0447\u0430\u043B\u0438 \u0412\u0442\u043E\u0440\u0443\u044E
@@ -744,7 +744,7 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 68|XandArt.TheGrowth.And, Code
+      Data: 68|XandArt.TheGrowth.Logic.And, Code
     - Name: conditions
       Entry: 7
       Data: 69|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
@@ -770,7 +770,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 71|XandArt.TheGrowth.DebugLog, Code
+      Data: 71|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u0412\u044B\u043F\u043E\u043B\u043D\u0438\u043B\u0438
@@ -811,7 +811,7 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 75|XandArt.TheGrowth.And, Code
+      Data: 75|XandArt.TheGrowth.Logic.And, Code
     - Name: conditions
       Entry: 7
       Data: 76|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
@@ -837,7 +837,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 78|XandArt.TheGrowth.DebugLog, Code
+      Data: 78|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "TEST - \u041C\u044B \u041F\u0440\u043E\u0432\u0430\u043B\u0438\u043B\u0438
@@ -847,7 +847,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 79|XandArt.TheGrowth.SetStoryStep, Code
+      Data: 79|XandArt.TheGrowth.Story.SetStoryStep, Code
     - Name: Step
       Entry: 6
       Data: 

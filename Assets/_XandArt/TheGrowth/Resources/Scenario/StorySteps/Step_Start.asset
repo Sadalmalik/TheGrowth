@@ -89,7 +89,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 6|XandArt.TheGrowth.GoToLocation, Code
+      Data: 6|XandArt.TheGrowth.Common.GoToLocation, Code
     - Name: Location
       Entry: 10
       Data: 4
@@ -98,7 +98,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|XandArt.TheGrowth.StartDialogue, Code
+      Data: 7|XandArt.TheGrowth.Story.StartDialogue, Code
     - Name: Script
       Entry: 10
       Data: 5

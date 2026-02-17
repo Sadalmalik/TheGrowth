@@ -238,7 +238,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 18|XandArt.TheGrowth.SetProjectCraft, Code
+      Data: 18|XandArt.TheGrowth.Crafting.SetProjectCraft, Code
     - Name: model
       Entry: 10
       Data: 14
@@ -247,7 +247,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 19|XandArt.TheGrowth.DebugLog, Code
+      Data: 19|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: "\u042D\u0442\u043E \u0441\u0446\u0435\u043D\u0430 01"
@@ -297,7 +297,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 24|XandArt.TheGrowth.GoToLocation, Code
+      Data: 24|XandArt.TheGrowth.Common.GoToLocation, Code
     - Name: Location
       Entry: 10
       Data: 15
@@ -338,7 +338,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 28|XandArt.TheGrowth.StartDialogue, Code
+      Data: 28|XandArt.TheGrowth.Story.StartDialogue, Code
     - Name: Script
       Entry: 10
       Data: 16

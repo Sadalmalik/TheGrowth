@@ -11774,12 +11774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471d85ed1dba419688bf1d93885132ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1379900433 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5056968830935581325, guid: 6393a4928c54e3a48ab053c548c226a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 5056968829626539676}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1379979785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16776,6 +16770,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6393a4928c54e3a48ab053c548c226a0, type: 3}
+--- !u!224 &5056968829626539677 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5056968830713723236, guid: 6393a4928c54e3a48ab053c548c226a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5056968829626539676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5332221894704320527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16799,8 +16799,8 @@ MonoBehaviour:
     SerializationNodes: []
   Marker: {fileID: 0}
   UseCustomOffset: 1
-  CustomOffset: {x: 1.6, y: 0, z: 0}
-  m_Inventory: {fileID: 0}
+  CustomOffset: {x: 0, y: 0, z: -2.6}
+  m_Inventory: {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
 --- !u!4 &6850591796888947819
 Transform:
   m_ObjectHideFlags: 0
@@ -16809,13 +16809,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6850591796888947820}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10.08141, y: 2.0000079, z: -1.3897191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.08141, y: 2.0000074, z: 3.871357}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 26175993}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6850591796888947820
 GameObject:
   m_ObjectHideFlags: 0
@@ -16857,7 +16857,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _mode: 1
-  _target: {fileID: 1379900433}
+  _target: {fileID: 5056968829626539677}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

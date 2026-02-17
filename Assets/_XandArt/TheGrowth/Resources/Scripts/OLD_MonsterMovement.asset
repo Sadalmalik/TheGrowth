@@ -33,31 +33,31 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.MoveCard, Code
+      Data: 1|XandArt.TheGrowth.Expedition.MoveCard, Code
     - Name: Card
       Entry: 7
-      Data: 2|XandArt.TheGrowth.ActiveCard, Code
+      Data: 2|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Slot
       Entry: 7
-      Data: 3|XandArt.TheGrowth.NearestSlot, Code
+      Data: 3|XandArt.TheGrowth.Slots.NearestSlot, Code
     - Name: Card
       Entry: 7
-      Data: 4|XandArt.TheGrowth.PlayerCard, Code
+      Data: 4|XandArt.TheGrowth.Cards.PlayerCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Collection
       Entry: 7
-      Data: 5|XandArt.TheGrowth.TableSlotsAround, Code
+      Data: 5|XandArt.TheGrowth.Slots.TableSlotsAround, Code
     - Name: Position
       Entry: 7
-      Data: 6|XandArt.TheGrowth.PositionByCard, Code
+      Data: 6|XandArt.TheGrowth.Expedition.PositionByCard, Code
     - Name: Card
       Entry: 7
-      Data: 7|XandArt.TheGrowth.ActiveCard, Code
+      Data: 7|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 

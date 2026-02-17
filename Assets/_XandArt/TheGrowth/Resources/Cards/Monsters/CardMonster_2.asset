@@ -18,6 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: dc533fa9a543d3b4e8f1bada754bf687, type: 3}
     - {fileID: 21300000, guid: 31355f911a56fbd4582c7509880e5e26, type: 3}
+    - {fileID: 11400000, guid: b0377e602b0719f498e7773afedd91df, type: 2}
     - {fileID: 11400000, guid: 520928b9d9de328488e7176c634b319e, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -57,7 +58,19 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.CardBrain, Code
+      Data: 2|XandArt.TheGrowth.Charges, Code
+    - Name: Amound
+      Entry: 3
+      Data: 1
+    - Name: ShowOnCard
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.CardBrain, Code
     - Name: Type
       Entry: 3
       Data: 8
@@ -69,29 +82,30 @@ MonoBehaviour:
       Data: 0.4
     - Name: SpawnSlot
       Entry: 7
-      Data: 3|XandArt.TheGrowth.Random`1[[XandArt.TheGrowth.SlotEntity, Code]], Code
+      Data: 4|XandArt.TheGrowth.Common.Random`1[[XandArt.TheGrowth.SlotEntity, Code]],
+        Code
     - Name: Collection
       Entry: 7
-      Data: 4|XandArt.TheGrowth.TableSlotsCombine, Code
+      Data: 5|XandArt.TheGrowth.Slots.TableSlotsCombine, Code
     - Name: Variant
       Entry: 3
       Data: 3
     - Name: Evaluators
       Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[XandArt.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.SlotEntity,
+      Data: 6|System.Collections.Generic.List`1[[XandArt.TheGrowth.Evaluator`1[[System.Collections.Generic.HashSet`1[[XandArt.TheGrowth.SlotEntity,
         Code]], System.Core]], Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 6|XandArt.TheGrowth.TableSlotsAll, Code
+      Data: 7|XandArt.TheGrowth.Slots.TableSlotsAll, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|XandArt.TheGrowth.TableSlotsFromSide, Code
+      Data: 8|XandArt.TheGrowth.Slots.TableSlotsFromSide, Code
     - Name: Side
       Entry: 3
       Data: 0
@@ -118,7 +132,7 @@ MonoBehaviour:
       Data: 
     - Name: OnPlacedFirstTime
       Entry: 7
-      Data: 8|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 9|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -131,7 +145,7 @@ MonoBehaviour:
       Data: 
     - Name: OnPlaced
       Entry: 7
-      Data: 9|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 10|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -144,7 +158,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFlipped
       Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 11|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -157,39 +171,39 @@ MonoBehaviour:
       Data: 
     - Name: OnStep
       Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 12|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 12|XandArt.TheGrowth.Branch, Code
+      Data: 13|XandArt.TheGrowth.Common.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 13|XandArt.TheGrowth.And, Code
+      Data: 14|XandArt.TheGrowth.Logic.And, Code
     - Name: conditions
       Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+      Data: 15|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 15|XandArt.TheGrowth.ChargesCheck, Code
+      Data: 16|XandArt.TheGrowth.Cards.ChargesCheck, Code
     - Name: Compare
       Entry: 3
-      Data: 1
+      Data: 3
     - Name: Card
       Entry: 7
-      Data: 16|XandArt.TheGrowth.ActiveCard, Code
+      Data: 17|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Value
       Entry: 3
-      Data: 2
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -204,26 +218,26 @@ MonoBehaviour:
       Data: 
     - Name: OnTrue
       Entry: 7
-      Data: 17|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 18|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 18|XandArt.TheGrowth.ChangeCharges, Code
+      Data: 19|XandArt.TheGrowth.Cards.ChangeCharges, Code
     - Name: Variant
       Entry: 3
       Data: 1
     - Name: Card
       Entry: 7
-      Data: 19|XandArt.TheGrowth.ActiveCard, Code
+      Data: 20|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Amount
       Entry: 3
-      Data: 1
+      Data: -1
     - Name: 
       Entry: 8
       Data: 
@@ -235,50 +249,35 @@ MonoBehaviour:
       Data: 
     - Name: OnFalse
       Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 21|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 21|XandArt.TheGrowth.MoveCard, Code
-    - Name: Card
-      Entry: 7
-      Data: 22|XandArt.TheGrowth.ActiveCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Slot
-      Entry: 6
-      Data: 
-    - Name: Instant
-      Entry: 5
-      Data: false
-    - Name: RaiseEvents
-      Entry: 5
-      Data: true
-    - Name: AfterCommands
-      Entry: 6
-      Data: 
+      Data: 22|XandArt.TheGrowth.Common.ExecuteCommandConfig, Code
+    - Name: config
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 23|XandArt.TheGrowth.Branch, Code
+      Data: 23|XandArt.TheGrowth.Common.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 24|XandArt.TheGrowth.CardInGroups, Code
+      Data: 24|XandArt.TheGrowth.Cards.CardInGroups, Code
     - Name: Card
       Entry: 7
-      Data: 25|XandArt.TheGrowth.RelativeCard, Code
+      Data: 25|XandArt.TheGrowth.Cards.RelativeCard, Code
     - Name: Variant
       Entry: 3
       Data: 0
     - Name: Card
       Entry: 7
-      Data: 26|XandArt.TheGrowth.ActiveCard, Code
+      Data: 26|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -297,7 +296,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 10
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 13
       Data: 
@@ -316,7 +315,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 29|XandArt.TheGrowth.EndGame, Code
+      Data: 29|XandArt.TheGrowth.Expedition.EndGame, Code
     - Name: Success
       Entry: 5
       Data: false
@@ -389,18 +388,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 33|XandArt.TheGrowth.Charges, Code
-    - Name: Amound
-      Entry: 3
-      Data: 0
-    - Name: ShowOnCard
-      Entry: 5
-      Data: true
     - Name: 
       Entry: 8
       Data: 

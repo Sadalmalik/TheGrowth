@@ -115,7 +115,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 9|XandArt.TheGrowth.GoToLocation, Code
+      Data: 9|XandArt.TheGrowth.Common.GoToLocation, Code
     - Name: Location
       Entry: 10
       Data: 4
