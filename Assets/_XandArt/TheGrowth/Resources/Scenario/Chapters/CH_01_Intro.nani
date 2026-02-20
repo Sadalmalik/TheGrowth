@@ -1,12 +1,18 @@
 @back Black_Screen
 
-Do you want to play from begining or you want to skip to the free-mode?
+Please choose an option: start from the beginning, skip the tutorial with a brief story summary, or jump straight into free mode.
 
-@choice "Start from begining" goto:CH_02_FirstDialogue
-@choice "Skip the intro" goto:.SkipIntro
+@choice "Start from the begining" goto:CH_02_FirstDialogue
+@choice "Skip the tutorial" goto:.SkipIntro
+@choice "Skip all" goto:.SkipAll
 @stop
+
 # SkipIntro
 @setStoryStep name:Step_001
+
+# SkipAll
+@setStoryStep name:Step_001
+
 @hideAll
 @stop
 @hidePrinter
