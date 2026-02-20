@@ -35,6 +35,7 @@ namespace XandArt.TheGrowth
             var view = card.View as EntityCardView;
             if (view != null)
             {
+                view.SetCanvasSortingOrder(target.SlotView.SortingOrder);
                 view.MoveTo(target, () =>
                 {
                     brain.Position = view.transform.position;
@@ -43,6 +44,7 @@ namespace XandArt.TheGrowth
             }
             else
             {
+                view.SetCanvasSortingOrder(0);
                 brain.Position = target.Position;
                 HandleMoved();
             }

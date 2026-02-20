@@ -87,6 +87,7 @@ namespace XandArt.TheGrowth
                     _draggedCard = card;
                     _draggedCardView = cardView;
                     _draggedCardView.cardCollider.enabled = false;
+                    _draggedCardView.SetCanvasSortingOrder(5);
 
                     LastSlot = brain.Slot.SlotView;
                 }

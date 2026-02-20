@@ -750,6 +750,7 @@ MonoBehaviour:
   Marker: {fileID: 0}
   UseCustomOffset: 0
   CustomOffset: {x: 0, y: 0, z: 0}
+  SortingOrder: 5
   m_Inventory: {fileID: 11400000, guid: 685c262e01893c94daf1d9420a1be9d3, type: 2}
 --- !u!1001 &87157989
 PrefabInstance:
@@ -6111,6 +6112,7 @@ MonoBehaviour:
   Marker: {fileID: 0}
   UseCustomOffset: 0
   CustomOffset: {x: 0, y: 0, z: 0}
+  SortingOrder: 5
   m_Inventory: {fileID: 11400000, guid: 0fb19187856e38c4392e0a592174a8c5, type: 2}
 --- !u!1 &979814658
 GameObject:
@@ -13093,6 +13095,7 @@ MonoBehaviour:
   Marker: {fileID: 0}
   UseCustomOffset: 1
   CustomOffset: {x: 0, y: 0, z: -2.6}
+  SortingOrder: 5
   m_Inventory: {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
 --- !u!4 &6850591796888947819
 Transform:

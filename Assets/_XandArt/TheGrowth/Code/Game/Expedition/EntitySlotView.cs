@@ -16,6 +16,9 @@ namespace XandArt.TheGrowth
         private Vector3 CustomOffset;
 
         [SerializeField]
+        public int SortingOrder = 0;
+        
+        [SerializeField]
         private InventoryModel m_Inventory;
         
         public GameObject Object => gameObject;

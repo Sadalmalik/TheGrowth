@@ -1008,6 +1008,8 @@ MonoBehaviour:
     SerializationNodes: []
   innerTransform: {fileID: 2245679917490482781}
   faceObject: {fileID: 2245679918746579259}
+  faceCanvas: {fileID: 2245679918746579263}
+  coverCanvas: {fileID: 2245679918428737583}
   decor: {fileID: 2245679917308147367}
   portrait: {fileID: 629782729985132061}
   charges: {fileID: 7492323914108249510}

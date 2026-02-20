@@ -20,6 +20,8 @@ namespace XandArt.TheGrowth
         public Transform innerTransform;
 
         public GameObject faceObject;
+        public Canvas faceCanvas;
+        public Canvas coverCanvas;
         public Image decor;
         public Image portrait;
         public TMP_Text charges;
@@ -58,6 +60,12 @@ namespace XandArt.TheGrowth
                 charges.SetText(newText);
         }
 
+        public void SetCanvasSortingOrder(int order)
+        {
+            faceCanvas.sortingOrder = order;
+            coverCanvas.sortingOrder = order;
+        }
+        
         public void SetFaceVisible(bool visible)
         {
             faceObject.SetActive(visible);
