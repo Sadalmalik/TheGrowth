@@ -18,6 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 5c320f4890fcc1c49a4f36a3c2471381, type: 2}
     - {fileID: 11400000, guid: 63c8b5d355d36fe42825cd08c02868ca, type: 2}
+    - {fileID: 11400000, guid: 882e6b7caa59f3046a0ac2d8ca993944, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -115,13 +116,16 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 10
       Data: 0
     - Name: 
       Entry: 10
       Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 13
       Data: 

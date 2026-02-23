@@ -190,7 +190,7 @@ MonoBehaviour:
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
-      Data: 7
+      Data: 5
     - Name: 
       Entry: 7
       Data: 13|XandArt.TheGrowth.Expedition.FlipCard, Code
@@ -299,16 +299,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 2
     - Name: 
       Entry: 7
       Data: 26|XandArt.TheGrowth.Expedition.MoveCamera, Code
@@ -326,13 +317,31 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 28|XandArt.TheGrowth.Cards.ChangeCharges, Code
+      Data: 28|XandArt.TheGrowth.Expedition.CallStep, Code
+    - Name: AfterCommands
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 29|XandArt.TheGrowth.Cards.ChangeCharges, Code
     - Name: Variant
       Entry: 3
       Data: 1
     - Name: Card
       Entry: 7
-      Data: 29|XandArt.TheGrowth.Cards.ActiveCard, Code
+      Data: 30|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -344,26 +353,26 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 30|XandArt.TheGrowth.Common.Branch, Code
+      Data: 31|XandArt.TheGrowth.Common.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 31|XandArt.TheGrowth.Logic.Or, Code
+      Data: 32|XandArt.TheGrowth.Logic.Or, Code
     - Name: conditions
       Entry: 7
-      Data: 32|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+      Data: 33|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 33|XandArt.TheGrowth.Cards.ChargesCheck, Code
+      Data: 34|XandArt.TheGrowth.Cards.ChargesCheck, Code
     - Name: Compare
       Entry: 3
       Data: 3
     - Name: Card
       Entry: 7
-      Data: 34|XandArt.TheGrowth.Cards.ActiveCard, Code
+      Data: 35|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -384,23 +393,23 @@ MonoBehaviour:
       Data: 
     - Name: OnTrue
       Entry: 7
-      Data: 35|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 36|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 36|XandArt.TheGrowth.Expedition.MoveCard, Code
+      Data: 37|XandArt.TheGrowth.Expedition.MoveCard, Code
     - Name: Card
       Entry: 7
-      Data: 37|XandArt.TheGrowth.Cards.ActiveCard, Code
+      Data: 38|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Slot
       Entry: 7
-      Data: 38|XandArt.TheGrowth.Expedition.Slots.BoardSlot, Code
+      Data: 39|XandArt.TheGrowth.Expedition.Slots.BoardSlot, Code
     - Name: _slot
       Entry: 3
       Data: 1
@@ -427,23 +436,23 @@ MonoBehaviour:
       Data: 
     - Name: OnFalse
       Entry: 7
-      Data: 39|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 40|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 40|XandArt.TheGrowth.Expedition.MoveCard, Code
+      Data: 41|XandArt.TheGrowth.Expedition.MoveCard, Code
     - Name: Card
       Entry: 7
-      Data: 41|XandArt.TheGrowth.Cards.ActiveCard, Code
+      Data: 42|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
     - Name: Slot
       Entry: 7
-      Data: 42|XandArt.TheGrowth.Expedition.Slots.BoardSlot, Code
+      Data: 43|XandArt.TheGrowth.Expedition.Slots.BoardSlot, Code
     - Name: _slot
       Entry: 3
       Data: 0
@@ -467,15 +476,6 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 43|XandArt.TheGrowth.Expedition.CallStep, Code
-    - Name: AfterCommands
-      Entry: 6
       Data: 
     - Name: 
       Entry: 8
