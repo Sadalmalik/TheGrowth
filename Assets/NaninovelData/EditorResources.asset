@@ -155,15 +155,15 @@ MonoBehaviour:
     - name: Tutorial_Game
       pathPrefix: Scripts
       guid: 5f9c9c678b7aed741b46b1ad332560ba
-    - name: CH_03
-      pathPrefix: Scripts
-      guid: 07166cfbc183e8048bff8ba07dd4dbbd
     - name: CH_04 1
       pathPrefix: Scripts
       guid: bb4709b0de22d194d9f16506b22a52be
     - name: CH_IntroSummary
       pathPrefix: Scripts
       guid: f2fcba4ec5fbc434e91d0a240d04226f
+    - name: CH_03
+      pathPrefix: Scripts
+      guid: cc753913067e9ec4a98647a8387786dd
   - Id: Unlockables
     Resources: []
   - Id: Audio
