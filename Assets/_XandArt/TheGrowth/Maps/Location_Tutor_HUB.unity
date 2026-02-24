@@ -1208,7 +1208,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 1|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-inventory
@@ -1220,7 +1220,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 2|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-buttons
@@ -2177,7 +2177,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 1|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-inventory
@@ -2189,7 +2189,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 2|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-buttons
@@ -2703,6 +2703,12 @@ PrefabInstance:
       propertyPath: m_Filter
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 2519010060622710054, guid: 3cc764094511e414d84196ce28f79477,
+        type: 3}
+      propertyPath: m_Inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b,
+        type: 2}
     - target: {fileID: 2519010060622710054, guid: 3cc764094511e414d84196ce28f79477,
         type: 3}
       propertyPath: m_InAnyDeck.Array.size
@@ -3246,7 +3252,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 1|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-inventory
@@ -3258,7 +3264,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 2|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-buttons
@@ -4511,7 +4517,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 1|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-inventory
@@ -4523,7 +4529,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 2|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-buttons
@@ -5260,7 +5266,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 1|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-inventory
@@ -5272,7 +5278,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 2|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-buttons
@@ -6399,7 +6405,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 1|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-inventory
@@ -6411,7 +6417,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.ShowUIElementsGroup, Code
+      Data: 2|XandArt.TheGrowth.Common.ShowUIElementsGroup, Code
     - Name: GroupID
       Entry: 1
       Data: hub-embark-buttons
@@ -10414,6 +10420,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2519010060622710054, guid: 3cc764094511e414d84196ce28f79477,
         type: 3}
+      propertyPath: m_Inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b,
+        type: 2}
+    - target: {fileID: 2519010060622710054, guid: 3cc764094511e414d84196ce28f79477,
+        type: 3}
       propertyPath: m_InList.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -10999,7 +11011,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|XandArt.TheGrowth.StartDialogue, Code
+      Data: 1|XandArt.TheGrowth.Story.StartDialogue, Code
     - Name: Script
       Entry: 10
       Data: 0

@@ -11,7 +11,7 @@ Please choose an option: start from the beginning, skip the tutorial with a brie
 @setStoryStep name:Step_001
 
 # SkipAll
-@setStoryStep name:Step_001
+@setStoryStep name:Step_001_Skiped
 
 @hideAll
 @stop

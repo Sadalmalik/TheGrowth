@@ -11,6 +11,7 @@ Alfredo: “This contract is not merely a matter of remuneration. It is an oppor
 Alfredo: “Excellent. I must insist, most firmly, that you assemble only the bare essentials. I shall collect you in two hours.”
 He cast the final words over his shoulder while already stepping out of the office, leaving me no opportunity to object.
 
+@setStoryStep name:Step_001_Skiped
 @stopSfx
 @hide Alfredo
 @back Black_Screen

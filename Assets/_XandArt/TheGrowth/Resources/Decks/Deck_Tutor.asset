@@ -48,7 +48,7 @@ MonoBehaviour:
       Data: 2|XandArt.TheGrowth.DeckEntry, Code
     - Name: Amount
       Entry: 3
-      Data: 25
+      Data: 24
     - Name: Entity
       Entry: 10
       Data: 1
