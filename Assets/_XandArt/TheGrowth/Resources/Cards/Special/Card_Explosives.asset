@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 0
     - Name: ShowOnCard
       Entry: 5
-      Data: false
+      Data: true
     - Name: 
       Entry: 8
       Data: 
