@@ -18,7 +18,6 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 882e6b7caa59f3046a0ac2d8ca993944, type: 2}
     - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
-    - {fileID: -5555909049971809409, guid: 07166cfbc183e8048bff8ba07dd4dbbd, type: 3}
     - {fileID: -5555909049971809409, guid: 846ae4ff0e5a0e8489591df2018f9915, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -126,8 +125,8 @@ MonoBehaviour:
       Entry: 7
       Data: 12|XandArt.TheGrowth.Story.StartDialogue, Code
     - Name: Script
-      Entry: 10
-      Data: 2
+      Entry: 6
+      Data: 
     - Name: AfterCommands
       Entry: 6
       Data: 
@@ -152,7 +151,7 @@ MonoBehaviour:
       Data: 14|XandArt.TheGrowth.Story.StartDialogue, Code
     - Name: Script
       Entry: 10
-      Data: 3
+      Data: 2
     - Name: AfterCommands
       Entry: 6
       Data: 
