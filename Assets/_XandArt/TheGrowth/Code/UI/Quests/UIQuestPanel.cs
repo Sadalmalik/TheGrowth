@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using XandArt.Architecture;
 using XandArt.TheGrowth.Quests;
@@ -41,11 +42,14 @@ namespace XandArt.TheGrowth
                 return;
             }
 
+            var toRemove = m_QuestPanels.Keys.ToList();
+
             foreach (var entity in Game.Container.Get<GameManager>().CurrentGameState.Entities)
             {
                 if (entity is not CompositeEntity compositeEntity) continue;
                 if (!QuestHelper.IsQuest(compositeEntity)) continue;
 
+                toRemove.Remove(compositeEntity);
                 if (!m_QuestPanels.TryGetValue(compositeEntity, out var uiQuest))
                 {
                     m_QuestPanels[compositeEntity] = uiQuest = Instantiate(m_Prefab, m_Container, false);
@@ -55,6 +59,14 @@ namespace XandArt.TheGrowth
                 {
                     uiQuest.Refresh();
                 }
+            }
+
+            if (toRemove.Count==0) return;
+            
+            foreach (var questEntity in toRemove)
+            {
+                Destroy(m_QuestPanels[questEntity].gameObject);
+                m_QuestPanels.Remove(questEntity);
             }
         }
     }

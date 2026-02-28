@@ -10,7 +10,7 @@ namespace XandArt.TheGrowth
     {
         public GameState GameState;
     }
-    
+
     public class GameManager : SharedObject, ITickable
     {
         public const string LastSavePref = "last-save";

@@ -42,12 +42,37 @@ MonoBehaviour:
     - Name: Description
       Entry: 1
       Data: Collect 4 coins
+    - Name: OnComplete
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 3|XandArt.TheGrowth.Common.DebugLog, Code
+    - Name: Message
+      Entry: 1
+      Data: QUEST COMPLETED!!!
+    - Name: Enabled
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.Quests.QuestItemRequirement, Code
+      Data: 4|XandArt.TheGrowth.Quests.QuestItemRequirement, Code
     - Name: Inventory
       Entry: 10
       Data: 0

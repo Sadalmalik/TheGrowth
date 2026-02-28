@@ -1,4 +1,5 @@
-﻿using XandArt.Architecture;
+﻿using System.Collections.Generic;
+using XandArt.Architecture;
 
 namespace XandArt.TheGrowth.Quests
 {
@@ -6,6 +7,7 @@ namespace XandArt.TheGrowth.Quests
     {
         public string Title;
         public string Description;
+        public List<Command> OnComplete = new List<Command>();
         
         public void OnEntityCreated(CompositeEntity card)
         {
