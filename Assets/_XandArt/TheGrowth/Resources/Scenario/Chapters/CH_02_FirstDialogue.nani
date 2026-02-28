@@ -3,7 +3,7 @@
 @sfx S_ClockTick loop!
 
 @back BG_MCOffice id:Office
-@setStoryStep name:Step_Tutor_01
+@setStoryStep name:Step_Tutorial
 @sfx S_doorbell
 
 The door to the office flew open, and a tall man entered the room, letting in a rush of cold air from the street along with the damp scent of rain.

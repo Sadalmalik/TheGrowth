@@ -860,7 +860,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Inventory
       value: 
-      objectReference: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b,
+      objectReference: {fileID: 11400000, guid: e712e8635497f1e45b262127f57839bf,
         type: 2}
     - target: {fileID: 4364477669955577130, guid: abaeb506c097edd43a7395c1c30c2aed,
         type: 3}
@@ -2460,7 +2460,7 @@ MonoBehaviour:
   - Ability_01
   - Ability_02
   - Ability_03
-  m_SourceInventory: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b, type: 2}
+  m_SourceInventory: {fileID: 11400000, guid: e712e8635497f1e45b262127f57839bf, type: 2}
   m_TargetInventory: {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
 --- !u!1 &397517750
 GameObject:
@@ -2707,7 +2707,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Inventory
       value: 
-      objectReference: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b,
+      objectReference: {fileID: 11400000, guid: e712e8635497f1e45b262127f57839bf,
         type: 2}
     - target: {fileID: 2519010060622710054, guid: 3cc764094511e414d84196ce28f79477,
         type: 3}
@@ -4218,7 +4218,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Inventory
       value: 
-      objectReference: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b,
+      objectReference: {fileID: 11400000, guid: e712e8635497f1e45b262127f57839bf,
         type: 2}
     - target: {fileID: 4364477669955577130, guid: abaeb506c097edd43a7395c1c30c2aed,
         type: 3}
@@ -4773,7 +4773,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Inventory
       value: 
-      objectReference: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b,
+      objectReference: {fileID: 11400000, guid: e712e8635497f1e45b262127f57839bf,
         type: 2}
     - target: {fileID: 4364477669955577130, guid: abaeb506c097edd43a7395c1c30c2aed,
         type: 3}
@@ -5744,7 +5744,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Inventory
       value: 
-      objectReference: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b,
+      objectReference: {fileID: 11400000, guid: e712e8635497f1e45b262127f57839bf,
         type: 2}
     - target: {fileID: 4364477669955577130, guid: abaeb506c097edd43a7395c1c30c2aed,
         type: 3}
@@ -10422,7 +10422,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Inventory
       value: 
-      objectReference: {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b,
+      objectReference: {fileID: 11400000, guid: e712e8635497f1e45b262127f57839bf,
         type: 2}
     - target: {fileID: 2519010060622710054, guid: 3cc764094511e414d84196ce28f79477,
         type: 3}

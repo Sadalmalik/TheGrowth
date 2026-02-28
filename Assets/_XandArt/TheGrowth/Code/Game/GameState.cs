@@ -69,20 +69,20 @@ namespace XandArt.TheGrowth
         {
         }
 
-        public static GameState Create(StoryStep start)
+        public static GameState Create()
         {
             // Game structure preset
             var state = new GameState
             {
-                _currentStep = start
+                _currentStep = null
             };
             state.Create<CraftingContainer>();
             return state;
         }
 
-        public void Start()
+        public void Start(StoryStep start)
         {
-            SetGameStep(CurrentStoryStep);
+            SetGameStep(start);
         }
 
         public Inventory GetInventory(InventoryModel model)

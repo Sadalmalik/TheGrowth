@@ -6,10 +6,10 @@ namespace XandArt.TheGrowth.StoryLine
     public class RunCommands : GameStepComponent
     {
         [SerializeField]
-        private List<Command> _onStepStartActions;
+        public List<Command> _onStepStartActions;
         
         [SerializeField]
-        private List<Command> _onStepEndActions;
+        public List<Command> _onStepEndActions;
 
         public override void OnStepStart(GameState state)
         {

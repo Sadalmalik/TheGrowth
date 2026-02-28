@@ -8,10 +8,13 @@ Please choose an option: start from the beginning, skip the tutorial with a brie
 @stop
 
 # SkipIntro
-@setStoryStep name:Step_001
+@setStoryStep name:Step_FreeMode
+Story summary: You, as a newly hired cartomancer, are brought by airship to Watchers Island, where a blackened castle rises from living rock at the island’s heart.
+There, House V races against time to dismantle ancient walls and reconstruct a mysterious Machine, struggling with vanishing labor, spreading rumors, and mounting tension between its leaders. Beneath the urgency lies the sense that the season—and perhaps something far older—is slipping beyond their control.
+Now your task is to help find mysterious Machine pieces, scattered in ancient woods around the castle. 
 
 # SkipAll
-@setStoryStep name:Step_001_Skiped
+@setStoryStep name:Step_FreeMode
 
 @hideAll
 @stop

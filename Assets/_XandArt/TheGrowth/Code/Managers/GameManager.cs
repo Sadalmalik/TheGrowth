@@ -60,11 +60,11 @@ namespace XandArt.TheGrowth
         public void StartNewGame()
         {
             Debug.Log("Game: StartNewGame");
-            CurrentGameState = GameState.Create(RootConfig.Instance.startStep);
+            CurrentGameState = GameState.Create();
             container.InjectAt(CurrentGameState);
             Game.BaseContext.GetRequired<GlobalData>().currentState = CurrentGameState;
             CurrentGameState.OnPostLoad();
-            CurrentGameState.Start();
+            CurrentGameState.Start(RootConfig.Instance.startStep);
             
             EventBus.Global.Invoke(new GameLoadedEvent
             {

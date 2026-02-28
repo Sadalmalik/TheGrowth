@@ -16,6 +16,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 11400000, guid: e712e8635497f1e45b262127f57839bf, type: 2}
     - {fileID: 11400000, guid: ef3bbfd188fc5f6408c5d93e84af2b8b, type: 2}
     - {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
     - {fileID: 11400000, guid: 685c262e01893c94daf1d9420a1be9d3, type: 2}
@@ -46,7 +47,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 10
       Data: 0
@@ -59,6 +60,9 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 13
       Data: 
@@ -86,22 +90,34 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
-      Data: 6|XandArt.TheGrowth.Common.GoToLocation, Code
-    - Name: Location
-      Entry: 10
-      Data: 4
+      Data: 6|XandArt.TheGrowth.Common.DebugLog, Code
+    - Name: Message
+      Entry: 1
+      Data: 'Step Start: Start'
+    - Name: Enabled
+      Entry: 5
+      Data: true
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|XandArt.TheGrowth.Story.StartDialogue, Code
-    - Name: Script
+      Data: 7|XandArt.TheGrowth.Common.GoToLocation, Code
+    - Name: Location
       Entry: 10
       Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|XandArt.TheGrowth.Story.StartDialogue, Code
+    - Name: Script
+      Entry: 10
+      Data: 6
     - Name: AfterCommands
       Entry: 6
       Data: 
@@ -115,7 +131,29 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: _onStepEndActions
-      Entry: 6
+      Entry: 7
+      Data: 9|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 10|XandArt.TheGrowth.Common.DebugLog, Code
+    - Name: Message
+      Entry: 1
+      Data: 'Step Start: End'
+    - Name: Enabled
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8

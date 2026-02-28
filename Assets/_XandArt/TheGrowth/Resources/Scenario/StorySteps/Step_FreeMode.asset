@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a20198ed85b7431d9a7399db2bad5755, type: 3}
-  m_Name: Step_001_Skiped
+  m_Name: Step_FreeMode
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -46,7 +46,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.StoryLine.AddItemsToInventory, Code
@@ -227,48 +227,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 16|XandArt.TheGrowth.StoryLine.RunCommands, Code
-    - Name: _onStepStartActions
-      Entry: 7
-      Data: 17|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 18|XandArt.TheGrowth.Crafting.SetProjectCraft, Code
-    - Name: model
-      Entry: 10
-      Data: 14
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _onStepEndActions
-      Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 20|XandArt.TheGrowth.StoryLine.SetEnabledActions, Code
+      Data: 16|XandArt.TheGrowth.StoryLine.SetEnabledActions, Code
     - Name: actions
       Entry: 3
       Data: 7
@@ -277,17 +236,38 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 21|XandArt.TheGrowth.StoryLine.RunCommands, Code
+      Data: 17|XandArt.TheGrowth.StoryLine.RunCommands, Code
     - Name: _onStepStartActions
       Entry: 7
-      Data: 22|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
-        Code]], Unity.Plastic.Antlr3.Runtime
+      Data: 18|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 7
-      Data: 23|XandArt.TheGrowth.Common.GoToLocation, Code
+      Data: 19|XandArt.TheGrowth.Common.DebugLog, Code
+    - Name: Message
+      Entry: 1
+      Data: 'Step Free Mode: Start'
+    - Name: Enabled
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 20|XandArt.TheGrowth.Crafting.SetProjectCraft, Code
+    - Name: model
+      Entry: 10
+      Data: 14
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 21|XandArt.TheGrowth.Common.GoToLocation, Code
     - Name: Location
       Entry: 10
       Data: 15
@@ -302,11 +282,23 @@ MonoBehaviour:
       Data: 
     - Name: _onStepEndActions
       Entry: 7
-      Data: 24|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
-        Code]], Unity.Plastic.Antlr3.Runtime
+      Data: 22|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 23|XandArt.TheGrowth.Common.DebugLog, Code
+    - Name: Message
+      Entry: 1
+      Data: 'Step Free Mode: End'
+    - Name: Enabled
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
