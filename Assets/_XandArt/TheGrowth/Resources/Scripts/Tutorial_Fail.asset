@@ -88,6 +88,9 @@ MonoBehaviour:
     - Name: Message
       Entry: 1
       Data: Tutorial fail - reset the mission
+    - Name: Enabled
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 

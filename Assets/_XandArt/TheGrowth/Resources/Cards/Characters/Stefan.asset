@@ -269,6 +269,9 @@ MonoBehaviour:
     - Name: Message
       Entry: 1
       Data: On Step
+    - Name: Enabled
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 
