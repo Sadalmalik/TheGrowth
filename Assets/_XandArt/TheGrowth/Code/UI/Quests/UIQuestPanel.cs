@@ -12,22 +12,35 @@ namespace XandArt.TheGrowth
 
         [SerializeField]
         private UIQuest m_Prefab;
-        
+
         [SerializeField]
         private float m_UpdateDelay = 1f;
 
         private float m_Elapsed;
 
         private Dictionary<CompositeEntity, UIQuest> m_QuestPanels;
-        
+
         private void Update()
         {
             m_Elapsed += Time.deltaTime;
-            if (m_Elapsed <m_UpdateDelay)
+            if (m_Elapsed < m_UpdateDelay)
                 return;
             m_Elapsed -= m_UpdateDelay;
 
             m_QuestPanels ??= new Dictionary<CompositeEntity, UIQuest>();
+            var state = Game.Container.Get<GameManager>().CurrentGameState;
+            if (state == null)
+            {
+                if (m_QuestPanels.Count > 0)
+                {
+                    foreach (var uiQuest in m_QuestPanels.Values)
+                        Destroy(uiQuest);
+                    m_QuestPanels.Clear();
+                }
+
+                return;
+            }
+
             foreach (var entity in Game.Container.Get<GameManager>().CurrentGameState.Entities)
             {
                 if (entity is not CompositeEntity compositeEntity) continue;

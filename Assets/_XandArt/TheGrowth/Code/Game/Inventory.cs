@@ -45,6 +45,7 @@ namespace XandArt.TheGrowth
                 {
                     Game.Container.Get<GameManager>().CurrentGameState.Destroy(entity);
                     OnChanged?.Invoke();
+                    return;
                 }
             }
 

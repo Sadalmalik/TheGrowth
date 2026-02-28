@@ -17,10 +17,10 @@ namespace XandArt.Architecture
         public const string GuidPropertyName = nameof(Guid);
         public const string ValuePropertyName = nameof(Value);
 
-        [JsonIgnore]
+        [JsonProperty]
         private Guid _guid;
         
-        [JsonIgnore]
+        [JsonProperty]
         private T _value;
 
         [JsonIgnore]
@@ -64,6 +64,11 @@ namespace XandArt.Architecture
             }
         }
 
+        public override string ToString()
+        {
+            return $"ref:{Guid}:{Value}";
+        }
+
         public static implicit operator bool(Ref<T> @ref)
         {
             return @ref.Value != null;
@@ -76,7 +81,9 @@ namespace XandArt.Architecture
 
         public static implicit operator Ref<T>(T entity)
         {
-            return new Ref<T> { Value = entity };
+            var @ref = new Ref<T>();
+            @ref.Value = entity;
+            return @ref;
         }
     }
 }

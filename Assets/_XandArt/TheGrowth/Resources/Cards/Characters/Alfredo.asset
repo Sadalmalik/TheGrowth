@@ -23,7 +23,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 52f3eee5fad002e4f984ced85e276ea0, type: 2}
     - {fileID: -5555909049971809409, guid: 5f9c9c678b7aed741b46b1ad332560ba, type: 3}
     - {fileID: 11400000, guid: 4d9cdf4b00aa9fe46a5b1f5bd544a171, type: 2}
-    - {fileID: 11400000, guid: 8fa2ea45db0b4a14b81e404aa5f97f10, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -270,7 +269,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 7
       Data: 21|XandArt.TheGrowth.Expedition.MoveCamera, Code
@@ -305,87 +304,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 7
-      Data: 25|XandArt.TheGrowth.Common.Branch, Code
-    - Name: condition
-      Entry: 7
-      Data: 26|XandArt.TheGrowth.Logic.Or, Code
-    - Name: conditions
-      Entry: 7
-      Data: 27|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OnTrue
-      Entry: 7
-      Data: 28|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 7
-      Data: 29|XandArt.TheGrowth.Common.GoToLocation, Code
-    - Name: Location
-      Entry: 10
-      Data: 7
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 30|XandArt.TheGrowth.Common.GoToHubRoom, Code
-    - Name: RoomName
-      Entry: 1
-      Data: Room_Missions
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 31|XandArt.TheGrowth.Common.DebugLog, Code
-    - Name: Message
-      Entry: 1
-      Data: Tutorial fail - reset the mission
-    - Name: Enabled
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OnFalse
-      Entry: 7
-      Data: 32|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -393,7 +311,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFlipped
       Entry: 7
-      Data: 33|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 25|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -406,7 +324,7 @@ MonoBehaviour:
       Data: 
     - Name: OnStep
       Entry: 7
-      Data: 34|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 26|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -419,7 +337,7 @@ MonoBehaviour:
       Data: 
     - Name: OnCovered
       Entry: 7
-      Data: 35|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 27|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -432,7 +350,7 @@ MonoBehaviour:
       Data: 
     - Name: OnUnCovered
       Entry: 7
-      Data: 36|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 28|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -448,7 +366,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 37|XandArt.TheGrowth.Charges, Code
+      Data: 29|XandArt.TheGrowth.Charges, Code
     - Name: Amound
       Entry: 3
       Data: 0

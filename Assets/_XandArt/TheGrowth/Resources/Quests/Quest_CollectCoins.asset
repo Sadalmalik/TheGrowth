@@ -16,7 +16,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: e712e8635497f1e45b262127f57839bf, type: 2}
+    - {fileID: 11400000, guid: 0fb19187856e38c4392e0a592174a8c5, type: 2}
     - {fileID: 11400000, guid: ef1d686878031864c9b977c651ffc55c, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -59,7 +59,7 @@ MonoBehaviour:
       Data: 4
     - Name: Format
       Entry: 1
-      Data: Coins <color=cyan>{0}</color> / <color=green>{1}</color>
+      Data: Coins <color=red>{0}</color> / <color=green>{1}</color>
     - Name: 
       Entry: 8
       Data: 

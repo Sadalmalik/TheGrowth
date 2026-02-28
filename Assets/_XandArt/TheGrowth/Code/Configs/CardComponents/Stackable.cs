@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using UnityEngine;
 using XandArt.Architecture;
 
 namespace XandArt.TheGrowth
@@ -26,7 +27,11 @@ namespace XandArt.TheGrowth
             public int Count
             {
                 get => _count;
-                set => _count = value;
+                set
+                {
+                    Debug.Log($"TEST - Set Stack {_count} -> {value} for {Owner}");
+                    _count = value;
+                }
             }
 
             [JsonIgnore]

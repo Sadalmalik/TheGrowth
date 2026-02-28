@@ -6,5 +6,10 @@ namespace XandArt.TheGrowth
     {
         public Ref<Inventory> Inventory;
         public string SlotName;
+
+        public CardInventoryComponent()
+        {
+            Inventory.Value = null;
+        }
     }
 }
