@@ -20,6 +20,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bac3c5ba149dca64aa33fd9910a225fb, type: 2}
     - {fileID: 11400000, guid: aa0fd3938b9a6954d904268e782753bd, type: 2}
     - {fileID: 11400000, guid: d7209ae1ab1fcb54cbf1132b89be41fa, type: 2}
+    - {fileID: 11400000, guid: bd808a73370609941a65899583dd35a8, type: 2}
     - {fileID: 11400000, guid: 8fa2ea45db0b4a14b81e404aa5f97f10, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -35,7 +36,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.StoryLine.AddItemsToInventory, Code
@@ -96,7 +97,29 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|XandArt.TheGrowth.StoryLine.SetEnabledActions, Code
+      Data: 6|XandArt.TheGrowth.StoryLine.CreateEntity, Code
+    - Name: Models
+      Entry: 7
+      Data: 7|System.Collections.Generic.List`1[[XandArt.Architecture.AbstractEntityModel,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|XandArt.TheGrowth.StoryLine.SetEnabledActions, Code
     - Name: actions
       Entry: 3
       Data: 7
@@ -105,17 +128,17 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|XandArt.TheGrowth.StoryLine.RunCommands, Code
+      Data: 9|XandArt.TheGrowth.StoryLine.RunCommands, Code
     - Name: _onStepStartActions
       Entry: 7
-      Data: 8|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
+      Data: 10|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 9|XandArt.TheGrowth.Common.DebugLog, Code
+      Data: 11|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: 'Step Tutorial: Start'
@@ -127,10 +150,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 10|XandArt.TheGrowth.Common.GoToLocation, Code
+      Data: 12|XandArt.TheGrowth.Common.GoToLocation, Code
     - Name: Location
       Entry: 10
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -142,14 +165,14 @@ MonoBehaviour:
       Data: 
     - Name: _onStepEndActions
       Entry: 7
-      Data: 11|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
+      Data: 13|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[XandArt.TheGrowth.Command,
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 12|XandArt.TheGrowth.Common.DebugLog, Code
+      Data: 14|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: 'Step Tutorial: End'

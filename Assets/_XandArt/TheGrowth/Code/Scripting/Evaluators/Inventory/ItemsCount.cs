@@ -16,23 +16,7 @@ namespace XandArt.TheGrowth.Inventories
             var gameManager = global.container.Get<GameManager>();
             var inventoryEntity = gameManager.CurrentGameState.GetInventory(Inventory);
 
-            int count = 0;
-            foreach (var itemRef in inventoryEntity.Items)
-            {
-                var item = itemRef.Value;
-                if (item.Model != Item) continue;
-                if (item is CompositeEntity entity)
-                {
-                    var stack = entity.GetComponent<Stackable.Component>();
-                    count += stack.Count;
-                }
-                else
-                {
-                    count++;
-                }
-            }
-
-            return count;
+            return inventoryEntity.Count(Item);
         }
     }
 }

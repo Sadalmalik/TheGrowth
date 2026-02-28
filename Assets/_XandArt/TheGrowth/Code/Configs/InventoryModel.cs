@@ -15,3 +15,7 @@ namespace XandArt.TheGrowth
         }
     }
 }
+
+namespace XandArt.TheGrowth.Quests
+{
+}

@@ -17,7 +17,7 @@ namespace XandArt.Architecture
     public class EntityModel : AbstractEntityModel
     {
         [ValidateInput(nameof(ElementsNotNull), "Components can't be null!")]
-        public List<IEntityModelComponent> components;
+        public List<IEntityModelComponent> components = new List<IEntityModelComponent>();
 
         private bool ElementsNotNull(List<IEntityModelComponent> list)
         {

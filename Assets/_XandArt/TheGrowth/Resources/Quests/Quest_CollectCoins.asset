@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721fd4a630e54d9784e83e35768c9280, type: 3}
+  m_Name: Quest_CollectCoins
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: e712e8635497f1e45b262127f57839bf, type: 2}
+    - {fileID: 11400000, guid: ef1d686878031864c9b977c651ffc55c, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Guid
+      Entry: 2
+      Data: bd808a73370609941a65899583dd35a8
+    - Name: components
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[XandArt.Architecture.IEntityModelComponent,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|XandArt.TheGrowth.Quests.QuestInfo, Code
+    - Name: Title
+      Entry: 1
+      Data: Coins
+    - Name: Description
+      Entry: 1
+      Data: Collect 4 coins
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|XandArt.TheGrowth.Quests.QuestItemRequirement, Code
+    - Name: Inventory
+      Entry: 10
+      Data: 0
+    - Name: Item
+      Entry: 10
+      Data: 1
+    - Name: Amount
+      Entry: 3
+      Data: 4
+    - Name: Format
+      Entry: 1
+      Data: Coins <color=cyan>{0}</color> / <color=green>{1}</color>
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
