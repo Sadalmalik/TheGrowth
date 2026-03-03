@@ -50,5 +50,6 @@ Alfredo: “If you consent, I shall conceal four such coins in the park at the e
 
 # LetsGo
 @stopSfx
+@executeCommandScript name:DebugLog
 @executeCommandScript name:GoToMissionsRoom
 @stop

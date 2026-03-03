@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Guid
       Entry: 2
-      Data: ac9b1ce8bb003c14d977aeff930ecfe5
+      Data: 6aafb004380355449b407d90f977c764
     - Name: Commands
       Entry: 7
       Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
