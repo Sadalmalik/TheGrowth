@@ -1,2 +1,7 @@
+@back Black_Screen
 chapter 03
-@setStoryStep name:Step_001_Skiped
+@setStoryStep name:Step_FreeMode
+
+@hideAll
+@stop
+@hidePrinter
