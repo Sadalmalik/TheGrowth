@@ -15,8 +15,7 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: -5555909049971809409, guid: 1c80ea59b4a5d85409d10dfe7df6344d, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -31,7 +30,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 2
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.Common.GoToHubRoom, Code
@@ -43,19 +42,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|XandArt.TheGrowth.Story.StartDialogue, Code
-    - Name: Script
-      Entry: 10
-      Data: 0
-    - Name: AfterCommands
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 3|XandArt.TheGrowth.Common.DebugLog, Code
+      Data: 2|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: GoToMissionsRoom script executed

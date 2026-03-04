@@ -3,7 +3,6 @@
 @sfx S_ClockTick loop!
 
 @back BG_MCOffice id:Office
-@setStoryStep name:Step_Tutorial
 @sfx S_doorbell
 
 The door to the office flew open, and a tall man entered the room, letting in a rush of cold air from the street along with the damp scent of rain.
@@ -49,7 +48,31 @@ Alfredo: “If you consent, I shall conceal four such coins in the park at the e
 @stop
 
 # LetsGo
+
+@hide Printer
+@hide Alfredo
+@hideAll
 @stopSfx
-@executeCommandScript name:DebugLog
+
+@back MainMenu id:LoadingSCR
+
+@setStoryStep name:Step_Tutorial
+@wait 1
+
+@printer Wide
+
+@back TP_01 id:Tutor_P
+Pres Enter
+
+@back TP_02 id:Tutor_P
+Pres Enter
+
 @executeCommandScript name:GoToMissionsRoom
+
+@hide Printer
+@back MainMenu id:LoadingSCR
+@wait 1
+
+@hideAll
 @stop
+@hidePrinter
