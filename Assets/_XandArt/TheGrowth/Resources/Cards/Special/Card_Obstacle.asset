@@ -118,37 +118,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 7|XandArt.TheGrowth.Expedition.MoveCard, Code
-    - Name: Card
-      Entry: 7
-      Data: 8|XandArt.TheGrowth.Cards.ActiveCard, Code
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Slot
-      Entry: 7
-      Data: 9|XandArt.TheGrowth.Expedition.Slots.BoardSlot, Code
-    - Name: _slot
-      Entry: 3
       Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Instant
-      Entry: 5
-      Data: false
-    - Name: RaiseEvents
-      Entry: 5
-      Data: false
-    - Name: AfterCommands
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
