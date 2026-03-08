@@ -32,13 +32,12 @@ namespace XandArt.TheGrowth
         public Evaluator<HashSet<SlotEntity>> AllowedMoves;
 
         [Space]
-        public List<Command> OnPlacedFirstTime;
-
-        public List<Command> OnPlaced;
-        public List<Command> OnFlipped;
-        public List<Command> OnStep;
-        public List<Command> OnCovered;
-        public List<Command> OnUnCovered;
+        public List<Command> OnPlacedFirstTime = new ();
+        public List<Command> OnPlaced = new ();
+        public List<Command> OnFlipped = new ();
+        public List<Command> OnStep = new ();
+        public List<Command> OnCovered = new ();
+        public List<Command> OnUnCovered = new ();
 
         public void OnEntityCreated(CompositeEntity card)
         {
