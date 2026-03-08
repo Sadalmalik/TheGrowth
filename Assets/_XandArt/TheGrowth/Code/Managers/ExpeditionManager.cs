@@ -103,12 +103,12 @@ namespace XandArt.TheGrowth
                     var slot = slotView?.Data as SlotEntity;
                     if (slot != null && _moves != null && _moves.Contains(slot))
                     {
-                        _ = _draggedCard.MoveTo(slot);
+                        _draggedCard.MoveTo(slot);
                     }
                     else
                     {
                         var brain = _draggedCard.GetComponent<CardBrain.Component>();
-                        _ = _draggedCard.MoveTo(brain.Slot, cardEvents: false);
+                        _draggedCard.MoveTo(brain.Slot, cardEvents: false);
                     }
                 }
 
@@ -131,7 +131,7 @@ namespace XandArt.TheGrowth
                 if (Input.GetKeyDown(KeyCode.Mouse1))
                 {
                     var brain = _draggedCard.GetComponent<CardBrain.Component>();
-                    _ = _draggedCard.MoveTo(brain.Slot, cardEvents: false);
+                    _draggedCard.MoveTo(brain.Slot, cardEvents: false);
 
                     _draggedCard = null;
                     _draggedCardView.cardCollider.enabled = true;
@@ -250,7 +250,7 @@ namespace XandArt.TheGrowth
 
                 foreach (var card in hand)
                 {
-                    _ = card.MoveTo(Board.HandSlot, () =>
+                    card.MoveTo(Board.HandSlot, () =>
                     {
                         var brain = card.GetComponent<CardBrain.Component>();
                         if (!brain.IsFaceUp) brain.FlipCard(null, true);
@@ -262,12 +262,12 @@ namespace XandArt.TheGrowth
                 {
                     var view = CreateView(card, Board.DeckSlot.SlotView.transform);
                     _views.Add(view);
-                    _ = card.MoveTo(Board.DeckSlot, instant: true);
+                    card.MoveTo(Board.DeckSlot, instant: true);
                 }
 
                 var index = new Vector2Int(0, Board.Size.y / 2);
                 var characterSlot = Board.Slots[index];
-                _ = character.MoveTo(characterSlot, null, true, false);
+                character.MoveTo(characterSlot, null, true, false);
                 slots.Remove(characterSlot);
                 slots.Shuffle();
 

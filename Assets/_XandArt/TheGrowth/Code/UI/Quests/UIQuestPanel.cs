@@ -29,7 +29,7 @@ namespace XandArt.TheGrowth
             m_Elapsed -= m_UpdateDelay;
 
             m_QuestPanels ??= new Dictionary<CompositeEntity, UIQuest>();
-            var state = Game.Container.Get<GameManager>().CurrentGameState;
+            var state = Game.Container?.Get<GameManager>()?.CurrentGameState;
             if (state == null)
             {
                 if (m_QuestPanels.Count > 0)

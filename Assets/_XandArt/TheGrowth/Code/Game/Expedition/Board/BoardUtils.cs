@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using XandArt.Architecture;
+using XandArt.Architecture.Utils;
 using XandArt.TheGrowth.Slots;
 
 namespace XandArt.TheGrowth
 {
     public static class BoardUtils
     {
-        public static async Task MoveTo(
+        public static void MoveTo(
             this CompositeEntity card,
             SlotEntity target,
-            Action OnMoveComplete = null,
+            Action onMoveComplete = null,
             bool instant = false,
             bool cardEvents = true)
         {
@@ -31,7 +32,6 @@ namespace XandArt.TheGrowth
             cardCover = target.Top();
             target.Add(card);
 
-            var tcs = new TaskCompletionSource<bool>();
             var view = card.View as EntityCardView;
             if (view != null)
             {
@@ -49,7 +49,6 @@ namespace XandArt.TheGrowth
                 HandleMoved();
             }
 
-            await tcs.Task;
             return;
 
             void HandleMoved()
@@ -69,8 +68,7 @@ namespace XandArt.TheGrowth
                     brain.OnPlaced();
                 }
 
-                OnMoveComplete?.Invoke();
-                tcs.SetResult(true);
+                onMoveComplete?.Invoke();
             }
         }
 
@@ -92,9 +90,9 @@ namespace XandArt.TheGrowth
                 if (slot == null) continue;
                 slots.Remove(slot);
 
-                var task = card.MoveTo(slot, () => card.GetComponent<CardBrain.Component>()?.OnPlacedFirstTime());
+                card.MoveTo(slot, () => card.GetComponent<CardBrain.Component>()?.OnPlacedFirstTime());
                 if (waitEachCard)
-                    await task;
+                    await Task.Delay(Mathf.FloorToInt(CardsViewConfig.Instance.jumpDuration * 1000));
 
                 await Task.Delay(cardDelay);
             }

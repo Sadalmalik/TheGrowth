@@ -85,21 +85,16 @@ namespace XandArt.TheGrowth
             var yMin = MouseControllPadding.y;
             var yMax = Screen.height - MouseControllPadding.y;
 
-            if (xMin < pos.x && pos.x < xMax &&
-                yMin < pos.y && pos.y < yMax)
+            if (pos.x <= xMin) direction.x = (pos.x - xMin) / MouseControllPadding.x;
+            if (xMax <= pos.x) direction.x = (pos.x - xMax) / MouseControllPadding.x;
+            if (pos.y <= yMin) direction.z = (pos.y - yMin) / MouseControllPadding.y;
+            if (yMax <= pos.y) direction.z = (pos.y - yMax) / MouseControllPadding.y;
+
+            var hor = Input.GetAxis("Horizontal");
+            var ver = Input.GetAxis("Vertical");
+            if (!Mathf.Approximately(hor,0) || !Mathf.Approximately(ver,0))
             {
-                direction = new Vector3(
-                    Input.GetAxis("Horizontal"),
-                    0,
-                    Input.GetAxis("Vertical")
-                );
-            }
-            else
-            {
-                if (pos.x <= xMin) direction.x = (pos.x - xMin) / MouseControllPadding.x;
-                if (xMax <= pos.x) direction.x = (pos.x - xMax) / MouseControllPadding.x;
-                if (pos.y <= yMin) direction.z = (pos.y - yMin) / MouseControllPadding.y;
-                if (yMax <= pos.y) direction.z = (pos.y - yMax) / MouseControllPadding.y;
+                direction = new Vector3(hor, 0, ver);
             }
 
             return direction;

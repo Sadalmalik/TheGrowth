@@ -33,8 +33,6 @@ namespace XandArt.TheGrowth
 
         public bool IsFaceUp => _isFaceUp;
 
-        public event Action OnAnimationComplete;
-
         private Charges.Component m_Charges;
 
         public void Bind(CompositeEntity card)
@@ -80,7 +78,7 @@ namespace XandArt.TheGrowth
             var endRotation = slot.GetNewRotation();
 
             var duration = CardsViewConfig.Instance.shiftDuration;
-            _moveTween?.Kill();
+            // _moveTween?.Kill();
             _moveTween = DOTween.Sequence()
                 .Append(transform.DOMove(endPosition, duration))
                 .Insert(0, transform.DORotate(endRotation, duration))
@@ -93,7 +91,6 @@ namespace XandArt.TheGrowth
                 transform.rotation = Quaternion.Euler(endRotation);
                 transform.SetParent(slot.SlotView.Object.transform);
                 onComplete?.Invoke();
-                OnAnimationComplete?.Invoke();
             }
         }
 
@@ -109,7 +106,7 @@ namespace XandArt.TheGrowth
             }
 
             var duration = CardsViewConfig.Instance.jumpDuration;
-            _moveTween?.Kill();
+            // _moveTween?.Kill();
             _moveTween = DOTween.Sequence()
                 .Append(transform.DOJump(endPosition, 3, 1, duration))
                 .Insert(0, transform.DORotate(endRotation, duration))
@@ -122,7 +119,6 @@ namespace XandArt.TheGrowth
                 transform.rotation = Quaternion.Euler(endRotation);
                 transform.SetParent(slot.SlotView.Object.transform);
                 onComplete?.Invoke();
-                OnAnimationComplete?.Invoke();
             }
         }
 
@@ -141,7 +137,6 @@ namespace XandArt.TheGrowth
                 SetFaceVisible(_isFaceUp);
 
                 onComplete?.Invoke();
-                OnAnimationComplete?.Invoke();
                 return;
             }
 
@@ -149,7 +144,7 @@ namespace XandArt.TheGrowth
                 SetFaceVisible(true);
 
             var duration = CardsViewConfig.Instance.flipDuration;
-            _flipTween?.Kill();
+            // _flipTween?.Kill();
             _flipTween = DOTween.Sequence()
                 .Append(innerTransform.DOLocalMove(Vector3.up, duration * 0.25f))
                 .Append(innerTransform.DOLocalRotate(new Vector3(0, 0, angle), duration * 0.5f))
@@ -163,7 +158,6 @@ namespace XandArt.TheGrowth
 
                     _isFaceUp = !_isFaceUp;
                     onComplete?.Invoke();
-                    OnAnimationComplete?.Invoke();
                 });
         }
     }
