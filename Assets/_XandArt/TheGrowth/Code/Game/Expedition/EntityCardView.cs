@@ -42,11 +42,15 @@ namespace XandArt.TheGrowth
             {
                 decor.sprite = visual.Decor;
                 portrait.sprite = visual.Portrait;
-                SetFaceVisible(false);
-                _isFaceUp = false;
             }
-
+            SetFaceVisible(false);
+            _isFaceUp = false;
+            
             m_Charges = card.GetComponent<Charges.Component>();
+            var brain = card.GetComponent<CardBrain.Component>();
+
+            if (brain.IsFaceUp)
+                Flip(null, true);
         }
 
         private void Update()
