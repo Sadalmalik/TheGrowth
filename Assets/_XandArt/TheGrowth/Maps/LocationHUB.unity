@@ -1155,8 +1155,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 234663679}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!1 &234892481
 GameObject:
@@ -2248,8 +2246,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 298897345}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!1 &337303615
 GameObject:
@@ -2433,8 +2429,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 337303617}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!114 &337303621
 MonoBehaviour:
@@ -2856,7 +2850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.86415094, g: 0.86415094, b: 0.86415094, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3512,8 +3506,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 515013243}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!114 &515013242
 MonoBehaviour:
@@ -4840,8 +4832,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 790917979}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 1506914568}
 --- !u!114 &790917979
 MonoBehaviour:
@@ -5026,8 +5016,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 823443788}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!114 &823443787
 MonoBehaviour:
@@ -6152,8 +6140,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 978339089}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!114 &978339088
 MonoBehaviour:
@@ -6448,8 +6434,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 991618943}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!114 &991618943
 MonoBehaviour:
@@ -7689,8 +7673,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 1152115748}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!114 &1152115747
 MonoBehaviour:
@@ -7957,8 +7939,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 1155628889}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 1506914568}
 --- !u!114 &1155628889
 MonoBehaviour:
@@ -8713,8 +8693,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 1396192121}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!114 &1396192121
 MonoBehaviour:
@@ -11761,8 +11739,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 1965284535}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!114 &1965284535
 MonoBehaviour:
@@ -12140,8 +12116,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 2058658847}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!114 &2058658847
 MonoBehaviour:
@@ -13151,8 +13125,6 @@ MonoBehaviour:
       Data: 
   _button: {fileID: 6030543526901110597}
   _holdButton: {fileID: 0}
-  _duration: 0.25
-  _progressFill: {fileID: 0}
   _gotoRoom: {fileID: 0}
 --- !u!1001 &8973022474500231844
 PrefabInstance:

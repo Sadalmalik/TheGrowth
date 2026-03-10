@@ -277,3 +277,8 @@ MonoBehaviour:
     - name: MainMenu
       pathPrefix: Backgrounds/LoadingSCR
       guid: c8fed2ad66f09f94ca835079f231c13c
+  - Id: Backgrounds/549ac9b2-f309-4e2f-83bc-a66d19be2d8b
+    Resources:
+    - name: BG_Wall
+      pathPrefix: Backgrounds/Wall
+      guid: 932c1f0289f62c2439ce68bc98333caf
