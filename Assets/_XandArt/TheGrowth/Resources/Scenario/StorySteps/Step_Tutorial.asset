@@ -22,6 +22,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d7209ae1ab1fcb54cbf1132b89be41fa, type: 2}
     - {fileID: 11400000, guid: bd808a73370609941a65899583dd35a8, type: 2}
     - {fileID: 11400000, guid: 8fa2ea45db0b4a14b81e404aa5f97f10, type: 2}
+    - {fileID: 11400000, guid: 685c262e01893c94daf1d9420a1be9d3, type: 2}
+    - {fileID: 11400000, guid: 67a62e626403b554b913182dbf06b02c, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -169,7 +171,7 @@ MonoBehaviour:
         Code]], Unity.Plastic.Antlr3.Runtime
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 4
     - Name: 
       Entry: 7
       Data: 14|XandArt.TheGrowth.Common.DebugLog, Code
@@ -179,6 +181,33 @@ MonoBehaviour:
     - Name: Enabled
       Entry: 5
       Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 15|XandArt.TheGrowth.Inventories.DestroyAllItems, Code
+    - Name: FromInventory
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 16|XandArt.TheGrowth.Inventories.DestroyAllItems, Code
+    - Name: FromInventory
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|XandArt.TheGrowth.Inventories.DestroyAllItems, Code
+    - Name: FromInventory
+      Entry: 10
+      Data: 7
     - Name: 
       Entry: 8
       Data: 

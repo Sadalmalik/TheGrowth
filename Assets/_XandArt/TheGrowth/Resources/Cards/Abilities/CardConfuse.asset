@@ -58,7 +58,7 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 2|XandArt.TheGrowth.Charges, Code
-    - Name: Amound
+    - Name: Amount
       Entry: 3
       Data: 2
     - Name: ShowOnCard
@@ -374,7 +374,7 @@ MonoBehaviour:
       Data: 35|XandArt.TheGrowth.Expedition.Slots.BoardSlot, Code
     - Name: _slot
       Entry: 3
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 8
       Data: 

@@ -60,7 +60,7 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 2|XandArt.TheGrowth.Charges, Code
-    - Name: Amound
+    - Name: Amount
       Entry: 3
       Data: 2
     - Name: ShowOnCard
