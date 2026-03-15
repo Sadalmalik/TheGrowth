@@ -1,4 +1,5 @@
-﻿using Sirenix.Serialization;
+﻿using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using XandArt.Architecture;
 
 namespace XandArt.TheGrowth.Cards
@@ -18,6 +19,8 @@ namespace XandArt.TheGrowth.Cards
         public EVariant Variant = EVariant.Set;
         
         public Evaluator<CompositeEntity> Card;
+        
+        [HideIf("Variant", EVariant.Reset)]
         public int Amount;
         
         public override void Execute(Context context)
