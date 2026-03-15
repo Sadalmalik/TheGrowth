@@ -236,8 +236,7 @@ namespace XandArt.TheGrowth
             var slots = _board.Slots.Values.Distinct().ToList();
             var cards = new List<CompositeEntity>();
             var hand = InitializeHandCards();
-            var character =
-                hand.FirstOrDefault(card => card.GetComponent<CardBrain.Component>()?.Type == CardType.Character);
+            var character = hand.FirstOrDefault(card => card.GetComponent<CardBrain.Component>()?.Type == CardType.Character);
             hand.Remove(character);
 
             Game.BaseContext.Add(new PlayerCard.Data { Card = character });
