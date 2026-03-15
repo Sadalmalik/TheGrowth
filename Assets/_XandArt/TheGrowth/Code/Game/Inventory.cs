@@ -70,7 +70,7 @@ namespace XandArt.TheGrowth
             OnChanged?.Invoke();
         }
 
-        public IEnumerable<Entity> GetEntities(CardType filter)
+        public IEnumerable<CompositeEntity> GetEntities(CardType filter)
         {
             var entities = Items.Select(entity => entity.Value as CompositeEntity);
             return filter == CardType.All
