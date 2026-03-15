@@ -11,7 +11,8 @@ namespace XandArt.TheGrowth.Cards
         public enum EVariant
         {
             Set,
-            Add
+            Add,
+            Reset
         }
 
         public EVariant Variant = EVariant.Set;
@@ -31,6 +32,9 @@ namespace XandArt.TheGrowth.Cards
                     break;
                 case EVariant.Add:
                     cardCharges.Charges += Amount;
+                    break;
+                case EVariant.Reset:
+                    cardCharges.Charges = card.Model.GetComponent<Charges>().Amount;
                     break;
             }
         }
