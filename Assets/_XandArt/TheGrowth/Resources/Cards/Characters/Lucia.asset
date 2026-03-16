@@ -221,7 +221,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 16|XandArt.TheGrowth.Common.ExecuteCommandConfig, Code
@@ -247,6 +247,18 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 19|XandArt.TheGrowth.Expedition.SetExpeditionStep, Code
+    - Name: Mode
+      Entry: 3
+      Data: 0
+    - Name: Amount
+      Entry: 3
+      Data: 25
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -254,20 +266,20 @@ MonoBehaviour:
       Data: 
     - Name: OnPlaced
       Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 20|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 4
     - Name: 
       Entry: 7
-      Data: 20|XandArt.TheGrowth.Common.Branch, Code
+      Data: 21|XandArt.TheGrowth.Common.Branch, Code
     - Name: condition
       Entry: 7
-      Data: 21|XandArt.TheGrowth.Expedition.SlotContainsCard, Code
+      Data: 22|XandArt.TheGrowth.Expedition.SlotContainsCard, Code
     - Name: Slot
       Entry: 7
-      Data: 22|XandArt.TheGrowth.Expedition.Slots.BoardSlot, Code
+      Data: 23|XandArt.TheGrowth.Expedition.Slots.BoardSlot, Code
     - Name: _slot
       Entry: 3
       Data: 0
@@ -276,7 +288,7 @@ MonoBehaviour:
       Data: 
     - Name: CardFilter
       Entry: 7
-      Data: 23|System.Collections.Generic.List`1[[XandArt.TheGrowth.CardListConfig,
+      Data: 24|System.Collections.Generic.List`1[[XandArt.TheGrowth.CardListConfig,
         Code]], mscorlib
     - Name: 
       Entry: 12
@@ -298,14 +310,14 @@ MonoBehaviour:
       Data: 
     - Name: OnTrue
       Entry: 7
-      Data: 24|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 25|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 25|XandArt.TheGrowth.Expedition.EndGame, Code
+      Data: 26|XandArt.TheGrowth.Expedition.EndGame, Code
     - Name: Success
       Entry: 5
       Data: false
@@ -317,7 +329,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 26|XandArt.TheGrowth.Common.DebugLog, Code
+      Data: 27|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: EXPODE!
@@ -335,14 +347,14 @@ MonoBehaviour:
       Data: 
     - Name: OnFalse
       Entry: 7
-      Data: 27|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 28|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 28|XandArt.TheGrowth.Common.DebugLog, Code
+      Data: 29|XandArt.TheGrowth.Common.DebugLog, Code
     - Name: Message
       Entry: 1
       Data: EXPLODE FALCE
@@ -363,10 +375,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 29|XandArt.TheGrowth.Expedition.MoveCamera, Code
+      Data: 30|XandArt.TheGrowth.Expedition.MoveCamera, Code
     - Name: Card
       Entry: 7
-      Data: 30|XandArt.TheGrowth.Cards.ActiveCard, Code
+      Data: 31|XandArt.TheGrowth.Cards.ActiveCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -378,7 +390,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 31|XandArt.TheGrowth.Common.ExecuteCommandConfig, Code
+      Data: 32|XandArt.TheGrowth.Common.ExecuteCommandConfig, Code
     - Name: config
       Entry: 10
       Data: 5
@@ -387,7 +399,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 32|XandArt.TheGrowth.Common.ExecuteCommandConfig, Code
+      Data: 33|XandArt.TheGrowth.Common.ExecuteCommandConfig, Code
     - Name: config
       Entry: 10
       Data: 7
@@ -402,7 +414,7 @@ MonoBehaviour:
       Data: 
     - Name: OnFlipped
       Entry: 7
-      Data: 33|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 34|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -415,7 +427,7 @@ MonoBehaviour:
       Data: 
     - Name: OnStep
       Entry: 7
-      Data: 34|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 35|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -428,7 +440,7 @@ MonoBehaviour:
       Data: 
     - Name: OnCovered
       Entry: 7
-      Data: 35|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 36|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -441,7 +453,7 @@ MonoBehaviour:
       Data: 
     - Name: OnUnCovered
       Entry: 7
-      Data: 36|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 37|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
