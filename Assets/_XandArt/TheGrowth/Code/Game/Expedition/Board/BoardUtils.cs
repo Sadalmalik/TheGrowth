@@ -58,7 +58,7 @@ namespace XandArt.TheGrowth
                     var component = card.GetOrAddComponent<CardInventoryComponent>();
                     if (component.Inventory)
                         component.Inventory.Value.Remove(card);
-                    target.Inventory.Add(card);
+                    target.Inventory.Add(card, false);
                 }
 
                 if (cardEvents && target.IsTableSlot)
