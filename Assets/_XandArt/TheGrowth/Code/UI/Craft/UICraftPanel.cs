@@ -102,10 +102,24 @@ namespace XandArt.TheGrowth.Crafting
                     });
                 }
 
-                m_Button.interactable = CanCraft(inventory);
+                RefreshAll();
             }
         }
 
+        private void RefreshButton()
+        {
+            var state = m_GameManager.CurrentGameState;
+            var inventory = state.GetInventory(m_Inventory);
+            m_Button.interactable = CanCraft(inventory);
+        }
+
+        public static void RefreshAll()
+        {
+            var panels = FindObjectsByType<UICraftPanel>(FindObjectsSortMode.None);
+            foreach (var panel in panels)
+                panel.RefreshButton();
+        }
+        
 #if UNITY_EDITOR
 
         [Button("Setup")]
