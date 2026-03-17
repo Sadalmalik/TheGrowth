@@ -335,7 +335,7 @@ MonoBehaviour:
       Data: EXPODE!
     - Name: Enabled
       Entry: 5
-      Data: false
+      Data: true
     - Name: 
       Entry: 8
       Data: 
@@ -360,7 +360,7 @@ MonoBehaviour:
       Data: EXPLODE FALCE
     - Name: Enabled
       Entry: 5
-      Data: false
+      Data: true
     - Name: 
       Entry: 8
       Data: 
