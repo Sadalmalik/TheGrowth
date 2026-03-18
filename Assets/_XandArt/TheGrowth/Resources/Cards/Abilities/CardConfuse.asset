@@ -60,7 +60,7 @@ MonoBehaviour:
       Data: 2|XandArt.TheGrowth.Charges, Code
     - Name: Amount
       Entry: 3
-      Data: 2
+      Data: 3
     - Name: ShowOnCard
       Entry: 5
       Data: true
