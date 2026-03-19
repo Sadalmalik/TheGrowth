@@ -164,6 +164,24 @@ MonoBehaviour:
     - name: CH_03
       pathPrefix: Scripts
       guid: cc753913067e9ec4a98647a8387786dd
+    - name: CH_03_Tang
+      pathPrefix: Scripts
+      guid: a5d967f876290c04b8f13496cea17f8a
+    - name: CH_03_Alexandru_Intro
+      pathPrefix: Scripts
+      guid: 6d9563244d12c954dbb76b287e7b8441
+    - name: CH_03_Lucia_Intro
+      pathPrefix: Scripts
+      guid: b6dbce2f370b1a64eae7f187994d92c7
+    - name: CH_03_Sebastien_Intro
+      pathPrefix: Scripts
+      guid: 61e88bc2b9d618e4e8fb3140a7329e8f
+    - name: CH_03_Stella_Intro
+      pathPrefix: Scripts
+      guid: e06258584c6586c41b3c979189bb6cfb
+    - name: Win_Screen
+      pathPrefix: Scripts
+      guid: 7d5a1ce2269236642a974eabd807d5a3
   - Id: Unlockables
     Resources: []
   - Id: Audio
@@ -236,7 +254,7 @@ MonoBehaviour:
   - Id: Characters/00497c1c-17ed-49a9-a7fd-3e1d8161caef
     Resources:
     - name: Jun
-      pathPrefix: Characters/Mr.Tang
+      pathPrefix: Characters/Jun
       guid: 48db179e9b61f7043a22f11eac347f3a
   - Id: Characters/e0fedd9a-34ce-4d1e-a60c-e04c577d4671
     Resources:

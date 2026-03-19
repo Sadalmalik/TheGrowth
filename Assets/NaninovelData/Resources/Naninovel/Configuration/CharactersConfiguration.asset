@@ -71,7 +71,7 @@ MonoBehaviour:
     - Lucia
     - "S\xE9bastien"
     - Alexandru
-    - Mr.Tang
+    - Jun
     - Stella
     - Solon
     - Worker
@@ -329,10 +329,11 @@ MonoBehaviour:
           visible: 0
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 0, z: 0, w: 0}
-          scale: {x: 0, y: 0, z: 0}
+          scale: {x: 0.85, y: 0.85, z: 0.85}
           tintColor: {r: 0, g: 0, b: 0, a: 0}
           lookDirection: 0
-        overriddenProperties: []
+        overriddenProperties:
+        - scale
     - Implementation: Naninovel.SpriteCharacter, Elringus.Naninovel.Runtime, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       Loader:

@@ -9,6 +9,7 @@ I found Alexandru leaning over the disassembled pistol on the table, carefully i
 @choice "He looks busy, better leave him alone." goto:.Leave
 @stop
 
+
 # Continue
 Alexandru: “Good afternoon, miss. Everything’s fine, just routine maintenance. I didn’t expect I’d be using this old guy so often. My life depends on this pistol, I can’t afford a misfire when it matters.”
 He glanced up briefly, offering a polite, reassuring nod.

@@ -1,16 +1,16 @@
 @back BG_Wall id:Wall
 @wait 0.5
 @showPrinter Dialogue
-@char Tang.Tang
+@char Jun.Jun
 
 Jun didn’t look up from the array of instruments and vials, his fingers moving with brisk, mechanical precision.
-Mr.Tang: "Miss? Preparing for the next mission? Give me a moment—I’ll assemble the supplies for the expedition."
-Mr.Tang: “And try to prioritize the herbs I mentioned. I’m aware of executives' expectations, but sick workers are... ineffective, wouldn’t you agree?”
+Jun: "Miss? Preparing for the next mission? Give me a moment—I’ll assemble the supplies for the expedition."
+Jun: “And try to prioritize the herbs I mentioned. I’m aware of executives' expectations, but sick workers are... ineffective, wouldn’t you agree?”
 A brief pause. He finally glanced at you, expression guarded.
-Mr.Tang: “And one more thing—let’s postpone our... discussion about your abilities for a more appropriate time.”
+Jun: “And one more thing—let’s postpone our... discussion about your abilities for a more appropriate time.”
 “Mr. Tang!”
 He exhaled, already turning back to his work.
-Mr.Tang: "Excuse me. I promised Solon a catalyst, and unlike superstition, chemistry runs on schedules."
+Jun: "Excuse me. I promised Solon a catalyst, and unlike superstition, chemistry runs on schedules."
 
 @hideAll
 @stop
