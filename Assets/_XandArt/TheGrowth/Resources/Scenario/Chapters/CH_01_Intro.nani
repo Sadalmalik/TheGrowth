@@ -1,5 +1,7 @@
 @back Black_Screen
 
+Good day! Thank you for playing. Please, use ENTER to skip text.
+
 Please choose an option: start from the beginning, skip the tutorial with a brief story summary, or jump straight into free mode.
 
 @choice "Start from the begining" goto:CH_02_FirstDialogue
