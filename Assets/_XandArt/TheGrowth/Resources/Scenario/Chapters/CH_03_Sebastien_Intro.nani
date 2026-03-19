@@ -1,0 +1,9 @@
+@back BG_Wall id:Wall
+@wait 0.5
+@showPrinter Dialogue
+
+Sébastien lounged in his chair, a tattered book resting lightly in his hand. Yet the moment anyone approached, he vanished like a mirage.
+It was impossible to tell whether he had truly been here, or if this was merely an illusion he had left behind for his own inscrutable reasons.
+
+@hideAll
+@stop

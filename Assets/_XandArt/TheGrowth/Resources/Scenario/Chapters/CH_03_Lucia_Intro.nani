@@ -1,0 +1,13 @@
+@back BG_Wall id:Wall
+@wait 0.5
+@showPrinter Dialogue
+
+I see Lucia instructing a group of frightened workers.
+
+@char Lucia
+Lucia: “Cartomancer! How goes the search? We need this mechanism to get to the cellars, remember?”
+Lucia: “You and Alexandru have been… effective. But effectiveness is no longer enough—we must move faster.”
+Lucia: “Yes, I’m aware everyone requires rest. We don’t have that luxury. If Alexandru isn’t ready, I will go myself. Prepare your equipment or whatever you require; we are moving now. There is no time for idle conversation.”
+
+@hideAll
+@stop

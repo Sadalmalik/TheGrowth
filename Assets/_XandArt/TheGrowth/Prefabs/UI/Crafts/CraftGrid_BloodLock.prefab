@@ -59,7 +59,7 @@ MonoBehaviour:
     - {fileID: 7078316986623308702}
     - {fileID: 11400000, guid: 6a0ef49b6ed2cab4989f5cb152412206, type: 2}
     - {fileID: 8683196991550640494}
-    - {fileID: 11400000, guid: ef1d686878031864c9b977c651ffc55c, type: 2}
+    - {fileID: 11400000, guid: 45979fa345ef78743804ce18d3845d0b, type: 2}
     - {fileID: 3047647766335075876}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -78,7 +78,7 @@ MonoBehaviour:
       Data: 1|XandArt.TheGrowth.Crafting.CraftItem, Code
     - Name: amount
       Entry: 3
-      Data: 1
+      Data: 5
     - Name: model
       Entry: 10
       Data: 0
@@ -757,7 +757,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Entity
       value: 
-      objectReference: {fileID: 11400000, guid: ef1d686878031864c9b977c651ffc55c,
+      objectReference: {fileID: 11400000, guid: 45979fa345ef78743804ce18d3845d0b,
         type: 2}
     - target: {fileID: 371145221551105978, guid: 09220b3e933894f49bd3950b98c3e63a,
         type: 3}
@@ -1419,7 +1419,7 @@ PrefabInstance:
     - target: {fileID: 371145221551105978, guid: 09220b3e933894f49bd3950b98c3e63a,
         type: 3}
       propertyPath: m_Required
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 371145221551105978, guid: 09220b3e933894f49bd3950b98c3e63a,
         type: 3}

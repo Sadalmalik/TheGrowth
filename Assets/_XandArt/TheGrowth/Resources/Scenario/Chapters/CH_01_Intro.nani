@@ -11,9 +11,11 @@ Please choose an option: start from the beginning, skip the tutorial with a brie
 
 You, as a newly hired cartomancer, are brought by airship to Watchers Island, where a ancient, blackened castle rises from the rock at the island’s heart.
 There, vampire House representatives race against time to infiltrate deep into the castle and reconstruct a mysterious blood machine, struggling with vanishing labor, spreading rumors, and mounting tension between its leaders.
-Beneath the urgency lies the sense that the season, and perhaps something far older, is slipping beyond their control. Now your task is to help find mysterious machine pieces, scattered in ancient woods around the castle. 
+Beneath the urgency lies the sense that the season, and perhaps something far older, is slipping beyond their control. Now your task is to help find mysterious machine pieces, scattered in ancient woods around the castle.
+Your task now is to help construct a Blood Mechanism to unlock the cellars by locating the necessary components scattered across the castle grounds.
 
 # SkipAll
+	@wait 0.5
 	@executeCommandScript name:DebugLog
 	@setStoryStep name:Step_FreeMode
 

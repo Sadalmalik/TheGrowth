@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: Project_BloodLock
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
-    SerializedBytes: 2901040000004700750069006400849bd054ebafc461ca069c248f63e74b
+    SerializedFormat: 2
+    SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Guid
+      Entry: 2
+      Data: 54d09b84afeb61c4ca069c248f63e74b
   title: 
   icon: {fileID: 21300000, guid: 5a794833b4eb1264e913415f2d25c975, type: 3}
   uiCraftPrefab: {fileID: 5664196904020489130, guid: 1665b5d0931c3d1408d3cebe0054a732,

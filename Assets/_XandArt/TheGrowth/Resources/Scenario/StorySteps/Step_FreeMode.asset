@@ -33,6 +33,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 2837e4f228d7de34787d6ee48dc6acb9, type: 2}
     - {fileID: 11400000, guid: 7a928ef056fe9af49a49ba3fd1f8d788, type: 2}
     - {fileID: 11400000, guid: 5116b4aeabaf94248a1c2ab62903c67d, type: 2}
+    - {fileID: 11400000, guid: 45979fa345ef78743804ce18d3845d0b, type: 2}
+    - {fileID: -5555909049971809409, guid: 7d5a1ce2269236642a974eabd807d5a3, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -47,7 +49,7 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 7
       Data: 1|XandArt.TheGrowth.StoryLine.AddItemsToInventory, Code
@@ -331,10 +333,25 @@ MonoBehaviour:
         Code]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 27|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
+      Data: 27|XandArt.TheGrowth.StoryLine.CraftTrigger, Code
+    - Name: Model
+      Entry: 10
+      Data: 17
+    - Name: MinAmount
+      Entry: 3
+      Data: 1
+    - Name: MaxAmount
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 28|XandArt.TheGrowth.StoryLine.HubRoomTrigger, Code
     - Name: Room
       Entry: 1
       Data: Room_Missions
@@ -349,10 +366,10 @@ MonoBehaviour:
       Data: 
     - Name: Condition
       Entry: 7
-      Data: 28|XandArt.TheGrowth.Logic.And, Code
+      Data: 29|XandArt.TheGrowth.Logic.And, Code
     - Name: conditions
       Entry: 7
-      Data: 29|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+      Data: 30|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
         mscorlib
     - Name: 
       Entry: 12
@@ -368,17 +385,17 @@ MonoBehaviour:
       Data: 
     - Name: Commands
       Entry: 7
-      Data: 30|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 31|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 31|XandArt.TheGrowth.Cards.ForEachCard, Code
+      Data: 32|XandArt.TheGrowth.Cards.ForEachCard, Code
     - Name: Cards
       Entry: 7
-      Data: 32|XandArt.TheGrowth.Inventories.CardsFromInventory, Code
+      Data: 33|XandArt.TheGrowth.Inventories.CardsFromInventory, Code
     - Name: Inventory
       Entry: 10
       Data: 0
@@ -393,20 +410,20 @@ MonoBehaviour:
       Data: 
     - Name: Commands
       Entry: 7
-      Data: 33|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+      Data: 34|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 34|XandArt.TheGrowth.Cards.ChangeCharges, Code
+      Data: 35|XandArt.TheGrowth.Cards.ChangeCharges, Code
     - Name: Variant
       Entry: 3
       Data: 2
     - Name: Card
       Entry: 7
-      Data: 35|XandArt.TheGrowth.Cards.IteratingCard, Code
+      Data: 36|XandArt.TheGrowth.Cards.IteratingCard, Code
     - Name: 
       Entry: 8
       Data: 
@@ -421,6 +438,84 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 37|XandArt.TheGrowth.StoryLine.TriggerComponent, Code
+    - Name: Triggers
+      Entry: 7
+      Data: 38|System.Collections.Generic.List`1[[XandArt.TheGrowth.StoryLine.IStoryTrigger,
+        Code]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 39|XandArt.TheGrowth.StoryLine.CraftTrigger, Code
+    - Name: Model
+      Entry: 10
+      Data: 17
+    - Name: MinAmount
+      Entry: 3
+      Data: 1
+    - Name: MaxAmount
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Condition
+      Entry: 7
+      Data: 40|XandArt.TheGrowth.Logic.And, Code
+    - Name: conditions
+      Entry: 7
+      Data: 41|System.Collections.Generic.List`1[[XandArt.TheGrowth.Condition, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Commands
+      Entry: 7
+      Data: 42|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 43|XandArt.TheGrowth.Story.StartDialogue, Code
+    - Name: Script
+      Entry: 10
+      Data: 18
+    - Name: AfterCommands
+      Entry: 6
       Data: 
     - Name: 
       Entry: 8

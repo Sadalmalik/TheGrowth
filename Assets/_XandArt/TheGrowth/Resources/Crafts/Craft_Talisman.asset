@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: Craft_Talisman
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
-    SerializedBytes: 2901040000004700750069006400aeb41651afab24948a1c2ab62903c67d
+    SerializedFormat: 2
+    SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Guid
+      Entry: 2
+      Data: 5116b4aeabaf94248a1c2ab62903c67d
   title: 
   icon: {fileID: 21300000, guid: a9ce9db58561aea4295da7ef96e04817, type: 3}
   uiCraftPrefab: {fileID: 5664196904020489130, guid: 3086f571c15c18b4bbc8c454d4e82a59,

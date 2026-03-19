@@ -1,0 +1,17 @@
+@back BG_Wall id:Wall
+@wait 0.5
+@showPrinter Dialogue
+
+@char Stella.Stella
+
+Stella bent over a yellowed page, her attention so complete it seemed almost reverent.
+
+Stella: “Cartomancer! It’s good to see you. How are you?”
+She glanced around, then lowered her voice to a soft, conspiratorial whisper.
+Stella: “Is it true what Alexandru told? That it’s not just ghouls anymore, but reanimated boars roaming the castle grounds? Oh Lord… how dreadful.”
+Stella: “What else might we uncover here? And if they find their way into the cellars. Just imagine what could be waiting in the depths of a vampire’s castle.”
+Sébastien's sharp, deliberate cough cut cleanly through the murmur of the hall. Stella straightened at once.
+Stella: “Oh—pardon me. He’s quite eager to see the next volume, and I must return to my work. Take care.”
+
+@hideAll
+@stop

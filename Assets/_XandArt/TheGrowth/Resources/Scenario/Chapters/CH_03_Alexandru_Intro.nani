@@ -1,0 +1,19 @@
+@back BG_Wall id:Wall
+@wait 0.5
+@showPrinter Dialogue
+@char Alexandru.Alexandru
+
+I found Alexandru leaning over the disassembled pistol on the table, carefully inspecting its parts.
+
+@choice "Ask if everything is okay." goto:.Continue
+@choice "He looks busy, better leave him alone." goto:.Leave
+@stop
+
+# Continue
+Alexandru: “Good afternoon, miss. Everything’s fine, just routine maintenance. I didn’t expect I’d be using this old guy so often. My life depends on this pistol, I can’t afford a misfire when it matters.”
+He glanced up briefly, offering a polite, reassuring nod.
+Alexandru: “Excuse me, but I’ll be working with gunpowder. It would be safer if you kept a bit of distance.”
+
+# Leave
+@hideAll
+@stop
