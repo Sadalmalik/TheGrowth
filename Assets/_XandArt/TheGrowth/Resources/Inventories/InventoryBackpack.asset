@@ -13,14 +13,11 @@ MonoBehaviour:
   m_Name: InventoryBackpack
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 29010400000047007500690064008791b10f6e85c438392e0a592174a8c5
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Guid
-      Entry: 2
-      Data: 0fb19187856e38c4392e0a592174a8c5
+    SerializationNodes: []

@@ -13,17 +13,14 @@ MonoBehaviour:
   m_Name: Expedition_Tutor_01
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 29010400000047007500690064006383864b964d34c2ca9bbbd6fe36bbf5
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Guid
-      Entry: 2
-      Data: 4b8683634d96c234ca9bbbd6fe36bbf5
+    SerializationNodes: []
   Title: The town park
   Description: Old town park near office.
   Type: 2

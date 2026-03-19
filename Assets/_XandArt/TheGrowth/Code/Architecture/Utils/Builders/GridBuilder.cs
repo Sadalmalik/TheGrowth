@@ -1,7 +1,10 @@
 ﻿using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
 using XandArt.Architecture;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace XandArt.TheGrowth
 {
@@ -15,6 +18,7 @@ namespace XandArt.TheGrowth
         public Vector3 xStep = Vector3.right;
         public Vector3 yStep = Vector3.forward;
 
+#if UNITY_EDITOR
         [Button("Build")]
         public void ExpressionLabel()
         {
@@ -48,5 +52,6 @@ namespace XandArt.TheGrowth
         {
             transform.Clear();
         }
+#endif
     }
 }

@@ -13,17 +13,14 @@ MonoBehaviour:
   m_Name: LocationHUB
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 2901040000004700750069006400f2e43728d72834de787d6ee48dc6acb9
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Guid
-      Entry: 2
-      Data: 2837e4f228d7de34787d6ee48dc6acb9
+    SerializationNodes: []
   Title: HUB
   Description: 
   Type: 1

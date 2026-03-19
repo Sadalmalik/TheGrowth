@@ -13,17 +13,14 @@ MonoBehaviour:
   m_Name: Expedition2
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 2901040000004700750069006400c97edb349c59b4122b080c98abe584d9
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Guid
-      Entry: 2
-      Data: 34db7ec9599c12b42b080c98abe584d9
+    SerializationNodes: []
   Title: thE foRest
   Description: You can't see it, but you can feel this boundary between the Orchards
     and the Forest. It presses on your ears, as if you're diving to the bottom.

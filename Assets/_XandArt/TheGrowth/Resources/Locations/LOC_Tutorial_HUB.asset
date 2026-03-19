@@ -13,17 +13,14 @@ MonoBehaviour:
   m_Name: LOC_Tutorial_HUB
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 290104000000470075006900640045eaa28f0bdb144ab81e404aa5f97f10
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Guid
-      Entry: 2
-      Data: 8fa2ea45db0b4a14b81e404aa5f97f10
+    SerializationNodes: []
   Title: Tutorial HUB
   Description: 
   Type: 1

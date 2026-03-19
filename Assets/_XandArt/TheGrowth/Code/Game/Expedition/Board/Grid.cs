@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
 using XandArt.Architecture;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace XandArt.TheGrowth
 {
@@ -25,6 +28,7 @@ namespace XandArt.TheGrowth
         
         private void InternalRebuild()
         {
+#if UNITY_EDITOR
             if (size.x <= 0 || size.y <= 0)
             {
                 transform.Clear();
@@ -66,6 +70,7 @@ namespace XandArt.TheGrowth
                 var result = PrefabUtility.InstantiatePrefab(cellPrefab, transform);
                 return (GridCell) result;
             }
+#endif
         }
     }
 }

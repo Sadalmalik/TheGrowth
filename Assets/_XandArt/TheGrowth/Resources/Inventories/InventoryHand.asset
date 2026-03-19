@@ -13,14 +13,11 @@ MonoBehaviour:
   m_Name: InventoryHand
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 2901040000004700750069006400622ea667036454b5b913182dbf06b02c
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Guid
-      Entry: 2
-      Data: 67a62e626403b554b913182dbf06b02c
+    SerializationNodes: []

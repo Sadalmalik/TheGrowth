@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e00e0762ea042689b342f010d1d316d, type: 3}
   m_Name: ProjectStats
   m_EditorClassIdentifier: 
-  TotalScriptsCount: 7
-  TotalCommandCount: 134
-  TotalWordsCount: 1518
+  TotalScriptsCount: 13
+  TotalCommandCount: 207
+  TotalWordsCount: 2005

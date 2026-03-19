@@ -13,39 +13,11 @@ MonoBehaviour:
   m_Name: DebugLog
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 290104000000470075006900640004b0af6a033844559b407d90f977c76401010800000043006f006d006d0061006e00640073002f00000000014e000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e004c00690073007400600031005b005b00580061006e0064004100720074002e00540068006500470072006f007700740068002e0043006f006d006d0061006e0064002c00200043006f00640065005d005d002c0020006d00730063006f0072006c006900620000000000060100000000000000022f010000000127000000580061006e0064004100720074002e00540068006500470072006f007700740068002e0043006f006d006d006f006e002e00440065006200750067004c006f0067002c00200043006f0064006500010000002701070000004d0065007300730061006700650001190000004c004f0047003a00200056004e0020007300630072006900700074002000690073002000720075006e006e0069006e0067002b010700000045006e00610062006c006500640001050705
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Guid
-      Entry: 2
-      Data: 6aafb004380355449b407d90f977c764
-    - Name: Commands
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[XandArt.TheGrowth.Command, Code]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|XandArt.TheGrowth.Common.DebugLog, Code
-    - Name: Message
-      Entry: 1
-      Data: 'LOG: VN script is running'
-    - Name: Enabled
-      Entry: 5
-      Data: true
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []

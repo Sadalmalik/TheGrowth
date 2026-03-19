@@ -13,17 +13,14 @@ MonoBehaviour:
   m_Name: Expedition1
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 29010400000047007500690064002d208ba12a9cc460fb4e60457d49a516
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Guid
-      Entry: 2
-      Data: a18b202d9c2a60c4fb4e60457d49a516
+    SerializationNodes: []
   Title: olD OrChaRd
   Description: The orchard at the foot of the castle hill is now wild and overgrown.
     Anyone who ventures deeper into the thicket will hear only wheezing sighs.

@@ -13,14 +13,11 @@ MonoBehaviour:
   m_Name: InventoryDeck
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 29010400000047007500690064002e265c688901943cdaf1d9420a1be9d3
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Guid
-      Entry: 2
-      Data: 685c262e01893c94daf1d9420a1be9d3
+    SerializationNodes: []

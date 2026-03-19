@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
-using UnityEngine;
+#endif
 
 namespace XandArt.Architecture
 {
-    public class AssetGuidsManager : IPreprocessBuildWithReport
+    public partial class AssetGuidsManager
     {
         // private static readonly string[] Separators = new[] { "Resources" };
-
         private static Dictionary<Guid, ScriptableAsset> _assets;
 
         public static void Initialize()
@@ -52,6 +54,17 @@ namespace XandArt.Architecture
                 .Select(asset => asset as T)
                 .Where(asset => asset != null)
                 .ToList();
+        }
+    }
+
+#if UNITY_EDITOR
+    public partial class AssetGuidsManager : IPreprocessBuildWithReport
+    {
+        public int callbackOrder => 0;
+
+        public void OnPreprocessBuild(BuildReport report)
+        {
+            UpdateGuids();
         }
 
         [MenuItem("[TheGrowth]/Update Assets Guids")]
@@ -109,12 +122,6 @@ namespace XandArt.Architecture
                 return guid;
             return null;
         }
-
-        public int callbackOrder => 0;
-
-        public void OnPreprocessBuild(BuildReport report)
-        {
-            UpdateGuids();
-        }
     }
+#endif
 }
