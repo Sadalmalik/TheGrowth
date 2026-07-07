@@ -23,7 +23,7 @@ MonoBehaviour:
   Bindings:
   - Name: Submit
     AlwaysProcess: 1
-    Keys: 0d0000004a010000
+    Keys: 0d0000004a01000044010000
     Axes: []
     Swipes: []
   - Name: Cancel
@@ -66,7 +66,7 @@ MonoBehaviour:
     Swipes: []
   - Name: Continue
     AlwaysProcess: 0
-    Keys: 0d0000000f0100004a010000
+    Keys: 0d0000000f0100004a01000043010000
     Axes:
     - AxisName: Mouse ScrollWheel
       TriggerMode: 2
