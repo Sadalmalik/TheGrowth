@@ -27,11 +27,7 @@ namespace XandArt.TheGrowth
             public int Count
             {
                 get => _count;
-                set
-                {
-                    Debug.Log($"TEST - Set Stack {_count} -> {value} for {Owner}");
-                    _count = value;
-                }
+                set => _count = value;
             }
 
             [JsonIgnore]

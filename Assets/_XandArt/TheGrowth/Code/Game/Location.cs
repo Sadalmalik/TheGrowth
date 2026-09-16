@@ -66,8 +66,6 @@ namespace XandArt.TheGrowth
 
         public async Task OnLoad()
         {
-            Debug.Log($"TEST - Location.Load: {Model} ( {Model.Scene} )");
-            
             var scene = SceneManager.GetSceneByName(Model.Scene);
             SceneManager.SetActiveScene(scene);
             

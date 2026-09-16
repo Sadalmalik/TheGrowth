@@ -36,6 +36,10 @@ namespace XandArt.TheGrowth
         private List<EntityModel> m_InList = new List<EntityModel>();
 
         [BoxGroup("Filters")]
+        [NotNull, SerializeField]
+        private List<IInventoryFilter> m_CustomFilters;
+        
+        [BoxGroup("Filters")]
         [SerializeField]
         private bool m_IncludeItemFromSlots = true;
             
@@ -104,7 +108,8 @@ namespace XandArt.TheGrowth
                 return false;
             var validDeck = m_InAnyDeck.Count == 0 || m_InAnyDeck.Any(deck => deck.Cards.Contains(model));
             var validEntity = m_InList.Count == 0 || m_InList.Contains(model);
-            return validDeck || validEntity;
+            var validFilter = m_CustomFilters == null || m_CustomFilters.All(filter => filter.IsValid(model));
+            return (validDeck || validEntity) && validFilter;
         }
 
         public void RefreshView()
@@ -133,7 +138,7 @@ namespace XandArt.TheGrowth
             while (0 < views.Count)
             {
                 var view = views.Dequeue();
-                Destroy(view);
+                Destroy(view.gameObject);
             }
         }
     }

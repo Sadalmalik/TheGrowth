@@ -1,7 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Naninovel.Async;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using XandArt.Architecture;
 using XandArt.Architecture.IOC;
 
@@ -24,6 +28,18 @@ namespace XandArt.TheGrowth
         [BoxGroup("Settings")]
         [SerializeField]
         private string m_SlotName;
+
+        [FormerlySerializedAs("m_IsOwnerSelector"), BoxGroup("Owner Selector")]
+        [SerializeField]
+        private bool m_IsHeroSelector;
+
+        [BoxGroup("Owner Selector")]
+        [SerializeField]
+        private List<UIInventory> m_RefreshTargets;
+
+        [BoxGroup("Owner Selector")]
+        [SerializeField]
+        private List<UISlot> m_ClearSlots;
 
         [Inject]
         private GameManager m_GameManager;
@@ -52,7 +68,7 @@ namespace XandArt.TheGrowth
             DropItem(item);
         }
 
-        private void DropItem(UIItem uiItemNew)
+        private async void DropItem(UIItem uiItemNew)
         {
             var fromInventory = m_GameManager.CurrentGameState.GetInventory(uiItemNew.Inventory);
             var intoInventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
@@ -62,7 +78,7 @@ namespace XandArt.TheGrowth
             {
                 var oldItemSlot = uiItemOld.Data.GetComponent<CardInventoryComponent>();
                 oldItemSlot.SlotName = null;
-                
+
                 if (fromInventory != intoInventory)
                 {
                     intoInventory.Remove(uiItemOld.Data);
@@ -72,17 +88,48 @@ namespace XandArt.TheGrowth
                 uiItemOld.TargetTransform = uiItemNew.LastParent;
                 uiItemOld.OnEndDrag(null);
             }
-            var newItemSlot = uiItemNew.Data.GetOrAddComponent<CardInventoryComponent>();
+
+            var entity = uiItemNew.Data;
+            var newItemSlot = entity.GetOrAddComponent<CardInventoryComponent>();
             newItemSlot.SlotName = m_SlotName;
-            
+
             if (fromInventory != intoInventory)
             {
-                fromInventory.Remove(uiItemNew.Data);
-                intoInventory.Add(uiItemNew.Data);
+                fromInventory.Remove(entity);
+                intoInventory.Add(entity);
             }
 
             uiItemNew.TargetTransform = m_Container;
             uiItemNew.Inventory = m_Inventory;
+
+            await Task.Delay(16);
+
+            if (m_IsHeroSelector)
+                HandleHeroSelector(entity);
+        }
+
+        // Супер-костыль
+        private void HandleHeroSelector(CompositeEntity heroEntity)
+        {
+            AbilityOwnerFilter.ActiveHero = heroEntity.Model;
+
+            foreach (var slot in m_ClearSlots)
+            {
+                var sotItem = slot.m_Container.GetComponentInChildren<UIItem>();
+                if (sotItem == null)
+                    continue;
+                var entity = sotItem.Data;
+                var inventoryComponent = entity.GetComponent<CardInventoryComponent>();
+                var fromInventory = inventoryComponent.Inventory.Value;
+                var intoInventory = m_GameManager.CurrentGameState.GetInventory(m_Inventory);
+                fromInventory.Remove(entity);
+                intoInventory.Add(entity);
+                inventoryComponent.SlotName = null;
+                Destroy(sotItem.gameObject);
+            }
+
+            foreach (var target in m_RefreshTargets)
+                target.RefreshView();
         }
 
         public void RefreshView()
