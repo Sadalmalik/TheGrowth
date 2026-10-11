@@ -1,0 +1,108 @@
+filters:
+  and:
+    - file.inFolder("tasks")
+    - type == "task"
+properties:
+  file.name:
+    displayName: Задача
+  status:
+    displayName: Статус
+  kind:
+    displayName: Вид
+  area:
+    displayName: Область
+  priority:
+    displayName: Приоритет
+  assignee:
+    displayName: Исполнитель
+  epic:
+    displayName: Эпик
+  depends:
+    displayName: После
+  source:
+    displayName: Источник
+  updated:
+    displayName: Изменена
+views:
+  - type: table
+    name: Активные
+    filters:
+      and:
+        - status != "done"
+        - status != "dropped"
+    groupBy:
+      property: status
+      direction: DESC
+    groupOrder:
+      - todo
+      - backlog
+    order:
+      - file.name
+      - kind
+      - area
+      - priority
+      - assignee
+      - epic
+    sort:
+      - property: priority
+        direction: ASC
+    columnSize:
+      note.area: 162
+  - type: table
+    name: Эпики
+    filters:
+      and:
+        - kind == "epic"
+    order:
+      - file.name
+      - status
+      - priority
+      - depends
+      - assignee
+  - type: table
+    name: Проверить
+    filters:
+      and:
+        - status == "verify"
+    order:
+      - file.name
+      - kind
+      - area
+      - source
+  - type: table
+    name: Баги
+    filters:
+      and:
+        - kind == "bug"
+        - status != "done"
+        - status != "dropped"
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - area
+      - priority
+      - assignee
+  - type: table
+    name: По областям
+    groupBy:
+      property: area
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - kind
+      - priority
+      - assignee
+  - type: table
+    name: Все
+    order:
+      - file.name
+      - status
+      - kind
+      - area
+      - priority
+      - assignee
+      - epic
+      - updated

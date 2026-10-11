@@ -71,3 +71,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Obsidian (.docs vault): local window state
+/.docs/.obsidian/workspace*.json
+/.docs/.obsidian/cache
