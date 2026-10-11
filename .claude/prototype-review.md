@@ -73,12 +73,12 @@
 
 | Прототип | Новая схема | Действие |
 |---|---|---|
-| `IOC/Container`, `Inject`, `SharedObject` | `XandArt.Core` | перенести как есть, + Dispose дочерних |
+| `IOC/Container`, `Inject`, `SharedObject` | Architecture (`XandArt.Architecture`) | перенести как есть, + Dispose дочерних |
 | `SignalBus/EventBus` (глобальный) | доменные события сессии | заменить, без глобального экземпляра |
 | `Game`, `GameManager`, `LocationManager` | `GameFlow`, `Session`, `LocationScope` | переписать |
 | `PersistentState`, `PersistenceManager`, `Ref<T>`, `AssetRef<T>`, конвертеры | `SaveService`, `ISaveable`, DTO, `ContentRegistry` | переписать |
 | `Entity`, `CompositeEntity`, `EntityModel` | `CardInstance`, `CardModel` (Settings → Behaviour → Save) | переписать по схеме GeekyHouse Game Entity |
-| `Inventory`, `SlotEntity`, `BoardEntity` | `ZoneSystem`, зоны | переписать |
+| `Inventory`, `SlotEntity`, `BoardEntity` | `SlotSystem`, слоты | переписать |
 | `CardBrain` (события, `AllowedMoves`, `SpawnSlot`) | `CardBrainSettings` + хуки (команды) | перенести семантику |
 | `Scripting/*` (команды, эвалуаторы, кондишены) | Model/Scripting на глаголах | перенести; `AfterCommands` → асинхронное ожидание; `[SerializeReference]` |
 | `Context`, `GlobalData` | `Context` с сессией, без `Global` | доработать |

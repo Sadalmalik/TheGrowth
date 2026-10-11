@@ -5,7 +5,7 @@ kind: feature
 area: cards
 priority: high
 assignee:
-epic: "[[E03 Модель карт и зон]]"
+epic: "[[E03 Модель карт и слотов]]"
 source: обсуждение 2026-10-11
 created: 2026-10-11
 updated: 2026-10-11

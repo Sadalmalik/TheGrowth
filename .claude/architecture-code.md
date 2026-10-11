@@ -1,80 +1,106 @@
 # TheGrowth — архитектура: структура кода, сборки, конвенции, тесты
 
 Часть детальной спецификации. Короткая версия — `CLAUDE.md` в корне.
-Статус: рекомендация от 2026-10-10, требует подтверждения автором.
+Статус: слои решены 2026-10-11.
 
-## Модульность: выбор подхода
+## Слои (решено 2026-10-11)
 
-Опыт автора:
-- GeekyHouse — модули-пакеты (код + конфиги + ассеты), группы Thirdparty → Architecture →
-  Subsystem → General → Core → Submodule, зависимости только вниз. Плюс: порядок. Минус:
-  накладные расходы на пакеты и мешающие границы.
-- Owlcat — ~90% кода в одной сборке, системы разложены по папкам.
-
-Для TheGrowth (одна игра, маленькая команда, работа вечерами):
-- Пакеты-модули не окупаются: переиспользование между проектами — не цель. Исключение —
-  инфраструктура (IOC, утилиты, процедурные анимации карт), которую автор переносит между
-  проектами (GeekyHouse → TheGrowth → TotalShooter). Её можно вынести в локальный UPM-пакет позже.
-- Одна сборка не даёт главного, что нужно проекту: гарантии, что логика не зависит от сцены.
-  Без неё не получится headless-тестов, и логика снова протечёт во вьюхи.
-- Решение: **слои — сборками, системы — папками.** 5–6 asmdef с запретом зависимостей вверх;
-  внутри каждой сборки папки по системам.
-
-## Сборки
+Крупные слои сборками, системы внутри слоя — папками. Зависимости только вниз (слой может
+использовать любой нижний). Наверх — только через интерфейсы, объявленные нижним слоем
+(реализует верхний), и через события `EventBus`. Циклов нет.
 
 ```
-TheGrowth.Game  (композиция: Bootstrap, GameFlow, интеграция Naninovel, SceneService)
-   │  ├──────────────► TheGrowth.UI            (MVVM: слои, VM, вьюхи)
-   │  ├──────────────► TheGrowth.Presentation  (3D: CardView, ZoneView, анимации, ввод, камера)
-   ▼  ▼                       │
-TheGrowth.Model  ◄────────────┘   (состояние, системы, правила, команды, конфиги-SO, сейв-DTO)
-   │
-   ▼
-XandArt.Core     (IOC Container, события, утилиты, zip/IO сохранений, базовые MVVM-классы)
+Game          GameFlow · Bootstrap · SceneService · композиция (какие интеграции подключить)
+                 ▼                          ▲ (пунктир) IFlowRequests, IDialogueService
+Presentation  CardView · SlotView · анимации карт · ввод · камера  ║  UI: слои · View · ViewModel
+                 ▼                          ▲ (пунктир) ICardAnimator, события EventBus
+Model         карты · слоты · сюжет · квесты · крафт · экспедиция · конкретные команды · секции сейва
+                 ▼
+Core          база команд · контент и ID · база сущности · ядро сохранений · локализация ·
+              ядро аналитики · ядро игровых сервисов · основа настроек
+                 ▼
+Architecture  IOC · EventBus · утилиты · процедурные анимации (AnimationProfile)
 
-TheGrowth.Editor          → все (инспекторы, валидаторы, реестр ID, миграция Odin)
-TheGrowth.Tests.EditMode  → Model, Core (headless-сессии)
-TheGrowth.Tests.PlayMode  → все (смоук сцен)
+Integrations  Steam · аналитика (Amplitude, ...) · хранилища сохранений (файлы, Web) — каждая
+              интеграция: своя сборка, зависит от Core + SDK, подключается в Game через DI
 ```
 
-Правила зависимостей:
-- Model не ссылается на Presentation, UI, Game, Naninovel, DOTween. Нужное снаружи — через
-  интерфейсы, объявленные в Model (`IFlowRequests`, `IDialogueService`), реализации — в Game.
-- Model может использовать `UnityEngine` для ScriptableObject-конфигов и математики, но не
-  `MonoBehaviour`, не `SceneManager`, не `Time`, не `UnityEngine.Random`.
-- UI не ссылается на Presentation (и наоборот); общее — через Model.
-- Сторонние: Model — Newtonsoft; Presentation — DOTween (Spine позже); UI — R3,
-  ObservableCollections; Game — Naninovel.
+Критерий Core / Architecture (решено 2026-10-11): Architecture — как связан код (DI, события,
+асинхронность, IO, твины), без понятий игры и контента. Core — язык, на котором описываются
+контент и логика.
+
+- Presentation и UI — один уровень, друг на друга не ссылаются.
+- Model не ссылается на Presentation, UI, Game, Naninovel, DOTween. Model может использовать
+  `UnityEngine` для ScriptableObject-конфигов и математики, но не `MonoBehaviour`, не
+  `SceneManager`, не `Time`, не `UnityEngine.Random`.
+- Пример цепочки «ввод → команда → анимация»: ввод (Presentation) вызывает систему модели (вниз);
+  команда меняет слот карты и ждёт `ICardAnimator.Move(...)` — интерфейс объявлен в Model,
+  реализация в Presentation. В headless-тестах `ICardAnimator` — заглушка.
+- Тип конфига живёт в слое, код которого его читает. Ассеты конфигов — в `Content/` по типам.
+- Конкретные команды можно объявлять в любом слое выше Core (`MoveCamera` — Presentation,
+  `ShowUIGroup` — UI, `StartDialogue`, `GoToLocation` — Game): конфиг в Model хранит их через
+  `[SerializeReference]`, не зная типа. Такие команды в тестах без сцены не исполняются — для них
+  лёгкая тестовая сцена.
+
+## Гибрид: слои + модули-интеграции (решено 2026-10-11)
+
+- Основная игровая логика — в модулях-слоях (по сборке на слой).
+- Всё, что зависит от внешнего мира (платформы, сервисы аналитики, хранилища файлов), —
+  отдельные модули-интеграции: своя сборка на интеграцию, зависят от интерфейсов Core и SDK,
+  подключаются через DI в Game. Про них не знает никто, кроме Game.
+- Схема как у аналитики в GeekyHouse: ядро с интерфейсами в Core → мосты-сборщики в слое своей
+  системы (один класс на систему, подписка на её события) → интеграции реализуют приёмники.
+
+| Сквозная система | Ядро (Core) | Мосты | Интеграции (отдельные сборки) |
+|---|---|---|---|
+| Аналитика | приём событий, интерфейсы источников и приёмников | класс на систему, в сборке слоя системы | Amplitude, Firebase, ... |
+| Игровые сервисы платформы | общие интерфейсы (ачивки, облако, ...) | по необходимости | Steam, мобильные сторы |
+| Сохранения | API слотов, `ISaveable`, упаковка, миграции, интерфейс хранилища | — | файлы (PC, мобильные), Web |
+| Настройки игры | основа: настройки — ScriptableObject, переопределения игрока хранятся рядом с сейвами или в PlayerPrefs; система со своими настройками реализует интерфейс | — | — |
+| Локализация | система локализации и тип локализуемой строки для конфигов | — | — |
+
+
+Сборки — **одна на слой** (решено 2026-10-11). Не по сборке на модуль: внутри слоя возможны
+перекрёстные ссылки между модулями (в GeekyHouse это приводило к иерархиям из 3–4 мелких модулей).
+
+| Слой | Сборка | Папка |
+|---|---|---|
+| Architecture | `TheGrowth.Architecture` | `Assets/_XandArt/TheGrowth/Code/Architecture/` |
+| Core | `TheGrowth.Core` | `.../Code/Core/` |
+| Model | `TheGrowth.Model` | `.../Code/Model/` |
+| Presentation | `TheGrowth.Presentation` | `.../Code/Presentation/` |
+| UI | `TheGrowth.UI` | `.../Code/UI/` |
+| Game | `TheGrowth.Game` | `.../Code/Game/` |
+| Integrations | `TheGrowth.Integrations.<Модуль>` (по сборке на интеграцию) | `.../Code/Integrations/<Модуль>/` |
+| — | `TheGrowth.Editor`, `TheGrowth.Tests.EditMode`, `TheGrowth.Tests.PlayMode` | `.../Code/Editor/`, `.../Tests/` |
+
+Сторонние: Architecture — DOTween (процедурные анимации); Core — Newtonsoft; Presentation — DOTween
+(Spine позже); UI — R3, ObservableCollections; Game — Naninovel.
 
 ## Папки
 
 ```
-Assets/_XandArt/
-    Core/                              XandArt.Core.asmdef
-    TheGrowth/
-        Code/
-            Model/                     TheGrowth.Model.asmdef
-                Cards/  Zones/  Story/  Quests/  Craft/  Expedition/  Locations/
-                Actions/  Visual/  Scripting/  Saves/  Content/  Session/
-            Presentation/              TheGrowth.Presentation.asmdef
-                Cards/  Zones/  Animation/  Interaction/  Camera/  Hub/
-            UI/                        TheGrowth.UI.asmdef
-                Layers/<LayerName>/    (View + VM рядом)
-                Widgets/
-            Game/                      TheGrowth.Game.asmdef
-                Bootstrap/  Flow/  Naninovel/
-            Editor/                    TheGrowth.Editor.asmdef
-        Tests/
-            EditMode/                  TheGrowth.Tests.EditMode.asmdef
-            PlayMode/                  TheGrowth.Tests.PlayMode.asmdef
-        Content/                       конфиги (ScriptableObject) по типам
-            Cards/<Группа>/<Карта>.asset
-            Decks/  Locations/  Story/  Crafts/  Quests/  Zones/
-        Art/  Audio/  Fonts/  Materials/  Prefabs/  Scenes/  Shaders/
+Assets/_XandArt/TheGrowth/
+    Code/
+        Architecture/  Core/  Model/  Presentation/  UI/  Game/  Editor/
+        _Legacy/                       код прототипа с его asmdef `Code` (временно)
+        Integrations/<Модуль>/         модули-интеграции, asmdef на модуль
+    Tests/
+        EditMode/  PlayMode/
+    Content/                           конфиги (ScriptableObject) по типам
+        Cards/<Группа>/<Карта>.asset + файл скриптов карты
+        Scripts/                       общеигровые скрипты (хуки для кнопок UI, триггеров)
+        Animations/  Decks/  Locations/  Story/  Crafts/  Quests/
+    Art/  Audio/  Fonts/  Materials/  Prefabs/  Scenes/  Shaders/
 ```
 
+- Внутри слоя — папки по модулям/системам: `Cards/`, `Slots/`, `Story/`, `ProceduralAnim/`, ...
+- Сейчас в `Code/` лежат папки прототипа `Architecture/`, `Game/`, `UI/` и asmdef `Code` в корне —
+  результат прототипирования, раскладку можно менять свободно.
+  Перед созданием слоёв прототип переносится в `Code/_Legacy/` вместе с asmdef (файлы
+  переносятся с `.meta` — GUID скриптов и ссылки в сценах сохраняются). Модули из
+  `Assets/_XandArt/Modules` (процедурные анимации, утилиты) переносятся в `Code/Architecture/`.
 - Конфиги не лежат в `Resources`: доступ через `ContentRegistry` (см. architecture-data.md).
-- Код прототипа (`Code/Architecture`, `Code/Managers`, ...) удаляется по мере переноса.
 
 ## Конвенции
 
@@ -83,8 +109,8 @@ Assets/_XandArt/
 комментариев-разделителей, директивы без отступа.
 
 Дополнительно:
-- Unity 6000.0 → C# 9. Нет extended property patterns (`a.B.C: x`), file-scoped namespaces,
-  `required`, raw strings. Property patterns — только вложенные: `x is { A: { B: true } }`.
+- Namespace — только с явным телом `namespace X { ... }`, без file-scoped.
+- Unity 6000.0 → C# 9: property patterns — только вложенные `x is { A: { B: true } }`.
 - Приватные поля — `m_Field` (решено 2026-10-11).
 - Постфиксы классов (из Naming Convention GeekyHouse): `Manager` (управляет множеством),
   `Controller` (одной сущностью), `View`, `Widget`, `Model` (конфиг сущности), `Converter`,
@@ -101,7 +127,7 @@ Assets/_XandArt/
 
 ## Тесты
 
-- EditMode, headless: `TestSession.Create(save)` → действия → проверка зон, флагов, переменных карт. Основной вид тестов для правил и скриптов карт.
+- EditMode, headless: `TestSession.Create(save)` → действия → проверка слотов, флагов, переменных карт. Основной вид тестов для правил и скриптов карт.
 - Смоук скриптов карт: каждый хук каждой карты на тестовом поле.
 - Миграции сейвов: фикстура старого сейва → чтение → проверка.
 - Валидаторы контента (ID, ссылки, missing types) как тесты — запускаются вместе с остальными.

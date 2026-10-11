@@ -1,7 +1,7 @@
 # TheGrowth — архитектура: жизненный цикл игры
 
 Часть детальной спецификации. Короткая версия — `CLAUDE.md` в корне. Связанные файлы:
-- [architecture-data.md](architecture-data.md) — модель данных, карты, зоны, сохранения.
+- [architecture-data.md](architecture-data.md) — модель данных, карты, слоты, сохранения.
 - [architecture-logic.md](architecture-logic.md) — исполнение логики (асинхронные команды).
 - [architecture-scripting.md](architecture-scripting.md) — команды, `[SerializeReference]`, миграция с Odin.
 - [architecture-presentation.md](architecture-presentation.md) — 3D, карты на сцене, UI/MVVM.
@@ -12,8 +12,7 @@
 
 ## Проблема прототипа
 
-Состояние распределено между `GameManager`, `GameState` (сам грузит локации), `LocationManager`,
-`ExpeditionManager` и статикой (`Game.Container`, `Game.BaseContext`, `PersistentState.Active`).
+Состояние распределено между `GameManager`, `GameState` (сам грузит локации), `LocationManager`, `ExpeditionManager` и статикой (`Game.Container`, `Game.BaseContext`, `PersistentState.Active`).
 Три разных пути старта (`StartNewGame`, `TryLoadLastGame`, `LoadGame`) с разным порядком
 действий. Переходы между локациями — `async void` с параллельными Unload/Load. Подробности —
 [prototype-review.md](prototype-review.md).
@@ -38,8 +37,8 @@ Boot ──► MainMenu ◄────────────────┐
 | Scope | Живёт | Содержимое |
 |---|---|---|
 | Global | всё время работы приложения | `GameFlow`, `SceneService`, `SaveService` (IO, слоты), `SettingsService`, `AudioService`, `UIRoot`/`UIManager`, `InputService` |
-| Session | от NewGame/LoadGame до ExitToMenu | системы модели: `CardRegistry`, `ZoneSystem`, `StorySystem`, `QuestSystem`, `FlagsSystem`, `CraftSystem`, `ExpeditionSystem`, `ScriptRunner`, `Rng` |
-| Location | пока загружена сцена локации | презентеры сцены: привязка `ZoneView`, `CardViewFactory`, `CardInteractionController`, камера локации |
+| Session | от NewGame/LoadGame до ExitToMenu | системы модели: `CardRegistry`, `SlotSystem`, `StorySystem`, `QuestSystem`, `FlagsSystem`, `CraftSystem`, `ExpeditionSystem`, `ScriptRunner`, `Rng` |
+| Location | пока загружена сцена локации | презентеры сцены: привязка `SlotView`, `CardViewFactory`, `CardInteractionController`, камера локации |
 
 Правила:
 - Объект живёт в самом узком scope, где он нужен. Всё сессионное уничтожается вместе с сессией.
