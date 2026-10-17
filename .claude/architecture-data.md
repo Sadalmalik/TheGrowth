@@ -114,7 +114,7 @@ CardModel (SO)                 CardInstance (runtime)           CardSave (DTO)
 | `CardRegistry` | все `CardInstance`, счётчик ID | `cards` |
 | `SlotSystem` | все слоты и порядок карт в них | `slots` |
 | `StorySystem` | текущий `StoryStep`, история шагов | `story` |
-| `FlagsSystem` | сюжетные переменные (мост в Naninovel) | `flags` |
+| `FlagsSystem` | сюжетные переменные (единый контейнер переменных — T052) | `flags` |
 | `QuestSystem` | активные/завершённые квесты | `quests` |
 | `CraftSystem` | доступные крафты, проект | `craft` |
 | `LocationSystem` | текущая локация, открытые локации | `locations` |
@@ -217,9 +217,7 @@ public abstract class SaveableSystem<TSave> : SharedObject, ISaveable where TSav
 - Миграции работают с данными, а не с игровыми классами — переименование кода на них не влияет.
 - Тест на каждую миграцию: фикстура старого сейва → чтение → проверка состояния.
 
-## Naninovel
+## Диалоги и переменные
 
-- Источник правды по сюжету — `StorySystem` (`StoryStep`) и `FlagsSystem`.
-- Naninovel читает и пишет их через свои команды (`setStoryStep`, `executeCommandScript` уже
-  есть) и мост переменных (`FlagsSystem` ↔ custom variables Naninovel) — задача в трекере.
-- Состояние Naninovel в наш сейв не пишется: сохранения во время диалога нет.
+- Диалоги — своя система (см. architecture-dialogs.md), сценарии на том же языке скриптов.
+- Единый контейнер дизайнерских переменных на игру — общий для скриптов карт и диалогов (T052).

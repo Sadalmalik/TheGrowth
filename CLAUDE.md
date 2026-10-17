@@ -5,7 +5,7 @@
 и друзьями вечерами, цель — релиз в Steam. Аудитория — девушки, далёкие от IT (моддинга нет).
 
 Unity 6000.3 (C# 9). Платформы: PC (Steam), вероятно Android, iOS, Web (itch.io); macOS нет.
-Плагины: DOTween, Odin Inspector (уходим), Naninovel (возможна замена своим решением).
+Плагины: DOTween, Odin Inspector (уходим), Naninovel (уходим — своя диалоговая система).
 Планируются: R3 + ObservableCollections, Spine.
 
 Код прототипа: `Assets/_XandArt/TheGrowth/Code`. Контент: `Assets/_XandArt/TheGrowth`.
@@ -18,6 +18,7 @@ Unity 6000.3 (C# 9). Платформы: PC (Steam), вероятно Android, i
 - [.claude/architecture-scripting.md](.claude/architecture-scripting.md) — система команд, миграция с Odin
 - [.claude/architecture-presentation.md](.claude/architecture-presentation.md) — 3D, ввод, хаб, UI на MVVM
 - [.claude/architecture-code.md](.claude/architecture-code.md) — сборки, папки, конвенции, тесты
+- [.claude/architecture-dialogs.md](.claude/architecture-dialogs.md) — своя диалоговая система (вместо Naninovel)
 - [.claude/prototype-review.md](.claude/prototype-review.md) — баги прототипа и карта переноса кода
 
 Документация и задачи — Obsidian-хранилище `.docs/`. Описание игры (хаб, экспедиция) —

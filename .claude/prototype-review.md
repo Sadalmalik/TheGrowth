@@ -87,4 +87,4 @@
 | `ExpeditionManager` | `ExpeditionSystem` (модель) + `CardInteractionController` (ввод) + анимации (Presentation) | разделить |
 | `EntityCardView` | `CardView` (3D) | переписать, анимации — из GeekyHouse |
 | `WidgetBase`, `UI/*` | MVVM (`View<TVM>`, `ViewModel`, слои) | переписать |
-| `NaniCommands/*` | Game/Naninovel | перенести |
+| `NaniCommands/*` | — | не переносится: своя диалоговая система |

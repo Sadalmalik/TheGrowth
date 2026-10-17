@@ -30,7 +30,7 @@ Integrations  Steam · аналитика (Amplitude, ...) · хранилища
 контент и логика.
 
 - Presentation и UI — один уровень, друг на друга не ссылаются.
-- Model не ссылается на Presentation, UI, Game, Naninovel, DOTween. Model может использовать
+- Model не ссылается на Presentation, UI, Game, DOTween. Model может использовать
   `UnityEngine` для ScriptableObject-конфигов и математики, но не `MonoBehaviour`, не
   `SceneManager`, не `Time`, не `UnityEngine.Random`.
 - Пример цепочки «ввод → команда → анимация»: ввод (Presentation) вызывает систему модели (вниз);
@@ -75,7 +75,7 @@ Integrations  Steam · аналитика (Amplitude, ...) · хранилища
 | — | `TheGrowth.Editor`, `TheGrowth.Tests.EditMode`, `TheGrowth.Tests.PlayMode` | `.../Code/Editor/`, `.../Tests/` |
 
 Сторонние: Architecture — DOTween (процедурные анимации); Core — Newtonsoft; Presentation — DOTween
-(Spine позже); UI — R3, ObservableCollections; Game — Naninovel.
+(Spine позже); UI — R3, ObservableCollections; Presentation/UI — Spine (позже).
 
 ## Папки
 
@@ -95,11 +95,11 @@ Assets/_XandArt/TheGrowth/
 ```
 
 - Внутри слоя — папки по модулям/системам: `Cards/`, `Slots/`, `Story/`, `ProceduralAnim/`, ...
-- Сейчас в `Code/` лежат папки прототипа `Architecture/`, `Game/`, `UI/` и asmdef `Code` в корне —
-  результат прототипирования, раскладку можно менять свободно.
-  Перед созданием слоёв прототип переносится в `Code/_Legacy/` вместе с asmdef (файлы
-  переносятся с `.meta` — GUID скриптов и ссылки в сценах сохраняются). Модули из
-  `Assets/_XandArt/Modules` (процедурные анимации, утилиты) переносятся в `Code/Architecture/`.
+- Прототип перенесён в `Code/_Legacy/` вместе с asmdef `Code` (2026-10-17, T050); namespace и
+  имя сборки не менялись — данные Odin ссылаются на полные имена типов. Тесты прототипа — в
+  `Tests/_Legacy/`, редакторский код прототипа и выгрузка скриптов — в `Code/_Legacy/Editor/`
+  (сборка `Code.Editor`).
+- Выгрузка скриптов прототипа в текст — `Export/Scripts/` в корне репозитория (T051).
 - Конфиги не лежат в `Resources`: доступ через `ContentRegistry` (см. architecture-data.md).
 
 ## Конвенции
@@ -110,6 +110,8 @@ Assets/_XandArt/TheGrowth/
 
 Дополнительно:
 - Namespace — только с явным телом `namespace X { ... }`, без file-scoped.
+- Namespace новых сборок следуют имени сборки (`TheGrowth.Architecture.IOC`, `TheGrowth.Core...`);
+  код прототипа в `_Legacy` сохраняет `XandArt.*` (данные Odin ссылаются на полные имена типов).
 - Unity 6000.0 → C# 9: property patterns — только вложенные `x is { A: { B: true } }`.
 - Приватные поля — `m_Field` (решено 2026-10-11).
 - Постфиксы классов (из Naming Convention GeekyHouse): `Manager` (управляет множеством),

@@ -95,7 +95,7 @@ CreateSession(SaveGame save)
 
 Сохранение разрешено, только когда `GameFlow.CanSave == true`:
 - нет активного перехода;
-- нет активного диалога (Naninovel);
+- нет активного диалога;
 - нет ни одного активного командного скрипта (см. architecture-logic.md).
 
 Автосейв — по событиям (вход в хаб, конец хода экспедиции, конец экспедиции), не
@@ -263,5 +263,5 @@ public sealed class Session : IDisposable
 
 - Логика игры (действия игрока, скрипты карт) не знает о `GameFlow`. Команда `GoToLocation`
   вызывает `IFlowRequests.Request(new EnterLocationRequest(...))` через интерфейс из Model.
-- Диалоги: `DialogueService` (сборка Game, обёртка Naninovel) выставляет `IsDialogueActive`.
+- Диалоги: диалоговая система (см. architecture-dialogs.md) выставляет `IsDialogueActive`.
 - UI-слои переключаются по смене `FlowState` (см. architecture-presentation.md).
