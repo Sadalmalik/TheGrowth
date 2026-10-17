@@ -1,0 +1,20 @@
+{
+    "name": "TheGrowth.Game",
+    "rootNamespace": "TheGrowth.Game",
+    "references": [
+        "TheGrowth.UI",
+        "TheGrowth.Presentation",
+        "TheGrowth.Model",
+        "TheGrowth.Core",
+        "TheGrowth.Architecture"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

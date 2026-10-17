@@ -2,30 +2,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using XandArt.Architecture.Utils;
+using TheGrowth.Architecture.Utils;
 
-namespace XandArt.Architecture.IOC
+namespace TheGrowth.Architecture.IOC
 {
     public class Container
     {
-        private static int _counter = 0;
-        private Dictionary<Type, IShared> _shareds;
+        private static int m_Counter = 0;
+        private Dictionary<Type, IShared> m_Shareds;
 
         public string Name { get; private set; }
         public bool Active { get; private set; }
         public Container Parent { get; private set; }
         public List<Container> Childs { get; private set; }
-        public List<IShared> SharedObjects => _shareds.Values.ToList();
+        public List<IShared> SharedObjects => m_Shareds.Values.ToList();
 
         public Container(Container parent = null, string name = null)
         {
-            Name = name ?? $"Container#{_counter:0000}";
-            _counter++;
+            Name = name ?? $"Container#{m_Counter:0000}";
+            m_Counter++;
 
             Active = false;
             Parent = parent;
             Childs = new List<Container>();
-            _shareds = new Dictionary<Type, IShared>();
+            m_Shareds = new Dictionary<Type, IShared>();
 
             if (Parent != null)
                 Parent.Childs.Add(this);
@@ -36,29 +36,29 @@ namespace XandArt.Architecture.IOC
             return Add(new T());
         }
 
-        public T Add<T>(T shared, bool addSubtypes=true) where T : IShared
+        public T Add<T>(T shared, bool addSubtypes = true) where T : IShared
         {
             Type type = typeof(T);
-            if (_shareds.ContainsKey(type))
+            if (m_Shareds.ContainsKey(type))
                 throw new ContainerTypeException($"Container already contains instance of Type '{type.Name}'");
-            _shareds.Add(type, shared);
+            m_Shareds.Add(type, shared);
 
-            if (addSubtypes)
+            if (!addSubtypes)
+                return shared;
+
+            Type inter = typeof(ISharedInterface);
+            var subtypes = type.GetInterfaces();
+            foreach (var sub in subtypes)
             {
-                Type inter = typeof(ISharedInterface);
-                var subtypes = @type.GetInterfaces();
-                foreach (var sub in subtypes)
-                {
-                    if (sub == null || sub == inter || sub == typeof(IShared))
-                        continue;
+                if (sub == null || sub == inter || sub == typeof(IShared))
+                    continue;
 
-                    if (!inter.IsAssignableFrom(sub))
-                        continue;
+                if (!inter.IsAssignableFrom(sub))
+                    continue;
 
-                    if (_shareds.ContainsKey(sub))
-                        throw new ContainerTypeException($"Container already contains instance of Interface '{sub.Name}'");
-                    _shareds.Add(sub, shared);
-                }
+                if (m_Shareds.ContainsKey(sub))
+                    throw new ContainerTypeException($"Container already contains instance of Interface '{sub.Name}'");
+                m_Shareds.Add(sub, shared);
             }
 
             return shared;
@@ -71,14 +71,12 @@ namespace XandArt.Architecture.IOC
 
         public object Get(Type type)
         {
-            if (!_shareds.TryGetValue(type, out var shared))
-            {
-                if (Parent == null)
-                    throw new ContainerTypeException($"Container doesn't contains element of Type '{type.Name}'");
-                return Parent.Get(type);
-            }
+            if (m_Shareds.TryGetValue(type, out var shared))
+                return shared;
 
-            return shared;
+            if (Parent == null)
+                throw new ContainerTypeException($"Container doesn't contains element of Type '{type.Name}'");
+            return Parent.Get(type);
         }
 
         public List<I> GetAll<I>(bool includeParents = false, List<I> objects = null)
@@ -91,10 +89,10 @@ namespace XandArt.Architecture.IOC
             if (includeParents)
                 Parent.GetAll<I>(true, objects);
 
-            foreach (var shared in _shareds.Values)
+            foreach (var shared in m_Shareds.Values)
             {
                 if (shared.GetType().GetInterfaces().Contains(target))
-                    objects.Add((I)shared);
+                    objects.Add((I) shared);
             }
 
             return objects;
@@ -106,12 +104,12 @@ namespace XandArt.Architecture.IOC
                 throw new ContainerInitializationException(
                     $"Can't initialize '{Name}': Parent container '{Parent.Name}' is not active!");
 
-            foreach (var pair in _shareds)
+            foreach (var pair in m_Shareds)
                 InjectAt(pair.Key, pair.Value);
 
             if (initObjects)
             {
-                foreach (var pair in _shareds)
+                foreach (var pair in m_Shareds)
                     pair.Value.Init();
             }
 
@@ -127,7 +125,7 @@ namespace XandArt.Architecture.IOC
         {
             InjectAt(typeof(T), target);
         }
-        
+
         public void InjectAt(Type type, object target)
         {
             var containerType = typeof(Container);
@@ -136,25 +134,26 @@ namespace XandArt.Architecture.IOC
             foreach (var field in fields)
             {
                 Attribute attr = Attribute.GetCustomAttribute(field, typeof(Inject));
+                if (attr == null)
+                    continue;
 
-                if (attr != null)
-                {
-                    object other = (field.FieldType == containerType) ? this : Get(field.FieldType);
-                    field.SetValue(target, other);
-                }
+                object other = (field.FieldType == containerType) ? this : Get(field.FieldType);
+                field.SetValue(target, other);
             }
         }
 
         public void Dispose()
         {
             foreach (var child in Childs)
+            {
                 if (child.Active)
                     throw new ContainerInitializationException(
                         $"Can't dispose '{Name}': Child container '{child.Name}' is active!");
+            }
 
             Active = false;
 
-            foreach (var pair in _shareds)
+            foreach (var pair in m_Shareds)
             {
                 var shared = pair.Value;
                 shared.Dispose();

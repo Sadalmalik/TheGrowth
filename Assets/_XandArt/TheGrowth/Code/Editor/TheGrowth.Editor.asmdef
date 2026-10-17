@@ -1,0 +1,23 @@
+{
+    "name": "TheGrowth.Editor",
+    "rootNamespace": "TheGrowth.Editor",
+    "references": [
+        "TheGrowth.Game",
+        "TheGrowth.UI",
+        "TheGrowth.Presentation",
+        "TheGrowth.Model",
+        "TheGrowth.Core",
+        "TheGrowth.Architecture"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

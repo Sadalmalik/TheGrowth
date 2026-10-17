@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-namespace XandArt.Architecture.Utils
+namespace TheGrowth.Architecture.Utils
 {
     public static class HierarchyUtils
     {
@@ -20,4 +22,4 @@ namespace XandArt.Architecture.Utils
                 GameObject.DestroyImmediate(obj);
         }
     }
-}
+}

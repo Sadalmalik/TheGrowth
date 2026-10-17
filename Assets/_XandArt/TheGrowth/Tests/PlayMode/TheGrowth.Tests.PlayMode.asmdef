@@ -1,0 +1,27 @@
+{
+    "name": "TheGrowth.Tests.PlayMode",
+    "rootNamespace": "TheGrowth.Tests.PlayMode",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "TheGrowth.Architecture",
+        "TheGrowth.Core",
+        "TheGrowth.Model",
+        "TheGrowth.Presentation",
+        "TheGrowth.UI",
+        "TheGrowth.Game"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

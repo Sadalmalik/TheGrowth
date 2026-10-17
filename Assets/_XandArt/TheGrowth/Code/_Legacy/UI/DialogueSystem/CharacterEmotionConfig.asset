@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf475066eca1d44189c8ee1a5870766, type: 3}
+  m_Name: CharacterEmotionConfig
+  m_EditorClassIdentifier: 
+  characterEmotions:
+  - characterName: Waifu
+    emotions:
+    - emotion: Sad
+      sprite: {fileID: -6386392781303966572, guid: d1e7fc04906c5fb46a86aac8560031bd,
+        type: 3}
+    - emotion: Happy
+      sprite: {fileID: -6598977352912706991, guid: d1e7fc04906c5fb46a86aac8560031bd,
+        type: 3}
+    - emotion: Wonder
+      sprite: {fileID: -8831895676300602175, guid: d1e7fc04906c5fb46a86aac8560031bd,
+        type: 3}
+  - characterName: MC
+    emotions:
+    - emotion: Neutral
+      sprite: {fileID: 1877948364973000315, guid: deeb992ddb471814a95b1563e182b323,
+        type: 3}
+    - emotion: Sad
+      sprite: {fileID: 8200132928277234174, guid: deeb992ddb471814a95b1563e182b323,
+        type: 3}

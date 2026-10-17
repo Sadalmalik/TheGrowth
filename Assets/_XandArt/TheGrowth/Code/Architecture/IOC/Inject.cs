@@ -3,7 +3,7 @@
 
 using System;
 
-namespace XandArt.Architecture.IOC
+namespace TheGrowth.Architecture.IOC
 {
     public class Inject : Attribute
     {

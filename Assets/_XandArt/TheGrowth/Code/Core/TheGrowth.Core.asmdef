@@ -1,0 +1,16 @@
+{
+    "name": "TheGrowth.Core",
+    "rootNamespace": "TheGrowth.Core",
+    "references": [
+        "TheGrowth.Architecture"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
