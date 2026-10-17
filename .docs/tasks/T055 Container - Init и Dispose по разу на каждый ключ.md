@@ -1,10 +1,10 @@
 ---
 type: task
-status: backlog
+status: review
 kind: bug
 area: architecture
 priority: medium
-assignee:
+assignee: Claude
 epic: "[[E01 Фундамент]]"
 source: T054, 2026-10-17
 created: 2026-10-17
@@ -19,5 +19,5 @@ updated: 2026-10-17
 
 ## Критерии готовности
 
-- [ ] `Init`, `Dispose` и инжект — один раз на экземпляр.
-- [ ] Тест в EditMode.
+- [x] `Init`, `Dispose` и инжект — один раз на экземпляр.
+- [x] Тест в EditMode.

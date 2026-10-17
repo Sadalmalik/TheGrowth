@@ -113,6 +113,13 @@ CreateSession(SaveGame save)
 - Отличие только в источнике данных и одном вызове старта сюжета. Класс багов «в новой игре
   работает, после загрузки нет» исключён конструкцией.
 - `SessionBuilder` живёт в сборке Model и используется и игрой, и headless-тестами.
+- Реализация (T060): `LifetimeScope` (Architecture) — контейнер + токен отмены, дочерние области
+  отменяются вместе с родителем; порядок `Dispose`: отмена токена → дочерние области →
+  контейнер. `Session : LifetimeScope` (Model, namespace `TheGrowth.Model`),
+  `Session.Create(parent, configure)`: `SessionBuilder.Register` → `configure` (заглушки в
+  тестах) → `Init` → `ISessionReady`. Чтение сейва (E02) встаёт между `Init` и `ISessionReady`.
+  Интерфейсы-хуки (`ISessionReady`, будущий `ISaveable`) не наследуют `ISharedInterface` —
+  иначе контейнер регистрировал бы их ключом. `LocationScope` строится так же, от сессии.
 
 ### Сохранение — запрос к `GameFlow` (решено 2026-10-17)
 

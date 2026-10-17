@@ -53,13 +53,12 @@ namespace TheGrowth.Core.Scripting
 
         public override void Init()
         {
-            RootContext ??= new ScriptContext(container, this);
+            RootContext = new ScriptContext(container, this);
         }
 
         public override void Dispose()
         {
-            if (!m_Lifetime.IsCancellationRequested)
-                m_Lifetime.Cancel();
+            m_Lifetime.Cancel();
         }
 
 #region Executions
