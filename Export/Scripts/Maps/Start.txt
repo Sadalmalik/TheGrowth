@@ -1,0 +1,7 @@
+# source: Assets/_XandArt/TheGrowth/Maps/Start.unity (guid 25b70689621d415419fae382ca403cbe)
+
+ExplorationEndScreen@GameRoot/Canvas/InGameUI/ExplorationCompleteScreen.OnContinue:
+    MoveAllItems(FromInventory=@InventoryBackpack (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryBackpack.asset), IntoInventory=@InventoryHub (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryHub.asset))
+    MoveAllItems(FromInventory=@InventoryHand (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryHand.asset), IntoInventory=@InventoryHub (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryHub.asset))
+    DestroyAllItems(FromInventory=@InventoryDeck (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryDeck.asset))
+    GoToLocation(Location=@LocationHUB (Assets/_XandArt/TheGrowth/Resources/Locations/LocationHUB.asset))

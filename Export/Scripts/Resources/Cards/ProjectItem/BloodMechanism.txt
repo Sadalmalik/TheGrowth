@@ -1,0 +1,4 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/ProjectItem/BloodMechanism.asset (guid 45979fa345ef78743804ce18d3845d0b)
+
+components[1](CardBrain).OnCovered:
+    ExecuteCommandConfig(config=@CollectResource (Assets/_XandArt/TheGrowth/Resources/Scripts/CollectResource.asset))

@@ -1,0 +1,29 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Characters/Alfredo.asset (guid bac3c5ba149dca64aa33fd9910a225fb)
+
+components[1](CardBrain).AllowedMoves:
+    TableSlotsCombine(Variant=Except)
+        Evaluators:
+            TableSlotsAround(Figure=Cross, Distance=1, Radius=0)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: ActiveCard
+            SlotsFromCards
+                Cards: CardsFromBoard(Filter=[@Monsters (Assets/_XandArt/TheGrowth/Resources/CardGroups/Monsters.asset), @Obstacles (Assets/_XandArt/TheGrowth/Resources/CardGroups/Obstacles.asset)], OnTop=true)
+            TableSlotsAround(Figure=Cross, Distance=0, Radius=0)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: ActiveCard
+            TableSlotsFree
+
+components[1](CardBrain).OnPlacedFirstTime:
+    ExecuteCommandConfig(config=@RevealArownd (Assets/_XandArt/TheGrowth/Resources/Scripts/RevealArownd.asset))
+    MoveCamera
+        Card: ActiveCard
+        AfterCommands: null
+    StartDialogue(Script=@Tutorial_Game (Assets/_XandArt/TheGrowth/Resources/Scenario/Chapters/Tutorial_Game.nani))
+        AfterCommands: null
+
+components[1](CardBrain).OnPlaced:
+    MoveCamera
+        Card: ActiveCard
+        AfterCommands: null
+    ExecuteCommandConfig(config=@RevealArownd (Assets/_XandArt/TheGrowth/Resources/Scripts/RevealArownd.asset))
+    ExecuteCommandConfig(config=@PlayerStep_Tutorial (Assets/_XandArt/TheGrowth/Resources/Scripts/PlayerStep_Tutorial.asset))

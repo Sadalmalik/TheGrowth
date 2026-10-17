@@ -1,0 +1,19 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scenario/StorySteps/Step_Tutorial.asset (guid e48f1d60093975343a0c2eff70ee12c4)
+
+components:
+    AddItemsToInventory(InventoryModel=@Inventory_TutorialHub (Assets/_XandArt/TheGrowth/Resources/Inventories/Inventory_TutorialHub.asset))
+        entries:
+            DeckEntry(Amount=1, Entity=@Alfredo (Assets/_XandArt/TheGrowth/Resources/Cards/Characters/Alfredo.asset))
+            DeckEntry(Amount=4, Entity=@AbilityCardVision (Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardVision.asset))
+            DeckEntry(Amount=1, Entity=@Card_Talisman (Assets/_XandArt/TheGrowth/Resources/Cards/Special/Card_Talisman.asset))
+    CreateEntity(Models=[@Quest_CollectCoins (Assets/_XandArt/TheGrowth/Resources/Quests/Quest_CollectCoins.asset)])
+    SetEnabledActions(actions=Missions|Story|Inventory)
+    RunCommands
+        _onStepStartActions:
+            DebugLog(Message="Step Tutorial: Start", Enabled=true)
+            GoToLocation(Location=@LOC_Tutorial_HUB (Assets/_XandArt/TheGrowth/Resources/Locations/LOC_Tutorial_HUB.asset))
+        _onStepEndActions:
+            DebugLog(Message="Step Tutorial: End", Enabled=true)
+            DestroyAllItems(FromInventory=@Inventory_TutorialHub (Assets/_XandArt/TheGrowth/Resources/Inventories/Inventory_TutorialHub.asset))
+            DestroyAllItems(FromInventory=@InventoryDeck (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryDeck.asset))
+            DestroyAllItems(FromInventory=@InventoryHand (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryHand.asset))

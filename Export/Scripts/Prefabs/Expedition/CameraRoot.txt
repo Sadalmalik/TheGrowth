@@ -1,0 +1,6 @@
+# source: Assets/_XandArt/TheGrowth/Prefabs/Expedition/CameraRoot.prefab (guid 6393a4928c54e3a48ab053c548c226a0)
+
+HUBButton@CameraRoot/Axis/Main Camera/Canvas/HoldButton.OnClickedActions:
+    MoveCamera
+        Card: PlayerCard
+        AfterCommands: null

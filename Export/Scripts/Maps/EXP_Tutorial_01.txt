@@ -1,0 +1,6 @@
+# source: Assets/_XandArt/TheGrowth/Maps/EXP_Tutorial_01.unity (guid 0afe5d196175a3042929c7e4dbb0b177)
+
+HUBButton@CameraRoot/Axis/Main Camera/Canvas/HoldButton.OnClickedActions:
+    MoveCamera
+        Card: PlayerCard
+        AfterCommands: null

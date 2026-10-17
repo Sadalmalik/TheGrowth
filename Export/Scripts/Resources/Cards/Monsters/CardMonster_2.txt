@@ -1,0 +1,27 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Monsters/CardMonster_2.asset (guid 3298608dfa08f7c4da67b6b62d5ead7a)
+
+components[2](CardBrain).SpawnSlot:
+    Random<SlotEntity>
+        Collection: TableSlotsCombine(Variant=Except)
+            Evaluators:
+                TableSlotsAll
+                TableSlotsFromSide(Side=Left, Steps=2)
+
+components[2](CardBrain).OnStep:
+    Branch
+        condition: And
+            conditions:
+                ChargesCheck(Compare=Greater, Value=0)
+                    Card: ActiveCard
+        OnTrue:
+            ChangeCharges(Variant=Add, Amount=-1)
+                Card: ActiveCard
+        OnFalse:
+            ExecuteCommandConfig(config=@Monster_SquareMov (Assets/_XandArt/TheGrowth/Resources/Scripts/Monster_SquareMov.asset))
+            Branch
+                condition: CardInGroups(Filter=[@Player (Assets/_XandArt/TheGrowth/Resources/CardGroups/Player.asset)])
+                    Card: RelativeCard(Variant=Under, Count=1)
+                        Card: ActiveCard
+                OnTrue:
+                    EndGame(Success=false, Message="Eaten by monster!")
+                OnFalse: []

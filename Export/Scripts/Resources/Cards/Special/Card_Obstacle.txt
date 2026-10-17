@@ -1,0 +1,6 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Special/Card_Obstacle.asset (guid 5eae9409d46fa4f469e2df4ab6a3c50b)
+
+components[1](CardBrain).OnPlacedFirstTime:
+    FlipCard(Variant=Reveal)
+        Card: ActiveCard
+        AfterCommands: null

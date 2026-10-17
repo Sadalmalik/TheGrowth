@@ -1,0 +1,4 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_MechParts.asset (guid 6a0ef49b6ed2cab4989f5cb152412206)
+
+components[1](CardBrain).OnCovered:
+    ExecuteCommandConfig(config=@CollectResource (Assets/_XandArt/TheGrowth/Resources/Scripts/CollectResource.asset))

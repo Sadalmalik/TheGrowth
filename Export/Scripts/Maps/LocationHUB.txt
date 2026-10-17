@@ -1,0 +1,45 @@
+# source: Assets/_XandArt/TheGrowth/Maps/LocationHUB.unity (guid cdd87bf9e33c7594aa8b5ad3465b3f7d)
+
+HUBButton@HUBRoot/Canvas/Room_Main/Interactive/NPC_Stella.OnClickedActions:
+    StartDialogue(Script=@CH_03_Stella_Intro (Assets/_XandArt/TheGrowth/Resources/Scenario/Chapters/CH_03_Stella_Intro.nani))
+        AfterCommands: null
+
+HUBButton@HUBRoot/Canvas/Room_Main/Interactive/NPC_Sebastien.OnClickedActions:
+    StartDialogue(Script=@CH_03_Sebastien_Intro (Assets/_XandArt/TheGrowth/Resources/Scenario/Chapters/CH_03_Sebastien_Intro.nani))
+        AfterCommands: null
+
+HUBButton@HUBRoot/Canvas/Room_Main/Interactive/NPC_Tang.OnClickedActions:
+    StartDialogue(Script=@CH_03_Tang (Assets/_XandArt/TheGrowth/Resources/Scenario/Chapters/CH_03_Tang.nani))
+        AfterCommands: null
+
+HUBButton@HUBRoot/Canvas/Room_Main/Interactive/NPC_Alexamdru.OnClickedActions:
+    StartDialogue(Script=@CH_03_Alexandru_Intro (Assets/_XandArt/TheGrowth/Resources/Scenario/Chapters/CH_03_Alexandru_Intro.nani))
+        AfterCommands: null
+
+HUBButton@HUBRoot/Canvas/Room_Main/Interactive/NPC_Lucia.OnClickedActions:
+    StartDialogue(Script=@CH_03_Lucia_Intro (Assets/_XandArt/TheGrowth/Resources/Scenario/Chapters/CH_03_Lucia_Intro.nani))
+        AfterCommands: null
+
+HUBButton@HUBRoot/Canvas/Room_Missions/Interactive/RightPanel/Slot-Character/SelectItemButton.OnClickedActions:
+    ShowUIElementsGroup(GroupID="hub-embark-inventory", Mode=Show)
+    ShowUIElementsGroup(GroupID="hub-embark-buttons", Mode=Hide)
+
+HUBButton@HUBRoot/Canvas/Room_Missions/Interactive/RightPanel/Slot-Abilities/Grid-2/SelectItemButton (1).OnClickedActions:
+    ShowUIElementsGroup(GroupID="hub-embark-inventory", Mode=Show)
+    ShowUIElementsGroup(GroupID="hub-embark-buttons", Mode=Hide)
+
+HUBButton@HUBRoot/Canvas/Room_Missions/Interactive/RightPanel/Slot-Abilities/Grid-2/SelectItemButton (2).OnClickedActions:
+    ShowUIElementsGroup(GroupID="hub-embark-inventory", Mode=Show)
+    ShowUIElementsGroup(GroupID="hub-embark-buttons", Mode=Hide)
+
+HUBButton@HUBRoot/Canvas/Room_Missions/Interactive/RightPanel/Slot-Abilities/Grid-2/SelectItemButton (3).OnClickedActions:
+    ShowUIElementsGroup(GroupID="hub-embark-inventory", Mode=Show)
+    ShowUIElementsGroup(GroupID="hub-embark-buttons", Mode=Hide)
+
+HUBButton@HUBRoot/Canvas/Room_Missions/Interactive/RightPanel/Slot-Abilities/Grid-2/SelectItemButton (4).OnClickedActions:
+    ShowUIElementsGroup(GroupID="hub-embark-inventory", Mode=Show)
+    ShowUIElementsGroup(GroupID="hub-embark-buttons", Mode=Hide)
+
+HUBButton@HUBRoot/Canvas/Room_Missions/Interactive/InventoryPanel/Close.OnClickedActions:
+    ShowUIElementsGroup(GroupID="hub-embark-inventory", Mode=Hide)
+    ShowUIElementsGroup(GroupID="hub-embark-buttons", Mode=Show)

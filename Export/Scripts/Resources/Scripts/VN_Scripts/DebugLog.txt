@@ -1,0 +1,4 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/VN_Scripts/DebugLog.asset (guid 6aafb004380355449b407d90f977c764)
+
+Commands:
+    DebugLog(Message="LOG: VN script is running", Enabled=true)

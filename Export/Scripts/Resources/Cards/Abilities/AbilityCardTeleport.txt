@@ -1,0 +1,51 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardTeleport.asset (guid fca1699702490494f8eac65809f9a982)
+
+components[2](CardBrain).AllowedMoves:
+    TableSlotsCombine(Variant=Except)
+        Evaluators:
+            TableSlotsAround(Figure=Rhombus, Distance=3, Radius=2)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: PlayerCard
+            TableSlotsAround(Figure=Square, Distance=0, Radius=0)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: PlayerCard
+            SlotsFromCards
+                Cards: CardsFromBoard(Filter=[@Obstacles (Assets/_XandArt/TheGrowth/Resources/CardGroups/Obstacles.asset), @Exit (Assets/_XandArt/TheGrowth/Resources/CardGroups/Exit.asset)], OnTop=true)
+            TableSlotsFree
+
+components[2](CardBrain).OnPlaced:
+    FlipCard(Variant=Reveal)
+        Card: RelativeCard(Variant=Under, Count=1)
+            Card: ActiveCard
+        AfterCommands: null
+    MoveCard(Instant=false, RaiseEvents=false)
+        Card: RelativeCard(Variant=Under, Count=1)
+            Card: ActiveCard
+        Slot: SlotFromCard
+            Card: PlayerCard
+        AfterCommands: null
+    MoveCard(Instant=false, RaiseEvents=true)
+        Card: PlayerCard
+        Slot: SlotFromCard
+            Card: ActiveCard
+        AfterCommands:
+            MoveCamera
+                Card: PlayerCard
+                AfterCommands: null
+    ChangeCharges(Variant=Add, Amount=-1)
+        Card: ActiveCard
+    Branch
+        condition: Or
+            conditions:
+                ChargesCheck(Compare=Greater, Value=0)
+                    Card: ActiveCard
+        OnTrue:
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: ActiveCard
+                Slot: BoardSlot(_slot=Hand)
+                AfterCommands: null
+        OnFalse:
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: ActiveCard
+                Slot: BoardSlot(_slot=Back)
+                AfterCommands: null

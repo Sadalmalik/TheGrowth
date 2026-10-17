@@ -1,0 +1,36 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Special/Card_Explosives.asset (guid c33b0f8c3db74d340970d30fddca159f)
+
+components[2](CardBrain).OnPlacedFirstTime:
+    FlipCard(Variant=Reveal)
+        Card: ActiveCard
+        AfterCommands: null
+
+components[2](CardBrain).OnStep:
+    Branch
+        condition: ChargesCheck(Compare=Greater, Value=0)
+            Card: ActiveCard
+        OnTrue:
+            ForEachCard
+                Cards: CardsFromSlots
+                    Slots: TableSlotsAround(Figure=Square, Distance=1, Radius=0)
+                        Position: PositionByCard(Fallback=(0, 0))
+                            Card: ActiveCard
+                    Filter: null
+                Commands:
+                    Branch
+                        condition: Or
+                            conditions:
+                                CardInGroups(Filter=[@Player (Assets/_XandArt/TheGrowth/Resources/CardGroups/Player.asset)])
+                                    Card: IteratingCard
+                        OnTrue:
+                            EndGame(Success=false, Message="Exloded")
+                        OnFalse: []
+                    MoveCard(Instant=false, RaiseEvents=false)
+                        Card: IteratingCard
+                        Slot: BoardSlot(_slot=Back)
+                        AfterCommands: []
+        OnFalse: []
+
+components[2](CardBrain).OnCovered:
+    ChangeCharges(Variant=Add, Amount=1)
+        Card: ActiveCard

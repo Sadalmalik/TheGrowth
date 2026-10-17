@@ -1,0 +1,6 @@
+# source: Assets/_XandArt/TheGrowth/Maps/ExpeditionTest_2.unity (guid ed033fbe11235804da35c720f928a836)
+
+HUBButton@CameraRoot/Axis/Main Camera/Canvas/HoldButton.OnClickedActions:
+    MoveCamera
+        Card: PlayerCard
+        AfterCommands: null

@@ -1,0 +1,4 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Herbs.asset (guid 376eaa740945a7f41b241de31202ed6d)
+
+components[1](CardBrain).OnCovered:
+    ExecuteCommandConfig(config=@CollectResource (Assets/_XandArt/TheGrowth/Resources/Scripts/CollectResource.asset))

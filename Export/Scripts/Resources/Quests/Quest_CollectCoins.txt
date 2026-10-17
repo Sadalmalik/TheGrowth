@@ -1,0 +1,4 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Quests/Quest_CollectCoins.asset (guid bd808a73370609941a65899583dd35a8)
+
+components[0](QuestInfo).OnComplete:
+    DebugLog(Message="QUEST COMPLETED!!!", Enabled=true)

@@ -1,0 +1,5 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/VN_Scripts/GoToMissionsRoom.asset (guid ac9b1ce8bb003c14d977aeff930ecfe5)
+
+Commands:
+    GoToHubRoom(RoomName="Room_Missions")
+    DebugLog(Message="GoToMissionsRoom script executed", Enabled=true)

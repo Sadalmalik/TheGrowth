@@ -1,0 +1,10 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/Tutorial_Fail.asset (guid 0153522e557a1504781c54b8aef2e20b)
+
+Commands:
+    Branch
+        condition: Or(conditions=[null])
+        OnTrue:
+            GoToLocation(Location=@LOC_Tutorial_HUB (Assets/_XandArt/TheGrowth/Resources/Locations/LOC_Tutorial_HUB.asset))
+            GoToHubRoom(RoomName="Room_Missions")
+            DebugLog(Message="Tutorial fail - reset the mission", Enabled=false)
+        OnFalse: []

@@ -1,0 +1,25 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Characters/Stefan.asset (guid bd8e63e715cfbbd4492f4adc252d9ddc)
+
+components[1](CardBrain).AllowedMoves:
+    TableSlotsCombine(Variant=Except)
+        Evaluators:
+            TableSlotsAround(Figure=Rhombus, Distance=1, Radius=0)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: ActiveCard
+            TableSlotsAround(Figure=Rhombus, Distance=0, Radius=0)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: ActiveCard
+            TableSlotsFree
+
+components[1](CardBrain).OnPlacedFirstTime:
+    null
+    MoveCamera
+        Card: ActiveCard
+        AfterCommands: null
+
+components[1](CardBrain).OnPlaced:
+    MoveCamera
+        Card: ActiveCard
+        AfterCommands: null
+    null
+    null

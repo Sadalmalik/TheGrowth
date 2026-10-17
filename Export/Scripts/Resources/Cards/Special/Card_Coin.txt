@@ -1,0 +1,6 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Special/Card_Coin.asset (guid ef1d686878031864c9b977c651ffc55c)
+
+components[1](CardBrain).OnCovered:
+    ChangeCharges(Variant=Add, Amount=1)
+        Card: CoveringCard
+    ExecuteCommandConfig(config=@CollectResource (Assets/_XandArt/TheGrowth/Resources/Scripts/CollectResource.asset))

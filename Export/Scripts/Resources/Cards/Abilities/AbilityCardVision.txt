@@ -1,0 +1,26 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardVision.asset (guid aa0fd3938b9a6954d904268e782753bd)
+
+components[3](CardBrain).AllowedMoves:
+    TableSlotsAround(Figure=Square, Distance=2, Radius=0)
+        Position: PositionByCard(Fallback=(0, 0))
+            Card: PlayerCard
+
+components[3](CardBrain).OnPlaced:
+    ChangeCharges(Variant=Add, Amount=-1)
+        Card: ActiveCard
+    ExecuteCommandConfig(config=@RevealArownd (Assets/_XandArt/TheGrowth/Resources/Scripts/RevealArownd.asset))
+    Branch
+        condition: Or
+            conditions:
+                ChargesCheck(Compare=LessOrEqual, Value=0)
+                    Card: ActiveCard
+        OnTrue:
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: ActiveCard
+                Slot: BoardSlot(_slot=Back)
+                AfterCommands: null
+        OnFalse:
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: ActiveCard
+                Slot: BoardSlot(_slot=Hand)
+                AfterCommands: null

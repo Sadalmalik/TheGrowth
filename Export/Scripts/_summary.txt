@@ -1,0 +1,123 @@
+# Legacy script export (Odin data -> text)
+# generated: 2026-10-17 16:46:49
+# scanned: assets 88, prefabs 26, scenes 6
+# exported files: 49, script fields: 81, nodes: 486, null node entries: 3
+# node = Command | Condition | IEvaluator | IStoryTrigger | GameStepComponent
+
+## Exported sources
+
+Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardConfuse.asset -> Resources/Cards/Abilities/AbilityCardConfuse.txt: fields 2, nodes 30
+Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardRevolver.asset -> Resources/Cards/Abilities/AbilityCardRevolver.txt: fields 2, nodes 24
+Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardTalisman.asset -> Resources/Cards/Abilities/AbilityCardTalisman.txt: fields 2, nodes 5
+Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardTeleport.asset -> Resources/Cards/Abilities/AbilityCardTeleport.txt: fields 2, nodes 36
+Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardVision.asset -> Resources/Cards/Abilities/AbilityCardVision.txt: fields 2, nodes 16
+Assets/_XandArt/TheGrowth/Resources/Cards/Characters/Alfredo.asset -> Resources/Cards/Characters/Alfredo.txt: fields 3, nodes 18
+Assets/_XandArt/TheGrowth/Resources/Cards/Characters/Lucia.asset -> Resources/Cards/Characters/Lucia.txt: fields 3, nodes 24
+Assets/_XandArt/TheGrowth/Resources/Cards/Characters/Stefan.asset -> Resources/Cards/Characters/Stefan.txt: fields 3, nodes 12, null entries 3
+Assets/_XandArt/TheGrowth/Resources/Cards/EmptyCard.asset -> Resources/Cards/EmptyCard.txt: fields 1, nodes 6
+Assets/_XandArt/TheGrowth/Resources/Cards/Monsters/CardMonster_1.asset -> Resources/Cards/Monsters/CardMonster_1.txt: fields 2, nodes 16
+Assets/_XandArt/TheGrowth/Resources/Cards/Monsters/CardMonster_2.asset -> Resources/Cards/Monsters/CardMonster_2.txt: fields 2, nodes 16
+Assets/_XandArt/TheGrowth/Resources/Cards/ProjectItem/BloodMechanism.asset -> Resources/Cards/ProjectItem/BloodMechanism.txt: fields 1, nodes 1
+Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Blood.asset -> Resources/Cards/Resources/Card_Blood.txt: fields 1, nodes 1
+Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Bulb.asset -> Resources/Cards/Resources/Card_Bulb.txt: fields 1, nodes 1
+Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Herbs.asset -> Resources/Cards/Resources/Card_Herbs.txt: fields 1, nodes 1
+Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_MechParts.asset -> Resources/Cards/Resources/Card_MechParts.txt: fields 1, nodes 1
+Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Mushroom.asset -> Resources/Cards/Resources/Card_Mushroom.txt: fields 1, nodes 1
+Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Pages.asset -> Resources/Cards/Resources/Card_Pages.txt: fields 1, nodes 1
+Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Scraps.asset -> Resources/Cards/Resources/Card_Scraps.txt: fields 1, nodes 1
+Assets/_XandArt/TheGrowth/Resources/Cards/Special/Card_Coin.asset -> Resources/Cards/Special/Card_Coin.txt: fields 1, nodes 3
+Assets/_XandArt/TheGrowth/Resources/Cards/Special/Card_Exit.asset -> Resources/Cards/Special/Card_Exit.txt: fields 2, nodes 10
+Assets/_XandArt/TheGrowth/Resources/Cards/Special/Card_Explosives.asset -> Resources/Cards/Special/Card_Explosives.txt: fields 3, nodes 20
+Assets/_XandArt/TheGrowth/Resources/Cards/Special/Card_Obstacle.asset -> Resources/Cards/Special/Card_Obstacle.txt: fields 1, nodes 2
+Assets/_XandArt/TheGrowth/Resources/Cards/Special/Card_Talisman.asset -> Resources/Cards/Special/Card_Talisman.txt: fields 1, nodes 9
+Assets/_XandArt/TheGrowth/Resources/Quests/Quest_CollectCoins.asset -> Resources/Quests/Quest_CollectCoins.txt: fields 1, nodes 1
+Assets/_XandArt/TheGrowth/Resources/Scenario/StorySteps/Step_Example.asset -> Resources/Scenario/StorySteps/Step_Example.txt: fields 1, nodes 39
+Assets/_XandArt/TheGrowth/Resources/Scenario/StorySteps/Step_FreeMode.asset -> Resources/Scenario/StorySteps/Step_FreeMode.txt: fields 1, nodes 20
+Assets/_XandArt/TheGrowth/Resources/Scenario/StorySteps/Step_Start.asset -> Resources/Scenario/StorySteps/Step_Start.txt: fields 1, nodes 7
+Assets/_XandArt/TheGrowth/Resources/Scenario/StorySteps/Step_Tutorial.asset -> Resources/Scenario/StorySteps/Step_Tutorial.txt: fields 1, nodes 10
+Assets/_XandArt/TheGrowth/Resources/Scripts/ChargesCheck.asset -> Resources/Scripts/ChargesCheck.txt: fields 1, nodes 11
+Assets/_XandArt/TheGrowth/Resources/Scripts/CollectResource.asset -> Resources/Scripts/CollectResource.txt: fields 1, nodes 6
+Assets/_XandArt/TheGrowth/Resources/Scripts/Monster_CrossMovement.asset -> Resources/Scripts/Monster_CrossMovement.txt: fields 1, nodes 10
+Assets/_XandArt/TheGrowth/Resources/Scripts/Monster_SquareMov.asset -> Resources/Scripts/Monster_SquareMov.txt: fields 1, nodes 10
+Assets/_XandArt/TheGrowth/Resources/Scripts/OLD_MonsterMovement.asset -> Resources/Scripts/OLD_MonsterMovement.txt: fields 1, nodes 7
+Assets/_XandArt/TheGrowth/Resources/Scripts/PlayerStep.asset -> Resources/Scripts/PlayerStep.txt: fields 1, nodes 22
+Assets/_XandArt/TheGrowth/Resources/Scripts/PlayerStep_Tutorial.asset -> Resources/Scripts/PlayerStep_Tutorial.txt: fields 1, nodes 19
+Assets/_XandArt/TheGrowth/Resources/Scripts/RemoveCardFromBoard.asset -> Resources/Scripts/RemoveCardFromBoard.txt: fields 1, nodes 6
+Assets/_XandArt/TheGrowth/Resources/Scripts/RevealArownd.asset -> Resources/Scripts/RevealArownd.txt: fields 1, nodes 10
+Assets/_XandArt/TheGrowth/Resources/Scripts/TurnsCheck.asset -> Resources/Scripts/TurnsCheck.txt: fields 1, nodes 3
+Assets/_XandArt/TheGrowth/Resources/Scripts/Tutorial_Fail.asset -> Resources/Scripts/Tutorial_Fail.txt: fields 1, nodes 5
+Assets/_XandArt/TheGrowth/Resources/Scripts/VN_Scripts/DebugLog.asset -> Resources/Scripts/VN_Scripts/DebugLog.txt: fields 1, nodes 1
+Assets/_XandArt/TheGrowth/Resources/Scripts/VN_Scripts/GoToMissionsRoom.asset -> Resources/Scripts/VN_Scripts/GoToMissionsRoom.txt: fields 1, nodes 2
+Assets/_XandArt/TheGrowth/Prefabs/Expedition/CameraRoot.prefab -> Prefabs/Expedition/CameraRoot.txt: fields 1, nodes 2
+Assets/_XandArt/TheGrowth/Maps/EXP_Tutorial_01.unity -> Maps/EXP_Tutorial_01.txt: fields 1, nodes 2
+Assets/_XandArt/TheGrowth/Maps/ExpeditionTest.unity -> Maps/ExpeditionTest.txt: fields 1, nodes 2
+Assets/_XandArt/TheGrowth/Maps/ExpeditionTest_2.unity -> Maps/ExpeditionTest_2.txt: fields 1, nodes 2
+Assets/_XandArt/TheGrowth/Maps/LocationHUB.unity -> Maps/LocationHUB.txt: fields 11, nodes 17
+Assets/_XandArt/TheGrowth/Maps/Location_Tutor_HUB.unity -> Maps/Location_Tutor_HUB.txt: fields 7, nodes 13
+Assets/_XandArt/TheGrowth/Maps/Start.unity -> Maps/Start.txt: fields 1, nodes 4
+
+## Problems
+
+none
+
+## Node types
+
+    69  ActiveCard
+    25  Branch
+    24  DebugLog
+    24  ShowUIElementsGroup
+    22  MoveCard
+    20  ExecuteCommandConfig
+    18  BoardSlot
+    18  PlayerCard
+    18  PositionByCard
+    18  TableSlotsAround
+    13  And
+    13  MoveCamera
+    12  RelativeCard
+    11  CardInGroups
+    11  StartDialogue
+    11  TableSlotsCombine
+    10  ChangeCharges
+    10  Or
+    10  TriggerComponent
+     9  EndGame
+     9  FlipCard
+     8  ChargesCheck
+     7  GoToLocation
+     5  CardsFromBoard
+     5  CoveringCard
+     5  SetExpeditionStep
+     5  SlotsFromCards
+     4  DestroyAllItems
+     4  HubRoomTrigger
+     4  IteratingCard
+     4  RunCommands
+     4  SetEnabledActions
+     4  TableSlotsFree
+     3  AddItemsToInventory
+     3  CallStep
+     3  CraftTrigger
+     3  ForEachCard
+     3  NearestSlot
+     3  Random<SlotEntity>
+     3  SlotFromCard
+     3  TableSlotsFromSide
+     2  CardsFromSlots
+     2  CompareNumbers
+     2  ConstantFloatEvaluator
+     2  CreateEntity
+     2  DealingSlots
+     2  ExpeditionStartTrigger
+     2  GoToHubRoom
+     2  MoveAllItems
+     2  SetProjectCraft
+     2  StepsEvaluator
+     1  AddCrafts
+     1  CardsFromInventory
+     1  ExpeditionFailureTrigger
+     1  ExpeditionSuccessTrigger
+     1  SetStoryStep
+     1  SlotContainsCard
+     1  SlotsAreEquals
+     1  TableSlotsAll

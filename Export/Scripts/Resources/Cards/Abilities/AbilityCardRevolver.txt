@@ -1,0 +1,37 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardRevolver.asset (guid 8e8367ee6ab9a9749a2e1fa41c7f51b3)
+
+components[3](CardBrain).AllowedMoves:
+    TableSlotsCombine(Variant=Except)
+        Evaluators:
+            TableSlotsAround(Figure=Square, Distance=1, Radius=2)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: PlayerCard
+            TableSlotsAround(Figure=Square, Distance=0, Radius=0)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: PlayerCard
+
+components[3](CardBrain).OnPlaced:
+    Branch
+        condition: Or
+            conditions:
+                CardInGroups(Filter=[@Monsters (Assets/_XandArt/TheGrowth/Resources/CardGroups/Monsters.asset)])
+                    Card: RelativeCard(Variant=Under, Count=1)
+                        Card: ActiveCard
+        OnTrue:
+            FlipCard(Variant=Flip)
+                Card: RelativeCard(Variant=Under, Count=1)
+                    Card: ActiveCard
+                AfterCommands: null
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: RelativeCard(Variant=Under, Count=1)
+                    Card: ActiveCard
+                Slot: BoardSlot(_slot=Deck)
+                AfterCommands: null
+            ExecuteCommandConfig(config=@ChargesCheck (Assets/_XandArt/TheGrowth/Resources/Scripts/ChargesCheck.asset))
+            CallStep
+                AfterCommands: null
+        OnFalse:
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: ActiveCard
+                Slot: BoardSlot(_slot=Hand)
+                AfterCommands: null

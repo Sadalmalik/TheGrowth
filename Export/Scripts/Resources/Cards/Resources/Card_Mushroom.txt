@@ -1,0 +1,4 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Mushroom.asset (guid dab00cc110e207b46b98ec91564df108)
+
+components[1](CardBrain).OnCovered:
+    ExecuteCommandConfig(config=@CollectResource (Assets/_XandArt/TheGrowth/Resources/Scripts/CollectResource.asset))

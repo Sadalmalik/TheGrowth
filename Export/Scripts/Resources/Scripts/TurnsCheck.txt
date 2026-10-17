@@ -1,0 +1,8 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/TurnsCheck.asset (guid 027e6bbdc2a30834495fcffaf9c983ea)
+
+Commands:
+    Branch
+        condition: Or(conditions=[null])
+        OnTrue:
+            EndGame(Success=false, Message="Out of Turns")
+        OnFalse: []

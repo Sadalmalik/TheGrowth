@@ -1,0 +1,12 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/CollectResource.asset (guid e4636dc6714fc27439e4d524b53e4050)
+
+Commands:
+    Branch
+        condition: CardInGroups(Filter=[@Player (Assets/_XandArt/TheGrowth/Resources/CardGroups/Player.asset)])
+            Card: CoveringCard
+        OnTrue:
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: ActiveCard
+                Slot: BoardSlot(_slot=Back)
+                AfterCommands: null
+        OnFalse: []

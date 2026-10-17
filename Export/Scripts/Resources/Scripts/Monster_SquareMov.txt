@@ -1,0 +1,15 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/Monster_SquareMov.asset (guid b0377e602b0719f498e7773afedd91df)
+
+Commands:
+    MoveCard(Instant=false, RaiseEvents=true)
+        Card: ActiveCard
+        Slot: NearestSlot
+            Card: PlayerCard
+            Collection: TableSlotsCombine(Variant=Except)
+                Evaluators:
+                    TableSlotsAround(Figure=Square, Distance=1, Radius=0)
+                        Position: PositionByCard(Fallback=(0, 0))
+                            Card: ActiveCard
+                    SlotsFromCards
+                        Cards: CardsFromBoard(Filter=[@Monsters (Assets/_XandArt/TheGrowth/Resources/CardGroups/Monsters.asset), @Obstacles (Assets/_XandArt/TheGrowth/Resources/CardGroups/Obstacles.asset)], OnTop=true)
+        AfterCommands: null

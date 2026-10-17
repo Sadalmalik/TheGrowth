@@ -1,0 +1,11 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/OLD_MonsterMovement.asset (guid 6f3707cb994542441a028faf740061b1)
+
+Commands:
+    MoveCard(Instant=false, RaiseEvents=true)
+        Card: ActiveCard
+        Slot: NearestSlot
+            Card: PlayerCard
+            Collection: TableSlotsAround(Figure=Cross, Distance=1, Radius=0)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: ActiveCard
+        AfterCommands: null

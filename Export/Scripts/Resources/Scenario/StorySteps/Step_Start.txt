@@ -1,0 +1,13 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scenario/StorySteps/Step_Start.asset (guid 6e3e4e75d7ffc444b8752621a599ad3a)
+
+components:
+    CreateEntity(Models=[@Inventory_TutorialHub (Assets/_XandArt/TheGrowth/Resources/Inventories/Inventory_TutorialHub.asset), @InventoryHub (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryHub.asset), @InventoryHand (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryHand.asset), @InventoryDeck (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryDeck.asset), @InventoryBackpack (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryBackpack.asset)])
+    SetEnabledActions(actions=Missions|Story|Inventory|BaseCraft|QuestCraft)
+    RunCommands
+        _onStepStartActions:
+            DebugLog(Message="Step Start: Start", Enabled=true)
+            GoToLocation(Location=@LocationHUB (Assets/_XandArt/TheGrowth/Resources/Locations/LocationHUB.asset))
+            StartDialogue(Script=@CH_01_Intro (Assets/_XandArt/TheGrowth/Resources/Scenario/Chapters/CH_01_Intro.nani))
+                AfterCommands: null
+        _onStepEndActions:
+            DebugLog(Message="Step Start: End", Enabled=true)

@@ -1,0 +1,12 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/EmptyCard.asset (guid 90716d6d1d371f84e9afe1565027bd39)
+
+components[1](CardBrain).OnCovered:
+    Branch
+        condition: CardInGroups(Filter=[@Player (Assets/_XandArt/TheGrowth/Resources/CardGroups/Player.asset)])
+            Card: CoveringCard
+        OnTrue:
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: ActiveCard
+                Slot: BoardSlot(_slot=Deck)
+                AfterCommands: null
+        OnFalse: []

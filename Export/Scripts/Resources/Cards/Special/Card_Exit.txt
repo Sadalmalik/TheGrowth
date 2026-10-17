@@ -1,0 +1,19 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Special/Card_Exit.asset (guid 47fc333d35167a046bd66e98aa830544)
+
+components[1](CardBrain).SpawnSlot:
+    Random<SlotEntity>
+        Collection: TableSlotsCombine(Variant=Except)
+            Evaluators:
+                DealingSlots
+                TableSlotsFromSide(Side=Left, Steps=4)
+
+components[1](CardBrain).OnPlacedFirstTime:
+    MoveCamera
+        Card: ActiveCard
+        AfterCommands:
+            MoveCamera
+                Card: PlayerCard
+                AfterCommands: null
+    FlipCard(Variant=Reveal)
+        Card: ActiveCard
+        AfterCommands: null

@@ -1,0 +1,36 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/PlayerStep.asset (guid 74a4769fd3faaf440af4a21e2ea029f3)
+
+Commands:
+    Branch
+        condition: And
+            conditions:
+                SlotsAreEquals
+                    SlotA: SlotFromCard
+                        Card: ActiveCard
+                    SlotB: BoardSlot(_slot=Deck)
+        OnTrue:
+            EndGame(Success=false, Message="Blown away!")
+        OnFalse: []
+    Branch
+        condition: Or
+            conditions:
+                CompareNumbers(Variant=LessOrEqual, Number=Float)
+                    iFirst: null
+                    iSecond: null
+                    fFirst: StepsEvaluator
+                    fSecond: ConstantFloatEvaluator(Value=0)
+        OnTrue:
+            EndGame(Success=false, Message="Run out of turns")
+        OnFalse: []
+    Branch
+        condition: CardInGroups(Filter=[@Exit (Assets/_XandArt/TheGrowth/Resources/CardGroups/Exit.asset)])
+            Card: RelativeCard(Variant=Under, Count=1)
+                Card: ActiveCard
+        OnTrue:
+            EndGame(Success=true, Message="We finally escaped!")
+            DebugLog(Message="FINISH LEVEL", Enabled=true)
+        OnFalse:
+            CallStep
+                AfterCommands: null
+            DebugLog(Message="CALL STEP", Enabled=true)
+            SetExpeditionStep(Mode=Add, Amount=-1)

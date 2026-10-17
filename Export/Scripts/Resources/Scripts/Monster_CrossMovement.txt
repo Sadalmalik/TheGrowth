@@ -1,0 +1,15 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/Monster_CrossMovement.asset (guid 8a28e63450ba53c4f966b0279454710f)
+
+Commands:
+    MoveCard(Instant=false, RaiseEvents=true)
+        Card: ActiveCard
+        Slot: NearestSlot
+            Card: PlayerCard
+            Collection: TableSlotsCombine(Variant=Except)
+                Evaluators:
+                    TableSlotsAround(Figure=Cross, Distance=1, Radius=0)
+                        Position: PositionByCard(Fallback=(0, 0))
+                            Card: ActiveCard
+                    SlotsFromCards
+                        Cards: CardsFromBoard(Filter=[@Monsters (Assets/_XandArt/TheGrowth/Resources/CardGroups/Monsters.asset), @Obstacles (Assets/_XandArt/TheGrowth/Resources/CardGroups/Obstacles.asset), @Exit (Assets/_XandArt/TheGrowth/Resources/CardGroups/Exit.asset)], OnTop=true)
+        AfterCommands: null

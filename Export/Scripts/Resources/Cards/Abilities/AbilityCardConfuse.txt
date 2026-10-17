@@ -1,0 +1,49 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardConfuse.asset (guid 4fec5ba75c66062478e8ac0c730e5e0c)
+
+components[3](CardBrain).AllowedMoves:
+    TableSlotsCombine(Variant=Except)
+        Evaluators:
+            TableSlotsAround(Figure=Square, Distance=2, Radius=0)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: PlayerCard
+
+components[3](CardBrain).OnPlaced:
+    Branch
+        condition: Or
+            conditions:
+                CardInGroups(Filter=[@Monsters (Assets/_XandArt/TheGrowth/Resources/CardGroups/Monsters.asset)])
+                    Card: RelativeCard(Variant=Under, Count=1)
+                        Card: ActiveCard
+        OnTrue:
+            ChangeCharges(Variant=Set, Amount=1)
+                Card: RelativeCard(Variant=Under, Count=1)
+                    Card: ActiveCard
+            ChangeCharges(Variant=Add, Amount=-1)
+                Card: ActiveCard
+            Branch
+                condition: Or
+                    conditions:
+                        ChargesCheck(Compare=Greater, Value=0)
+                            Card: ActiveCard
+                OnTrue:
+                    MoveCard(Instant=false, RaiseEvents=false)
+                        Card: ActiveCard
+                        Slot: BoardSlot(_slot=Hand)
+                        AfterCommands: null
+                OnFalse:
+                    MoveCard(Instant=false, RaiseEvents=false)
+                        Card: ActiveCard
+                        Slot: BoardSlot(_slot=Back)
+                        AfterCommands: null
+                    FlipCard(Variant=Flip)
+                        Card: ActiveCard
+                        AfterCommands: null
+        OnFalse:
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: ActiveCard
+                Slot: BoardSlot(_slot=Hand)
+                AfterCommands: null
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: null
+                Slot: null
+                AfterCommands: null

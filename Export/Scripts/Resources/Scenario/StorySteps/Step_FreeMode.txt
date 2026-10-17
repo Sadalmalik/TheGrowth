@@ -1,0 +1,47 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scenario/StorySteps/Step_FreeMode.asset (guid a3b0bd7a99934fe4188c8c578815a0ca)
+
+components:
+    AddItemsToInventory(InventoryModel=@InventoryHub (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryHub.asset))
+        entries:
+            DeckEntry(Amount=1, Entity=@Lucia (Assets/_XandArt/TheGrowth/Resources/Cards/Characters/Lucia.asset))
+            DeckEntry(Amount=1, Entity=@Stefan (Assets/_XandArt/TheGrowth/Resources/Cards/Characters/Stefan.asset))
+            DeckEntry(Amount=1, Entity=@AbilityCardVision (Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardVision.asset))
+            DeckEntry(Amount=1, Entity=@AbilityCardRevolver (Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardRevolver.asset))
+            DeckEntry(Amount=1, Entity=@AbilityCardConfuse (Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardConfuse.asset))
+            DeckEntry(Amount=12, Entity=@Card_Mushroom (Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Mushroom.asset))
+            DeckEntry(Amount=1, Entity=@Card_MechParts (Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_MechParts.asset))
+            DeckEntry(Amount=1, Entity=@AbilityCardTeleport (Assets/_XandArt/TheGrowth/Resources/Cards/Abilities/AbilityCardTeleport.asset))
+            DeckEntry(Amount=5, Entity=@Card_Blood (Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Blood.asset))
+            DeckEntry(Amount=10, Entity=@Card_Herbs (Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Herbs.asset))
+            DeckEntry(Amount=12, Entity=@Card_Bulb (Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Bulb.asset))
+            DeckEntry(Amount=14, Entity=@Card_Scraps (Assets/_XandArt/TheGrowth/Resources/Cards/Resources/Card_Scraps.asset))
+    SetEnabledActions(actions=Missions|Story|Inventory)
+    RunCommands
+        _onStepStartActions:
+            DebugLog(Message="Step Free Mode: Start", Enabled=true)
+            SetProjectCraft(model=@Project_BloodLock (Assets/_XandArt/TheGrowth/Resources/Crafts/Project_BloodLock.asset))
+            GoToLocation(Location=@LocationHUB (Assets/_XandArt/TheGrowth/Resources/Locations/LocationHUB.asset))
+            AddCrafts(crafts=[@Craft_MechParts (Assets/_XandArt/TheGrowth/Resources/Crafts/Craft_MechParts.asset), @Craft_Talisman (Assets/_XandArt/TheGrowth/Resources/Crafts/Craft_Talisman.asset)])
+        _onStepEndActions:
+            DebugLog(Message="Step Free Mode: End", Enabled=true)
+    TriggerComponent
+        Triggers:
+            CraftTrigger(Model=@BloodMechanism (Assets/_XandArt/TheGrowth/Resources/Cards/ProjectItem/BloodMechanism.asset), MinAmount=1, MaxAmount=1)
+            HubRoomTrigger(Room="Room_Missions")
+        Condition: And
+            conditions: []
+        Commands:
+            ForEachCard
+                Cards: CardsFromInventory(Inventory=@InventoryHub (Assets/_XandArt/TheGrowth/Resources/Inventories/InventoryHub.asset), CardTypes=Ability)
+                    Filter: null
+                Commands:
+                    ChangeCharges(Variant=Reset, Amount=3)
+                        Card: IteratingCard
+    TriggerComponent
+        Triggers:
+            CraftTrigger(Model=@BloodMechanism (Assets/_XandArt/TheGrowth/Resources/Cards/ProjectItem/BloodMechanism.asset), MinAmount=1, MaxAmount=1)
+        Condition: And
+            conditions: []
+        Commands:
+            StartDialogue(Script=@Win_Screen (Assets/_XandArt/TheGrowth/Resources/Scenario/Chapters/Win_Screen.nani))
+                AfterCommands: null

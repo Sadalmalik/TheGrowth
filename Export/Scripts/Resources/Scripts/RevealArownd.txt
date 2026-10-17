@@ -1,0 +1,17 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/RevealArownd.asset (guid 52f3eee5fad002e4f984ced85e276ea0)
+
+Commands:
+    ForEachCard
+        Cards: CardsFromSlots
+            Slots: TableSlotsAround(Figure=Square, Distance=1, Radius=0)
+                Position: PositionByCard(Fallback=(0, 0))
+                    Card: ActiveCard
+            Filter: null
+        Commands:
+            FlipCard(Variant=Reveal)
+                Card: IteratingCard
+                AfterCommands: null
+    FlipCard(Variant=Reveal)
+        Card: RelativeCard(Variant=Under, Count=1)
+            Card: ActiveCard
+        AfterCommands: null

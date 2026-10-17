@@ -1,0 +1,18 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/ChargesCheck.asset (guid c110f1ee6eed0934bba8b54e8f20b909)
+
+Commands:
+    ChangeCharges(Variant=Add, Amount=-1)
+        Card: ActiveCard
+    Branch
+        condition: ChargesCheck(Compare=Greater, Value=0)
+            Card: ActiveCard
+        OnTrue:
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: ActiveCard
+                Slot: BoardSlot(_slot=Hand)
+                AfterCommands: null
+        OnFalse:
+            MoveCard(Instant=false, RaiseEvents=false)
+                Card: ActiveCard
+                Slot: BoardSlot(_slot=Back)
+                AfterCommands: null

@@ -1,0 +1,34 @@
+# source: Assets/_XandArt/TheGrowth/Resources/Scripts/PlayerStep_Tutorial.asset (guid 4d9cdf4b00aa9fe46a5b1f5bd544a171)
+
+Commands:
+    Branch
+        condition: CardInGroups(Filter=[@Exit (Assets/_XandArt/TheGrowth/Resources/CardGroups/Exit.asset)])
+            Card: RelativeCard(Variant=Under, Count=1)
+                Card: ActiveCard
+        OnTrue:
+            Branch
+                condition: ChargesCheck(Compare=Equal, Value=4)
+                    Card: ActiveCard
+                OnTrue:
+                    GoToLocation(Location=@LocationHUB (Assets/_XandArt/TheGrowth/Resources/Locations/LocationHUB.asset))
+                    StartDialogue(Script=@CH_03 (Assets/_XandArt/TheGrowth/Resources/Scenario/Chapters/CH_03.nani))
+                        AfterCommands: null
+                OnFalse:
+                    StartDialogue(Script=@Tutorial_NeedMoreCoins (Assets/_XandArt/TheGrowth/Resources/Scenario/Chapters/Tutorial_NeedMoreCoins.nani))
+                        AfterCommands: null
+                    DebugLog(Message="Need more Coins!", Enabled=true)
+        OnFalse:
+            SetExpeditionStep(Mode=Add, Amount=-1)
+            CallStep
+                AfterCommands: null
+    Branch
+        condition: Or
+            conditions:
+                CompareNumbers(Variant=LessOrEqual, Number=Float)
+                    iFirst: null
+                    iSecond: null
+                    fFirst: StepsEvaluator
+                    fSecond: ConstantFloatEvaluator(Value=0)
+        OnTrue:
+            EndGame(Success=false, Message="Run out of turns")
+        OnFalse: []
