@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using TheGrowth.Architecture.IOC;
@@ -423,7 +422,8 @@ namespace TheGrowth.Core.Scripting
                 return $"<null command> at {DescribeFrame(frame, index)}";
 
             var type = command.GetType();
-            var name = type.GetCustomAttribute<ScriptAttribute>()?.Name ?? type.Name;
+            var attributes = (ScriptAttribute[])type.GetCustomAttributes(typeof(ScriptAttribute), false);
+            var name = attributes.Length > 0 ? attributes[0].Name : type.Name;
             if (command.Location.IsValid)
                 return $"'{name}' at {command.Location}";
 

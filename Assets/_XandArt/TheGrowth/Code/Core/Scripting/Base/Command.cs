@@ -13,6 +13,12 @@ namespace TheGrowth.Core.Scripting
         /// </summary>
         public ScriptLocation Location { get; set; }
 
+        /// <summary>
+        /// ID строки (<c>#k3f9a2</c> в конце первой строки команды): ключ локализации и проверка позиции
+        /// при загрузке сохранения. null — ID нет. Выставляет парсер, печатает принтер.
+        /// </summary>
+        public string LineId { get; set; }
+
         public abstract UniTask Execute(ScriptContext context);
     }
 }

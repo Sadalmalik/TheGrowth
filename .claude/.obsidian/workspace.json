@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "architecture-flow.md",
+                "file": "architecture-data.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "architecture-flow"
+              "title": "architecture-data"
             }
           }
         ]
@@ -190,9 +190,9 @@
   },
   "active": "638460d6558298a7",
   "lastOpenFiles": [
+    "architecture-flow.md",
     "architecture-code.md",
     "architecture-data.md",
-    "architecture-flow.md",
     "architecture-logic.md",
     "architecture-presentation.md",
     "architecture-logic.md.tmp.20240.b612774a6b79",
