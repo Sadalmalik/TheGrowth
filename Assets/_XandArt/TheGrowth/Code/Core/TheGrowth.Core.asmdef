@@ -2,7 +2,8 @@
     "name": "TheGrowth.Core",
     "rootNamespace": "TheGrowth.Core",
     "references": [
-        "TheGrowth.Architecture"
+        "TheGrowth.Architecture",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

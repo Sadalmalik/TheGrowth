@@ -9,7 +9,8 @@
         "TheGrowth.Model",
         "TheGrowth.Presentation",
         "TheGrowth.UI",
-        "TheGrowth.Game"
+        "TheGrowth.Game",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

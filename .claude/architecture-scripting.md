@@ -125,6 +125,12 @@ else
 Открыто (`.docs/Вопросы.md`): повторяющиеся секции (`else if`); скобки у литералов внутри
 вложенного узла.
 
+### Типы файлов и контексты команд (решено 2026-10-17)
+
+- Файлы скриптов (карты, общеигровые хуки) и файлы диалогов — разные расширения.
+- У команды — контекст: везде / только в диалогах / только вне диалогов. Валидатор проверяет по
+  типу файла. Таблица контекстов — в architecture-dialogs.md.
+
 Для ИИ:
 - каталог команд (шаблоны, типы параметров, описания) генерируется из атрибутов в скилл
   `.claude/skills/`;
@@ -133,6 +139,103 @@ else
 
 Отклонённые варианты: `[SerializeReference]` + CLI/MCP (ИИ правит только при открытом редакторе,
 merge YAML с `rid` не разрешить руками), JSON со схемой (многословно, две формы представления).
+
+## База команд (решено 2026-10-17)
+
+- Асинхронный примитив — **UniTask** (Cysharp): работает в Web, есть `WhenAll`, интеграция с
+  DOTween, окно TaskTracker. Копия UniTask внутри Naninovel — в своём namespace, не конфликтует.
+- Асинхронны только **команды**: `UniTask Execute(ScriptContext)`. Мгновенные команды наследуют
+  `InstantCommand` (`void Run(ScriptContext)`). **Кондишены и эвалуаторы синхронны.**
+- `ScriptContext` — развитие `Context` прототипа: цепочка родителей с типизированными данными
+  (`ActiveCard`, `IteratingCard`, ...; дочерний — `context.With(data)`), системы сессии через
+  `context.Get<T>()`, текущий запуск и его токен отмены. Корневой контекст — на сессию;
+  `Game.BaseContext` нет.
+- `ScriptRunner` (система сессии): каждый запуск (хук карты, общеигровой хук, диалог) —
+  зарегистрированный `ScriptExecution`. Вложенные реакции карт — внутри того же запуска.
+  `Background` — отдельный запуск, токен связан с токеном scope, а не родителя. `Parallel` —
+  `UniTask.WhenAll`. Команды ожидания игрока (реплика, выбор, ввод) оборачивают ожидание в
+  `context.WaitForPlayer()`; `IsIdle` = активных запусков нет или все ждут игрока.
+- Ошибка в команде — лог с файлом и строкой скрипта, запуск прерывается, игра продолжается.
+  Отмена — тихая.
+- **Скрипты разбираются из текста при загрузке** (с кешем), в редакторе — ещё и при импорте для
+  проверки. Парсер — в Core, работает в билде. Команды — обычные классы: `[SerializeReference]`
+  и `[Serializable]` им не нужны.
+
+```csharp
+public abstract class Command
+{
+    public abstract UniTask Execute(ScriptContext context);
+}
+
+public abstract class InstantCommand : Command
+{
+    public sealed override UniTask Execute(ScriptContext context)
+    {
+        Run(context);
+        return UniTask.CompletedTask;
+    }
+
+    protected abstract void Run(ScriptContext context);
+}
+
+public abstract class Condition
+{
+    public abstract bool Check(ScriptContext context);
+}
+
+public abstract class Evaluator<T>
+{
+    public abstract T Evaluate(ScriptContext context);
+}
+```
+
+## Исполнитель и управляющие команды (решено 2026-10-17)
+
+Управляющие конструкции исполняет сам `ScriptRunner` по явному стеку кадров, а не C#-рекурсия:
+асинхронный метод нельзя сохранить посреди выполнения, а стек кадров — данные.
+
+- **Обычные команды** — `UniTask Execute(ScriptContext)`, подавляющее большинство.
+- **Управляющие команды** (`if`, `choice` / `option`, `goto`, `call`, `return`) свои блоки не
+  выполняют, а возвращают шаг исполнителю:
+
+```csharp
+public abstract class ControlCommand : Command
+{
+    // Enter(block) | Jump(section) | Call(section) | Return
+    public abstract UniTask<ControlStep> Next(ScriptContext context);
+}
+
+[Script("if", "if [Condition] {OnTrue} else {OnFalse}")]
+public class Branch : ControlCommand
+{
+    public Condition Condition;
+    public List<Command> OnTrue;
+    public List<Command> OnFalse;
+
+    public override UniTask<ControlStep> Next(ScriptContext context)
+        => UniTask.FromResult(ControlStep.Enter(Condition.Check(context) ? OnTrue : OnFalse));
+}
+```
+
+- Кадр: файл, секция, блок, индекс команды; стек `call` — часть стека кадров. `goto` снимает
+  кадры текущей секции и кладёт кадр целевой; `call` кладёт кадр с возвратом; `return` снимает.
+- `choice` — управляющая команда с ожиданием игрока: показывает варианты, ждёт выбора, возвращает
+  `Enter(тело варианта)`.
+- `Parallel`, `Background`, циклы (`for each card`) — обычные команды; свои блоки запускают как
+  вложенные запуски (`context.Runner.RunBlock(...)`). Позиция внутри них не сохраняется — в
+  диалогах команды ожидания внутри них запрещены (валидатор).
+- Реакции карт — вложенные запуски изнутри обычных команд.
+- Один исполнитель для всех файлов (скрипты и диалоги).
+- Реализация (T054, `Code/Core/Scripting/`): `goto` внутри `call` сохраняет кадр вызова — после
+  целевой секции исполнение возвращается к вызвавшему (как `jump` в Ren'Py). `ControlCommand`
+  объявляет свои блоки (`BlockCount` / `GetBlock`) — по ним строится путь позиции. Во вложенных
+  ветках (`parallel`, `RunSection`) `goto` / `return` действуют в пределах ветки.
+- Известные ограничения: ожидание игрока учитывается на весь запуск (если одна ветка `parallel`
+  ждёт игрока, а другая анимируется, запуск считается ждущим — в диалогах это закрыто запретом
+  ожидания внутри `parallel`); долгие команды обязаны слушать `context.Cancellation`, иначе при
+  ошибке соседней ветки `parallel` остаётся «хвост».
+- Плюсы: `goto` / `call` без раскрутки исключениями, точная позиция в ошибках и для подсветки
+  строки в инспекторе, позиция исполнения сериализуема.
 
 ## Почему ломались скрипты карт
 

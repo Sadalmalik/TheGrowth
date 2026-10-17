@@ -6,7 +6,8 @@
         "UnityEditor.TestRunner",
         "TheGrowth.Architecture",
         "TheGrowth.Core",
-        "TheGrowth.Model"
+        "TheGrowth.Model",
+        "UniTask"
     ],
     "includePlatforms": [
         "Editor"

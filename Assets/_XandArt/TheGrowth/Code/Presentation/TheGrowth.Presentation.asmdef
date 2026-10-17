@@ -4,7 +4,8 @@
     "references": [
         "TheGrowth.Model",
         "TheGrowth.Core",
-        "TheGrowth.Architecture"
+        "TheGrowth.Architecture",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

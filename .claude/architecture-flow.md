@@ -37,7 +37,7 @@ Boot ──► MainMenu ◄────────────────┐
 | Scope | Живёт | Содержимое |
 |---|---|---|
 | Global | всё время работы приложения | `GameFlow`, `SceneService`, `SaveService` (IO, слоты), `SettingsService`, `AudioService`, `UIRoot`/`UIManager`, `InputService` |
-| Session | от NewGame/LoadGame до ExitToMenu | системы модели: `CardRegistry`, `SlotSystem`, `StorySystem`, `QuestSystem`, `FlagsSystem`, `CraftSystem`, `ExpeditionSystem`, `ScriptRunner`, `Rng` |
+| Session | от NewGame/LoadGame до ExitToMenu | системы модели: `CardRegistry`, `SlotSystem`, `StorySystem`, `QuestSystem`, `VariablesSystem`, `CraftSystem`, `ExpeditionSystem`, `ScriptRunner`, `Rng` |
 | Location | пока загружена сцена локации | презентеры сцены: привязка `SlotView`, `CardViewFactory`, `CardInteractionController`, камера локации |
 
 Правила:
@@ -95,8 +95,7 @@ CreateSession(SaveGame save)
 
 Сохранение разрешено, только когда `GameFlow.CanSave == true`:
 - нет активного перехода;
-- нет активного диалога;
-- нет ни одного активного командного скрипта (см. architecture-logic.md).
+- нет активных командных скриптов, кроме: диалог, который ждёт игрока (выведена реплика, открыт выбор или ввод текста) — см. architecture-dialogs.md.
 
 Автосейв — по событиям (вход в хаб, конец хода экспедиции, конец экспедиции), не
 по таймеру. Слоты и ротация автосейвов — в [architecture-data.md](architecture-data.md).
@@ -130,7 +129,7 @@ public sealed class GameFlow : SharedObject
     // Unity 6 = C# 9: extended property patterns (Actions.IsIdle) недоступны, только вложенные
     public bool CanSave => !m_IsProcessing
                            && Session is { Scripts: { IsIdle: true } }
-                           && !IsDialogueActive;
+                           && (!IsDialogueActive || IsDialogueWaitingForPlayer);
 
     public void Request(IFlowRequest request)
     {

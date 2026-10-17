@@ -6,7 +6,8 @@
         "TheGrowth.Core",
         "TheGrowth.Architecture",
         "UnityEngine.UI",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
