@@ -77,7 +77,7 @@
 | `SignalBus/EventBus` (глобальный) | доменные события сессии | заменить, без глобального экземпляра |
 | `Game`, `GameManager`, `LocationManager` | `GameFlow`, `Session`, `LocationScope` | переписать |
 | `PersistentState`, `PersistenceManager`, `Ref<T>`, `AssetRef<T>`, конвертеры | `SaveService`, `ISaveable`, DTO, `ContentRegistry` | переписать |
-| `Entity`, `CompositeEntity`, `EntityModel` | `CardInstance`, `CardModel` (Settings → Behaviour → Save) | переписать по схеме GeekyHouse Game Entity |
+| `Entity`, `CompositeEntity`, `EntityModel` | одна `Entity` с компонентами, единый конфиг `Model` с пресетами (Settings → Behaviour → Save) | переписать, без `CompositeEntity` |
 | `Inventory`, `SlotEntity`, `BoardEntity` | `SlotSystem`, слоты | переписать |
 | `CardBrain` (события, `AllowedMoves`, `SpawnSlot`) | `CardBrainSettings` + хуки (команды) | перенести семантику |
 | `Scripting/*` (команды, эвалуаторы, кондишены) | Model/Scripting на глаголах | перенести; `AfterCommands` → асинхронное ожидание; `[SerializeReference]` |
