@@ -160,6 +160,23 @@ namespace TheGrowth.Tests.EditMode.Sessions
         }
 
         [Test]
+        public void Dispose_CancelsRunningScripts_ByLifetimeWithoutToken()
+        {
+            var session = Session.Create(m_Global);
+            var gate = new Gate();
+            var trace = new TraceLog();
+            var file = new ScriptFile("waiting", new[] { new ScriptSection("Start", new Command[] { new WaitCommand { Name = "w", Gate = gate } }) });
+            var probe = Probe.Watch(session.Scripts.Run(file, "Start", session.Scripts.RootContext.With(trace)));
+
+            session.Dispose();
+
+            Assert.IsTrue(probe.IsCompleted);
+            Assert.IsNull(probe.Exception);
+            Assert.AreEqual(0, session.Scripts.ActiveCount);
+            Assert.That(trace.Entries, Is.EqualTo(new[] { "w" }));
+        }
+
+        [Test]
         public void Scripts_RunFileFromContentRegistry_CallIntoOtherFile()
         {
             var session = Session.Create(m_Global);

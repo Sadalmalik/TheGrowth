@@ -8,8 +8,8 @@ namespace TheGrowth.Architecture.IOC
     /// <summary>
     /// Контейнер зависимостей: объект регистрируется под своим типом и под интерфейсами-наследниками
     /// <see cref="ISharedInterface"/>, поиск идёт по цепочке родителей. Инжект, <see cref="IShared.Init"/> и
-    /// <see cref="IShared.Dispose"/> выполняются по одному разу на экземпляр, в порядке регистрации, сколько бы
-    /// ключей у экземпляра ни было.
+    /// <see cref="IShared.Dispose"/> выполняются по одному разу на экземпляр, сколько бы ключей у экземпляра ни было:
+    /// инжект и <c>Init</c> — в порядке регистрации, <c>Dispose</c> — в обратном (поздние системы обычно зависят от ранних).
     /// </summary>
     public class Container
     {
@@ -164,8 +164,8 @@ namespace TheGrowth.Architecture.IOC
 
             Active = false;
 
-            foreach (var shared in m_Instances)
-                shared.Dispose();
+            for (var i = m_Instances.Count - 1; i >= 0; i--)
+                m_Instances[i].Dispose();
 
             if (Parent != null)
                 Parent.Childs.Remove(this);

@@ -11,7 +11,8 @@ namespace TheGrowth.Core.Scripting
     /// Исполнитель скриптов (система сессии). Один на все файлы: скрипты карт, общеигровые хуки, диалоги.
     /// Каждый запуск — зарегистрированный <see cref="ScriptExecution"/>. Управляющие команды исполняются
     /// по явному стеку кадров: позиция исполнения — данные, её можно сохранить.
-    /// Требует <see cref="IScriptLibrary"/> в контейнере.
+    /// Требует <see cref="IScriptLibrary"/> и <see cref="ILifetime"/> (область сессии) в контейнере: отмена области
+    /// отменяет все запуски.
     /// </summary>
     public sealed class ScriptRunner : SharedObject
     {
@@ -20,10 +21,12 @@ namespace TheGrowth.Core.Scripting
 #pragma warning disable CS0649 // заполняется контейнером через [Inject]
         [Inject]
         private IScriptLibrary m_Library;
+
+        [Inject]
+        private ILifetime m_Lifetime;
 #pragma warning restore CS0649
 
         private readonly List<ScriptExecution> m_Executions = new List<ScriptExecution>();
-        private readonly CancellationTokenSource m_Lifetime = new CancellationTokenSource();
         private int m_LastExecutionId;
 
         /// <summary>Сколько команд запуск может выполнить без ожидания игрока; 0 — без ограничения.</summary>
@@ -56,16 +59,23 @@ namespace TheGrowth.Core.Scripting
             RootContext = new ScriptContext(container, this);
         }
 
+        /// <summary>
+        /// Область отменяет токен до <c>Dispose</c> систем, и запуски к этому моменту уже завершены. Здесь — отмена
+        /// оставшихся, если исполнитель уничтожают без отмены области.
+        /// </summary>
         public override void Dispose()
         {
-            m_Lifetime.Cancel();
+            foreach (var execution in new List<ScriptExecution>(m_Executions))
+                execution.Cancel();
         }
 
 #region Executions
 
         /// <summary>
         /// Новый запуск секции. Ошибки команд логируются и прерывают запуск; возвращённая задача
-        /// завершается без исключения и при ошибке, и при отмене.
+        /// завершается без исключения и при ошибке, и при отмене. Запуск отменяется вместе с областью исполнителя
+        /// (<see cref="ILifetime"/>); <paramref name="token"/> — дополнительно, для запуска, принадлежащего более узкой
+        /// области (локация, диалог): исполнитель один на сессию, а скрипт сцены должен остановиться с её выгрузкой.
         /// </summary>
         public UniTask Run(ScriptFile file, string section, ScriptContext parent = null, CancellationToken token = default)
         {
@@ -112,7 +122,8 @@ namespace TheGrowth.Core.Scripting
         private ScriptExecution CreateExecution(string name, ScriptContext parent, CancellationToken scope)
         {
             var context = parent ?? RootContext ?? throw new InvalidOperationException($"{nameof(ScriptRunner)} is not initialized");
-            var execution = new ScriptExecution(++m_LastExecutionId, name, scope, m_Lifetime.Token);
+            var lifetime = m_Lifetime?.Token ?? throw new InvalidOperationException($"{nameof(ScriptRunner)} is not initialized");
+            var execution = new ScriptExecution(++m_LastExecutionId, name, scope, lifetime);
             execution.Root.Context = context.ForRun(execution, execution.Root);
             m_Executions.Add(execution);
             return execution;

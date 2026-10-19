@@ -85,7 +85,7 @@ Boot ──► MainMenu ◄────────────────┐
 
 | Запрос | Из состояний | Действия |
 |---|---|---|
-| `NewGameRequest` | MainMenu | создать сессию из пустого `SaveGame` → `StorySystem.Start(RootConfig.StartStep)` → войти в стартовую локацию |
+| `NewGameRequest` | MainMenu | создать сессию из пустого `SaveGame` → `StorySystem.Start(GameConfig.StartStep)` → войти в стартовую локацию |
 | `LoadGameRequest(slot)` | MainMenu, Hub, Expedition | при наличии сессии — выгрузить локацию и уничтожить сессию → прочитать слот → создать сессию → войти в сохранённую локацию |
 | `EnterLocationRequest(locationId)` | Hub, Expedition | выгрузить текущую локацию → загрузить новую → поднять location scope |
 | `ExitToMenuRequest` | Hub, Expedition | выгрузить локацию → уничтожить сессию → MainMenu |
@@ -150,6 +150,34 @@ CreateSession(SaveGame save)
   входит в эту локацию.
 - Пресет — отдельный конфиг `StoryStep`, настраивающий игру под локацию (карты, переменные, шаг
   сюжета).
+
+## Реализация (T061, 2026-10-18)
+
+Код: `Code/Game/Flow/` (`GameFlow`, запросы), `Code/Game/Scenes/` (`ISceneService`),
+`Code/Game/Bootstrap/` (`GameStarter`), `Code/Model/Locations/` (`LocationModel`, `LocationScope`),
+`Code/Presentation/Locations/` (`LocationRoot`, `ILocationBehaviour`), `Code/Architecture/Input/`
+(`InputService`), `Code/UI/Loading/` (`ILoadingScreen`). Сцены: `Scenes/Main.unity`,
+`Scenes/Locations/TestLocation.unity`. Конфиги: `Content/Game/GameConfig.asset` (стартовая
+локация; вместо `RootConfig` прототипа), `Content/Locations/`.
+
+- `GameFlow(global, config)` — глобальная область передаётся конструктором: только он создаёт
+  дочерние области. `UniTask Request(IFlowRequest)` завершается после обработки и не бросает.
+- `IFlowRequest { bool IsAllowedIn(FlowState); UniTask ExecuteAsync(GameFlow, CancellationToken) }`.
+  Недопустимый в текущем состоянии запрос пропускается с предупреждением. `NewGameRequest`
+  разрешён и из Boot (для Play из сцены).
+- Блокировка ввода и экран загрузки — один раз на всю очередь запросов, не на каждый.
+- `ISceneService.LoadAdditiveAsync` возвращает корневые объекты сцены (в тестах — объекты в памяти).
+- `LocationRoot` регистрируется в контейнере локации; `Initialize` вызывается из `configure` в
+  `LocationScope.Create`; инжект и `OnLocationInit` — при `Init` контейнера, `OnLocationDispose` —
+  в обратном порядке через `Dispose` контейнера после отмены токена.
+- `InputService` — Architecture (понятий игры нет); `ILoadingScreen` — UI (Game использует сверху
+  вниз); `LocationModel`, `LocationScope` — Model; `GameConfig` — Game.
+- Play из любой сцены: `PlayModeStart` (редактор) пишет ID локации открытой сцены в `SessionState`;
+  `GameStarter` под `#if UNITY_EDITOR` вызывает делегат `EditorStartHook.CreateRequest`.
+  Несохранённая сцена и сцена PlayMode-тестов запускаются как есть. Пресет встанет между созданием
+  сессии и входом в локацию.
+- E02: `CreateSession()` станет `CreateSession(SaveGame)`; запросы сохранения и загрузки — в ту же
+  очередь, сохранение — без блокировки ввода и экрана загрузки.
 
 ## Набросок кода
 

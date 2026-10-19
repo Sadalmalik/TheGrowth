@@ -72,7 +72,7 @@ Integrations  Steam · аналитика (Amplitude, ...) · хранилища
 | UI | `TheGrowth.UI` | `.../Code/UI/` |
 | Game | `TheGrowth.Game` | `.../Code/Game/` |
 | Integrations | `TheGrowth.Integrations.<Модуль>` (по сборке на интеграцию) | `.../Code/Integrations/<Модуль>/` |
-| — | `TheGrowth.Editor`, `TheGrowth.Tests.EditMode`, `TheGrowth.Tests.PlayMode` | `.../Code/Editor/`, `.../Tests/` |
+| — | `TheGrowth.Editor`, `TheGrowth.Tests.EditMode`, `TheGrowth.Tests.PlayMode`, `TheGrowth.Tests.Support` | `.../Code/Editor/`, `.../Tests/` |
 
 Сторонние: Architecture — DOTween (процедурные анимации), UniTask (с ним — все слои выше); Core — Newtonsoft; Presentation — DOTween
 (Spine позже); UI — R3, ObservableCollections; Presentation/UI — Spine (позже).
@@ -142,3 +142,6 @@ Assets/_XandArt/TheGrowth/
 - `.claude/` — спецификация для Claude (этот набор файлов) и, позже, скилы проекта.
 - При изменении архитектурного решения обновлять и `.claude/*.md`, и соответствующую страницу
   `.docs/Техническая документация/Архитектура проекта/`.
+
+- `TheGrowth.Tests.Support` — runtime-сборка (только при `UNITY_INCLUDE_TESTS`) для тестовых
+  `MonoBehaviour`: из editor-only сборки EditMode-тестов Unity не даёт вешать их на объекты.

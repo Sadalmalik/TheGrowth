@@ -24,7 +24,7 @@ namespace TheGrowth.Core.Scripting
         /// <summary>Токен scope, переданный при запуске. С ним связаны фоновые запуски, начатые из этого.</summary>
         public CancellationToken Scope { get; }
 
-        /// <summary>Токен отмены запуска: scope, уничтожение исполнителя, ошибка, <see cref="Cancel"/>.</summary>
+        /// <summary>Токен отмены запуска: scope, отмена области исполнителя или его уничтожение, ошибка, <see cref="Cancel"/>.</summary>
         public CancellationToken Cancellation { get; }
 
         public bool IsWaitingForPlayer => m_WaitDepth > 0;

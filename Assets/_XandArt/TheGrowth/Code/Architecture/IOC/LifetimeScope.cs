@@ -9,6 +9,7 @@ namespace TheGrowth.Architecture.IOC
     /// дочерний, токен связан с токеном родителя. Отмена или уничтожение родителя отменяет детей.
     /// Порядок <see cref="Dispose"/>: отменить токен → уничтожить дочерние области (последняя созданная —
     /// первой) → <see cref="IOC.Container.Dispose"/> → освободить источник токена.
+    /// Токен области зарегистрирован в её контейнере как <see cref="ILifetime"/> (первым, до систем).
     /// </summary>
     public class LifetimeScope : IDisposable
     {
@@ -42,6 +43,7 @@ namespace TheGrowth.Architecture.IOC
             Container = new Container(parent?.Container, name);
             m_Lifetime = parent == null ? new CancellationTokenSource() : CancellationTokenSource.CreateLinkedTokenSource(parent.Lifetime);
             Lifetime = m_Lifetime.Token;
+            Container.Add(new ScopeLifetime(Lifetime));
 
             parent?.m_Children.Add(this);
         }
@@ -87,6 +89,25 @@ namespace TheGrowth.Architecture.IOC
         public override string ToString()
         {
             return Name;
+        }
+
+        /// <summary><see cref="ILifetime"/> области: жизненного цикла нет, токен принадлежит области.</summary>
+        private sealed class ScopeLifetime : IShared, ILifetime
+        {
+            public ScopeLifetime(CancellationToken token)
+            {
+                Token = token;
+            }
+
+            public CancellationToken Token { get; }
+
+            public void Init()
+            {
+            }
+
+            public void Dispose()
+            {
+            }
         }
     }
 }

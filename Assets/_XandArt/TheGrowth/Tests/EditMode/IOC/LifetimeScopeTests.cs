@@ -21,6 +21,17 @@ namespace TheGrowth.Tests.EditMode.IOC
         }
     }
 
+    /// <summary>Система с токеном своей области через <see cref="ILifetime"/>.</summary>
+    public sealed class LifetimeConsumer : SharedObject
+    {
+#pragma warning disable CS0649 // заполняется контейнером через [Inject]
+        [Inject]
+        private ILifetime m_Lifetime;
+#pragma warning restore CS0649
+
+        public CancellationToken Token => m_Lifetime.Token;
+    }
+
     public sealed class LifetimeScopeTests
     {
         private static LifetimeProbe AddProbe(LifetimeScope scope, string name, List<string> journal)
@@ -115,6 +126,44 @@ namespace TheGrowth.Tests.EditMode.IOC
 
             Assert.AreSame(dependency, child.Container.Get<TestDependency>());
             root.Dispose();
+        }
+
+        [Test]
+        public void Lifetime_SystemGetsTokenOfScopeWhereItIsRegistered()
+        {
+            var root = new LifetimeScope("Root");
+            var inRoot = root.Container.Add(new LifetimeConsumer());
+            root.Container.Init();
+            var child = root.CreateChild("Child");
+            var inChild = child.Container.Add(new LifetimeConsumer());
+            child.Container.Init();
+
+            Assert.AreEqual(root.Lifetime, inRoot.Token, "parent system: parent token");
+            Assert.AreEqual(child.Lifetime, inChild.Token, "child system: child token");
+            Assert.AreEqual(child.Lifetime, child.Get<ILifetime>().Token);
+            Assert.AreEqual(root.Lifetime, root.Get<ILifetime>().Token);
+
+            child.Cancel();
+            Assert.IsTrue(inChild.Token.IsCancellationRequested);
+            Assert.IsFalse(inRoot.Token.IsCancellationRequested);
+            root.Dispose();
+        }
+
+        [Test]
+        public void Lifetime_GrandChildSystem_GetsGrandChildToken_CancelledWithRoot()
+        {
+            var root = new LifetimeScope("Root");
+            root.Container.Init();
+            var child = root.CreateChild("Child");
+            var grandChild = child.CreateChild("GrandChild");
+            var inGrandChild = grandChild.Container.Add(new LifetimeConsumer());
+            child.Container.Init();
+            grandChild.Container.Init();
+
+            Assert.AreEqual(grandChild.Lifetime, inGrandChild.Token);
+
+            root.Dispose();
+            Assert.IsTrue(inGrandChild.Token.IsCancellationRequested);
         }
 
         [Test]

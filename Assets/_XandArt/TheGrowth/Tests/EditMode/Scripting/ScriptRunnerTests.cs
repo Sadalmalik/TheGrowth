@@ -313,6 +313,22 @@ namespace TheGrowth.Tests.EditMode.Scripting
         }
 
         [Test]
+        public void ScopeCancel_CancelsExecutions_WithoutExplicitToken()
+        {
+            var gate = new Gate();
+            var file = AddFile("test", Section("Start", Wait("w", gate), Mark("after")));
+
+            var probe = RunFile(file);
+            var execution = Runner.ActiveExecutions[0];
+            Scope.Cancel();
+
+            Assert.IsTrue(probe.IsCompleted);
+            Assert.IsTrue(execution.IsFinished);
+            Assert.AreEqual(0, Runner.ActiveCount);
+            Assert.That(Trace.Entries, Is.EqualTo(new[] { "w" }));
+        }
+
+        [Test]
         public void RunnerDispose_CancelsExecutions()
         {
             var gate = new Gate();

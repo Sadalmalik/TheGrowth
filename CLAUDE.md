@@ -28,7 +28,7 @@ Unity 6000.3 (C# 9). Платформы: PC (Steam), вероятно Android, i
 
 - **Жизненный цикл** — `GameFlow` единственный владелец переходов. Scopes Global → Session →
   Location. Новая игра и загрузка — один путь `CreateSession(SaveGame)`. Без статики.
-  Сцена `Main` постоянная, остальные additive; сцена локации — `LocationRoot`. Сохранение —
+  Сцена `Main` постоянная (`Scenes/Main.unity`), остальные additive (`Scenes/Locations/`); сцена локации — `LocationRoot`. Сохранение —
   `SaveGameRequest`, ждёт точки сохранения. Play из любой сцены — пресет `StoryStep`.
 - **Данные** — конфиги (SO, `int Id` на тип), runtime-состояние (C# классы в системах сессии),
   сейв (DTO с версией).

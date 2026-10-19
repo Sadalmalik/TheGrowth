@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using NUnit.Framework;
 using TheGrowth.Architecture.IOC;
 
@@ -48,6 +49,34 @@ namespace TheGrowth.Tests.EditMode.IOC
     {
     }
 
+    /// <summary>Пишет в журнал свои Init и Dispose; наследники — разные ключи контейнера.</summary>
+    public abstract class OrderProbe : SharedObject
+    {
+        public List<string> Journal;
+
+        public override void Init()
+        {
+            Journal.Add($"{GetType().Name}:init");
+        }
+
+        public override void Dispose()
+        {
+            Journal.Add($"{GetType().Name}:dispose");
+        }
+    }
+
+    public sealed class FirstProbe : OrderProbe
+    {
+    }
+
+    public sealed class SecondProbe : OrderProbe
+    {
+    }
+
+    public sealed class ThirdProbe : OrderProbe
+    {
+    }
+
     public sealed class ContainerTests
     {
         [Test]
@@ -67,6 +96,25 @@ namespace TheGrowth.Tests.EditMode.IOC
 
             container.Dispose();
             Assert.AreEqual(1, service.DisposeCount);
+        }
+
+        [Test]
+        public void Init_InRegistrationOrder_Dispose_InReverseOrder()
+        {
+            var journal = new List<string>();
+            var container = new Container(null, "Test");
+            container.Add(new FirstProbe { Journal = journal });
+            container.Add(new SecondProbe { Journal = journal });
+            container.Add(new ThirdProbe { Journal = journal });
+
+            container.Init();
+            container.Dispose();
+
+            Assert.That(journal, Is.EqualTo(new[]
+            {
+                "FirstProbe:init", "SecondProbe:init", "ThirdProbe:init",
+                "ThirdProbe:dispose", "SecondProbe:dispose", "FirstProbe:dispose",
+            }));
         }
 
         [Test]

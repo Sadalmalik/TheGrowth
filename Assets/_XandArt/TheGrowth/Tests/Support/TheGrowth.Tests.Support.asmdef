@@ -1,0 +1,21 @@
+{
+    "name": "TheGrowth.Tests.Support",
+    "rootNamespace": "TheGrowth.Tests.Support",
+    "references": [
+        "TheGrowth.Architecture",
+        "TheGrowth.Core",
+        "TheGrowth.Model",
+        "TheGrowth.Presentation"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

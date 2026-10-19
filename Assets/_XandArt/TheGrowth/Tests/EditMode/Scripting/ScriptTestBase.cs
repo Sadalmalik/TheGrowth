@@ -7,12 +7,14 @@ using TheGrowth.Core.Scripting;
 namespace TheGrowth.Tests.EditMode.Scripting
 {
     /// <summary>
-    /// Контейнер с библиотекой и исполнителем, корневой контекст с журналом.
+    /// Область (контейнер + <see cref="ILifetime"/>) с библиотекой и исполнителем, корневой контекст с журналом.
     /// Команды тестов завершаются синхронно или по <see cref="Gate"/>, поэтому тесты синхронные.
     /// </summary>
     public abstract class ScriptTestBase
     {
-        protected Container Container { get; private set; }
+        protected LifetimeScope Scope { get; private set; }
+
+        protected Container Container => Scope.Container;
 
         protected TestScriptLibrary Library { get; private set; }
 
@@ -25,7 +27,7 @@ namespace TheGrowth.Tests.EditMode.Scripting
         [SetUp]
         public void SetUpRunner()
         {
-            Container = new Container(null, "ScriptTests");
+            Scope = new LifetimeScope("ScriptTests");
             Library = Container.Add(new TestScriptLibrary());
             Runner = Container.Add(new ScriptRunner());
             Container.Init();
@@ -37,7 +39,7 @@ namespace TheGrowth.Tests.EditMode.Scripting
         [TearDown]
         public void TearDownRunner()
         {
-            Container.Dispose();
+            Scope.Dispose();
         }
 
         protected Probe RunFile(ScriptFile file, string section = "Start", CancellationToken token = default)

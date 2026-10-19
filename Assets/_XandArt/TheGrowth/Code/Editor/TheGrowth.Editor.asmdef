@@ -8,6 +8,7 @@
         "TheGrowth.Model",
         "TheGrowth.Core",
         "TheGrowth.Architecture",
+        "UnityEngine.UI",
         "UniTask"
     ],
     "includePlatforms": [
