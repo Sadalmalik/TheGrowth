@@ -25,4 +25,4 @@ namespace TheGrowth.Architecture.Utils
             }
         }
     }
-}
+}

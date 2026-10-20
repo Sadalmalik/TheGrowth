@@ -22,4 +22,4 @@ namespace TheGrowth.Architecture.Utils
                 GameObject.DestroyImmediate(obj);
         }
     }
-}
+}

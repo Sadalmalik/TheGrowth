@@ -14,4 +14,4 @@ namespace TheGrowth.Architecture.Utils
             return Mathf.Clamp01((value - min) / (max - min));
         }
     }
-}
+}

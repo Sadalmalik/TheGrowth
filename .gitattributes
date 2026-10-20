@@ -1,0 +1,25 @@
+# Окончания строк — только LF: в репозитории и в рабочей копии, независимо от core.autocrlf.
+* text=auto eol=lf
+*.cs text eol=lf
+
+# Бинарные файлы
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.psd binary
+*.exr binary
+*.ttf binary
+*.otf binary
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.mp4 binary
+*.fbx binary
+*.dll binary
+*.so binary
+*.a binary
+*.pdf binary
+*.zip binary
+*.bytes binary
+*.tgsave binary

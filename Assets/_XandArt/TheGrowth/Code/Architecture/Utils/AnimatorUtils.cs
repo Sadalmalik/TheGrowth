@@ -38,4 +38,4 @@ namespace TheGrowth.Architecture.Utils
             callback?.Invoke();
         }
     }
-}
+}

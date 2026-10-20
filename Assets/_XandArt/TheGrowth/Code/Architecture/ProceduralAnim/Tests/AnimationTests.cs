@@ -62,4 +62,4 @@ namespace TheGrowth.Architecture.ProceduralAnim
             }
         }
     }
-}
+}

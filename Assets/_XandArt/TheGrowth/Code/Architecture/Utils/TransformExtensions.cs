@@ -52,4 +52,4 @@ namespace TheGrowth.Architecture.Utils
             t.localRotation = Quaternion.Euler(rotation);
         }
     }
-}
+}

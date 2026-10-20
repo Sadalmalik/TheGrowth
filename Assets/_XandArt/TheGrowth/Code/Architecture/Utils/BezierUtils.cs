@@ -46,4 +46,4 @@ namespace TheGrowth.Architecture.Utils
             return uu * (u * start + 3 * t * pivot1) + tt * (3 * u * pivot2 + t * end);
         }
     }
-}
+}

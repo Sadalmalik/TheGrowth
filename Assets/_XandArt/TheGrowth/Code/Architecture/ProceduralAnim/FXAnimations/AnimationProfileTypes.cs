@@ -53,4 +53,4 @@ namespace TheGrowth.Architecture.ProceduralAnim
         RotateZ = 3,
         RotateWorld = 4
     }
-}
+}
