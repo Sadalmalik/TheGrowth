@@ -1,6 +1,7 @@
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Scripting;
+using TheGrowth.Model.Locations;
 
 namespace TheGrowth.Model
 {
@@ -14,6 +15,7 @@ namespace TheGrowth.Model
         {
             container.Add(new ContentScriptLibrary());
             container.Add(new ScriptRunner());
+            container.Add(new LocationSystem());
         }
     }
 }

@@ -74,8 +74,9 @@ Integrations  Steam · аналитика (Amplitude, ...) · хранилища
 | Integrations | `TheGrowth.Integrations.<Модуль>` (по сборке на интеграцию) | `.../Code/Integrations/<Модуль>/` |
 | — | `TheGrowth.Editor`, `TheGrowth.Tests.EditMode`, `TheGrowth.Tests.PlayMode`, `TheGrowth.Tests.Support` | `.../Code/Editor/`, `.../Tests/` |
 
-Сторонние: Architecture — DOTween (процедурные анимации), UniTask (с ним — все слои выше); Core — Newtonsoft; Presentation — DOTween
-(Spine позже); UI — R3, ObservableCollections; Presentation/UI — Spine (позже).
+Сторонние: Architecture — DOTween (процедурные анимации), UniTask, R3 и ObservableCollections (база MVVM,
+решено 2026-10-20) — с ними все слои выше; Core — Newtonsoft; Presentation — DOTween (Spine позже); UI — DOTween;
+Presentation/UI — Spine (позже).
 
 ## Папки
 

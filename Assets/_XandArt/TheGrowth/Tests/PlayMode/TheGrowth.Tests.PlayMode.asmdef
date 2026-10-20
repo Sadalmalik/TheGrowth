@@ -10,6 +10,7 @@
         "TheGrowth.Presentation",
         "TheGrowth.UI",
         "TheGrowth.Game",
+        "TheGrowth.Integrations.SaveFiles",
         "UniTask"
     ],
     "includePlatforms": [],

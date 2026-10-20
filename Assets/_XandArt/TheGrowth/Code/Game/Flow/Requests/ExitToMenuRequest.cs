@@ -4,8 +4,8 @@ using Cysharp.Threading.Tasks;
 namespace TheGrowth.Game.Flow
 {
     /// <summary>
-    /// Выход в меню: выгрузить локацию → уничтожить сессию → MainMenu. Автосейв перед выходом, если можно
-    /// сохраниться, — E02.
+    /// Выход в меню: автосейв, если сессия в точке сохранения (<see cref="GameFlow.AutosaveAsync"/>, до выгрузки) →
+    /// выгрузить локацию → уничтожить сессию → MainMenu.
     /// </summary>
     public sealed class ExitToMenuRequest : IFlowRequest
     {
@@ -16,6 +16,7 @@ namespace TheGrowth.Game.Flow
 
         public async UniTask ExecuteAsync(GameFlow flow, CancellationToken token)
         {
+            await flow.AutosaveAsync(token);
             flow.SetState(FlowState.Loading);
             await flow.UnloadLocationAsync();
             flow.DestroySession();

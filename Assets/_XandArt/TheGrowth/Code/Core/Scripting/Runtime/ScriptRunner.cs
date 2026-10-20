@@ -54,6 +54,13 @@ namespace TheGrowth.Core.Scripting
             }
         }
 
+        /// <summary>
+        /// Исполнитель стал простаивающим (<see cref="IsIdle"/>): запуск завершился или начал ждать игрока. Вызывается
+        /// синхронно в этот момент, до продолжения кода, ждавшего запуск; ошибка обработчика — в лог. Для точки
+        /// сохранения (<c>GameFlow</c>).
+        /// </summary>
+        public event Action BecameIdle;
+
         public override void Init()
         {
             RootContext = new ScriptContext(container, this);
@@ -150,6 +157,22 @@ namespace TheGrowth.Core.Scripting
             {
                 m_Executions.Remove(execution);
                 execution.Finish();
+                NotifyIfIdle();
+            }
+        }
+
+        internal void NotifyIfIdle()
+        {
+            if (BecameIdle == null || !IsIdle)
+                return;
+
+            try
+            {
+                BecameIdle.Invoke();
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
             }
         }
 

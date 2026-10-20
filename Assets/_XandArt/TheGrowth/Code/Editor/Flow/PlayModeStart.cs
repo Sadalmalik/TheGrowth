@@ -11,11 +11,13 @@ using UnityEngine.SceneManagement;
 namespace TheGrowth.EditorTools.Flow
 {
     /// <summary>
-    /// Play в редакторе всегда начинается со сцены Main (<see cref="EditorSceneManager.playModeStartScene"/>). Если перед
-    /// Play была открыта сцена локации (на корне — <see cref="LocationRoot"/>, на неё ссылается <see cref="LocationModel"/>),
-    /// <c>GameStarter</c> начинает новую игру сразу в этой локации (<see cref="EditorStartHook"/>). ID локации
-    /// переживает перезагрузку домена через <see cref="SessionState"/>.
+    /// При включённом <see cref="RunAsGame"/> (переключатель «Run as game» в тулбаре) Play в редакторе начинается со
+    /// сцены Main (<see cref="EditorSceneManager.playModeStartScene"/>). Если перед Play была открыта сцена локации
+    /// (на корне — <see cref="LocationRoot"/>, на неё ссылается <see cref="LocationModel"/>), <c>GameStarter</c>
+    /// начинает новую игру сразу в этой локации (<see cref="EditorStartHook"/>). ID локации переживает перезагрузку
+    /// домена через <see cref="SessionState"/>.
     /// Исключения: несохранённая сцена и сцена запуска PlayMode-тестов играются как есть (стартовая сцена не задаётся).
+    /// При выключенном <see cref="RunAsGame"/> — обычный Play Unity.
     /// Пресет локации (<c>StoryStep</c>, T058) — точка расширения в <see cref="CreateStartRequest"/>.
     /// </summary>
     [InitializeOnLoad]
@@ -24,6 +26,7 @@ namespace TheGrowth.EditorTools.Flow
         public const string MainScenePath = "Assets/_XandArt/TheGrowth/Scenes/Main.unity";
 
         private const string LocationKey = "TheGrowth.PlayModeStart.Location";
+        private const string RunAsGameKey = "TheGrowth.PlayModeStart.RunAsGame";
 
         // UnityEngine.TestTools.TestRunner.PlaymodeTestsController.kPlaymodeTestControllerName (internal).
         private const string TestRunnerObjectName = "Code-based tests runner";
@@ -36,6 +39,20 @@ namespace TheGrowth.EditorTools.Flow
             EditorSceneManager.activeSceneChangedInEditMode += HandleActiveSceneChanged;
             EditorSceneManager.sceneSaved += HandleSceneSaved;
             EditorApplication.delayCall += RefreshStartScene;
+        }
+
+        /// <summary>Play через Main. Хранится в UserSettings проекта (не в VCS), по умолчанию включено.</summary>
+        public static bool RunAsGame
+        {
+            get => EditorUserSettings.GetConfigValue(RunAsGameKey) != "0";
+            set
+            {
+                if (value == RunAsGame)
+                    return;
+
+                EditorUserSettings.SetConfigValue(RunAsGameKey, value ? "1" : "0");
+                RefreshStartScene();
+            }
         }
 
         /// <summary>Location ID для старта из сцены (после последнего входа в Play) или null.</summary>
@@ -163,9 +180,12 @@ namespace TheGrowth.EditorTools.Flow
                 EditorSceneManager.playModeStartScene = scene;
         }
 
-        /// <summary>Несохранённая сцена или сцена запуска PlayMode-тестов: Play без Main.</summary>
+        /// <summary>Выключен <see cref="RunAsGame"/>, несохранённая сцена или сцена запуска PlayMode-тестов: Play без Main.</summary>
         private static bool IsPlayedAsIs(Scene scene)
         {
+            if (!RunAsGame)
+                return true;
+
             if (!scene.IsValid() || string.IsNullOrEmpty(scene.path))
                 return true;
 

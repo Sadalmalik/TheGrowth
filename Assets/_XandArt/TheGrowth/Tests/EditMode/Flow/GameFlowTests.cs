@@ -4,11 +4,13 @@ using NUnit.Framework;
 using TheGrowth.Architecture.Input;
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
+using TheGrowth.Core.Saves;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Game.Flow;
 using TheGrowth.Model.Locations;
 using TheGrowth.Tests.EditMode.Content;
 using TheGrowth.Tests.EditMode.Locations;
+using TheGrowth.Tests.EditMode.Saves;
 using TheGrowth.Tests.EditMode.Scripting;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -60,6 +62,8 @@ namespace TheGrowth.Tests.EditMode.Flow
             container.Add(m_Scenes);
             m_Input = container.Add(new InputService());
             m_Loading = container.Add(new FakeLoadingScreen());
+            container.Add(new MemorySaveStorage());
+            container.Add(new SaveService());
             m_Flow = container.Add(new GameFlow(m_Global, LocationTestKit.Config(m_Kit, "game", hub)));
             container.Init();
         }

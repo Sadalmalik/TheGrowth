@@ -4,6 +4,7 @@ using System.Threading;
 using NUnit.Framework;
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
+using TheGrowth.Core.Saves;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Model;
 using TheGrowth.Tests.EditMode.Content;
@@ -73,7 +74,7 @@ namespace TheGrowth.Tests.EditMode.Sessions
         [Test]
         public void Create_Headless_ResolvesSessionSystems()
         {
-            var session = Session.Create(m_Global);
+            var session = Session.Create(m_Global, new SaveGame());
 
             Assert.AreSame(m_Global, session.Parent);
             Assert.That(m_Global.Children, Is.EqualTo(new[] { session }));
@@ -91,7 +92,7 @@ namespace TheGrowth.Tests.EditMode.Sessions
         public void Create_CallsSessionReady_AfterInitOfAllSystems()
         {
             var probe = new SessionProbe();
-            var session = Session.Create(m_Global, created => created.Container.Add(probe));
+            var session = Session.Create(m_Global, new SaveGame(), created => created.Container.Add(probe));
 
             Assert.That(probe.Journal, Is.EqualTo(new[] { "init", "ready:runner-initialized" }));
             session.Dispose();
@@ -101,7 +102,7 @@ namespace TheGrowth.Tests.EditMode.Sessions
         public void Dispose_CancelsLifetimeThenDisposesSystemsOnce_DetachesFromGlobal()
         {
             var probe = new SessionProbe();
-            var session = Session.Create(m_Global, created =>
+            var session = Session.Create(m_Global, new SaveGame(), created =>
             {
                 probe.Lifetime = created.Lifetime;
                 created.Container.Add(probe);
@@ -122,7 +123,7 @@ namespace TheGrowth.Tests.EditMode.Sessions
         public void GlobalDispose_DisposesSession()
         {
             var probe = new SessionProbe();
-            var session = Session.Create(m_Global, created => created.Container.Add(probe));
+            var session = Session.Create(m_Global, new SaveGame(), created => created.Container.Add(probe));
 
             m_Global.Dispose();
 
@@ -136,7 +137,7 @@ namespace TheGrowth.Tests.EditMode.Sessions
         {
             var global = new LifetimeScope("NotInitialized");
 
-            Assert.Throws<ContainerInitializationException>(() => Session.Create(global));
+            Assert.Throws<ContainerInitializationException>(() => Session.Create(global, new SaveGame()));
             Assert.IsEmpty(global.Children);
             global.Dispose();
         }
@@ -144,7 +145,7 @@ namespace TheGrowth.Tests.EditMode.Sessions
         [Test]
         public void Dispose_CancelsRunningScripts()
         {
-            var session = Session.Create(m_Global);
+            var session = Session.Create(m_Global, new SaveGame());
             var gate = new Gate();
             var trace = new TraceLog();
             var file = new ScriptFile("waiting", new[] { new ScriptSection("Start", new Command[] { new WaitCommand { Name = "w", Gate = gate } }) });
@@ -162,7 +163,7 @@ namespace TheGrowth.Tests.EditMode.Sessions
         [Test]
         public void Dispose_CancelsRunningScripts_ByLifetimeWithoutToken()
         {
-            var session = Session.Create(m_Global);
+            var session = Session.Create(m_Global, new SaveGame());
             var gate = new Gate();
             var trace = new TraceLog();
             var file = new ScriptFile("waiting", new[] { new ScriptSection("Start", new Command[] { new WaitCommand { Name = "w", Gate = gate } }) });
@@ -179,7 +180,7 @@ namespace TheGrowth.Tests.EditMode.Sessions
         [Test]
         public void Scripts_RunFileFromContentRegistry_CallIntoOtherFile()
         {
-            var session = Session.Create(m_Global);
+            var session = Session.Create(m_Global, new SaveGame());
             var library = session.Get<IScriptLibrary>();
             var trace = new TraceLog();
 
@@ -194,7 +195,7 @@ namespace TheGrowth.Tests.EditMode.Sessions
         [Test]
         public void Library_ParsesLazily_AndCaches()
         {
-            var session = Session.Create(m_Global);
+            var session = Session.Create(m_Global, new SaveGame());
             var library = (ContentScriptLibrary)session.Get<IScriptLibrary>();
 
             Assert.AreEqual(0, library.ParseCount);
@@ -211,7 +212,7 @@ namespace TheGrowth.Tests.EditMode.Sessions
         [Test]
         public void Library_ParseErrors_LoggedOnceWithLocation_FileUnavailable()
         {
-            var session = Session.Create(m_Global);
+            var session = Session.Create(m_Global, new SaveGame());
             var library = (ContentScriptLibrary)session.Get<IScriptLibrary>();
 
             LogAssert.Expect(LogType.Error, new Regex(Regex.Escape("Broken:2:5: unknown command 'jump'")));

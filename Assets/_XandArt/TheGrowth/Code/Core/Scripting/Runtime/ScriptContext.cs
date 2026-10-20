@@ -99,14 +99,17 @@ namespace TheGrowth.Core.Scripting
 
         /// <summary>
         /// Обернуть ожидание игрока (реплика, выбор, ввод). Пока область открыта, запуск не мешает
-        /// <see cref="ScriptRunner.IsIdle"/>, а счётчик защиты от зацикливания сброшен.
+        /// <see cref="ScriptRunner.IsIdle"/>, а счётчик защиты от зацикливания сброшен. Если с входом в ожидание
+        /// исполнитель простаивает, срабатывает <see cref="ScriptRunner.BecameIdle"/>.
         /// </summary>
         public IDisposable WaitForPlayer()
         {
             if (Execution == null)
                 throw new InvalidOperationException("WaitForPlayer requires a context of an active execution");
 
-            return Execution.EnterWait();
+            var wait = Execution.EnterWait();
+            Runner?.NotifyIfIdle();
+            return wait;
         }
 
 #endregion

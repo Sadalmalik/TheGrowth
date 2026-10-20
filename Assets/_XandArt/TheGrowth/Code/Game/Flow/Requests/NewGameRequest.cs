@@ -1,11 +1,12 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using TheGrowth.Core.Saves;
 
 namespace TheGrowth.Game.Flow
 {
     /// <summary>
-    /// Новая игра: создать сессию → войти в стартовую локацию (<see cref="GameConfig.StartLocation"/> или
+    /// Новая игра: создать сессию из пустого сейва (тот же путь, что загрузка) → войти в стартовую локацию (<see cref="GameConfig.StartLocation"/> или
     /// <see cref="LocationId"/>). Старт сюжета (<c>StorySystem.Start(startStep)</c>) — когда появится StorySystem.
     /// Из Boot — запуск из сцены локации в редакторе (вместо главного меню).
     /// </summary>
@@ -35,7 +36,7 @@ namespace TheGrowth.Game.Flow
                 throw new InvalidOperationException($"{flow.Config} has no start location");
 
             flow.SetState(FlowState.Loading);
-            flow.CreateSession();
+            flow.CreateSession(new SaveGame());
             await flow.LoadLocationAsync(location, token);
         }
 

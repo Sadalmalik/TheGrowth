@@ -20,8 +20,9 @@ namespace TheGrowth.EditorTools.Flow
     /// <summary>
     /// Создание сцены Main (точка входа, временное меню, экран загрузки) и тестовой локации с конфигами
     /// (<see cref="LocationModel"/>, <see cref="GameConfig"/>). Существующие сцены и ассеты не перезаписываются.
-    /// Сцены добавляются в конец Build Settings. Запуск: меню или batchmode
-    /// <c>-executeMethod TheGrowth.EditorTools.Flow.FlowSceneSetup.CreateAll</c>.
+    /// Сцены добавляются в Build Settings: Main — первой (стартовая сцена сборки), остальные — в конец. Запуск: меню или batchmode
+    /// <c>-executeMethod TheGrowth.EditorTools.Flow.FlowSceneSetup.CreateAll</c>. Меню существующей сцены Main
+    /// пересоздаётся <see cref="RebuildMainMenu"/>.
     /// </summary>
     public static class FlowSceneSetup
     {
@@ -48,6 +49,52 @@ namespace TheGrowth.EditorTools.Flow
             AssetDatabase.SaveAssets();
 
             Debug.Log($"[Flow] Setup done: {PlayModeStart.MainScenePath}, {TestLocationScenePath}, registry: {count} assets");
+        }
+
+        /// <summary>
+        /// Пересоздать временное меню в существующей сцене Main (когда в меню добавились кнопки и панели): старый объект
+        /// меню удаляется, новый встаёт на его место в иерархии холста и назначается <see cref="GameStarter"/>. Запуск:
+        /// меню или batchmode <c>-executeMethod TheGrowth.EditorTools.Flow.FlowSceneSetup.RebuildMainMenu</c>.
+        /// </summary>
+        [MenuItem("[TheGrowth]/Flow/Rebuild Main Menu")]
+        public static void RebuildMainMenu()
+        {
+            if (!Application.isBatchMode && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                return;
+
+            var scene = EditorSceneManager.OpenScene(PlayModeStart.MainScenePath, OpenSceneMode.Single);
+            GameStarter starter = null;
+            Canvas canvas = null;
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                if (starter == null)
+                    root.TryGetComponent(out starter);
+
+                if (canvas == null)
+                    root.TryGetComponent(out canvas);
+            }
+
+            if (starter == null || canvas == null)
+            {
+                Debug.LogError($"[Flow] {PlayModeStart.MainScenePath}: no {nameof(GameStarter)} or {nameof(Canvas)} on root objects");
+                return;
+            }
+
+            var serialized = new SerializedObject(starter);
+            var menuProperty = serialized.FindProperty("m_Menu");
+            var old = menuProperty.objectReferenceValue as TemporaryMenu;
+            var index = old != null ? old.transform.GetSiblingIndex() : 0;
+            if (old != null)
+                Object.DestroyImmediate(old.gameObject);
+
+            var menu = CreateMenu(canvas.transform);
+            menu.transform.SetSiblingIndex(index);
+            menuProperty.objectReferenceValue = menu;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+
+            EditorSceneManager.MarkSceneDirty(scene);
+            EndScene(scene, PlayModeStart.MainScenePath);
+            Debug.Log($"[Flow] {PlayModeStart.MainScenePath}: temporary menu rebuilt");
         }
 
 #region Content
@@ -192,40 +239,132 @@ namespace TheGrowth.EditorTools.Flow
             var menu = root.gameObject.AddComponent<TemporaryMenu>();
 
             var mainPanel = CreateUiObject("MainMenuPanel", root);
-            mainPanel.sizeDelta = new Vector2(480f, 360f);
-            var layout = mainPanel.gameObject.AddComponent<VerticalLayoutGroup>();
-            layout.childAlignment = TextAnchor.MiddleCenter;
-            layout.spacing = 24f;
-            layout.childControlWidth = true;
-            layout.childControlHeight = true;
-            layout.childForceExpandWidth = true;
-            layout.childForceExpandHeight = false;
-
+            mainPanel.sizeDelta = new Vector2(480f, 560f);
+            AddVerticalLayout(mainPanel, 24f);
             var title = CreateText("Title", mainPanel, "Thraumatrope", 56);
             title.gameObject.AddComponent<LayoutElement>().preferredHeight = 96f;
+            var continueButton = CreateButton("ContinueButton", mainPanel, "Продолжить");
             var newGame = CreateButton("NewGameButton", mainPanel, "Новая игра");
+            var load = CreateButton("LoadButton", mainPanel, "Загрузить");
             var quit = CreateButton("QuitButton", mainPanel, "Выход");
 
             var locationPanel = CreateUiObject("LocationPanel", root);
             locationPanel.anchorMin = Vector2.one;
             locationPanel.anchorMax = Vector2.one;
             locationPanel.pivot = Vector2.one;
-            locationPanel.sizeDelta = new Vector2(240f, 72f);
+            locationPanel.sizeDelta = new Vector2(240f, 240f);
             locationPanel.anchoredPosition = new Vector2(-24f, -24f);
+            AddVerticalLayout(locationPanel, 12f);
+            var save = CreateButton("SaveButton", locationPanel, "Сохранить");
+            var locationLoad = CreateButton("LoadButton", locationPanel, "Загрузить");
             var exitToMenu = CreateButton("ExitToMenuButton", locationPanel, "В меню");
-            Stretch((RectTransform)exitToMenu.transform);
+
+            var slotsPanel = CreateSlotsPanel(root, out var content, out var template, out var empty, out var close);
 
             var serialized = new SerializedObject(menu);
             serialized.FindProperty("m_MainMenuPanel").objectReferenceValue = mainPanel.gameObject;
+            serialized.FindProperty("m_ContinueButton").objectReferenceValue = continueButton;
             serialized.FindProperty("m_NewGameButton").objectReferenceValue = newGame;
+            serialized.FindProperty("m_LoadButton").objectReferenceValue = load;
             serialized.FindProperty("m_QuitButton").objectReferenceValue = quit;
             serialized.FindProperty("m_LocationPanel").objectReferenceValue = locationPanel.gameObject;
+            serialized.FindProperty("m_SaveButton").objectReferenceValue = save;
+            serialized.FindProperty("m_LocationLoadButton").objectReferenceValue = locationLoad;
             serialized.FindProperty("m_ExitToMenuButton").objectReferenceValue = exitToMenu;
+            serialized.FindProperty("m_SlotsPanel").objectReferenceValue = slotsPanel.gameObject;
+            serialized.FindProperty("m_SlotsContent").objectReferenceValue = content;
+            serialized.FindProperty("m_SlotTemplate").objectReferenceValue = template;
+            serialized.FindProperty("m_SlotsEmptyLabel").objectReferenceValue = empty;
+            serialized.FindProperty("m_SlotsCloseButton").objectReferenceValue = close;
             serialized.ApplyModifiedPropertiesWithoutUndo();
 
             mainPanel.gameObject.SetActive(false);
             locationPanel.gameObject.SetActive(false);
+            slotsPanel.gameObject.SetActive(false);
             return menu;
+        }
+
+        /// <summary>Список слотов поверх меню и локации: заголовок, прокрутка со строками (шаблон неактивен), «нет сохранений», «Закрыть».</summary>
+        private static RectTransform CreateSlotsPanel(Transform parent, out RectTransform content, out TemporarySlotRow template,
+            out GameObject empty, out Button close)
+        {
+            var panel = CreateUiObject("SlotsPanel", parent);
+            panel.sizeDelta = new Vector2(1100f, 760f);
+            var background = panel.gameObject.AddComponent<Image>();
+            background.color = new Color(0.12f, 0.11f, 0.15f, 0.97f);
+            background.raycastTarget = true;
+            var layout = AddVerticalLayout(panel, 16f);
+            layout.padding = new RectOffset(24, 24, 24, 24);
+
+            var title = CreateText("Title", panel, "Сохранения", 40);
+            title.gameObject.AddComponent<LayoutElement>().preferredHeight = 64f;
+
+            var scroll = CreateUiObject("Scroll", panel);
+            scroll.gameObject.AddComponent<LayoutElement>().flexibleHeight = 1f;
+            var scrollRect = scroll.gameObject.AddComponent<ScrollRect>();
+            scrollRect.horizontal = false;
+            scrollRect.vertical = true;
+            scrollRect.movementType = ScrollRect.MovementType.Clamped;
+            scrollRect.scrollSensitivity = 30f;
+
+            var viewport = CreateUiObject("Viewport", scroll);
+            Stretch(viewport);
+            var viewportImage = viewport.gameObject.AddComponent<Image>();
+            viewportImage.color = new Color(1f, 1f, 1f, 0f);
+            viewport.gameObject.AddComponent<RectMask2D>();
+
+            content = CreateUiObject("Content", viewport);
+            content.anchorMin = new Vector2(0f, 1f);
+            content.anchorMax = Vector2.one;
+            content.pivot = new Vector2(0.5f, 1f);
+            content.sizeDelta = Vector2.zero;
+            AddVerticalLayout(content, 8f).childAlignment = TextAnchor.UpperCenter;
+            content.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            scrollRect.viewport = viewport;
+            scrollRect.content = content;
+
+            template = CreateSlotRow(content);
+
+            var emptyLabel = CreateText("EmptyLabel", panel, "Сохранений нет", 32);
+            emptyLabel.gameObject.AddComponent<LayoutElement>().preferredHeight = 48f;
+            empty = emptyLabel.gameObject;
+
+            close = CreateButton("CloseButton", panel, "Закрыть");
+            return panel;
+        }
+
+        private static TemporarySlotRow CreateSlotRow(Transform parent)
+        {
+            var row = CreateUiObject("SlotRow", parent);
+            row.gameObject.AddComponent<Image>().color = new Color(1f, 1f, 1f, 0.06f);
+            row.gameObject.AddComponent<LayoutElement>().preferredHeight = 64f;
+            var layout = row.gameObject.AddComponent<HorizontalLayoutGroup>();
+            layout.spacing = 12f;
+            layout.padding = new RectOffset(16, 8, 4, 4);
+            layout.childAlignment = TextAnchor.MiddleLeft;
+            layout.childControlWidth = true;
+            layout.childControlHeight = true;
+            layout.childForceExpandWidth = false;
+            layout.childForceExpandHeight = true;
+
+            var label = CreateText("Label", row, "", 24);
+            label.alignment = TextAnchor.MiddleLeft;
+            label.gameObject.AddComponent<LayoutElement>().flexibleWidth = 1f;
+
+            var load = CreateButton("LoadButton", row, "Загрузить");
+            load.GetComponent<LayoutElement>().preferredWidth = 200f;
+            var delete = CreateButton("DeleteButton", row, "Удалить");
+            delete.GetComponent<LayoutElement>().preferredWidth = 180f;
+
+            var component = row.gameObject.AddComponent<TemporarySlotRow>();
+            var serialized = new SerializedObject(component);
+            serialized.FindProperty("m_Label").objectReferenceValue = label;
+            serialized.FindProperty("m_LoadButton").objectReferenceValue = load;
+            serialized.FindProperty("m_DeleteButton").objectReferenceValue = delete;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+
+            row.gameObject.SetActive(false);
+            return component;
         }
 
         /// <summary>Последний в иерархии холста: рисуется поверх меню и перекрывает клики.</summary>
@@ -273,7 +412,12 @@ namespace TheGrowth.EditorTools.Flow
                 if (scenes.Exists(scene => scene.path == path))
                     continue;
 
-                scenes.Add(new EditorBuildSettingsScene(path, true));
+                var scene = new EditorBuildSettingsScene(path, true);
+                if (path == PlayModeStart.MainScenePath)
+                    scenes.Insert(0, scene);
+                else
+                    scenes.Add(scene);
+
                 changed = true;
             }
 
@@ -292,6 +436,18 @@ namespace TheGrowth.EditorTools.Flow
             var transform = (RectTransform)gameObject.transform;
             transform.SetParent(parent, false);
             return transform;
+        }
+
+        private static VerticalLayoutGroup AddVerticalLayout(RectTransform transform, float spacing)
+        {
+            var layout = transform.gameObject.AddComponent<VerticalLayoutGroup>();
+            layout.childAlignment = TextAnchor.MiddleCenter;
+            layout.spacing = spacing;
+            layout.childControlWidth = true;
+            layout.childControlHeight = true;
+            layout.childForceExpandWidth = true;
+            layout.childForceExpandHeight = false;
+            return layout;
         }
 
         private static void Stretch(RectTransform transform)

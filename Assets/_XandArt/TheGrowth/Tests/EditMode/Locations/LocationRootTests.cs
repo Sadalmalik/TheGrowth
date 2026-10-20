@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using NUnit.Framework;
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
+using TheGrowth.Core.Saves;
 using TheGrowth.Model;
 using TheGrowth.Model.Locations;
 using TheGrowth.Presentation.Locations;
@@ -31,7 +32,7 @@ namespace TheGrowth.Tests.EditMode.Locations
             m_Objects = new LocationTestKit();
             m_Model = LocationTestKit.Location(m_Kit, "test_location", "TestScene");
             m_Global = m_Kit.Global(m_Kit.Registry(new ContentAsset[] { m_Model }));
-            m_Session = Session.Create(m_Global);
+            m_Session = Session.Create(m_Global, new SaveGame());
             m_Journal = new List<string>();
         }
 

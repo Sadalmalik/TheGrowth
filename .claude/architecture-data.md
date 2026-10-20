@@ -300,6 +300,35 @@ public abstract class SaveableSystem<TSave> : SharedObject, ISaveable where TSav
 - Миграции работают с данными, а не с игровыми классами — переименование кода на них не влияет.
 - Тест на каждую миграцию: фикстура старого сейва → чтение → проверка состояния.
 
+### Реализация (T065, 2026-10-19)
+
+Код: `Code/Core/Saves/`, `Code/Integrations/SaveFiles/` (`SaveFileStorage`), `Code/Model/Locations/`
+(`LocationSystem`), `Code/Game/Flow/Requests/` (`SaveGameRequest`, `LoadGameRequest`), `Code/Game/Saves/`
+(`SaveThumbnail`).
+
+- Секция в архиве — `<key>.json` вида `{version, data}`; данные секции — `JObject`. JSON: Newtonsoft
+  без `TypeNameHandling`, camelCase (ключи словарей как есть), enum строкой, даты UTC.
+- `ISaveStorage` — асинхронный API (UniTask): чтение отдаёт поток с поиском, запись —
+  `WriteAsync(id, Action<Stream>)`, атомарная. Список слотов: `ZipArchive` читает центральный
+  каталог и одну запись `meta.json`.
+- Файлы: `persistentDataPath/saves/<id>.tgsave` (папка общая с файлами прототипа — не меняем,
+  хранилище читает только `.tgsave`); запись в `<id>.tgsave.tmp` → `Flush(true)` →
+  `File.Replace` (новый слот — `File.Move`). Ввод-вывод синхронный в главном потоке, пул
+  потоков не используется (Web).
+- ID слотов `[a-z0-9_-]`: ручные `manual_yyyyMMdd_HHmmss` (UTC, при совпадении `_2`, `_3`, ...),
+  автосейвы `auto_1..3`; перезаписывается пустой или битый, иначе самый старый по `savedAtUtc`.
+- `SaveService` (глобальная область) исполняет операции строго по одной; `WaitIdleAsync` —
+  ожидание конца записи (выход из приложения).
+- Миграции регистрирует сама система (`SaveableSystem.RegisterMigrations`), глобального реестра
+  нет. Применяются к копии данных; следующее сохранение пишет текущую версию.
+- Сессия: `Session.Create(parent, SaveGame, configure)`; `Session.Capture()` собирает секции.
+  Секция без системы — предупреждение; один ключ у двух систем — исключение.
+- `LocationSystem` — секция `locations` (текущая локация). Локации из сейва нет в контенте —
+  предупреждение, вход в `GameConfig.StartLocation`, остальное состояние сохраняется.
+- Время в игре — в Game: `meta.playTimeSeconds` + реальное время с создания сессии; пауза и
+  свёрнутое приложение не вычитаются.
+- Превью — камеры экрана рендерятся в текстуру шириной 320 px → PNG; UI в снимок не попадает.
+
 ## Диалоги и переменные
 
 - Диалоги — своя система (см. architecture-dialogs.md), сценарии на том же языке скриптов.

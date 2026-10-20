@@ -4,8 +4,9 @@ using Cysharp.Threading.Tasks;
 namespace TheGrowth.Game.Flow
 {
     /// <summary>
-    /// Выход из игры из любого состояния: как <see cref="ExitToMenuRequest"/> (если есть сессия), затем
-    /// <c>Application.Quit</c>. Отложить выход до конца автосейва (<c>Application.wantsToQuit</c>) — E02.
+    /// Выход из игры из любого состояния: как <see cref="ExitToMenuRequest"/> с автосейвом (если есть сессия) → дождаться
+    /// конца всех записей сейвов → <c>Application.Quit</c>. Закрытие окна (<c>Application.wantsToQuit</c>) откладывается
+    /// до этого запроса (<c>GameStarter</c>).
     /// </summary>
     public sealed class QuitRequest : IFlowRequest
     {
@@ -18,11 +19,13 @@ namespace TheGrowth.Game.Flow
         {
             if (flow.Session != null)
             {
+                await flow.AutosaveAsync(token);
                 flow.SetState(FlowState.Loading);
                 await flow.UnloadLocationAsync();
                 flow.DestroySession();
             }
 
+            await flow.Saves.WaitIdleAsync();
             flow.SetState(FlowState.MainMenu);
             flow.QuitApplication();
         }
