@@ -9,7 +9,9 @@
         "TheGrowth.Core",
         "TheGrowth.Architecture",
         "UnityEngine.UI",
-        "UniTask"
+        "UniTask",
+        "Unity.TextMeshPro",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [
         "Editor"
