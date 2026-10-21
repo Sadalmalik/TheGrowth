@@ -5,7 +5,9 @@
         "TheGrowth.Architecture",
         "TheGrowth.Core",
         "TheGrowth.Model",
-        "TheGrowth.Presentation"
+        "TheGrowth.Presentation",
+        "TheGrowth.UI",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

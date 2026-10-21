@@ -13,7 +13,9 @@
         "TheGrowth.Editor",
         "TheGrowth.Integrations.SaveFiles",
         "TheGrowth.Tests.Support",
-        "UniTask"
+        "UniTask",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [
         "Editor"
@@ -23,7 +25,10 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "nunit.framework.dll",
-        "Newtonsoft.Json.dll"
+        "Newtonsoft.Json.dll",
+        "R3.dll",
+        "ObservableCollections.dll",
+        "Microsoft.Bcl.TimeProvider.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

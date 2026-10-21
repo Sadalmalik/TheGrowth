@@ -6,7 +6,7 @@
 
 Unity 6000.3 (C# 9). Платформы: PC (Steam), вероятно Android, iOS, Web (itch.io); macOS нет.
 Плагины: DOTween, Odin Inspector (уходим), Naninovel (уходим — своя диалоговая система).
-UniTask. Планируются: R3 + ObservableCollections, Spine.
+UniTask, R3 + ObservableCollections (NuGetForUnity), Input System (режим `Both`). Планируется Spine.
 
 Код прототипа: `Assets/_XandArt/TheGrowth/Code`. Контент: `Assets/_XandArt/TheGrowth`.
 
@@ -62,7 +62,7 @@ UniTask. Планируются: R3 + ObservableCollections, Spine.
   (`Code/<Слой>/`), модули папками. Зависимости только вниз; наверх — через интерфейсы нижнего слоя и события
   `EventBus`. Model не зависит от сцены. Всё, что зависит от внешнего мира (платформы, аналитика,
   хранилища сохранений), — модули-интеграции (сборка на модуль), подключаются через DI в Game.
-  Сквозные системы: ядро в Core (сохранения, локализация, аналитика, игровые сервисы, настройки). Приватные поля — `m_Field`; namespace только с телом.
+  Сквозные системы: ядро в Core (сохранения, локализация, аналитика, игровые сервисы, настройки). Приватные поля — `m_Field`; namespace только с телом; окончания строк — LF.
 - **Процедурные анимации** — `AnimationProfile` (Architecture); наборы
   анимаций карт и слотов — конфиги Presentation.
 

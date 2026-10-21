@@ -45,13 +45,13 @@ namespace TheGrowth.Core.Saves
                 throw new ArgumentNullException(nameof(data));
 
             if (version > targetVersion)
-                throw new SaveException($"Section '{Key}' version {version} is newer than supported {targetVersion}: the save is from a newer game version");
+                throw new SaveException(SaveErrorKind.NewerVersion, $"Section '{Key}' version {version} is newer than supported {targetVersion}: the save is from a newer game version");
 
             var current = (JObject)data.DeepClone();
             for (var from = version; from < targetVersion; from++)
             {
                 if (!m_Steps.TryGetValue(from, out var step))
-                    throw new SaveException($"Section '{Key}': no migration from version {from} to {from + 1}");
+                    throw new SaveException(SaveErrorKind.MissingMigration, $"Section '{Key}': no migration from version {from} to {from + 1}");
 
                 try
                 {
@@ -59,11 +59,11 @@ namespace TheGrowth.Core.Saves
                 }
                 catch (Exception exception) when (exception is not SaveException)
                 {
-                    throw new SaveException($"Section '{Key}': migration from version {from} failed: {exception.Message}", exception);
+                    throw new SaveException(SaveErrorKind.Corrupted, $"Section '{Key}': migration from version {from} failed: {exception.Message}", exception);
                 }
 
                 if (current == null)
-                    throw new SaveException($"Section '{Key}': migration from version {from} returned null");
+                    throw new SaveException(SaveErrorKind.Corrupted, $"Section '{Key}': migration from version {from} returned null");
             }
 
             return current;

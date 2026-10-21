@@ -11,14 +11,20 @@
         "TheGrowth.UI",
         "TheGrowth.Game",
         "TheGrowth.Integrations.SaveFiles",
-        "UniTask"
+        "UniTask",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll"
+        "nunit.framework.dll",
+        "R3.dll",
+        "ObservableCollections.dll",
+        "Microsoft.Bcl.TimeProvider.dll",
+        "Newtonsoft.Json.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

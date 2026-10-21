@@ -67,7 +67,27 @@ namespace TheGrowth.Core.Saves
             }
             catch (Exception exception) when (IsFormatError(exception))
             {
-                throw new SaveException($"Save archive is broken: {exception.Message}", exception);
+                throw new SaveException(SaveErrorKind.Corrupted, $"Save archive is broken: {exception.Message}", exception);
+            }
+        }
+
+        /// <summary>Только превью (PNG): центральный каталог и запись <c>thumbnail.png</c>; превью нет — null.</summary>
+        public static byte[] ReadThumbnail(Stream stream)
+        {
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+
+            try
+            {
+                using (var archive = new ZipArchive(stream, ZipArchiveMode.Read, true))
+                {
+                    var entry = archive.GetEntry(ThumbnailEntry);
+                    return entry == null ? null : ReadBytes(entry);
+                }
+            }
+            catch (Exception exception) when (IsFormatError(exception))
+            {
+                throw new SaveException(SaveErrorKind.Corrupted, $"Save archive is broken: {exception.Message}", exception);
             }
         }
 
@@ -99,26 +119,26 @@ namespace TheGrowth.Core.Saves
             }
             catch (Exception exception) when (IsFormatError(exception))
             {
-                throw new SaveException($"Save archive is broken: {exception.Message}", exception);
+                throw new SaveException(SaveErrorKind.Corrupted, $"Save archive is broken: {exception.Message}", exception);
             }
         }
 
         private static SaveMeta ReadMeta(ZipArchive archive)
         {
-            var entry = archive.GetEntry(MetaEntry) ?? throw new SaveException($"Save archive has no {MetaEntry}");
+            var entry = archive.GetEntry(MetaEntry) ?? throw new SaveException(SaveErrorKind.Corrupted, $"Save archive has no {MetaEntry}");
 
             SaveMeta meta;
             using (var stream = entry.Open())
                 meta = SaveJson.Read<SaveMeta>(stream);
 
             if (meta == null)
-                throw new SaveException($"{MetaEntry} is empty");
+                throw new SaveException(SaveErrorKind.Corrupted, $"{MetaEntry} is empty");
 
             if (meta.FormatVersion > FormatVersion)
-                throw new SaveException($"Save format version {meta.FormatVersion} is newer than supported {FormatVersion}: the save is from a newer game version");
+                throw new SaveException(SaveErrorKind.NewerVersion, $"Save format version {meta.FormatVersion} is newer than supported {FormatVersion}: the save is from a newer game version");
 
             if (meta.FormatVersion < 1)
-                throw new SaveException($"{MetaEntry} has invalid format version {meta.FormatVersion}");
+                throw new SaveException(SaveErrorKind.Corrupted, $"{MetaEntry} has invalid format version {meta.FormatVersion}");
 
             return meta;
         }
@@ -130,10 +150,10 @@ namespace TheGrowth.Core.Saves
                 root = SaveJson.ReadObject(stream);
 
             if (root[VersionField] is not { Type: JTokenType.Integer } version)
-                throw new SaveException($"Section '{entry.FullName}' has no integer '{VersionField}'");
+                throw new SaveException(SaveErrorKind.Corrupted, $"Section '{entry.FullName}' has no integer '{VersionField}'");
 
             if (root[DataField] is not JObject data)
-                throw new SaveException($"Section '{entry.FullName}' has no object '{DataField}'");
+                throw new SaveException(SaveErrorKind.Corrupted, $"Section '{entry.FullName}' has no object '{DataField}'");
 
             return new SaveSection(key, (int)version, data);
         }

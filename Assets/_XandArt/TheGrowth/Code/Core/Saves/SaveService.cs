@@ -108,7 +108,7 @@ namespace TheGrowth.Core.Saves
         public async UniTask<SaveGame> LoadAsync(string slotId, CancellationToken token = default)
         {
             if (!IsValidSlotId(slotId))
-                throw new SaveException($"Invalid slot id '{slotId}'");
+                throw new SaveException(SaveErrorKind.NotFound, $"Invalid slot id '{slotId}'");
 
             using (await LockAsync())
             {
@@ -119,11 +119,11 @@ namespace TheGrowth.Core.Saves
                 }
                 catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
                 {
-                    throw new SaveException($"Slot '{slotId}' can't be opened: {exception.Message}", exception);
+                    throw new SaveException(SaveErrorKind.Corrupted, $"Slot '{slotId}' can't be opened: {exception.Message}", exception);
                 }
 
                 if (stream == null)
-                    throw new SaveException($"Slot '{slotId}' not found");
+                    throw new SaveException(SaveErrorKind.NotFound, $"Slot '{slotId}' not found");
 
                 using (stream)
                 {
@@ -133,8 +133,32 @@ namespace TheGrowth.Core.Saves
                     }
                     catch (SaveException exception)
                     {
-                        throw new SaveException($"Slot '{slotId}': {exception.Message}", exception);
+                        throw new SaveException(exception.Kind, $"Slot '{slotId}': {exception.Message}", exception);
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Превью слота (PNG) для списка слотов: читается только запись превью. Превью нет, слота нет или он повреждён —
+        /// null (повреждённый — предупреждение в лог).
+        /// </summary>
+        public async UniTask<byte[]> LoadThumbnailAsync(string slotId, CancellationToken token = default)
+        {
+            if (!IsValidSlotId(slotId))
+                return null;
+
+            using (await LockAsync())
+            {
+                try
+                {
+                    using (var stream = await m_Storage.OpenReadAsync(slotId, token))
+                        return stream == null ? null : SaveArchive.ReadThumbnail(stream);
+                }
+                catch (Exception exception) when (exception is not OperationCanceledException)
+                {
+                    Debug.LogWarning($"[Saves] Thumbnail of slot '{slotId}' can't be read: {exception.Message}");
+                    return null;
                 }
             }
         }

@@ -328,6 +328,9 @@ public abstract class SaveableSystem<TSave> : SharedObject, ISaveable where TSav
 - Время в игре — в Game: `meta.playTimeSeconds` + реальное время с создания сессии; пауза и
   свёрнутое приложение не вычитаются.
 - Превью — камеры экрана рендерятся в текстуру шириной 320 px → PNG; UI в снимок не попадает.
+  Чтение превью для списка — `SaveService.LoadThumbnailAsync` (T067).
+- Виды ошибок (T067): `SaveException.Kind` — `SaveErrorKind` (Unknown, NotFound, Corrupted,
+  NewerVersion, MissingMigration); по нему UI выбирает текст для игрока.
 
 ## Диалоги и переменные
 

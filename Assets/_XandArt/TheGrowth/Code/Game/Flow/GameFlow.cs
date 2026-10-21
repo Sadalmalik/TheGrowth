@@ -71,6 +71,12 @@ namespace TheGrowth.Game.Flow
         /// <summary>Смена <see cref="State"/>; вызывается внутри обработки запроса.</summary>
         public event Action<FlowState> StateChanged;
 
+        /// <summary>
+        /// Слот не загрузился (<see cref="LoadGameRequest"/>): до уничтожения сессии — состояние не меняется, после —
+        /// возврат в главное меню (<see cref="LoadGameFailure.ReturnedToMenu"/>). Game показывает игроку причину.
+        /// </summary>
+        public event Action<LoadGameFailure> LoadFailed;
+
         public FlowState State { get; private set; } = FlowState.Boot;
 
         public GameConfig Config { get; }
@@ -100,6 +106,12 @@ namespace TheGrowth.Game.Flow
 
         /// <summary>Превью сохранения (PNG) или null. Задаёт <c>GameStarter</c>; не задано (тесты без экрана) — без превью.</summary>
         public Func<byte[]> ThumbnailCapture { get; set; }
+
+        /// <summary>
+        /// Дополнительные системы каждой новой сессии (<c>configure</c> в <see cref="Session.Create"/>, до <c>Init</c>
+        /// контейнера): сессионный наблюдатель UI. Задаёт <c>GameStarter</c>; не задано — только системы модели.
+        /// </summary>
+        public Action<Session> ConfigureSession { get; set; }
 
         /// <summary>
         /// Время в игре текущей сессии: время из сейва плюс реальное время с создания сессии. Пауза не вычитается (системы
@@ -387,7 +399,7 @@ namespace TheGrowth.Game.Flow
             if (Session != null)
                 throw new InvalidOperationException($"Can't create a session: {Session} already exists");
 
-            Session = Session.Create(m_Global, save);
+            Session = Session.Create(m_Global, save, ConfigureSession);
             Session.Scripts.BecameIdle += HandleScriptsBecameIdle;
             m_PlayTimeBefore = Math.Max(0d, save.Meta.PlayTimeSeconds);
             m_SessionStartedAt = m_Clock();
@@ -527,6 +539,19 @@ namespace TheGrowth.Game.Flow
             {
                 Debug.LogException(exception);
                 Debug.LogWarning("[Flow] Autosave failed");
+            }
+        }
+
+        internal void ReportLoadFailed(string slotId, Exception exception, bool returnedToMenu)
+        {
+            var failure = new LoadGameFailure(slotId, exception, returnedToMenu);
+            try
+            {
+                LoadFailed?.Invoke(failure);
+            }
+            catch (Exception handlerException)
+            {
+                Debug.LogException(handlerException);
             }
         }
 

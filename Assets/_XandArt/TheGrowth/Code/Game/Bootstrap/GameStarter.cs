@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using TheGrowth.Architecture.Input;
 using TheGrowth.Architecture.IOC;
@@ -8,19 +7,25 @@ using TheGrowth.Core.Scripting;
 using TheGrowth.Game.Flow;
 using TheGrowth.Game.Saves;
 using TheGrowth.Game.Scenes;
+using TheGrowth.Game.UI;
 using TheGrowth.Integrations.SaveFiles;
+using TheGrowth.Model;
 using TheGrowth.UI.Loading;
-using TheGrowth.UI.Temporary;
+using TheGrowth.UI.Observers;
+using TheGrowth.UI.Popups;
+using TheGrowth.UI.Root;
 using UnityEngine;
 
 namespace TheGrowth.Game.Bootstrap
 {
     /// <summary>
     /// Точка входа (сцена Main, постоянная): собирает глобальную область (в том числе сохранения: хранилище файлов —
-    /// интеграция, подключается только здесь), затем отправляет первый запрос <see cref="GameFlow"/> — главное меню
-    /// или (в редакторе) новую игру в открытой локации. Закрытие окна откладывает до <see cref="QuitRequest"/>
-    /// (автосейв и конец записи). Уничтожается вместе с Main (выход из Play, приложения) и уничтожает глобальную
-    /// область, а с ней сессию и локацию.
+    /// интеграция, подключается только здесь; UI: корневая VM, слои, экран загрузки, всплывающие окна, адаптер
+    /// <see cref="UIFlowAdapter"/>, глобальный наблюдатель; сессионный наблюдатель — в каждую сессию через
+    /// <see cref="GameFlow.ConfigureSession"/>), связывает корневую вьюху UI, затем отправляет первый запрос
+    /// <see cref="GameFlow"/> — главное меню или (в редакторе) новую игру в открытой локации. Закрытие окна откладывает
+    /// до <see cref="QuitRequest"/> (автосейв и конец записи). Уничтожается вместе с Main (выход из Play, приложения) и
+    /// уничтожает глобальную область, а с ней сессию и локацию.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class GameStarter : MonoBehaviour
@@ -32,11 +37,7 @@ namespace TheGrowth.Game.Bootstrap
         private GameConfig m_Config;
 
         [SerializeField]
-        private LoadingOverlay m_LoadingScreen;
-
-        [SerializeField]
-        [Tooltip("Temporary uGUI menu until the MVVM UI (E08).")]
-        private TemporaryMenu m_Menu;
+        private UIRootView m_UI;
 
         private LifetimeScope m_Global;
 
@@ -45,6 +46,10 @@ namespace TheGrowth.Game.Bootstrap
         public GameFlow Flow { get; private set; }
 
         public SaveService Saves { get; private set; }
+
+        public UIManager UI { get; private set; }
+
+        public UIRootView UIRoot => m_UI;
 
         private void Awake()
         {
@@ -60,15 +65,21 @@ namespace TheGrowth.Game.Bootstrap
             container.Add(ScriptLanguage.FromLoadedAssemblies());
             container.Add(new SceneService());
             container.Add(new InputService());
-            container.Add(m_LoadingScreen);
+            container.Add(new UIRootViewModel());
+            UI = container.Add(new UIManager());
+            container.Add(new LoadingScreen());
+            container.Add(new PopupService());
             container.Add(new SaveFileStorage(SaveFileStorage.DefaultFolder));
             Saves = container.Add(new SaveService());
             Flow = container.Add(new GameFlow(m_Global, m_Config));
             Flow.ThumbnailCapture = SaveThumbnail.Capture;
+            Flow.ConfigureSession = ConfigureSession;
+            container.Add(new UIFlowAdapter());
+            container.Add(new GlobalUIObserver());
             container.Init();
 
+            m_UI.Initialize(UI);
             Application.wantsToQuit += HandleWantsToQuit;
-            BindMenu();
         }
 
         private void Start()
@@ -82,11 +93,22 @@ namespace TheGrowth.Game.Bootstrap
                 return;
 
             Application.wantsToQuit -= HandleWantsToQuit;
-            UnbindMenu();
+
+            // Вьюхи убираются без анимаций до уничтожения VM (корневая вьюха может быть уже уничтожена вместе с Main).
+            if (m_UI != null)
+                m_UI.Shutdown();
+
             m_Global.Dispose();
             m_Global = null;
             Flow = null;
             Saves = null;
+            UI = null;
+        }
+
+        /// <summary>Сессионный наблюдатель UI — в контейнер каждой новой сессии; уничтожается вместе с ней.</summary>
+        private static void ConfigureSession(Session session)
+        {
+            session.Container.Add(new SessionUIObserver());
         }
 
         private static IFlowRequest CreateStartRequest()
@@ -101,10 +123,10 @@ namespace TheGrowth.Game.Bootstrap
 
         private bool Validate()
         {
-            if (m_Content != null && m_Config != null && m_LoadingScreen != null)
+            if (m_Content != null && m_Config != null && m_UI != null)
                 return true;
 
-            Debug.LogError($"[Flow] {nameof(GameStarter)} '{name}': content registry, game config and loading screen must be assigned", this);
+            Debug.LogError($"[Flow] {nameof(GameStarter)} '{name}': content registry, game config and UI root must be assigned", this);
             return false;
         }
 
@@ -122,166 +144,5 @@ namespace TheGrowth.Game.Bootstrap
             Application.wantsToQuit -= HandleWantsToQuit;
             return false;
         }
-
-#region Temporary menu
-
-        private void BindMenu()
-        {
-            Flow.StateChanged += HandleStateChanged;
-            if (m_Menu == null)
-                return;
-
-            m_Menu.ContinueClicked += HandleContinue;
-            m_Menu.NewGameClicked += HandleNewGame;
-            m_Menu.LoadClicked += HandleOpenSlots;
-            m_Menu.SaveClicked += HandleSave;
-            m_Menu.QuitClicked += HandleQuit;
-            m_Menu.ExitToMenuClicked += HandleExitToMenu;
-            m_Menu.SlotLoadClicked += HandleLoadSlot;
-            m_Menu.SlotDeleteClicked += HandleDeleteSlot;
-            HandleStateChanged(Flow.State);
-        }
-
-        private void UnbindMenu()
-        {
-            Flow.StateChanged -= HandleStateChanged;
-            if (m_Menu == null)
-                return;
-
-            m_Menu.ContinueClicked -= HandleContinue;
-            m_Menu.NewGameClicked -= HandleNewGame;
-            m_Menu.LoadClicked -= HandleOpenSlots;
-            m_Menu.SaveClicked -= HandleSave;
-            m_Menu.QuitClicked -= HandleQuit;
-            m_Menu.ExitToMenuClicked -= HandleExitToMenu;
-            m_Menu.SlotLoadClicked -= HandleLoadSlot;
-            m_Menu.SlotDeleteClicked -= HandleDeleteSlot;
-        }
-
-        private void HandleStateChanged(FlowState state)
-        {
-            if (m_Menu == null)
-                return;
-
-            m_Menu.Show(state == FlowState.MainMenu, state is FlowState.Hub or FlowState.Expedition);
-            if (state == FlowState.MainMenu)
-                RefreshContinueAsync().Forget();
-        }
-
-        private void HandleContinue()
-        {
-            ContinueAsync().Forget();
-        }
-
-        private void HandleNewGame()
-        {
-            Flow.Request(new NewGameRequest()).Forget();
-        }
-
-        private void HandleOpenSlots()
-        {
-            ShowSlotsAsync().Forget();
-        }
-
-        private void HandleSave()
-        {
-            Flow.Request(SaveGameRequest.Manual()).Forget();
-        }
-
-        private void HandleQuit()
-        {
-            Flow.Request(new QuitRequest()).Forget();
-        }
-
-        private void HandleExitToMenu()
-        {
-            Flow.Request(new ExitToMenuRequest()).Forget();
-        }
-
-        private void HandleLoadSlot(string slotId)
-        {
-            m_Menu.HideSlots();
-            Flow.Request(new LoadGameRequest(slotId)).Forget();
-        }
-
-        private void HandleDeleteSlot(string slotId)
-        {
-            DeleteAsync(slotId).Forget();
-        }
-
-        /// <summary>Последний по дате читаемый слот.</summary>
-        private async UniTask<SaveSlotInfo> FindLatestAsync()
-        {
-            foreach (var slot in await Saves.ListAsync(m_Global.Lifetime))
-            {
-                if (!slot.IsBroken)
-                    return slot;
-            }
-
-            return null;
-        }
-
-        private async UniTaskVoid RefreshContinueAsync()
-        {
-            try
-            {
-                var latest = await FindLatestAsync();
-                if (m_Menu != null)
-                    m_Menu.SetContinueAvailable(latest != null);
-            }
-            catch (Exception exception) when (exception is not OperationCanceledException)
-            {
-                Debug.LogException(exception);
-            }
-        }
-
-        private async UniTaskVoid ContinueAsync()
-        {
-            try
-            {
-                var latest = await FindLatestAsync();
-                if (latest != null)
-                    Flow?.Request(new LoadGameRequest(latest.SlotId)).Forget();
-            }
-            catch (Exception exception) when (exception is not OperationCanceledException)
-            {
-                Debug.LogException(exception);
-            }
-        }
-
-        private async UniTaskVoid ShowSlotsAsync()
-        {
-            try
-            {
-                var slots = await Saves.ListAsync(m_Global.Lifetime);
-                if (m_Menu != null)
-                    m_Menu.ShowSlots(slots);
-            }
-            catch (Exception exception) when (exception is not OperationCanceledException)
-            {
-                Debug.LogException(exception);
-            }
-        }
-
-        private async UniTaskVoid DeleteAsync(string slotId)
-        {
-            try
-            {
-                await Saves.DeleteAsync(slotId, m_Global.Lifetime);
-                var slots = await Saves.ListAsync(m_Global.Lifetime);
-                if (m_Menu == null)
-                    return;
-
-                m_Menu.ShowSlots(slots);
-                if (Flow is { State: FlowState.MainMenu })
-                    m_Menu.SetContinueAvailable(slots.Count > 0 && !slots[0].IsBroken);
-            }
-            catch (Exception exception) when (exception is not OperationCanceledException)
-            {
-                Debug.LogException(exception);
-            }
-        }
-
-#endregion
     }
 }

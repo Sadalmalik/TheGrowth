@@ -74,6 +74,11 @@ Integrations  Steam · аналитика (Amplitude, ...) · хранилища
 | Integrations | `TheGrowth.Integrations.<Модуль>` (по сборке на интеграцию) | `.../Code/Integrations/<Модуль>/` |
 | — | `TheGrowth.Editor`, `TheGrowth.Tests.EditMode`, `TheGrowth.Tests.PlayMode`, `TheGrowth.Tests.Support` | `.../Code/Editor/`, `.../Tests/` |
 
+Версии (T067, 2026-10-20): Input System 1.19.0 (режим `Both`), NuGetForUnity 4.5.0 (git-пакет; NuGet-пакеты —
+`Assets/Packages/`, список — `Assets/packages.config`), R3 1.3.1 + R3.Unity (git), ObservableCollections 3.3.4 +
+ObservableCollections.R3 3.3.4. Model закрыта `overrideReferences` — из предкомпилированных только
+`Newtonsoft.Json.dll` (нет R3, DOTween, Odin).
+
 Сторонние: Architecture — DOTween (процедурные анимации), UniTask, R3 и ObservableCollections (база MVVM,
 решено 2026-10-20) — с ними все слои выше; Core — Newtonsoft; Presentation — DOTween (Spine позже); UI — DOTween;
 Presentation/UI — Spine (позже).
@@ -110,6 +115,8 @@ Assets/_XandArt/TheGrowth/
 комментариев-разделителей, директивы без отступа.
 
 Дополнительно:
+- Окончания строк — только LF (решено 2026-10-20): `.gitattributes` (`* text=auto eol=lf`),
+  `.editorconfig`, в Unity новые скрипты — Unix. Кодировка — UTF-8.
 - Namespace — только с явным телом `namespace X { ... }`, без file-scoped.
 - Namespace новых сборок следуют имени сборки (`TheGrowth.Architecture.IOC`, `TheGrowth.Core...`);
   код прототипа в `_Legacy` сохраняет `XandArt.*` (данные Odin ссылаются на полные имена типов).
@@ -135,6 +142,8 @@ Assets/_XandArt/TheGrowth/
 - Миграции сейвов: фикстура старого сейва → чтение → проверка.
 - Валидаторы контента (ID, ссылки, missing types) как тесты — запускаются вместе с остальными.
 - PlayMode — минимально: загрузка каждой сцены локации, вход/выход, сохранение/загрузка.
+- Тесты не трогают данные игрока (папку сохранений, настройки, профиль) — только отдельная
+  тестовая папка (2026-10-20: PlayMode-тест удалил папку `saves` автора, T068).
 
 ## Документация и задачи
 

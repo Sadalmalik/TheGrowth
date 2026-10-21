@@ -20,8 +20,8 @@ namespace TheGrowth.Tests.PlayMode.Flow
     /// <summary>
     /// Сцена Main целиком: точка входа → главное меню → новая игра в тестовой локации → выход в меню; сохранение и
     /// загрузка. Main грузится additive (сцена запуска тестов остаётся), сцены должны быть в Build Settings. Папка
-    /// сохранений игры на время теста убирается в соседнюю (<c>saves.test-backup</c>) и возвращается после него: тест
-    /// пишет настоящие файлы и не трогает сохранения разработчика.
+    /// сохранений игры на время теста убирается в соседнюю (<see cref="TestSavesFolder"/>) и возвращается после него:
+    /// тест пишет настоящие файлы и не трогает сохранения разработчика.
     /// </summary>
     public sealed class MainSceneTests
     {
@@ -30,18 +30,14 @@ namespace TheGrowth.Tests.PlayMode.Flow
         private const string TestLocationId = "TestLocation";
         private const float Timeout = 30f;
 
-        private static string SavesFolder => SaveFileStorage.DefaultFolder;
+        private readonly TestSavesFolder m_Saves = new TestSavesFolder();
 
-        private static string BackupFolder => SavesFolder + ".test-backup";
+        private static string SavesFolder => TestSavesFolder.Folder;
 
         [SetUp]
         public void SetUp()
         {
-            if (Directory.Exists(BackupFolder))
-                Assert.Fail($"{BackupFolder} exists: a previous run did not restore the saves, move it back to {SavesFolder} manually");
-
-            if (Directory.Exists(SavesFolder))
-                Directory.Move(SavesFolder, BackupFolder);
+            m_Saves.Isolate();
         }
 
         [UnityTearDown]
@@ -54,11 +50,7 @@ namespace TheGrowth.Tests.PlayMode.Flow
                     yield return SceneManager.UnloadSceneAsync(scene);
             }
 
-            if (Directory.Exists(SavesFolder))
-                Directory.Delete(SavesFolder, true);
-
-            if (Directory.Exists(BackupFolder))
-                Directory.Move(BackupFolder, SavesFolder);
+            m_Saves.Restore();
         }
 
         [UnityTest]

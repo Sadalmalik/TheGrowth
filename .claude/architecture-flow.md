@@ -153,6 +153,9 @@ CreateSession(SaveGame save)
   состояние не меняется. Ошибки после уничтожения старой сессии (версия секции новее кода, нет
   шага миграции, сцена) — возврат в главное меню.
 - Точка расширения E12: `CanSave` учитывает `!IsDialogueActive || IsDialogueWaitingForPlayer`.
+- Ошибка загрузки (T067): `GameFlow.LoadFailed(LoadGameFailure { SlotId, Kind, ReturnedToMenu })` —
+  и до, и после уничтожения старой сессии; `UIFlowAdapter` показывает всплывающее окно.
+  `GameFlow.ConfigureSession` — хук `configure` для `Session.Create` (сессионный наблюдатель UI).
 
 ### Точки сохранения
 

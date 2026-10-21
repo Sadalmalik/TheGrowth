@@ -1,6 +1,6 @@
 ---
 type: task
-status: backlog
+status: in-progress
 kind: epic
 area: ui
 priority: medium
@@ -9,7 +9,7 @@ epic:
 depends: "[[E01 Фундамент]]"
 source: обсуждение архитектуры 2026-10-10
 created: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-20
 ---
 
 ## Описание

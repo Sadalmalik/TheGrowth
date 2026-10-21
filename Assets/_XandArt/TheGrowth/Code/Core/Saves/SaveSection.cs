@@ -44,10 +44,10 @@ namespace TheGrowth.Core.Saves
         public static SaveSection FromObject(string key, int version, object save)
         {
             if (save == null)
-                throw new SaveException($"Section '{key}': the system returned null instead of its save");
+                throw new SaveException(SaveErrorKind.Unknown, $"Section '{key}': the system returned null instead of its save");
 
             if (SaveJson.ToToken(save) is not JObject data)
-                throw new SaveException($"Section '{key}': {save.GetType().Name} is not serialized as a JSON object");
+                throw new SaveException(SaveErrorKind.Unknown, $"Section '{key}': {save.GetType().Name} is not serialized as a JSON object");
 
             return new SaveSection(key, version, data);
         }
@@ -70,10 +70,10 @@ namespace TheGrowth.Core.Saves
             }
             catch (JsonException exception)
             {
-                throw new SaveException($"Section '{Key}' (version {version}) can't be read as {typeof(T).Name}: {exception.Message}", exception);
+                throw new SaveException(SaveErrorKind.Corrupted, $"Section '{Key}' (version {version}) can't be read as {typeof(T).Name}: {exception.Message}", exception);
             }
 
-            return save ?? throw new SaveException($"Section '{Key}' (version {version}) is read as null");
+            return save ?? throw new SaveException(SaveErrorKind.Corrupted, $"Section '{Key}' (version {version}) is read as null");
         }
 
         public override string ToString()
