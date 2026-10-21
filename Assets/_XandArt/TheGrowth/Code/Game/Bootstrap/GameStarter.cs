@@ -69,7 +69,7 @@ namespace TheGrowth.Game.Bootstrap
             UI = container.Add(new UIManager());
             container.Add(new LoadingScreen());
             container.Add(new PopupService());
-            container.Add(new SaveFileStorage(SaveFileStorage.DefaultFolder));
+            container.Add(new SaveFileStorage(GetSavesFolder()));
             Saves = container.Add(new SaveService());
             Flow = container.Add(new GameFlow(m_Global, m_Config));
             Flow.ThumbnailCapture = SaveThumbnail.Capture;
@@ -109,6 +109,16 @@ namespace TheGrowth.Game.Bootstrap
         private static void ConfigureSession(Session session)
         {
             session.Container.Add(new SessionUIObserver());
+        }
+
+        /// <summary>Папка игрока; в редакторе — подмена из <see cref="EditorStartHook.SavesFolder"/> (PlayMode-тесты).</summary>
+        private static string GetSavesFolder()
+        {
+#if UNITY_EDITOR
+            if (!string.IsNullOrEmpty(EditorStartHook.SavesFolder))
+                return EditorStartHook.SavesFolder;
+#endif
+            return SaveFileStorage.DefaultFolder;
         }
 
         private static IFlowRequest CreateStartRequest()

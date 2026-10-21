@@ -1,65 +1,39 @@
 using System;
 using System.IO;
-using System.Threading;
-using NUnit.Framework;
+using TheGrowth.Game.Bootstrap;
 using TheGrowth.Integrations.SaveFiles;
 
 namespace TheGrowth.Tests.PlayMode
 {
     /// <summary>
-    /// Папка сохранений игры на время теста: настоящая убирается в соседнюю (<c>saves.test-backup</c>), тест пишет
-    /// настоящие файлы в пустую, после теста она удаляется и настоящая возвращается. Папка не убралась (занята) —
-    /// <see cref="Restore"/> её не трогает. Перенос повторяется: папку может ненадолго держать другой процесс.
+    /// Временная папка сохранений PlayMode-теста: своя на каждый тест, во временной папке системы. До загрузки Main
+    /// подставляется вместо папки игрока (<see cref="EditorStartHook.SavesFolder"/>), после теста удаляется. Папку игрока
+    /// (<see cref="SaveFileStorage.DefaultFolder"/>) тесты не трогают.
     /// </summary>
     public sealed class TestSavesFolder
     {
-        private const int Attempts = 10;
-        private const int RetryDelayMs = 200;
+        private const string Root = "TheGrowth.Tests";
 
-        private bool m_IsIsolated;
+        /// <summary>Папка текущего теста; null вне теста.</summary>
+        public string Folder { get; private set; }
 
-        public static string Folder => SaveFileStorage.DefaultFolder;
-
-        public static string Backup => Folder + ".test-backup";
-
-        public void Isolate()
+        public void Create()
         {
-            if (Directory.Exists(Backup))
-                Assert.Fail($"{Backup} exists: a previous run did not restore the saves, move it back to {Folder} manually");
-
-            if (Directory.Exists(Folder))
-                Move(Folder, Backup);
-
-            m_IsIsolated = true;
+            Folder = Path.Combine(Path.GetTempPath(), Root, "Saves-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(Folder);
+            EditorStartHook.SavesFolder = Folder;
         }
 
-        public void Restore()
+        public void Delete()
         {
-            if (!m_IsIsolated)
+            EditorStartHook.SavesFolder = null;
+            if (Folder == null)
                 return;
 
-            m_IsIsolated = false;
             if (Directory.Exists(Folder))
                 Directory.Delete(Folder, true);
 
-            if (Directory.Exists(Backup))
-                Move(Backup, Folder);
-        }
-
-        private static void Move(string from, string to)
-        {
-            for (var attempt = 1; ; attempt++)
-            {
-                try
-                {
-                    Directory.Move(from, to);
-                    return;
-                }
-                catch (Exception exception) when (attempt < Attempts && exception is IOException or UnauthorizedAccessException)
-                {
-                    Thread.Sleep(RetryDelayMs);
-                }
-            }
+            Folder = null;
         }
     }
 }

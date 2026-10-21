@@ -19,9 +19,8 @@ namespace TheGrowth.Tests.PlayMode.Flow
 {
     /// <summary>
     /// Сцена Main целиком: точка входа → главное меню → новая игра в тестовой локации → выход в меню; сохранение и
-    /// загрузка. Main грузится additive (сцена запуска тестов остаётся), сцены должны быть в Build Settings. Папка
-    /// сохранений игры на время теста убирается в соседнюю (<see cref="TestSavesFolder"/>) и возвращается после него:
-    /// тест пишет настоящие файлы и не трогает сохранения разработчика.
+    /// загрузка. Main грузится additive (сцена запуска тестов остаётся), сцены должны быть в Build Settings. Сохранения
+    /// пишутся настоящими файлами во временную папку теста (<see cref="TestSavesFolder"/>); папку игрока тест не трогает.
     /// </summary>
     public sealed class MainSceneTests
     {
@@ -32,12 +31,12 @@ namespace TheGrowth.Tests.PlayMode.Flow
 
         private readonly TestSavesFolder m_Saves = new TestSavesFolder();
 
-        private static string SavesFolder => TestSavesFolder.Folder;
+        private string SavesFolder => m_Saves.Folder;
 
         [SetUp]
         public void SetUp()
         {
-            m_Saves.Isolate();
+            m_Saves.Create();
         }
 
         [UnityTearDown]
@@ -50,7 +49,7 @@ namespace TheGrowth.Tests.PlayMode.Flow
                     yield return SceneManager.UnloadSceneAsync(scene);
             }
 
-            m_Saves.Restore();
+            m_Saves.Delete();
         }
 
         [UnityTest]
@@ -93,6 +92,7 @@ namespace TheGrowth.Tests.PlayMode.Flow
         [UnityTest]
         public IEnumerator NewGame_Save_ExitToMenu_Load_ReturnsToSameLocation()
         {
+            var playerSaves = SnapshotFolder(SaveFileStorage.DefaultFolder);
             yield return SceneManager.LoadSceneAsync(MainScene, LoadSceneMode.Additive);
             var starter = FindStarter();
 
@@ -135,6 +135,20 @@ namespace TheGrowth.Tests.PlayMode.Flow
 
             flow.Request(new ExitToMenuRequest()).Forget();
             yield return WaitUntil(() => flow is { State: FlowState.MainMenu, IsTransitioning: false }, "exit to menu after loading");
+            Assert.That(SnapshotFolder(SaveFileStorage.DefaultFolder), Is.EqualTo(playerSaves), "the player's saves folder is untouched");
+        }
+
+        /// <summary>Файлы папки с размером и временем записи; пустой список, если папки нет.</summary>
+        private static List<string> SnapshotFolder(string folder)
+        {
+            if (!Directory.Exists(folder))
+                return new List<string>();
+
+            return Directory.GetFiles(folder)
+                .Select(path => new FileInfo(path))
+                .Select(file => $"{file.Name} {file.Length} {file.LastWriteTimeUtc.Ticks}")
+                .OrderBy(entry => entry, StringComparer.Ordinal)
+                .ToList();
         }
 
         private static GameStarter FindStarter()

@@ -22,7 +22,7 @@ namespace TheGrowth.Tests.PlayMode.UI
     /// <summary>
     /// UI сцены Main через кнопки вьюх и ввод «назад» (<see cref="UIManager.HandleInput"/>): главное меню → новая игра
     /// → пауза → сохранить → в меню → «Продолжить» → та же локация; загрузка слота новее клиента → всплывающее окно.
-    /// Папка сохранений на время теста убирается в соседнюю (<see cref="TestSavesFolder"/>).
+    /// Сохранения — во временной папке теста (<see cref="TestSavesFolder"/>); папку игрока тест не трогает.
     /// </summary>
     public sealed class MainUITests
     {
@@ -36,7 +36,7 @@ namespace TheGrowth.Tests.PlayMode.UI
         [SetUp]
         public void SetUp()
         {
-            m_Saves.Isolate();
+            m_Saves.Create();
         }
 
         [UnityTearDown]
@@ -49,7 +49,7 @@ namespace TheGrowth.Tests.PlayMode.UI
                     yield return SceneManager.UnloadSceneAsync(scene);
             }
 
-            m_Saves.Restore();
+            m_Saves.Delete();
         }
 
         [UnityTest]

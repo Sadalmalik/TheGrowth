@@ -200,7 +200,8 @@ CreateSession(SaveGame save)
   вниз); `LocationModel`, `LocationScope` — Model; `GameConfig` — Game.
 - Play из любой сцены: `PlayModeStart` (редактор) пишет ID локации открытой сцены в `SessionState`
   (при включённом «Run as game», `RunAsGameToolbar` — `MainToolbarToggle`);
-  `GameStarter` под `#if UNITY_EDITOR` вызывает делегат `EditorStartHook.CreateRequest`.
+  `GameStarter` под `#if UNITY_EDITOR` вызывает делегат `EditorStartHook.CreateRequest`;
+  `EditorStartHook.SavesFolder` — папка сохранений вместо папки игрока (PlayMode-тесты, T068).
   Несохранённая сцена и сцена PlayMode-тестов запускаются как есть. Пресет встанет между созданием
   сессии и входом в локацию.
 - E02 (сделано в T065): `CreateSession(SaveGame)`; загрузка — в очереди переходов, сохранение —
