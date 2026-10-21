@@ -12,16 +12,14 @@ namespace TheGrowth.Integrations.SaveFiles
     /// <summary>
     /// Хранилище слотов в файлах (PC, мобильные): <c>&lt;папка&gt;/&lt;slotId&gt;.tgsave</c>, по умолчанию
     /// <see cref="DefaultFolder"/>. Ввод-вывод синхронный, в главном потоке: файлы слотов маленькие, а пул потоков есть не
-    /// на всех платформах (Web — своё хранилище, T066). Атомарная запись: во временный файл рядом (<c>.tmp</c>), сброс
-    /// на диск, затем замена файла слота; ошибка до замены удаляет временный файл, прежний файл слота не меняется.
-    /// Подключается только в Game.
+    /// на всех платформах (Web — своё хранилище, T066). Атомарная запись (<see cref="AtomicFile"/>): во временный файл рядом
+    /// (<c>.tmp</c>), сброс на диск, затем замена файла слота; ошибка до замены удаляет временный файл, прежний файл слота
+    /// не меняется. Подключается только в Game.
     /// </summary>
     public sealed class SaveFileStorage : SharedObject, ISaveStorage
     {
         public const string Extension = ".tgsave";
         public const string FolderName = "saves";
-
-        private const string TempExtension = ".tmp";
 
         public SaveFileStorage(string folder)
         {
@@ -73,29 +71,7 @@ namespace TheGrowth.Integrations.SaveFiles
                 throw new ArgumentNullException(nameof(write));
 
             token.ThrowIfCancellationRequested();
-            Directory.CreateDirectory(Folder);
-
-            var path = GetPath(slotId);
-            var temp = path + TempExtension;
-            try
-            {
-                using (var stream = new FileStream(temp, FileMode.Create, FileAccess.Write, FileShare.None))
-                {
-                    write(stream);
-                    stream.Flush(true);
-                }
-
-                if (File.Exists(path))
-                    File.Replace(temp, path, null);
-                else
-                    File.Move(temp, path);
-            }
-            catch
-            {
-                DeleteTemp(temp);
-                throw;
-            }
-
+            AtomicFile.Write(GetPath(slotId), write);
             return UniTask.CompletedTask;
         }
 
@@ -112,19 +88,6 @@ namespace TheGrowth.Integrations.SaveFiles
         public override string ToString()
         {
             return $"{nameof(SaveFileStorage)}({Folder})";
-        }
-
-        private static void DeleteTemp(string temp)
-        {
-            try
-            {
-                if (File.Exists(temp))
-                    File.Delete(temp);
-            }
-            catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
-            {
-                Debug.LogWarning($"[Saves] Temporary file '{temp}' is not deleted: {exception.Message}");
-            }
         }
     }
 }

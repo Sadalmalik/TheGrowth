@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using NUnit.Framework;
+using TheGrowth.Core.Profile;
 using TheGrowth.Core.Saves;
+using TheGrowth.Core.Variables;
 using TheGrowth.Game.Bootstrap;
 using TheGrowth.Game.Flow;
 using TheGrowth.Integrations.SaveFiles;
@@ -19,8 +21,9 @@ namespace TheGrowth.Tests.PlayMode.Flow
 {
     /// <summary>
     /// Сцена Main целиком: точка входа → главное меню → новая игра в тестовой локации → выход в меню; сохранение и
-    /// загрузка. Main грузится additive (сцена запуска тестов остаётся), сцены должны быть в Build Settings. Сохранения
-    /// пишутся настоящими файлами во временную папку теста (<see cref="TestSavesFolder"/>); папку игрока тест не трогает.
+    /// загрузка. Main грузится additive (сцена запуска тестов остаётся), сцены должны быть в Build Settings. Сохранения и
+    /// профиль пишутся настоящими файлами во временные папки теста (<see cref="TestSavesFolder"/>); папку сохранений и
+    /// профиль игрока тест не трогает.
     /// </summary>
     public sealed class MainSceneTests
     {
@@ -78,6 +81,8 @@ namespace TheGrowth.Tests.PlayMode.Flow
             Assert.IsNotNull(session);
             Assert.AreEqual(TestLocationId, location.Model.Id);
             Assert.IsTrue(flow.CanSave);
+            Assert.IsNotNull(session.Get<IGameVariables>().Variables, "game variables are in the session");
+            Assert.AreEqual(m_Saves.ProfileFolder, ((ProfileFileStorage)starter.Global.Get<IProfileStorage>()).Folder, "the test profile folder");
 
             flow.Request(new ExitToMenuRequest()).Forget();
             yield return WaitUntil(() => flow is { State: FlowState.MainMenu, IsTransitioning: false }, "exit to menu");
@@ -93,6 +98,7 @@ namespace TheGrowth.Tests.PlayMode.Flow
         public IEnumerator NewGame_Save_ExitToMenu_Load_ReturnsToSameLocation()
         {
             var playerSaves = SnapshotFolder(SaveFileStorage.DefaultFolder);
+            var playerProfile = SnapshotFile(Path.Combine(ProfileFileStorage.DefaultFolder, ProfileFileStorage.FileName));
             yield return SceneManager.LoadSceneAsync(MainScene, LoadSceneMode.Additive);
             var starter = FindStarter();
 
@@ -102,6 +108,11 @@ namespace TheGrowth.Tests.PlayMode.Flow
             flow.Request(new NewGameRequest(TestLocationId)).Forget();
             yield return WaitUntil(() => flow is { State: FlowState.Hub, IsTransitioning: false }, "test location");
             var session = flow.Session;
+
+            // Переменная профиля из примера объявлений (Content/Variables) пишется в профиль теста.
+            Assert.IsTrue(starter.Global.Get<VariableCatalog>().TryGet("ending_seen", out var endingSeen), "the example declarations are in the content registry");
+            starter.Profile.Variables.Set(endingSeen, true);
+            Assert.IsTrue(File.Exists(Path.Combine(m_Saves.ProfileFolder, ProfileFileStorage.FileName)), "the profile is written to the test folder");
 
             var request = SaveGameRequest.Manual();
             yield return flow.Request(request).ToCoroutine();
@@ -136,6 +147,17 @@ namespace TheGrowth.Tests.PlayMode.Flow
             flow.Request(new ExitToMenuRequest()).Forget();
             yield return WaitUntil(() => flow is { State: FlowState.MainMenu, IsTransitioning: false }, "exit to menu after loading");
             Assert.That(SnapshotFolder(SaveFileStorage.DefaultFolder), Is.EqualTo(playerSaves), "the player's saves folder is untouched");
+            Assert.AreEqual(playerProfile, SnapshotFile(Path.Combine(ProfileFileStorage.DefaultFolder, ProfileFileStorage.FileName)), "the player's profile is untouched");
+        }
+
+        /// <summary>Размер и время записи файла; null, если файла нет.</summary>
+        private static string SnapshotFile(string path)
+        {
+            if (!File.Exists(path))
+                return null;
+
+            var file = new FileInfo(path);
+            return $"{file.Length} {file.LastWriteTimeUtc.Ticks}";
         }
 
         /// <summary>Файлы папки с размером и временем записи; пустой список, если папки нет.</summary>

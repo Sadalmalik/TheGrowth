@@ -9,57 +9,10 @@ namespace TheGrowth.Tests.EditMode.Scripting
 {
 #region Conditions and evaluators
 
-    public enum CompareOp
-    {
-        [ScriptToken(">")]
-        Greater,
-
-        [ScriptToken("<")]
-        Less,
-
-        [ScriptToken(">=")]
-        GreaterOrEqual,
-
-        [ScriptToken("==")]
-        Equal,
-    }
-
     public enum TestSpeed
     {
         Fast,
         Slow,
-    }
-
-    [Script("compare", "[A] [Operator] [B]")]
-    public sealed class CompareCondition : Condition
-    {
-        public Evaluator<int> A;
-        public CompareOp Operator;
-        public Evaluator<int> B;
-
-        public override bool Check(ScriptContext context)
-        {
-            var a = A.Evaluate(context);
-            var b = B.Evaluate(context);
-            return Operator switch
-            {
-                CompareOp.Greater => a > b,
-                CompareOp.Less => a < b,
-                CompareOp.GreaterOrEqual => a >= b,
-                _ => a == b,
-            };
-        }
-    }
-
-    [Script("not", "not [Condition]")]
-    public sealed class NotCondition : Condition
-    {
-        public Condition Condition;
-
-        public override bool Check(ScriptContext context)
-        {
-            return !Condition.Check(context);
-        }
     }
 
     [Script("any", "any of [Conditions]")]
@@ -81,18 +34,6 @@ namespace TheGrowth.Tests.EditMode.Scripting
         public override bool Check(ScriptContext context)
         {
             return Value;
-        }
-    }
-
-    [Script("add", "[A] + [B]")]
-    public sealed class AddEvaluator : Evaluator<int>
-    {
-        public Evaluator<int> A;
-        public Evaluator<int> B;
-
-        public override int Evaluate(ScriptContext context)
-        {
-            return A.Evaluate(context) + B.Evaluate(context);
         }
     }
 
@@ -296,12 +237,14 @@ namespace TheGrowth.Tests.EditMode.Scripting
         }
     }
 
-    /// <summary>Переменные int: <c>$x</c>, <c>$coins</c>, <c>$trust</c>.</summary>
+    /// <summary>Переменные int: <c>$x</c>, <c>$coins</c>, <c>$trust</c>. Владельцев переменных нет.</summary>
     public sealed class TestVariableResolver : IScriptVariableResolver
     {
         private readonly HashSet<string> m_Names = new HashSet<string> { "x", "coins", "trust" };
 
-        public bool TryResolve(string name, Type type, out object value, out string error)
+        public Type OwnerType => null;
+
+        public bool TryResolve(string name, object owner, Type type, out object value, out string error)
         {
             value = null;
             error = null;
@@ -321,8 +264,9 @@ namespace TheGrowth.Tests.EditMode.Scripting
             return true;
         }
 
-        public bool TryGetName(object value, out string name)
+        public bool TryGetReference(object value, out string name, out object owner)
         {
+            owner = null;
             name = (value as TestVariable)?.Name;
             return name != null;
         }
@@ -332,17 +276,14 @@ namespace TheGrowth.Tests.EditMode.Scripting
 
     public static class ScriptLanguageTypes
     {
-        /// <summary>Встроенные команды Core и тестовые узлы этого файла.</summary>
+        /// <summary>Встроенные команды и узлы Core (в том числе сравнения, логика, арифметика, переменные) и тестовые узлы этого файла.</summary>
         public static IEnumerable<Type> All()
         {
             foreach (var type in ScriptRegistry.CollectTypes(new[] { typeof(Command).Assembly }))
                 yield return type;
 
-            yield return typeof(CompareCondition);
-            yield return typeof(NotCondition);
             yield return typeof(AnyCondition);
             yield return typeof(FlagCondition);
-            yield return typeof(AddEvaluator);
             yield return typeof(SumEvaluator);
             yield return typeof(ScriptMark);
             yield return typeof(GiveCommand);

@@ -58,7 +58,7 @@ namespace TheGrowth.Tests.EditMode.Flow
             m_Global = new LifetimeScope("Global");
             var container = m_Global.Container;
             container.Add(registry);
-            container.Add(new ScriptLanguage(ContentTestKit.Language));
+            ContentTestKit.AddLanguage(container, registry);
             container.Add(m_Scenes);
             m_Input = container.Add(new InputService());
             m_Loading = container.Add(new FakeLoadingScreen());

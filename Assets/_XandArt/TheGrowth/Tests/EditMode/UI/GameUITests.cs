@@ -6,7 +6,6 @@ using TheGrowth.Architecture.Input;
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Saves;
-using TheGrowth.Core.Scripting;
 using TheGrowth.Game.Flow;
 using TheGrowth.Game.UI;
 using TheGrowth.Model.Locations;
@@ -63,7 +62,7 @@ namespace TheGrowth.Tests.EditMode.UI
             m_Global = new LifetimeScope("Global");
             var container = m_Global.Container;
             container.Add(registry);
-            container.Add(new ScriptLanguage(ContentTestKit.Language));
+            ContentTestKit.AddLanguage(container, registry);
             container.Add(m_Scenes);
             m_Input = container.Add(new InputService());
             m_Root = container.Add(new UIRootViewModel());

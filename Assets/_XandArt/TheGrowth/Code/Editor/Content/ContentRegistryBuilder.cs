@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Scripting;
+using TheGrowth.Core.Variables;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,19 +13,21 @@ namespace TheGrowth.EditorTools.Content
     /// <summary>
     /// Сборка <see cref="ContentRegistry"/>: все <see cref="ContentAsset"/> и файлы скриптов (<c>.script</c>,
     /// <c>.dialog</c>) из папки контента. Пустые ID заполняются из имени ассета. Ассет реестра записывается,
-    /// только если состав изменился. Набор ID конфигов публикуется как custom dependency
-    /// <see cref="IdsDependency"/>: импортёр скриптов зависит от него и переимпортируется при смене ID.
-    /// Запуск: меню, <see cref="ContentAssetPostprocessor"/>, <see cref="ContentBuildPreprocessor"/>.
+    /// только если состав изменился. Набор ID конфигов и набор объявлений переменных публикуются как custom dependency
+    /// <see cref="IdsDependency"/> и <see cref="VariablesDependency"/>: импортёр скриптов зависит от них и
+    /// переимпортируется при их смене. Запуск: меню, <see cref="ContentAssetPostprocessor"/>, <see cref="ContentBuildPreprocessor"/>.
     /// </summary>
     public static class ContentRegistryBuilder
     {
         public const string ContentRoot = "Assets/_XandArt/TheGrowth";
         public const string RegistryPath = ContentRoot + "/Content/ContentRegistry.asset";
         public const string IdsDependency = "TheGrowth/ContentIds";
+        public const string VariablesDependency = "TheGrowth/Variables";
 
         private const string MenuRoot = "[TheGrowth]/Content/";
 
         private static Hash128 m_PublishedIds;
+        private static Hash128 m_PublishedVariables;
         private static bool m_IsRefreshScheduled;
 
 #region Menu
@@ -78,7 +81,7 @@ namespace TheGrowth.EditorTools.Content
 
             var registry = WriteRegistry(registryPath, assets, scripts);
             if (registryPath == RegistryPath)
-                PublishIds(registry);
+                PublishDependencies(registry);
 
             return registry;
         }
@@ -186,7 +189,7 @@ namespace TheGrowth.EditorTools.Content
 
 #endregion
 
-#region Ids dependency
+#region Dependencies
 
         /// <summary>Хеш набора «тип: ID» конфигов реестра — значение <see cref="IdsDependency"/>.</summary>
         public static Hash128 ComputeIdsHash(ContentRegistry registry)
@@ -202,17 +205,48 @@ namespace TheGrowth.EditorTools.Content
         }
 
         /// <summary>
-        /// Опубликовать ID для импортёра скриптов. Unity переимпортирует зависимые файлы при следующем Refresh;
-        /// он запускается после текущего импорта, если набор изменился.
+        /// Хеш объявлений переменных реестра (имя, область, тип, прежние имена — всё, от чего зависит разбор скриптов) —
+        /// значение <see cref="VariablesDependency"/>. Значения по умолчанию и описания на разбор не влияют.
         /// </summary>
-        private static void PublishIds(ContentRegistry registry)
+        public static Hash128 ComputeVariablesHash(ContentRegistry registry)
         {
-            var hash = ComputeIdsHash(registry);
-            AssetDatabase.RegisterCustomDependency(IdsDependency, hash);
-            if (hash == m_PublishedIds)
+            var builder = new StringBuilder();
+            foreach (var asset in registry.Assets)
+            {
+                if (asset is not VariableDeclarations declarations)
+                    continue;
+
+                foreach (var variable in declarations.Variables)
+                {
+                    if (variable == null)
+                        continue;
+
+                    builder.Append(variable.Name).Append(':').Append((int)variable.Scope).Append(':').Append((int)variable.Type);
+                    foreach (var previous in variable.PreviousNames)
+                        builder.Append(':').Append(previous);
+
+                    builder.Append('\n');
+                }
+            }
+
+            return Hash128.Compute(builder.ToString());
+        }
+
+        /// <summary>
+        /// Опубликовать ID и объявления переменных для импортёра скриптов. Unity переимпортирует зависимые файлы при
+        /// следующем Refresh; он запускается после текущего импорта, если набор изменился.
+        /// </summary>
+        private static void PublishDependencies(ContentRegistry registry)
+        {
+            var ids = ComputeIdsHash(registry);
+            var variables = ComputeVariablesHash(registry);
+            AssetDatabase.RegisterCustomDependency(IdsDependency, ids);
+            AssetDatabase.RegisterCustomDependency(VariablesDependency, variables);
+            if (ids == m_PublishedIds && variables == m_PublishedVariables)
                 return;
 
-            m_PublishedIds = hash;
+            m_PublishedIds = ids;
+            m_PublishedVariables = variables;
             if (m_IsRefreshScheduled)
                 return;
 

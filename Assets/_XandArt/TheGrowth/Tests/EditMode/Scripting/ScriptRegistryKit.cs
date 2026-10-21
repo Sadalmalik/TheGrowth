@@ -37,6 +37,15 @@ namespace TheGrowth.Tests.EditMode.Scripting
         public override UniTask Execute(ScriptContext context) => default;
     }
 
+    /// <summary>Эвалуатор bool со скелетом кондишена <see cref="SameSkeletonCondition"/>: кондишен подставляется вместо bool — конфликт.</summary>
+    [Script("same4", "same [A]")]
+    public sealed class SameSkeletonBoolEvaluator : Evaluator<bool>
+    {
+        public int A;
+
+        public override bool Evaluate(ScriptContext context) => false;
+    }
+
     /// <summary>Тот же скелет, но другой вид результата (кондишен) — допустимо.</summary>
     [Script("same3", "same [A]")]
     public sealed class SameSkeletonCondition : Condition

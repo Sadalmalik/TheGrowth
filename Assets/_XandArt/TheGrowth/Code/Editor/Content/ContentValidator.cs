@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Scripting;
+using TheGrowth.Core.Variables;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -11,8 +12,8 @@ namespace TheGrowth.EditorTools.Content
 {
     /// <summary>
     /// Проверки контента: ID конфигов (пустой, не идентификатор, дубль в области ID), ID файлов скриптов,
-    /// пропавшие ссылки, конфиги и файлы скриптов проекта вне реестра. Ошибки — списком (для тестов и
-    /// pre-build), <see cref="Log"/> выводит их в консоль с выделением ассета.
+    /// объявления переменных (<see cref="VariableCatalog"/>), пропавшие ссылки, конфиги и файлы скриптов проекта вне
+    /// реестра. Ошибки — списком (для тестов и pre-build), <see cref="Log"/> выводит их в консоль с выделением ассета.
     /// </summary>
     public static class ContentValidator
     {
@@ -26,6 +27,7 @@ namespace TheGrowth.EditorTools.Content
             var errors = new List<ContentError>();
             ValidateAssets(assets ?? Array.Empty<ContentAsset>(), errors);
             ValidateScripts(scripts ?? Array.Empty<ScriptFileEntry>(), errors);
+            ValidateVariables(assets ?? Array.Empty<ContentAsset>(), errors);
             return errors;
         }
 
@@ -146,6 +148,16 @@ namespace TheGrowth.EditorTools.Content
                     var others = string.Join(", ", group.Where(other => other.Text != entry.Text).Select(other => GetPath(other.Text)));
                     errors.Add(Error(ContentErrorKind.DuplicateScriptId, entry.Text, $"duplicate script file id '{entry.Id}' (also: {others})"));
                 }
+            }
+        }
+
+        private static void ValidateVariables(IReadOnlyList<ContentAsset> assets, List<ContentError> errors)
+        {
+            var catalog = new VariableCatalog(assets.OfType<VariableDeclarations>());
+            foreach (var error in catalog.Errors)
+            {
+                var message = string.IsNullOrEmpty(error.Variable) ? error.Message : $"variable '{error.Variable}': {error.Message}";
+                errors.Add(Error(ContentErrorKind.InvalidVariable, error.Source, message));
             }
         }
 

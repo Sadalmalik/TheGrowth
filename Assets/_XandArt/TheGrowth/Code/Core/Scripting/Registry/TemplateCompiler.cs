@@ -209,7 +209,55 @@ namespace TheGrowth.Core.Scripting
                 }
             }
 
+            if (!LinkTypeSources(parameters, prefix, errors))
+                return null;
+
             return new TemplateLine(index, elements, parts, parameters, block);
+        }
+
+        /// <summary><see cref="ScriptTypeOfAttribute"/>: источник — параметр той же строки с известным типом значения, без цепочек.</summary>
+        private static bool LinkTypeSources(List<ScriptParam> parameters, string prefix, List<string> errors)
+        {
+            var valid = true;
+            foreach (var param in parameters)
+            {
+                var attribute = param.Field.GetCustomAttribute<ScriptTypeOfAttribute>();
+                if (attribute == null)
+                    continue;
+
+                if (param.Value.Kind != ScriptValueKind.Value || param.IsList)
+                {
+                    errors.Add($"{prefix}: [{param.Name}]: [ScriptTypeOf] is allowed only on an {nameof(IEvaluator)} field, not on a list");
+                    valid = false;
+                    continue;
+                }
+
+                var source = parameters.Find(other => other.Name == attribute.Field);
+                if (source == null || source == param)
+                {
+                    errors.Add($"{prefix}: [{param.Name}]: type source '{attribute.Field}' is not another parameter of the same line");
+                    valid = false;
+                    continue;
+                }
+
+                if (source.IsList || source.IsRest || source.Value.Kind is not (ScriptValueKind.Variable or ScriptValueKind.Value or ScriptValueKind.Evaluator))
+                {
+                    errors.Add($"{prefix}: [{param.Name}]: type source [{source.Name}] must be a variable, a value or an evaluator, not a list");
+                    valid = false;
+                    continue;
+                }
+
+                if (source.Field.IsDefined(typeof(ScriptTypeOfAttribute), false))
+                {
+                    errors.Add($"{prefix}: [{param.Name}]: type source [{source.Name}] is typed by another parameter itself");
+                    valid = false;
+                    continue;
+                }
+
+                param.TypeSource = source;
+            }
+
+            return valid;
         }
 
         private static bool AddLiterals(string text, List<TemplateElement> elements, string prefix, List<string> errors)

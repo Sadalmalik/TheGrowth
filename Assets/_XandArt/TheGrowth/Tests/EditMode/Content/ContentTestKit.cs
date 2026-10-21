@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TheGrowth.Architecture.Events;
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Scripting;
+using TheGrowth.Core.Variables;
 using TheGrowth.Tests.EditMode.Scripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -84,14 +86,22 @@ namespace TheGrowth.Tests.EditMode.Content
             return registry;
         }
 
-        /// <summary>Глобальная область: реестр контента и язык, инициализирована.</summary>
+        /// <summary>Глобальная область: реестр контента, язык, шина событий, объявления переменных; инициализирована.</summary>
         public LifetimeScope Global(ContentRegistry registry)
         {
             var global = new LifetimeScope("Global");
             global.Container.Add(registry);
-            global.Container.Add(new ScriptLanguage(Language));
+            AddLanguage(global.Container, registry);
             global.Container.Init();
             return global;
+        }
+
+        /// <summary>Что нужно сессии кроме реестра: язык (<see cref="Language"/>), шина событий, объявления переменных из реестра.</summary>
+        public static void AddLanguage(Container container, IContentRegistry registry)
+        {
+            container.Add(new ScriptLanguage(Language));
+            container.Add(new EventBus());
+            container.Add(VariableCatalog.FromContent(registry));
         }
 
         public void Dispose()

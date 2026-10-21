@@ -7,7 +7,7 @@ namespace TheGrowth.Game.Bootstrap
     /// <summary>
     /// Только редактор: подмены старта сцены Main. Первый запрос вместо главного меню — Play из сцены локации (T058):
     /// делегат ставит сборка TheGrowth.Editor при загрузке домена, runtime-код на UnityEditor не ссылается; в билде
-    /// класса нет. Папка сохранений — PlayMode-тесты (T068). Статика — канал «редактор, тесты → сцена Main»: значение
+    /// класса нет. Папки сохранений и профиля — PlayMode-тесты (T068, T052). Статика — канал «редактор, тесты → сцена Main»: значение
     /// выбирается до загрузки Main, когда её объектов ещё нет. Пресеты (<c>StoryStep</c>) встанут в запрос, который
     /// возвращает делегат.
     /// </summary>
@@ -21,6 +21,12 @@ namespace TheGrowth.Game.Bootstrap
         /// тесты не трогают сохранения игрока.
         /// </summary>
         public static string SavesFolder { get; set; }
+
+        /// <summary>
+        /// Папка профиля игрока вместо папки игрока (<c>ProfileFileStorage.DefaultFolder</c>) или null. Ставят PlayMode-тесты:
+        /// тесты не трогают профиль игрока.
+        /// </summary>
+        public static string ProfileFolder { get; set; }
     }
 }
 #endif

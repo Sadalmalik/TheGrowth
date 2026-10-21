@@ -26,6 +26,11 @@ namespace TheGrowth.Core.Scripting
         /// <summary>Тип значения (элемента списка); null у блока.</summary>
         public ScriptValueType Value { get; }
 
+        /// <summary>
+        /// Параметр той же строки, от которого берётся тип значения (<see cref="ScriptTypeOfAttribute"/>); null — тип свой.
+        /// </summary>
+        public ScriptParam TypeSource { get; internal set; }
+
         internal ScriptParam(FieldInfo field, bool isBlock, bool isRest, bool isList, ScriptValueType value)
         {
             Field = field;

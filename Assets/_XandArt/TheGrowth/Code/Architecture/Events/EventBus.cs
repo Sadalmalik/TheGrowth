@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TheGrowth.Architecture.IOC;
 
 namespace TheGrowth.Architecture.Events
 {
@@ -24,45 +25,42 @@ namespace TheGrowth.Architecture.Events
             m_Handlers.Remove(act);
         }
 
+        /// <summary>По снимку подписчиков: обработчик может подписаться или отписаться во время рассылки.</summary>
         public void Invoke(T signal)
         {
-            if (m_Handlers.Count == 0 && EventBus.ThrowNoHandlersException)
-                throw new ArgumentException($"No handlers for signal: {signal}");
+            if (m_Handlers.Count == 0)
+                return;
 
-            foreach (var handler in m_Handlers)
+            var handlers = new Action<T>[m_Handlers.Count];
+            m_Handlers.CopyTo(handlers);
+            foreach (var handler in handlers)
                 handler(signal);
         }
     }
 
-    public partial class EventBus
+    /// <summary>
+    /// Шина событий: экземпляр в глобальном контейнере (<c>[Inject] EventBus</c>), статического экземпляра нет.
+    /// Событие без подписчиков никуда не уходит. <see cref="IShared.Dispose"/> снимает все подписки.
+    /// </summary>
+    public class EventBus : IShared
     {
-        private static EventBus m_Global;
-
-        public static EventBus Global => m_Global ?? (m_Global = new EventBus());
-
-        public static bool ThrowNoHandlersException = true;
-
         private readonly Dictionary<Type, IEventContainer> m_Signals = new Dictionary<Type, IEventContainer>();
 
         public void Subscribe<T>(Action<T> handler)
         {
-            var container = GetContainer<T>();
-
-            container.Subscribe(handler);
+            GetContainer<T>().Subscribe(handler);
         }
 
         public void Unsubscribe<T>(Action<T> handler)
         {
-            var container = GetContainer<T>();
-
-            container.Unsubscribe(handler);
+            if (m_Signals.TryGetValue(typeof(T), out var container))
+                ((EventContainer<T>)container).Unsubscribe(handler);
         }
 
         public void Invoke<T>(T signal)
         {
-            var container = GetContainer<T>();
-
-            container.Invoke(signal);
+            if (m_Signals.TryGetValue(typeof(T), out var container))
+                ((EventContainer<T>)container).Invoke(signal);
         }
 
         public bool AnySubscribers<T>()
@@ -70,17 +68,22 @@ namespace TheGrowth.Architecture.Events
             return m_Signals.TryGetValue(typeof(T), out var container) && container.Count > 0;
         }
 
-        private bool HaveContainer<T>()
+        void IShared.Init()
         {
-            return m_Signals.ContainsKey(typeof(T));
+        }
+
+        void IShared.Dispose()
+        {
+            m_Signals.Clear();
         }
 
         private EventContainer<T> GetContainer<T>()
         {
             var type = typeof(T);
-            if (!m_Signals.TryGetValue(type, out var iContainer))
-                m_Signals.Add(type, iContainer = new EventContainer<T>());
-            return iContainer as EventContainer<T>;
+            if (!m_Signals.TryGetValue(type, out var container))
+                m_Signals.Add(type, container = new EventContainer<T>());
+
+            return (EventContainer<T>)container;
         }
     }
 }

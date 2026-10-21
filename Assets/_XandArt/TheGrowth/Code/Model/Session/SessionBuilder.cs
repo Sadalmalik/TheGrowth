@@ -2,12 +2,14 @@ using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Model.Locations;
+using TheGrowth.Model.Variables;
 
 namespace TheGrowth.Model
 {
     /// <summary>
     /// Состав сессии: все системы модели, без сцены. Один и тот же для игры и headless-тестов.
-    /// Родительский (глобальный) контейнер должен содержать <see cref="IContentRegistry"/> и <see cref="ScriptLanguage"/>.
+    /// Родительский (глобальный) контейнер должен содержать <see cref="IContentRegistry"/>, <see cref="ScriptLanguage"/>,
+    /// <see cref="Core.Variables.VariableCatalog"/> и <see cref="Architecture.Events.EventBus"/>.
     /// </summary>
     public static class SessionBuilder
     {
@@ -16,6 +18,7 @@ namespace TheGrowth.Model
             container.Add(new ContentScriptLibrary());
             container.Add(new ScriptRunner());
             container.Add(new LocationSystem());
+            container.Add(new VariablesSystem());
         }
     }
 }

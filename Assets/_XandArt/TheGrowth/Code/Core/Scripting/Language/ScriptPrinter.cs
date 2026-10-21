@@ -63,7 +63,7 @@ namespace TheGrowth.Core.Scripting
             return builder.ToString();
         }
 
-        /// <summary>Значение параметра-узла, как оно пишется в строке: <c>[...]</c>, <c>$имя</c> или литерал.</summary>
+        /// <summary>Значение параметра-узла, как оно пишется в строке: <c>[...]</c>, <c>$имя</c>, <c>[узел].имя</c> или литерал.</summary>
         public string PrintNode(object node)
         {
             return PrintNode(null, node);
@@ -218,11 +218,25 @@ namespace TheGrowth.Core.Scripting
                 return literal is { IsNode: false } ? PrintLiteral(literal, constant.Value) : ScriptSyntax.MissingValue;
             }
 
-            if (m_Variables != null && m_Variables.TryGetName(node, out var name))
-                return "$" + name;
+            if (node is ConditionValue { Condition: { } condition })
+                return PrintNode(null, condition);
+
+            if (TryPrintVariable(node, out var variable))
+                return variable;
 
             var template = ChooseTemplate(node);
             return "[" + PrintLine(template.Header, node) + "]";
+        }
+
+        /// <summary>Ссылка на переменную: <c>$имя</c> или <c>[узел].имя</c>.</summary>
+        private bool TryPrintVariable(object value, out string text)
+        {
+            text = null;
+            if (m_Variables == null || !m_Variables.TryGetReference(value, out var name, out var owner))
+                return false;
+
+            text = owner == null ? "$" + name : PrintNode(null, owner) + "." + name;
+            return true;
         }
 
         private string PrintLiteral(ScriptValueType type, object value)
@@ -250,6 +264,8 @@ namespace TheGrowth.Core.Scripting
                         return ScriptSyntax.MissingValue;
 
                     return m_Content != null && m_Content.TryGetId(value, out var id) ? id : ScriptSyntax.MissingValue;
+                case ScriptValueKind.Variable:
+                    return value != null && TryPrintVariable(value, out var variable) ? variable : ScriptSyntax.MissingValue;
                 default:
                     return ScriptSyntax.MissingValue;
             }

@@ -308,15 +308,15 @@ namespace TheGrowth.Tests.EditMode.Scripting
             Assert.AreEqual(TestSpeed.Slow, ParseSingle<SpeedCommand>("speed Slow").Speed);
         }
 
-        [TestCase(">", CompareOp.Greater)]
-        [TestCase(">=", CompareOp.GreaterOrEqual)]
-        [TestCase("==", CompareOp.Equal)]
-        [TestCase("Less", CompareOp.Less)]
-        public void Literals_EnumByToken(string op, CompareOp expected)
+        [TestCase(">", CompareOperator.Greater)]
+        [TestCase(">=", CompareOperator.GreaterOrEqual)]
+        [TestCase("<=", CompareOperator.LessOrEqual)]
+        [TestCase("Less", CompareOperator.Less)]
+        public void Literals_EnumByToken(string op, CompareOperator expected)
         {
             var branch = ParseSingle<Branch>($"if [$x {op} 3]");
 
-            Assert.AreEqual(expected, ((CompareCondition)branch.Condition).Operator);
+            Assert.AreEqual(expected, ((Compare)branch.Condition).Operator);
         }
 
         [Test]
@@ -350,9 +350,9 @@ namespace TheGrowth.Tests.EditMode.Scripting
         {
             var branch = ParseSingle<Branch>("if [[[$x + 1] + -2] >= [sum of 1, 2, 3]]");
 
-            var compare = (CompareCondition)branch.Condition;
-            var outer = (AddEvaluator)compare.A;
-            var inner = (AddEvaluator)outer.A;
+            var compare = (Compare)branch.Condition;
+            var outer = (Plus)compare.A;
+            var inner = (Plus)outer.A;
             Assert.AreEqual("x", ((TestVariable)inner.A).Name);
             Assert.AreEqual(1, ((Constant<int>)inner.B).Value);
             Assert.AreEqual(-2, ((Constant<int>)outer.B).Value);
@@ -366,8 +366,8 @@ namespace TheGrowth.Tests.EditMode.Scripting
 
             var any = (AnyCondition)branch.Condition;
             Assert.AreEqual(3, any.Conditions.Count);
-            Assert.IsInstanceOf<NotCondition>(any.Conditions[1]);
-            Assert.IsInstanceOf<CompareCondition>(any.Conditions[2]);
+            Assert.IsInstanceOf<Not>(any.Conditions[1]);
+            Assert.IsInstanceOf<Compare>(any.Conditions[2]);
         }
 
         [Test]

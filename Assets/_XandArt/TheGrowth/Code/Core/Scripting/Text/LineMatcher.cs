@@ -207,12 +207,25 @@ namespace TheGrowth.Core.Scripting.Text
                         CollectLiteralEnds(value.Constant, token, position, ends);
 
                     return;
+                case ScriptValueKind.Value:
+                    CollectNodeEnds(token, position, ends);
+                    foreach (var typed in value.Typed.Values)
+                    {
+                        if (typed.Constant != null)
+                            CollectLiteralEnds(typed.Constant, token, position, ends);
+                    }
+
+                    return;
+                case ScriptValueKind.Variable:
+                    CollectVariableEnds(token, position, ends);
+                    return;
                 default:
                     CollectLiteralEnds(value, token, position, ends);
                     return;
             }
         }
 
+        /// <summary><c>$имя</c>, <c>[...]</c> и <c>[...].имя</c> (переменная владельца).</summary>
         private void CollectNodeEnds(Token token, int position, List<int> ends)
         {
             if (token.Kind == TokenKind.Variable)
@@ -225,8 +238,43 @@ namespace TheGrowth.Core.Scripting.Text
                 return;
 
             var close = FindClose(m_Tokens, position, m_End);
-            if (close >= 0)
-                ends.Add(close + 1);
+            if (close < 0)
+                return;
+
+            ends.Add(close + 1);
+            if (TryGetOwnedEnd(m_Tokens, close, m_End, out var owned))
+                ends.Add(owned);
+        }
+
+        /// <summary>Переменная для записи: <c>$имя</c> или <c>[...].имя</c>.</summary>
+        private void CollectVariableEnds(Token token, int position, List<int> ends)
+        {
+            if (token.Kind == TokenKind.Variable)
+            {
+                ends.Add(position + 1);
+                return;
+            }
+
+            if (!token.IsPunctuation("["))
+                return;
+
+            var close = FindClose(m_Tokens, position, m_End);
+            if (close >= 0 && TryGetOwnedEnd(m_Tokens, close, m_End, out var owned))
+                ends.Add(owned);
+        }
+
+        /// <summary>
+        /// После <c>]</c> в <paramref name="close"/> — <c>.имя</c> без пробелов: переменная владельца. <paramref name="ownedEnd"/> —
+        /// конец записи <c>[...].имя</c>.
+        /// </summary>
+        public static bool TryGetOwnedEnd(IReadOnlyList<Token> tokens, int close, int end, out int ownedEnd)
+        {
+            ownedEnd = close + 3;
+            return ownedEnd <= end
+                && tokens[close + 1].IsPunctuation(".")
+                && tokens[close + 2].Kind == TokenKind.Identifier
+                && tokens[close].End == tokens[close + 1].Start
+                && tokens[close + 1].End == tokens[close + 2].Start;
         }
 
         private void CollectLiteralEnds(ScriptValueType value, Token token, int position, List<int> ends)

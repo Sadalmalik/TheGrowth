@@ -16,6 +16,9 @@ namespace TheGrowth.Core.Scripting
     {
         private const string TestFrameworkAssembly = "nunit.framework";
 
+        /// <summary>Типы значения <see cref="ScriptValueKind.Value"/> — типы переменных.</summary>
+        private static readonly Type[] ValueEvaluatorTypes = { typeof(Evaluator<int>), typeof(Evaluator<bool>), typeof(Evaluator<string>) };
+
         private readonly List<ScriptTemplate> m_Templates = new List<ScriptTemplate>();
         private readonly List<ScriptTemplate> m_Commands = new List<ScriptTemplate>();
         private readonly Dictionary<Type, ScriptTemplate[]> m_TemplatesByType = new Dictionary<Type, ScriptTemplate[]>();
@@ -25,6 +28,7 @@ namespace TheGrowth.Core.Scripting
         private readonly Dictionary<string, ScriptTemplate> m_Continuations = new Dictionary<string, ScriptTemplate>();
         private readonly Dictionary<Type, ScriptValueType> m_ValueTypes = new Dictionary<Type, ScriptValueType>();
         private readonly Dictionary<Type, string> m_ValueTypeErrors = new Dictionary<Type, string>();
+        private readonly Dictionary<Type, ScriptValueType> m_OwnerTypes = new Dictionary<Type, ScriptValueType>();
 
         /// <summary>Все шаблоны; у класса с несколькими атрибутами — несколько.</summary>
         public IReadOnlyList<ScriptTemplate> Templates => m_Templates;
@@ -249,12 +253,16 @@ namespace TheGrowth.Core.Scripting
             }
         }
 
+        /// <summary>
+        /// Ключ уникальности скелета. Условие и эвалуатор bool — один ключ: условие подставляется туда, где ждут bool
+        /// (<see cref="ConditionValue"/>), и одинаковые скелеты были бы неоднозначны.
+        /// </summary>
         private static string GetResultKey(ScriptTemplate template)
         {
             return template.NodeKind switch
             {
                 ScriptNodeKind.Command => "command",
-                ScriptNodeKind.Condition => "condition",
+                ScriptNodeKind.Condition => "evaluator:" + typeof(bool).FullName,
                 _ => "evaluator:" + template.ResultType.FullName,
             };
         }
@@ -268,8 +276,10 @@ namespace TheGrowth.Core.Scripting
         {
             foreach (var value in m_ValueTypes.Values)
             {
-                if (value.IsNode)
-                    value.Candidates = m_Templates.Where(t => t.NodeKind != ScriptNodeKind.Command && value.Type.IsAssignableFrom(t.Type)).ToArray();
+                if (value.Kind == ScriptValueKind.Value)
+                    value.Candidates = m_Templates.Where(t => IsValueCandidate(value, t)).ToArray();
+                else if (value.IsNode)
+                    value.Candidates = m_Templates.Where(t => IsNodeCandidate(value, t)).ToArray();
             }
 
             foreach (var template in m_Commands)
@@ -286,6 +296,29 @@ namespace TheGrowth.Core.Scripting
 
                 list.Add(template);
             }
+        }
+
+        /// <summary>Значение любого типа: эвалуаторы его типов; условия — если среди типов есть bool.</summary>
+        private static bool IsValueCandidate(ScriptValueType value, ScriptTemplate template)
+        {
+            return template.NodeKind switch
+            {
+                ScriptNodeKind.Evaluator => value.Typed.ContainsKey(template.ResultType),
+                ScriptNodeKind.Condition => value.Typed.ContainsKey(typeof(bool)),
+                _ => false,
+            };
+        }
+
+        /// <summary>Узел типа поля; в эвалуатор bool подходят и условия (<see cref="ConditionValue"/>).</summary>
+        private static bool IsNodeCandidate(ScriptValueType value, ScriptTemplate template)
+        {
+            if (template.NodeKind == ScriptNodeKind.Command)
+                return false;
+
+            if (value.Type.IsAssignableFrom(template.Type))
+                return true;
+
+            return template.NodeKind == ScriptNodeKind.Condition && value.Type == typeof(Evaluator<bool>);
         }
 
 #endregion
@@ -357,6 +390,24 @@ namespace TheGrowth.Core.Scripting
             return type != null && m_ValueTypes.TryGetValue(type, out var value) ? value : null;
         }
 
+        /// <summary>
+        /// Узел владельца переменных (<see cref="ScriptValueKind.Owner"/>): эвалуаторы, результат которых приводится к
+        /// <paramref name="ownerType"/>. Строится при первом запросе на тип владельца.
+        /// </summary>
+        internal ScriptValueType GetOwnerValueType(Type ownerType)
+        {
+            if (ownerType == null)
+                throw new ArgumentNullException(nameof(ownerType));
+
+            if (m_OwnerTypes.TryGetValue(ownerType, out var value))
+                return value;
+
+            var candidates = m_Templates.Where(t => t.NodeKind == ScriptNodeKind.Evaluator && ownerType.IsAssignableFrom(t.ResultType)).ToArray();
+            value = new ScriptValueType(ownerType, candidates);
+            m_OwnerTypes.Add(ownerType, value);
+            return value;
+        }
+
         private static string GetLiteralKey(Token token)
         {
             return (int)token.Kind + ":" + token.Text;
@@ -402,6 +453,12 @@ namespace TheGrowth.Core.Scripting
             if (typeof(Condition).IsAssignableFrom(type))
                 return new ScriptValueType(ScriptValueKind.Condition, type);
 
+            if (typeof(IVariableTarget).IsAssignableFrom(type))
+                return new ScriptValueType(ScriptValueKind.Variable, type);
+
+            if (type == typeof(IEvaluator))
+                return CreateValue(out error);
+
             if (TryGetEvaluatorResult(type, out var resultType))
             {
                 var literal = GetValueType(resultType, out _);
@@ -417,6 +474,23 @@ namespace TheGrowth.Core.Scripting
 
             error = $"unsupported parameter type {type.FullName}";
             return null;
+        }
+
+        /// <summary>Значение <see cref="ScriptValueKind.Value"/>: эвалуаторы типов литералов-констант <c>int</c>, <c>bool</c>, <c>string</c>.</summary>
+        private ScriptValueType CreateValue(out string error)
+        {
+            error = null;
+            var typed = new Dictionary<Type, ScriptValueType>();
+            foreach (var evaluatorType in ValueEvaluatorTypes)
+            {
+                var value = GetValueType(evaluatorType, out error);
+                if (value == null)
+                    return null;
+
+                typed.Add(value.ResultType, value);
+            }
+
+            return new ScriptValueType(typeof(IEvaluator), typed);
         }
 
         private static ScriptEnum CreateEnum(Type type, out string error)

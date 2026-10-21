@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Scripting;
+using TheGrowth.Core.Variables;
 using TheGrowth.EditorTools.Content;
 using UnityEditor;
 
@@ -19,7 +20,9 @@ namespace TheGrowth.EditorTools.Scripting
         private static string m_RegistryError;
 
         /// <param name="content">ID конфигов; null — разрешающая заглушка (любой ID допустим).</param>
-        public static IReadOnlyList<string> Validate(string assetPath, string text, IScriptContentResolver content = null)
+        /// <param name="variables">Переменные; null — разрешающая заглушка (любая переменная любого типа).</param>
+        public static IReadOnlyList<string> Validate(string assetPath, string text, IScriptContentResolver content = null,
+            IScriptVariableResolver variables = null)
         {
             if (!ScriptSyntax.TryGetFileKind(Path.GetExtension(assetPath), out var kind))
                 return new[] { $"{assetPath}: unknown script file extension" };
@@ -28,8 +31,7 @@ namespace TheGrowth.EditorTools.Scripting
             if (registry == null)
                 return new[] { $"{assetPath}: script registry is invalid, the file is not checked\n{registryError}" };
 
-            // Системы переменных (T052) ещё нет: переменные принимаются любые, проверяется только синтаксис.
-            var parser = new ScriptParser(registry, content ?? PermissiveContentResolver.Instance, PermissiveVariableResolver.Instance);
+            var parser = new ScriptParser(registry, content ?? PermissiveContentResolver.Instance, variables ?? PermissiveVariableResolver.Instance);
             var result = parser.Parse(ScriptParser.GetFileId(assetPath), kind, text);
             return result.Errors.Select(error => Format(assetPath, error)).ToArray();
         }
@@ -57,6 +59,31 @@ namespace TheGrowth.EditorTools.Scripting
 
             warning = null;
             return new ContentScriptResolver(registry);
+        }
+
+        /// <summary>
+        /// Переменные для импорта — по объявлениям из реестра контента в <paramref name="registryPath"/>. Реестра нет или в
+        /// нём пропавшие ссылки — разрешающая заглушка и <paramref name="warning"/> (как у <see cref="GetContentResolver"/>);
+        /// файл переимпортируется при смене объявлений (зависимость <see cref="ContentRegistryBuilder.VariablesDependency"/>).
+        /// Ошибки самих объявлений (дубли) показывает валидатор контента, а не импорт скрипта.
+        /// </summary>
+        public static IScriptVariableResolver GetVariableResolver(string registryPath, out string warning)
+        {
+            var registry = AssetDatabase.LoadAssetAtPath<ContentRegistry>(registryPath);
+            if (registry == null)
+            {
+                warning = $"content registry '{registryPath}' not found, variables are not checked (run [TheGrowth]/Content/Rebuild Registry)";
+                return PermissiveVariableResolver.Instance;
+            }
+
+            if (registry.Assets.Any(asset => asset == null))
+            {
+                warning = $"content registry '{registryPath}' has missing assets, variables are not checked (run [TheGrowth]/Content/Rebuild Registry)";
+                return PermissiveVariableResolver.Instance;
+            }
+
+            warning = null;
+            return new VariableScriptResolver(VariableCatalog.FromContent(registry));
         }
 
         public static string Format(string assetPath, ScriptError error)
@@ -105,21 +132,27 @@ namespace TheGrowth.EditorTools.Scripting
         }
     }
 
-    /// <summary>Заглушка: любая переменная любого типа допустима, значение — null. Только для проверки синтаксиса.</summary>
+    /// <summary>
+    /// Заглушка: любая переменная любого типа допустима, владелец — любой эвалуатор, значение — null. Только для проверки
+    /// синтаксиса, пока реестра контента нет.
+    /// </summary>
     public sealed class PermissiveVariableResolver : IScriptVariableResolver
     {
         public static readonly PermissiveVariableResolver Instance = new PermissiveVariableResolver();
 
-        public bool TryResolve(string name, Type type, out object value, out string error)
+        public Type OwnerType => typeof(object);
+
+        public bool TryResolve(string name, object owner, Type type, out object value, out string error)
         {
             value = null;
             error = null;
             return true;
         }
 
-        public bool TryGetName(object value, out string name)
+        public bool TryGetReference(object value, out string name, out object owner)
         {
             name = null;
+            owner = null;
             return false;
         }
     }

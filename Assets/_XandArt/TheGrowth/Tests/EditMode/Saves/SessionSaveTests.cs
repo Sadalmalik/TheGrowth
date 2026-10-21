@@ -84,7 +84,8 @@ namespace TheGrowth.Tests.EditMode.Saves
             var captured = first.Capture();
             first.Dispose();
 
-            Assert.That(captured.Sections, Has.Count.EqualTo(3));
+            // first, counter и системы сессии: locations, variables.
+            Assert.That(captured.Sections, Has.Count.EqualTo(4));
             Assert.AreEqual(CounterSystem.Version, captured.GetSection(CounterSystem.Key).Version);
             Assert.AreEqual("hub", (string)captured.GetSection(LocationSystem.Key).Data["current"]);
 

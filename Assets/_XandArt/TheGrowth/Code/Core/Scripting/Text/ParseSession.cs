@@ -465,41 +465,81 @@ namespace TheGrowth.Core.Scripting.Text
 
 #region Values
 
+        /// <summary>Параметры строки; параметры с типом от другого параметра (<see cref="ScriptParam.TypeSource"/>) — после остальных.</summary>
         private void Assign(object target, LineMatch match, OutlineNode node)
         {
             var parameters = match.Line.Params;
             for (var slot = 0; slot < parameters.Count; slot++)
             {
-                var param = parameters[slot];
-                var span = match.Spans[slot];
-                if (param.IsRest)
-                {
-                    var text = span.Start < span.End ? node.Content.Substring(node.Tokens[span.Start].Start).Trim() : string.Empty;
-                    param.Field.SetValue(target, text);
-                    continue;
-                }
-
-                if (!param.IsList)
-                {
-                    if (ReadValue(param.Value, node, span.Start, span.End, out var value))
-                        param.Field.SetValue(target, value);
-
-                    continue;
-                }
-
-                var list = (IList)Activator.CreateInstance(param.FieldType);
-                var valid = true;
-                foreach (var item in SplitList(node.Tokens, span))
-                {
-                    if (ReadValue(param.Value, node, item.Start, item.End, out var value))
-                        list.Add(value);
-                    else
-                        valid = false;
-                }
-
-                if (valid)
-                    param.Field.SetValue(target, list);
+                if (parameters[slot].TypeSource == null)
+                    AssignParam(target, parameters[slot], match.Spans[slot], node, parameters[slot].Value);
             }
+
+            for (var slot = 0; slot < parameters.Count; slot++)
+            {
+                var param = parameters[slot];
+                if (param.TypeSource == null)
+                    continue;
+
+                var span = match.Spans[slot];
+                if (TryGetSourceType(param, target, node, span, out var type))
+                    AssignParam(target, param, span, node, type);
+            }
+        }
+
+        private void AssignParam(object target, ScriptParam param, ParamSpan span, OutlineNode node, ScriptValueType type)
+        {
+            if (param.IsRest)
+            {
+                var text = span.Start < span.End ? node.Content.Substring(node.Tokens[span.Start].Start).Trim() : string.Empty;
+                param.Field.SetValue(target, text);
+                return;
+            }
+
+            if (!param.IsList)
+            {
+                if (ReadValue(type, node, span.Start, span.End, out var value))
+                    param.Field.SetValue(target, value);
+
+                return;
+            }
+
+            var list = (IList)Activator.CreateInstance(param.FieldType);
+            var valid = true;
+            foreach (var item in SplitList(node.Tokens, span))
+            {
+                if (ReadValue(type, node, item.Start, item.End, out var value))
+                    list.Add(value);
+                else
+                    valid = false;
+            }
+
+            if (valid)
+                param.Field.SetValue(target, list);
+        }
+
+        /// <summary>
+        /// Тип значения параметра по источнику: тип переменной, результат значения или эвалуатора. Источник не разобран или
+        /// тип неизвестен (заглушка резолвера) — значение разбирается со своим типом, чтобы показать ошибки в нём самом.
+        /// </summary>
+        private bool TryGetSourceType(ScriptParam param, object target, OutlineNode node, ParamSpan span, out ScriptValueType type)
+        {
+            type = param.Value;
+            var resultType = param.TypeSource.Field.GetValue(target) switch
+            {
+                IVariableTarget variable => variable.ValueType,
+                IEvaluator evaluator => evaluator.ResultType,
+                _ => null,
+            };
+
+            if (resultType == null)
+                return true;
+
+            if (param.Value.Typed.TryGetValue(resultType, out type))
+                return true;
+
+            Error(node, node.Tokens[span.Start].Start, $"values of type {resultType.Name} are not supported here (from [{param.TypeSource.Name}])");
+            return false;
         }
 
         private static List<ParamSpan> SplitList(List<Token> tokens, ParamSpan span)
@@ -533,23 +573,95 @@ namespace TheGrowth.Core.Scripting.Text
         {
             value = null;
             var token = node.Tokens[start];
+            if (type.Kind == ScriptValueKind.Variable)
+                return ReadVariable(type, node, start, end, out value);
+
             if (!type.IsNode)
                 return ReadLiteral(type, node, start, end, out value);
 
             if (token.IsPunctuation("["))
             {
+                if (IsOwnedVariable(node.Tokens, start, end))
+                    return ResolveOwnedVariable(type, node, start, end, out value);
+
                 value = ParseNode(type, node, start, end);
                 return value != null;
             }
 
             if (token.Kind == TokenKind.Variable)
-                return ResolveVariable(type, node, token, out value);
+                return ResolveVariable(type, node, token, null, out value);
+
+            if (type.Kind == ScriptValueKind.Value)
+                return ReadUntypedLiteral(type, node, start, end, out value);
 
             if (type.Constant == null || !ReadLiteral(type.Constant, node, start, end, out var literal))
                 return false;
 
             value = Activator.CreateInstance(type.ConstantType, literal);
             return true;
+        }
+
+        /// <summary>Литерал значения без заданного типа: тип — по виду литерала (число, строка, <c>true</c> / <c>false</c>).</summary>
+        private bool ReadUntypedLiteral(ScriptValueType type, OutlineNode node, int start, int end, out object value)
+        {
+            value = null;
+            var token = node.Tokens[start];
+            Type resultType = null;
+            if (token.Kind == TokenKind.Number || token.IsPunctuation("-"))
+                resultType = typeof(int);
+            else if (token.Kind == TokenKind.String)
+                resultType = typeof(string);
+            else if (token.Is(TokenKind.Identifier, "true") || token.Is(TokenKind.Identifier, "false"))
+                resultType = typeof(bool);
+
+            if (resultType != null && type.Typed.TryGetValue(resultType, out var typed))
+                return ReadValue(typed, node, start, end, out value);
+
+            Error(node, token.Start, $"'{node.Content.Substring(token.Start, node.Tokens[end - 1].End - token.Start)}' is not a valid value: expected {type.Describe()}");
+            return false;
+        }
+
+        /// <summary>Переменная для записи: <c>$имя</c> или <c>[узел].имя</c>.</summary>
+        private bool ReadVariable(ScriptValueType type, OutlineNode node, int start, int end, out object value)
+        {
+            var token = node.Tokens[start];
+            if (token.Kind == TokenKind.Variable)
+                return ResolveVariable(type, node, token, null, out value);
+
+            if (token.IsPunctuation("[") && IsOwnedVariable(node.Tokens, start, end))
+                return ResolveOwnedVariable(type, node, start, end, out value);
+
+            value = null;
+            Error(node, token.Start, $"expected {type.Describe()}");
+            return false;
+        }
+
+        /// <summary>[start, end) — <c>[...].имя</c>: скобка закрывается за два токена до конца.</summary>
+        private static bool IsOwnedVariable(List<Token> tokens, int start, int end)
+        {
+            var close = LineMatcher.FindClose(tokens, start, end);
+            return close == end - 3 && LineMatcher.TryGetOwnedEnd(tokens, close, end, out _);
+        }
+
+        /// <summary><c>[узел].имя</c>: узел владельца разбирается как эвалуатор типа владельца из резолвера.</summary>
+        private bool ResolveOwnedVariable(ScriptValueType type, OutlineNode node, int start, int end, out object value)
+        {
+            value = null;
+            var name = node.Tokens[end - 1];
+            if (m_Variables == null)
+            {
+                Error(node, name.Start, $"variable '[...].{name.Text}' cannot be resolved: no variable resolver");
+                return false;
+            }
+
+            if (m_Variables.OwnerType == null)
+            {
+                Error(node, node.Tokens[start].Start, $"variable '[...].{name.Text}': variables of owners are not supported");
+                return false;
+            }
+
+            var owner = ParseNode(m_Registry.GetOwnerValueType(m_Variables.OwnerType), node, start, end - 2);
+            return owner != null && ResolveVariable(type, node, name, owner, out value);
         }
 
         private bool ReadLiteral(ScriptValueType type, OutlineNode node, int start, int end, out object value)
@@ -579,11 +691,16 @@ namespace TheGrowth.Core.Scripting.Text
                         value = doubleValue;
 
                     break;
+                // Вид токена проверяет сопоставление, кроме значения с типом от другого параметра — проверка здесь.
                 case ScriptValueKind.Boolean:
-                    value = token.Text == "true";
+                    if (end - start == 1 && token.Kind == TokenKind.Identifier && token.Text is "true" or "false")
+                        value = token.Text == "true";
+
                     break;
                 case ScriptValueKind.String:
-                    value = token.Text;
+                    if (end - start == 1 && token.Kind == TokenKind.String)
+                        value = token.Text;
+
                     break;
                 case ScriptValueKind.Enum:
                     value = ReadEnum(type.Enum, node.Tokens, start, end);
@@ -640,19 +757,22 @@ namespace TheGrowth.Core.Scripting.Text
             return false;
         }
 
-        private bool ResolveVariable(ScriptValueType type, OutlineNode node, Token token, out object value)
+        /// <param name="name">Токен имени: <c>$имя</c> (<see cref="TokenKind.Variable"/>) или имя после <c>[узел].</c>.</param>
+        /// <param name="owner">Узел владельца; null — <c>$имя</c>.</param>
+        private bool ResolveVariable(ScriptValueType type, OutlineNode node, Token name, object owner, out object value)
         {
             value = null;
+            var text = owner == null ? "$" + name.Text : "[...]." + name.Text;
             if (m_Variables == null)
             {
-                Error(node, token.Start, $"variable '${token.Text}' cannot be resolved: no variable resolver");
+                Error(node, name.Start, $"variable '{text}' cannot be resolved: no variable resolver");
                 return false;
             }
 
-            if (m_Variables.TryResolve(token.Text, type.Type, out value, out var error))
+            if (m_Variables.TryResolve(name.Text, owner, type.Type, out value, out var error))
                 return true;
 
-            Error(node, token.Start, error ?? $"unknown variable '${token.Text}'");
+            Error(node, name.Start, error ?? $"unknown variable '{text}'");
             return false;
         }
 
@@ -690,7 +810,12 @@ namespace TheGrowth.Core.Scripting.Text
             {
                 if (!ReportLexicalErrors(node, tokens, start, close))
                 {
-                    var what = type.Kind == ScriptValueKind.Condition ? "condition" : $"{type.ResultType.Name} expression";
+                    var what = type.Kind switch
+                    {
+                        ScriptValueKind.Condition => "condition",
+                        ScriptValueKind.Value => "expression",
+                        _ => $"{type.ResultType.Name} expression",
+                    };
                     var text = node.Content.Substring(tokens[open].Start, tokens[close].End - tokens[open].Start);
                     ReportMismatch(node, tokens, matcher.Furthest, close, matcher.Expected, $"{what} {text}");
                 }
@@ -705,6 +830,9 @@ namespace TheGrowth.Core.Scripting.Text
 
             CheckContext(match.Template, node, tokens[start].Start);
             Assign(instance, match, node);
+            if (instance is Condition condition && !type.Type.IsInstanceOfType(instance))
+                return new ConditionValue(condition);
+
             return instance;
         }
 

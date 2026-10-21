@@ -82,7 +82,7 @@ namespace TheGrowth.Tests.EditMode.Scripting
         [Test]
         public void Compile_ValueKinds()
         {
-            var registry = ScriptRegistry.Build(new[] { typeof(CheckCommand), typeof(SumEvaluator), typeof(CompareCondition), typeof(Goto) });
+            var registry = ScriptRegistry.Build(new[] { typeof(CheckCommand), typeof(SumEvaluator), typeof(Compare), typeof(Goto) });
 
             var check = Single(registry, typeof(CheckCommand)).Header.Params[0].Value;
             Assert.AreEqual(ScriptValueKind.Evaluator, check.Kind);
@@ -95,7 +95,7 @@ namespace TheGrowth.Tests.EditMode.Scripting
             Assert.IsTrue(sum.IsList);
             Assert.AreEqual(ScriptValueKind.Integer, sum.Value.Kind);
 
-            var op = Single(registry, typeof(CompareCondition)).Header.Params[1].Value;
+            var op = Single(registry, typeof(Compare)).Header.Params[1].Value;
             Assert.AreEqual(ScriptValueKind.Enum, op.Kind);
             Assert.AreEqual(">", op.Enum.Members.First(m => m.Name == "Greater").Token);
 
@@ -143,6 +143,12 @@ namespace TheGrowth.Tests.EditMode.Scripting
         public void Validate_SameSkeletonOfOtherResultKind_IsAllowed()
         {
             Assert.DoesNotThrow(() => ScriptRegistry.Build(new[] { typeof(SameSkeletonA), typeof(SameSkeletonCondition) }));
+        }
+
+        [Test]
+        public void Validate_ConditionAndBoolEvaluatorWithSameSkeleton_Fails()
+        {
+            AssertError(BuildFails(typeof(SameSkeletonCondition), typeof(SameSkeletonBoolEvaluator)), "the same skeleton 'same []'");
         }
 
         [Test]

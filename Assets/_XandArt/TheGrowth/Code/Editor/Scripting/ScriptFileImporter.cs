@@ -9,11 +9,11 @@ namespace TheGrowth.EditorTools.Scripting
     /// <summary>
     /// Импорт <c>.script</c> / <c>.dialog</c>: главный объект — <see cref="TextAsset"/> с исходным текстом
     /// (дерево разбирается из текста при загрузке). Текст разбирается и при импорте — только чтобы показать
-    /// ошибки с файлом и строкой; импорт при этом успешен, ассет существует. ID конфигов проверяются по
-    /// реестру контента; файл зависит от набора ID (<see cref="ContentRegistryBuilder.IdsDependency"/>) и
-    /// переимпортируется при его смене.
+    /// ошибки с файлом и строкой; импорт при этом успешен, ассет существует. ID конфигов и переменные проверяются по
+    /// реестру контента; файл зависит от набора ID (<see cref="ContentRegistryBuilder.IdsDependency"/>) и набора
+    /// объявлений переменных (<see cref="ContentRegistryBuilder.VariablesDependency"/>) и переимпортируется при их смене.
     /// </summary>
-    [ScriptedImporter(2, new[] { "script", "dialog" })]
+    [ScriptedImporter(3, new[] { "script", "dialog" })]
     public sealed class ScriptFileImporter : ScriptedImporter
     {
         public override void OnImportAsset(AssetImportContext ctx)
@@ -24,11 +24,14 @@ namespace TheGrowth.EditorTools.Scripting
             ctx.SetMainObject(asset);
 
             ctx.DependsOnCustomDependency(ContentRegistryBuilder.IdsDependency);
+            ctx.DependsOnCustomDependency(ContentRegistryBuilder.VariablesDependency);
             var content = ScriptImportValidator.GetContentResolver(ContentRegistryBuilder.RegistryPath, out var warning);
+            var variables = ScriptImportValidator.GetVariableResolver(ContentRegistryBuilder.RegistryPath, out var variablesWarning);
+            warning ??= variablesWarning;
             if (warning != null)
                 ctx.LogImportWarning($"{ctx.assetPath}: {warning}", asset);
 
-            foreach (var message in ScriptImportValidator.Validate(ctx.assetPath, text, content))
+            foreach (var message in ScriptImportValidator.Validate(ctx.assetPath, text, content, variables))
                 ctx.LogImportError(message, asset);
         }
     }

@@ -7,7 +7,6 @@ using TheGrowth.Architecture.IOC;
 using TheGrowth.Architecture.MVVM;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Saves;
-using TheGrowth.Core.Scripting;
 using TheGrowth.Tests.EditMode.Content;
 using TheGrowth.Tests.EditMode.Saves;
 using TheGrowth.Tests.Support;
@@ -98,8 +97,8 @@ namespace TheGrowth.Tests.EditMode.UI
             if (withContent)
             {
                 m_Content = new ContentTestKit();
-                container.Add(m_Content.Registry(Array.Empty<ContentAsset>()));
-                container.Add(new ScriptLanguage(ContentTestKit.Language));
+                var registry = container.Add(m_Content.Registry(Array.Empty<ContentAsset>()));
+                ContentTestKit.AddLanguage(container, registry);
             }
 
             Input = container.Add(new InputService());

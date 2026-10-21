@@ -15,6 +15,9 @@ namespace TheGrowth.EditorTools.Content
         MissingScriptText,
         InvalidScriptId,
         DuplicateScriptId,
+
+        /// <summary>Объявление переменной: имя, дубль имени или прежнего имени, значение по умолчанию.</summary>
+        InvalidVariable,
     }
 
     /// <summary>Ошибка валидации контента: вид, путь ассета, сообщение, объект для выделения в консоли.</summary>

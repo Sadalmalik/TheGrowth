@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Scripting;
+using TheGrowth.Core.Variables;
 using TheGrowth.EditorTools.Content;
 using TheGrowth.EditorTools.Scripting;
 using UnityEditor;
@@ -108,6 +109,27 @@ namespace TheGrowth.Tests.EditMode.Content
             var fallback = ScriptImportValidator.GetContentResolver(TempFolder + "/Missing.asset", out warning);
             Assert.IsInstanceOf<PermissiveContentResolver>(fallback);
             StringAssert.Contains("not found", warning);
+        }
+
+        [Test]
+        public void ImporterVariableResolver_UsesDeclarationsOfRegistryAsset_FallsBackWithWarningWhenMissing()
+        {
+            var declarations = ScriptableObject.CreateInstance<VariableDeclarations>();
+            declarations.SetId("Variables");
+            declarations.SetVariables(new[] { new VariableDeclaration("coins", VariableScope.Game, VariableType.Int) });
+            AssetDatabase.CreateAsset(declarations, ContentFolder + "/Variables.asset");
+            ContentRegistryBuilder.Rebuild(ContentFolder, RegistryPath);
+
+            var variables = ScriptImportValidator.GetVariableResolver(RegistryPath, out var warning);
+            Assert.IsNull(warning);
+            Assert.IsInstanceOf<VariableScriptResolver>(variables);
+            Assert.IsEmpty(ScriptImportValidator.Validate("Assets/a.script", "S:\n    add 1 to $coins\n", null, variables));
+            Assert.That(ScriptImportValidator.Validate("Assets/a.script", "S:\n    add 1 to $nope\n", null, variables),
+                Is.EqualTo(new[] { "Assets/a.script(2,14): unknown variable '$nope'" }));
+
+            var fallback = ScriptImportValidator.GetVariableResolver(TempFolder + "/Missing.asset", out warning);
+            Assert.IsInstanceOf<PermissiveVariableResolver>(fallback);
+            StringAssert.Contains("variables are not checked", warning);
         }
 
 #region Helpers

@@ -42,7 +42,7 @@ namespace TheGrowth.Tests.EditMode.Scripting
                 {
                     new Branch
                     {
-                        Condition = new CompareCondition { A = new TestVariable { Name = "x" }, Operator = CompareOp.Greater, B = new Constant<int>(3) },
+                        Condition = new Compare { A = new TestVariable { Name = "x" }, Operator = CompareOperator.Greater, B = new Constant<int>(3) },
                         OnTrue = new List<Command> { new DebugLog { Message = "near" }, new Goto { Target = new SectionRef("other", "End") } },
                     },
                     new Comment { Text = " done" },

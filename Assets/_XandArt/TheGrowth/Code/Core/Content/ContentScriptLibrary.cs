@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Scripting;
+using TheGrowth.Core.Variables;
 using UnityEngine;
 
 namespace TheGrowth.Core.Content
@@ -8,9 +9,10 @@ namespace TheGrowth.Core.Content
     /// <summary>
     /// Файлы скриптов из реестра контента (система сессии). Файл разбирается при первом запросе и кешируется
     /// до конца сессии. Файл с ошибками разбора недоступен: ошибки логируются один раз, с файлом и строкой.
-    /// ID конфигов — по реестру (<see cref="ContentScriptResolver"/>); переменных пока нет (T052) — <c>$имя</c>
-    /// в тексте даёт ошибку разбора.
-    /// Требует в контейнере (обычно глобальном) <see cref="IContentRegistry"/> и <see cref="ScriptLanguage"/>.
+    /// ID конфигов — по реестру (<see cref="ContentScriptResolver"/>), переменные — по объявлениям
+    /// (<see cref="VariableScriptResolver"/>).
+    /// Требует в контейнере (обычно глобальном) <see cref="IContentRegistry"/>, <see cref="ScriptLanguage"/> и
+    /// <see cref="VariableCatalog"/>.
     /// </summary>
     public sealed class ContentScriptLibrary : SharedObject, IScriptLibrary
     {
@@ -20,6 +22,9 @@ namespace TheGrowth.Core.Content
 
         [Inject]
         private ScriptLanguage m_Language;
+
+        [Inject]
+        private VariableCatalog m_Variables;
 #pragma warning restore CS0649
 
         /// <summary>Разобранные файлы по ID; null — файла нет или он с ошибками.</summary>
@@ -31,7 +36,7 @@ namespace TheGrowth.Core.Content
 
         public override void Init()
         {
-            m_Parser = new ScriptParser(m_Language.Registry, new ContentScriptResolver(m_Content));
+            m_Parser = new ScriptParser(m_Language.Registry, new ContentScriptResolver(m_Content), new VariableScriptResolver(m_Variables));
         }
 
         public override void Dispose()
