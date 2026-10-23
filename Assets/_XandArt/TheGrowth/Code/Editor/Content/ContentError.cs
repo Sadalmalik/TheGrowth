@@ -18,6 +18,15 @@ namespace TheGrowth.EditorTools.Content
 
         /// <summary>Объявление переменной: имя, дубль имени или прежнего имени, значение по умолчанию.</summary>
         InvalidVariable,
+
+        /// <summary>Объявление тега: имя, дубль имени.</summary>
+        InvalidTag,
+
+        /// <summary>Граф поля локации: сцена графа и локации, граф у двух локаций, данные графа, теги слотов.</summary>
+        InvalidGraph,
+
+        /// <summary>Настройки поля (<c>FieldConfig</c>): в реестре проекта нет ни одного или их несколько.</summary>
+        InvalidFieldConfig,
     }
 
     /// <summary>Ошибка валидации контента: вид, путь ассета, сообщение, объект для выделения в консоли.</summary>

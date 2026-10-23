@@ -1,1 +1,3 @@
-// Placeholder: an assembly definition must contain at least one script to be compiled.
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("TheGrowth.Tests.EditMode")]

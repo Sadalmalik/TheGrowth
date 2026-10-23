@@ -96,14 +96,27 @@ namespace TheGrowth.EditorTools.Flow
             if (!LocationRoot.TryFind(scene.GetRootGameObjects(), out _, out _))
                 return null;
 
+            var location = FindLocationModel(scene.name);
+            if (location != null)
+                return location;
+
+            Debug.LogWarning($"[Flow] Scene '{scene.name}' has a {nameof(LocationRoot)}, but no {nameof(LocationModel)} references it: Play starts from the main menu");
+            return null;
+        }
+
+        /// <summary>Первый <see cref="LocationModel"/> проекта со сценой <paramref name="sceneName"/> или null.</summary>
+        public static LocationModel FindLocationModel(string sceneName)
+        {
+            if (string.IsNullOrEmpty(sceneName))
+                return null;
+
             foreach (var guid in AssetDatabase.FindAssets("t:" + nameof(LocationModel)))
             {
                 var model = AssetDatabase.LoadAssetAtPath<LocationModel>(AssetDatabase.GUIDToAssetPath(guid));
-                if (model != null && model.SceneName == scene.name)
+                if (model != null && model.SceneName == sceneName)
                     return model;
             }
 
-            Debug.LogWarning($"[Flow] Scene '{scene.name}' has a {nameof(LocationRoot)}, but no {nameof(LocationModel)} references it: Play starts from the main menu");
             return null;
         }
 

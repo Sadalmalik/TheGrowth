@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: ContentRegistry
   m_EditorClassIdentifier: TheGrowth.Core::TheGrowth.Core.Content.ContentRegistry
   m_Assets:
+  - {fileID: 11400000, guid: 25ddfe3cfeeb99d4c9a1fba6ca236256, type: 2}
   - {fileID: 11400000, guid: 5fd5a1b773cd4b208eb2692d0bb6d0fd, type: 2}
   - {fileID: 11400000, guid: 82b05135a96afd949837348a52eb15f1, type: 2}
+  - {fileID: 11400000, guid: 2d486a9b60cc16844aeb22692a89660c, type: 2}
   - {fileID: 11400000, guid: 1150708eb789eda468d12ec8067bbd99, type: 2}
   m_Scripts: []

@@ -1,0 +1,639 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b206c580a2abdef4782764cc12ef77c6, type: 3}
+  m_Name: TestLocation_Graph
+  m_EditorClassIdentifier: TheGrowth.Model::TheGrowth.Model.Graphs.GraphModel
+  m_SceneName: TestLocation
+  m_Slots:
+  - m_Id: rohat9
+    m_Position: {x: -2.4750001, y: 0, z: -2.2}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: ik95j7
+    m_Position: {x: -0.82500005, y: 0, z: -2.2}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: atvape
+    m_Position: {x: 0.82500005, y: 0.000000059604645, z: -2.2}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: ihnd0e
+    m_Position: {x: 2.4750001, y: 0.000000059604645, z: -2.2}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: gq0y79
+    m_Position: {x: -2.4750001, y: 0.000000059604645, z: 0}
+    m_Tags:
+    - PlayerSpawn
+    m_Grid: bie33e
+  - m_Id: cxapyh
+    m_Position: {x: -0.82500005, y: 0.000000059604645, z: 0}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: jm6a7g
+    m_Position: {x: 0.82500005, y: 0.000000059604645, z: 0}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: ztfy3r
+    m_Position: {x: 2.4750001, y: 0.000000059604645, z: 0}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: la29rv
+    m_Position: {x: -2.4750001, y: 0.000000059604645, z: 2.2}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: tuxc2c
+    m_Position: {x: -0.82500005, y: 0.000000059604645, z: 2.2}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: gxm91w
+    m_Position: {x: 0.82500005, y: 0, z: 2.2}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: xv5nxd
+    m_Position: {x: 2.4750001, y: 0, z: 2.2}
+    m_Tags: []
+    m_Grid: bie33e
+  - m_Id: iro2ez
+    m_Position: {x: 4.125, y: 0, z: 0}
+    m_Tags:
+    - Exit
+    m_Grid: 
+  - m_Id: oaai4d
+    m_Position: {x: -11.808544, y: 0, z: 0.22657204}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: opwec7
+    m_Position: {x: -11.430138, y: 0, z: 2.3937836}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: cod2di
+    m_Position: {x: -11.051716, y: 0, z: 4.5609894}
+    m_Tags:
+    - PlayerSpawn
+    m_Grid: vxx1sk
+  - m_Id: jv2vt5
+    m_Position: {x: -10.673302, y: 0, z: 6.728201}
+    m_Tags:
+    - PlayerSpawn
+    m_Grid: vxx1sk
+  - m_Id: nz2f7w
+    m_Position: {x: -10.294882, y: 0, z: 8.895416}
+    m_Tags:
+    - PlayerSpawn
+    m_Grid: vxx1sk
+  - m_Id: qgl4gl
+    m_Position: {x: -9.916464, y: 0.000000059604645, z: 11.062626}
+    m_Tags:
+    - PlayerSpawn
+    m_Grid: vxx1sk
+  - m_Id: twwnth
+    m_Position: {x: -9.538052, y: 0.000000059604645, z: 13.229832}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: mz7l38
+    m_Position: {x: -10.211693, y: 0, z: 1.0643883}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: qbtoo6
+    m_Position: {x: -9.833275, y: 0.000000059604645, z: 3.231598}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: n7qfzf
+    m_Position: {x: -9.4548645, y: 0.000000059604645, z: 5.3988056}
+    m_Tags:
+    - PlayerSpawn
+    m_Grid: vxx1sk
+  - m_Id: hosaq5
+    m_Position: {x: -9.076454, y: 0.000000059604645, z: 7.5660167}
+    m_Tags:
+    - PlayerSpawn
+    m_Grid: vxx1sk
+  - m_Id: pii1cr
+    m_Position: {x: -8.698036, y: 0.000000059604645, z: 9.7332325}
+    m_Tags:
+    - PlayerSpawn
+    m_Grid: vxx1sk
+  - m_Id: p9bue3
+    m_Position: {x: -8.319614, y: 0.000000059604645, z: 11.90045}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: yg53s6
+    m_Position: {x: -7.9412007, y: 0.000000059604645, z: 14.067659}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: ci2omi
+    m_Position: {x: -8.993267, y: 0, z: -0.2650032}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: wv6rcf
+    m_Position: {x: -8.614841, y: 0.000000059604645, z: 1.9022007}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: sqiczu
+    m_Position: {x: -8.2364235, y: 0.000000059604645, z: 4.069413}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: s68b2o
+    m_Position: {x: -7.8580112, y: 0.000000059604645, z: 6.2366276}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: w72xht
+    m_Position: {x: -7.479602, y: 0.000000059604645, z: 8.403837}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: hr6w7i
+    m_Position: {x: -7.1011777, y: 0.000000059604645, z: 10.571045}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: ch6a6r
+    m_Position: {x: -6.7227693, y: 0.000000059604645, z: 12.738253}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: pe765y
+    m_Position: {x: -7.3964124, y: 0.000000059604645, z: 0.57280636}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: p5qkdw
+    m_Position: {x: -7.0179887, y: 0.000000059604645, z: 2.7400227}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: yapnto
+    m_Position: {x: -6.639575, y: 0.000000059604645, z: 4.9072304}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: lhnnhu
+    m_Position: {x: -6.2611594, y: 0.000000059604645, z: 7.0744414}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: gcta9s
+    m_Position: {x: -5.882737, y: 0.000000059604645, z: 9.241653}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: r09rqx
+    m_Position: {x: -5.5043235, y: 0.000000059604645, z: 11.408873}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: m8cecl
+    m_Position: {x: -5.1259103, y: 0.000000059604645, z: 13.576063}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: b8ojz6
+    m_Position: {x: -6.1779704, y: 0, z: -0.7565851}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: uzyruy
+    m_Position: {x: -5.7995563, y: 0.000000059604645, z: 1.4106293}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: ci7mx2
+    m_Position: {x: -5.421134, y: 0.000000059604645, z: 3.577835}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: du68wm
+    m_Position: {x: -5.0427217, y: 0.000000059604645, z: 5.7450466}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: qpu16u
+    m_Position: {x: -4.664305, y: 0.000000059604645, z: 7.9122553}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: jkfbki
+    m_Position: {x: -4.285893, y: 0.000000059604645, z: 10.0794735}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: e9nxhj
+    m_Position: {x: -3.907474, y: 0.000000059604645, z: 12.246683}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: vgfkni
+    m_Position: {x: -4.581116, y: 0.000000059604645, z: 0.08123207}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: seljar
+    m_Position: {x: -4.202699, y: 0.000000059604645, z: 2.2484417}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: kembxj
+    m_Position: {x: -3.8242831, y: 0.000000059604645, z: 4.415653}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: ia2dek
+    m_Position: {x: -3.4458709, y: 0.000000059604645, z: 6.5828648}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: nb7zfy
+    m_Position: {x: -3.0674524, y: 0.000000059604645, z: 8.750065}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: krmwdq
+    m_Position: {x: -2.6890373, y: 0.000000059604645, z: 10.91729}
+    m_Tags: []
+    m_Grid: vxx1sk
+  - m_Id: flblb1
+    m_Position: {x: -2.3106194, y: 0.000000059604645, z: 13.084497}
+    m_Tags: []
+    m_Grid: vxx1sk
+  m_Links:
+  - m_Id: glkgeg
+    m_SlotA: rohat9
+    m_SlotB: ik95j7
+  - m_Id: ztwii6
+    m_SlotA: rohat9
+    m_SlotB: gq0y79
+  - m_Id: fdfoyd
+    m_SlotA: ik95j7
+    m_SlotB: atvape
+  - m_Id: olt31j
+    m_SlotA: ik95j7
+    m_SlotB: cxapyh
+  - m_Id: va1t2h
+    m_SlotA: atvape
+    m_SlotB: ihnd0e
+  - m_Id: pcny1g
+    m_SlotA: atvape
+    m_SlotB: jm6a7g
+  - m_Id: iuqqdi
+    m_SlotA: ihnd0e
+    m_SlotB: ztfy3r
+  - m_Id: lapp1y
+    m_SlotA: gq0y79
+    m_SlotB: cxapyh
+  - m_Id: lr712m
+    m_SlotA: gq0y79
+    m_SlotB: la29rv
+  - m_Id: ootamd
+    m_SlotA: cxapyh
+    m_SlotB: jm6a7g
+  - m_Id: kp1pxg
+    m_SlotA: cxapyh
+    m_SlotB: tuxc2c
+  - m_Id: nsm9de
+    m_SlotA: jm6a7g
+    m_SlotB: ztfy3r
+  - m_Id: qdhln1
+    m_SlotA: jm6a7g
+    m_SlotB: gxm91w
+  - m_Id: voiddk
+    m_SlotA: ztfy3r
+    m_SlotB: xv5nxd
+  - m_Id: h3jbem
+    m_SlotA: la29rv
+    m_SlotB: tuxc2c
+  - m_Id: qkhmby
+    m_SlotA: tuxc2c
+    m_SlotB: gxm91w
+  - m_Id: lami6i
+    m_SlotA: gxm91w
+    m_SlotB: xv5nxd
+  - m_Id: dib2g8
+    m_SlotA: iro2ez
+    m_SlotB: ztfy3r
+  - m_Id: gdkywg
+    m_SlotA: oaai4d
+    m_SlotB: opwec7
+  - m_Id: xelelg
+    m_SlotA: oaai4d
+    m_SlotB: mz7l38
+  - m_Id: m0b41m
+    m_SlotA: opwec7
+    m_SlotB: cod2di
+  - m_Id: ia8x4s
+    m_SlotA: opwec7
+    m_SlotB: mz7l38
+  - m_Id: d2a53l
+    m_SlotA: opwec7
+    m_SlotB: qbtoo6
+  - m_Id: fa9b4b
+    m_SlotA: cod2di
+    m_SlotB: jv2vt5
+  - m_Id: z4o13b
+    m_SlotA: cod2di
+    m_SlotB: qbtoo6
+  - m_Id: ikgffn
+    m_SlotA: cod2di
+    m_SlotB: n7qfzf
+  - m_Id: kmtzaa
+    m_SlotA: jv2vt5
+    m_SlotB: nz2f7w
+  - m_Id: uvi2t4
+    m_SlotA: jv2vt5
+    m_SlotB: n7qfzf
+  - m_Id: eala6l
+    m_SlotA: jv2vt5
+    m_SlotB: hosaq5
+  - m_Id: fp6957
+    m_SlotA: nz2f7w
+    m_SlotB: qgl4gl
+  - m_Id: yuh7lt
+    m_SlotA: nz2f7w
+    m_SlotB: hosaq5
+  - m_Id: i8wxrq
+    m_SlotA: nz2f7w
+    m_SlotB: pii1cr
+  - m_Id: us98ii
+    m_SlotA: qgl4gl
+    m_SlotB: twwnth
+  - m_Id: vhktv2
+    m_SlotA: qgl4gl
+    m_SlotB: pii1cr
+  - m_Id: smo480
+    m_SlotA: qgl4gl
+    m_SlotB: p9bue3
+  - m_Id: morw2q
+    m_SlotA: twwnth
+    m_SlotB: p9bue3
+  - m_Id: u4kypv
+    m_SlotA: twwnth
+    m_SlotB: yg53s6
+  - m_Id: gst4ho
+    m_SlotA: mz7l38
+    m_SlotB: qbtoo6
+  - m_Id: iigxgx
+    m_SlotA: mz7l38
+    m_SlotB: ci2omi
+  - m_Id: pn8pi8
+    m_SlotA: mz7l38
+    m_SlotB: wv6rcf
+  - m_Id: dra5gc
+    m_SlotA: qbtoo6
+    m_SlotB: n7qfzf
+  - m_Id: zfzsfo
+    m_SlotA: qbtoo6
+    m_SlotB: wv6rcf
+  - m_Id: ye1zlc
+    m_SlotA: qbtoo6
+    m_SlotB: sqiczu
+  - m_Id: g5eatz
+    m_SlotA: n7qfzf
+    m_SlotB: hosaq5
+  - m_Id: o3h4ao
+    m_SlotA: n7qfzf
+    m_SlotB: sqiczu
+  - m_Id: mnwlt8
+    m_SlotA: n7qfzf
+    m_SlotB: s68b2o
+  - m_Id: pmmq5c
+    m_SlotA: hosaq5
+    m_SlotB: pii1cr
+  - m_Id: r3c2zc
+    m_SlotA: hosaq5
+    m_SlotB: s68b2o
+  - m_Id: w6c5fm
+    m_SlotA: hosaq5
+    m_SlotB: w72xht
+  - m_Id: we8kmm
+    m_SlotA: pii1cr
+    m_SlotB: p9bue3
+  - m_Id: vfela2
+    m_SlotA: pii1cr
+    m_SlotB: w72xht
+  - m_Id: uwv3e8
+    m_SlotA: pii1cr
+    m_SlotB: hr6w7i
+  - m_Id: t2abm0
+    m_SlotA: p9bue3
+    m_SlotB: yg53s6
+  - m_Id: q1ef8e
+    m_SlotA: p9bue3
+    m_SlotB: hr6w7i
+  - m_Id: jvijqo
+    m_SlotA: p9bue3
+    m_SlotB: ch6a6r
+  - m_Id: zka9w0
+    m_SlotA: yg53s6
+    m_SlotB: ch6a6r
+  - m_Id: ym2kac
+    m_SlotA: ci2omi
+    m_SlotB: wv6rcf
+  - m_Id: mb2dfm
+    m_SlotA: ci2omi
+    m_SlotB: pe765y
+  - m_Id: j32iyu
+    m_SlotA: wv6rcf
+    m_SlotB: sqiczu
+  - m_Id: gyga8o
+    m_SlotA: wv6rcf
+    m_SlotB: pe765y
+  - m_Id: osgh33
+    m_SlotA: wv6rcf
+    m_SlotB: p5qkdw
+  - m_Id: y1gkd9
+    m_SlotA: sqiczu
+    m_SlotB: s68b2o
+  - m_Id: yl0by6
+    m_SlotA: sqiczu
+    m_SlotB: p5qkdw
+  - m_Id: iiq56x
+    m_SlotA: sqiczu
+    m_SlotB: yapnto
+  - m_Id: p1wp07
+    m_SlotA: s68b2o
+    m_SlotB: w72xht
+  - m_Id: o7on0r
+    m_SlotA: s68b2o
+    m_SlotB: yapnto
+  - m_Id: xji8go
+    m_SlotA: s68b2o
+    m_SlotB: lhnnhu
+  - m_Id: ecz3km
+    m_SlotA: w72xht
+    m_SlotB: hr6w7i
+  - m_Id: vg9jyz
+    m_SlotA: w72xht
+    m_SlotB: lhnnhu
+  - m_Id: yyvsvb
+    m_SlotA: w72xht
+    m_SlotB: gcta9s
+  - m_Id: frai0g
+    m_SlotA: hr6w7i
+    m_SlotB: ch6a6r
+  - m_Id: puvjfp
+    m_SlotA: hr6w7i
+    m_SlotB: gcta9s
+  - m_Id: rnccy4
+    m_SlotA: hr6w7i
+    m_SlotB: r09rqx
+  - m_Id: y2rjvt
+    m_SlotA: ch6a6r
+    m_SlotB: r09rqx
+  - m_Id: yjiyob
+    m_SlotA: ch6a6r
+    m_SlotB: m8cecl
+  - m_Id: xnxg1y
+    m_SlotA: pe765y
+    m_SlotB: p5qkdw
+  - m_Id: j8mthz
+    m_SlotA: pe765y
+    m_SlotB: b8ojz6
+  - m_Id: tubuvl
+    m_SlotA: pe765y
+    m_SlotB: uzyruy
+  - m_Id: q5a1u3
+    m_SlotA: p5qkdw
+    m_SlotB: yapnto
+  - m_Id: o75rkq
+    m_SlotA: p5qkdw
+    m_SlotB: uzyruy
+  - m_Id: y6ftn2
+    m_SlotA: p5qkdw
+    m_SlotB: ci7mx2
+  - m_Id: uswnzz
+    m_SlotA: yapnto
+    m_SlotB: lhnnhu
+  - m_Id: mpu2sb
+    m_SlotA: yapnto
+    m_SlotB: ci7mx2
+  - m_Id: nny7bt
+    m_SlotA: yapnto
+    m_SlotB: du68wm
+  - m_Id: ae34v3
+    m_SlotA: lhnnhu
+    m_SlotB: gcta9s
+  - m_Id: u5x5vl
+    m_SlotA: lhnnhu
+    m_SlotB: du68wm
+  - m_Id: ohhj2d
+    m_SlotA: lhnnhu
+    m_SlotB: qpu16u
+  - m_Id: sjfkje
+    m_SlotA: gcta9s
+    m_SlotB: r09rqx
+  - m_Id: g2p496
+    m_SlotA: gcta9s
+    m_SlotB: qpu16u
+  - m_Id: u95wsj
+    m_SlotA: gcta9s
+    m_SlotB: jkfbki
+  - m_Id: y862u4
+    m_SlotA: r09rqx
+    m_SlotB: m8cecl
+  - m_Id: bw3jik
+    m_SlotA: r09rqx
+    m_SlotB: jkfbki
+  - m_Id: vivui1
+    m_SlotA: r09rqx
+    m_SlotB: e9nxhj
+  - m_Id: j04yv3
+    m_SlotA: m8cecl
+    m_SlotB: e9nxhj
+  - m_Id: k850cv
+    m_SlotA: b8ojz6
+    m_SlotB: uzyruy
+  - m_Id: l6z8k3
+    m_SlotA: b8ojz6
+    m_SlotB: vgfkni
+  - m_Id: f6ylix
+    m_SlotA: uzyruy
+    m_SlotB: ci7mx2
+  - m_Id: i9tfa0
+    m_SlotA: uzyruy
+    m_SlotB: vgfkni
+  - m_Id: ii1dj2
+    m_SlotA: uzyruy
+    m_SlotB: seljar
+  - m_Id: kjmcow
+    m_SlotA: ci7mx2
+    m_SlotB: du68wm
+  - m_Id: ylth3l
+    m_SlotA: ci7mx2
+    m_SlotB: seljar
+  - m_Id: p581nl
+    m_SlotA: ci7mx2
+    m_SlotB: kembxj
+  - m_Id: cbrhnv
+    m_SlotA: du68wm
+    m_SlotB: qpu16u
+  - m_Id: gi7fp4
+    m_SlotA: du68wm
+    m_SlotB: kembxj
+  - m_Id: vmx7tb
+    m_SlotA: du68wm
+    m_SlotB: ia2dek
+  - m_Id: mercn7
+    m_SlotA: qpu16u
+    m_SlotB: jkfbki
+  - m_Id: cefiuf
+    m_SlotA: qpu16u
+    m_SlotB: ia2dek
+  - m_Id: ut4pah
+    m_SlotA: qpu16u
+    m_SlotB: nb7zfy
+  - m_Id: hh603g
+    m_SlotA: jkfbki
+    m_SlotB: e9nxhj
+  - m_Id: s25znr
+    m_SlotA: jkfbki
+    m_SlotB: nb7zfy
+  - m_Id: rxm6kj
+    m_SlotA: jkfbki
+    m_SlotB: krmwdq
+  - m_Id: vaxudj
+    m_SlotA: e9nxhj
+    m_SlotB: krmwdq
+  - m_Id: lby2m5
+    m_SlotA: e9nxhj
+    m_SlotB: flblb1
+  - m_Id: aolpxm
+    m_SlotA: vgfkni
+    m_SlotB: seljar
+  - m_Id: d0klmu
+    m_SlotA: seljar
+    m_SlotB: kembxj
+  - m_Id: ao0yt6
+    m_SlotA: kembxj
+    m_SlotB: ia2dek
+  - m_Id: u5juv9
+    m_SlotA: ia2dek
+    m_SlotB: nb7zfy
+  - m_Id: ozdwk1
+    m_SlotA: nb7zfy
+    m_SlotB: krmwdq
+  - m_Id: m6pay8
+    m_SlotA: krmwdq
+    m_SlotB: flblb1
+  - m_Id: eia91t
+    m_SlotA: seljar
+    m_SlotB: la29rv
+  - m_Id: n1r19q
+    m_SlotA: gq0y79
+    m_SlotB: vgfkni
+  m_Grids:
+  - m_Id: bie33e
+    m_Type: 0
+    m_Step: 1.1
+    m_From: {x: -2.4750001, y: -0, z: -2.2}
+    m_To: {x: 2.4750001, y: 0, z: 2.2}
+    m_HexOrientation: 1
+    m_Diagonals: 0
+    m_RaycastHeight: 1
+    m_Angle: 0
+  - m_Id: vxx1sk
+    m_Type: 1
+    m_Step: 1.1
+    m_From: {x: -10.594465, y: -0.0000000012587407, z: -0.57569504}
+    m_To: {x: -2.5497952, y: 0.00000029256807, z: 14.238022}
+    m_HexOrientation: 1
+    m_Diagonals: 0
+    m_RaycastHeight: 1
+    m_Angle: 9.904404
+  m_EditorSettings:
+    m_AutoConnect: 1
+    m_AutoConnectRadius: 1.3
+    m_MinRadius: 1
+    m_GridType: 1
+    m_GridStep: 1.1
+    m_HexOrientation: 1
+    m_Diagonals: 0
+    m_GridRaycastHeight: 1
+    m_BrushRadius: 3.6
+    m_BrushTag: PlayerSpawn
