@@ -16,3 +16,4 @@ MonoBehaviour:
   m_SceneName: TestLocation
   m_Type: 0
   m_Graph: {fileID: 11400000, guid: a0a8364c4b8b5274d9c6eb5b5fea8284, type: 2}
+  m_Deck: {fileID: 11400000, guid: 7393a785369e43c486250035e53fb2e8, type: 2}

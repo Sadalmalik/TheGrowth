@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TheGrowth.Core.Entities;
+using TheGrowth.Core.Rng;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Core.Tags;
 using TheGrowth.Model.Slots;
@@ -80,6 +81,19 @@ namespace TheGrowth.Model.Cards
 
             var top = slot.Entities[slot.Count - 1];
             return top.Kind == EntityKind.Card ? top : null;
+        }
+    }
+
+    /// <summary>Случайная карта набора (ГСЧ сессии, <see cref="RngSystem"/>); пустой набор — пусто, ГСЧ не используется.</summary>
+    [Script("random_card", "random card of [Cards]")]
+    public sealed class RandomCardEvaluator : Evaluator<Entity>
+    {
+        public Evaluator<CardSet> Cards;
+
+        public override Entity Evaluate(ScriptContext context)
+        {
+            var cards = Cards.Evaluate(context);
+            return cards.IsEmpty ? null : cards[context.Get<RngSystem>().Index(cards.Count)];
         }
     }
 

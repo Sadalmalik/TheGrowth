@@ -44,7 +44,7 @@ namespace TheGrowth.EditorTools.Content
             var registry = Rebuild();
             var errors = ContentValidator.ValidateProject(registry);
             ContentValidator.Log(errors);
-            Debug.Log($"[Content] Registry rebuilt: {registry.Assets.Count} assets, {registry.Scripts.Count} script files, {errors.Count} errors ({RegistryPath})", registry);
+            Debug.Log($"[Content] Registry rebuilt: {registry.Assets.Count} assets, {registry.Scripts.Count} script files, {ContentValidator.CountErrors(errors)} errors, {errors.Count - ContentValidator.CountErrors(errors)} warnings ({RegistryPath})", registry);
         }
 
         [MenuItem(MenuRoot + "Validate")]
@@ -59,7 +59,7 @@ namespace TheGrowth.EditorTools.Content
 
             var errors = ContentValidator.ValidateProject(registry);
             ContentValidator.Log(errors);
-            Debug.Log($"[Content] Validation: {errors.Count} errors", registry);
+            Debug.Log($"[Content] Validation: {ContentValidator.CountErrors(errors)} errors, {errors.Count - ContentValidator.CountErrors(errors)} warnings", registry);
         }
 
 #endregion

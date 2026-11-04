@@ -445,5 +445,67 @@ namespace TheGrowth.Tests.EditMode.Scripting
         }
 
 #endregion
+
+#region Code runs
+
+        [Test]
+        public void RunCode_ActiveUntilBodyEnds_RunsInsideDoNotBecomeIdle()
+        {
+            var gate = new Gate();
+            var file = AddFile("test", Section("Start", Mark("a")));
+            var idle = 0;
+            Runner.BecameIdle += () => idle++;
+            ScriptExecution own = null;
+
+            var probe = Probe.Watch(Runner.RunCode("code", async context =>
+            {
+                own = context.Execution;
+                await Runner.Run(file, "Start", Context);
+                await gate.Wait(context.Cancellation);
+                await Runner.Run(file, "Start", Context);
+            }, Context));
+
+            Assert.That(Trace.Entries, Is.EqualTo(new[] { "a" }));
+            Assert.AreEqual("code", own.Name);
+            Assert.That(Runner.ActiveExecutions, Is.EqualTo(new[] { own }));
+            Assert.IsFalse(Runner.IsIdle);
+            Assert.AreEqual(0, idle, "a run inside the code is not a save point");
+
+            gate.Open();
+
+            Assert.IsTrue(probe.IsCompleted);
+            Assert.IsNull(probe.Exception);
+            Assert.That(Trace.Entries, Is.EqualTo(new[] { "a", "a" }));
+            Assert.AreEqual(1, idle);
+            Assert.IsTrue(own.IsFinished);
+            Assert.AreEqual(0, Runner.ActiveCount);
+        }
+
+        [Test]
+        public void RunCode_BodyThrows_ExceptionGoesToCaller()
+        {
+            var probe = Probe.Watch(Runner.RunCode("code", _ => throw new InvalidOperationException("boom")));
+
+            Assert.IsTrue(probe.IsCompleted);
+            Assert.IsInstanceOf<InvalidOperationException>(probe.Exception);
+            Assert.AreEqual(0, Runner.ActiveCount);
+            Assert.IsTrue(Runner.IsIdle);
+        }
+
+        [Test]
+        public void RunCode_Cancelled_OperationCanceledGoesToCaller()
+        {
+            var gate = new Gate();
+            using var source = new CancellationTokenSource();
+            var probe = Probe.Watch(Runner.RunCode("code", context => gate.Wait(context.Cancellation), Context, source.Token));
+
+            source.Cancel();
+
+            Assert.IsTrue(probe.IsCompleted);
+            Assert.IsInstanceOf<OperationCanceledException>(probe.Exception);
+            Assert.AreEqual(0, Runner.ActiveCount);
+        }
+
+#endregion
     }
 }

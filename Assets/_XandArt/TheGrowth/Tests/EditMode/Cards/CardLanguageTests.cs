@@ -148,6 +148,37 @@ namespace TheGrowth.Tests.EditMode.Cards
         }
 
         [Test]
+        public void RoundTrip_RandomAndChance()
+        {
+            AssertRoundTrip(Lines(
+                "SpawnSlot -> [random slot of [[free slots] except [slots tagged PlayerSpawn]]]",
+                "",
+                "Start:",
+                "    trace [random card of [cards tagged Monster]] a",
+                "    trace [random card of [active card]] b",
+                "    trace slot [random slot of [free slots]]",
+                "    move [active card] to [random slot of [slots around [active card] within 1]]",
+                "    if [chance 50%]",
+                "        trace [active card] c",
+                "    if [chance [active card].charges%]",
+                "        trace [active card] d",
+                "    if [chance [[active card].charges + 10]%]",
+                "        trace [active card] e",
+                "    if [[random number from 1 to 6] > 3]",
+                "        trace [active card] f",
+                "    set [active card].charges to [random number from [count of [cards tagged Monster]] to [active card].charges]",
+                "    set [active card].charges to [random number from -3 to 0]"));
+        }
+
+        [Test]
+        public void Chance_SpaceBeforePercent_ParsedAndPrintedCanonically()
+        {
+            var file = ParseOk(Lines("Start:", "    if [chance 25 %]", "        trace [active card] a"));
+
+            Assert.AreEqual(Lines("Start:", "    if [chance 25%]", "        trace [active card] a"), m_Printer.Print(file));
+        }
+
+        [Test]
         public void RoundTrip_SingleValueWhereSetExpected_PrintsSourceNode()
         {
             var text = Lines(

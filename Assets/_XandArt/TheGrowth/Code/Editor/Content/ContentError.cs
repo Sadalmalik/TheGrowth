@@ -39,9 +39,21 @@ namespace TheGrowth.EditorTools.Content
 
         /// <summary>Файл скрипта: свойства (<c>Имя -> [...]</c>) в файле, не привязанном к сущности; файл сущности не найден.</summary>
         InvalidScript,
+
+        /// <summary>Колода (<c>DeckModel</c>): строка без конфига, количество меньше 1.</summary>
+        InvalidDeck,
+
+        /// <summary>
+        /// Раскладка локации с колодой: у поля нет клетки <c>PlayerSpawn</c>, нет поля; предупреждение — набор <c>SpawnSlot</c>
+        /// карты колоды на пустом поле пуст или меньше числа её карт.
+        /// </summary>
+        InvalidDeal,
     }
 
-    /// <summary>Ошибка валидации контента: вид, путь ассета, сообщение, объект для выделения в консоли.</summary>
+    /// <summary>
+    /// Ошибка валидации контента: вид, путь ассета, сообщение, объект для выделения в консоли. Предупреждение
+    /// (<see cref="IsWarning"/>) показывается, но билд не останавливает.
+    /// </summary>
     public readonly struct ContentError
     {
         public ContentErrorKind Kind { get; }
@@ -52,12 +64,15 @@ namespace TheGrowth.EditorTools.Content
 
         public Object Context { get; }
 
-        public ContentError(ContentErrorKind kind, string path, string message, Object context)
+        public bool IsWarning { get; }
+
+        public ContentError(ContentErrorKind kind, string path, string message, Object context, bool isWarning = false)
         {
             Kind = kind;
             Path = path;
             Message = message;
             Context = context;
+            IsWarning = isWarning;
         }
 
         public override string ToString()

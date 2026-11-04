@@ -26,10 +26,6 @@ properties:
 views:
   - type: table
     name: Активные
-    filters:
-      and:
-        - status != "done"
-        - status != "dropped"
     groupBy:
       property: status
       direction: DESC
@@ -47,6 +43,7 @@ views:
       - property: priority
         direction: ASC
     columnSize:
+      file.name: 410
       note.area: 162
   - type: table
     name: Эпики
@@ -97,6 +94,9 @@ views:
       - assignee
   - type: table
     name: Все
+    groupBy:
+      property: status
+      direction: DESC
     order:
       - file.name
       - status

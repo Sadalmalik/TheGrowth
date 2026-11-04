@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TheGrowth.Core.Entities;
+using TheGrowth.Core.Rng;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Core.Tags;
 using TheGrowth.Model.Slots;
@@ -113,6 +114,19 @@ namespace TheGrowth.Model.Cards
             }
 
             return best;
+        }
+    }
+
+    /// <summary>Случайный слот набора (ГСЧ сессии, <see cref="RngSystem"/>); пустой набор — пусто, ГСЧ не используется.</summary>
+    [Script("random_slot", "random slot of [Slots]")]
+    public sealed class RandomSlotEvaluator : Evaluator<Slot>
+    {
+        public Evaluator<SlotSet> Slots;
+
+        public override Slot Evaluate(ScriptContext context)
+        {
+            var slots = Slots.Evaluate(context);
+            return slots.IsEmpty ? null : slots[context.Get<RngSystem>().Index(slots.Count)];
         }
     }
 

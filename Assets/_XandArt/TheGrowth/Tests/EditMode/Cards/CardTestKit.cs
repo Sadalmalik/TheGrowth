@@ -8,6 +8,7 @@ using TheGrowth.Architecture.Events;
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Entities;
+using TheGrowth.Core.Rng;
 using TheGrowth.Core.Saves;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Core.Tags;
@@ -16,12 +17,14 @@ using TheGrowth.EditorTools.Content;
 using TheGrowth.EditorTools.Entities;
 using TheGrowth.Model;
 using TheGrowth.Model.Cards;
+using TheGrowth.Model.Decks;
 using TheGrowth.Model.Entities;
 using TheGrowth.Model.Graphs;
 using TheGrowth.Model.Locations;
 using TheGrowth.Model.Slots;
 using TheGrowth.Tests.EditMode.Content;
 using TheGrowth.Tests.EditMode.Graphs;
+using TheGrowth.Tests.EditMode.Saves;
 using TheGrowth.Tests.EditMode.Scripting;
 using UnityEngine;
 
@@ -127,11 +130,14 @@ namespace TheGrowth.Tests.EditMode.Cards
     /// примеров контента (<see cref="Hero"/>, <see cref="Monster"/>, <see cref="Herb"/>, <see cref="Exit"/>) с текстами скриптов из
     /// <c>Content/</c> и тестовые конфиги со скриптами из теста (<see cref="Model"/>). Поле — граф 3 × 3, построенный здесь
     /// (не из ассета): клетки <c>a1..c3</c> (строки a, b, c сверху вниз, столбцы 1..3 слева направо, шаг 1 по X и −Z),
-    /// связи крестом; <c>a1</c> — <c>PlayerSpawn</c>, <c>c3</c> — <c>Exit</c>; отдельная клетка <c>x</c> без связей.
+    /// связи крестом; <c>a1</c> — <c>PlayerSpawn</c>, <c>c3</c> — <c>Exit</c>; отдельная клетка <c>x</c> без связей. Seed ГСЧ новой
+    /// сессии — <see cref="DefaultSeed"/>, если не задан другой.
     /// </summary>
     public sealed class CardTestKit : IDisposable
     {
         public const string ContentFolder = ContentRegistryBuilder.ContentRoot + "/Content";
+
+        public const ulong DefaultSeed = 20261104;
 
         private static ScriptRegistry m_Language;
 
@@ -291,12 +297,41 @@ namespace TheGrowth.Tests.EditMode.Cards
             m_Scripts.Add(Content.Script(id, text));
         }
 
-        /// <summary>Сессия с журналом <see cref="CardTrace"/> и слотами экспедиции на поле <see cref="Location"/>.</summary>
-        public Session NewSession()
+        /// <summary>Колода в реестре — колода экспедиции локации <see cref="Location"/>.</summary>
+        public DeckModel Deck(params DeckEntry[] entries)
         {
-            var session = Session.Create(Global, new SaveGame(), configure => configure.Container.Add(new CardTrace()));
+            if (m_Registry != null)
+                throw new InvalidOperationException("The registry is already built");
+
+            var deck = Content.Asset<DeckModel>("Deck");
+            deck.EntryList.AddRange(entries);
+            m_Assets.Add(deck);
+            var serialized = new UnityEditor.SerializedObject(Location);
+            serialized.FindProperty("m_Deck").objectReferenceValue = deck;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+            return deck;
+        }
+
+        /// <summary>
+        /// Сессия с журналом <see cref="CardTrace"/>, seed ГСЧ <paramref name="seed"/> и слотами экспедиции на поле
+        /// <see cref="Location"/>.
+        /// </summary>
+        public Session NewSession(ulong seed = DefaultSeed)
+        {
+            var session = Session.Create(Global, new SaveGame(), configure =>
+            {
+                configure.Container.Add(new CardTrace());
+                configure.Get<RngSystem>().NewGameSeed = seed;
+            });
             session.Get<SlotSystem>().CreateExpedition(Location);
             return session;
+        }
+
+        /// <summary>Сохранить сессию (через архив, как в слот) и загрузить в новую; старая не уничтожается.</summary>
+        public Session Reload(Session session)
+        {
+            var save = SaveTestKit.Unpack(SaveTestKit.Pack(session.Capture()));
+            return Session.Create(Global, save, configure => configure.Container.Add(new CardTrace()));
         }
 
         public ScriptParser Parser()
@@ -328,10 +363,14 @@ namespace TheGrowth.Tests.EditMode.Cards
     /// <summary>Сессия теста карт: системы, клетки поля, создание карт без хуков, синхронный запуск.</summary>
     public sealed class CardSession : IDisposable
     {
-        public CardSession(CardTestKit kit)
+        public CardSession(CardTestKit kit, ulong seed = CardTestKit.DefaultSeed) : this(kit, kit.NewSession(seed))
+        {
+        }
+
+        public CardSession(CardTestKit kit, Session session)
         {
             Kit = kit;
-            Session = kit.NewSession();
+            Session = session;
             Slots = Session.Get<SlotSystem>();
             Cards = Session.Get<CardSystem>();
             Entities = Session.Get<EntityRegistry>();
@@ -351,6 +390,10 @@ namespace TheGrowth.Tests.EditMode.Cards
         public CardTrace Trace { get; }
 
         public ScriptRunner Runner => Session.Scripts;
+
+        public RngSystem Rng => Session.Get<RngSystem>();
+
+        public DealSystem Dealer => Session.Get<DealSystem>();
 
         public Slot Cell(string id)
         {

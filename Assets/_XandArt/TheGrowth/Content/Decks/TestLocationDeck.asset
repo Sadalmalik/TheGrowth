@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edf2691697e47df80ba41b162ecadd3, type: 3}
+  m_Name: TestLocationDeck
+  m_EditorClassIdentifier: TheGrowth.Model::TheGrowth.Model.Decks.DeckModel
+  m_Id: TestLocationDeck
+  m_Entries:
+  - m_Model: {fileID: 11400000, guid: d4d72eaf1ea3d984aa732850fdc55494, type: 2}
+    m_Count: 1
+    m_KeepInDeck: 0
+  - m_Model: {fileID: 11400000, guid: e6f7908b98403034bb76b11c4a5ce6fe, type: 2}
+    m_Count: 6
+    m_KeepInDeck: 0
+  - m_Model: {fileID: 11400000, guid: d96f1576b4c51444b9be42ee5191e956, type: 2}
+    m_Count: 12
+    m_KeepInDeck: 0
+  - m_Model: {fileID: 11400000, guid: d96f1576b4c51444b9be42ee5191e956, type: 2}
+    m_Count: 4
+    m_KeepInDeck: 1

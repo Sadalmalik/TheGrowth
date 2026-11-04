@@ -107,6 +107,31 @@ namespace TheGrowth.Core.Scripting
         }
 
         /// <summary>
+        /// Новый запуск кода C# (начальная раскладка поля, позже — действия игрока): зарегистрирован, как запуск секции, —
+        /// пока он идёт, исполнитель не простаивает (<see cref="IsIdle"/>), точки сохранения нет, и запуски, начатые из него,
+        /// не дают <see cref="BecameIdle"/> между собой. <paramref name="body"/> получает контекст запуска (блоки и секции,
+        /// запущенные с ним, — вложенные). В отличие от <see cref="Run"/> исключения <paramref name="body"/>, включая отмену,
+        /// пробрасываются вызывающему: это код, а не скрипт. Позиции у запуска нет.
+        /// </summary>
+        public async UniTask RunCode(string name, Func<ScriptContext, UniTask> body, ScriptContext parent = null, CancellationToken token = default)
+        {
+            if (body == null)
+                throw new ArgumentNullException(nameof(body));
+
+            var execution = CreateExecution(name, parent, token);
+            try
+            {
+                await body(execution.Root.Context);
+            }
+            finally
+            {
+                m_Executions.Remove(execution);
+                execution.Finish();
+                NotifyIfIdle();
+            }
+        }
+
+        /// <summary>
         /// Фоновый запуск блока: отдельный запуск, не ожидается. Отмена связана со scope запуска,
         /// из которого он начат, а не с самим запуском.
         /// </summary>

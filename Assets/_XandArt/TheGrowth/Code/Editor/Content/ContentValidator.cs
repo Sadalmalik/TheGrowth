@@ -6,8 +6,11 @@ using TheGrowth.Core.Entities;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Core.Tags;
 using TheGrowth.Core.Variables;
+using TheGrowth.EditorTools.Decks;
 using TheGrowth.EditorTools.Entities;
 using TheGrowth.EditorTools.Graphs;
+using TheGrowth.EditorTools.Scripting;
+using TheGrowth.Model.Decks;
 using TheGrowth.Model.Graphs;
 using TheGrowth.Model.Locations;
 using UnityEditor;
@@ -23,8 +26,10 @@ namespace TheGrowth.EditorTools.Content
     /// конфиги и файлы скриптов проекта вне реестра, графы сцен локаций, на которые локация не ссылается, настройки поля
     /// (<see cref="FieldConfig"/> — ровно один в реестре проекта), конфиги сущностей (<see cref="EntityModelChecks"/>),
     /// вид конфигов сущностей в полях с <see cref="ModelKindAttribute"/> (<see cref="ModelKindChecks"/>), типы компонентов
-    /// сущностей (только в проекте), файлы скриптов сущностей (свойства — только в файлах сущностей). Сцены не открываются.
-    /// Ошибки — списком (для тестов и pre-build), <see cref="Log"/> выводит их в консоль с выделением ассета.
+    /// сущностей (только в проекте), файлы скриптов сущностей (свойства — только в файлах сущностей), колоды и раскладка
+    /// локаций (<see cref="DeckChecks"/>: строки колоды, клетка <c>PlayerSpawn</c>; предупреждения <c>SpawnSlot</c> — только
+    /// для контента без ошибок). Сцены не открываются. Ошибки и предупреждения (<see cref="ContentError.IsWarning"/>) —
+    /// списком (для тестов и pre-build), <see cref="Log"/> выводит их в консоль с выделением ассета.
     /// </summary>
     public static class ContentValidator
     {
@@ -52,6 +57,10 @@ namespace TheGrowth.EditorTools.Content
             ValidateEntities(assets, tags, variables, errors);
             ValidateEntityScripts(assets, scripts ?? Array.Empty<ScriptFileEntry>(), errors);
             ValidateModelKinds(assets, errors);
+            ValidateDecks(assets, errors);
+            if (CountErrors(errors) == 0)
+                ValidateSpawnSlots(assets, scripts ?? Array.Empty<ScriptFileEntry>(), errors);
+
             return errors;
         }
 
@@ -93,7 +102,18 @@ namespace TheGrowth.EditorTools.Content
         public static void Log(IReadOnlyList<ContentError> errors)
         {
             foreach (var error in errors)
-                Debug.LogError($"[Content] {error}", error.Context);
+            {
+                if (error.IsWarning)
+                    Debug.LogWarning($"[Content] {error}", error.Context);
+                else
+                    Debug.LogError($"[Content] {error}", error.Context);
+            }
+        }
+
+        /// <summary>Число ошибок без предупреждений.</summary>
+        public static int CountErrors(IReadOnlyList<ContentError> errors)
+        {
+            return errors.Count(error => !error.IsWarning);
         }
 
 #region Checks
@@ -311,6 +331,30 @@ namespace TheGrowth.EditorTools.Content
                 foreach (var message in ModelKindChecks.Check(asset))
                     errors.Add(Error(ContentErrorKind.WrongModelKind, asset, message));
             }
+        }
+
+        /// <summary>Строки колод; локации с колодой: поле есть, в графе есть клетка героя.</summary>
+        private static void ValidateDecks(IReadOnlyList<ContentAsset> assets, List<ContentError> errors)
+        {
+            foreach (var deck in assets.OfType<DeckModel>())
+            {
+                foreach (var message in DeckChecks.CheckDeck(deck))
+                    errors.Add(Error(ContentErrorKind.InvalidDeck, deck, message));
+            }
+
+            foreach (var location in assets.OfType<LocationModel>())
+            {
+                foreach (var message in DeckChecks.CheckField(location))
+                    errors.Add(Error(ContentErrorKind.InvalidDeal, location, message));
+            }
+        }
+
+        /// <summary>Наборы <c>SpawnSlot</c> карт колод на пустом поле локации (предупреждения).</summary>
+        private static void ValidateSpawnSlots(IReadOnlyList<ContentAsset> assets, IReadOnlyList<ScriptFileEntry> scripts, List<ContentError> errors)
+        {
+            var language = ScriptImportValidator.GetRegistry(out _);
+            foreach (var (location, message) in DeckChecks.CheckSpawnSlots(assets, scripts, language))
+                errors.Add(new ContentError(ContentErrorKind.InvalidDeal, GetPath(location), message, location, true));
         }
 
         /// <summary>Граф сцены локации есть в проекте, а локация ссылается на другой граф или ни на какой.</summary>

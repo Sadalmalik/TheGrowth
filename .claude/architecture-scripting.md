@@ -230,7 +230,8 @@ if [$trust_lucia > 3]
   `exists`.
 - `[hero]` — карта героя экспедиции: явная ссылка в состоянии экспедиции (`SlotSystem.SetHero`, ставит раскладка,
   шаг 5 E03), без перебора поля; хранится в сейве (решено 2026-11-04). Тег `Hero` героем карту не делает.
-- `random` — с ГСЧ сессии (шаг 4 E03).
+- `random` и `chance` — с ГСЧ сессии (`RngSystem`, T072): состояние в сейве, после загрузки те же действия дают тот же
+  результат.
 
 #### Базовый набор узлов (T074)
 
@@ -239,12 +240,12 @@ if [$trust_lucia > 3]
 
 | Вид | Шаблоны |
 |---|---|
-| карта | `active card`, `covering card`, `iterating card`, `hero`, `card under [Card]`, `top card of [Slot]` |
+| карта | `active card`, `covering card`, `iterating card`, `hero`, `card under [Card]`, `top card of [Slot]`, `random card of [Cards]` |
 | набор карт | `cards in [Slots]`, `cards tagged [Tag]` (на поле), `[A] except [B]`, `[A] or [B]`, `[A] and [B]` |
-| слот | `slot of [Card]`, `deck`, `hand`, `discard`, `backpack`, `inventory`, `nearest of [Slots] to [Card]` |
+| слот | `slot of [Card]`, `deck`, `hand`, `discard`, `backpack`, `inventory`, `nearest of [Slots] to [Card]`, `random slot of [Slots]` |
 | набор слотов | `field slots`, `free slots`, `slots tagged [Tag]`, `slots around [Card] within [Distance]`, `slots of [Cards]`, `[A] except [B]`, `[A] or [B]`, `[A] and [B]` |
-| число | `count of [Cards]`, `count of slots in [Slots]` |
-| условие | `[Target] has tag [Tag]` (карта или слот), `[Slot] is empty`, `[Value] exists` (карта или слот), `==` / `!=` (карты, слоты) |
+| число | `count of [Cards]`, `count of slots in [Slots]`, `random number from [A] to [B]` |
+| условие | `[Target] has tag [Tag]` (карта или слот), `[Slot] is empty`, `[Value] exists` (карта или слот), `==` / `!=` (карты, слоты), `chance [Percent]%` |
 | команда | `move [Card] to [Slot]`, `flip [Card]`, `reveal [Card]`, `hide [Card]`, `destroy [Card]`, `create [Model] in [Slot]` (`[ModelKind(Card)]`), `for each card in [Cards]` + блок |
 
 Отличия от предложения задачи:
@@ -269,6 +270,18 @@ if [$trust_lucia > 3]
 - Глубина вложенных реакций ограничена (`CardSystem.MaxReactionDepth` = 100): рекурсия реакций без ожидания
   переполнила бы стек раньше лимита шагов исполнителя (10 000). Лимит шагов по-прежнему действует.
 - Ошибка вычисления свойства — лог с местом свойства, результат «нет».
+
+#### Узлы ГСЧ (T072, 2026-11-04)
+
+- `random card of [Cards]`, `random slot of [Slots]` (Model) — равновероятно из набора; пустой набор — пусто, число из ГСЧ не
+  берётся. Одиночная карта или слот — набор из одного.
+- `random number from [A] to [B]` (Core, `RngNodes.cs`) — целое, обе границы включительно; A больше B — ошибка исполнения
+  (пустой диапазон — чаще всего ошибка в выражении границы).
+- `chance [Percent]%` (Core) — условие: истинно с шансом N из 100; число из ГСЧ берётся всегда; N 0 и меньше — никогда, 100
+  и больше — всегда. Шаблон — как в задаче: `%` — отдельный знак токенизатора сразу после параметра, конфликта нет; печать —
+  `chance 50%`, разбор принимает и `chance 50 %`; значение — литерал, переменная или узел (`chance $p%`,
+  `chance [active card].charges%`, `chance [$p + 10]%`).
+- Контекст — везде (в диалогах тоже).
 
 #### Реализация (T074)
 
@@ -302,7 +315,8 @@ if [$trust_lucia > 3]
 
   Монстр обходит клетки с картами `Monster`, `Obstacle`, `Exit`.
 - Примеры: `Content/Entities/Hero|Monster|Herb|Exit.script`, общий `Content/Scripts/Monsters.script`
-  (`CrossMovement`, вызов `call Monsters.CrossMovement`). Конец экспедиции у монстра — строка-комментарий (шаг 7).
+  (`CrossMovement`, вызов `call Monsters.CrossMovement`). Конец экспедиции у монстра — строка-комментарий (шаг 7) под
+  проверкой `if [[card under [active card]] == [hero]]` (T072: по ссылке на героя, не по тегу).
 - Тесты: `Tests/EditMode/Cards/` (поле 3 × 3 строится в тесте), `Scripting/ScriptExtensionTests`.
 
 ### Типы файлов и контексты команд (решено 2026-10-17)
@@ -335,6 +349,9 @@ merge YAML с `rid` не разрешить руками), JSON со схемо�
   `Background` — отдельный запуск, токен связан с токеном scope, а не родителя. `Parallel` —
   `UniTask.WhenAll`. Команды ожидания игрока (реплика, выбор, ввод) оборачивают ожидание в
   `context.WaitForPlayer()`; `IsIdle` = активных запусков нет или все ждут игрока.
+- `ScriptRunner.RunCode(name, body)` (T072) — запуск кода C# (раскладка, позже действия игрока), зарегистрированный как
+  запуск секции: пока он идёт, исполнитель не простаивает, и запуски внутри него не дают точки сохранения между собой.
+  Исключения кода, включая отмену, уходят вызывающему; позиции нет.
 - Ошибка в команде — лог с файлом и строкой скрипта, запуск прерывается, игра продолжается.
   Отмена — тихая.
 - **Скрипты разбираются из текста при загрузке** (с кешем), в редакторе — ещё и при импорте для
