@@ -68,6 +68,19 @@ namespace TheGrowth.Core.Scripting
             return new ScriptContext(this, Execution, Run, data);
         }
 
+        /// <summary>
+        /// Дочерний контекст того же запуска и ветки без данных родителей: видны только <paramref name="data"/> (реакция карты
+        /// не видит данных вызвавшего скрипта — его активной, накрывшей, перебираемой карты). Системы и исполнитель — те же.
+        /// </summary>
+        public ScriptContext WithOnly(params IContextData[] data)
+        {
+            var root = this;
+            while (root.Parent != null)
+                root = root.Parent;
+
+            return new ScriptContext(root, Execution, Run, data);
+        }
+
         public T GetOptional<T>() where T : class, IContextData
         {
             for (var context = this; context != null; context = context.Parent)

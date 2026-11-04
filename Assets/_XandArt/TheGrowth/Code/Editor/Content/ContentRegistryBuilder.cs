@@ -5,6 +5,7 @@ using System.Text;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Entities;
 using TheGrowth.Core.Scripting;
+using TheGrowth.Core.Tags;
 using TheGrowth.Core.Variables;
 using TheGrowth.EditorTools.Entities;
 using UnityEditor;
@@ -15,10 +16,12 @@ namespace TheGrowth.EditorTools.Content
     /// <summary>
     /// Сборка <see cref="ContentRegistry"/>: все <see cref="ContentAsset"/> и файлы скриптов (<c>.script</c>,
     /// <c>.dialog</c>) из папки контента. Пустые ID заполняются из имени ассета, в конфиги сущностей дописываются недостающие
-    /// обязательные компоненты вида (<see cref="EntityModelEditing.AddMissingComponents"/>). Ассет реестра записывается,
-    /// только если состав изменился. Набор ID конфигов и набор объявлений переменных публикуются как custom dependency
-    /// <see cref="IdsDependency"/> и <see cref="VariablesDependency"/>: импортёр скриптов зависит от них и
-    /// переимпортируется при их смене. Запуск: меню, <see cref="ContentAssetPostprocessor"/>, <see cref="ContentBuildPreprocessor"/>.
+    /// обязательные компоненты вида (<see cref="EntityModelEditing.AddMissingComponents"/>) и ID файла скрипта
+    /// <c>&lt;имя ассета&gt;.script</c> из папки конфига (<see cref="EntityModel.ScriptId"/>; файла нет — пусто). Ассет
+    /// реестра записывается, только если состав изменился. Набор ID контента (конфиги и теги) и набор объявлений переменных
+    /// публикуются как custom dependency <see cref="IdsDependency"/> и <see cref="VariablesDependency"/>: импортёр скриптов
+    /// зависит от них и переимпортируется при их смене. Запуск: меню, <see cref="ContentAssetPostprocessor"/>,
+    /// <see cref="ContentBuildPreprocessor"/>.
     /// </summary>
     public static class ContentRegistryBuilder
     {
@@ -70,12 +73,14 @@ namespace TheGrowth.EditorTools.Content
         public static ContentRegistry Rebuild(string root = ContentRoot, string registryPath = RegistryPath)
         {
             var assets = FindContentAssets(root);
+            var scriptPaths = FindScriptPaths(root);
             FillEmptyIds(assets);
             FillRequiredComponents(assets);
+            FillScriptIds(assets, scriptPaths);
             assets.Sort(CompareAssets);
 
             var scripts = new List<ScriptFileEntry>();
-            foreach (var path in FindScriptPaths(root))
+            foreach (var path in scriptPaths)
             {
                 ScriptSyntax.TryGetFileKind(Path.GetExtension(path), out var kind);
                 scripts.Add(new ScriptFileEntry(ScriptParser.GetFileId(path), kind, AssetDatabase.LoadMainAssetAtPath(path) as TextAsset));
@@ -163,6 +168,43 @@ namespace TheGrowth.EditorTools.Content
             }
         }
 
+        /// <summary>
+        /// Привязка файла скрипта к конфигу сущности: <c>&lt;имя ассета&gt;.script</c> в папке конфига — его ID файла
+        /// (<see cref="ScriptParser.GetFileId"/>), файла нет — пусто. Только главные ассеты: у вложенного конфига нет имени файла.
+        /// </summary>
+        private static void FillScriptIds(List<ContentAsset> assets, List<string> scriptPaths)
+        {
+            var paths = new HashSet<string>(scriptPaths, StringComparer.Ordinal);
+            foreach (var asset in assets)
+            {
+                if (asset is not EntityModel model || !AssetDatabase.IsMainAsset(model))
+                    continue;
+
+                var path = GetScriptPath(model);
+                var id = path != null && paths.Contains(path) ? ScriptParser.GetFileId(path) : null;
+                if (id == model.ScriptId || string.IsNullOrEmpty(id) && string.IsNullOrEmpty(model.ScriptId))
+                    continue;
+
+                model.SetScript(id);
+                EditorUtility.SetDirty(model);
+                AssetDatabase.SaveAssetIfDirty(model);
+                Debug.Log(id == null
+                    ? $"[Content] {AssetDatabase.GetAssetPath(model)}: script file is removed, the entity has no script"
+                    : $"[Content] {AssetDatabase.GetAssetPath(model)}: script file '{path}' is bound", model);
+            }
+        }
+
+        /// <summary>Путь файла скрипта конфига сущности: <c>&lt;папка&gt;/&lt;имя ассета&gt;.script</c>; конфиг не ассет — null.</summary>
+        public static string GetScriptPath(EntityModel model)
+        {
+            var path = AssetDatabase.GetAssetPath(model);
+            if (string.IsNullOrEmpty(path))
+                return null;
+
+            var folder = Path.GetDirectoryName(path)?.Replace('\\', '/');
+            return $"{folder}/{Path.GetFileNameWithoutExtension(path)}{ScriptSyntax.ScriptExtension}";
+        }
+
         private static int CompareAssets(ContentAsset a, ContentAsset b)
         {
             var result = string.CompareOrdinal(ContentAsset.GetIdScope(a.GetType()).FullName, ContentAsset.GetIdScope(b.GetType()).FullName);
@@ -217,7 +259,10 @@ namespace TheGrowth.EditorTools.Content
 
 #region Dependencies
 
-        /// <summary>Хеш набора «тип: ID» конфигов реестра — значение <see cref="IdsDependency"/>.</summary>
+        /// <summary>
+        /// Хеш набора «тип: ID» конфигов реестра и имён тегов (теги — литералы скриптов, <see cref="Tag"/>) — значение
+        /// <see cref="IdsDependency"/>.
+        /// </summary>
         public static Hash128 ComputeIdsHash(ContentRegistry registry)
         {
             var builder = new StringBuilder();
@@ -225,6 +270,15 @@ namespace TheGrowth.EditorTools.Content
             {
                 if (asset != null)
                     builder.Append(asset.GetType().FullName).Append(':').Append(asset.Id).Append('\n');
+
+                if (asset is not TagDeclarations tags)
+                    continue;
+
+                foreach (var tag in tags.Tags)
+                {
+                    if (tag != null)
+                        builder.Append(nameof(Tag)).Append(':').Append(tag.Name).Append('\n');
+                }
             }
 
             return Hash128.Compute(builder.ToString());

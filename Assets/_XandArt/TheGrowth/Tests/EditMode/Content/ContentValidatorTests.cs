@@ -1,8 +1,10 @@
 using System.Linq;
 using NUnit.Framework;
 using TheGrowth.Core.Content;
+using TheGrowth.Core.Entities;
 using TheGrowth.Core.Scripting;
 using TheGrowth.EditorTools.Content;
+using TheGrowth.EditorTools.Entities;
 
 namespace TheGrowth.Tests.EditMode.Content
 {
@@ -30,6 +32,41 @@ namespace TheGrowth.Tests.EditMode.Content
                 new[] { m_Kit.Script("Hub", "Start:\n"), m_Kit.Script("Lucia_intro", "Start:\n", ScriptFileKind.Dialog) });
 
             Assert.IsEmpty(errors, string.Join("\n", errors));
+        }
+
+        [Test]
+        public void Properties_OnlyInScriptFilesOfEntities()
+        {
+            var hero = m_Kit.Asset<EntityModel>("Hero");
+            EntityModelEditing.SetKind(hero, EntityKind.Card);
+            hero.SetScript("Hero");
+            var shared = m_Kit.Script("Shared", "Start:\n    log \"a\"\nSpawnSlot -> [free slots]\n");
+
+            var errors = ContentValidator.Validate(new ContentAsset[] { hero }, new[]
+            {
+                m_Kit.Script("Hero", "AllowedMoves -> [free slots]\n\nOnPlaced:\n    log \"a\"\n"),
+                shared,
+                m_Kit.Script("Talk", "SpawnSlot -> [free slots]\n", ScriptFileKind.Dialog),
+            });
+
+            Assert.AreEqual(1, errors.Count, string.Join("\n", errors));
+            Assert.AreEqual(ContentErrorKind.InvalidScript, errors[0].Kind);
+            Assert.AreSame(shared.Text, errors[0].Context);
+            StringAssert.Contains("line 3: property 'SpawnSlot' is allowed only in a script file of an entity", errors[0].Message);
+        }
+
+        [Test]
+        public void EntityScript_NotInRegistry_Error()
+        {
+            var hero = m_Kit.Asset<EntityModel>("Hero");
+            EntityModelEditing.SetKind(hero, EntityKind.Card);
+            hero.SetScript("Hero");
+
+            var errors = ContentValidator.Validate(new ContentAsset[] { hero }, null);
+
+            Assert.AreEqual(1, errors.Count, string.Join("\n", errors));
+            Assert.AreEqual(ContentErrorKind.InvalidScript, errors[0].Kind);
+            StringAssert.Contains("script file 'Hero' of the entity is not in the registry", errors[0].Message);
         }
 
         [Test]

@@ -8,7 +8,7 @@ using System.Text;
 namespace TheGrowth.Core.Scripting.Text
 {
     /// <summary>
-    /// Разбор одного файла. Три шага: строки → секции и дерево строк по отступам → команды по шаблонам.
+    /// Разбор одного файла. Три шага: строки → свойства, секции и дерево строк по отступам → команды по шаблонам.
     /// Ошибки собираются по всему файлу; ошибочная строка пропускается вместе с вложенными строками.
     /// </summary>
     internal sealed class ParseSession
@@ -22,6 +22,7 @@ namespace TheGrowth.Core.Scripting.Text
         private readonly string m_FileId;
         private readonly ScriptFileKind m_Kind;
         private readonly List<ScriptError> m_Errors = new List<ScriptError>();
+        private readonly List<ScriptProperty> m_Properties = new List<ScriptProperty>();
 
         private readonly struct Level
         {
@@ -55,7 +56,7 @@ namespace TheGrowth.Core.Scripting.Text
             }
 
             var errors = m_Errors.OrderBy(e => e.Line).ThenBy(e => e.Column).ToArray();
-            return new ScriptParseResult(new ScriptFile(m_FileId, sections), m_Kind, errors);
+            return new ScriptParseResult(new ScriptFile(m_FileId, sections, m_Properties), m_Kind, errors);
         }
 
 #region Lines and sections
@@ -64,6 +65,7 @@ namespace TheGrowth.Core.Scripting.Text
         {
             var sections = new List<OutlineSection>();
             var names = new Dictionary<string, int>();
+            var properties = new Dictionary<string, int>();
             var levels = new List<Level>();
             OutlineSection current = null;
             var orphanReported = false;
@@ -90,6 +92,15 @@ namespace TheGrowth.Core.Scripting.Text
                 }
 
                 var content = raw.Substring(indent).TrimEnd();
+                if (indent == 0 && ScriptSyntax.TryGetPropertyName(content, out var property))
+                {
+                    ReadProperty(property, content, number, properties);
+                    current = null;
+                    levels.Clear();
+                    orphanReported = false;
+                    continue;
+                }
+
                 if (indent == 0)
                 {
                     var section = ReadSectionHeader(content, number, names);
@@ -160,6 +171,55 @@ namespace TheGrowth.Core.Scripting.Text
             }
 
             return section;
+        }
+
+        /// <summary>
+        /// Свойство <c>Имя -> [выражение]</c>: только в <c>.script</c>, имя из объявлений языка, не повторяется, значение —
+        /// одно выражение типа свойства. Ошибки — с номером строки.
+        /// </summary>
+        private void ReadProperty(string name, string content, int line, Dictionary<string, int> lines)
+        {
+            if (m_Kind != ScriptFileKind.Script)
+            {
+                Error(line, 1, $"property '{name}': properties are allowed only in script files ({ScriptSyntax.ScriptExtension})");
+                return;
+            }
+
+            if (!m_Registry.TryGetProperty(name, out var declaration))
+            {
+                var known = m_Registry.Properties.Count > 0 ? ": expected " + string.Join(", ", m_Registry.Properties.Select(p => p.Name)) : string.Empty;
+                Error(line, 1, $"unknown property '{name}'{known}");
+                return;
+            }
+
+            var isDuplicate = lines.TryGetValue(name, out var first);
+            if (isDuplicate)
+                Error(line, 1, $"property '{name}' is already defined at line {first}");
+            else
+                lines.Add(name, line);
+
+            var node = new OutlineNode { Line = line, Indent = 0, Content = content, Tokens = Tokenizer.Tokenize(content) };
+            var tokens = node.Tokens;
+            if (tokens.Count == 2)
+            {
+                Error(node, tokens[1].End, $"property '{name}' has no value: expected {declaration.Value.Describe()}");
+                return;
+            }
+
+            if (ReportLexicalErrors(node, tokens, 2, tokens.Count))
+                return;
+
+            var matcher = new LineMatcher();
+            matcher.Reset(tokens, tokens.Count, EndOfLine);
+            if (!matcher.MatchValue(declaration.Value, 2))
+            {
+                ReportMismatch(node, tokens, matcher.Furthest, tokens.Count, matcher.Expected, $"property '{name}'");
+                return;
+            }
+
+            // Заглушка резолвера переменных (импорт без реестра) даёт null: синтаксис проверен, свойства нет.
+            if (ReadValue(declaration.Value, node, 2, tokens.Count, out var value) && value is IEvaluator evaluator && !isDuplicate)
+                m_Properties.Add(new ScriptProperty(name, evaluator, new ScriptLocation(m_FileId, line)));
         }
 
         private static OutlineNode CreateNode(int line, int indent, string content)
@@ -849,6 +909,10 @@ namespace TheGrowth.Core.Scripting.Text
             Assign(instance, match, node);
             if (instance is Condition condition && !type.Type.IsInstanceOfType(instance))
                 return new ConditionValue(condition);
+
+            if (instance is IEvaluator evaluator && !type.Type.IsInstanceOfType(instance)
+                && m_Registry.TryGetConversion(evaluator.ResultType, type.ResultType, out var conversion))
+                return conversion.Wrap(evaluator);
 
             return instance;
         }

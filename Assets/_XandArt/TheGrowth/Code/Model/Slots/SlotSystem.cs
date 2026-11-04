@@ -48,8 +48,8 @@ namespace TheGrowth.Model.Slots
         /// <summary>Рюкзак: карты как лежали.</summary>
         public static readonly SlotRules BackpackRules = new SlotRules(new[] { EntityKind.Card });
 
-        /// <summary>Клетка поля: карты, несколько, как лежали (переворот — правила хода).</summary>
-        public static readonly SlotRules CellRules = new SlotRules(new[] { EntityKind.Card });
+        /// <summary>Клетка поля: карты, несколько, как лежали (переворот — правила хода), хуки размещения.</summary>
+        public static readonly SlotRules CellRules = new SlotRules(new[] { EntityKind.Card }, invokePlaceEvent: true);
 
         /// <summary>Слот связи: один объект механики.</summary>
         public static readonly SlotRules LinkRules = new SlotRules(new[] { EntityKind.Mechanic }, 1);

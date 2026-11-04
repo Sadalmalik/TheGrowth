@@ -76,6 +76,26 @@ namespace TheGrowth.Core.Scripting.Text
             MatchFrom(template, line, 0, start, new ParamSpan[line.Params.Count]);
         }
 
+        /// <summary>
+        /// Одно значение типа <paramref name="value"/> занимает ровно токены [<paramref name="start"/>, конец) (значение
+        /// свойства файла). Нет — <see cref="Furthest"/> и <see cref="Expected"/> для сообщения.
+        /// </summary>
+        public bool MatchValue(ScriptValueType value, int start)
+        {
+            var ends = new List<int>();
+            CollectValueEnds(value, start, ends);
+            if (ends.Contains(m_End))
+                return true;
+
+            if (ends.Count == 0)
+                Note(start, value.Describe());
+
+            foreach (var end in ends)
+                Note(end, m_EndName);
+
+            return false;
+        }
+
         /// <summary>Индекс закрывающей <c>]</c> для <c>[</c> в <paramref name="open"/>; -1 — не закрыта.</summary>
         public static int FindClose(IReadOnlyList<Token> tokens, int open, int end)
         {

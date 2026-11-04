@@ -107,7 +107,7 @@ namespace TheGrowth.Tests.EditMode.Tags
             Assert.AreEqual(2, errors.Count, string.Join("\n", errors));
             Assert.IsTrue(errors.All(error => error.Kind == ContentErrorKind.InvalidTag && error.Context == tags));
             Assert.IsTrue(errors.Any(error => error.Message == "tag 'Exit': is declared twice (also in 'Tags')"));
-            Assert.IsTrue(errors.Any(error => error.Message.StartsWith("tag 'bad name': name is not an identifier")));
+            Assert.IsTrue(errors.Any(error => error.Message.StartsWith("tag 'bad name': name is not CamelCase")), string.Join("\n", errors));
         }
     }
 }

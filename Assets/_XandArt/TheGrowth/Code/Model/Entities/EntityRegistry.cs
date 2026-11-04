@@ -102,7 +102,7 @@ namespace TheGrowth.Model.Entities
 #region Lifecycle
 
         /// <summary>
-        /// Покрытие из конфига <paramref name="model"/> (вид <see cref="EntityKind.Modifier"/>) на живую карту или объект механики
+        /// Модификатор из конфига <paramref name="model"/> (вид <see cref="EntityKind.Modifier"/>) на живую карту или объект механики
         /// на место <paramref name="index"/> (-1 — в конец). Нарушение — исключение, ничего не меняется.
         /// </summary>
         public Entity AddModifier(Entity owner, EntityModel model, int index = -1)

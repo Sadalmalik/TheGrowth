@@ -18,7 +18,7 @@ namespace TheGrowth.Core.Entities
         /// <summary>Владелец модификатора; не модификатор или уничтожено — null.</summary>
         Entity GetOwner(Entity entity);
 
-        /// <summary>Покрытия сущности по порядку; нет — пустой список.</summary>
+        /// <summary>Модификаторы сущности по порядку; нет — пустой список.</summary>
         IReadOnlyList<Entity> GetModifiers(Entity entity);
     }
 }

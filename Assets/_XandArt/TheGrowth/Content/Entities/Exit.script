@@ -1,0 +1,4 @@
+SpawnSlot -> [slots tagged Exit]
+
+OnPlacedFirstTime:
+    reveal [active card]

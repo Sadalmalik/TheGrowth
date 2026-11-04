@@ -8,8 +8,8 @@ namespace TheGrowth.Model.Slots
     /// Поле экспедиции в слотах, построенное из графа локации без сцены: клетки (<see cref="SlotIds.Field"/>, по слоту на
     /// слот графа) и слоты связей для объектов механики (<see cref="SlotIds.Link"/>, по слоту на связь), смежность клеток по
     /// связям (ненаправленная). Структура во время игры не меняется. Повторяющиеся ID и связи с пропавшими слотами
-    /// пропускаются (их показывает валидатор контента). Поиск пути и «соседи за N связей» — эвалуаторы (позже), здесь только
-    /// данные смежности.
+    /// пропускаются (их показывает валидатор контента). Близость по графу — число связей (<see cref="GetDistances"/>); объекты
+    /// механики на связях пока не учитываются, поиск пути с ними — позже (шаг 8 E03).
     /// </summary>
     public sealed class FieldSlots
     {
@@ -81,6 +81,39 @@ namespace TheGrowth.Model.Slots
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Число связей от клетки <paramref name="from"/> до клеток в пределах <paramref name="maxSteps"/> связей (поиск в
+        /// ширину), включая её саму (0). Не клетка поля — пусто.
+        /// </summary>
+        public Dictionary<Slot, int> GetDistances(Slot from, int maxSteps = int.MaxValue)
+        {
+            var distances = new Dictionary<Slot, int>();
+            if (from == null || !m_Neighbours.ContainsKey(from))
+                return distances;
+
+            distances.Add(from, 0);
+            var queue = new Queue<Slot>();
+            queue.Enqueue(from);
+            while (queue.Count > 0)
+            {
+                var cell = queue.Dequeue();
+                var steps = distances[cell];
+                if (steps >= maxSteps)
+                    continue;
+
+                foreach (var neighbour in m_Neighbours[cell])
+                {
+                    if (distances.ContainsKey(neighbour))
+                        continue;
+
+                    distances.Add(neighbour, steps + 1);
+                    queue.Enqueue(neighbour);
+                }
+            }
+
+            return distances;
         }
 
         /// <summary>Вторая клетка слота связи; <paramref name="cell"/> не из этой связи — null.</summary>

@@ -14,7 +14,7 @@ namespace TheGrowth.EditorTools.Entities
 {
     /// <summary>
     /// Инспектор <see cref="EntityModel"/> без Odin: ID и вид (смена вида дописывает обязательные компоненты нового вида),
-    /// теги из реестра тегов, переменные области «карта» из объявлений со значениями по умолчанию конфига, список компонентов
+    /// файл скрипта (только для чтения), теги из реестра тегов, переменные области «карта» из объявлений со значениями по умолчанию конфига, список компонентов
     /// <c>[SerializeReference]</c> — добавление по меню типов (один компонент на ключ), удаление (обязательные компоненты вида
     /// не удаляются — <see cref="EntityModelEditing.CanRemove"/>), порядок, поля компонента; ошибки конфига
     /// (<see cref="EntityModelChecks"/>). Изменения — с Undo.
@@ -61,6 +61,7 @@ namespace TheGrowth.EditorTools.Entities
                 Edit(model, "Change Entity Kind", () => EntityModelEditing.AddMissingComponents(model));
 
             serializedObject.Update();
+            DrawScript(model);
             EditorGUILayout.Space();
             DrawTags(model, tags);
             EditorGUILayout.Space();
@@ -73,6 +74,25 @@ namespace TheGrowth.EditorTools.Entities
             foreach (var error in EntityModelChecks.Check(model, tags, variables))
                 EditorGUILayout.HelpBox(error, MessageType.Error);
         }
+
+#region Script
+
+        /// <summary>Файл скрипта — только для чтения: привязку пишет сборка реестра (<c>&lt;имя ассета&gt;.script</c> рядом).</summary>
+        private static void DrawScript(EntityModel model)
+        {
+            var path = ContentRegistryBuilder.GetScriptPath(model) ?? "<asset name>.script";
+            var text = string.IsNullOrEmpty(model.ScriptId) ? null : AssetDatabase.LoadMainAssetAtPath(path) as TextAsset;
+            var label = new GUIContent("Script", $"'{path}' is bound by the content registry build. No file — the entity has no script.");
+            using (new EditorGUI.DisabledScope(true))
+            {
+                if (text != null)
+                    EditorGUILayout.ObjectField(label, text, typeof(TextAsset), false);
+                else
+                    EditorGUILayout.TextField(label, string.IsNullOrEmpty(model.ScriptId) ? "None" : $"{model.ScriptId} (file not found)");
+            }
+        }
+
+#endregion
 
 #region Tags
 

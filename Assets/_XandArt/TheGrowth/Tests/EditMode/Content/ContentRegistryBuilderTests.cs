@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using TheGrowth.Core.Content;
+using TheGrowth.Core.Entities;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Core.Variables;
 using TheGrowth.EditorTools.Content;
@@ -73,6 +74,24 @@ namespace TheGrowth.Tests.EditMode.Content
             Assert.AreEqual("monster_1", monster.Id);
             Assert.AreEqual(ContentFolder + "/Wolf.asset", AssetDatabase.GetAssetPath(monster));
             Assert.That(rebuilt.Assets, Is.EqualTo(new ContentAsset[] { bear, monster }));
+        }
+
+        [Test]
+        public void Rebuild_BindsEntityScriptFileByAssetName()
+        {
+            var hero = CreateAsset<EntityModel>(ContentFolder + "/Hero.asset", "hero_card");
+            var plain = CreateAsset<EntityModel>(ContentFolder + "/Plain.asset", "plain");
+            WriteScript(ContentFolder + "/Hero.script", "AllowedMoves -> [free slots]\n\nOnPlaced:\n    log \"a\"\n");
+            WriteScript(ContentFolder + "/hero_card.script", "Start:\n    log \"b\"\n");
+
+            ContentRegistryBuilder.Rebuild(ContentFolder, RegistryPath);
+
+            Assert.AreEqual("Hero", hero.ScriptId, "the file name of the asset, not the config id");
+            Assert.IsTrue(string.IsNullOrEmpty(plain.ScriptId));
+
+            Assert.IsTrue(AssetDatabase.DeleteAsset(ContentFolder + "/Hero.script"));
+            ContentRegistryBuilder.Rebuild(ContentFolder, RegistryPath);
+            Assert.IsTrue(string.IsNullOrEmpty(hero.ScriptId), "the file is removed");
         }
 
         [Test]

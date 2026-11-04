@@ -149,7 +149,7 @@ namespace TheGrowth.Tests.EditMode.Slots
             Assert.IsTrue(resources.Accepts(m_Kit.Herb, out _));
             Assert.IsTrue(resources.Accepts(m_Kit.Exit, out _));
             Assert.IsFalse(resources.Accepts(m_Kit.Hero, out var reason));
-            StringAssert.Contains("none of the tags resource, exit", reason);
+            StringAssert.Contains("none of the tags Resource, Exit", reason);
             Assert.IsFalse(resources.Accepts(m_Kit.Wall, out reason));
             StringAssert.Contains("is a mechanic", reason);
             Assert.Throws<ArgumentException>(() => new SlotRules(new[] { EntityKind.Modifier }));

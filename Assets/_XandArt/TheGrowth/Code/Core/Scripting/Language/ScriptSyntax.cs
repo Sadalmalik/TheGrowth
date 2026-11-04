@@ -23,6 +23,9 @@ namespace TheGrowth.Core.Scripting
         /// <summary>Что печатает принтер на месте незаданного параметра. Парсер такую запись не принимает.</summary>
         public const string MissingValue = "[]";
 
+        /// <summary>Разделитель свойства файла: <c>Имя -> [выражение]</c>.</summary>
+        public const string PropertyArrow = "->";
+
         public static bool TryGetFileKind(string extension, out ScriptFileKind kind)
         {
             if (string.Equals(extension, ScriptExtension, StringComparison.OrdinalIgnoreCase))
@@ -54,6 +57,31 @@ namespace TheGrowth.Core.Scripting
                 CommandContext.GameplayOnly => kind == ScriptFileKind.Script,
                 _ => true,
             };
+        }
+
+        /// <summary>
+        /// Строка с нулевым отступом — свойство файла: идентификатор, затем <see cref="PropertyArrow"/>
+        /// (<c>AllowedMoves -> [...]</c>). Проверяется до заголовка секции.
+        /// </summary>
+        public static bool TryGetPropertyName(string line, out string name)
+        {
+            name = null;
+            if (string.IsNullOrEmpty(line) || !IsIdentifierStart(line[0]))
+                return false;
+
+            var end = 1;
+            while (end < line.Length && IsIdentifierPart(line[end]))
+                end++;
+
+            var arrow = end;
+            while (arrow < line.Length && line[arrow] == ' ')
+                arrow++;
+
+            if (string.CompareOrdinal(line, arrow, PropertyArrow, 0, PropertyArrow.Length) != 0)
+                return false;
+
+            name = line.Substring(0, end);
+            return true;
         }
 
         /// <summary>Имя секции, переменной, ID конфига: буква или <c>_</c>, затем буквы, цифры, <c>_</c>.</summary>

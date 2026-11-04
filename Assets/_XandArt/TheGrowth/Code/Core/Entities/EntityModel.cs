@@ -10,12 +10,17 @@ namespace TheGrowth.Core.Entities
     /// <c>[SerializeReference]</c>). Одно пространство ID для всех видов. Создаётся пресетом вида (меню
     /// <c>[Game]/Entity/...</c>): пресет добавляет обязательные компоненты вида, инспектор не даёт их удалить, сборка реестра
     /// контента дописывает недостающие. Ссылка на конфиг определённого вида — поле с <see cref="ModelKindAttribute"/>.
-    /// Экземпляр в игре — <see cref="Entity"/>.
+    /// Логика — файл скрипта <c>&lt;имя ассета&gt;.script</c> в папке конфига: привязку (<see cref="ScriptId"/>) записывает
+    /// сборка реестра контента. Экземпляр в игре — <see cref="Entity"/>.
     /// </summary>
     public sealed class EntityModel : ContentAsset
     {
         [SerializeField]
         private EntityKind m_Kind;
+
+        [SerializeField]
+        [Tooltip("Id of the script file '<asset name>.script' next to the asset. Written by the content registry build.")]
+        private string m_Script;
 
         [SerializeField]
         [Tooltip("Tags from the tag registry. They don't change in the game.")]
@@ -29,6 +34,9 @@ namespace TheGrowth.Core.Entities
         private List<ComponentSettings> m_Components = new List<ComponentSettings>();
 
         public EntityKind Kind => m_Kind;
+
+        /// <summary>ID файла скрипта сущности (хуки, свойства); файла нет — пусто.</summary>
+        public string ScriptId => m_Script;
 
         public IReadOnlyList<string> Tags => TagList;
 
@@ -67,6 +75,12 @@ namespace TheGrowth.Core.Entities
         internal void SetKind(EntityKind kind)
         {
             m_Kind = kind;
+        }
+
+        /// <summary>Только редактор (сборка реестра контента) и тесты.</summary>
+        internal void SetScript(string scriptId)
+        {
+            m_Script = string.IsNullOrEmpty(scriptId) ? null : scriptId;
         }
     }
 }

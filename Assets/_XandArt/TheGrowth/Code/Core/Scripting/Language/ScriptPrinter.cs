@@ -8,10 +8,10 @@ using TheGrowth.Core.Scripting.Text;
 namespace TheGrowth.Core.Scripting
 {
     /// <summary>
-    /// Печать дерева команд в канонический текст: отступ <see cref="ScriptSyntax.IndentWidth"/> пробелов,
-    /// пустая строка между секциями, без пробелов в конце строк, перевод строки <c>\n</c>.
-    /// Вложенные узлы — в скобках, константы — литералами. Незаданный параметр — <see cref="ScriptSyntax.MissingValue"/>
-    /// (такой текст не разбирается: место видно сразу).
+    /// Печать дерева команд в канонический текст: свойства файла первыми (<c>Имя -> [выражение]</c>, по строке), затем
+    /// секции; отступ <see cref="ScriptSyntax.IndentWidth"/> пробелов, пустая строка между свойствами и секциями и между
+    /// секциями, без пробелов в конце строк, перевод строки <c>\n</c>. Вложенные узлы — в скобках, константы — литералами.
+    /// Незаданный параметр — <see cref="ScriptSyntax.MissingValue"/> (такой текст не разбирается: место видно сразу).
     /// </summary>
     public sealed class ScriptPrinter
     {
@@ -35,9 +35,16 @@ namespace TheGrowth.Core.Scripting
                 throw new ArgumentNullException(nameof(file));
 
             var builder = new StringBuilder();
+            foreach (var property in file.Properties)
+            {
+                var type = m_Registry.TryGetProperty(property.Name, out var declaration) ? declaration.Value : null;
+                builder.Append(property.Name).Append(' ').Append(ScriptSyntax.PropertyArrow).Append(' ');
+                builder.Append(PrintNode(type, property.Value)).Append('\n');
+            }
+
             for (var i = 0; i < file.Sections.Count; i++)
             {
-                if (i > 0)
+                if (i > 0 || file.Properties.Count > 0)
                     builder.Append('\n');
 
                 var section = file.Sections[i];
@@ -220,6 +227,9 @@ namespace TheGrowth.Core.Scripting
 
             if (node is ConditionValue { Condition: { } condition })
                 return PrintNode(null, condition);
+
+            if (node is IConversionValue { Source: { } source })
+                return PrintNode(null, source);
 
             if (TryPrintVariable(node, out var variable))
                 return variable;

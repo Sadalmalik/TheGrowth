@@ -40,7 +40,10 @@ namespace TheGrowth.Core.Scripting
         }
     }
 
-    /// <summary>Равенство значений одного типа (<c>int</c>, <c>bool</c>, <c>string</c>); тип B — как у A.</summary>
+    /// <summary>
+    /// Равенство значений одного типа (<c>int</c>, <c>bool</c>, <c>string</c> и типы значений расширений — карта, слот);
+    /// тип B — как у A. Пустое значение (карта или слот не найдены) с одной из сторон — false.
+    /// </summary>
     [Script("equal", "[A] == [B]")]
     public sealed class Equal : Condition
     {
@@ -51,11 +54,16 @@ namespace TheGrowth.Core.Scripting
 
         public override bool Check(ScriptContext context)
         {
-            return Equals(A.Evaluate(context), B.Evaluate(context));
+            var a = A.Evaluate(context);
+            var b = B.Evaluate(context);
+            return a != null && b != null && Equals(a, b);
         }
     }
 
-    /// <summary>Неравенство значений одного типа (<c>int</c>, <c>bool</c>, <c>string</c>); тип B — как у A.</summary>
+    /// <summary>
+    /// Неравенство значений одного типа (<c>int</c>, <c>bool</c>, <c>string</c> и типы значений расширений — карта, слот);
+    /// тип B — как у A. Пустое значение с одной из сторон — false (условие на пустом).
+    /// </summary>
     [Script("not_equal", "[A] != [B]")]
     public sealed class NotEqual : Condition
     {
@@ -66,7 +74,9 @@ namespace TheGrowth.Core.Scripting
 
         public override bool Check(ScriptContext context)
         {
-            return !Equals(A.Evaluate(context), B.Evaluate(context));
+            var a = A.Evaluate(context);
+            var b = B.Evaluate(context);
+            return a != null && b != null && !Equals(a, b);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TheGrowth.EditorTools.Scripting
     /// реестру контента; файл зависит от набора ID (<see cref="ContentRegistryBuilder.IdsDependency"/>) и набора
     /// объявлений переменных (<see cref="ContentRegistryBuilder.VariablesDependency"/>) и переимпортируется при их смене.
     /// </summary>
-    [ScriptedImporter(3, new[] { "script", "dialog" })]
+    [ScriptedImporter(4, new[] { "script", "dialog" })]
     public sealed class ScriptFileImporter : ScriptedImporter
     {
         public override void OnImportAsset(AssetImportContext ctx)

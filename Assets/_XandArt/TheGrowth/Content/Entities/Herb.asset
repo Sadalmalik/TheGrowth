@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: TheGrowth.Core::TheGrowth.Core.Entities.EntityModel
   m_Id: Herb
   m_Kind: 0
+  m_Script: Herb
   m_Tags:
   - Resource
   m_Variables: []

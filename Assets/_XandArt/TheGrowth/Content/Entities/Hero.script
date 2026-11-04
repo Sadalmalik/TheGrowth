@@ -1,0 +1,9 @@
+AllowedMoves -> [slots around [active card] within 1]
+
+OnPlacedFirstTime:
+    call OnPlaced
+
+OnPlaced:
+    for each card in [cards in [slots around [active card] within 1]]
+        reveal [iterating card]
+    reveal [card under [active card]]

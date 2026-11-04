@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: TheGrowth.Core::TheGrowth.Core.Entities.EntityModel
   m_Id: Monster
   m_Kind: 0
+  m_Script: Monster
   m_Tags:
   - Monster
   m_Variables:

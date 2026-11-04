@@ -23,8 +23,8 @@ namespace TheGrowth.EditorTools.Content
     /// конфиги и файлы скриптов проекта вне реестра, графы сцен локаций, на которые локация не ссылается, настройки поля
     /// (<see cref="FieldConfig"/> — ровно один в реестре проекта), конфиги сущностей (<see cref="EntityModelChecks"/>),
     /// вид конфигов сущностей в полях с <see cref="ModelKindAttribute"/> (<see cref="ModelKindChecks"/>), типы компонентов
-    /// сущностей (только в проекте). Сцены не открываются. Ошибки — списком (для тестов и pre-build), <see cref="Log"/>
-    /// выводит их в консоль с выделением ассета.
+    /// сущностей (только в проекте), файлы скриптов сущностей (свойства — только в файлах сущностей). Сцены не открываются.
+    /// Ошибки — списком (для тестов и pre-build), <see cref="Log"/> выводит их в консоль с выделением ассета.
     /// </summary>
     public static class ContentValidator
     {
@@ -50,6 +50,7 @@ namespace TheGrowth.EditorTools.Content
             ValidateGraphs(assets, tags, errors);
             ValidateFieldConfig(assets, isComplete, errors);
             ValidateEntities(assets, tags, variables, errors);
+            ValidateEntityScripts(assets, scripts ?? Array.Empty<ScriptFileEntry>(), errors);
             ValidateModelKinds(assets, errors);
             return errors;
         }
@@ -254,6 +255,48 @@ namespace TheGrowth.EditorTools.Content
             {
                 foreach (var message in EntityModelChecks.Check(model, tags, variables))
                     errors.Add(Error(ContentErrorKind.InvalidEntity, model, message));
+            }
+        }
+
+        /// <summary>
+        /// Файлы скриптов сущностей: файл конфига есть в реестре; свойства (<c>Имя -> [...]</c>) — только в файлах, привязанных
+        /// к сущностям (<see cref="EntityModel.ScriptId"/>).
+        /// </summary>
+        private static void ValidateEntityScripts(IReadOnlyList<ContentAsset> assets, IReadOnlyList<ScriptFileEntry> scripts, List<ContentError> errors)
+        {
+            var bound = new HashSet<string>(StringComparer.Ordinal);
+            var known = new HashSet<string>(scripts.Select(entry => entry.Id), StringComparer.Ordinal);
+            foreach (var model in assets.OfType<EntityModel>())
+            {
+                if (string.IsNullOrEmpty(model.ScriptId))
+                    continue;
+
+                bound.Add(model.ScriptId);
+                if (!known.Contains(model.ScriptId))
+                    errors.Add(Error(ContentErrorKind.InvalidScript, model, $"script file '{model.ScriptId}' of the entity is not in the registry (run [TheGrowth]/Content/Rebuild Registry)"));
+            }
+
+            foreach (var entry in scripts)
+            {
+                if (entry.Text == null || entry.Kind != ScriptFileKind.Script || bound.Contains(entry.Id))
+                    continue;
+
+                foreach (var (name, line) in FindProperties(entry.Text.text))
+                {
+                    errors.Add(Error(ContentErrorKind.InvalidScript, entry.Text,
+                        $"line {line}: property '{name}' is allowed only in a script file of an entity ('<entity asset name>.script' next to the asset)"));
+                }
+            }
+        }
+
+        /// <summary>Строки-свойства файла: нулевой отступ, <c>Имя -></c> (<see cref="ScriptSyntax.TryGetPropertyName"/>).</summary>
+        private static IEnumerable<(string Name, int Line)> FindProperties(string text)
+        {
+            var lines = (text ?? string.Empty).Replace("\r\n", "\n").Split('\n');
+            for (var i = 0; i < lines.Length; i++)
+            {
+                if (ScriptSyntax.TryGetPropertyName(lines[i].TrimStart('﻿').TrimEnd(), out var name))
+                    yield return (name, i + 1);
             }
         }
 

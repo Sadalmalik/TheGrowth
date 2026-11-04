@@ -20,15 +20,17 @@ namespace TheGrowth.Model.Slots
 
     /// <summary>
     /// Правила слота: какие сущности можно положить (виды; теги — хотя бы один из списка, пусто — любые), ёмкость (0 — без
-    /// ограничения), как класть карту. Проверяются при создании сущности в слоте и при перемещении; загрузка сейва правила не
-    /// проверяет (состояние восстанавливается как было). Покрытия в слоты не кладутся. Неизменяемые.
+    /// ограничения), как класть карту, вызываются ли хуки размещения карт (<see cref="InvokePlaceEvent"/>). Проверяются при
+    /// создании сущности в слоте и при перемещении; загрузка сейва правила не проверяет (состояние восстанавливается как
+    /// было). Модификаторы в слоты не кладутся. Неизменяемые.
     /// </summary>
     public sealed class SlotRules
     {
         private readonly EntityKind[] m_Kinds;
         private readonly string[] m_AnyTags;
 
-        public SlotRules(IEnumerable<EntityKind> kinds, int capacity = 0, SlotFacing facing = SlotFacing.Keep, IEnumerable<string> anyTags = null)
+        public SlotRules(IEnumerable<EntityKind> kinds, int capacity = 0, SlotFacing facing = SlotFacing.Keep, IEnumerable<string> anyTags = null,
+            bool invokePlaceEvent = false)
         {
             if (kinds == null)
                 throw new ArgumentNullException(nameof(kinds));
@@ -45,6 +47,7 @@ namespace TheGrowth.Model.Slots
 
             Capacity = capacity;
             Facing = facing;
+            InvokePlaceEvent = invokePlaceEvent;
             m_AnyTags = (anyTags ?? Array.Empty<string>()).Distinct().ToArray();
         }
 
@@ -57,6 +60,13 @@ namespace TheGrowth.Model.Slots
         public int Capacity { get; }
 
         public SlotFacing Facing { get; }
+
+        /// <summary>
+        /// В слоте вызываются хуки размещения карт (<c>OnPlaced</c>, <c>OnCovered</c>, <c>OnUnCovered</c>): у клеток поля —
+        /// да, у служебных слотов (инвентарь, колода, рука, сброс, рюкзак) и слотов связей — нет. Хуки вызывает
+        /// <c>CardSystem</c>; <see cref="SlotSystem.Move"/> хуков не вызывает.
+        /// </summary>
+        public bool InvokePlaceEvent { get; }
 
         /// <summary>Вид и теги конфига подходят слоту (ёмкость проверяет система слотов).</summary>
         public bool Accepts(EntityModel model, out string reason)
@@ -82,7 +92,8 @@ namespace TheGrowth.Model.Slots
         {
             var tags = m_AnyTags.Length > 0 ? $", tags {string.Join("|", m_AnyTags)}" : string.Empty;
             var capacity = Capacity > 0 ? Capacity.ToString() : "unlimited";
-            return $"{string.Join("|", m_Kinds.Select(kind => kind.ToText()))}{tags}, capacity {capacity}, {Facing}";
+            var events = InvokePlaceEvent ? ", place events" : string.Empty;
+            return $"{string.Join("|", m_Kinds.Select(kind => kind.ToText()))}{tags}, capacity {capacity}, {Facing}{events}";
         }
     }
 }

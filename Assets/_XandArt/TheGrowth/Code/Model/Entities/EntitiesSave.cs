@@ -29,7 +29,7 @@ namespace TheGrowth.Model.Entities
         /// <summary>Состояния компонентов <c>{ ключ: DTO }</c>; нет — null.</summary>
         public Dictionary<string, JToken> Components;
 
-        /// <summary>Покрытия по порядку; нет — null.</summary>
+        /// <summary>Модификаторы по порядку; нет — null.</summary>
         public List<EntitySave> Modifiers;
     }
 }

@@ -93,14 +93,16 @@ namespace TheGrowth.EditorTools.Scripting
                 : $"{assetPath}({error.Line}): {error.Message}";
         }
 
-        /// <summary>Реестр из сборок игры; null — шаблоны с ошибками (<paramref name="error"/>).</summary>
+        /// <summary>Реестр из сборок игры (шаблоны и расширения языка); null — шаблоны с ошибками (<paramref name="error"/>).</summary>
         public static ScriptRegistry GetRegistry(out string error)
         {
             if (m_Registry == null && m_RegistryError == null)
             {
                 try
                 {
-                    var types = TypeCache.GetTypesWithAttribute<ScriptAttribute>().Where(t => ScriptRegistry.IsScriptAssembly(t.Assembly));
+                    var types = TypeCache.GetTypesWithAttribute<ScriptAttribute>()
+                        .Concat(TypeCache.GetTypesDerivedFrom<ScriptExtension>().Where(ScriptRegistry.IsExtension))
+                        .Where(t => ScriptRegistry.IsScriptAssembly(t.Assembly));
                     m_Registry = ScriptRegistry.Build(types);
                 }
                 catch (ScriptRegistryException exception)

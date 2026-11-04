@@ -1,0 +1,3 @@
+OnCovered:
+    if [[covering card] has tag Hero]
+        move [active card] to [backpack]

@@ -1,6 +1,7 @@
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Scripting;
+using TheGrowth.Model.Cards;
 using TheGrowth.Model.Entities;
 using TheGrowth.Model.Locations;
 using TheGrowth.Model.Slots;
@@ -23,6 +24,7 @@ namespace TheGrowth.Model
             container.Add(new VariablesSystem());
             container.Add(new EntityRegistry());
             container.Add(new SlotSystem());
+            container.Add(new CardSystem());
         }
     }
 }

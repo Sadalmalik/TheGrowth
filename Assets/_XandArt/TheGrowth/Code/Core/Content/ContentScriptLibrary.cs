@@ -9,7 +9,7 @@ namespace TheGrowth.Core.Content
     /// <summary>
     /// Файлы скриптов из реестра контента (система сессии). Файл разбирается при первом запросе и кешируется
     /// до конца сессии. Файл с ошибками разбора недоступен: ошибки логируются один раз, с файлом и строкой.
-    /// ID конфигов — по реестру (<see cref="ContentScriptResolver"/>), переменные — по объявлениям
+    /// ID конфигов и теги — по реестру (<see cref="ContentScriptResolver"/>), переменные — по объявлениям
     /// (<see cref="VariableScriptResolver"/>).
     /// Требует в контейнере (обычно глобальном) <see cref="IContentRegistry"/>, <see cref="ScriptLanguage"/> и
     /// <see cref="VariableCatalog"/>.

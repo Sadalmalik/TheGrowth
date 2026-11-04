@@ -7,7 +7,8 @@ using TheGrowth.Core.Scripting.Text;
 namespace TheGrowth.Core.Scripting
 {
     /// <summary>
-    /// Реестр шаблонов языка: все неабстрактные команды, кондишены и эвалуаторы с <see cref="ScriptAttribute"/>.
+    /// Реестр шаблонов языка: все неабстрактные команды, кондишены и эвалуаторы с <see cref="ScriptAttribute"/> и
+    /// объявления расширений языка (<see cref="ScriptExtension"/>: типы значений, свойства файлов, преобразования).
     /// Строится один раз (<see cref="Build"/>) и дальше только читается — парсером, принтером, инспектором.
     /// Проблемы шаблонов собираются целиком и бросаются одним <see cref="ScriptRegistryException"/>:
     /// это ошибки кода, с неверным реестром разбор давал бы ложные ошибки в скриптах.
@@ -16,9 +17,12 @@ namespace TheGrowth.Core.Scripting
     {
         private const string TestFrameworkAssembly = "nunit.framework";
 
-        /// <summary>Типы значения <see cref="ScriptValueKind.Value"/> — типы переменных.</summary>
+        /// <summary>Встроенные типы значения <see cref="ScriptValueKind.Value"/> — типы переменных; расширения добавляют свои.</summary>
         private static readonly Type[] ValueEvaluatorTypes = { typeof(Evaluator<int>), typeof(Evaluator<bool>), typeof(Evaluator<string>) };
 
+        private readonly List<Type> m_ValueEvaluatorTypes = new List<Type>(ValueEvaluatorTypes);
+        private readonly List<ScriptPropertyDeclaration> m_Properties = new List<ScriptPropertyDeclaration>();
+        private readonly Dictionary<(Type From, Type To), ScriptConversion> m_Conversions = new Dictionary<(Type, Type), ScriptConversion>();
         private readonly List<ScriptTemplate> m_Templates = new List<ScriptTemplate>();
         private readonly List<ScriptTemplate> m_Commands = new List<ScriptTemplate>();
         private readonly Dictionary<Type, ScriptTemplate[]> m_TemplatesByType = new Dictionary<Type, ScriptTemplate[]>();
@@ -35,21 +39,27 @@ namespace TheGrowth.Core.Scripting
 
         public IReadOnlyList<ScriptTemplate> Commands => m_Commands;
 
+        /// <summary>Свойства файлов из расширений, по имени.</summary>
+        public IReadOnlyList<ScriptPropertyDeclaration> Properties => m_Properties;
+
         private ScriptRegistry()
         {
         }
 
 #region Building
 
-        /// <summary>Реестр из типов. Типы без <see cref="ScriptAttribute"/> пропускаются.</summary>
+        /// <summary>Реестр из типов. Типы без <see cref="ScriptAttribute"/>, кроме расширений языка, пропускаются.</summary>
         public static ScriptRegistry Build(IEnumerable<Type> types)
         {
             if (types == null)
                 throw new ArgumentNullException(nameof(types));
 
+            var list = types.Where(t => t != null).Distinct().OrderBy(t => t.FullName, StringComparer.Ordinal).ToList();
             var registry = new ScriptRegistry();
             var errors = new List<string>();
-            registry.Compile(types, errors);
+            var declarations = registry.Extend(list, errors);
+            registry.Compile(list, errors);
+            registry.CompileProperties(declarations, errors);
             registry.Validate(errors);
 
             if (errors.Count > 0)
@@ -70,7 +80,7 @@ namespace TheGrowth.Core.Scripting
             return FromAssemblies(AppDomain.CurrentDomain.GetAssemblies().Where(IsScriptAssembly));
         }
 
-        /// <summary>Типы с <see cref="ScriptAttribute"/> из сборок.</summary>
+        /// <summary>Типы с <see cref="ScriptAttribute"/> и расширения языка (<see cref="IsExtension"/>) из сборок.</summary>
         public static IEnumerable<Type> CollectTypes(IEnumerable<Assembly> assemblies)
         {
             foreach (var assembly in assemblies)
@@ -87,10 +97,16 @@ namespace TheGrowth.Core.Scripting
 
                 foreach (var type in types)
                 {
-                    if (type != null && type.IsDefined(typeof(ScriptAttribute), false))
+                    if (type != null && (type.IsDefined(typeof(ScriptAttribute), false) || IsExtension(type)))
                         yield return type;
                 }
             }
+        }
+
+        /// <summary>Неабстрактный наследник <see cref="ScriptExtension"/>.</summary>
+        public static bool IsExtension(Type type)
+        {
+            return type is { IsAbstract: false } && typeof(ScriptExtension).IsAssignableFrom(type);
         }
 
         /// <summary>
@@ -119,10 +135,82 @@ namespace TheGrowth.Core.Scripting
             return referencesCore;
         }
 
+        /// <summary>
+        /// Объявления расширений: до компиляции шаблонов (типы значений нужны параметрам <see cref="IEvaluator"/>). Свойства —
+        /// в <see cref="CompileProperties"/>.
+        /// </summary>
+        private ScriptDeclarations Extend(List<Type> types, List<string> errors)
+        {
+            var declarations = new ScriptDeclarations();
+            foreach (var type in types)
+            {
+                if (!IsExtension(type))
+                    continue;
+
+                try
+                {
+                    ((ScriptExtension)Activator.CreateInstance(type)).Declare(declarations);
+                }
+                catch (Exception exception)
+                {
+                    errors.Add($"{type.FullName}: language extension failed: {exception.InnerException?.Message ?? exception.Message}");
+                }
+            }
+
+            foreach (var type in declarations.ValueTypes)
+            {
+                if (!m_ValueEvaluatorTypes.Contains(type))
+                    m_ValueEvaluatorTypes.Add(type);
+            }
+
+            foreach (var conversion in declarations.Conversions)
+            {
+                var key = (conversion.From, conversion.To);
+                if (conversion.From == conversion.To)
+                    errors.Add($"conversion {conversion}: types are the same");
+                else if (m_Conversions.ContainsKey(key))
+                    errors.Add($"conversion {conversion} is declared twice");
+                else
+                    m_Conversions.Add(key, conversion);
+            }
+
+            return declarations;
+        }
+
+        /// <summary>
+        /// Свойства файлов: имя — идентификатор, уникально; тип значения — как у параметра-эвалуатора. После компиляции
+        /// шаблонов, до индекса кандидатов.
+        /// </summary>
+        private void CompileProperties(ScriptDeclarations declarations, List<string> errors)
+        {
+            foreach (var (name, valueType, evaluatorType) in declarations.Properties)
+            {
+                if (!ScriptSyntax.IsIdentifier(name))
+                {
+                    errors.Add($"property '{name}': name must be an identifier");
+                    continue;
+                }
+
+                if (m_Properties.Exists(property => property.Name == name))
+                {
+                    errors.Add($"property '{name}' is declared twice");
+                    continue;
+                }
+
+                var value = GetValueType(evaluatorType, out var error);
+                if (value == null)
+                    errors.Add($"property '{name}': {error}");
+                else
+                    m_Properties.Add(new ScriptPropertyDeclaration(name, valueType, value));
+            }
+
+            m_Properties.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
+        }
+
         private void Compile(IEnumerable<Type> types, List<string> errors)
         {
             var names = new Dictionary<string, Type>();
-            foreach (var type in types.Where(t => t != null).Distinct().OrderBy(t => t.FullName, StringComparer.Ordinal))
+            foreach (var type in types)
             {
                 var attributes = (ScriptAttribute[])type.GetCustomAttributes(typeof(ScriptAttribute), false);
                 if (attributes.Length == 0)
@@ -228,11 +316,14 @@ namespace TheGrowth.Core.Scripting
             var skeletons = new Dictionary<string, ScriptTemplate>();
             foreach (var template in m_Templates)
             {
-                var key = GetResultKey(template) + "|" + template.Skeleton;
-                if (skeletons.TryGetValue(key, out var other))
-                    errors.Add($"templates have the same skeleton '{template.Skeleton}': {Describe(other)} and {Describe(template)}");
-                else
-                    skeletons.Add(key, template);
+                foreach (var resultKey in GetResultKeys(template))
+                {
+                    var key = resultKey + "|" + template.Skeleton;
+                    if (skeletons.TryGetValue(key, out var other))
+                        errors.Add($"templates have the same skeleton '{template.Skeleton}': {Describe(other)} and {Describe(template)}");
+                    else
+                        skeletons.Add(key, template);
+                }
             }
 
             foreach (var template in m_Commands)
@@ -265,6 +356,23 @@ namespace TheGrowth.Core.Scripting
                 ScriptNodeKind.Condition => "evaluator:" + typeof(bool).FullName,
                 _ => "evaluator:" + template.ResultType.FullName,
             };
+        }
+
+        /// <summary>
+        /// Ключи уникальности скелета шаблона: свой и типы, в которые его результат преобразуется
+        /// (<see cref="ScriptDeclarations.AddConversion{TFrom,TTo}"/>): там он — кандидат наравне с эвалуаторами целевого типа.
+        /// </summary>
+        private IEnumerable<string> GetResultKeys(ScriptTemplate template)
+        {
+            yield return GetResultKey(template);
+            if (template.NodeKind != ScriptNodeKind.Evaluator)
+                yield break;
+
+            foreach (var conversion in m_Conversions.Values)
+            {
+                if (conversion.From == template.ResultType)
+                    yield return "evaluator:" + conversion.To.FullName;
+            }
         }
 
         private static string Describe(ScriptTemplate template)
@@ -309,8 +417,11 @@ namespace TheGrowth.Core.Scripting
             };
         }
 
-        /// <summary>Узел типа поля; в эвалуатор bool подходят и условия (<see cref="ConditionValue"/>).</summary>
-        private static bool IsNodeCandidate(ScriptValueType value, ScriptTemplate template)
+        /// <summary>
+        /// Узел типа поля; в эвалуатор bool подходят и условия (<see cref="ConditionValue"/>), в эвалуатор T — эвалуаторы
+        /// типов, которые преобразуются в T (<see cref="ConversionValue{TFrom,TTo}"/>).
+        /// </summary>
+        private bool IsNodeCandidate(ScriptValueType value, ScriptTemplate template)
         {
             if (template.NodeKind == ScriptNodeKind.Command)
                 return false;
@@ -318,7 +429,10 @@ namespace TheGrowth.Core.Scripting
             if (value.Type.IsAssignableFrom(template.Type))
                 return true;
 
-            return template.NodeKind == ScriptNodeKind.Condition && value.Type == typeof(Evaluator<bool>);
+            if (template.NodeKind == ScriptNodeKind.Condition)
+                return value.Type == typeof(Evaluator<bool>);
+
+            return value.Kind == ScriptValueKind.Evaluator && m_Conversions.ContainsKey((template.ResultType, value.ResultType));
         }
 
 #endregion
@@ -348,6 +462,19 @@ namespace TheGrowth.Core.Scripting
 
             templates = Array.Empty<ScriptTemplate>();
             return false;
+        }
+
+        public bool TryGetProperty(string name, out ScriptPropertyDeclaration property)
+        {
+            property = name == null ? null : m_Properties.Find(item => item.Name == name);
+            return property != null;
+        }
+
+        /// <summary>Преобразование значения <paramref name="from"/> в <paramref name="to"/> из расширений языка.</summary>
+        public bool TryGetConversion(Type from, Type to, out ScriptConversion conversion)
+        {
+            conversion = null;
+            return from != null && to != null && m_Conversions.TryGetValue((from, to), out conversion);
         }
 
         /// <summary>Команды, заголовок которых начинается с токена, и команды, начинающиеся с параметра.</summary>
@@ -447,7 +574,7 @@ namespace TheGrowth.Core.Scripting
                 return scriptEnum == null ? null : new ScriptValueType(ScriptValueKind.Enum, type, scriptEnum);
             }
 
-            if (typeof(UnityEngine.Object).IsAssignableFrom(type))
+            if (typeof(UnityEngine.Object).IsAssignableFrom(type) || typeof(IScriptContentValue).IsAssignableFrom(type))
                 return new ScriptValueType(ScriptValueKind.Content, type);
 
             if (typeof(Condition).IsAssignableFrom(type))
@@ -476,12 +603,15 @@ namespace TheGrowth.Core.Scripting
             return null;
         }
 
-        /// <summary>Значение <see cref="ScriptValueKind.Value"/>: эвалуаторы типов литералов-констант <c>int</c>, <c>bool</c>, <c>string</c>.</summary>
+        /// <summary>
+        /// Значение <see cref="ScriptValueKind.Value"/>: эвалуаторы типов литералов-констант <c>int</c>, <c>bool</c>,
+        /// <c>string</c> и типов значений расширений (<see cref="ScriptDeclarations.AddValueType{T}"/>).
+        /// </summary>
         private ScriptValueType CreateValue(out string error)
         {
             error = null;
             var typed = new Dictionary<Type, ScriptValueType>();
-            foreach (var evaluatorType in ValueEvaluatorTypes)
+            foreach (var evaluatorType in m_ValueEvaluatorTypes)
             {
                 var value = GetValueType(evaluatorType, out error);
                 if (value == null)

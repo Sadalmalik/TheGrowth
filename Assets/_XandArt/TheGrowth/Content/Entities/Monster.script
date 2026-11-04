@@ -1,0 +1,7 @@
+OnStep:
+    if [[active card].charges > 0]
+        add -1 to [active card].charges
+    else
+        call Monsters.CrossMovement
+        if [[card under [active card]] has tag Hero]
+            // конец экспедиции: героя съел монстр (шаг 7 E03)

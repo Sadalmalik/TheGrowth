@@ -56,7 +56,7 @@ namespace TheGrowth.Core.Entities
         /// <summary>Владелец модификатора; у карты и объекта механики — null.</summary>
         public Entity Owner => m_Registry.GetOwner(this);
 
-        /// <summary>Покрытия сущности по порядку.</summary>
+        /// <summary>Модификаторы сущности по порядку.</summary>
         public IReadOnlyList<Entity> Modifiers => m_Registry.GetModifiers(this);
 
         public bool HasTag(string tag)
