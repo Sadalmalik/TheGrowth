@@ -39,30 +39,15 @@ namespace TheGrowth.Model.Cards
     }
 
     /// <summary>
-    /// Карта героя: карта с тегом <see cref="HeroTag"/> в слотах экспедиции, первая по порядку слотов экспедиции; нет
-    /// экспедиции или карты — пусто. Временное решение до персонажа и карты героя (шаг 6 E03).
+    /// Карта героя экспедиции — явная ссылка в состоянии экспедиции (<see cref="SlotSystem.SetHero"/>, ставит раскладка),
+    /// без перебора поля; героя или экспедиции нет — пусто.
     /// </summary>
     [Script("hero", "hero")]
     public sealed class HeroEvaluator : Evaluator<Entity>
     {
-        public const string HeroTag = "Hero";
-
         public override Entity Evaluate(ScriptContext context)
         {
-            var expedition = context.Get<SlotSystem>().Expedition;
-            if (expedition == null)
-                return null;
-
-            foreach (var slot in expedition.All)
-            {
-                foreach (var entity in slot.Entities)
-                {
-                    if (entity.Kind == EntityKind.Card && entity.HasTag(HeroTag))
-                        return entity;
-                }
-            }
-
-            return null;
+            return context.Get<SlotSystem>().Expedition?.Hero;
         }
     }
 

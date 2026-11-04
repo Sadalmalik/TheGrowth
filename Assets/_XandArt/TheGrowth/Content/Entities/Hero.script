@@ -1,4 +1,4 @@
-AllowedMoves -> [slots around [active card] within 1]
+AllowedMoves -> [[slots around [active card] within 1] except [[slots of [[cards tagged Monster] or [cards tagged Obstacle]]] or [free slots]]]
 
 OnPlacedFirstTime:
     call OnPlaced

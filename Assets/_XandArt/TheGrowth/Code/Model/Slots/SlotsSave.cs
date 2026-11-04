@@ -11,6 +11,9 @@ namespace TheGrowth.Model.Slots
         /// <summary>ID локации активной экспедиции: по её графу восстанавливаются слоты экспедиции; нет экспедиции — null.</summary>
         public string Expedition;
 
+        /// <summary><c>InstanceId</c> карты героя экспедиции; героя нет (или сейв старее поля) — null.</summary>
+        public int? Hero;
+
         /// <summary>Непустые слоты в порядке создания.</summary>
         public List<SlotSave> Slots = new List<SlotSave>();
     }

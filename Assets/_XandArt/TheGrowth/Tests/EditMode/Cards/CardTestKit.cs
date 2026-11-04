@@ -123,7 +123,7 @@ namespace TheGrowth.Tests.EditMode.Cards
 
     /// <summary>
     /// Контент и сессии для тестов скриптов карт без сцены: язык Core + Model (+ <see cref="TraceCommand"/>), теги
-    /// (<c>PlayerSpawn</c>, <c>Exit</c>, <c>Hero</c>, <c>Monster</c>, <c>Resource</c>), переменная карты <c>charges</c>, конфиги
+    /// (<c>PlayerSpawn</c>, <c>Exit</c>, <c>Hero</c>, <c>Monster</c>, <c>Resource</c>, <c>Obstacle</c>), переменная карты <c>charges</c>, конфиги
     /// примеров контента (<see cref="Hero"/>, <see cref="Monster"/>, <see cref="Herb"/>, <see cref="Exit"/>) с текстами скриптов из
     /// <c>Content/</c> и тестовые конфиги со скриптами из теста (<see cref="Model"/>). Поле — граф 3 × 3, построенный здесь
     /// (не из ассета): клетки <c>a1..c3</c> (строки a, b, c сверху вниз, столбцы 1..3 слева направо, шаг 1 по X и −Z),
@@ -146,7 +146,7 @@ namespace TheGrowth.Tests.EditMode.Cards
             Graphs = new GraphTestKit();
 
             Tags = Content.Asset<TagDeclarations>("Tags");
-            Tags.SetTags(new[] { "PlayerSpawn", "Exit", "Hero", "Monster", "Resource" }.Select(name => new TagDeclaration(name)));
+            Tags.SetTags(new[] { "PlayerSpawn", "Exit", "Hero", "Monster", "Resource", "Obstacle" }.Select(name => new TagDeclaration(name)));
             Variables = Content.Asset<VariableDeclarations>("Variables");
             Variables.SetVariables(new[] { new VariableDeclaration("charges", VariableScope.Card, VariableType.Int) });
             m_Assets.Add(Tags);
@@ -162,6 +162,7 @@ namespace TheGrowth.Tests.EditMode.Cards
             Beta = Model("Beta", TracerScript);
             Gamma = Model("Gamma", TracerScript);
             Plain = Model("Plain", null);
+            Rock = Model("Rock", null, "Obstacle");
             Poison = Content.Asset<EntityModel>("Poison");
             EntityModelEditing.SetKind(Poison, EntityKind.Modifier);
             m_Assets.Add(Poison);
@@ -230,6 +231,9 @@ namespace TheGrowth.Tests.EditMode.Cards
 
         /// <summary>Карта без файла скрипта.</summary>
         public EntityModel Plain { get; }
+
+        /// <summary>Препятствие (тег <c>Obstacle</c>) без файла скрипта.</summary>
+        public EntityModel Rock { get; }
 
         /// <summary>Модификатор (не карта).</summary>
         public EntityModel Poison { get; }
@@ -364,6 +368,14 @@ namespace TheGrowth.Tests.EditMode.Cards
             var card = Slots.Create(model, slot);
             card.GetRequired<CardBrain>().SetFaceUp(faceUp);
             return card;
+        }
+
+        /// <summary>Карта героя в клетке — как раскладка: без хуков, затем явная ссылка экспедиции (<see cref="SlotSystem.SetHero"/>).</summary>
+        public Entity PlaceHero(string cell)
+        {
+            var hero = Place(Kit.Hero, cell);
+            Slots.SetHero(hero);
+            return hero;
         }
 
         public static bool IsFaceUp(Entity card)

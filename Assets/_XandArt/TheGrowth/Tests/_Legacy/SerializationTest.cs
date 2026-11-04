@@ -50,6 +50,7 @@ namespace XandArt.Tests
         }
 
         [Test]
+        [Ignore("Prototype PersistenceManager is created without Init (save folder path is null); with the path it would write to the player's save folder")]
         public void TestSerialization()
         {
             var persistenceManager = new PersistenceManager();

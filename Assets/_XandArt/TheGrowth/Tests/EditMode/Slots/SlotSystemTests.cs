@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using TheGrowth.Architecture.Events;
 using TheGrowth.Core.Entities;
@@ -457,8 +458,122 @@ namespace TheGrowth.Tests.EditMode.Slots
             EntityTestKit.AssertPlacement(m_Session);
         }
 
-        /// <summary>Сейв: герой (1) и монстр (2) с модификатором (3), секция слотов из пар «слот — ID».</summary>
+#region Hero of expedition
+
+        [Test]
+        public void Hero_SetOnlyForCardInExpeditionSlot()
+        {
+            var inInventory = Create(m_Kit.Hero);
+            Assert.Throws<InvalidOperationException>(() => m_Slots.SetHero(inInventory), "no expedition");
+
+            var expedition = m_Slots.CreateExpedition(m_Kit.Location);
+            Assert.IsNull(expedition.Hero);
+            Assert.Throws<InvalidOperationException>(() => m_Slots.SetHero(inInventory), "not in an expedition slot");
+            var wall = Create(m_Kit.Wall, expedition.Field.GetLink("k1"));
+            Assert.Throws<InvalidOperationException>(() => m_Slots.SetHero(wall), "not a card");
+
+            var hero = Create(m_Kit.Hero, expedition.Field.GetCell("s4"));
+            m_Slots.SetHero(hero);
+            Assert.AreSame(hero, expedition.Hero);
+            m_Slots.SetHero(null);
+            Assert.IsNull(expedition.Hero);
+        }
+
+        [Test]
+        public void Hero_Reset_MovedOutOfExpedition_Destroyed_WithExpedition()
+        {
+            var expedition = m_Slots.CreateExpedition(m_Kit.Location);
+            var hero = Create(m_Kit.Hero, expedition.Field.GetCell("s4"));
+            m_Slots.SetHero(hero);
+
+            m_Slots.Move(hero, expedition.Field.GetCell("s1"));
+            m_Slots.Move(hero, expedition.Backpack);
+            Assert.AreSame(hero, expedition.Hero, "moves inside the expedition keep the hero");
+
+            m_Slots.Move(hero, m_Slots.Inventory);
+            Assert.IsNull(expedition.Hero, "moved out of the expedition");
+            m_Slots.Move(hero, expedition.Deck);
+            Assert.IsNull(expedition.Hero, "the hero is set only explicitly");
+
+            m_Slots.SetHero(hero);
+            m_Entities.Destroy(hero);
+            Assert.IsNull(expedition.Hero, "destroyed");
+
+            m_Slots.SetHero(Create(m_Kit.Hero, expedition.Deck));
+            m_Slots.DestroyExpedition();
+            Assert.IsNull(m_Slots.CreateExpedition(m_Kit.Location).Hero, "a new expedition has no hero");
+        }
+
+        [Test]
+        public void Save_HeroOfExpedition_Restored()
+        {
+            var expedition = m_Slots.CreateExpedition(m_Kit.Location);
+            var hero = Create(m_Kit.Hero, expedition.Field.GetCell("s4"));
+            m_Slots.SetHero(hero);
+
+            var section = m_Session.Capture().GetSection(SlotSystem.Key);
+            Assert.AreEqual(hero.InstanceId, (int)section.Data["hero"]);
+
+            Reload();
+
+            Assert.AreEqual(hero.InstanceId, m_Slots.Expedition.Hero.InstanceId);
+            Assert.AreSame(m_Slots.Expedition.Field.GetCell("s4"), m_Slots.GetSlot(m_Slots.Expedition.Hero));
+        }
+
+        [Test]
+        public void Save_NoHero_NullAndRestoredWithoutHero()
+        {
+            m_Slots.CreateExpedition(m_Kit.Location);
+
+            var section = m_Session.Capture().GetSection(SlotSystem.Key);
+            Assert.AreEqual(JTokenType.Null, section.Data["hero"].Type);
+
+            Reload();
+            Assert.IsNull(m_Slots.Expedition.Hero);
+        }
+
+        [Test]
+        public void Load_OldSaveWithoutHeroField_NoHero()
+        {
+            var save = Save("Field", ("exp/deck", new[] { 1, 2 }));
+            Assert.IsTrue(save.GetSection(SlotSystem.Key).Data.Remove("hero"));
+
+            Open(m_Kit.Load(save));
+
+            Assert.IsNull(m_Slots.Expedition.Hero);
+            Assert.AreEqual(2, m_Slots.Expedition.Deck.Count);
+        }
+
+        [TestCase(1, "Inventory", "hero card 1 'Hero' is not in an expedition slot, the expedition has no hero")]
+        [TestCase(9, "Field", "hero 9 is not a restored card, the expedition has no hero")]
+        [TestCase(3, "Field", "hero 3 is not a restored card, the expedition has no hero")]
+        [TestCase(1, "NoExpedition", "hero 1: there are no expedition slots, the hero is not restored")]
+        public void Load_HeroAnomalies_WarningAndNoHero(int hero, string layout, string warning)
+        {
+            var save = layout switch
+            {
+                "Field" => Save("Field", hero, ("exp/deck", new[] { 1, 2 })),
+                "NoExpedition" => Save(null, hero, ("hub/inventory", new[] { 1, 2 })),
+                _ => Save("Field", hero, ("hub/inventory", new[] { 1 }), ("exp/deck", new[] { 2 })),
+            };
+
+            LogAssert.Expect(LogType.Warning, new Regex(Regex.Escape(warning)));
+            Open(m_Kit.Load(save));
+
+            Assert.IsNull(m_Slots.Expedition?.Hero);
+            EntityTestKit.AssertPlacement(m_Session);
+        }
+
+#endregion
+
+        /// <summary>Сейв: герой (1) и монстр (2) с модификатором (3), секция слотов из пар «слот — ID», без героя экспедиции.</summary>
         private static SaveGame Save(string expedition, params (string Slot, int[] Ids)[] slots)
+        {
+            return Save(expedition, null, slots);
+        }
+
+        /// <summary>Как <see cref="Save(string, (string, int[])[])"/>, с <c>InstanceId</c> героя экспедиции.</summary>
+        private static SaveGame Save(string expedition, int? hero, params (string Slot, int[] Ids)[] slots)
         {
             var save = new SaveGame();
             save.AddSection(SaveSection.FromObject(EntityRegistry.Key, 1, new EntitiesSave
@@ -471,7 +586,7 @@ namespace TheGrowth.Tests.EditMode.Slots
                 },
             }));
 
-            var slotsSave = new SlotsSave { Expedition = expedition };
+            var slotsSave = new SlotsSave { Expedition = expedition, Hero = hero };
             foreach (var (slot, ids) in slots)
                 slotsSave.Slots.Add(new SlotSave { Id = slot, Entities = ids.ToList() });
 

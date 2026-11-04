@@ -1,2 +1,2 @@
 CrossMovement:
-    move [active card] to [nearest of [[slots around [active card] within 1] except [slots of [[cards tagged Monster] or [cards tagged Exit]]]] to [hero]]
+    move [active card] to [nearest of [[slots around [active card] within 1] except [slots of [[[cards tagged Monster] or [cards tagged Obstacle]] or [cards tagged Exit]]]] to [hero]]

@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using TheGrowth.Core.Entities;
 using TheGrowth.Model.Locations;
 
 namespace TheGrowth.Model.Slots
 {
     /// <summary>
-    /// Слоты экспедиции: служебные (колода, рука, сброс, рюкзак) и поле из графа локации. Создаются при старте экспедиции и
-    /// уничтожаются в конце (<see cref="SlotSystem.CreateExpedition"/>, <see cref="SlotSystem.DestroyExpedition"/>); после
-    /// загрузки сейва восстанавливаются по локации без сцены.
+    /// Слоты экспедиции: служебные (колода, рука, сброс, рюкзак) и поле из графа локации, и карта героя (<see cref="Hero"/>).
+    /// Создаются при старте экспедиции и уничтожаются в конце (<see cref="SlotSystem.CreateExpedition"/>,
+    /// <see cref="SlotSystem.DestroyExpedition"/>); после загрузки сейва восстанавливаются по локации без сцены.
     /// </summary>
     public sealed class ExpeditionSlots
     {
@@ -43,5 +44,17 @@ namespace TheGrowth.Model.Slots
 
         /// <summary>Все слоты экспедиции: служебные, клетки, слоты связей.</summary>
         public IReadOnlyList<Slot> All => m_All;
+
+        /// <summary>
+        /// Карта героя экспедиции — явная ссылка (<see cref="SlotSystem.SetHero"/>): живая карта в слоте экспедиции; не
+        /// задана — null. Меняет только <see cref="SlotSystem"/>.
+        /// </summary>
+        public Entity Hero { get; internal set; }
+
+        /// <summary>Слот — один из слотов этой экспедиции.</summary>
+        public bool Contains(Slot slot)
+        {
+            return slot != null && m_All.Contains(slot);
+        }
     }
 }

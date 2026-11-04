@@ -36,7 +36,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         [Test]
         public void Monster_WithCharges_SpendsChargeAndStays()
         {
-            m_Cards.Place(m_Kit.Hero, "a2");
+            m_Cards.PlaceHero("a2");
             var monster = m_Cards.Place(m_Kit.Monster, "c3");
 
             for (var charges = 2; charges >= 0; charges--)
@@ -50,7 +50,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         [Test]
         public void Monster_WithoutCharges_StepsToHero()
         {
-            m_Cards.Place(m_Kit.Hero, "a2");
+            m_Cards.PlaceHero("a2");
             var monster = m_Cards.Place(m_Kit.Monster, "c3");
             m_Cards.Run(monster, "set [active card].charges to 0");
 
@@ -64,7 +64,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         [Test]
         public void Monster_AvoidsCellsWithMonsterOrExit()
         {
-            m_Cards.Place(m_Kit.Hero, "a2");
+            m_Cards.PlaceHero("a2");
             var monster = m_Cards.Place(m_Kit.Monster, "c3");
             m_Cards.Place(m_Kit.Exit, "b3");
             m_Cards.Run(monster, "set [active card].charges to 0");
@@ -80,9 +80,34 @@ namespace TheGrowth.Tests.EditMode.Cards
         }
 
         [Test]
+        public void Monster_AvoidsObstacle()
+        {
+            m_Cards.PlaceHero("a2");
+            var monster = m_Cards.Place(m_Kit.Monster, "c3");
+            m_Cards.Place(m_Kit.Rock, "b3");
+            m_Cards.Run(monster, "set [active card].charges to 0");
+
+            CardSession.Complete(Cards.InvokeHook(monster, CardHooks.OnStep));
+
+            Assert.AreSame(m_Cards.Cell("c2"), m_Cards.Slots.GetSlot(monster), "b3 has an obstacle");
+        }
+
+        [Test]
+        public void Monster_NoHeroReference_StaysInPlace()
+        {
+            m_Cards.Place(m_Kit.Hero, "a2");
+            var monster = m_Cards.Place(m_Kit.Monster, "c3");
+            m_Cards.Run(monster, "set [active card].charges to 0");
+
+            CardSession.Complete(Cards.InvokeHook(monster, CardHooks.OnStep));
+
+            Assert.AreSame(m_Cards.Cell("c3"), m_Cards.Slots.GetSlot(monster), "a card tagged Hero is not the hero of the expedition");
+        }
+
+        [Test]
         public void Monster_StepsOntoHero_LiesOnTop()
         {
-            var hero = m_Cards.Place(m_Kit.Hero, "b2");
+            var hero = m_Cards.PlaceHero("b2");
             var monster = m_Cards.Place(m_Kit.Monster, "b3");
             m_Cards.Run(monster, "set [active card].charges to 0");
 
@@ -109,7 +134,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         [Test]
         public void Herb_CoveredByHero_GoesToBackpack()
         {
-            var hero = m_Cards.Place(m_Kit.Hero, "a1");
+            var hero = m_Cards.PlaceHero("a1");
             var herb = m_Cards.Place(m_Kit.Herb, "a2");
 
             CardSession.Complete(Cards.Move(hero, m_Cards.Cell("a2")));
@@ -121,7 +146,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         [Test]
         public void Herb_CoveredByMonster_Stays()
         {
-            m_Cards.Place(m_Kit.Hero, "a2");
+            m_Cards.PlaceHero("a2");
             var herb = m_Cards.Place(m_Kit.Herb, "b3");
             var monster = m_Cards.Place(m_Kit.Monster, "c3");
             m_Cards.Run(monster, "set [active card].charges to 0");
@@ -138,7 +163,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         [Test]
         public void Hero_Placed_RevealsCardsAroundAndUnder()
         {
-            var hero = m_Cards.Place(m_Kit.Hero, "a1");
+            var hero = m_Cards.PlaceHero("a1");
             var under = m_Cards.Place(m_Kit.Monster, "b2", false);
             var around = new[] { "a2", "b1", "b3", "c2" }.Select(cell => m_Cards.Place(m_Kit.Exit, cell, false)).ToArray();
             var far = m_Cards.Place(m_Kit.Exit, "c3", false);
@@ -153,7 +178,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         [Test]
         public void Hero_PlacedFirstTime_RevealsAround()
         {
-            var hero = m_Cards.Place(m_Kit.Hero, "a1");
+            var hero = m_Cards.PlaceHero("a1");
             var near = m_Cards.Place(m_Kit.Herb, "a2", false);
 
             CardSession.Complete(Cards.InvokeHook(hero, CardHooks.OnPlacedFirstTime));
@@ -162,12 +187,34 @@ namespace TheGrowth.Tests.EditMode.Cards
         }
 
         [Test]
-        public void Hero_AllowedMoves_SlotsAround()
+        public void Hero_AllowedMoves_CellsAroundWithCards_ExceptMonstersAndObstacles()
         {
-            var hero = m_Cards.Place(m_Kit.Hero, "a1");
+            var hero = m_Cards.PlaceHero("b2");
+            m_Cards.Place(m_Kit.Herb, "a2");
+            m_Cards.Place(m_Kit.Monster, "b1");
+            m_Cards.Place(m_Kit.Rock, "b3");
+            m_Cards.Place(m_Kit.Exit, "c3");
 
+            // c2 свободна, c3 не рядом.
             Assert.IsTrue(Cards.TryEvaluate<SlotSet>(hero, CardProperties.AllowedMoves, out var moves));
-            Assert.That(moves.Select(CardTrace.Name), Is.EqualTo(new[] { "a2", "b1" }));
+            Assert.That(moves.Select(CardTrace.Name), Is.EqualTo(new[] { "a2" }));
+
+            m_Cards.Place(m_Kit.Exit, "c2");
+            Assert.IsTrue(Cards.TryEvaluate(hero, CardProperties.AllowedMoves, out moves));
+            Assert.That(moves.Select(CardTrace.Name), Is.EqualTo(new[] { "a2", "c2" }));
+        }
+
+        [Test]
+        public void Hero_AllowedMoves_MonsterUnderOtherCard_Excluded()
+        {
+            var hero = m_Cards.PlaceHero("a1");
+            m_Cards.Place(m_Kit.Monster, "a2");
+            m_Cards.Place(m_Kit.Herb, "a2");
+            m_Cards.Place(m_Kit.Herb, "b1");
+
+            // Отличие от прототипа: там учитывались только верхние карты (OnTop) и a2 с травой сверху была бы доступна.
+            Assert.IsTrue(Cards.TryEvaluate<SlotSet>(hero, CardProperties.AllowedMoves, out var moves));
+            Assert.That(moves.Select(CardTrace.Name), Is.EqualTo(new[] { "b1" }));
         }
 
 #endregion

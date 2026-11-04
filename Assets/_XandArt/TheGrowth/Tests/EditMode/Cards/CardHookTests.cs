@@ -356,16 +356,18 @@ namespace TheGrowth.Tests.EditMode.Cards
         [Test]
         public void Property_EvaluatedWithActiveCard()
         {
-            var hero = m_Cards.Place(m_Kit.Hero, "b2");
+            var hero = m_Cards.PlaceHero("b2");
+            m_Cards.Place(m_Kit.Alpha, "a2");
+            m_Cards.Place(m_Kit.Alpha, "b3");
 
             Assert.IsTrue(Cards.TryEvaluate<SlotSet>(hero, CardProperties.AllowedMoves, out var moves));
-            Assert.That(moves.Select(slot => CardTrace.Name(slot)), Is.EqualTo(new[] { "a2", "b1", "b3", "c2" }));
+            Assert.That(moves.Select(slot => CardTrace.Name(slot)), Is.EqualTo(new[] { "a2", "b3" }), "cells around the active card with cards");
         }
 
         [Test]
         public void Property_Missing_ExplicitNo()
         {
-            var hero = m_Cards.Place(m_Kit.Hero, "b2");
+            var hero = m_Cards.PlaceHero("b2");
             var plain = m_Cards.Place(m_Kit.Plain, "a1");
 
             Assert.IsFalse(Cards.TryEvaluate<SlotSet>(hero, CardProperties.SpawnSlot, out var spawn));

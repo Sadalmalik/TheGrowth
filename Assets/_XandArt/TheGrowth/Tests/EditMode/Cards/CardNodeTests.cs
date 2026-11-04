@@ -36,7 +36,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         {
             m_Cards.Place(m_Kit.Monster, "a2");
             m_Cards.Place(m_Kit.Herb, "a2");
-            var hero = m_Cards.Place(m_Kit.Hero, "b2");
+            var hero = m_Cards.PlaceHero("b2");
             m_Cards.Place(m_Kit.Herb, "c1");
             m_Cards.Place(m_Kit.Exit, "c3");
             return hero;
@@ -158,21 +158,20 @@ namespace TheGrowth.Tests.EditMode.Cards
         }
 
         [Test]
-        public void Hero_FirstCardTaggedHero_InExpeditionSlots()
+        public void Hero_ExplicitReferenceOfExpedition_NotByTag()
         {
-            var deckHero = m_Cards.Place(m_Kit.Hero, m_Cards.Slots.Expedition.Deck);
             m_Cards.Place(m_Kit.Hero, "a1");
+            Assert.That(Trace(null, "trace [hero] hero"), Is.EqualTo(new[] { "none: hero" }), "a card tagged Hero is not the hero by itself");
 
-            Assert.That(Trace(null, "trace [hero] hero", "trace slot [slot of [hero]]"), Is.EqualTo(new[] { "Hero: hero", "slot: deck" }));
-
-            m_Cards.Entities.Destroy(deckHero);
-            Assert.That(Trace(null, "trace slot [slot of [hero]]"), Is.EqualTo(new[] { "slot: a1" }));
+            var hero = m_Cards.Place(m_Kit.Alpha, m_Cards.Slots.Expedition.Deck);
+            m_Cards.Slots.SetHero(hero);
+            Assert.That(Trace(null, "trace [hero] hero", "trace slot [slot of [hero]]"), Is.EqualTo(new[] { "Alpha: hero", "slot: deck" }));
         }
 
         [Test]
         public void Nearest_ByGraphSteps()
         {
-            m_Cards.Place(m_Kit.Hero, "a2");
+            m_Cards.PlaceHero("a2");
             var monster = m_Cards.Place(m_Kit.Monster, "c2");
 
             // Около монстра: b2 (1 шаг до героя), c1 и c3 (по 3).
@@ -182,7 +181,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         [Test]
         public void Nearest_EqualSteps_ByDistanceOfPositions()
         {
-            m_Cards.Place(m_Kit.Hero, "a1");
+            m_Cards.PlaceHero("a1");
             var monster = m_Cards.Place(m_Kit.Monster, "b3");
 
             // a3 и b2 — по 2 шага до героя; b2 ближе по позиции (√2 против 2), хотя в наборе a3 раньше.
@@ -192,7 +191,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         [Test]
         public void Nearest_EqualStepsAndDistance_ByOrderOfSet()
         {
-            m_Cards.Place(m_Kit.Hero, "a1");
+            m_Cards.PlaceHero("a1");
             var monster = m_Cards.Place(m_Kit.Monster, "c3");
 
             // b3 и c2 — по 3 шага и √5 до героя: первый в наборе.

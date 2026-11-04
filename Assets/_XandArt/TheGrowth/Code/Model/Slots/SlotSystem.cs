@@ -17,11 +17,12 @@ namespace TheGrowth.Model.Slots
     /// проверка правил, затем убрать из старого, добавить в новый, событие), при уничтожении сущности убираются из слота.
     /// Ссылок «сущность знает свой слот» нет: место знает только система (<see cref="GetSlot"/>). Слоты: инвентарь игрока
     /// (<see cref="SlotIds.Inventory"/>, всегда) и слоты экспедиции (<see cref="CreateExpedition"/> — служебные и поле из
-    /// графа локации; <see cref="DestroyExpedition"/>). Перемещение — событие C# <see cref="Moved"/> и
-    /// <see cref="EntityMoved"/> в <see cref="EventBus"/>. Сейв: локация экспедиции (по её графу слоты восстанавливаются без
-    /// сцены) и непустые слоты со списком <c>InstanceId</c>; секция читается после <c>entities</c>, содержимое связывается с
-    /// сущностями в <see cref="ISessionReady.OnSessionReady"/>. Сущность из сейва в двух слотах остаётся в первом, без слота —
-    /// уничтожается (с предупреждением).
+    /// графа локации; <see cref="DestroyExpedition"/>) с картой героя (<see cref="SetHero"/>). Перемещение — событие C#
+    /// <see cref="Moved"/> и <see cref="EntityMoved"/> в <see cref="EventBus"/>. Сейв: локация экспедиции (по её графу слоты
+    /// восстанавливаются без сцены), <c>InstanceId</c> героя и непустые слоты со списком <c>InstanceId</c>; секция читается
+    /// после <c>entities</c>, содержимое связывается с сущностями в <see cref="ISessionReady.OnSessionReady"/>. Сущность из
+    /// сейва в двух слотах остаётся в первом, без слота — уничтожается (с предупреждением); герой не в слоте экспедиции —
+    /// предупреждение, героя нет.
     /// Требует в контейнере <see cref="EntityRegistry"/>, <see cref="IContentRegistry"/> и <see cref="EventBus"/>.
     /// </summary>
     public sealed class SlotSystem : SaveableSystem<SlotsSave>, ISessionReady
@@ -215,6 +216,9 @@ namespace TheGrowth.Model.Slots
             if (from != to)
                 ApplyFacing(entity, to.Rules);
 
+            if (Expedition != null && Expedition.Hero == entity && !Expedition.Contains(to))
+                Expedition.Hero = null;
+
             var moved = new EntityMoved(entity, from, fromIndex, to, toIndex);
             Moved?.Invoke(moved);
             m_Events.Invoke(moved);
@@ -261,6 +265,9 @@ namespace TheGrowth.Model.Slots
 
         private void HandleDetaching(Entity entity)
         {
+            if (Expedition != null && Expedition.Hero == entity)
+                Expedition.Hero = null;
+
             if (!m_Places.TryGetValue(entity, out var slot))
                 return;
 
@@ -326,6 +333,31 @@ namespace TheGrowth.Model.Slots
             Expedition = null;
         }
 
+        /// <summary>
+        /// Карта героя экспедиции (<see cref="ExpeditionSlots.Hero"/>): живая карта в слоте экспедиции; null — героя нет.
+        /// Ставит раскладка (шаг 5 E03). Сбрасывается при уничтожении карты, при перемещении её из слотов экспедиции и
+        /// вместе с экспедицией. Экспедиции нет или карта не подходит — <see cref="InvalidOperationException"/>.
+        /// </summary>
+        public void SetHero(Entity card)
+        {
+            if (Expedition == null)
+                throw new InvalidOperationException("There are no expedition slots");
+
+            if (card == null)
+            {
+                Expedition.Hero = null;
+                return;
+            }
+
+            if (!m_Entities.Contains(card) || card.Kind != EntityKind.Card)
+                throw new InvalidOperationException($"Can't make {card} the hero: it is destroyed, not from this session or not a card");
+
+            if (!Expedition.Contains(GetSlot(card)))
+                throw new InvalidOperationException($"Can't make {card} the hero: it is not in an expedition slot");
+
+            Expedition.Hero = card;
+        }
+
         private void Register(Slot slot)
         {
             if (m_ById.ContainsKey(slot.Id))
@@ -341,7 +373,7 @@ namespace TheGrowth.Model.Slots
 
         protected override SlotsSave Write()
         {
-            var save = new SlotsSave { Expedition = Expedition?.Location.Id };
+            var save = new SlotsSave { Expedition = Expedition?.Location.Id, Hero = Expedition?.Hero?.InstanceId };
             foreach (var slot in m_Slots)
             {
                 if (slot.IsEmpty)
@@ -400,6 +432,33 @@ namespace TheGrowth.Model.Slots
                 Debug.LogWarning($"{LogSource}: {entity} is in no slot, it is removed");
                 m_Entities.Destroy(entity);
             }
+
+            if (pending?.Hero != null)
+                RestoreHero(pending.Hero.Value);
+        }
+
+        /// <summary>Герой из сейва: живая карта в слоте экспедиции; иначе — предупреждение, героя нет.</summary>
+        private void RestoreHero(int id)
+        {
+            if (Expedition == null)
+            {
+                Debug.LogWarning($"{LogSource}: hero {id}: there are no expedition slots, the hero is not restored");
+                return;
+            }
+
+            if (!m_Entities.TryGet(id, out var hero) || hero.Kind != EntityKind.Card)
+            {
+                Debug.LogWarning($"{LogSource}: hero {id} is not a restored card, the expedition has no hero");
+                return;
+            }
+
+            if (!Expedition.Contains(GetSlot(hero)))
+            {
+                Debug.LogWarning($"{LogSource}: hero {hero} is not in an expedition slot, the expedition has no hero");
+                return;
+            }
+
+            Expedition.Hero = hero;
         }
 
         private void Fill(SlotsSave save)

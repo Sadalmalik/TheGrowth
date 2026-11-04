@@ -24,3 +24,5 @@ MonoBehaviour:
     m_Description: Monster card.
   - m_Name: Resource
     m_Description: 'Resource card: collected into the backpack.'
+  - m_Name: Obstacle
+    m_Description: 'Obstacle card: the hero and monsters can''t move to a cell with it.'
