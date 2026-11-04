@@ -2,3 +2,13 @@ RevealAround:
     for each card in [cards in [slots in [square 1.5m scaled 1.5 2] around [active card]]]
         reveal [iterating card]
     reveal [card under [active card]]
+
+HeroStep:
+    if [[turns left] <= 0]
+        end expedition with defeat
+    else
+        if [[card under [active card]] has tag Exit]
+            end expedition with victory
+        else
+            add -1 to turns left
+            end turn

@@ -20,7 +20,8 @@ namespace TheGrowth.Core.Variables
         private string m_Name;
 
         [SerializeField]
-        [Tooltip("Game — saved in the slot ($name). Card — stored by the card ([card].name). Profile — outside save slots ($name).")]
+        [Tooltip("Game — saved in the slot ($name). Card — stored by the card ([card].name). Profile — outside save slots ($name). " +
+            "Expedition — while an expedition is active, reset at its start ($name).")]
         private VariableScope m_Scope;
 
         [SerializeField]

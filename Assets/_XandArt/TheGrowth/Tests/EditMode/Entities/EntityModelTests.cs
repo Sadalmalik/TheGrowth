@@ -244,7 +244,7 @@ namespace TheGrowth.Tests.EditMode.Entities
             var tags = TagCatalog.FromContent(registry);
             var variables = VariableCatalog.FromContent(registry);
 
-            Assert.That(models.Select(model => model.Id), Is.SupersetOf(new[] { "Hero", "Monster", "Herb", "Exit", "Poison", "Wall" }));
+            Assert.That(models.Select(model => model.Id), Is.SupersetOf(new[] { "Lucia", "Monster", "Herb", "Exit", "Poison", "Wall" }));
             foreach (var model in models)
                 Assert.IsEmpty(EntityModelChecks.Check(model, tags, variables), model.ToString());
 

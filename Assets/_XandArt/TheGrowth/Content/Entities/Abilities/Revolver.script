@@ -4,6 +4,6 @@ OnPlaced:
     if [[card under [active card]] has tag Monster]
         move [card under [active card]] to [deck]
         call Abilities.Spend
-        // ход монстров (шаг 7 E03)
+        end turn
     else
         move [active card] to [hand]

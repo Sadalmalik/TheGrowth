@@ -23,4 +23,14 @@ namespace TheGrowth.Core.Variables
     {
         VariableStore Variables { get; }
     }
+
+    /// <summary>
+    /// Переменные области «экспедиция» (система сессии): <c>$имя</c> с областью <see cref="VariableScope.Expedition"/>. Вне
+    /// экспедиции хранилища нет: чтение в скрипте — значение по умолчанию, запись ничего не делает (оба — с предупреждением).
+    /// </summary>
+    public interface IExpeditionVariables : ISharedInterface
+    {
+        /// <summary>Переменные активной экспедиции; экспедиции нет — null.</summary>
+        VariableStore Variables { get; }
+    }
 }

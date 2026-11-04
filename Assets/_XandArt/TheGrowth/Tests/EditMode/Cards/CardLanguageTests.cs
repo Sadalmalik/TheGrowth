@@ -378,11 +378,20 @@ namespace TheGrowth.Tests.EditMode.Cards
 
 #region Content
 
-        [TestCase("Entities/Hero.script")]
+        [TestCase("Entities/Heroes/Lucia.script")]
+        [TestCase("Entities/Heroes/Alfredo.script")]
+        [TestCase("Entities/Heroes/Stefan.script")]
+        [TestCase("Entities/Abilities/Vision.script")]
+        [TestCase("Entities/Abilities/Revolver.script")]
+        [TestCase("Entities/Abilities/Teleport.script")]
+        [TestCase("Entities/Abilities/Confuse.script")]
+        [TestCase("Entities/Abilities/Talisman.script")]
         [TestCase("Entities/Monster.script")]
         [TestCase("Entities/Herb.script")]
         [TestCase("Entities/Exit.script")]
         [TestCase("Scripts/Monsters.script")]
+        [TestCase("Scripts/Cards.script")]
+        [TestCase("Scripts/Abilities.script")]
         public void ContentScripts_ParseWithoutErrors_InCanonicalFormat(string path)
         {
             AssertRoundTrip(CardTestKit.ReadContent(path));

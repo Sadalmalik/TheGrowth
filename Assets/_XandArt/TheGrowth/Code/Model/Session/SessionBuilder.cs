@@ -5,6 +5,7 @@ using TheGrowth.Core.Scripting;
 using TheGrowth.Model.Cards;
 using TheGrowth.Model.Decks;
 using TheGrowth.Model.Entities;
+using TheGrowth.Model.Expeditions;
 using TheGrowth.Model.Locations;
 using TheGrowth.Model.Slots;
 using TheGrowth.Model.Variables;
@@ -29,6 +30,7 @@ namespace TheGrowth.Model
             container.Add(new SlotSystem());
             container.Add(new CardSystem());
             container.Add(new DealSystem());
+            container.Add(new ExpeditionSystem());
         }
     }
 }

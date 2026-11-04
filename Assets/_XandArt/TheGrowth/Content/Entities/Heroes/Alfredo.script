@@ -2,10 +2,19 @@ AllowedMoves -> [[slots in [[line 0 2.25m] or [line 90 3m]] around [active card]
 
 OnPlacedFirstTime:
     call Cards.RevealAround
-    // камера — к герою (шаг 7 E03)
+    // камера — к герою (E06)
     // диалог Tutorial_Game (E12)
+    set turns left to 25
 
 OnPlaced:
-    // камера — к герою (шаг 7 E03)
+    // камера — к герою (E06)
     call Cards.RevealAround
-    // конец хода героя в обучении, как PlayerStep_Tutorial прототипа (шаг 7 E03)
+    if [[turns left] <= 0]
+        end expedition with defeat
+    else
+        if [[card under [active card]] has tag Exit]
+            // обучение (PlayerStep_Tutorial прототипа): на выходе с монетами — диалог CH_03, без них — Tutorial_NeedMoreCoins (E12)
+            end expedition with victory
+        else
+            add -1 to turns left
+            end turn

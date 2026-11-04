@@ -17,7 +17,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b40fce962e19472b99b6b22dc7e8196a, type: 2}
   - {fileID: 11400000, guid: d4d72eaf1ea3d984aa732850fdc55494, type: 2}
   - {fileID: 11400000, guid: d96f1576b4c51444b9be42ee5191e956, type: 2}
-  - {fileID: 11400000, guid: 2396caf7b4649c6498fabc7c47620d42, type: 2}
   - {fileID: 11400000, guid: f1440ab46e124900b52cbb50434ac525, type: 2}
   - {fileID: 11400000, guid: e6f7908b98403034bb76b11c4a5ce6fe, type: 2}
   - {fileID: 11400000, guid: 05add849fea92054695a78868435f9cf, type: 2}
@@ -61,10 +60,6 @@ MonoBehaviour:
   - m_Id: Herb
     m_Kind: 0
     m_Text: {fileID: 2811297602134710623, guid: f287ca7816cfba44681cb58f45db1947,
-      type: 3}
-  - m_Id: Hero
-    m_Kind: 0
-    m_Text: {fileID: 2811297602134710623, guid: 8de9302ac7dac8a4596e6905285448d6,
       type: 3}
   - m_Id: Lucia
     m_Kind: 0

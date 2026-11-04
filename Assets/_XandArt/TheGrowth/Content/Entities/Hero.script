@@ -1,9 +1,0 @@
-AllowedMoves -> [[slots around [active card] within 1] except [[slots of [[cards tagged Monster] or [cards tagged Obstacle]]] or [free slots]]]
-
-OnPlacedFirstTime:
-    call OnPlaced
-
-OnPlaced:
-    for each card in [cards in [slots around [active card] within 1]]
-        reveal [iterating card]
-    reveal [card under [active card]]

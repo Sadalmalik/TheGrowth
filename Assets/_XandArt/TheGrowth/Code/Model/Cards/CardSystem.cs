@@ -140,6 +140,16 @@ namespace TheGrowth.Model.Cards
         }
 
         /// <summary>
+        /// Переместить сущность в слот без хуков размещения (<c>OnUnCovered</c>, <c>OnCovered</c>, <c>OnPlaced</c>) —
+        /// <see cref="SlotSystem.Move"/>: правила, атомарно; нарушение — исключение без изменений. Асинхронно: анимация (позже).
+        /// </summary>
+        public UniTask MoveWithoutHooks(Entity entity, Slot to, int index = -1)
+        {
+            m_Slots.Move(entity, to, index);
+            return UniTask.CompletedTask;
+        }
+
+        /// <summary>
         /// Создать сущность в слоте (<see cref="SlotSystem.Create"/>, наверх) — как положили: <c>OnCovered</c> прежней верхней
         /// карты и <c>OnPlaced</c> новой, если у слота <c>InvokePlaceEvent</c>.
         /// </summary>

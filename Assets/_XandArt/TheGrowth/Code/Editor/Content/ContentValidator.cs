@@ -352,7 +352,10 @@ namespace TheGrowth.EditorTools.Content
             }
         }
 
-        /// <summary>Строки колод; локации с колодой: поле есть, в графе есть клетка героя.</summary>
+        /// <summary>
+        /// Строки колод; локации с колодой: поле есть, в графе есть клетка героя; предупреждение — локация экспедиции с полем без
+        /// колоды.
+        /// </summary>
         private static void ValidateDecks(IReadOnlyList<ContentAsset> assets, List<ContentError> errors)
         {
             foreach (var deck in assets.OfType<DeckModel>())
@@ -365,6 +368,9 @@ namespace TheGrowth.EditorTools.Content
             {
                 foreach (var message in DeckChecks.CheckField(location))
                     errors.Add(Error(ContentErrorKind.InvalidDeal, location, message));
+
+                foreach (var message in DeckChecks.CheckDeckWarnings(location))
+                    errors.Add(new ContentError(ContentErrorKind.InvalidDeal, GetPath(location), message, location, true));
             }
         }
 

@@ -20,6 +20,7 @@ using TheGrowth.Model;
 using TheGrowth.Model.Cards;
 using TheGrowth.Model.Decks;
 using TheGrowth.Model.Entities;
+using TheGrowth.Model.Expeditions;
 using TheGrowth.Model.Graphs;
 using TheGrowth.Model.Heroes;
 using TheGrowth.Model.Locations;
@@ -125,13 +126,41 @@ namespace TheGrowth.Tests.EditMode.Cards
         }
     }
 
+    /// <summary>Ворота тестовых скриптов (система сессии): <c>wait for gate</c> ждёт <see cref="Open"/>.</summary>
+    public sealed class CardGate : SharedObject
+    {
+        private readonly Gate m_Gate = new Gate();
+
+        public UniTask Wait(ScriptContext context)
+        {
+            return m_Gate.Wait(context.Cancellation);
+        }
+
+        /// <summary>Завершить текущие ожидания.</summary>
+        public void Open()
+        {
+            m_Gate.Open();
+        }
+    }
+
+    /// <summary><c>wait for gate</c> — ждёт <see cref="CardGate.Open"/> (действие или скрипт, который ещё идёт).</summary>
+    [Script("test_wait_gate", "wait for gate")]
+    public sealed class WaitGateCommand : Command
+    {
+        public override UniTask Execute(ScriptContext context)
+        {
+            return context.Get<CardGate>().Wait(context);
+        }
+    }
+
 #endregion
 
     /// <summary>
     /// Контент и сессии для тестов скриптов карт без сцены: язык Core + Model (+ <see cref="TraceCommand"/>), теги
-    /// (<c>PlayerSpawn</c>, <c>Exit</c>, <c>Hero</c>, <c>Monster</c>, <c>Resource</c>, <c>Obstacle</c>), переменная карты <c>charges</c>, конфиги
-    /// примеров контента (<see cref="Hero"/> — карта героя персонажа <see cref="HeroCharacter"/>, <see cref="Monster"/>,
-    /// <see cref="Herb"/>, <see cref="Exit"/>) с текстами скриптов из <c>Content/</c>, общие скрипты <c>Content/Scripts/</c>, тестовые
+    /// (<c>PlayerSpawn</c>, <c>Exit</c>, <c>Hero</c>, <c>Monster</c>, <c>Resource</c>, <c>Obstacle</c>), переменная карты <c>charges</c> и
+    /// переменная экспедиции <c>clues</c> (int, по умолчанию 1), тестовая
+    /// карта героя <see cref="Hero"/> персонажа <see cref="HeroCharacter"/> (<see cref="HeroScript"/>), конфиги примеров контента
+    /// (<see cref="Monster"/>, <see cref="Herb"/>, <see cref="Exit"/>) с текстами скриптов из <c>Content/</c>, общие скрипты <c>Content/Scripts/</c>, тестовые
     /// конфиги со скриптами из теста (<see cref="Model"/>, <see cref="HeroModel"/>, <see cref="AbilityModel"/>), настройки
     /// (<see cref="AddSlotsConfig"/>, <see cref="AddFieldConfig"/>) и конфиги контента проекта (<see cref="ContentModel"/>).
     /// Поле — граф size × size (по умолчанию 3 × 3), построенный здесь (не из ассета):
@@ -167,12 +196,16 @@ namespace TheGrowth.Tests.EditMode.Cards
             Tags = Content.Asset<TagDeclarations>("Tags");
             Tags.SetTags(new[] { "PlayerSpawn", "Exit", "Hero", "Monster", "Resource", "Obstacle" }.Select(name => new TagDeclaration(name)));
             Variables = Content.Asset<VariableDeclarations>("Variables");
-            Variables.SetVariables(new[] { new VariableDeclaration("charges", VariableScope.Card, VariableType.Int) });
+            Variables.SetVariables(new[]
+            {
+                new VariableDeclaration("charges", VariableScope.Card, VariableType.Int),
+                new VariableDeclaration("clues", VariableScope.Expedition, VariableType.Int, "1"),
+            });
             m_Assets.Add(Tags);
             m_Assets.Add(Variables);
 
             HeroCharacter = Character("TestHero");
-            Hero = HeroModel("Hero", HeroCharacter, ReadContent("Entities/Hero.script"));
+            Hero = HeroModel("Hero", HeroCharacter, HeroScript);
             Monster = Model("Monster", ReadContent("Entities/Monster.script"), "Monster");
             Monster.VariableList.Add(new EntityVariable("charges", "3"));
             Herb = Model("Herb", ReadContent("Entities/Herb.script"), "Resource");
@@ -223,10 +256,26 @@ namespace TheGrowth.Tests.EditMode.Cards
         /// </summary>
         public static readonly string TracerScript = string.Join("\n", CardHooks.All.Select(hook => $"{hook}:\n    trace [active card] {hook}\n"));
 
+        /// <summary>
+        /// Скрипт тестового героя <see cref="Hero"/> (по графу, без фигур и хода экспедиции): ход — клетки вокруг на 1 связь с
+        /// картами, кроме монстров и препятствий; положили (и при раскладке) — раскрывает карты вокруг на 1 связь и под собой.
+        /// Герои контента — <c>Content/Entities/Heroes</c>.
+        /// </summary>
+        public const string HeroScript =
+            "AllowedMoves -> [[slots around [active card] within 1] except [[slots of [[cards tagged Monster] or [cards tagged Obstacle]]] or [free slots]]]\n" +
+            "\n" +
+            "OnPlacedFirstTime:\n" +
+            "    call OnPlaced\n" +
+            "\n" +
+            "OnPlaced:\n" +
+            "    for each card in [cards in [slots around [active card] within 1]]\n" +
+            "        reveal [iterating card]\n" +
+            "    reveal [card under [active card]]\n";
+
         /// <summary>Язык: команды и узлы Core и Model, расширение языка карт, тестовые команды <c>trace</c>.</summary>
         public static ScriptRegistry Language => m_Language ??= ScriptRegistry.Build(
             ScriptRegistry.CollectTypes(new[] { typeof(Command).Assembly, typeof(CardSystem).Assembly })
-                .Concat(new[] { typeof(TraceCommand), typeof(TraceCardsCommand), typeof(TraceSlotsCommand), typeof(TraceSlotCommand) }));
+                .Concat(new[] { typeof(TraceCommand), typeof(TraceCardsCommand), typeof(TraceSlotsCommand), typeof(TraceSlotCommand), typeof(WaitGateCommand) }));
 
         public ContentTestKit Content { get; }
 
@@ -239,7 +288,7 @@ namespace TheGrowth.Tests.EditMode.Cards
         /// <summary>Персонаж карты героя <see cref="Hero"/>.</summary>
         public CharacterModel HeroCharacter { get; }
 
-        /// <summary>Карта героя (тег <c>Hero</c>, компонент героя) со скриптом примера <c>Content/Entities/Hero.script</c>.</summary>
+        /// <summary>Тестовая карта героя (тег <c>Hero</c>, компонент героя) со скриптом <see cref="HeroScript"/>.</summary>
         public EntityModel Hero { get; }
 
         public EntityModel Monster { get; }
@@ -398,17 +447,20 @@ namespace TheGrowth.Tests.EditMode.Cards
         }
 
         /// <summary>
-        /// Сессия с журналом <see cref="CardTrace"/>, seed ГСЧ <paramref name="seed"/> и слотами экспедиции на поле
-        /// <see cref="Location"/>.
+        /// Сессия с журналом <see cref="CardTrace"/>, seed ГСЧ <paramref name="seed"/> и (если <paramref name="expeditionSlots"/>)
+        /// слотами экспедиции на поле <see cref="Location"/> — без старта экспедиции (<c>ExpeditionSystem</c>).
         /// </summary>
-        public Session NewSession(ulong seed = DefaultSeed)
+        public Session NewSession(ulong seed = DefaultSeed, bool expeditionSlots = true)
         {
             var session = Session.Create(Global, new SaveGame(), configure =>
             {
                 configure.Container.Add(new CardTrace());
+                configure.Container.Add(new CardGate());
                 configure.Get<RngSystem>().NewGameSeed = seed;
             });
-            session.Get<SlotSystem>().CreateExpedition(Location);
+            if (expeditionSlots)
+                session.Get<SlotSystem>().CreateExpedition(Location);
+
             return session;
         }
 
@@ -416,7 +468,11 @@ namespace TheGrowth.Tests.EditMode.Cards
         public Session Reload(Session session)
         {
             var save = SaveTestKit.Unpack(SaveTestKit.Pack(session.Capture()));
-            return Session.Create(Global, save, configure => configure.Container.Add(new CardTrace()));
+            return Session.Create(Global, save, configure =>
+            {
+                configure.Container.Add(new CardTrace());
+                configure.Container.Add(new CardGate());
+            });
         }
 
         public ScriptParser Parser()
@@ -474,11 +530,15 @@ namespace TheGrowth.Tests.EditMode.Cards
 
         public CardTrace Trace { get; }
 
+        public CardGate Gate => Session.Get<CardGate>();
+
         public ScriptRunner Runner => Session.Scripts;
 
         public RngSystem Rng => Session.Get<RngSystem>();
 
         public DealSystem Dealer => Session.Get<DealSystem>();
+
+        public ExpeditionSystem Expedition => Session.Get<ExpeditionSystem>();
 
         public Slot Cell(string id)
         {
@@ -501,7 +561,13 @@ namespace TheGrowth.Tests.EditMode.Cards
         /// <summary>Карта героя в клетке — как раскладка: без хуков, затем явная ссылка экспедиции (<see cref="SlotSystem.SetHero"/>).</summary>
         public Entity PlaceHero(string cell)
         {
-            var hero = Place(Kit.Hero, cell);
+            return PlaceHero(Kit.Hero, cell);
+        }
+
+        /// <summary>Карта героя <paramref name="model"/> в клетке — без хуков, затем <see cref="SlotSystem.SetHero"/>.</summary>
+        public Entity PlaceHero(EntityModel model, string cell)
+        {
+            var hero = Place(model, cell);
             Slots.SetHero(hero);
             return hero;
         }
@@ -548,9 +614,12 @@ namespace TheGrowth.Tests.EditMode.Cards
             return Trace.Entries.ToArray();
         }
 
-        /// <summary>Непустые слоты экспедиции: <c>a1:[Hero,Herb] backpack:[Herb]</c> (снизу вверх).</summary>
+        /// <summary>Непустые слоты экспедиции: <c>a1:[Hero,Herb] backpack:[Herb]</c> (снизу вверх); экспедиции нет — <c>no expedition</c>.</summary>
         public string Describe()
         {
+            if (Slots.Expedition == null)
+                return "no expedition";
+
             return string.Join(" ", Slots.Expedition.All
                 .Where(slot => !slot.IsEmpty)
                 .Select(slot => $"{slot.Id.Substring(slot.Id.LastIndexOf('/') + 1)}:[{string.Join(",", slot.Entities.Select(entity => entity.Model.Id))}]"));

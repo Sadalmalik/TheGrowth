@@ -53,6 +53,30 @@ namespace TheGrowth.Model.Cards
         }
     }
 
+    /// <summary>
+    /// Переместить карту в слот (наверх) без хуков размещения (<c>OnUnCovered</c>, <c>OnCovered</c>, <c>OnPlaced</c>), как
+    /// <c>RaiseEvents=false</c> прототипа. Слот полон (карта не из него) — ничего, предупреждение в лог.
+    /// </summary>
+    [Script("move_without_hooks", "move [Card] to [Slot] without hooks", Context = CommandContext.GameplayOnly)]
+    public sealed class MoveCardWithoutHooks : Command
+    {
+        public Evaluator<Entity> Card;
+        public Evaluator<Slot> Slot;
+
+        public override UniTask Execute(ScriptContext context)
+        {
+            var card = Card.Evaluate(context);
+            var slot = Slot.Evaluate(context);
+            if (!CardCommandUtility.IsAlive(card) || slot == null)
+                return UniTask.CompletedTask;
+
+            if (context.Get<SlotSystem>().GetSlot(card) != slot && !CardCommandUtility.HasRoom(this, slot, $"move {card}"))
+                return UniTask.CompletedTask;
+
+            return context.Get<CardSystem>().MoveWithoutHooks(card, slot);
+        }
+    }
+
     /// <summary>Перевернуть карту на другую сторону; <c>OnFlipped</c>.</summary>
     [Script("flip", "flip [Card]", Context = CommandContext.GameplayOnly)]
     public sealed class FlipCard : Command

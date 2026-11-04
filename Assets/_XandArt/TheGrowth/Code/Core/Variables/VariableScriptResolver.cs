@@ -4,7 +4,7 @@ using TheGrowth.Core.Scripting;
 namespace TheGrowth.Core.Variables
 {
     /// <summary>
-    /// Переменные в скриптах по объявлениям (<see cref="VariableCatalog"/>). <c>$имя</c> — переменная игры или профиля,
+    /// Переменные в скриптах по объявлениям (<see cref="VariableCatalog"/>). <c>$имя</c> — переменная игры, профиля или экспедиции,
     /// <c>[узел].имя</c> — переменная карты у владельца (<see cref="IVariableOwner"/>). Ошибки разбора: переменная не
     /// объявлена, прежнее имя (с подсказкой нового), не та область для записи, тип не подходит параметру. Узлы:
     /// чтение — <see cref="VariableValue{T}"/> (<see cref="VariableCondition"/> для bool в условии), запись —

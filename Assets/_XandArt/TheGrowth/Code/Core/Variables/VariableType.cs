@@ -21,6 +21,12 @@ namespace TheGrowth.Core.Variables
 
         /// <summary>Профиль игрока: вне слотов, общий для всех сохранений (открытые концовки, галерея). В скриптах — <c>$имя</c>.</summary>
         Profile,
+
+        /// <summary>
+        /// Экспедиция: пока идёт экспедиция (<see cref="IExpeditionVariables"/>), сохраняется вместе с ней; при старте — значения по
+        /// умолчанию, в конце удаляются. В скриптах — <c>$имя</c>.
+        /// </summary>
+        Expedition,
     }
 
     public static class VariableTypes
@@ -79,6 +85,7 @@ namespace TheGrowth.Core.Variables
                 VariableScope.Game => "game",
                 VariableScope.Card => "card",
                 VariableScope.Profile => "profile",
+                VariableScope.Expedition => "expedition",
                 _ => scope.ToString(),
             };
         }

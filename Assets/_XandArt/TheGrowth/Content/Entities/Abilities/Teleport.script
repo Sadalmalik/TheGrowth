@@ -2,7 +2,7 @@ AllowedMoves -> [[slots in [square 2.47m rotated 45 scaled 1.5 2] around [hero]]
 
 OnPlaced:
     reveal [card under [active card]]
-    move [card under [active card]] to [slot of [hero]]
+    move [card under [active card]] to [slot of [hero]] without hooks
     move [hero] to [slot of [active card]]
-    // камера — к герою (шаг 7 E03)
+    // камера — к герою (E06)
     call Abilities.Spend

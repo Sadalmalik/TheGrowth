@@ -15,7 +15,7 @@ namespace TheGrowth.Tests.EditMode.Decks
     /// <summary>
     /// Валидатор контента для колод и раскладки на контенте <see cref="CardTestKit"/> (поле 3 × 3: a1 — <c>PlayerSpawn</c>, c3 —
     /// <c>Exit</c>; выход — <c>SpawnSlot -> [slots tagged Exit]</c>): строки колоды, вид конфига, клетка героя, предупреждения
-    /// <c>SpawnSlot</c> (раскладка на пустом поле без сцены).
+    /// <c>SpawnSlot</c> (раскладка на пустом поле без сцены) и локации экспедиции без колоды.
     /// </summary>
     public sealed class DeckValidationTests
     {
@@ -95,6 +95,34 @@ namespace TheGrowth.Tests.EditMode.Decks
             m_Kit.Graph.FindSlot("a1").TagList.Clear();
 
             Assert.IsEmpty(Deal(Validate()));
+        }
+
+        [Test]
+        public void ExpeditionLocationWithoutDeck_Warning()
+        {
+            SetType(LocationType.Expedition);
+
+            var warnings = Deal(Validate());
+
+            Assert.AreEqual(1, warnings.Length, string.Join("\n", warnings));
+            Assert.IsTrue(warnings[0].IsWarning);
+            StringAssert.Contains("the expedition location has a field but no deck: only the hero is dealt", warnings[0].Message);
+        }
+
+        [Test]
+        public void ExpeditionLocationWithDeck_NoWarning()
+        {
+            SetType(LocationType.Expedition);
+            m_Kit.Deck(new DeckEntry(m_Kit.Plain));
+
+            Assert.IsEmpty(Validate());
+        }
+
+        private void SetType(LocationType type)
+        {
+            var serialized = new SerializedObject(m_Kit.Location);
+            serialized.FindProperty("m_Type").enumValueIndex = (int)type;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
         }
 
 #endregion

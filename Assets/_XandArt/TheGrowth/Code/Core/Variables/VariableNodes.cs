@@ -1,5 +1,6 @@
 using System;
 using TheGrowth.Core.Scripting;
+using UnityEngine;
 
 namespace TheGrowth.Core.Variables
 {
@@ -11,7 +12,7 @@ namespace TheGrowth.Core.Variables
     {
         VariableDeclaration Declaration { get; }
 
-        /// <summary>Эвалуатор владельца переменных карты; null у областей игры и профиля.</summary>
+        /// <summary>Эвалуатор владельца переменных карты; null у областей игры, профиля и экспедиции.</summary>
         IEvaluator Owner { get; }
     }
 
@@ -30,7 +31,7 @@ namespace TheGrowth.Core.Variables
 
         public override T Evaluate(ScriptContext context)
         {
-            return VariableAccess.GetStore(context, Declaration, Owner).Get<T>(Declaration);
+            return VariableAccess.Get<T>(context, Declaration, Owner);
         }
 
         public override string ToString()
@@ -54,7 +55,7 @@ namespace TheGrowth.Core.Variables
 
         public override bool Check(ScriptContext context)
         {
-            return VariableAccess.GetStore(context, Declaration, Owner).Get<bool>(Declaration);
+            return VariableAccess.Get<bool>(context, Declaration, Owner);
         }
 
         public override string ToString()
@@ -83,18 +84,23 @@ namespace TheGrowth.Core.Variables
 
         public object GetValue(ScriptContext context)
         {
-            return GetStore(context).Get(Declaration);
+            var store = VariableAccess.GetStore(context, Declaration, Owner, false);
+            return store != null ? store.Get(Declaration) : Declaration.DefaultValue;
         }
 
+        /// <summary>Записать значение; хранилища области нет (экспедиция не идёт) — ничего, предупреждение в лог.</summary>
         public void SetValue(ScriptContext context, object value)
         {
-            GetStore(context).Set(Declaration, value);
+            GetStore(context)?.Set(Declaration, value);
         }
 
-        /// <summary>Хранилище области переменной; у переменной карты — владельца, вычисленного сейчас.</summary>
+        /// <summary>
+        /// Хранилище области переменной для записи; у переменной карты — владельца, вычисленного сейчас. Области нет (переменная
+        /// экспедиции вне экспедиции) — null, предупреждение в лог.
+        /// </summary>
         public VariableStore GetStore(ScriptContext context)
         {
-            return VariableAccess.GetStore(context, Declaration, Owner);
+            return VariableAccess.GetStore(context, Declaration, Owner, true);
         }
 
         /// <summary>Ссылка с типом значения объявления.</summary>
@@ -127,19 +133,30 @@ namespace TheGrowth.Core.Variables
 
         public T Get(ScriptContext context)
         {
-            return GetStore(context).Get<T>(Declaration);
+            return VariableAccess.Get<T>(context, Declaration, Owner);
         }
 
         public void Set(ScriptContext context, T value)
         {
-            GetStore(context).Set(Declaration, value);
+            GetStore(context)?.Set(Declaration, value);
         }
     }
 
     internal static class VariableAccess
     {
-        /// <summary>Хранилище области: игра и профиль — системы контейнера, карта — владелец из <paramref name="owner"/>.</summary>
-        public static VariableStore GetStore(ScriptContext context, VariableDeclaration declaration, IEvaluator owner)
+        /// <summary>Значение переменной; хранилища области нет (экспедиция не идёт) — значение по умолчанию из объявления.</summary>
+        public static T Get<T>(ScriptContext context, VariableDeclaration declaration, IEvaluator owner)
+        {
+            var store = GetStore(context, declaration, owner, false);
+            return store != null ? store.Get<T>(declaration) : (T)declaration.DefaultValue;
+        }
+
+        /// <summary>
+        /// Хранилище области: игра, профиль и экспедиция — системы контейнера, карта — владелец из <paramref name="owner"/>.
+        /// Экспедиция не идёт — null и предупреждение в лог (чтение — значение по умолчанию, запись ничего не делает).
+        /// </summary>
+        /// <param name="write">Для записи: только текст предупреждения.</param>
+        public static VariableStore GetStore(ScriptContext context, VariableDeclaration declaration, IEvaluator owner, bool write)
         {
             switch (declaration.Scope)
             {
@@ -147,6 +164,8 @@ namespace TheGrowth.Core.Variables
                     return context.Get<IGameVariables>().Variables;
                 case VariableScope.Profile:
                     return context.Get<IProfileVariables>().Variables;
+                case VariableScope.Expedition:
+                    return GetExpeditionStore(context, declaration, write);
             }
 
             if (owner == null)
@@ -159,6 +178,19 @@ namespace TheGrowth.Core.Variables
             throw new InvalidOperationException(value == null
                 ? $"Owner of variable '{declaration.Name}' is null"
                 : $"{value.GetType().Name} is not an owner of variables (variable '{declaration.Name}')");
+        }
+
+        private static VariableStore GetExpeditionStore(ScriptContext context, VariableDeclaration declaration, bool write)
+        {
+            var store = context.Get<IExpeditionVariables>().Variables;
+            if (store != null)
+                return store;
+
+            var where = context.Execution?.Name ?? "no script";
+            Debug.LogWarning(write
+                ? $"[Variables] {where}: expedition variable '${declaration.Name}' is written outside of an expedition, nothing is changed"
+                : $"[Variables] {where}: expedition variable '${declaration.Name}' is read outside of an expedition, the default value is used");
+            return null;
         }
     }
 }

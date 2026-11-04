@@ -23,7 +23,8 @@ namespace TheGrowth.EditorTools.Decks
     /// Проверки колод и раскладки локаций для валидатора контента:
     /// <list type="bullet">
     /// <item>строки колоды — конфиг есть, количество не меньше 1 (вид конфига — <c>ModelKindChecks</c>);</item>
-    /// <item>локация с колодой — у неё есть поле, в графе есть клетка <see cref="DealSystem.PlayerSpawnTag"/>;</item>
+    /// <item>локация с колодой — у неё есть поле, в графе есть клетка <see cref="DealSystem.PlayerSpawnTag"/>; локация экспедиции с
+    /// полем без колоды — предупреждение;</item>
     /// <item><c>SpawnSlot</c> карт колоды — первый шаг раскладки на пустом поле в сессии без сцены: каждая карта строк без
     /// «не раскладывать» по порядку строк вычисляет набор и занимает первую свободную клетку из него (клетка героя — первая
     /// <c>PlayerSpawn</c> — занята); карты без свободной клетки — предупреждение. Случайный выбор раскладки здесь заменён
@@ -71,6 +72,22 @@ namespace TheGrowth.EditorTools.Decks
                 errors.Add($"field graph '{location.Graph.name}' has no slot tagged {DealSystem.PlayerSpawnTag}: the hero can't be dealt");
 
             return errors;
+        }
+
+        /// <summary>
+        /// Предупреждения: локация экспедиции (<see cref="LocationType.Expedition"/>) с полем без колоды — при старте экспедиции
+        /// раскладывается только герой.
+        /// </summary>
+        public static List<string> CheckDeckWarnings(LocationModel location)
+        {
+            if (location == null)
+                throw new ArgumentNullException(nameof(location));
+
+            var warnings = new List<string>();
+            if (location.Type == LocationType.Expedition && location.Graph != null && location.Deck == null)
+                warnings.Add("the expedition location has a field but no deck: only the hero is dealt at the start of the expedition");
+
+            return warnings;
         }
 
         /// <summary>

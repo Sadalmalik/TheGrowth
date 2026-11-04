@@ -4,4 +4,4 @@ OnStep:
     else
         call Monsters.CrossMovement
         if [[card under [active card]] == [hero]]
-            // конец экспедиции: героя съел монстр (шаг 7 E03)
+            end expedition with defeat

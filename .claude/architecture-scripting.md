@@ -54,6 +54,16 @@ Warcraft 3:
 - **Общеигровые скрипты** — отдельный файл (или несколько) с именованными хуками под точки в игре:
   кнопки UI, триггеры. Объект сцены ссылается на хук по имени (выпадающий список в инспекторе).
   Валидатор проверяет, что все ссылки на хуки существуют.
+- **Игровые события в скриптах** (решено 2026-11-04; в прототипе — триггеры и команды компонентов `StoryStep`):
+  - хуки на основные игровые события — в двух местах: общий файл `Game.script` (работает в любом шаге) и скрипт
+    шага сюжета `<StoryStep>.script` рядом с конфигом шага (активен, пока шаг текущий); на одно событие сначала
+    срабатывает общий файл, затем шаг;
+  - имена — как у хуков карт: `OnStepStarted`, `OnStepEnded`, `OnExpeditionStarted`, `OnExpeditionEnded`,
+    `OnHubEntered`, `OnInventoryOpened`, ...; подробности события — эвалуаторами контекста (`expedition won`,
+    `[current location]`), отдельных событий на победу и поражение нет;
+  - автосейв по игровым событиям — так же: `OnExpeditionEnded:` + `autosave`;
+  - когда: механизм, `Game.script`, события экспедиции и хаба — T077; скрипты шагов — со `StorySystem` (E09);
+    остальные события — со своими системами (инвентарь — E07, крафт и шаги — E09).
 - Импортёр (`ScriptedImporter`) разбирает файл при импорте, ошибки — с номером строки.
 - Расширения: `.script` и `.dialog` (см. «Синтаксис языка»).
 
@@ -346,6 +356,45 @@ if [$trust_lucia > 3]
   | `Cross N` | `[line 0 [(N + 0,5) · a]m] or [line 90 [(N + 0,5) · b]m]` | Cross 1 — `[line 0 2.25m] or [line 90 3m]` |
   | `Square 0` / `Distance 0` (своя клетка) | `slot of [hero]` (или `except [slot of [...]]`) | — |
 
+#### Узлы хода экспедиции (решено 2026-11-04, T076)
+
+| Вид | Шаблоны |
+|---|---|
+| команда | `end turn`, `end expedition with victory`, `end expedition with defeat`, `set turns left to [N]`, `add [N] to turns left`, `move [Card] to [Slot] without hooks` |
+| эвалуатор | `turns left`, `turn number` |
+
+- `end turn` и `end expedition` только отмечают запрос; обрабатывает их `ExpeditionSystem` после действия игрока
+  (architecture-data.md, «Ход экспедиции»). `end turn` — ход монстров и номер хода; счётчик ходов меняют только скрипты
+  (ход героя — `Cards.HeroStep`).
+- `move ... without hooks` не вызывает хуки размещения (`OnUnCovered`, `OnCovered`, `OnPlaced`); перетаскивание
+  игроком — всегда с хуками.
+
+##### Реализация (T076)
+
+Шаблоны — как в таблице; `end expedition with victory` / `defeat` — один класс с параметром-enum: `end expedition with [Result]`
+(`ExpeditionResult`, запись `victory` / `defeat`; разбор принимает и имя члена `Victory`, принтер пишет запись).
+
+| Класс | Имя | Шаблон | Контекст |
+|---|---|---|---|
+| `EndTurnCommand` | `end_turn` | `end turn` | везде |
+| `EndExpeditionCommand` | `end_expedition` | `end expedition with [Result]` | везде |
+| `SetTurnsLeftCommand` | `set_turns_left` | `set turns left to [Turns]` | везде |
+| `AddTurnsLeftCommand` | `add_turns_left` | `add [Amount] to turns left` | везде |
+| `TurnsLeftEvaluator` | `turns_left` | `turns left` (int) | везде |
+| `TurnNumberEvaluator` | `turn_number` | `turn number` (int) | везде |
+| `MoveCardWithoutHooks` | `move_without_hooks` | `move [Card] to [Slot] without hooks` | только вне диалогов (как `move`) |
+
+- Код: `Code/Model/Expeditions/ExpeditionNodes.cs`, `MoveCardWithoutHooks` — `Code/Model/Cards/CardCommands.cs`
+  (`CardSystem.MoveWithoutHooks`: `SlotSystem.Move`, асинхронно для будущих анимаций; пустая или уничтоженная карта, пустой
+  слот — ничего; полный слот — предупреждение, как у `move`).
+- Скелеты не конфликтуют: `set turns left to []` и `set [] to []`, `add [] to turns left` и `add [] to []` различаются
+  литералами; параметр-переменная не принимает слово `turns`, поэтому разбор однозначен.
+- Вне экспедиции команды — предупреждение `[Expedition] <файл:строка>: <узел>: there is no active expedition, the command does
+  nothing`, эвалуаторы — 0 и предупреждение с именем запуска. `end turn` / `end expedition` вне действия игрока — то же с
+  причиной `no player action is in progress`; повторный `end expedition` — `the first result stays`.
+- Номер хода: первый — 1. Счётчик: `add` с переполнением — ошибка исполнения (как `add` к переменной).
+- Переменные экспедиции — `$имя` с областью `Expedition` (architecture-data.md, «Переменные»).
+
 #### Реализация (T074)
 
 - Core: расширение языка `ScriptExtension` + `ScriptDeclarations` (`Registry/ScriptExtension.cs`) — объявления снизу
@@ -377,9 +426,10 @@ if [$trust_lucia > 3]
   ```
 
   Монстр обходит клетки с картами `Monster`, `Obstacle`, `Exit`.
-- Примеры: `Content/Entities/Hero|Monster|Herb|Exit.script`, общий `Content/Scripts/Monsters.script`
-  (`CrossMovement`, вызов `call Monsters.CrossMovement`). Конец экспедиции у монстра — строка-комментарий (шаг 7) под
-  проверкой `if [[card under [active card]] == [hero]]` (T072: по ссылке на героя, не по тегу).
+- Примеры: `Content/Entities/Hero|Monster|Herb|Exit.script` (заглушка `Hero` удалена в T076, герои —
+  `Content/Entities/Heroes/`), общий `Content/Scripts/Monsters.script` (`CrossMovement`, вызов `call Monsters.CrossMovement`).
+  Конец экспедиции у монстра — под проверкой `if [[card under [active card]] == [hero]]` (T072: по ссылке на героя, не по тегу);
+  с T076 — `end expedition with defeat`.
 - Тесты: `Tests/EditMode/Cards/` (поле 3 × 3 строится в тесте), `Scripting/ScriptExtensionTests`.
 
 ### Типы файлов и контексты команд (решено 2026-10-17)
@@ -412,7 +462,7 @@ merge YAML с `rid` не разрешить руками), JSON со схемо�
   `Background` — отдельный запуск, токен связан с токеном scope, а не родителя. `Parallel` —
   `UniTask.WhenAll`. Команды ожидания игрока (реплика, выбор, ввод) оборачивают ожидание в
   `context.WaitForPlayer()`; `IsIdle` = активных запусков нет или все ждут игрока.
-- `ScriptRunner.RunCode(name, body)` (T072) — запуск кода C# (раскладка, позже действия игрока), зарегистрированный как
+- `ScriptRunner.RunCode(name, body)` (T072) — запуск кода C# (раскладка, действия игрока — T076), зарегистрированный как
   запуск секции: пока он идёт, исполнитель не простаивает, и запуски внутри него не дают точки сохранения между собой.
   Исключения кода, включая отмену, уходят вызывающему; позиции нет.
 - Ошибка в команде — лог с файлом и строкой скрипта, запуск прерывается, игра продолжается.

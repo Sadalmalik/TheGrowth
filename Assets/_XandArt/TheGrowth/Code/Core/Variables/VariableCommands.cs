@@ -17,7 +17,10 @@ namespace TheGrowth.Core.Variables
         }
     }
 
-    /// <summary>Прибавить число к переменной int; вычитание — отрицательным числом. Переполнение — ошибка исполнения.</summary>
+    /// <summary>
+    /// Прибавить число к переменной int; вычитание — отрицательным числом. Переполнение — ошибка исполнения. Переменная
+    /// экспедиции вне экспедиции — ничего, предупреждение в лог.
+    /// </summary>
     [Script("add", "add [Amount] to [Variable]")]
     public sealed class AddToVariable : InstantCommand
     {
@@ -28,6 +31,9 @@ namespace TheGrowth.Core.Variables
         {
             var amount = Amount.Evaluate(context);
             var store = Variable.GetStore(context);
+            if (store == null)
+                return;
+
             store.Set(Variable.Declaration, checked(store.Get<int>(Variable.Declaration) + amount));
         }
     }
