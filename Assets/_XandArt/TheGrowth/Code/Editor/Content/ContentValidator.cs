@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TheGrowth.Core.Content;
+using TheGrowth.Core.Entities;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Core.Tags;
 using TheGrowth.Core.Variables;
+using TheGrowth.EditorTools.Entities;
 using TheGrowth.EditorTools.Graphs;
 using TheGrowth.Model.Graphs;
 using TheGrowth.Model.Locations;
@@ -19,8 +21,10 @@ namespace TheGrowth.EditorTools.Content
     /// объявления переменных (<see cref="VariableCatalog"/>) и тегов (<see cref="TagCatalog"/>), графы полей локаций
     /// (граф помнит сцену локации, один граф — одна локация, данные графа — <see cref="GraphChecks"/>), пропавшие ссылки,
     /// конфиги и файлы скриптов проекта вне реестра, графы сцен локаций, на которые локация не ссылается, настройки поля
-    /// (<see cref="FieldConfig"/> — ровно один в реестре проекта). Сцены не открываются. Ошибки — списком (для тестов и
-    /// pre-build), <see cref="Log"/> выводит их в консоль с выделением ассета.
+    /// (<see cref="FieldConfig"/> — ровно один в реестре проекта), конфиги сущностей (<see cref="EntityModelChecks"/>),
+    /// вид конфигов сущностей в полях с <see cref="ModelKindAttribute"/> (<see cref="ModelKindChecks"/>), типы компонентов
+    /// сущностей (только в проекте). Сцены не открываются. Ошибки — списком (для тестов и pre-build), <see cref="Log"/>
+    /// выводит их в консоль с выделением ассета.
     /// </summary>
     public static class ContentValidator
     {
@@ -36,13 +40,17 @@ namespace TheGrowth.EditorTools.Content
         public static List<ContentError> Validate(IReadOnlyList<ContentAsset> assets, IReadOnlyList<ScriptFileEntry> scripts, bool isComplete = false)
         {
             var errors = new List<ContentError>();
-            ValidateAssets(assets ?? Array.Empty<ContentAsset>(), errors);
+            assets ??= Array.Empty<ContentAsset>();
+            ValidateAssets(assets, errors);
             ValidateScripts(scripts ?? Array.Empty<ScriptFileEntry>(), errors);
-            ValidateVariables(assets ?? Array.Empty<ContentAsset>(), errors);
-            var tags = new TagCatalog((assets ?? Array.Empty<ContentAsset>()).OfType<TagDeclarations>());
+            var variables = new VariableCatalog(assets.OfType<VariableDeclarations>());
+            ValidateVariables(variables, errors);
+            var tags = new TagCatalog(assets.OfType<TagDeclarations>());
             ValidateTags(tags, errors);
-            ValidateGraphs(assets ?? Array.Empty<ContentAsset>(), tags, errors);
-            ValidateFieldConfig(assets ?? Array.Empty<ContentAsset>(), isComplete, errors);
+            ValidateGraphs(assets, tags, errors);
+            ValidateFieldConfig(assets, isComplete, errors);
+            ValidateEntities(assets, tags, variables, errors);
+            ValidateModelKinds(assets, errors);
             return errors;
         }
 
@@ -75,6 +83,9 @@ namespace TheGrowth.EditorTools.Content
             }
 
             ValidateUnusedGraphs(registry, searchFolder, errors);
+            foreach (var message in EntityModelEditing.CheckComponentTypes(EntityModelEditing.FindComponentTypes()))
+                errors.Add(new ContentError(ContentErrorKind.InvalidComponentType, "<code>", message, null));
+
             return errors;
         }
 
@@ -169,9 +180,8 @@ namespace TheGrowth.EditorTools.Content
             }
         }
 
-        private static void ValidateVariables(IReadOnlyList<ContentAsset> assets, List<ContentError> errors)
+        private static void ValidateVariables(VariableCatalog catalog, List<ContentError> errors)
         {
-            var catalog = new VariableCatalog(assets.OfType<VariableDeclarations>());
             foreach (var error in catalog.Errors)
             {
                 var message = string.IsNullOrEmpty(error.Variable) ? error.Message : $"variable '{error.Variable}': {error.Message}";
@@ -234,6 +244,29 @@ namespace TheGrowth.EditorTools.Content
             {
                 var others = string.Join(", ", configs.Where(other => other != config).Select(GetPath));
                 errors.Add(Error(ContentErrorKind.InvalidFieldConfig, config, $"more than one {nameof(FieldConfig)} in the project, one is allowed (also: {others})"));
+            }
+        }
+
+        /// <summary>Конфиги сущностей: вид, компоненты, обязательные компоненты вида, теги, переменные.</summary>
+        private static void ValidateEntities(IReadOnlyList<ContentAsset> assets, TagCatalog tags, VariableCatalog variables, List<ContentError> errors)
+        {
+            foreach (var model in assets.OfType<EntityModel>())
+            {
+                foreach (var message in EntityModelChecks.Check(model, tags, variables))
+                    errors.Add(Error(ContentErrorKind.InvalidEntity, model, message));
+            }
+        }
+
+        /// <summary>Ссылки на конфиги сущностей в полях с <see cref="ModelKindAttribute"/>: вид конфига подходит полю.</summary>
+        private static void ValidateModelKinds(IReadOnlyList<ContentAsset> assets, List<ContentError> errors)
+        {
+            foreach (var asset in assets)
+            {
+                if (asset == null)
+                    continue;
+
+                foreach (var message in ModelKindChecks.Check(asset))
+                    errors.Add(Error(ContentErrorKind.WrongModelKind, asset, message));
             }
         }
 

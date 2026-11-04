@@ -34,16 +34,16 @@ namespace TheGrowth.Tests.EditMode.Tags
         {
             var field = m_Kit.Asset<TagDeclarations>("FieldTags");
             field.SetTags(new[] { new TagDeclaration("PlayerSpawn", "Hero start"), new TagDeclaration("Exit") });
-            var cards = GraphTestKit.Tags(m_Kit, "CardTags", "monster", "Лес_2");
+            var cards = GraphTestKit.Tags(m_Kit, "CardTags", "Monster", "Лес2");
 
             var catalog = new TagCatalog(new[] { field, cards });
 
             Assert.IsEmpty(catalog.Errors, string.Join("\n", catalog.Errors));
-            Assert.That(catalog.Tags.Select(tag => tag.Name), Is.EqualTo(new[] { "PlayerSpawn", "Exit", "monster", "Лес_2" }));
+            Assert.That(catalog.Tags.Select(tag => tag.Name), Is.EqualTo(new[] { "PlayerSpawn", "Exit", "Monster", "Лес2" }));
             Assert.IsTrue(catalog.TryGet("PlayerSpawn", out var spawn));
             Assert.AreEqual("Hero start", spawn.Description);
-            Assert.IsTrue(catalog.Contains("monster"));
-            Assert.IsFalse(catalog.Contains("Monster"), "names are case-sensitive");
+            Assert.IsTrue(catalog.Contains("Monster"));
+            Assert.IsFalse(catalog.Contains("monster"), "names are case-sensitive");
             Assert.IsFalse(catalog.Contains(null));
         }
 
@@ -51,6 +51,8 @@ namespace TheGrowth.Tests.EditMode.Tags
         [TestCase("1st")]
         [TestCase("player spawn")]
         [TestCase("player-spawn")]
+        [TestCase("playerSpawn")]
+        [TestCase("Player_Spawn")]
         public void InvalidName_Error_NotInCatalog(string name)
         {
             var tags = GraphTestKit.Tags(m_Kit, "Tags", name, "Exit");
@@ -59,7 +61,7 @@ namespace TheGrowth.Tests.EditMode.Tags
 
             Assert.AreEqual(1, catalog.Errors.Count);
             Assert.AreEqual(name, catalog.Errors[0].Tag);
-            StringAssert.Contains(name == "" ? "name is empty" : "not an identifier", catalog.Errors[0].Message);
+            StringAssert.Contains(name == "" ? "name is empty" : "not CamelCase", catalog.Errors[0].Message);
             Assert.That(catalog.Tags.Select(tag => tag.Name), Is.EqualTo(new[] { "Exit" }));
         }
 

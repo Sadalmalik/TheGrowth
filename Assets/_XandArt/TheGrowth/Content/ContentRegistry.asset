@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: ContentRegistry
   m_EditorClassIdentifier: TheGrowth.Core::TheGrowth.Core.Content.ContentRegistry
   m_Assets:
+  - {fileID: 11400000, guid: accaf4cf0b6280d45a85fa37d0fc04f5, type: 2}
+  - {fileID: 11400000, guid: 6e30ca096fa613c44beac3323b9cfa18, type: 2}
+  - {fileID: 11400000, guid: d4d72eaf1ea3d984aa732850fdc55494, type: 2}
+  - {fileID: 11400000, guid: d96f1576b4c51444b9be42ee5191e956, type: 2}
+  - {fileID: 11400000, guid: 2396caf7b4649c6498fabc7c47620d42, type: 2}
+  - {fileID: 11400000, guid: 7b156de33eaabd94aa7d48e1edd5dfd6, type: 2}
+  - {fileID: 11400000, guid: e6f7908b98403034bb76b11c4a5ce6fe, type: 2}
+  - {fileID: 11400000, guid: 05add849fea92054695a78868435f9cf, type: 2}
+  - {fileID: 11400000, guid: 3932f12e3e3179e4382d5a7ab04fb2e8, type: 2}
   - {fileID: 11400000, guid: 25ddfe3cfeeb99d4c9a1fba6ca236256, type: 2}
   - {fileID: 11400000, guid: 5fd5a1b773cd4b208eb2692d0bb6d0fd, type: 2}
   - {fileID: 11400000, guid: 82b05135a96afd949837348a52eb15f1, type: 2}

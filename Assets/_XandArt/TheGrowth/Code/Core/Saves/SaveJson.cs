@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
@@ -46,6 +47,11 @@ namespace TheGrowth.Core.Saves
         public static T ToObject<T>(JToken token)
         {
             return token.ToObject<T>(CreateSerializer());
+        }
+
+        public static object ToObject(JToken token, Type type)
+        {
+            return token.ToObject(type, CreateSerializer());
         }
 
         public static void Write(Stream stream, object value)

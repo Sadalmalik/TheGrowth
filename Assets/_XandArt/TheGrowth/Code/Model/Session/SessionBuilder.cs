@@ -1,7 +1,9 @@
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
 using TheGrowth.Core.Scripting;
+using TheGrowth.Model.Entities;
 using TheGrowth.Model.Locations;
+using TheGrowth.Model.Slots;
 using TheGrowth.Model.Variables;
 
 namespace TheGrowth.Model
@@ -19,6 +21,8 @@ namespace TheGrowth.Model
             container.Add(new ScriptRunner());
             container.Add(new LocationSystem());
             container.Add(new VariablesSystem());
+            container.Add(new EntityRegistry());
+            container.Add(new SlotSystem());
         }
     }
 }

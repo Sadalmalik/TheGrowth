@@ -7,9 +7,10 @@ using UnityEngine;
 namespace TheGrowth.Core.Variables
 {
     /// <summary>
-    /// Значения переменных в JSON сохранения (секция игры, файл профиля): <c>{ "имя": значение }</c>, только явно заданные.
-    /// Чтение по объявлениям: значение по прежнему имени читается под новым, необъявленное, другой области или другого
-    /// типа — предупреждение и значение по умолчанию.
+    /// Значения переменных в JSON сохранения (секция игры, файл профиля, сущность): <c>{ "имя": значение }</c>, только явно
+    /// заданные. Чтение по объявлениям: значение по прежнему имени читается под новым, необъявленное, другой области, другого
+    /// типа или переменной, которой у владельца нет (<see cref="VariableStore.Contains"/>), — предупреждение и значение по
+    /// умолчанию.
     /// </summary>
     public static class VariableValues
     {
@@ -71,6 +72,12 @@ namespace TheGrowth.Core.Variables
             if (declaration.Scope != store.Scope)
             {
                 Debug.LogWarning($"{source}: variable '{name}' is now a {declaration.Scope.ToText()} variable, its saved value is ignored");
+                return;
+            }
+
+            if (!store.Contains(declaration))
+            {
+                Debug.LogWarning($"{source}: variable '{name}' is not a variable of {store.Schema} any more, its saved value is ignored");
                 return;
             }
 

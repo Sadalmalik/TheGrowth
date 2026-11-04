@@ -498,7 +498,7 @@ namespace TheGrowth.Core.Scripting.Text
 
             if (!param.IsList)
             {
-                if (ReadValue(type, node, span.Start, span.End, out var value))
+                if (ReadValue(type, node, span.Start, span.End, out var value) && CheckFilters(param, value, node, span.Start))
                     param.Field.SetValue(target, value);
 
                 return;
@@ -508,7 +508,7 @@ namespace TheGrowth.Core.Scripting.Text
             var valid = true;
             foreach (var item in SplitList(node.Tokens, span))
             {
-                if (ReadValue(type, node, item.Start, item.End, out var value))
+                if (ReadValue(type, node, item.Start, item.End, out var value) && CheckFilters(param, value, node, item.Start))
                     list.Add(value);
                 else
                     valid = false;
@@ -516,6 +516,23 @@ namespace TheGrowth.Core.Scripting.Text
 
             if (valid)
                 param.Field.SetValue(target, list);
+        }
+
+        /// <summary>Ограничения параметра (<see cref="ScriptParam.Filters"/>) для разобранного значения; нарушение — ошибка разбора.</summary>
+        private bool CheckFilters(ScriptParam param, object value, OutlineNode node, int start)
+        {
+            var valid = true;
+            foreach (var filter in param.Filters)
+            {
+                var error = filter.Check(value);
+                if (error == null)
+                    continue;
+
+                Error(node, node.Tokens[start].Start, $"[{param.Name}]: {error}");
+                valid = false;
+            }
+
+            return valid;
         }
 
         /// <summary>

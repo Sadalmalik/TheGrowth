@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using TheGrowth.Architecture.IOC;
 using TheGrowth.Core.Content;
-using TheGrowth.Core.Scripting;
 using UnityEngine;
 
 namespace TheGrowth.Core.Tags
@@ -32,7 +31,7 @@ namespace TheGrowth.Core.Tags
 
     /// <summary>
     /// Все объявления тегов: поиск по имени. Строится из конфигов <see cref="TagDeclarations"/> и проверяет их: имя —
-    /// идентификатор языка, имена уникальны по всем конфигам. Объявление с неверным именем в поиск не попадает, при дубле
+    /// CamelCase (<see cref="IsValidName"/>), имена уникальны по всем конфигам. Объявление с неверным именем в поиск не попадает, при дубле
     /// остаётся первое в порядке реестра; ошибки — <see cref="Errors"/>, в лог — при добавлении в контейнер
     /// (<see cref="Init"/>).
     /// </summary>
@@ -81,6 +80,25 @@ namespace TheGrowth.Core.Tags
                 Debug.LogError($"[Tags] {error}", error.Source);
         }
 
+        /// <summary>
+        /// Имя тега — CamelCase (решено 2026-11-04): с заглавной буквы, только буквы и цифры (<c>PlayerSpawn</c>,
+        /// <c>Exit</c>). Смысл тега зависит от того, на чём он стоит: <c>Exit</c> на слоте — сюда можно положить карту
+        /// выхода, на карте — это карта выхода.
+        /// </summary>
+        public static bool IsValidName(string name)
+        {
+            if (string.IsNullOrEmpty(name) || !char.IsUpper(name[0]))
+                return false;
+
+            foreach (var c in name)
+            {
+                if (!char.IsLetterOrDigit(c))
+                    return false;
+            }
+
+            return true;
+        }
+
         public bool Contains(string name)
         {
             return name != null && m_ByName.ContainsKey(name);
@@ -101,11 +119,11 @@ namespace TheGrowth.Core.Tags
         private void Add(TagDeclarations source, TagDeclaration tag)
         {
             var name = tag.Name;
-            if (!ScriptSyntax.IsIdentifier(name))
+            if (!IsValidName(name))
             {
                 m_Errors.Add(new TagError(source, name, string.IsNullOrEmpty(name)
                     ? "name is empty"
-                    : "name is not an identifier (letters, digits, '_', not starting with a digit)"));
+                    : "name is not CamelCase (starts with an uppercase letter, letters and digits only)"));
                 return;
             }
 

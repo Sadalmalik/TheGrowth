@@ -97,30 +97,43 @@ namespace TheGrowth.Core.Variables
         /// <summary>Значение по умолчанию из текста. false — текст не подходит к типу (<paramref name="error"/>).</summary>
         public bool TryParseDefault(out object value, out string error)
         {
+            if (TryParse(m_Type, m_Default, out value, out error))
+                return true;
+
+            error = "default value " + error;
+            return false;
+        }
+
+        /// <summary>
+        /// Значение типа <paramref name="type"/> из текста конфига: <c>true</c> / <c>false</c>, целое, строка как есть; пусто —
+        /// <c>false</c>, <c>0</c>, <c>""</c>. false — текст не подходит к типу (<paramref name="error"/>).
+        /// </summary>
+        public static bool TryParse(VariableType type, string text, out object value, out string error)
+        {
             error = null;
-            var text = m_Default?.Trim();
-            if (m_Type == VariableType.String)
+            if (type == VariableType.String)
             {
-                value = m_Default ?? string.Empty;
+                value = text ?? string.Empty;
                 return true;
             }
 
-            if (string.IsNullOrEmpty(text))
+            var trimmed = text?.Trim();
+            if (string.IsNullOrEmpty(trimmed))
             {
-                value = m_Type.GetZeroValue();
+                value = type.GetZeroValue();
                 return true;
             }
 
             value = null;
-            switch (m_Type)
+            switch (type)
             {
                 case VariableType.Bool:
-                    if (text is "true" or "false")
-                        value = text == "true";
+                    if (trimmed is "true" or "false")
+                        value = trimmed == "true";
 
                     break;
                 case VariableType.Int:
-                    if (int.TryParse(text, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out var number))
+                    if (int.TryParse(trimmed, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out var number))
                         value = number;
 
                     break;
@@ -129,7 +142,7 @@ namespace TheGrowth.Core.Variables
             if (value != null)
                 return true;
 
-            error = $"default value '{m_Default}' is not a valid {m_Type.ToText()} ({(m_Type == VariableType.Bool ? "true or false" : "integer")})";
+            error = $"'{text}' is not a valid {type.ToText()} ({(type == VariableType.Bool ? "true or false" : "integer")})";
             return false;
         }
 

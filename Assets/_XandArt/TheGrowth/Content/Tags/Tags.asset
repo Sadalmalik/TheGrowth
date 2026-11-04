@@ -17,4 +17,10 @@ MonoBehaviour:
   - m_Name: PlayerSpawn
     m_Description: Slot where the hero card is placed at the start of an expedition.
   - m_Name: Exit
-    m_Description: Slot that leads out of the field.
+    m_Description: 'On a slot: the exit card can be spawned here. On a card: the exit card.'
+  - m_Name: Hero
+    m_Description: Hero card of the expedition.
+  - m_Name: Monster
+    m_Description: Monster card.
+  - m_Name: Resource
+    m_Description: 'Resource card: collected into the backpack.'

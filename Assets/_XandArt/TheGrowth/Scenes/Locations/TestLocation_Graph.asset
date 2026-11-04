@@ -15,52 +15,52 @@ MonoBehaviour:
   m_SceneName: TestLocation
   m_Slots:
   - m_Id: rohat9
-    m_Position: {x: -2.4750001, y: 0, z: -2.2}
+    m_Position: {x: -3.2978737, y: 0, z: -5.0085926}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: ik95j7
-    m_Position: {x: -0.82500005, y: 0, z: -2.2}
+    m_Position: {x: -1.6478722, y: 0, z: -5.0085926}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: atvape
-    m_Position: {x: 0.82500005, y: 0.000000059604645, z: -2.2}
+    m_Position: {x: 0.002127707, y: 0.000000059604645, z: -5.0085926}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: ihnd0e
-    m_Position: {x: 2.4750001, y: 0.000000059604645, z: -2.2}
+    m_Position: {x: 1.6521275, y: 0.000000059604645, z: -5.0085926}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: gq0y79
-    m_Position: {x: -2.4750001, y: 0.000000059604645, z: 0}
+    m_Position: {x: -3.2978737, y: 0, z: -2.808592}
     m_Tags:
     - PlayerSpawn
     m_Grid: bie33e
   - m_Id: cxapyh
-    m_Position: {x: -0.82500005, y: 0.000000059604645, z: 0}
+    m_Position: {x: -1.6478722, y: 0, z: -2.808592}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: jm6a7g
-    m_Position: {x: 0.82500005, y: 0.000000059604645, z: 0}
+    m_Position: {x: 0.002127707, y: 0.000000059604645, z: -2.808592}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: ztfy3r
-    m_Position: {x: 2.4750001, y: 0.000000059604645, z: 0}
+    m_Position: {x: 1.6521275, y: 0.000000059604645, z: -2.808592}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: la29rv
-    m_Position: {x: -2.4750001, y: 0.000000059604645, z: 2.2}
+    m_Position: {x: -3.2978737, y: 0, z: -0.60859215}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: tuxc2c
-    m_Position: {x: -0.82500005, y: 0.000000059604645, z: 2.2}
+    m_Position: {x: -1.6478722, y: 0, z: -0.60859215}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: gxm91w
-    m_Position: {x: 0.82500005, y: 0, z: 2.2}
+    m_Position: {x: 0.002127707, y: 0.100000024, z: -0.60859215}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: xv5nxd
-    m_Position: {x: 2.4750001, y: 0, z: 2.2}
+    m_Position: {x: 1.6871507, y: 0.000000059604645, z: -0.58524907}
     m_Tags: []
     m_Grid: bie33e
   - m_Id: iro2ez
@@ -69,180 +69,379 @@ MonoBehaviour:
     - Exit
     m_Grid: 
   - m_Id: oaai4d
-    m_Position: {x: -11.808544, y: 0, z: 0.22657204}
-    m_Tags: []
+    m_Position: {x: -18.217653, y: 0.00000023841858, z: -12.270393}
+    m_Tags:
+    - Resource
     m_Grid: vxx1sk
   - m_Id: opwec7
-    m_Position: {x: -11.430138, y: 0, z: 2.3937836}
-    m_Tags: []
+    m_Position: {x: -17.839247, y: 0.00000023841858, z: -10.103183}
+    m_Tags:
+    - Resource
     m_Grid: vxx1sk
   - m_Id: cod2di
-    m_Position: {x: -11.051716, y: 0, z: 4.5609894}
-    m_Tags:
-    - PlayerSpawn
+    m_Position: {x: -17.460829, y: 1.9808602, z: -7.935976}
+    m_Tags: []
     m_Grid: vxx1sk
   - m_Id: jv2vt5
-    m_Position: {x: -10.673302, y: 0, z: 6.728201}
-    m_Tags:
-    - PlayerSpawn
+    m_Position: {x: -17.082415, y: 1.8794646, z: -5.7687654}
+    m_Tags: []
     m_Grid: vxx1sk
   - m_Id: nz2f7w
-    m_Position: {x: -10.294882, y: 0, z: 8.895416}
-    m_Tags:
-    - PlayerSpawn
+    m_Position: {x: -16.703993, y: 1.7780669, z: -3.6015496}
+    m_Tags: []
     m_Grid: vxx1sk
   - m_Id: qgl4gl
-    m_Position: {x: -9.916464, y: 0.000000059604645, z: 11.062626}
-    m_Tags:
-    - PlayerSpawn
+    m_Position: {x: -16.325575, y: -0.00000023841858, z: -1.434339}
+    m_Tags: []
     m_Grid: vxx1sk
   - m_Id: twwnth
-    m_Position: {x: -9.538052, y: 0.000000059604645, z: 13.229832}
+    m_Position: {x: -15.947166, y: 0.00000023841858, z: 0.7328675}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: mz7l38
-    m_Position: {x: -10.211693, y: 0, z: 1.0643883}
-    m_Tags: []
+    m_Position: {x: -16.620806, y: 0.00000023841858, z: -11.432577}
+    m_Tags:
+    - Resource
     m_Grid: vxx1sk
   - m_Id: qbtoo6
-    m_Position: {x: -9.833275, y: 0.000000059604645, z: 3.231598}
+    m_Position: {x: -16.242388, y: 1.6543802, z: -9.265368}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: n7qfzf
-    m_Position: {x: -9.4548645, y: 0.000000059604645, z: 5.3988056}
-    m_Tags:
-    - PlayerSpawn
+    m_Position: {x: -15.863978, y: 1.5529858, z: -7.09816}
+    m_Tags: []
     m_Grid: vxx1sk
   - m_Id: hosaq5
-    m_Position: {x: -9.076454, y: 0.000000059604645, z: 7.5660167}
-    m_Tags:
-    - PlayerSpawn
+    m_Position: {x: -15.485563, y: 1.45159, z: -4.9309506}
+    m_Tags: []
     m_Grid: vxx1sk
   - m_Id: pii1cr
-    m_Position: {x: -8.698036, y: 0.000000059604645, z: 9.7332325}
-    m_Tags:
-    - PlayerSpawn
+    m_Position: {x: -15.107145, y: 1.3501934, z: -2.7637327}
+    m_Tags: []
     m_Grid: vxx1sk
   - m_Id: p9bue3
-    m_Position: {x: -8.319614, y: 0.000000059604645, z: 11.90045}
+    m_Position: {x: -14.728724, y: -0.00000023841858, z: -0.59651446}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: yg53s6
-    m_Position: {x: -7.9412007, y: 0.000000059604645, z: 14.067659}
+    m_Position: {x: -14.350313, y: 0.00000023841858, z: 1.5706949}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: ci2omi
-    m_Position: {x: -8.993267, y: 0, z: -0.2650032}
-    m_Tags: []
+    m_Position: {x: -15.402376, y: 0.00000023841858, z: -12.761969}
+    m_Tags:
+    - Resource
     m_Grid: vxx1sk
   - m_Id: wv6rcf
-    m_Position: {x: -8.614841, y: 0.000000059604645, z: 1.9022007}
+    m_Position: {x: -15.023951, y: 0.00000023841858, z: -10.594766}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: sqiczu
-    m_Position: {x: -8.2364235, y: 0.000000059604645, z: 4.069413}
+    m_Position: {x: -14.645536, y: 1.2265062, z: -8.427553}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: s68b2o
-    m_Position: {x: -7.8580112, y: 0.000000059604645, z: 6.2366276}
+    m_Position: {x: -14.267122, y: 1.1251106, z: -6.260339}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: w72xht
-    m_Position: {x: -7.479602, y: 0.000000059604645, z: 8.403837}
+    m_Position: {x: -13.888712, y: 1.0237157, z: -4.093128}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: hr6w7i
-    m_Position: {x: -7.1011777, y: 0.000000059604645, z: 10.571045}
+    m_Position: {x: -13.510289, y: -0.00000023841858, z: -1.92592}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: ch6a6r
-    m_Position: {x: -6.7227693, y: 0.000000059604645, z: 12.738253}
+    m_Position: {x: -13.131879, y: 0.00000023841858, z: 0.24128842}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: pe765y
-    m_Position: {x: -7.3964124, y: 0.000000059604645, z: 0.57280636}
+    m_Position: {x: -13.805521, y: 0.00000023841858, z: -11.92416}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: p5qkdw
-    m_Position: {x: -7.0179887, y: 0.000000059604645, z: 2.7400227}
+    m_Position: {x: -13.4271, y: 0.90002775, z: -9.756944}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: yapnto
-    m_Position: {x: -6.639575, y: 0.000000059604645, z: 4.9072304}
+    m_Position: {x: -13.048684, y: 0.7986314, z: -7.589735}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: lhnnhu
-    m_Position: {x: -6.2611594, y: 0.000000059604645, z: 7.0744414}
+    m_Position: {x: -12.670269, y: 0.6972358, z: -5.422524}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: gcta9s
-    m_Position: {x: -5.882737, y: 0.000000059604645, z: 9.241653}
+    m_Position: {x: -12.291847, y: 0.59583807, z: -3.2553117}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: r09rqx
-    m_Position: {x: -5.5043235, y: 0.000000059604645, z: 11.408873}
+    m_Position: {x: -11.913433, y: -0.00000023841858, z: -1.0880914}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: m8cecl
-    m_Position: {x: -5.1259103, y: 0.000000059604645, z: 13.576063}
-    m_Tags: []
+    m_Position: {x: -11.53502, y: 0.00000023841858, z: 1.0790989}
+    m_Tags:
+    - Resource
     m_Grid: vxx1sk
   - m_Id: b8ojz6
-    m_Position: {x: -6.1779704, y: 0, z: -0.7565851}
+    m_Position: {x: -12.58708, y: 0.00000023841858, z: -13.2535515}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: uzyruy
-    m_Position: {x: -5.7995563, y: 0.000000059604645, z: 1.4106293}
+    m_Position: {x: -12.208666, y: 0.00000023841858, z: -11.086337}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: ci7mx2
-    m_Position: {x: -5.421134, y: 0.000000059604645, z: 3.577835}
+    m_Position: {x: -11.830244, y: 0.472152, z: -8.91913}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: du68wm
-    m_Position: {x: -5.0427217, y: 0.000000059604645, z: 5.7450466}
+    m_Position: {x: -11.451832, y: 0.3707571, z: -6.751919}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: qpu16u
-    m_Position: {x: -4.664305, y: 0.000000059604645, z: 7.9122553}
+    m_Position: {x: -11.073415, y: 0.26936078, z: -4.5847116}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: jkfbki
-    m_Position: {x: -4.285893, y: 0.000000059604645, z: 10.0794735}
-    m_Tags: []
+    m_Position: {x: -10.695003, y: 0.16796565, z: -2.4174917}
+    m_Tags:
+    - Resource
     m_Grid: vxx1sk
   - m_Id: e9nxhj
-    m_Position: {x: -3.907474, y: 0.000000059604645, z: 12.246683}
-    m_Tags: []
+    m_Position: {x: -10.316584, y: -0.00000023841858, z: -0.2502811}
+    m_Tags:
+    - Resource
     m_Grid: vxx1sk
   - m_Id: vgfkni
-    m_Position: {x: -4.581116, y: 0.000000059604645, z: 0.08123207}
+    m_Position: {x: -10.990226, y: 0.00000023841858, z: -12.415733}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: seljar
-    m_Position: {x: -4.202699, y: 0.000000059604645, z: 2.2484417}
+    m_Position: {x: -10.611809, y: 0.00000023841858, z: -10.248525}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: kembxj
-    m_Position: {x: -3.8242831, y: 0.000000059604645, z: 4.415653}
+    m_Position: {x: -10.233393, y: 0.044277906, z: -8.081312}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: ia2dek
-    m_Position: {x: -3.4458709, y: 0.000000059604645, z: 6.5828648}
+    m_Position: {x: -9.85498, y: 0.00000023841858, z: -5.9141016}
     m_Tags: []
     m_Grid: vxx1sk
   - m_Id: nb7zfy
-    m_Position: {x: -3.0674524, y: 0.000000059604645, z: 8.750065}
-    m_Tags: []
+    m_Position: {x: -9.476562, y: 0.00000023841858, z: -3.7469}
+    m_Tags:
+    - Resource
     m_Grid: vxx1sk
   - m_Id: krmwdq
-    m_Position: {x: -2.6890373, y: 0.000000059604645, z: 10.91729}
-    m_Tags: []
+    m_Position: {x: -9.098146, y: 0.00000023841858, z: -1.5796752}
+    m_Tags:
+    - Resource
     m_Grid: vxx1sk
   - m_Id: flblb1
-    m_Position: {x: -2.3106194, y: 0.000000059604645, z: 13.084497}
-    m_Tags: []
+    m_Position: {x: -8.02642, y: 0, z: 1.1451732}
+    m_Tags:
+    - Resource
     m_Grid: vxx1sk
+  - m_Id: bkgeig
+    m_Position: {x: -0.69897103, y: 0.00000093211975, z: 2.2636971}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: ciroat
+    m_Position: {x: 1.1480879, y: -0.0000007574704, z: 2.2376292}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: qh3awm
+    m_Position: {x: 2.9560075, y: 0.00000032947014, z: 2.7234511}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: hw533e
+    m_Position: {x: 1.1760548, y: -0.0000004560501, z: 4.7005167}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: pu9suu
+    m_Position: {x: -2.3395708, y: -0.0000011084547, z: 1.5574609}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: r43upc
+    m_Position: {x: 6.2559476, y: 0, z: 11.411111}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: j3ktxs
+    m_Position: {x: 6.2559476, y: 0, z: 9.211111}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: wjdoq2
+    m_Position: {x: 6.2559476, y: 0, z: 7.011111}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: m4zbzr
+    m_Position: {x: 6.2559476, y: 0, z: 4.8111105}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: ltpw39
+    m_Position: {x: 6.2559476, y: 0, z: 2.6111107}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: k8r9mz
+    m_Position: {x: 7.68489, y: 0, z: 10.3111105}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: q2vvra
+    m_Position: {x: 7.68489, y: 0, z: 8.111111}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: ctjlg5
+    m_Position: {x: 7.68489, y: 0, z: 5.911111}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: hjfndu
+    m_Position: {x: 7.68489, y: 0, z: 3.7111106}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: wweme5
+    m_Position: {x: 9.1138315, y: 0, z: 11.411111}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: q09kfz
+    m_Position: {x: 9.1138315, y: 0, z: 9.211111}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: b56o2x
+    m_Position: {x: 9.1138315, y: 0, z: 7.011111}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: e5my8g
+    m_Position: {x: 9.1138315, y: 0, z: 4.8111105}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: femumt
+    m_Position: {x: 9.1138315, y: 0, z: 2.6111107}
+    m_Tags: []
+    m_Grid: rvfuou
+  - m_Id: tql3aq
+    m_Position: {x: 7.226583, y: 0, z: 0.17940985}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: fe29s8
+    m_Position: {x: 8.876583, y: 0, z: 0.17940985}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: l2k7kt
+    m_Position: {x: 10.526583, y: 0, z: 0.17940985}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: movz7t
+    m_Position: {x: 12.176583, y: 0, z: 0.17940985}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: kpkcig
+    m_Position: {x: 13.826583, y: 0, z: 0.17940985}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: x4ou6k
+    m_Position: {x: 15.4765835, y: 0, z: 0.17940985}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: lj9fsq
+    m_Position: {x: 5.576583, y: 0, z: -2.0205903}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: xnqwaq
+    m_Position: {x: 7.226583, y: 0, z: -2.0205903}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: gsc7lh
+    m_Position: {x: 8.876583, y: 0, z: -2.0205903}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: jas2pv
+    m_Position: {x: 10.526583, y: 0, z: -2.0205903}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: de6vcy
+    m_Position: {x: 12.176583, y: 0, z: -2.0205903}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: n569qa
+    m_Position: {x: 13.826583, y: 0, z: -2.0205903}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: ol6f3t
+    m_Position: {x: 15.4765835, y: 0, z: -2.0205903}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: c1p430
+    m_Position: {x: 5.576583, y: 0, z: -4.22059}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: c9shi6
+    m_Position: {x: 7.226583, y: 0, z: -4.22059}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: uy4oan
+    m_Position: {x: 8.876583, y: 0, z: -4.22059}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: okl1de
+    m_Position: {x: 10.526583, y: 0, z: -4.22059}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: oibcna
+    m_Position: {x: 12.176583, y: 0, z: -4.22059}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: igg8zy
+    m_Position: {x: 13.826583, y: 0, z: -4.22059}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: ellfsc
+    m_Position: {x: 15.4765835, y: 0, z: -4.22059}
+    m_Tags: []
+    m_Grid: lnq3w8
+  - m_Id: s4lrdj
+    m_Position: {x: 0.36815453, y: 0.00000031396542, z: -12.070619}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: x8lok0
+    m_Position: {x: -5.4422703, y: -0.000000028196837, z: -25.471922}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: z7a6yw
+    m_Position: {x: 8.614474, y: 0.0000001065423, z: -17.813026}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: nkvste
+    m_Position: {x: -7.7471404, y: 0.0000009108685, z: -16.396816}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: hgghtc
+    m_Position: {x: 5.765572, y: 0.000000012827741, z: -25.181412}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: j9uo58
+    m_Position: {x: 1.9939618, y: -0.000000345098, z: -16.796812}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: i6ip4p
+    m_Position: {x: 3.691495, y: 0.0000014637681, z: -20.65865}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: dihf46
+    m_Position: {x: 0.1982182, y: 0.0000006579339, z: -22.158}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: bruzpt
+    m_Position: {x: -2.8650024, y: -0.00000031765478, z: -20.438467}
+    m_Tags: []
+    m_Grid: 
+  - m_Id: lglhh6
+    m_Position: {x: -1.7060038, y: -0.00000039211568, z: -16.847847}
+    m_Tags: []
+    m_Grid: 
   m_Links:
   - m_Id: glkgeg
     m_SlotA: rohat9
@@ -304,15 +503,9 @@ MonoBehaviour:
   - m_Id: xelelg
     m_SlotA: oaai4d
     m_SlotB: mz7l38
-  - m_Id: m0b41m
-    m_SlotA: opwec7
-    m_SlotB: cod2di
   - m_Id: ia8x4s
     m_SlotA: opwec7
     m_SlotB: mz7l38
-  - m_Id: d2a53l
-    m_SlotA: opwec7
-    m_SlotB: qbtoo6
   - m_Id: fa9b4b
     m_SlotA: cod2di
     m_SlotB: jv2vt5
@@ -355,9 +548,6 @@ MonoBehaviour:
   - m_Id: u4kypv
     m_SlotA: twwnth
     m_SlotB: yg53s6
-  - m_Id: gst4ho
-    m_SlotA: mz7l38
-    m_SlotB: qbtoo6
   - m_Id: iigxgx
     m_SlotA: mz7l38
     m_SlotB: ci2omi
@@ -367,9 +557,6 @@ MonoBehaviour:
   - m_Id: dra5gc
     m_SlotA: qbtoo6
     m_SlotB: n7qfzf
-  - m_Id: zfzsfo
-    m_SlotA: qbtoo6
-    m_SlotB: wv6rcf
   - m_Id: ye1zlc
     m_SlotA: qbtoo6
     m_SlotB: sqiczu
@@ -418,15 +605,9 @@ MonoBehaviour:
   - m_Id: mb2dfm
     m_SlotA: ci2omi
     m_SlotB: pe765y
-  - m_Id: j32iyu
-    m_SlotA: wv6rcf
-    m_SlotB: sqiczu
   - m_Id: gyga8o
     m_SlotA: wv6rcf
     m_SlotB: pe765y
-  - m_Id: osgh33
-    m_SlotA: wv6rcf
-    m_SlotB: p5qkdw
   - m_Id: y1gkd9
     m_SlotA: sqiczu
     m_SlotB: s68b2o
@@ -469,9 +650,6 @@ MonoBehaviour:
   - m_Id: yjiyob
     m_SlotA: ch6a6r
     m_SlotB: m8cecl
-  - m_Id: xnxg1y
-    m_SlotA: pe765y
-    m_SlotB: p5qkdw
   - m_Id: j8mthz
     m_SlotA: pe765y
     m_SlotB: b8ojz6
@@ -607,12 +785,255 @@ MonoBehaviour:
   - m_Id: n1r19q
     m_SlotA: gq0y79
     m_SlotB: vgfkni
+  - m_Id: k8zdcc
+    m_SlotA: ciroat
+    m_SlotB: bkgeig
+  - m_Id: i4dgop
+    m_SlotA: qh3awm
+    m_SlotB: ciroat
+  - m_Id: rso2oj
+    m_SlotA: hw533e
+    m_SlotB: ciroat
+  - m_Id: n6tatq
+    m_SlotA: pu9suu
+    m_SlotB: la29rv
+  - m_Id: jax43n
+    m_SlotA: pu9suu
+    m_SlotB: tuxc2c
+  - m_Id: c64cen
+    m_SlotA: pu9suu
+    m_SlotB: bkgeig
+  - m_Id: vb56e0
+    m_SlotA: r43upc
+    m_SlotB: j3ktxs
+  - m_Id: oky080
+    m_SlotA: r43upc
+    m_SlotB: k8r9mz
+  - m_Id: a2nujl
+    m_SlotA: j3ktxs
+    m_SlotB: wjdoq2
+  - m_Id: y5rrgh
+    m_SlotA: j3ktxs
+    m_SlotB: k8r9mz
+  - m_Id: fgx8e9
+    m_SlotA: j3ktxs
+    m_SlotB: q2vvra
+  - m_Id: ncopqe
+    m_SlotA: wjdoq2
+    m_SlotB: m4zbzr
+  - m_Id: ve1g4s
+    m_SlotA: wjdoq2
+    m_SlotB: q2vvra
+  - m_Id: zq7wyf
+    m_SlotA: wjdoq2
+    m_SlotB: ctjlg5
+  - m_Id: ux4bvq
+    m_SlotA: m4zbzr
+    m_SlotB: ltpw39
+  - m_Id: bm4xz7
+    m_SlotA: m4zbzr
+    m_SlotB: ctjlg5
+  - m_Id: bvfyh6
+    m_SlotA: m4zbzr
+    m_SlotB: hjfndu
+  - m_Id: iulj0e
+    m_SlotA: ltpw39
+    m_SlotB: hjfndu
+  - m_Id: o2b9r0
+    m_SlotA: k8r9mz
+    m_SlotB: q2vvra
+  - m_Id: hvssgq
+    m_SlotA: k8r9mz
+    m_SlotB: wweme5
+  - m_Id: drq8nd
+    m_SlotA: k8r9mz
+    m_SlotB: q09kfz
+  - m_Id: hfp3di
+    m_SlotA: q2vvra
+    m_SlotB: ctjlg5
+  - m_Id: jkiakd
+    m_SlotA: q2vvra
+    m_SlotB: q09kfz
+  - m_Id: vs7zq3
+    m_SlotA: q2vvra
+    m_SlotB: b56o2x
+  - m_Id: kc5dnd
+    m_SlotA: ctjlg5
+    m_SlotB: hjfndu
+  - m_Id: lupyt0
+    m_SlotA: ctjlg5
+    m_SlotB: b56o2x
+  - m_Id: lnhi9u
+    m_SlotA: ctjlg5
+    m_SlotB: e5my8g
+  - m_Id: s1y3xg
+    m_SlotA: hjfndu
+    m_SlotB: e5my8g
+  - m_Id: njlpyx
+    m_SlotA: hjfndu
+    m_SlotB: femumt
+  - m_Id: opawul
+    m_SlotA: wweme5
+    m_SlotB: q09kfz
+  - m_Id: gg2mnt
+    m_SlotA: q09kfz
+    m_SlotB: b56o2x
+  - m_Id: vx1ru6
+    m_SlotA: b56o2x
+    m_SlotB: e5my8g
+  - m_Id: xvsmaz
+    m_SlotA: e5my8g
+    m_SlotB: femumt
+  - m_Id: emx9i2
+    m_SlotA: tql3aq
+    m_SlotB: fe29s8
+  - m_Id: eflsvt
+    m_SlotA: tql3aq
+    m_SlotB: xnqwaq
+  - m_Id: glxkju
+    m_SlotA: fe29s8
+    m_SlotB: l2k7kt
+  - m_Id: rbvr5b
+    m_SlotA: fe29s8
+    m_SlotB: gsc7lh
+  - m_Id: s39fhy
+    m_SlotA: l2k7kt
+    m_SlotB: movz7t
+  - m_Id: bo2iv1
+    m_SlotA: l2k7kt
+    m_SlotB: jas2pv
+  - m_Id: luaj5h
+    m_SlotA: movz7t
+    m_SlotB: kpkcig
+  - m_Id: s2vw0o
+    m_SlotA: movz7t
+    m_SlotB: de6vcy
+  - m_Id: a5b0rq
+    m_SlotA: kpkcig
+    m_SlotB: x4ou6k
+  - m_Id: myqwkp
+    m_SlotA: kpkcig
+    m_SlotB: n569qa
+  - m_Id: vb8wqg
+    m_SlotA: x4ou6k
+    m_SlotB: ol6f3t
+  - m_Id: u9064y
+    m_SlotA: lj9fsq
+    m_SlotB: xnqwaq
+  - m_Id: opfn2d
+    m_SlotA: lj9fsq
+    m_SlotB: c1p430
+  - m_Id: lccvem
+    m_SlotA: xnqwaq
+    m_SlotB: gsc7lh
+  - m_Id: qm7l16
+    m_SlotA: xnqwaq
+    m_SlotB: c9shi6
+  - m_Id: h4kvp4
+    m_SlotA: gsc7lh
+    m_SlotB: jas2pv
+  - m_Id: gcmo40
+    m_SlotA: gsc7lh
+    m_SlotB: uy4oan
+  - m_Id: rfbngb
+    m_SlotA: jas2pv
+    m_SlotB: de6vcy
+  - m_Id: hd5ngh
+    m_SlotA: jas2pv
+    m_SlotB: okl1de
+  - m_Id: ii7w9d
+    m_SlotA: de6vcy
+    m_SlotB: n569qa
+  - m_Id: hqi3va
+    m_SlotA: de6vcy
+    m_SlotB: oibcna
+  - m_Id: k89le0
+    m_SlotA: n569qa
+    m_SlotB: ol6f3t
+  - m_Id: taim78
+    m_SlotA: n569qa
+    m_SlotB: igg8zy
+  - m_Id: hjg5ay
+    m_SlotA: ol6f3t
+    m_SlotB: ellfsc
+  - m_Id: a7xcjh
+    m_SlotA: c1p430
+    m_SlotB: c9shi6
+  - m_Id: xxdieo
+    m_SlotA: c9shi6
+    m_SlotB: uy4oan
+  - m_Id: n4ub8h
+    m_SlotA: uy4oan
+    m_SlotB: okl1de
+  - m_Id: b99fwf
+    m_SlotA: okl1de
+    m_SlotB: oibcna
+  - m_Id: zak8lz
+    m_SlotA: oibcna
+    m_SlotB: igg8zy
+  - m_Id: yopu3x
+    m_SlotA: igg8zy
+    m_SlotB: ellfsc
+  - m_Id: jmy1oq
+    m_SlotA: fe29s8
+    m_SlotB: femumt
+  - m_Id: qs634d
+    m_SlotA: movz7t
+    m_SlotB: femumt
+  - m_Id: kjl83b
+    m_SlotA: tql3aq
+    m_SlotB: hjfndu
+  - m_Id: bzojal
+    m_SlotA: nkvste
+    m_SlotB: bruzpt
+  - m_Id: duccu2
+    m_SlotA: dihf46
+    m_SlotB: bruzpt
+  - m_Id: jcpfnk
+    m_SlotA: dihf46
+    m_SlotB: hgghtc
+  - m_Id: xdlkfc
+    m_SlotA: bruzpt
+    m_SlotB: x8lok0
+  - m_Id: nytb8y
+    m_SlotA: dihf46
+    m_SlotB: x8lok0
+  - m_Id: qeylne
+    m_SlotA: nkvste
+    m_SlotB: lglhh6
+  - m_Id: a5i6aj
+    m_SlotA: lglhh6
+    m_SlotB: bruzpt
+  - m_Id: v962ln
+    m_SlotA: lglhh6
+    m_SlotB: s4lrdj
+  - m_Id: ck3bkd
+    m_SlotA: s4lrdj
+    m_SlotB: j9uo58
+  - m_Id: p2um0l
+    m_SlotA: j9uo58
+    m_SlotB: lglhh6
+  - m_Id: udwoqq
+    m_SlotA: j9uo58
+    m_SlotB: z7a6yw
+  - m_Id: cbzler
+    m_SlotA: z7a6yw
+    m_SlotB: i6ip4p
+  - m_Id: badcqf
+    m_SlotA: i6ip4p
+    m_SlotB: j9uo58
+  - m_Id: dzmg8y
+    m_SlotA: i6ip4p
+    m_SlotB: dihf46
+  - m_Id: wv3v0u
+    m_SlotA: i6ip4p
+    m_SlotB: hgghtc
   m_Grids:
   - m_Id: bie33e
     m_Type: 0
     m_Step: 1.1
-    m_From: {x: -2.4750001, y: -0, z: -2.2}
-    m_To: {x: 2.4750001, y: 0, z: 2.2}
+    m_From: {x: -3.2978737, y: 0, z: -5.0085926}
+    m_To: {x: 1.6521275, y: 0, z: -0.60859215}
     m_HexOrientation: 1
     m_Diagonals: 0
     m_RaycastHeight: 1
@@ -620,20 +1041,38 @@ MonoBehaviour:
   - m_Id: vxx1sk
     m_Type: 1
     m_Step: 1.1
-    m_From: {x: -10.594465, y: -0.0000000012587407, z: -0.57569504}
-    m_To: {x: -2.5497952, y: 0.00000029256807, z: 14.238022}
+    m_From: {x: -17.003576, y: 1.9292595, z: -13.07266}
+    m_To: {x: -8.958905, y: 1.9292598, z: 1.7410555}
     m_HexOrientation: 1
     m_Diagonals: 0
     m_RaycastHeight: 1
     m_Angle: 9.904404
+  - m_Id: rvfuou
+    m_Type: 1
+    m_Step: 1.1
+    m_From: {x: 6.2559476, y: -0.00000011412112, z: 11.411111}
+    m_To: {x: 10.467515, y: -0.00000052436053, z: 2.2092454}
+    m_HexOrientation: 1
+    m_Diagonals: 0
+    m_RaycastHeight: 1
+    m_Angle: 0
+  - m_Id: lnq3w8
+    m_Type: 0
+    m_Step: 1.1
+    m_From: {x: 5.576583, y: 0.00000061659784, z: 0.17940985}
+    m_To: {x: 15.752111, y: 0.0000007644247, z: -5.9352136}
+    m_HexOrientation: 1
+    m_Diagonals: 0
+    m_RaycastHeight: 1
+    m_Angle: 0
   m_EditorSettings:
     m_AutoConnect: 1
     m_AutoConnectRadius: 1.3
     m_MinRadius: 1
-    m_GridType: 1
-    m_GridStep: 1.1
+    m_GridType: 0
+    m_GridStep: 1.4
     m_HexOrientation: 1
     m_Diagonals: 0
     m_GridRaycastHeight: 1
-    m_BrushRadius: 3.6
+    m_BrushRadius: 1.5
     m_BrushTag: PlayerSpawn

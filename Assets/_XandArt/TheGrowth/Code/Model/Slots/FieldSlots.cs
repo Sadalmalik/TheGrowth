@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+using TheGrowth.Model.Graphs;
+
+namespace TheGrowth.Model.Slots
+{
+    /// <summary>
+    /// Поле экспедиции в слотах, построенное из графа локации без сцены: клетки (<see cref="SlotIds.Field"/>, по слоту на
+    /// слот графа) и слоты связей для объектов механики (<see cref="SlotIds.Link"/>, по слоту на связь), смежность клеток по
+    /// связям (ненаправленная). Структура во время игры не меняется. Повторяющиеся ID и связи с пропавшими слотами
+    /// пропускаются (их показывает валидатор контента). Поиск пути и «соседи за N связей» — эвалуаторы (позже), здесь только
+    /// данные смежности.
+    /// </summary>
+    public sealed class FieldSlots
+    {
+        private readonly List<Slot> m_Cells = new List<Slot>();
+        private readonly List<Slot> m_Links = new List<Slot>();
+        private readonly Dictionary<string, Slot> m_CellsById = new Dictionary<string, Slot>(StringComparer.Ordinal);
+        private readonly Dictionary<string, Slot> m_LinksById = new Dictionary<string, Slot>(StringComparer.Ordinal);
+        private readonly Dictionary<Slot, List<Slot>> m_Neighbours = new Dictionary<Slot, List<Slot>>();
+        private readonly Dictionary<Slot, List<Slot>> m_CellLinks = new Dictionary<Slot, List<Slot>>();
+
+        internal FieldSlots(GraphModel graph, SlotRules cellRules, SlotRules linkRules)
+        {
+            Graph = graph ?? throw new ArgumentNullException(nameof(graph));
+            foreach (var graphSlot in graph.Slots)
+            {
+                if (graphSlot == null || string.IsNullOrEmpty(graphSlot.Id) || m_CellsById.ContainsKey(graphSlot.Id))
+                    continue;
+
+                var cell = new Slot(SlotIds.Field(graphSlot.Id), cellRules, graphSlot);
+                m_Cells.Add(cell);
+                m_CellsById.Add(graphSlot.Id, cell);
+                m_Neighbours.Add(cell, new List<Slot>());
+                m_CellLinks.Add(cell, new List<Slot>());
+            }
+
+            foreach (var graphLink in graph.Links)
+                AddLink(graphLink, linkRules);
+        }
+
+        public GraphModel Graph { get; }
+
+        /// <summary>Клетки в порядке слотов графа.</summary>
+        public IReadOnlyList<Slot> Cells => m_Cells;
+
+        /// <summary>Слоты связей в порядке связей графа.</summary>
+        public IReadOnlyList<Slot> Links => m_Links;
+
+        /// <summary>Клетка по ID слота графа; нет — null.</summary>
+        public Slot GetCell(string graphSlotId)
+        {
+            return graphSlotId != null && m_CellsById.TryGetValue(graphSlotId, out var cell) ? cell : null;
+        }
+
+        /// <summary>Слот связи по ID связи графа; нет — null.</summary>
+        public Slot GetLink(string graphLinkId)
+        {
+            return graphLinkId != null && m_LinksById.TryGetValue(graphLinkId, out var link) ? link : null;
+        }
+
+        /// <summary>Соседние клетки (через одну связь) в порядке связей графа; не клетка поля — пусто.</summary>
+        public IReadOnlyList<Slot> GetNeighbours(Slot cell)
+        {
+            return cell != null && m_Neighbours.TryGetValue(cell, out var neighbours) ? neighbours : (IReadOnlyList<Slot>)Array.Empty<Slot>();
+        }
+
+        /// <summary>Слоты связей клетки; не клетка поля — пусто.</summary>
+        public IReadOnlyList<Slot> GetLinks(Slot cell)
+        {
+            return cell != null && m_CellLinks.TryGetValue(cell, out var links) ? links : (IReadOnlyList<Slot>)Array.Empty<Slot>();
+        }
+
+        /// <summary>Слот связи между клетками в любом порядке; связи нет — null.</summary>
+        public Slot GetLinkBetween(Slot a, Slot b)
+        {
+            foreach (var link in GetLinks(a))
+            {
+                if (GetOther(link, a) == b)
+                    return link;
+            }
+
+            return null;
+        }
+
+        /// <summary>Вторая клетка слота связи; <paramref name="cell"/> не из этой связи — null.</summary>
+        public Slot GetOther(Slot link, Slot cell)
+        {
+            if (link?.GraphLink == null || cell?.GraphSlot == null)
+                return null;
+
+            return GetCell(link.GraphLink.GetOther(cell.GraphSlot.Id));
+        }
+
+        private void AddLink(GraphLink graphLink, SlotRules rules)
+        {
+            if (graphLink == null || string.IsNullOrEmpty(graphLink.Id) || m_LinksById.ContainsKey(graphLink.Id))
+                return;
+
+            var a = GetCell(graphLink.SlotA);
+            var b = GetCell(graphLink.SlotB);
+            if (a == null || b == null || a == b || m_Neighbours[a].Contains(b))
+                return;
+
+            var link = new Slot(SlotIds.Link(graphLink.Id), rules, null, graphLink);
+            m_Links.Add(link);
+            m_LinksById.Add(graphLink.Id, link);
+            m_Neighbours[a].Add(b);
+            m_Neighbours[b].Add(a);
+            m_CellLinks[a].Add(link);
+            m_CellLinks[b].Add(link);
+        }
+    }
+}

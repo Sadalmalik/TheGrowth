@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace TheGrowth.Core.Scripting
@@ -31,6 +33,9 @@ namespace TheGrowth.Core.Scripting
         /// </summary>
         public ScriptParam TypeSource { get; internal set; }
 
+        /// <summary>Ограничения значения — атрибуты поля, реализующие <see cref="IScriptValueFilter"/>; проверяет парсер.</summary>
+        public IReadOnlyList<IScriptValueFilter> Filters { get; }
+
         internal ScriptParam(FieldInfo field, bool isBlock, bool isRest, bool isList, ScriptValueType value)
         {
             Field = field;
@@ -38,6 +43,7 @@ namespace TheGrowth.Core.Scripting
             IsRest = isRest;
             IsList = isList;
             Value = value;
+            Filters = field.GetCustomAttributes(true).OfType<IScriptValueFilter>().ToArray();
         }
 
         public string Describe()

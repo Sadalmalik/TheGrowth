@@ -27,6 +27,15 @@ namespace TheGrowth.EditorTools.Content
 
         /// <summary>Настройки поля (<c>FieldConfig</c>): в реестре проекта нет ни одного или их несколько.</summary>
         InvalidFieldConfig,
+
+        /// <summary>Конфиг сущности: вид, компоненты (пустые, пропавшие типы, ключи), обязательные компоненты, теги, переменные.</summary>
+        InvalidEntity,
+
+        /// <summary>Поле с <c>[ModelKind]</c> ссылается на конфиг сущности другого вида.</summary>
+        WrongModelKind,
+
+        /// <summary>Тип компонента сущности: без ключа, неверный ключ, один ключ у двух типов, не сериализуется.</summary>
+        InvalidComponentType,
     }
 
     /// <summary>Ошибка валидации контента: вид, путь ассета, сообщение, объект для выделения в консоли.</summary>

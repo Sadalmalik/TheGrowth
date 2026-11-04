@@ -40,9 +40,10 @@ namespace TheGrowth.Core.Variables
 
     /// <summary>
     /// Значения переменных одной области (игра, профиль или владелец-карта). Хранятся только явно заданные значения:
-    /// незаданная переменная читается как значение по умолчанию из объявления, поэтому новое значение по умолчанию
-    /// действует и на старые сейвы. Тип значения и область объявления проверяются. Изменение — событие
-    /// <see cref="Changed"/> (для владельца хранилища), затем <see cref="VariableChanged"/> в <see cref="EventBus"/>.
+    /// незаданная переменная читается как значение по умолчанию (владельца по <see cref="Schema"/>, иначе из объявления),
+    /// поэтому новое значение по умолчанию действует и на старые сейвы. Тип значения и область объявления проверяются;
+    /// со схемой запись переменной, которой у владельца нет, — ошибка. Изменение — событие <see cref="Changed"/> (для
+    /// владельца хранилища), затем <see cref="VariableChanged"/> в <see cref="EventBus"/>.
     /// </summary>
     public sealed class VariableStore
     {
@@ -51,16 +52,21 @@ namespace TheGrowth.Core.Variables
 
         /// <param name="events">Шина для <see cref="VariableChanged"/>; null — только <see cref="Changed"/>.</param>
         /// <param name="owner">Владелец переменных карты (<see cref="VariableScope.Card"/>); у остальных областей — null.</param>
-        public VariableStore(VariableScope scope, EventBus events = null, IVariableOwner owner = null)
+        /// <param name="schema">Переменные владельца и их значения по умолчанию; null — доступны все переменные области.</param>
+        public VariableStore(VariableScope scope, EventBus events = null, IVariableOwner owner = null, IVariableSchema schema = null)
         {
             Scope = scope;
             m_Events = events;
             Owner = owner;
+            Schema = schema;
         }
 
         public VariableScope Scope { get; }
 
         public IVariableOwner Owner { get; }
+
+        /// <summary>Переменные владельца; null — все переменные области.</summary>
+        public IVariableSchema Schema { get; }
 
         /// <summary>Сколько значений задано явно.</summary>
         public int Count => m_Values.Count;
@@ -75,11 +81,21 @@ namespace TheGrowth.Core.Variables
             return m_Values.ContainsKey(declaration.Name);
         }
 
-        /// <summary>Значение или значение по умолчанию из объявления.</summary>
+        /// <summary>Переменная есть у владельца (по <see cref="Schema"/>; без схемы — любая переменная области): её можно записать.</summary>
+        public bool Contains(VariableDeclaration declaration)
+        {
+            CheckScope(declaration);
+            return Schema == null || Schema.TryGetDefault(declaration, out _);
+        }
+
+        /// <summary>Значение или значение по умолчанию: владельца (<see cref="Schema"/>), иначе из объявления.</summary>
         public object Get(VariableDeclaration declaration)
         {
             CheckScope(declaration);
-            return m_Values.TryGetValue(declaration.Name, out var value) ? value : declaration.DefaultValue;
+            if (m_Values.TryGetValue(declaration.Name, out var value))
+                return value;
+
+            return Schema != null && Schema.TryGetDefault(declaration, out var ownerDefault) ? ownerDefault : declaration.DefaultValue;
         }
 
         public T Get<T>(VariableDeclaration declaration)
@@ -94,10 +110,15 @@ namespace TheGrowth.Core.Variables
             Set(declaration, (object)value);
         }
 
-        /// <summary>Задать значение; тип — точно тип переменной (строка null — пустая). Событие — если значение изменилось.</summary>
+        /// <summary>
+        /// Задать значение; тип — точно тип переменной (строка null — пустая). Переменной нет у владельца
+        /// (<see cref="Contains"/>) — <see cref="InvalidOperationException"/>. Событие — если значение изменилось.
+        /// </summary>
         public void Set(VariableDeclaration declaration, object value)
         {
-            CheckScope(declaration);
+            if (!Contains(declaration))
+                throw new InvalidOperationException($"Variable '{declaration.Name}' is not a variable of {Schema}: add it to the variables of the config");
+
             value = Normalize(declaration, value);
 
             var old = Get(declaration);
@@ -124,7 +145,7 @@ namespace TheGrowth.Core.Variables
             return values;
         }
 
-        /// <summary>Значение из сейва: без события. Тип проверен вызывающим.</summary>
+        /// <summary>Значение из сейва: без события. Тип и <see cref="Contains"/> проверены вызывающим.</summary>
         internal void Restore(VariableDeclaration declaration, object value)
         {
             CheckScope(declaration);

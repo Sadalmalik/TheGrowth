@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using TheGrowth.Core.Content;
+using TheGrowth.Core.Entities;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Core.Variables;
+using TheGrowth.EditorTools.Entities;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +14,8 @@ namespace TheGrowth.EditorTools.Content
 {
     /// <summary>
     /// Сборка <see cref="ContentRegistry"/>: все <see cref="ContentAsset"/> и файлы скриптов (<c>.script</c>,
-    /// <c>.dialog</c>) из папки контента. Пустые ID заполняются из имени ассета. Ассет реестра записывается,
+    /// <c>.dialog</c>) из папки контента. Пустые ID заполняются из имени ассета, в конфиги сущностей дописываются недостающие
+    /// обязательные компоненты вида (<see cref="EntityModelEditing.AddMissingComponents"/>). Ассет реестра записывается,
     /// только если состав изменился. Набор ID конфигов и набор объявлений переменных публикуются как custom dependency
     /// <see cref="IdsDependency"/> и <see cref="VariablesDependency"/>: импортёр скриптов зависит от них и
     /// переимпортируется при их смене. Запуск: меню, <see cref="ContentAssetPostprocessor"/>, <see cref="ContentBuildPreprocessor"/>.
@@ -68,6 +71,7 @@ namespace TheGrowth.EditorTools.Content
         {
             var assets = FindContentAssets(root);
             FillEmptyIds(assets);
+            FillRequiredComponents(assets);
             assets.Sort(CompareAssets);
 
             var scripts = new List<ScriptFileEntry>();
@@ -134,6 +138,28 @@ namespace TheGrowth.EditorTools.Content
                 EditorUtility.SetDirty(asset);
                 AssetDatabase.SaveAssetIfDirty(asset);
                 Debug.Log($"[Content] {path}: empty id filled from asset name: '{asset.Id}'", asset);
+            }
+        }
+
+        /// <summary>
+        /// Недостающие обязательные компоненты вида — во все конфиги сущностей (описание обязательных компонентов изменилось
+        /// или конфиг правили руками). Конфиг с пропавшими типами компонентов не меняется — ошибку показывает валидатор.
+        /// </summary>
+        private static void FillRequiredComponents(List<ContentAsset> assets)
+        {
+            foreach (var asset in assets)
+            {
+                if (asset is not EntityModel model)
+                    continue;
+
+                var added = EntityModelEditing.AddMissingComponents(model);
+                if (added.Count == 0)
+                    continue;
+
+                EditorUtility.SetDirty(model);
+                AssetDatabase.SaveAssetIfDirty(model);
+                var names = string.Join(", ", added.ConvertAll(EntityModelEditing.GetDisplayName));
+                Debug.Log($"[Content] {AssetDatabase.GetAssetPath(model)}: required components of a {model.Kind.ToText()} added: {names}", model);
             }
         }
 
