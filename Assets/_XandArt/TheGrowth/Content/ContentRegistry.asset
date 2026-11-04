@@ -13,19 +13,47 @@ MonoBehaviour:
   m_Name: ContentRegistry
   m_EditorClassIdentifier: TheGrowth.Core::TheGrowth.Core.Content.ContentRegistry
   m_Assets:
+  - {fileID: 11400000, guid: 576c768e44734be999a174ab9321c0ca, type: 2}
+  - {fileID: 11400000, guid: b40fce962e19472b99b6b22dc7e8196a, type: 2}
   - {fileID: 11400000, guid: d4d72eaf1ea3d984aa732850fdc55494, type: 2}
   - {fileID: 11400000, guid: d96f1576b4c51444b9be42ee5191e956, type: 2}
   - {fileID: 11400000, guid: 2396caf7b4649c6498fabc7c47620d42, type: 2}
+  - {fileID: 11400000, guid: f1440ab46e124900b52cbb50434ac525, type: 2}
   - {fileID: 11400000, guid: e6f7908b98403034bb76b11c4a5ce6fe, type: 2}
   - {fileID: 11400000, guid: 05add849fea92054695a78868435f9cf, type: 2}
+  - {fileID: 11400000, guid: 5af44465596b490783379012c9e8a76f, type: 2}
+  - {fileID: 11400000, guid: 16911436e0fe405b9de1a20ed19cf022, type: 2}
+  - {fileID: 11400000, guid: 35c376c4a8724d40b23174e172ea5722, type: 2}
+  - {fileID: 11400000, guid: cc42688200124012aaf493a49b5c55a1, type: 2}
+  - {fileID: 11400000, guid: 36a5beb114704608842eca69ffdcb6b0, type: 2}
   - {fileID: 11400000, guid: 3932f12e3e3179e4382d5a7ab04fb2e8, type: 2}
   - {fileID: 11400000, guid: 25ddfe3cfeeb99d4c9a1fba6ca236256, type: 2}
   - {fileID: 11400000, guid: 5fd5a1b773cd4b208eb2692d0bb6d0fd, type: 2}
   - {fileID: 11400000, guid: 82b05135a96afd949837348a52eb15f1, type: 2}
   - {fileID: 11400000, guid: 7393a785369e43c486250035e53fb2e8, type: 2}
   - {fileID: 11400000, guid: 2d486a9b60cc16844aeb22692a89660c, type: 2}
+  - {fileID: 11400000, guid: df8e29ec9c1a4dd6b67e533bd234bb80, type: 2}
+  - {fileID: 11400000, guid: c51a46e3537f407aba8bdf2e31c5a52e, type: 2}
+  - {fileID: 11400000, guid: 6b3ac64a7fe44eb38fd638fb80aaa13e, type: 2}
   - {fileID: 11400000, guid: 1150708eb789eda468d12ec8067bbd99, type: 2}
+  - {fileID: 11400000, guid: eb3bc6a501344b03acd57f2e87c65bdf, type: 2}
   m_Scripts:
+  - m_Id: Abilities
+    m_Kind: 0
+    m_Text: {fileID: 2811297602134710623, guid: cf2cacbf7f744655be0eb0a03b6971eb,
+      type: 3}
+  - m_Id: Alfredo
+    m_Kind: 0
+    m_Text: {fileID: 2811297602134710623, guid: b82b8467a78d4e7d970cb26bc8c275c6,
+      type: 3}
+  - m_Id: Cards
+    m_Kind: 0
+    m_Text: {fileID: 2811297602134710623, guid: ca8705580ec0462da40a0443b0031b87,
+      type: 3}
+  - m_Id: Confuse
+    m_Kind: 0
+    m_Text: {fileID: 2811297602134710623, guid: 9c7cdfbfd30d4a2f8b3f8171fd977bd0,
+      type: 3}
   - m_Id: Exit
     m_Kind: 0
     m_Text: {fileID: 2811297602134710623, guid: 3d4f6eef62b66a44b95a3f41229baceb,
@@ -38,6 +66,10 @@ MonoBehaviour:
     m_Kind: 0
     m_Text: {fileID: 2811297602134710623, guid: 8de9302ac7dac8a4596e6905285448d6,
       type: 3}
+  - m_Id: Lucia
+    m_Kind: 0
+    m_Text: {fileID: 2811297602134710623, guid: 7a351ef47a7b48719030c0f6163bb546,
+      type: 3}
   - m_Id: Monster
     m_Kind: 0
     m_Text: {fileID: 2811297602134710623, guid: de8f042829e2671429a448a2c5b8da66,
@@ -45,4 +77,24 @@ MonoBehaviour:
   - m_Id: Monsters
     m_Kind: 0
     m_Text: {fileID: 2811297602134710623, guid: 9ede3c3299ba0e24b9077f3bc3519064,
+      type: 3}
+  - m_Id: Revolver
+    m_Kind: 0
+    m_Text: {fileID: 2811297602134710623, guid: d2f6a9253974499391e4486b03f5f64e,
+      type: 3}
+  - m_Id: Stefan
+    m_Kind: 0
+    m_Text: {fileID: 2811297602134710623, guid: 8585ef1c54ca42ad9ebad63ce6b5bb2c,
+      type: 3}
+  - m_Id: Talisman
+    m_Kind: 0
+    m_Text: {fileID: 2811297602134710623, guid: d202e8af160f4f028d40834db454efd0,
+      type: 3}
+  - m_Id: Teleport
+    m_Kind: 0
+    m_Text: {fileID: 2811297602134710623, guid: 3627eaab9b704d89b54ca9d9675623f0,
+      type: 3}
+  - m_Id: Vision
+    m_Kind: 0
+    m_Text: {fileID: 2811297602134710623, guid: 2baa8b5e8b954a17b427a48eeb8f8eeb,
       type: 3}

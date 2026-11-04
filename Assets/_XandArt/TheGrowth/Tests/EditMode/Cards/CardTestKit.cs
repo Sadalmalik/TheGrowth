@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -20,12 +21,14 @@ using TheGrowth.Model.Cards;
 using TheGrowth.Model.Decks;
 using TheGrowth.Model.Entities;
 using TheGrowth.Model.Graphs;
+using TheGrowth.Model.Heroes;
 using TheGrowth.Model.Locations;
 using TheGrowth.Model.Slots;
 using TheGrowth.Tests.EditMode.Content;
 using TheGrowth.Tests.EditMode.Graphs;
 using TheGrowth.Tests.EditMode.Saves;
 using TheGrowth.Tests.EditMode.Scripting;
+using UnityEditor;
 using UnityEngine;
 
 namespace TheGrowth.Tests.EditMode.Cards
@@ -127,11 +130,14 @@ namespace TheGrowth.Tests.EditMode.Cards
     /// <summary>
     /// Контент и сессии для тестов скриптов карт без сцены: язык Core + Model (+ <see cref="TraceCommand"/>), теги
     /// (<c>PlayerSpawn</c>, <c>Exit</c>, <c>Hero</c>, <c>Monster</c>, <c>Resource</c>, <c>Obstacle</c>), переменная карты <c>charges</c>, конфиги
-    /// примеров контента (<see cref="Hero"/>, <see cref="Monster"/>, <see cref="Herb"/>, <see cref="Exit"/>) с текстами скриптов из
-    /// <c>Content/</c> и тестовые конфиги со скриптами из теста (<see cref="Model"/>). Поле — граф 3 × 3, построенный здесь
-    /// (не из ассета): клетки <c>a1..c3</c> (строки a, b, c сверху вниз, столбцы 1..3 слева направо, шаг 1 по X и −Z),
-    /// связи крестом; <c>a1</c> — <c>PlayerSpawn</c>, <c>c3</c> — <c>Exit</c>; отдельная клетка <c>x</c> без связей. Seed ГСЧ новой
-    /// сессии — <see cref="DefaultSeed"/>, если не задан другой.
+    /// примеров контента (<see cref="Hero"/> — карта героя персонажа <see cref="HeroCharacter"/>, <see cref="Monster"/>,
+    /// <see cref="Herb"/>, <see cref="Exit"/>) с текстами скриптов из <c>Content/</c>, общие скрипты <c>Content/Scripts/</c>, тестовые
+    /// конфиги со скриптами из теста (<see cref="Model"/>, <see cref="HeroModel"/>, <see cref="AbilityModel"/>), настройки
+    /// (<see cref="AddSlotsConfig"/>, <see cref="AddFieldConfig"/>) и конфиги контента проекта (<see cref="ContentModel"/>).
+    /// Поле — граф size × size (по умолчанию 3 × 3), построенный здесь (не из ассета):
+    /// клетки <c>a1..c3</c> (строки a, b, c, ... сверху вниз, столбцы 1..size слева направо, шаг stepX по X и stepZ по −Z), связи
+    /// крестом; <c>a1</c> — <c>PlayerSpawn</c>, последняя клетка (<c>c3</c>) — <c>Exit</c>; отдельная клетка <c>x</c> без связей в
+    /// (10, 0, 10). Seed ГСЧ новой сессии — <see cref="DefaultSeed"/>, если не задан другой.
     /// </summary>
     public sealed class CardTestKit : IDisposable
     {
@@ -146,7 +152,14 @@ namespace TheGrowth.Tests.EditMode.Cards
         private ContentRegistry m_Registry;
         private LifetimeScope m_Global;
 
-        public CardTestKit()
+        public CardTestKit() : this(3, 1f, 1f)
+        {
+        }
+
+        /// <param name="size">Поле size × size (строк не больше 26).</param>
+        /// <param name="stepX">Шаг клеток по X графа (между столбцами).</param>
+        /// <param name="stepZ">Шаг клеток по Z графа (между строками, строки — вниз по −Z).</param>
+        public CardTestKit(int size, float stepX, float stepZ)
         {
             Content = new ContentTestKit();
             Graphs = new GraphTestKit();
@@ -158,12 +171,15 @@ namespace TheGrowth.Tests.EditMode.Cards
             m_Assets.Add(Tags);
             m_Assets.Add(Variables);
 
-            Hero = Model("Hero", ReadContent("Entities/Hero.script"), "Hero");
+            HeroCharacter = Character("TestHero");
+            Hero = HeroModel("Hero", HeroCharacter, ReadContent("Entities/Hero.script"));
             Monster = Model("Monster", ReadContent("Entities/Monster.script"), "Monster");
             Monster.VariableList.Add(new EntityVariable("charges", "3"));
             Herb = Model("Herb", ReadContent("Entities/Herb.script"), "Resource");
             Exit = Model("Exit", ReadContent("Entities/Exit.script"), "Exit");
             Script("Monsters", ReadContent("Scripts/Monsters.script"));
+            Script("Cards", ReadContent("Scripts/Cards.script"));
+            Script("Abilities", ReadContent("Scripts/Abilities.script"));
             Alpha = Model("Alpha", TracerScript);
             Beta = Model("Beta", TracerScript);
             Gamma = Model("Gamma", TracerScript);
@@ -174,25 +190,25 @@ namespace TheGrowth.Tests.EditMode.Cards
             m_Assets.Add(Poison);
 
             Graph = Graphs.Graph("Field");
-            var rows = new[] { "a", "b", "c" };
-            for (var row = 0; row < 3; row++)
+            var rows = Enumerable.Range(0, size).Select(row => ((char)('a' + row)).ToString()).ToArray();
+            for (var row = 0; row < size; row++)
             {
-                for (var column = 0; column < 3; column++)
-                    Graph.SlotList.Add(new GraphSlot($"{rows[row]}{column + 1}", new Vector3(column, 0f, -row)));
+                for (var column = 0; column < size; column++)
+                    Graph.SlotList.Add(new GraphSlot($"{rows[row]}{column + 1}", new Vector3(column * stepX, 0f, -row * stepZ)));
             }
 
             Graph.SlotList.Add(new GraphSlot("x", new Vector3(10f, 0f, 10f)));
             Graph.FindSlot("a1").TagList.Add("PlayerSpawn");
-            Graph.FindSlot("c3").TagList.Add("Exit");
-            for (var row = 0; row < 3; row++)
+            Graph.FindSlot($"{rows[size - 1]}{size}").TagList.Add("Exit");
+            for (var row = 0; row < size; row++)
             {
-                for (var column = 0; column < 3; column++)
+                for (var column = 0; column < size; column++)
                 {
                     var id = $"{rows[row]}{column + 1}";
-                    if (column < 2)
+                    if (column < size - 1)
                         Graph.LinkList.Add(new GraphLink($"h{id}", id, $"{rows[row]}{column + 2}"));
 
-                    if (row < 2)
+                    if (row < size - 1)
                         Graph.LinkList.Add(new GraphLink($"v{id}", id, $"{rows[row + 1]}{column + 1}"));
                 }
             }
@@ -220,6 +236,10 @@ namespace TheGrowth.Tests.EditMode.Cards
 
         public VariableDeclarations Variables { get; }
 
+        /// <summary>Персонаж карты героя <see cref="Hero"/>.</summary>
+        public CharacterModel HeroCharacter { get; }
+
+        /// <summary>Карта героя (тег <c>Hero</c>, компонент героя) со скриптом примера <c>Content/Entities/Hero.script</c>.</summary>
         public EntityModel Hero { get; }
 
         public EntityModel Monster { get; }
@@ -295,6 +315,71 @@ namespace TheGrowth.Tests.EditMode.Cards
                 throw new InvalidOperationException("The registry is already built");
 
             m_Scripts.Add(Content.Script(id, text));
+        }
+
+        /// <summary>Персонаж в реестре (имя — ID).</summary>
+        public CharacterModel Character(string id)
+        {
+            var character = Add(Content.Asset<CharacterModel>(id));
+            character.SetDisplayName(id);
+            return character;
+        }
+
+        /// <summary>Карта героя персонажа: тег <c>Hero</c>, компонент героя, файл скрипта <paramref name="script"/> (null — без файла).</summary>
+        public EntityModel HeroModel(string id, CharacterModel character, string script = null)
+        {
+            var model = Model(id, script, HeroCardSettings.Tag);
+            model.ComponentList.Add(new HeroCardSettings(character));
+            return model;
+        }
+
+        /// <summary>Карта способности персонажа <paramref name="owner"/> (null — игрока) с зарядами <c>charges</c>.</summary>
+        public EntityModel AbilityModel(string id, CharacterModel owner, string script = null, int charges = 1)
+        {
+            var model = Model(id, script);
+            model.ComponentList.Add(new AbilityCardSettings(owner));
+            model.VariableList.Add(new EntityVariable("charges", charges.ToString(CultureInfo.InvariantCulture)));
+            return model;
+        }
+
+        /// <summary>Ёмкость слотов в реестре.</summary>
+        public SlotsConfig AddSlotsConfig(int inventory, int hand)
+        {
+            var config = Add(Content.Asset<SlotsConfig>("SlotsConfig"));
+            config.SetCapacities(inventory, hand);
+            return config;
+        }
+
+        /// <summary>Настройки поля в реестре: размер карты (x — ширина, y — длина).</summary>
+        public FieldConfig AddFieldConfig(Vector2 cardSize)
+        {
+            var config = Add(Content.Asset<FieldConfig>("FieldConfig"));
+            config.SetCardSize(cardSize);
+            return config;
+        }
+
+        /// <summary>
+        /// Конфиг сущности контента проекта (<c>Content/&lt;path&gt;</c>, сам ассет, не копия) и его файл скрипта
+        /// <c>&lt;имя&gt;.script</c> рядом — в реестр набора.
+        /// </summary>
+        public EntityModel ContentModel(string path)
+        {
+            var model = AssetDatabase.LoadAssetAtPath<EntityModel>($"{ContentFolder}/{path}");
+            Assert.IsNotNull(model, $"content asset '{ContentFolder}/{path}' not found");
+            Add(model);
+            if (!string.IsNullOrEmpty(model.ScriptId))
+                Script(model.ScriptId, ReadContent(Path.ChangeExtension(path, ScriptSyntax.ScriptExtension)));
+
+            return model;
+        }
+
+        private T Add<T>(T asset) where T : ContentAsset
+        {
+            if (m_Registry != null)
+                throw new InvalidOperationException("The registry is already built");
+
+            m_Assets.Add(asset);
+            return asset;
         }
 
         /// <summary>Колода в реестре — колода экспедиции локации <see cref="Location"/>.</summary>

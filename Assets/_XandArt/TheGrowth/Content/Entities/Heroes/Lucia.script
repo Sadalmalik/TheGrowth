@@ -1,0 +1,12 @@
+AllowedMoves -> [[slots in [[line 0 2.25m] or [line 90 3m]] around [active card]] except [[slot of [active card]] or [[slots of [[cards tagged Monster] or [cards tagged Obstacle]]] or [free slots]]]]
+
+OnPlacedFirstTime:
+    // камера — к герою (шаг 7 E03)
+    call Cards.RevealAround
+    // счётчик ходов экспедиции — 25 (шаг 7 E03)
+
+OnPlaced:
+    // героя сдуло с поля в колоду — поражение (шаг 7 E03)
+    // камера — к герою (шаг 7 E03)
+    call Cards.RevealAround
+    // конец хода героя (шаг 7 E03): под героем выход — победа, ходы кончились — поражение, иначе ход монстров и счётчик ходов -1

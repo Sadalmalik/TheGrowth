@@ -8,6 +8,7 @@ using TheGrowth.EditorTools.Flow;
 using TheGrowth.EditorTools.Graphs;
 using TheGrowth.Model.Graphs;
 using TheGrowth.Model.Locations;
+using TheGrowth.Model.Slots;
 using TheGrowth.Tests.EditMode.Content;
 using UnityEditor;
 using UnityEngine;
@@ -225,8 +226,9 @@ namespace TheGrowth.Tests.EditMode.Graphs
         public void FieldConfig_ExactlyOne_NoErrors()
         {
             var config = m_Content.Asset<FieldConfig>("FieldConfig");
+            var slots = m_Content.Asset<SlotsConfig>("SlotsConfig");
 
-            Assert.IsEmpty(ContentValidator.Validate(new ContentAsset[] { config }, null, true));
+            Assert.IsEmpty(ContentValidator.Validate(new ContentAsset[] { config, slots }, null, true), "the complete content also needs one SlotsConfig");
             Assert.AreEqual(FieldConfig.DefaultCardSize, config.CardSize, "1.5 x 2 by default");
         }
 

@@ -1,0 +1,8 @@
+AllowedMoves -> [slots in [square 2.5m scaled 1.5 2] around [hero]]
+
+OnPlaced:
+    if [[card under [active card]] has tag Monster]
+        set [card under [active card]].charges to 1
+        call Abilities.Spend
+    else
+        move [active card] to [hand]

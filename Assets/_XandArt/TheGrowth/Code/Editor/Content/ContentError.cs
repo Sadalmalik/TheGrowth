@@ -28,8 +28,17 @@ namespace TheGrowth.EditorTools.Content
         /// <summary>Настройки поля (<c>FieldConfig</c>): в реестре проекта нет ни одного или их несколько.</summary>
         InvalidFieldConfig,
 
+        /// <summary>Ёмкость слотов (<c>SlotsConfig</c>): в реестре проекта нет ни одного или их несколько.</summary>
+        InvalidSlotsConfig,
+
         /// <summary>Конфиг сущности: вид, компоненты (пустые, пропавшие типы, ключи), обязательные компоненты, теги, переменные.</summary>
         InvalidEntity,
+
+        /// <summary>
+        /// Карта героя или способности: компонент не у карты, у героя нет персонажа; предупреждение — компонент героя без тега
+        /// <c>Hero</c> или тег без компонента.
+        /// </summary>
+        InvalidHero,
 
         /// <summary>Поле с <c>[ModelKind]</c> ссылается на конфиг сущности другого вида.</summary>
         WrongModelKind,

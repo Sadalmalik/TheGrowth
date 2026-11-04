@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using TheGrowth.Model.Graphs;
+using TheGrowth.Model.Shapes;
+using UnityEngine;
 
 namespace TheGrowth.Model.Slots
 {
@@ -9,7 +11,8 @@ namespace TheGrowth.Model.Slots
     /// слот графа) и слоты связей для объектов механики (<see cref="SlotIds.Link"/>, по слоту на связь), смежность клеток по
     /// связям (ненаправленная). Структура во время игры не меняется. Повторяющиеся ID и связи с пропавшими слотами
     /// пропускаются (их показывает валидатор контента). Близость по графу — число связей (<see cref="GetDistances"/>); объекты
-    /// механики на связях пока не учитываются, поиск пути с ними — позже (шаг 8 E03).
+    /// механики на связях пока не учитываются, поиск пути с ними — позже (шаг 8 E03). Близость по геометрии — фигуры
+    /// (<see cref="GetCellsIn"/>) по позициям слотов графа.
     /// </summary>
     public sealed class FieldSlots
     {
@@ -114,6 +117,37 @@ namespace TheGrowth.Model.Slots
             }
 
             return distances;
+        }
+
+        /// <summary>
+        /// Клетки, центры которых в фигуре с центром в клетке <paramref name="center"/> (плоскость XZ графа, высота не
+        /// учитывается), по порядку графа; <paramref name="center"/> не клетка поля — пусто.
+        /// </summary>
+        /// <param name="lineHalfWidth">Половина ширины линий фигуры — половина ширины карты (<see cref="FieldConfig.CardSize"/>).</param>
+        public List<Slot> GetCellsIn(Shape shape, Slot center, float lineHalfWidth)
+        {
+            if (shape == null)
+                throw new ArgumentNullException(nameof(shape));
+
+            var cells = new List<Slot>();
+            if (center == null || !m_Neighbours.ContainsKey(center))
+                return cells;
+
+            var origin = GetPlanePosition(center);
+            foreach (var cell in m_Cells)
+            {
+                if (shape.Contains(GetPlanePosition(cell) - origin, lineHalfWidth))
+                    cells.Add(cell);
+            }
+
+            return cells;
+        }
+
+        /// <summary>Позиция клетки в плоскости графа: x — X, y — Z локальных координат графа; не клетка поля — ноль.</summary>
+        public static Vector2 GetPlanePosition(Slot cell)
+        {
+            var position = cell?.GraphSlot?.Position ?? Vector3.zero;
+            return new Vector2(position.x, position.z);
         }
 
         /// <summary>Вторая клетка слота связи; <paramref name="cell"/> не из этой связи — null.</summary>

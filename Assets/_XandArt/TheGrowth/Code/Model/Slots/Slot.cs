@@ -42,6 +42,9 @@ namespace TheGrowth.Model.Slots
 
         public bool IsEmpty => m_Entities.Count == 0;
 
+        /// <summary>Ёмкость исчерпана (<see cref="SlotRules.Capacity"/>); слот без ограничения полным не бывает.</summary>
+        public bool IsFull => Rules.Capacity > 0 && m_Entities.Count >= Rules.Capacity;
+
         /// <summary>Тег клетки поля (из графа); у остальных слотов тегов нет.</summary>
         public bool HasTag(string tag)
         {

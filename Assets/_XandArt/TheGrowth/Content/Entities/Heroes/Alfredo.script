@@ -1,0 +1,11 @@
+AllowedMoves -> [[slots in [[line 0 2.25m] or [line 90 3m]] around [active card]] except [[slot of [active card]] or [[slots of [[cards tagged Monster] or [cards tagged Obstacle]]] or [free slots]]]]
+
+OnPlacedFirstTime:
+    call Cards.RevealAround
+    // камера — к герою (шаг 7 E03)
+    // диалог Tutorial_Game (E12)
+
+OnPlaced:
+    // камера — к герою (шаг 7 E03)
+    call Cards.RevealAround
+    // конец хода героя в обучении, как PlayerStep_Tutorial прототипа (шаг 7 E03)

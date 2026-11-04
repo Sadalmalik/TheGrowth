@@ -1,0 +1,5 @@
+AllowedMoves -> [slot of [hero]]
+
+OnPlaced:
+    // счётчик ходов экспедиции +3 (шаг 7 E03)
+    call Abilities.Spend

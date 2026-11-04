@@ -22,7 +22,8 @@ namespace TheGrowth.Model.Slots
     /// восстанавливаются без сцены), <c>InstanceId</c> героя и непустые слоты со списком <c>InstanceId</c>; секция читается
     /// после <c>entities</c>, содержимое связывается с сущностями в <see cref="ISessionReady.OnSessionReady"/>. Сущность из
     /// сейва в двух слотах остаётся в первом, без слота — уничтожается (с предупреждением); герой не в слоте экспедиции —
-    /// предупреждение, героя нет.
+    /// предупреждение, героя нет. Ёмкость инвентаря и руки — из <see cref="SlotsConfig"/> реестра контента (при создании
+    /// сессии; конфига нет — его значения по умолчанию).
     /// Требует в контейнере <see cref="EntityRegistry"/>, <see cref="IContentRegistry"/> и <see cref="EventBus"/>.
     /// </summary>
     public sealed class SlotSystem : SaveableSystem<SlotsSave>, ISessionReady
@@ -34,14 +35,8 @@ namespace TheGrowth.Model.Slots
 
         private const string LogSource = "[Saves] Section '" + Key + "'";
 
-        /// <summary>Инвентарь игрока: карты, без ограничения, как лежали.</summary>
-        public static readonly SlotRules InventoryRules = new SlotRules(new[] { EntityKind.Card });
-
         /// <summary>Колода экспедиции: карты рубашкой вверх.</summary>
         public static readonly SlotRules DeckRules = new SlotRules(new[] { EntityKind.Card }, 0, SlotFacing.FaceDown);
-
-        /// <summary>Рука: карты лицом вверх.</summary>
-        public static readonly SlotRules HandRules = new SlotRules(new[] { EntityKind.Card }, 0, SlotFacing.FaceUp);
 
         /// <summary>Сброс: карты лицом вверх.</summary>
         public static readonly SlotRules DiscardRules = new SlotRules(new[] { EntityKind.Card }, 0, SlotFacing.FaceUp);
@@ -84,12 +79,25 @@ namespace TheGrowth.Model.Slots
         /// <summary>Слоты активной экспедиции; нет экспедиции — null.</summary>
         public ExpeditionSlots Expedition { get; private set; }
 
+        /// <summary>Инвентарь игрока: карты, как лежали, ёмкость — <see cref="SlotsConfig.InventoryCapacity"/>.</summary>
+        public SlotRules InventoryRules { get; private set; }
+
+        /// <summary>Рука экспедиции: карты лицом вверх, ёмкость — <see cref="SlotsConfig.HandCapacity"/>.</summary>
+        public SlotRules HandRules { get; private set; }
+
         /// <summary>Сущность перемещена; вызывается до события в шине.</summary>
         public event Action<EntityMoved> Moved;
 
         public override void Init()
         {
             m_Entities.Detaching += HandleDetaching;
+
+            var configs = m_Content.GetAll<SlotsConfig>();
+            var config = configs.Count > 0 ? configs[0] : null;
+            var inventory = config != null ? config.InventoryCapacity : SlotsConfig.DefaultInventoryCapacity;
+            var hand = config != null ? config.HandCapacity : SlotsConfig.DefaultHandCapacity;
+            InventoryRules = new SlotRules(new[] { EntityKind.Card }, inventory);
+            HandRules = new SlotRules(new[] { EntityKind.Card }, hand, SlotFacing.FaceUp);
         }
 
         /// <summary>Недособранная сессия (ошибка инжекта) тоже уничтожается: реестра может не быть.</summary>

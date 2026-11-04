@@ -1,0 +1,7 @@
+Spend:
+    add -1 to [active card].charges
+    if [[active card].charges > 0]
+        move [active card] to [hand]
+    else
+        move [active card] to [backpack]
+        hide [active card]

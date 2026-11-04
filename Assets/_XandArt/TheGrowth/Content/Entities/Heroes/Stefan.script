@@ -1,0 +1,10 @@
+AllowedMoves -> [[slots in [square 1.06m rotated 45 scaled 1.5 2] around [active card]] except [[slot of [active card]] or [free slots]]]
+
+OnPlacedFirstTime:
+    // камера — к герою (шаг 7 E03)
+    call Cards.RevealAround
+
+OnPlaced:
+    // камера — к герою (шаг 7 E03)
+    call Cards.RevealAround
+    // конец хода героя (шаг 7 E03)

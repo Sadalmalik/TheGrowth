@@ -1,3 +1,4 @@
+using System;
 using TheGrowth.Core.Content;
 using UnityEngine;
 
@@ -24,5 +25,21 @@ namespace TheGrowth.Model.Graphs
 
         /// <summary>X — ширина карты (вдоль оси X графа), Y — длина (вдоль оси Z); стороны не меньше <see cref="MinCardSide"/>.</summary>
         public Vector2 CardSize => new Vector2(Mathf.Max(MinCardSide, m_CardSize.x), Mathf.Max(MinCardSide, m_CardSize.y));
+
+        /// <summary>Размер карты первого конфига реестра; конфига нет — <see cref="DefaultCardSize"/> (ошибку показывает валидатор).</summary>
+        public static Vector2 GetCardSize(IContentRegistry content)
+        {
+            if (content == null)
+                throw new ArgumentNullException(nameof(content));
+
+            var configs = content.GetAll<FieldConfig>();
+            return configs.Count > 0 && configs[0] != null ? configs[0].CardSize : DefaultCardSize;
+        }
+
+        /// <summary>Только тесты.</summary>
+        internal void SetCardSize(Vector2 size)
+        {
+            m_CardSize = size;
+        }
     }
 }

@@ -1,0 +1,5 @@
+AllowedMoves -> [slots in [square 2.5m scaled 1.5 2] around [hero]]
+
+OnPlaced:
+    call Cards.RevealAround
+    call Abilities.Spend

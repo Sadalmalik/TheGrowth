@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd3143e10770f04099daba6117b2562, type: 3}
+  m_Name: Alfredo
+  m_EditorClassIdentifier: TheGrowth.Core::TheGrowth.Core.Entities.EntityModel
+  m_Id: Alfredo
+  m_Kind: 0
+  m_Script: Alfredo
+  m_Tags:
+  - Hero
+  m_Variables: []
+  m_Components:
+  - rid: 7411699558765830010
+  - rid: 7411699558765830011
+  references:
+    version: 2
+    RefIds:
+    - rid: 7411699558765830010
+      type: {class: CardBrainSettings, ns: TheGrowth.Model.Entities, asm: TheGrowth.Model}
+      data:
+        m_FaceUp: 1
+    - rid: 7411699558765830011
+      type: {class: HeroCardSettings, ns: TheGrowth.Model.Heroes, asm: TheGrowth.Model}
+      data:
+        m_Character: {fileID: 11400000, guid: df8e29ec9c1a4dd6b67e533bd234bb80, type: 2}

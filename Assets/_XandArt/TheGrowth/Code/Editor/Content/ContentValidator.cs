@@ -9,10 +9,12 @@ using TheGrowth.Core.Variables;
 using TheGrowth.EditorTools.Decks;
 using TheGrowth.EditorTools.Entities;
 using TheGrowth.EditorTools.Graphs;
+using TheGrowth.EditorTools.Heroes;
 using TheGrowth.EditorTools.Scripting;
 using TheGrowth.Model.Decks;
 using TheGrowth.Model.Graphs;
 using TheGrowth.Model.Locations;
+using TheGrowth.Model.Slots;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -24,7 +26,8 @@ namespace TheGrowth.EditorTools.Content
     /// объявления переменных (<see cref="VariableCatalog"/>) и тегов (<see cref="TagCatalog"/>), графы полей локаций
     /// (граф помнит сцену локации, один граф — одна локация, данные графа — <see cref="GraphChecks"/>), пропавшие ссылки,
     /// конфиги и файлы скриптов проекта вне реестра, графы сцен локаций, на которые локация не ссылается, настройки поля
-    /// (<see cref="FieldConfig"/> — ровно один в реестре проекта), конфиги сущностей (<see cref="EntityModelChecks"/>),
+    /// (<see cref="FieldConfig"/> — ровно один в реестре проекта), ёмкость слотов (<see cref="SlotsConfig"/> — так же), конфиги
+    /// сущностей (<see cref="EntityModelChecks"/>), карты героев и способностей (<see cref="HeroChecks"/>, с предупреждениями),
     /// вид конфигов сущностей в полях с <see cref="ModelKindAttribute"/> (<see cref="ModelKindChecks"/>), типы компонентов
     /// сущностей (только в проекте), файлы скриптов сущностей (свойства — только в файлах сущностей), колоды и раскладка
     /// локаций (<see cref="DeckChecks"/>: строки колоды, клетка <c>PlayerSpawn</c>; предупреждения <c>SpawnSlot</c> — только
@@ -53,8 +56,10 @@ namespace TheGrowth.EditorTools.Content
             var tags = new TagCatalog(assets.OfType<TagDeclarations>());
             ValidateTags(tags, errors);
             ValidateGraphs(assets, tags, errors);
-            ValidateFieldConfig(assets, isComplete, errors);
+            ValidateSingle<FieldConfig>(assets, isComplete, ContentErrorKind.InvalidFieldConfig, "[Game]/Field Config", errors);
+            ValidateSingle<SlotsConfig>(assets, isComplete, ContentErrorKind.InvalidSlotsConfig, "[Game]/Slots Config", errors);
             ValidateEntities(assets, tags, variables, errors);
+            ValidateHeroes(assets, errors);
             ValidateEntityScripts(assets, scripts ?? Array.Empty<ScriptFileEntry>(), errors);
             ValidateModelKinds(assets, errors);
             ValidateDecks(assets, errors);
@@ -247,14 +252,18 @@ namespace TheGrowth.EditorTools.Content
             }
         }
 
-        /// <summary>Настройки поля — один конфиг на проект: несколько — ошибка у каждого; ни одного в полном реестре — ошибка.</summary>
-        private static void ValidateFieldConfig(IReadOnlyList<ContentAsset> assets, bool isComplete, List<ContentError> errors)
+        /// <summary>
+        /// Конфиг, который должен быть один на проект (настройки поля, ёмкость слотов): несколько — ошибка у каждого; ни одного в
+        /// полном реестре — ошибка.
+        /// </summary>
+        private static void ValidateSingle<T>(IReadOnlyList<ContentAsset> assets, bool isComplete, ContentErrorKind kind, string menu, List<ContentError> errors)
+            where T : ContentAsset
         {
-            var configs = assets.OfType<FieldConfig>().ToList();
+            var configs = assets.OfType<T>().ToList();
             if (configs.Count == 0 && isComplete)
             {
-                errors.Add(new ContentError(ContentErrorKind.InvalidFieldConfig, ContentRegistryBuilder.RegistryPath,
-                    $"no {nameof(FieldConfig)} in the project: create one ([Game]/Field Config) under {ContentRegistryBuilder.ContentRoot}/Content", null));
+                errors.Add(new ContentError(kind, ContentRegistryBuilder.RegistryPath,
+                    $"no {typeof(T).Name} in the project: create one ({menu}) under {ContentRegistryBuilder.ContentRoot}/Content", null));
                 return;
             }
 
@@ -264,7 +273,7 @@ namespace TheGrowth.EditorTools.Content
             foreach (var config in configs)
             {
                 var others = string.Join(", ", configs.Where(other => other != config).Select(GetPath));
-                errors.Add(Error(ContentErrorKind.InvalidFieldConfig, config, $"more than one {nameof(FieldConfig)} in the project, one is allowed (also: {others})"));
+                errors.Add(Error(kind, config, $"more than one {typeof(T).Name} in the project, one is allowed (also: {others})"));
             }
         }
 
@@ -275,6 +284,16 @@ namespace TheGrowth.EditorTools.Content
             {
                 foreach (var message in EntityModelChecks.Check(model, tags, variables))
                     errors.Add(Error(ContentErrorKind.InvalidEntity, model, message));
+            }
+        }
+
+        /// <summary>Карты героев и способностей: ошибки и предупреждения <see cref="HeroChecks"/>.</summary>
+        private static void ValidateHeroes(IReadOnlyList<ContentAsset> assets, List<ContentError> errors)
+        {
+            foreach (var model in assets.OfType<EntityModel>())
+            {
+                foreach (var (message, isWarning) in HeroChecks.Check(model))
+                    errors.Add(new ContentError(ContentErrorKind.InvalidHero, GetPath(model), message, model, isWarning));
             }
         }
 

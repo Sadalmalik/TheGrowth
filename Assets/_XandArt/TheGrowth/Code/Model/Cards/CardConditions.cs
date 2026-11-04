@@ -40,6 +40,21 @@ namespace TheGrowth.Model.Cards
         }
     }
 
+    /// <summary>
+    /// Ёмкость слота исчерпана (<see cref="Slots.Slot.IsFull"/>): <c>move</c> и <c>create</c> в него ничего не сделают. Слот без
+    /// ограничения полным не бывает. Пусто — false.
+    /// </summary>
+    [Script("is_full", "[Slot] is full")]
+    public sealed class IsFullCondition : Condition
+    {
+        public Evaluator<Slot> Slot;
+
+        public override bool Check(ScriptContext context)
+        {
+            return Slot.Evaluate(context) is { IsFull: true };
+        }
+    }
+
     /// <summary>Карта или слот найдены (значение не пустое).</summary>
     [Script("exists", "[Value] exists")]
     public sealed class ExistsCondition : Condition

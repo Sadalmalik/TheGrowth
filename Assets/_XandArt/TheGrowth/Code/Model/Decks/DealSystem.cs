@@ -8,6 +8,7 @@ using TheGrowth.Core.Rng;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Model.Cards;
 using TheGrowth.Model.Entities;
+using TheGrowth.Model.Heroes;
 using TheGrowth.Model.Slots;
 using UnityEngine;
 
@@ -27,6 +28,9 @@ namespace TheGrowth.Model.Decks
     /// <item>Остальные — по одной в случайные свободные клетки без тега <see cref="PlayerSpawnTag"/>; клетки кончились —
     /// остаток в колоде, карт меньше — клетки пустые.</item>
     /// <item>Герой — последним, лицом вверх; <see cref="SlotSystem.SetHero"/>.</item>
+    /// <item>Способности героя перемещаются (не копируются) в руку экспедиции (<see cref="SlotIds.Hand"/>, лицом вверх) в
+    /// переданном порядке — после раскладки поля, до хуков: хуки уже видят их в руке. <c>OnPlacedFirstTime</c> у них нет (рука —
+    /// не клетка поля).</item>
     /// <item><c>OnPlacedFirstTime</c> (<see cref="CardSystem.InvokeHook"/>) — отдельным циклом в порядке раздачи, у героя
     /// последним. Хук каждой карты — отдельный запуск: ошибка в хуке одной карты не прерывает раскладку.</item>
     /// </list>
@@ -58,10 +62,13 @@ namespace TheGrowth.Model.Decks
 #pragma warning restore CS0649
 
         /// <summary>
-        /// Разложить колоду локации экспедиции и героя. Экспедиции нет, герой не живая карта или на поле нет свободной клетки
-        /// <see cref="PlayerSpawnTag"/> — <see cref="InvalidOperationException"/>, ничего не меняется.
+        /// Разложить колоду локации экспедиции, героя и его способности (в руку). Экспедиции нет, герой не живая карта, на поле
+        /// нет свободной клетки <see cref="PlayerSpawnTag"/>, способность не живая карта, не карта способности
+        /// (<see cref="AbilityCard"/>), повторяется, не подходит герою (<see cref="AbilityCard.Fits"/>) или способностей больше,
+        /// чем места в руке, — <see cref="InvalidOperationException"/>, ничего не меняется.
         /// </summary>
-        public UniTask Deal(Entity hero)
+        /// <param name="abilities">Карты способностей (например, из инвентаря); null — без способностей.</param>
+        public UniTask Deal(Entity hero, IReadOnlyList<Entity> abilities = null)
         {
             var expedition = m_Slots.Expedition;
             if (expedition == null)
@@ -69,6 +76,10 @@ namespace TheGrowth.Model.Decks
 
             if (!m_Entities.Contains(hero) || hero.Kind != EntityKind.Card)
                 return UniTask.FromException(new InvalidOperationException($"Can't deal {expedition.Location}: the hero {hero?.ToString() ?? "null"} is destroyed, not from this session or not a card"));
+
+            var list = abilities?.ToList() ?? new List<Entity>();
+            if (!CheckAbilities(expedition, hero, list, out var reason))
+                return UniTask.FromException(new InvalidOperationException($"Can't deal {expedition.Location}: {reason}"));
 
             var spawns = expedition.Field.Cells.Where(cell => cell.IsEmpty && cell.HasTag(PlayerSpawnTag)).ToList();
             if (spawns.Count == 0)
@@ -78,10 +89,10 @@ namespace TheGrowth.Model.Decks
                     $"Can't deal {expedition.Location}: no free field slot tagged {PlayerSpawnTag} for the hero {hero} ({total} slot(s) with the tag in the graph)"));
             }
 
-            return m_Runner.RunCode($"deal {expedition.Location.Id}", context => DealAsync(expedition, hero, spawns, context));
+            return m_Runner.RunCode($"deal {expedition.Location.Id}", context => DealAsync(expedition, hero, list, spawns, context));
         }
 
-        private async UniTask DealAsync(ExpeditionSlots expedition, Entity hero, List<Slot> spawns, ScriptContext context)
+        private async UniTask DealAsync(ExpeditionSlots expedition, Entity hero, List<Entity> abilities, List<Slot> spawns, ScriptContext context)
         {
             var kept = Fill(expedition);
             Shuffle(expedition.Deck);
@@ -128,6 +139,8 @@ namespace TheGrowth.Model.Decks
                 brain.SetFaceUp(true);
 
             m_Slots.SetHero(hero);
+            foreach (var ability in abilities)
+                m_Slots.Move(ability, expedition.Hand);
 
             foreach (var card in dealt)
             {
@@ -137,6 +150,61 @@ namespace TheGrowth.Model.Decks
 
             context.Cancellation.ThrowIfCancellationRequested();
             await m_Cards.InvokeHook(hero, CardHooks.OnPlacedFirstTime);
+        }
+
+        /// <summary>
+        /// Способности можно положить в руку: живые карты с <see cref="AbilityCard"/>, без повторов, не герой, подходят герою,
+        /// помещаются в руку все вместе (карты, уже лежащие в руке, место повторно не занимают) и подходят правилам руки.
+        /// </summary>
+        private bool CheckAbilities(ExpeditionSlots expedition, Entity hero, List<Entity> abilities, out string reason)
+        {
+            reason = null;
+            var hand = expedition.Hand;
+            var seen = new HashSet<Entity>();
+            var incoming = 0;
+            foreach (var ability in abilities)
+            {
+                if (!m_Entities.Contains(ability) || ability.Kind != EntityKind.Card)
+                    reason = $"the ability {ability?.ToString() ?? "null"} is destroyed, not from this session or not a card";
+                else if (ability == hero)
+                    reason = $"{ability} is the hero, not an ability";
+                else if (!seen.Add(ability))
+                    reason = $"the ability {ability} is listed twice";
+                else if (!ability.TryGet<AbilityCard>(out var card))
+                    reason = $"{ability} is not an ability card (no {nameof(AbilityCard)} component)";
+                else if (!card.Fits(hero))
+                    reason = $"the ability {ability} of character '{card.Owner.Id}' doesn't fit the hero {hero} (character '{DescribeCharacter(hero)}')";
+
+                if (reason != null)
+                    return false;
+
+                if (m_Slots.GetSlot(ability) != hand)
+                    incoming++;
+            }
+
+            var capacity = hand.Rules.Capacity;
+            if (capacity > 0 && hand.Count + incoming > capacity)
+            {
+                reason = $"{incoming} abilities don't fit the hand: capacity {capacity}, {hand.Count} card(s) in it already";
+                return false;
+            }
+
+            foreach (var ability in abilities)
+            {
+                if (m_Slots.GetSlot(ability) == hand || m_Slots.CanMove(ability, hand, out var rule))
+                    continue;
+
+                reason = $"the ability {ability} can't be put into the hand: {rule}";
+                return false;
+            }
+
+            return true;
+        }
+
+        private static string DescribeCharacter(Entity hero)
+        {
+            var character = hero.Get<HeroCard>()?.Character;
+            return character != null ? character.Id : "none";
         }
 
         /// <summary>Карты строк колоды локации — в колоду экспедиции; результат — карты строк «не раскладывать».</summary>

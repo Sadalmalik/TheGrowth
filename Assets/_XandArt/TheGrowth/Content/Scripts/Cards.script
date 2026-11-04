@@ -1,0 +1,4 @@
+RevealAround:
+    for each card in [cards in [slots in [square 1.5m scaled 1.5 2] around [active card]]]
+        reveal [iterating card]
+    reveal [card under [active card]]

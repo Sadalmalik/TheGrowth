@@ -3,12 +3,14 @@ using Cysharp.Threading.Tasks;
 using TheGrowth.Core.Entities;
 using TheGrowth.Core.Scripting;
 using TheGrowth.Model.Slots;
+using UnityEngine;
 
 namespace TheGrowth.Model.Cards
 {
     /// <summary>
     /// Команды карт: действия через <see cref="CardSystem"/> (с хуками). Пустая или уничтоженная карта, пустой слот —
-    /// команда ничего не делает; нарушение правил слота — ошибка исполнения.
+    /// команда ничего не делает; полный слот (<see cref="Slot.IsFull"/>) у <c>move</c> и <c>create</c> — тоже ничего, с
+    /// предупреждением в лог (проверка в скрипте — <c>[Slot] is full</c>); другое нарушение правил слота — ошибка исполнения.
     /// </summary>
     internal static class CardCommandUtility
     {
@@ -16,9 +18,21 @@ namespace TheGrowth.Model.Cards
         {
             return entity is { IsDestroyed: false };
         }
+
+        /// <summary>В слоте есть место для карты не из него; нет — предупреждение с местом команды, false.</summary>
+        public static bool HasRoom(Command command, Slot slot, string action)
+        {
+            if (!slot.IsFull)
+                return true;
+
+            Debug.LogWarning($"[Cards] {command.Location}: {action}: {slot} is full ({slot.Rules.Capacity}), the command does nothing");
+            return false;
+        }
     }
 
-    /// <summary>Переместить карту в слот (наверх) — с хуками размещения.</summary>
+    /// <summary>
+    /// Переместить карту в слот (наверх) — с хуками размещения. Слот полон (карта не из него) — ничего, предупреждение в лог.
+    /// </summary>
     [Script("move", "move [Card] to [Slot]", Context = CommandContext.GameplayOnly)]
     public sealed class MoveCard : Command
     {
@@ -30,6 +44,9 @@ namespace TheGrowth.Model.Cards
             var card = Card.Evaluate(context);
             var slot = Slot.Evaluate(context);
             if (!CardCommandUtility.IsAlive(card) || slot == null)
+                return UniTask.CompletedTask;
+
+            if (context.Get<SlotSystem>().GetSlot(card) != slot && !CardCommandUtility.HasRoom(this, slot, $"move {card}"))
                 return UniTask.CompletedTask;
 
             return context.Get<CardSystem>().Move(card, slot, context);
@@ -88,7 +105,10 @@ namespace TheGrowth.Model.Cards
         }
     }
 
-    /// <summary>Создать карту из конфига наверх слота — как положили (<c>OnCovered</c>, <c>OnPlaced</c>).</summary>
+    /// <summary>
+    /// Создать карту из конфига наверх слота — как положили (<c>OnCovered</c>, <c>OnPlaced</c>). Слот полон — ничего,
+    /// предупреждение в лог.
+    /// </summary>
     [Script("create", "create [Model] in [Slot]")]
     public sealed class CreateCard : Command
     {
@@ -100,8 +120,10 @@ namespace TheGrowth.Model.Cards
         public override async UniTask Execute(ScriptContext context)
         {
             var slot = Slot.Evaluate(context);
-            if (slot != null && Model != null)
-                await context.Get<CardSystem>().Create(Model, slot, context);
+            if (slot == null || Model == null || !CardCommandUtility.HasRoom(this, slot, $"create '{Model.Id}'"))
+                return;
+
+            await context.Get<CardSystem>().Create(Model, slot, context);
         }
     }
 
